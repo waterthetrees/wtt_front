@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="245.91" height="13.14" viewBox="0 0 245.91 13.14">
+  <defs>
+    <style>
+      .a {
+        fill: url(#a);
+      }
+    </style>
+    <linearGradient id="a" data-name="Dégradé sans nom 2" x1="-1185.81" y1="1287.56" x2="-1184.81" y2="1287.56" gradientTransform="matrix(245.91, 0, 0, -13.14, 291598.59, 16922.49)" gradientUnits="userSpaceOnUse">
+      <stop offset="0"/>
+      <stop offset="0.23" stop-color="#942b2b"/>
+      <stop offset="0.48" stop-color="#d4a23d"/>
+      <stop offset="0.75" stop-color="#357823"/>
+      <stop offset="1" stop-color="#73c75b"/>
+    </linearGradient>
+  </defs>
+  <title>scale</title>
+  <path class="a" d="M239.34,13.14H6.57A6.57,6.57,0,0,1,0,6.57H0A6.57,6.57,0,0,1,6.57,0H239.34a6.57,6.57,0,0,1,6.57,6.57h0a6.57,6.57,0,0,1-6.57,6.57Z"/>
+</svg>

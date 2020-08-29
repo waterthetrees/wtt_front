@@ -1,0 +1,54 @@
+/**
+ * Customized version of bootstrap using variables from _variables.scss.
+ * This file is loaded via separate loader thus allowing to use original bootstrap classes (e.g. .btn-default) through out the app.
+ */
+
+
+@import 'variables';
+@import 'mixins';
+@import 'general';
+
+// Required
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
+// Optional
+@import 'node_modules/bootstrap/scss/reboot';
+@import 'node_modules/bootstrap/scss/type';
+@import 'node_modules/bootstrap/scss/images';
+@import 'node_modules/bootstrap/scss/code';
+@import 'node_modules/bootstrap/scss/grid';
+
+// Leaflet
+// @import 'leaflet.css';
+// @import 'Control.Geocoder.css';
+
+/**
+* Components
+* @import './components/Layout';
+* @import './components/Header';
+* @import './components/Footer';
+* @import './components/Sidebar';
+* @import './components/Page';
+* @import './components/Widget';
+* @import './components/LinksGroup';
+* Pages
+* @import './pages/Address';
+* @import './pages/Dashboard';
+* @import './pages/ErrorPage';
+* @import './pages/Google';
+* @import './pages/Home';
+* @import './pages/Icons';
+* @import './pages/Login';
+* @import './pages/Notifications';
+* @import './pages/Orders';
+* @import './pages/Payments';
+* @import './pages/PostList';
+* @import './pages/PostNew';
+* @import './pages/Profile';
+* @import './pages/Register';
+* @import './pages/Static';
+* @import './pages/Style';
+* @import './pages/Tracking';
+*/

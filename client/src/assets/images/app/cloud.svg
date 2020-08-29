@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="197.55" height="143.07" viewBox="0 0 197.55 143.07">
+  <defs>
+    <style>
+      .a {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>cloud</title>
+  <g>
+    <path class="a" d="M194.16,78.39a44.12,44.12,0,0,0-47.53-57.18A54.6,54.6,0,0,0,51.4,38.05a35.81,35.81,0,0,0,5.74,71.16H177.8a19.75,19.75,0,0,0,16.36-30.82Z"/>
+    <circle class="a" cx="15.89" cy="112.03" r="15.89"/>
+    <circle class="a" cx="17.65" cy="137.85" r="5.22"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 76 76">
+  <defs>
+    <style>
+      .a {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>achievement-plantedachievement-saved</title>
+  <g>
+    <circle class="a" cx="38" cy="38" r="38"/>
+    <g>
+      <rect x="19" y="31" width="38" height="14" rx="3"/>
+      <rect x="31" y="19" width="14" height="38" rx="3"/>
+    </g>
+  </g>
+</svg>

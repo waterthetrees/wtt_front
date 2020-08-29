@@ -1,0 +1,6 @@
+{
+  "name": "UserProfile",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./UserProfile.js"
+}
