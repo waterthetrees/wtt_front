@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="76" height="76" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .a {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)">
+    <g>
+      <path d="M251.385,5.277c-6.823-6.947-17.985-7.047-24.931-0.225c-0.076,0.074-0.151,0.149-0.225,0.225 C219.778,12.325,68.14,179.254,68.14,306.947c0,113.254,57.412,170.667,170.667,170.667s170.667-57.412,170.667-170.667 C409.474,179.254,257.836,12.325,251.385,5.277z" style="fill: rgb(0, 247, 255);"/>
+    </g>
+  </g>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g style="" transform="matrix(0.157709, 0, 0, 0.157709, 0.432147, 0.237624)"/>
+  <g transform="matrix(0.105262, 0, 0, 0.106257, 10.685961, 17.907335)" style="stroke-width: 1.5724; vector-effect: non-scaling-stroke;">
+    <circle style="" cx="160" cy="192" r="32"/>
+    <circle style="" cx="352" cy="192" r="32"/>
+    <path d="M 155.553 365.889 C 229.159 365.889 304.02 364.619 376.496 364.619" style="stroke: rgb(0, 0, 0); fill: rgb(216, 216, 216); stroke-linecap: round; stroke-width: 189.108px;"/>
+  </g>
+</svg>

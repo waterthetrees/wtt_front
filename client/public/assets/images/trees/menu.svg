@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="24" viewBox="0 0 30 24">
+  <defs>
+    <style>
+      .a, .c {
+        fill: none;
+      }
+
+      .b {
+        clip-path: url(#a);
+      }
+
+      .c {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-width: 4px;
+      }
+    </style>
+    <clipPath id="a" transform="translate(-5 -1)">
+      <rect class="a" width="38" height="28"/>
+    </clipPath>
+  </defs>
+  <g class="b">
+    <g>
+      <line class="c" x1="2" y1="2" x2="28" y2="2"/>
+      <line class="c" x1="2" y1="12" x2="28" y2="12"/>
+      <line class="c" x1="2" y1="22" x2="28" y2="22"/>
+    </g>
+  </g>
+</svg>

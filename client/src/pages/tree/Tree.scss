@@ -1,0 +1,105 @@
+@import '../../styles/app';
+
+.MapContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  margin: -100px
+}
+
+.tree__label {
+  color: #ff0000;
+}
+
+.tree__label img {
+  height: 50px;
+}
+
+
+.tree__add {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; 
+  z-index: 1049;
+  border-radius: 50%;
+  padding: 0;
+  .btn {
+    border: 0px solid #000;
+    border-radius: 50%;
+  }
+  .btn-success:active {
+   color: #fff;
+   background-color: #006400;
+  }
+
+  h1, .h1 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    font-weight: 900;
+    line-height: 1;
+  }
+}
+
+ 
+.tree__add:not(:disabled):not(.disabled).active, .tree__add:not(:disabled):not(.disabled):active, .show > .tree__add.dropdown-toggle {
+    color: #fff;
+    background-color: #006400;
+    border-color: white;
+ }
+.tree__add .active {
+  color: #fff;
+  background-color: #006400 !important;
+  border-color: white;
+ }
+
+ .tree__add:active {
+  color: #fff;
+  background-color: #006400;
+  border-color: white;
+ }
+
+ .tree__add .active:hover {
+  color: #fff;
+  background-color: #006400;
+  border-color: white;
+ }
+
+ .tree__add:hover {
+   color: #006400;
+   background-color: white;
+   border-color: white;
+  }
+
+.userprofile {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  z-index: 1049;
+  border-radius: 50%;
+  padding: 0;
+  .btn {
+    border: 0px solid #000;
+    border-radius: 50%;
+  }
+  .btn-success:active {
+   color: #fff;
+   background-color: #006400;
+  }
+
+  h1, .h1 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    font-weight: 900;
+    line-height: 1;
+  }
+}
+ 
+

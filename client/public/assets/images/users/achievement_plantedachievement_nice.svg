@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 76 76">
+  <defs>
+    <style>
+      .a {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>achievement-plantedachievement-nice</title>
+  <g>
+    <circle class="a" cx="38" cy="38" r="38"/>
+    <path d="M53.06,27.91a10.27,10.27,0,0,0-14.52,0h0A10.27,10.27,0,0,0,24,42.44h0L38.54,57,53.06,42.44a10.28,10.28,0,0,0,0-14.53Z"/>
+  </g>
+</svg>

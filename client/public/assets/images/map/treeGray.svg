@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="104.99" height="181.23" viewBox="0 0 104.99 181.23" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .a {
+        fill: #76923e;
+      }
+
+      .b {
+        fill: #324416;
+      }
+    </style>
+  </defs>
+  <title>Tree</title>
+  <g>
+    <circle class="a" cx="52.5" cy="52.5" r="52.5" style="fill: rgb(246, 246, 246);"/>
+    <circle class="a" cx="51.85" cy="52.265" r="44.157" style="fill: rgb(232, 232, 232);"/>
+  </g>
+</svg>
