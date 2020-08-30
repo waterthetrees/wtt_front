@@ -1,4 +1,4 @@
-@import '../../styles/app';
+@import "../../styles/app";
 
 .userprofile__image {
   width: 100%;
@@ -7,7 +7,6 @@
   padding-left: 0;
   border-radius: 5px 5px 0 0;
 }
-
 
 .userprofile__image > img {
   width: 100vw;
@@ -44,7 +43,8 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-leaflet-popup-content-wrapper, .leaflet-popup-tip { 
+leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
   color: #333;
   box-shadow: none;
 }
@@ -58,30 +58,22 @@ element.style {
 }
 
 .tree__status {
-  
   padding: 2px 2px;
   .tree__status-btn {
-    padding:3px;
+    padding: 3px;
     margin: 2px 2px;
     page-break-after: always; /* CSS 2.1 syntax */
     break-after: always; /* New syntax */
     border-radius: 0;
   }
 
-.tree__status-btn:active {
-  border: 2px solid #000000;
+  .tree__status-btn:active {
+    border: 2px solid #000000;
+  }
+  p {
+    margin: 0;
+  }
 }
- p {
-   margin:0;
- }
-}
-
-
-
-
-
-
-
 
 leaflet-popup {
   position: absolute;
@@ -102,10 +94,8 @@ leaflet-popup {
   width: 100vw;
   // margin: 0 auto;
   color: white;
-  z-index:100000;
+  z-index: 100000;
 }
-
-
 
 .tree__col {
   padding: 10px 0 10px 0;
@@ -119,20 +109,19 @@ leaflet-popup {
   box-sizing: border-box;
 }
 
-.tree__imagelocation .col{
+.tree__imagelocation .col {
   width: 100%;
   padding-right: 0;
   padding-left: 0;
 }
 
 .tree__imagelocation {
-  .col{
+  .col {
     width: 100%;
     padding-right: 0;
     padding-left: 0;
   }
 }
-
 
 .tree__imagelocation > img {
   width: 100vw;
@@ -146,7 +135,7 @@ leaflet-popup {
   }
 }
 
-.flex-grid { 
+.flex-grid {
   margin: 0 0 2px 0;
   display: flex;
   justify-content: flex-start;
@@ -191,7 +180,7 @@ leaflet-popup {
   font-weight: $font-weight-bold;
 }
 
-.tree__imagelocation .col{
+.tree__imagelocation .col {
   width: 100vw;
 }
 
@@ -200,24 +189,67 @@ leaflet-popup {
   height: 100%;
 }
 
-
 .progressbar {
   height: 20px;
-  width:100%;
+  width: 100%;
   border-radius: 10px;
-  margin:5px;
+  margin: 5px;
 
-  background: -moz-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 25%, rgba(255,184,41,1) 50%, rgba(97,156,58,1) 75%, rgba(84,219,22,1) 100%); /* ff3.6+ */
-  
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(25%, rgba(255,0,0,1)), color-stop(50%, rgba(255,184,41,1)), color-stop(75%, rgba(97,156,58,1)), color-stop(100%, rgba(84,219,22,1))); /* safari4+,chrome */
-  
-  background: -webkit-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 25%, rgba(255,184,41,1) 50%, rgba(97,156,58,1) 75%, rgba(84,219,22,1) 100%); /* safari5.1+,chrome10+ */
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 25%,
+    rgba(255, 184, 41, 1) 50%,
+    rgba(97, 156, 58, 1) 75%,
+    rgba(84, 219, 22, 1) 100%
+  ); /* ff3.6+ */
 
-  background: -o-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 25%, rgba(255,184,41,1) 50%, rgba(97,156,58,1) 75%, rgba(84,219,22,1) 100%); /* opera 11.10+ */
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    color-stop(0%, rgba(0, 0, 0, 1)),
+    color-stop(25%, rgba(255, 0, 0, 1)),
+    color-stop(50%, rgba(255, 184, 41, 1)),
+    color-stop(75%, rgba(97, 156, 58, 1)),
+    color-stop(100%, rgba(84, 219, 22, 1))
+  ); /* safari4+,chrome */
 
-  background: -ms-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 25%, rgba(255,184,41,1) 50%, rgba(97,156,58,1) 75%, rgba(84,219,22,1) 100%); /* ie10+ */
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 25%,
+    rgba(255, 184, 41, 1) 50%,
+    rgba(97, 156, 58, 1) 75%,
+    rgba(84, 219, 22, 1) 100%
+  ); /* safari5.1+,chrome10+ */
 
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 25%, rgba(255,184,41,1) 50%, rgba(97,156,58,1) 75%, rgba(84,219,22,1) 100%); /* w3c */
+  background: -o-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 25%,
+    rgba(255, 184, 41, 1) 50%,
+    rgba(97, 156, 58, 1) 75%,
+    rgba(84, 219, 22, 1) 100%
+  ); /* opera 11.10+ */
+
+  background: -ms-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 25%,
+    rgba(255, 184, 41, 1) 50%,
+    rgba(97, 156, 58, 1) 75%,
+    rgba(84, 219, 22, 1) 100%
+  ); /* ie10+ */
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 25%,
+    rgba(255, 184, 41, 1) 50%,
+    rgba(97, 156, 58, 1) 75%,
+    rgba(84, 219, 22, 1) 100%
+  ); /* w3c */
 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54DB16', endColorstr='#000000',GradientType=1 ); /* ie6-9 */
 }
@@ -237,10 +269,15 @@ leaflet-popup {
 }
 
 .container_popup {
-    width: 500px;
-    height: 500px;
-    top: 5px;
-    left:5px;
+  width: 500px;
+  height: 500px;
+  top: 5px;
+  left: 5px;
 
-    background-color: rgba(255,255,255,1); /* complimenting your modal colors */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    1
+  ); /* complimenting your modal colors */
 }

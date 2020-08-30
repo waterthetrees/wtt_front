@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-import s from './../../styles/app.scss';
+import s from "./../../styles/app.scss";
 
 class NotFound extends React.Component {
   render() {
@@ -14,4 +14,4 @@ class NotFound extends React.Component {
   }
 }
 
-export default (NotFound);
+export default NotFound;
