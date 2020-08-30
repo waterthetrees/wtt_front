@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom';
-import cx from 'classnames';
-import './Header.scss';
+import React, { useState } from "react";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from "reactstrap";
+import { NavLink as RRNavLink } from "react-router-dom";
+import cx from "classnames";
+import "./Header.scss";
 
 const Header = (props) => {
-  const component_name = 'Header';
+  const component_name = "Header";
   const [collapsed, setCollapsed] = useState(false);
   const toggleNavbar = () => setCollapsed(!collapsed);
   return (
@@ -13,19 +21,40 @@ const Header = (props) => {
       <NavbarToggler onClick={toggleNavbar} />
       <Collapse isOpen={collapsed} navbar>
         <Nav className="justify-content-beginning text-right">
-          <NavItem >
-            <NavLink tag={RRNavLink} onClick={toggleNavbar} activeClassName="active" to="/about">About</NavLink>
+          <NavItem>
+            <NavLink
+              tag={RRNavLink}
+              onClick={toggleNavbar}
+              activeClassName="active"
+              to="/about"
+            >
+              About
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={RRNavLink} onClick={toggleNavbar} activeClassName="active" to="/treemap">TreeMap</NavLink>
+            <NavLink
+              tag={RRNavLink}
+              onClick={toggleNavbar}
+              activeClassName="active"
+              to="/treemap"
+            >
+              TreeMap
+            </NavLink>
           </NavItem>
-          <NavItem >
-            <NavLink tag={RRNavLink} onClick={toggleNavbar} activeClassName="active" to="/mapper">Mapper</NavLink>
+          <NavItem>
+            <NavLink
+              tag={RRNavLink}
+              onClick={toggleNavbar}
+              activeClassName="active"
+              to="/mapper"
+            >
+              Mapper
+            </NavLink>
           </NavItem>
         </Nav>
-      </Collapse>        
+      </Collapse>
     </Navbar>
   );
-}
+};
 
 export default Header;

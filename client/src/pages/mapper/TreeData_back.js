@@ -1,92 +1,116 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
+import React, { Component, useState, useRef, useEffect } from "react";
 // import { useDispatch, useSelector } from 'react-redux';
-import mapboxgl from 'mapbox-gl';
-import useSWR from 'swr';
-import { Button, ButtonToggle, Modal, ModalHeader, ModalBody, ModalFooter, Progress, ButtonGroup, Label, Input, Col, Row } from 'reactstrap';
-import moment from 'moment';
-import cx from 'classnames';
-import './Mapper.scss';
-import CustomizedSlider from './Slider.js';
+import mapboxgl from "mapbox-gl";
+import useSWR from "swr";
+import {
+  Button,
+  ButtonToggle,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Progress,
+  ButtonGroup,
+  Label,
+  Input,
+  Col,
+  Row,
+} from "reactstrap";
+import moment from "moment";
+import cx from "classnames";
+import "./Mapper.scss";
+import CustomizedSlider from "./Slider.js";
 
-import {postTreeStatus} from '../../actions/index.js';
- 
+import { postTreeStatus } from "../../actions/index.js";
+
 export const serializeData = (data) => {
   // console.log(data,'serializeData');
-  return Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&');
-}
+  return Object.entries(data)
+    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+    .join("&");
+};
 
 const fetcher = (url) =>
   fetch(url)
-  .then((r) => r.text())
-  .then((body_string) => JSON.parse(body_string))
-  .then((body) => {
-    console.log('FETCHER!!!!! \n\n\n\n\n',body)
-    return body.data});
+    .then((r) => r.text())
+    .then((body_string) => JSON.parse(body_string))
+    .then((body) => {
+      console.log("FETCHER!!!!! \n\n\n\n\n", body);
+      return body.data;
+    });
 
-
-export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
-  console.log('TreeData currentTree',currentTree);
-  const {lat, lng} = currentTree || {};
-  console.log('TreeData tree {lat,lng}',{lat, lng});
+export function TreeData({ currentTree, iconCurrent, showTree, setShowTree }) {
+  console.log("TreeData currentTree", currentTree);
+  const { lat, lng } = currentTree || {};
+  console.log("TreeData tree {lat,lng}", { lat, lng });
   const request = {
-      requestType: 'GetTree', 
-      lat,
-      lng
-    }
-    console.log('TreeData tree request',request);
+    requestType: "GetTree",
+    lat,
+    lng,
+  };
+  console.log("TreeData tree request", request);
   const dataSerialized = serializeData(request);
-  const BASE_URL = 'http://localhost:3002/treemap';
+  const BASE_URL = "http://localhost:3002/treemap";
   const URL = `${BASE_URL}?${dataSerialized}`;
-  const { data, error } = useSWR( URL, fetcher);
-  console.log(data, 'tree POST FETCH DDDDDDDATA \n\n\n\n');
+  const { data, error } = useSWR(URL, fetcher);
+  console.log(data, "tree POST FETCH DDDDDDDATA \n\n\n\n");
 
   // const treeDataRef = useRef(null); // DOM element to render map
   const [tree, setTree] = useState(null);
   // Initialize our map
   useEffect(() => {
-    if (!data) return ;
+    if (!data) return;
     // console.log('data here' ,data)
     setTree(data);
   }, [data]);
 
   // tree = JSON.parse(tree);
-  const {label, icon, common, health, treetag, plant_date, owner,buttonLabel,className} = tree || {};
-  console.log('tree', tree, common,'asdfasdfasdfasdf\n\n\n');
-// {"inventoryid","common","botanicalname",
-// "lng":-122.27753419780001,"lat":37.776214375251996,
-// "plantingdistrict":" Lincoln Tilden Marshall Pacific ",
-// "address":"640",
-// "street":" PACIFIC AV","sidetype":" Front","tree":1,"treecity":null,
-// "treestate":null,"treecountry":null,"treezip":null,"treewaterlevel":100,
-// "treehealth":null,"treeinsects":null,"treebroken":null,
-// "selectreelink":"https://selectree.calpoly.edu/tree-detail/lophostemon-confertus",
-// "dbh":" 13-18","height":null,"owner":" Public","pictureurl":"None"} 
+  const {
+    label,
+    icon,
+    common,
+    health,
+    treetag,
+    plant_date,
+    owner,
+    buttonLabel,
+    className,
+  } = tree || {};
+  console.log("tree", tree, common, "asdfasdfasdfasdf\n\n\n");
+  // {"inventoryid","common","botanicalname",
+  // "lng":-122.27753419780001,"lat":37.776214375251996,
+  // "plantingdistrict":" Lincoln Tilden Marshall Pacific ",
+  // "address":"640",
+  // "street":" PACIFIC AV","sidetype":" Front","tree":1,"treecity":null,
+  // "treestate":null,"treecountry":null,"treezip":null,"treewaterlevel":100,
+  // "treehealth":null,"treeinsects":null,"treebroken":null,
+  // "selectreelink":"https://selectree.calpoly.edu/tree-detail/lophostemon-confertus",
+  // "dbh":" 13-18","height":null,"owner":" Public","pictureurl":"None"}
 
   // const {progressNumber, dateWateredFormatted} = treeProgress(tree, today);
 
   const [dateWatered, setWaterDate] = useState(dateWateredFormatted);
   const [waterSelected, setWaterSelected] = useState();
-  const [healthy, setHealthy] = useState('healthy');
+  const [healthy, setHealthy] = useState("healthy");
   const [statusSelected, setStatusSelected] = useState([]);
   const [issuesSelected, setIssuesSelected] = useState([]);
-  const [moreSelected, setMoreSelected] =useState(false);
+  const [moreSelected, setMoreSelected] = useState(false);
 
   const [getmedal, setMedal] = useState(false);
 
-   // const [watered, setWaterDate] = useState();
-  const [status, setStatus] = useState('healthy');
+  // const [watered, setWaterDate] = useState();
+  const [status, setStatus] = useState("healthy");
   const changeLastWatered = () => {
-    setWaterDate(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    setWaterDate(moment().format("MMMM Do YYYY, h:mm:ss a"));
     setMedal(!getmedal);
   };
   const changeStatus = (event) => setStatus(event.target.name);
-  const [watered, setWatered] = useState('water');
-  const [weeded, setWeeded] = useState('weed');
-  const [mulched, setMulched] = useState('mulch');
-  const [staked, setStaked] = useState('stake');
-  const [braced, setBraced] = useState('brace');
-  const [pruned, setPruned] = useState('prune');
-
+  const [watered, setWatered] = useState("water");
+  const [weeded, setWeeded] = useState("weed");
+  const [mulched, setMulched] = useState("mulch");
+  const [staked, setStaked] = useState("stake");
+  const [braced, setBraced] = useState("brace");
+  const [pruned, setPruned] = useState("prune");
 
   const onCheckboxBtnClick = (selected) => {
     const index = statusSelected.indexOf(selected);
@@ -96,15 +120,25 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
       statusSelected.splice(index, 1);
     }
     setStatusSelected([...statusSelected]);
-    (statusSelected.includes('watered')) ? setWatered('watered') : setWatered('water');
-    (statusSelected.includes('weeded')) ? setWeeded('weeded') : setWeeded('weed');
-    (statusSelected.includes('mulched')) ? setMulched('mulched') : setMulched('mulch');
-    (statusSelected.includes('staked')) ? setStaked('staked') : setStaked('stake');
-    (statusSelected.includes('braced')) ? setBraced('braced') : setBraced('brace');
-    (statusSelected.includes('pruned')) ? setPruned('pruned') : setPruned('prune');
+    statusSelected.includes("watered")
+      ? setWatered("watered")
+      : setWatered("water");
+    statusSelected.includes("weeded") ? setWeeded("weeded") : setWeeded("weed");
+    statusSelected.includes("mulched")
+      ? setMulched("mulched")
+      : setMulched("mulch");
+    statusSelected.includes("staked")
+      ? setStaked("staked")
+      : setStaked("stake");
+    statusSelected.includes("braced")
+      ? setBraced("braced")
+      : setBraced("brace");
+    statusSelected.includes("pruned")
+      ? setPruned("pruned")
+      : setPruned("prune");
 
-    (statusSelected.length > 0) ? setHealthy(null) : setHealthy('healthy');
-  }
+    statusSelected.length > 0 ? setHealthy(null) : setHealthy("healthy");
+  };
 
   const onMoreClick = () => setMoreSelected(!moreSelected);
   const onIssuesClick = (selected) => {
@@ -115,89 +149,107 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
       issuesSelected.splice(index, 1);
     }
     setIssuesSelected([...issuesSelected]);
-    (issuesSelected.length > 0) ? setHealthy(null) : setHealthy('healthy');
-  }
+    issuesSelected.length > 0 ? setHealthy(null) : setHealthy("healthy");
+  };
 
   const addWater = (selected) => {
     //console.log('selected',selected, waterSelected);
-    (waterSelected) ? setWaterDate(moment().format('MMM Do YYYY')) :setWaterDate(dateWateredFormatted) ;
+    waterSelected
+      ? setWaterDate(moment().format("MMM Do YYYY"))
+      : setWaterDate(dateWateredFormatted);
     setWaterSelected(!waterSelected);
     setMedal(!getmedal);
   };
 
   const dispatch = useDispatch();
-  const saved = (event) => dispatch(postTreeStatus({treeId, request:'savetree', status, dateWatered, treetag}));
+  const saved = (event) =>
+    dispatch(
+      postTreeStatus({
+        treeId,
+        request: "savetree",
+        status,
+        dateWatered,
+        treetag,
+      })
+    );
   // const image = <img className='tree__image' src='assets/images/trees/Koelreuteria-paniculata-Maja-Dumat-600x400.jpg'/>
-    //<div className="flex-grid border-top tree__imagelocation">
-      //<img className='tree__image' src='assets/images/trees/Koelreuteria-paniculata-Maja-Dumat-600x400.jpg'/>
-   // </div>
-  const image = (tree.pictureurl === "None" || tree.pictureurl === undefined) ?  icon : tree.pictureurl;
-  const tree__imageclass = (tree.pictureurl === "None" || tree.pictureurl === undefined) ? 'tree__icon' : 'tree__image';
+  //<div className="flex-grid border-top tree__imagelocation">
+  //<img className='tree__image' src='assets/images/trees/Koelreuteria-paniculata-Maja-Dumat-600x400.jpg'/>
+  // </div>
+  const image =
+    tree.pictureurl === "None" || tree.pictureurl === undefined
+      ? icon
+      : tree.pictureurl;
+  const tree__imageclass =
+    tree.pictureurl === "None" || tree.pictureurl === undefined
+      ? "tree__icon"
+      : "tree__image";
   // {getmedal && <img className='Tree__icon' src='assets/images/trees/medal.svg' height="50px"/>}
-  console.log('image',image, tree__imageclass);
+  console.log("image", image, tree__imageclass);
 
-  const notesRef = useRef('test notes');
+  const notesRef = useRef("test notes");
 
   const handleSubmit = async (event, send_data) => {
-    const functionName = 'handleSubmit';
+    const functionName = "handleSubmit";
     try {
-      
-
       return;
     } catch (err) {
-      console.log('\n\n\n\n ------', functionName, 'err',err);
+      console.log("\n\n\n\n ------", functionName, "err", err);
       return err;
     }
-  }
+  };
   const [value, setValue] = useState("");
   const valueRef = useRef();
 
-  const handleClick = e => {
-    
-  };
+  const handleClick = (e) => {};
 
-  const [volunteerValue, setVolunteerValue] = useState('');
-  const volunteerRef = useRef('Volunteer');
-  const handleVolunteer = e => setVolunteerValue(volunteerRef.current.value);
-  const [commentValue, setCommentValue] = useState('');
-  const commentRef = useRef('Volunteer');
-  const handleComment = e => setVolunteerValue(commentRef.current.value);
+  const [volunteerValue, setVolunteerValue] = useState("");
+  const volunteerRef = useRef("Volunteer");
+  const handleVolunteer = (e) => setVolunteerValue(volunteerRef.current.value);
+  const [commentValue, setCommentValue] = useState("");
+  const commentRef = useRef("Volunteer");
+  const handleComment = (e) => setVolunteerValue(commentRef.current.value);
   const toggle = () => setShowTree(!showTree);
-  useEffect(() => { 
-  }, [])
+  useEffect(() => {}, []);
 
   const defaultSliderValue = {
     good: 100,
     fair: 79,
     poor: 59,
     dead: 20,
-    missing: 0
+    missing: 0,
   };
 
   const [sliderValue, setSlider] = useState(defaultSliderValue.health || 100);
-  const [overallHealth, setOverallHealth] = useState(health || 'good');
+  const [overallHealth, setOverallHealth] = useState(health || "good");
 
-  console.log('overallHealth',overallHealth, defaultSliderValue, 'health',health)
+  console.log(
+    "overallHealth",
+    overallHealth,
+    defaultSliderValue,
+    "health",
+    health
+  );
 
   // const [sliderValue, setSlider] = useState(100);
   // const [overallHealth, setOverallHealth] = useState('GOOD');
   const changeSlider = (event) => {
     const value = event.target.value;
-    if (value >= 80) setOverallHealth('good');
-    if (value >= 60 && value <=79 ) setOverallHealth('fair');
-    if (value >= 40 && value <=59 ) setOverallHealth('poor');
-    if (value >= 20 && value <=39 ) setOverallHealth('dead');
-    if (value <= 20) setOverallHealth('stump');
-    setSlider(event.target.value)
+    if (value >= 80) setOverallHealth("good");
+    if (value >= 60 && value <= 79) setOverallHealth("fair");
+    if (value >= 40 && value <= 59) setOverallHealth("poor");
+    if (value >= 20 && value <= 39) setOverallHealth("dead");
+    if (value <= 20) setOverallHealth("stump");
+    setSlider(event.target.value);
   };
 
-  return (<div>test</div>)
+  return <div>test</div>;
 
   // return (
 
   // <Modal isOpen={showTree} toggle={toggle} className={className}>
 
-  //   <ModalHeader toggle={toggle}>{label} 
+  //   <ModalHeader toggle={toggle}>{label}
   //     {treetag}
   //     <div className="flex-grid-three text-left">
   //       {tree.common && <div><h3>{tree.common}</h3></div>}
@@ -207,8 +259,6 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //       {image && <img src={`${image}`} height="200px"/>}
   //     </div>
   //   </ModalHeader>
-      
-    
 
   //   <ModalBody>
   //     <div className="flex-grid tree_history-list text-center"><h5>Overall Health</h5></div>
@@ -217,10 +267,8 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //       <h5><span id={sliderValue}>{overallHealth}</span></h5>
   //     </div>
 
-
   //     <div className="flex-grid border-top">
   //     <div className="text-center tree_history-list"><h5>Tree Visit Maintenance</h5></div>
-      
 
   //     <div className="flex-grid-buttons tree__status  ">
   //       <div className="text-center">
@@ -244,7 +292,6 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //         </Button>{' '}
   //       </div>
 
-
   //       <div className="text-center">
   //         <Button className="tree__status-btn btn-sm" color="success" onClick={() => onCheckboxBtnClick('staked')} active={statusSelected.includes('staked')}>
   //           <img src={`assets/images/trees/${staked}.svg`} />
@@ -266,7 +313,7 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //         </Button>
   //       </div>
   //     </div>
-      
+
   //     <div className="flex-grid tree__status">
   //       {(statusSelected.length > 0) && (
   //       <div className="flex-grid tree__indent">
@@ -284,7 +331,7 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //         Maintenance Comment:
   //         <input ref={commentRef} placeholder="Maintenance Comment" onBlur={handleComment} className="volunteerName" id="maintenanceComment"/>
   //       </div>
-        
+
   //       <div className="flex-grid tree__indent">
   //         Tree Notes:
   //         <textarea rows="5" cols="80" ref={notesRef} placeholder="Tree Notes" className="notes" id="notes"/>
@@ -293,7 +340,7 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //     </div>
 
   //     <a href={tree.selectreelink}><img className={tree__imageclass} src={image}/></a>
-      
+
   //     <div className="flex-grid border-top">
   //     <div className="text-center tree_history-list"><h5>Tree Visit History</h5></div>
   //       {dateWatered && (
@@ -316,7 +363,7 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //         <div>Lat: {tree.lat}</div>
   //         <div>Lng: {tree.lng}</div>
   //         <div>{tree.plantingdistrict}</div>
-         
+
   //       </div>
   //     </div>
 
@@ -325,17 +372,16 @@ export function TreeData({currentTree,iconCurrent, showTree, setShowTree}) {
   //         <h5 className="text-center">More info</h5>
   //         Open Tree Standards
   //         <a href="https://standards.opencouncildata.org/#/trees">https://standards.opencouncildata.org/#/trees</a>
-          
+
   //       </div>
   //     </div>
   //   </ModalBody>
- 
+
   //   <ModalFooter>
-        
+
   //   </ModalFooter>
   // </Modal>
   // )
-  
 }
 
 //   address: "1524"

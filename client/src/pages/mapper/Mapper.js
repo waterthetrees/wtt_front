@@ -1,25 +1,34 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 // import {useSelector, useDispatch} from 'react-redux';
-import mapboxgl from 'mapbox-gl';
-import useSWR from 'swr';
+import mapboxgl from "mapbox-gl";
+import useSWR from "swr";
 
 // ES6
 // import ReactMapboxGl, { Layer, Feature, Popup, Cluster, GeoJSONLayer } from 'react-mapbox-gl';
-import moment from 'moment';
+import moment from "moment";
 
-import { Button, ButtonToggle,Modal, ModalHeader, ModalBody, ModalFooter, Progress, ButtonGroup, Label, Input } from 'reactstrap';
-import { TreeData } from './TreeData.js';
+import {
+  Button,
+  ButtonToggle,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Progress,
+  ButtonGroup,
+  Label,
+  Input,
+} from "reactstrap";
+import { TreeData } from "./TreeData.js";
 // import { TreeAdd } from '../treemap/TreeAdd.js';
 // import UserProfile from '../userprofile';
-import config from '../../config.js';
-
+import config from "../../config.js";
 
 const has = Object.prototype.hasOwnProperty;
-const today = moment().format('YYYY-MM-DD');
+const today = moment().format("YYYY-MM-DD");
 
-
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w';
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w";
 
 // const fetcher = (url) =>
 //   fetch(url)
@@ -27,28 +36,29 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3a
 //   .then((body_string) => JSON.parse(body_string))
 //   .then((body) => body.data);
 
-
 function Mapper() {
-  const componentName = 'Mapper';
+  const componentName = "Mapper";
 
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const [currentTree, setCurrentTree] = useState({});
   const [showTree, setShowTree] = useState(false);
-  const { data: mapData, error } = useSWR('http://localhost:3002/treemap?requestType=GetMap&city=Oakland');
+  const { data: mapData, error } = useSWR(
+    "http://localhost:3002/treemap?requestType=GetMap&city=Oakland"
+  );
   // const { data: tree } = useSWR(`http://localhost:3002/tree?requestType=GetTree&currentTreeId=${currentTreeId}&lng=${lng}&lat=${lat}`, fetcher);
-  
+
   const mapboxElRef = useRef(null); // DOM element to render map
 
   // Initialize our map
   useEffect(() => {
-    if (!mapData) return ;
+    if (!mapData) return;
     // console.log('mapData here' ,mapData)
     const map = new mapboxgl.Map({
       container: mapboxElRef.current,
       // style: 'mapbox://styles/notalemesa/ck8dqwdum09ju1ioj65e3ql3k',
-      style: 'mapbox://styles/mapbox/light-v10',
+      style: "mapbox://styles/mapbox/light-v10",
       center: [-122.196532, 37.779369],
-      zoom: 15
+      zoom: 15,
     });
 
     map.addControl(
@@ -63,55 +73,60 @@ function Mapper() {
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());
 
-    map.once('load', function () {
+    map.once("load", function () {
       // Add our SOURCE
       // console.log(mapData,'asdfasdfasdf\n\n\n')
-      map.addSource('points', {
-        type: 'geojson',
-        data: mapData
+      map.addSource("points", {
+        type: "geojson",
+        data: mapData,
       });
 
       // Add our layer
       map.addLayer({
-        id: 'circle',
-        source: 'points', // this should be the id of source
-        type: 'circle',
-        paint: { 
-          'circle-radius': { 
-            'base': 1.75,
-            'stops': [
+        id: "circle",
+        source: "points", // this should be the id of source
+        type: "circle",
+        paint: {
+          "circle-radius": {
+            base: 1.75,
+            stops: [
               [10, 2],
-              [22, 180]
-            ]},
-          'circle-color': 'green'
-        }
+              [22, 180],
+            ],
+          },
+          "circle-color": "green",
+        },
       });
 
-
-
-      map.on('click', 'circle', function(e) {
-        map.getCanvas().style.cursor = 'pointer';
+      map.on("click", "circle", function (e) {
+        map.getCanvas().style.cursor = "pointer";
         setCurrentTreeId(e.features[0].properties.id);
         setShowTree(true);
       });
 
       let lastId;
       var hoveredStateId = null;
-       const popup = new mapboxgl.Popup({
-              closeButton: false,
-              closeOnClick: false
-            });
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+      });
 
-      map.on('mousemove', 'circle', function(e) {
-        map.getCanvas().style.cursor = 'pointer';
+      map.on("mousemove", "circle", function (e) {
+        map.getCanvas().style.cursor = "pointer";
         if (e.features.length > 0) {
           if (e.features[0].properties.id) {
-              map.setFeatureState({ source: 'points', id: hoveredStateId }, { hover: false });
+            map.setFeatureState(
+              { source: "points", id: hoveredStateId },
+              { hover: false }
+            );
           }
           hoveredStateId = e.features[0].id;
           const common = e.features[0].properties.common;
-          map.setFeatureState({ source: 'points', id: hoveredStateId }, { hover: true });
-          map.getCanvas().style.cursor = 'pointer';
+          map.setFeatureState(
+            { source: "points", id: hoveredStateId },
+            { hover: true }
+          );
+          map.getCanvas().style.cursor = "pointer";
           const coordinates = e.features[0].geometry.coordinates.slice();
 
           const HTML = `<p>Common: <b>${common}</b></p><p>Id: <b>${hoveredStateId}</b></p>`;
@@ -124,19 +139,20 @@ function Mapper() {
         }
       });
 
-  // When the mouse leaves the state-fill layer, update the feature state of the
-  // previously hovered feature.
-      map.on('mouseleave', 'circle', function() {
+      // When the mouse leaves the state-fill layer, update the feature state of the
+      // previously hovered feature.
+      map.on("mouseleave", "circle", function () {
         if (hoveredStateId) {
-          map.setFeatureState({ source: 'points', id: hoveredStateId }, { hover: false });
+          map.setFeatureState(
+            { source: "points", id: hoveredStateId },
+            { hover: false }
+          );
         }
         hoveredStateId = null;
         // lastId = undefined;
-        map.getCanvas().style.cursor = '';
+        map.getCanvas().style.cursor = "";
         popup.remove();
       });
-
-     
 
       // map.on('mousemove', 'circle', (e) => {
       //   const id = e.features[0].properties.id;
@@ -169,7 +185,6 @@ function Mapper() {
       //   popup.remove();
       // });
     });
-    
   }, [mapData]);
 
   // const treeListMap = useSelector(state => state.treemap.treeListMap);
@@ -180,50 +195,56 @@ function Mapper() {
 
   const [userProfileOpen, setUserProfileOpen] = useState(false);
   const toggle = () => setModal(!userProfileOpen);
- 
+
   const handleAddTree = (selected) => {
-    (addTree === 'addTree') ? setAddTreeSelected(null) : setAddTreeSelected('addTree');
-    (addTree || addTree === 'addTree' ) ? setMapDraggable(true) : setMapDraggable(false);
+    addTree === "addTree"
+      ? setAddTreeSelected(null)
+      : setAddTreeSelected("addTree");
+    addTree || addTree === "addTree"
+      ? setMapDraggable(true)
+      : setMapDraggable(false);
   };
 
   const handleOpenUserProfile = (selected) => {
-    (userProfileOpen === 'userProfileOpen') ? setUserProfileOpen(null) : setUserProfileOpen('userProfileOpen');
-    (userProfileOpen || userProfileOpen === 'userProfileOpen' ) ? setMapDraggable(true) : setMapDraggable(false);
+    userProfileOpen === "userProfileOpen"
+      ? setUserProfileOpen(null)
+      : setUserProfileOpen("userProfileOpen");
+    userProfileOpen || userProfileOpen === "userProfileOpen"
+      ? setMapDraggable(true)
+      : setMapDraggable(false);
   };
 
   // const [latlng, setLatLng] = useState();
-  
+
   const handleClickedMap = (event) => {
-    const functionName = 'handleClickedMap';
+    const functionName = "handleClickedMap";
     let lat = event.lat;
-    let lng  = event.lng;
-    setLatLng([lat,lng])
-  }
+    let lng = event.lng;
+    setLatLng([lat, lng]);
+  };
   // const key = config.googlemap.key;
   const [modal, setModal] = useState(false);
-
 
   // TODO figure out this
 
   // Define layout to use in Layer component
-    // const layoutLayer = { 'icon-image': 'londonCycle' };
-
+  // const layoutLayer = { 'icon-image': 'londonCycle' };
 
   const url = window.location.origin;
   const imagepath = `${url}/assets/images/map/`;
   const treeIcons = {
-    fair:  `${imagepath}treeYellow.svg`,
-    poor:  `${imagepath}treeRed.svg`,
-    missing:  `${imagepath}treeOrange.svg`,
-    good:  `${imagepath}treeGreen.svg`,
-    well:  `${imagepath}treeGray.svg`,
-    dead:  `${imagepath}treeBlack.svg`,
+    fair: `${imagepath}treeYellow.svg`,
+    poor: `${imagepath}treeRed.svg`,
+    missing: `${imagepath}treeOrange.svg`,
+    good: `${imagepath}treeGreen.svg`,
+    well: `${imagepath}treeGray.svg`,
+    dead: `${imagepath}treeBlack.svg`,
   };
 
-    // Create an image for the Layer
+  // Create an image for the Layer
   const image = new Image();
   image.src = treeIcons.green;
-  const images = ['londonCycle', image];
+  const images = ["londonCycle", image];
   const treeRef = useRef();
 
   const [showTreePopper, setShowTreePopper] = useState(false);
@@ -237,11 +258,19 @@ function Mapper() {
         <div className="mapBox" ref={mapboxElRef} />
       </div>
       {error && <div>Failed to load trees</div>}
-      {userProfileOpen && <UserProfile toggle={toggle} modal={userProfileOpen}/>}
-      {currentTreeId && <TreeData currentTreeId={currentTreeId} lng={currentTree.lng} lat={currentTree.lat} icon={iconCurrent} showTree={showTree} setShowTree={setShowTree}/>}
-
-      
-      
+      {userProfileOpen && (
+        <UserProfile toggle={toggle} modal={userProfileOpen} />
+      )}
+      {currentTreeId && (
+        <TreeData
+          currentTreeId={currentTreeId}
+          lng={currentTree.lng}
+          lat={currentTree.lat}
+          icon={iconCurrent}
+          showTree={showTree}
+          setShowTree={setShowTree}
+        />
+      )}
     </div>
   );
 }
@@ -249,7 +278,7 @@ function Mapper() {
 // const handleClickedTree = async (tree) => {
 //   console.log('tree', tree);
 //   const request = {
-//       requestType: 'GetTree', 
+//       requestType: 'GetTree',
 //       lat: tree.lat,
 //       lng:tree.lng
 //     }
@@ -265,7 +294,9 @@ function Mapper() {
 
 export const serializeData = (data) => {
   // console.log(data,'serializeData');
-  return Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&');
-}
+  return Object.entries(data)
+    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+    .join("&");
+};
 
 export default Mapper;

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-import s from './../../styles/app.scss';
+import s from "./../../styles/app.scss";
 
 class ErrorPage extends React.Component {
   static propTypes = {
@@ -15,7 +15,7 @@ class ErrorPage extends React.Component {
 
   render() {
     if (__DEV__) {
-      const {error} = this.props;
+      const { error } = this.props;
       return (
         <div>
           <h1>{error.name}</h1>
@@ -34,5 +34,5 @@ class ErrorPage extends React.Component {
   }
 }
 
-export {ErrorPage as ErrorPageWithoutStyle};
-export default (ErrorPage);
+export { ErrorPage as ErrorPageWithoutStyle };
+export default ErrorPage;

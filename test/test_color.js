@@ -10,5 +10,5 @@ const statusColor = (status, error) => {
         unpaid: 'Payment__grid-label__showred',
       }[status];
 }
-
+ 
 console.log(statusColor('aca', 'error'))

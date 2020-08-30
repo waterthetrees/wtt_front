@@ -1,14 +1,16 @@
 # wtt
+
 ## wtt_front
 
 ## Features
-* React
-* React Router
-* Redux
-* Bootstrap4
-* Reactstrap
-* Webpack build
-* Sass styles
+
+- React
+- React Router
+- Redux
+- Bootstrap4
+- Reactstrap
+- Webpack build
+- Sass styles
 
 ## Quick Start
 
@@ -31,26 +33,30 @@ $ yarn global add --save-dev webpack-cli
 This will install both run-time project dependencies and developer tools listed
 in [package.json](../package.json) file.
 
-
 #### 3. API endpoints
 
+- Backend endpoints
 
-* Backend endpoints
 ```shell
 $ server/server-dashboard.js
-``` 
+```
 
 #### 4. START ER UP
 
 To build bundle once
+
 ```shell
 $ webpack
 ```
+
 If you want to watch for dev changes continuously
+
 ```shell
 $ webpack -w
 ```
+
 Start react pages server - change local to dev or live
+
 ```shell
 $ yarn start local
 ```
@@ -60,6 +66,7 @@ $ node server/server-dashboard.js local
 ```
 
 ### License
+
 Code written by Rose Meyers, Victoria Tan
 Design by Vivien Muller
 

@@ -1,41 +1,51 @@
-const {logger} = require('./../logger.js');
-util = require('util');
-const puppeteer = require('puppeteer');
-const expect = require('chai').expect;
-const config = require('./lib/config');
-const { checkFrame, waitForFrame, shouldNotExist, shouldExist, pressKey, getCount, getText, loadURL, click, typeText, waitForText} = require('./lib/helpers');
-const { generateEmail, generatePassword, user } = require('./lib/utils');
-
+const { logger } = require("./../logger.js");
+util = require("util");
+const puppeteer = require("puppeteer");
+const expect = require("chai").expect;
+const config = require("./lib/config");
+const {
+  checkFrame,
+  waitForFrame,
+  shouldNotExist,
+  shouldExist,
+  pressKey,
+  getCount,
+  getText,
+  loadURL,
+  click,
+  typeText,
+  waitForText,
+} = require("./lib/helpers");
+const { generateEmail, generatePassword, user } = require("./lib/utils");
 
 async function setupPage(browser, page) {
   try {
-      browser = await puppeteer.launch({
-        headless: config.isHeadless,
-        slowMo: config.slowMo,
-        devtools: config.isDevTools,
-        timeout: config.launchTimeout
-      });
-      page = await browser.newPage();
-      await page.setDefaultTimeout(config.waitingTimeout);
-      await page.setViewport({
-          width: config.viewportWidth,
-          height: config.viewportHeight
-      });
-      return {browser, page};
-  } catch( err) {
-      logger.log('error', `CATCH ERROR  ${err}`);
-  } 
+    browser = await puppeteer.launch({
+      headless: config.isHeadless,
+      slowMo: config.slowMo,
+      devtools: config.isDevTools,
+      timeout: config.launchTimeout,
+    });
+    page = await browser.newPage();
+    await page.setDefaultTimeout(config.waitingTimeout);
+    await page.setViewport({
+      width: config.viewportWidth,
+      height: config.viewportHeight,
+    });
+    return { browser, page };
+  } catch (err) {
+    logger.log("error", `CATCH ERROR  ${err}`);
+  }
 }
 
 async function closePage(browser, page) {
   try {
-     await browser.close(); 
-     return;
-  } catch( err) {
-      logger.log('error', `CATCH ERROR  ${err}`);
+    await browser.close();
+    return;
+  } catch (err) {
+    logger.log("error", `CATCH ERROR  ${err}`);
   }
 }
-
 
 // describe('Threadbeast Puppeteer Payment tests', () => {
 //     let browser;
@@ -74,16 +84,16 @@ async function closePage(browser, page) {
 //             // logger.log('debug', `tests page  ${util.inspect(page, false, 10, true)}`);
 //         } catch( err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
-//         } 
+//         }
 //     });
 
 //     after(async () => {
 //         try {
-//            await browser.close(); 
+//            await browser.close();
 //         } catch( err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
 //         }
-        
+
 //     });
 
 //     it('load payments', async () => {
@@ -96,11 +106,11 @@ async function closePage(browser, page) {
 //             const url = await page.url();
 //             const title = await page.title();
 //             expect(url).to.contain('payment');
-//             expect(title).to.contain('Threadbeast Payment Portal'); 
+//             expect(title).to.contain('Threadbeast Payment Portal');
 //         } catch( err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
 //         }
-        
+
 //     });
 
 //     it('browser reload', async () => {
@@ -121,7 +131,7 @@ async function closePage(browser, page) {
 //         try {
 //             await shouldExist(page, '.Payment');
 //             logger.log('info',`waiting for Payment page to be ready.`);
-            
+
 //             await shouldExist(page, '#CheckoutForm');
 //             logger.log('info',`waiting for CheckoutForm Row to be ready.`);
 
@@ -131,7 +141,6 @@ async function closePage(browser, page) {
 //             const elementHandle = await page.waitForSelector('iframe');
 //             logger.log('info',`wait for iframe selector ${elementHandle}`);
 
-            
 //             // const frame = await elementHandle.contentFrame();
 //             // logger.log('info',`filling form in iframe ${frame}`);
 
@@ -142,15 +151,10 @@ async function closePage(browser, page) {
 //             // await frame.type('input[name=cvc]', 2344, { delay: 10000 });
 //             //  logger.log('info','filling in cvc');
 
-
-
 //         } catch( err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
 //         }
 //     });
-
-
-
 
 //     it('update credit card click', async () => {
 //         try {
@@ -172,8 +176,6 @@ async function closePage(browser, page) {
 //             logger.log('info','filling in date');
 //             await page.keyboard.type('input[name=cvc]',card.cvc, { delay: 50 });
 //             logger.log('info','filling in cvc');
-     
-
 
 //             const update_cc_button_clicked = await Promise.all([
 //               await page.waitForSelector('#update_creditcard_button'),
@@ -201,15 +203,14 @@ async function closePage(browser, page) {
 //             // await pressKey(page, '#reactivate');
 //             await page.click('#reactivate');
 //             logger.log('info',`click reactivate`);
-            
+
 //             await shouldExist(page, '.Payment');
 //             logger.log('info',`waiting for Payment page to be ready.`);
 //         } catch(err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
 //         }
- 
-//     });
 
+//     });
 
 //     it('select plan', async () => {
 //         try {
@@ -220,9 +221,8 @@ async function closePage(browser, page) {
 //         } catch(err) {
 //             logger.log('error', `CATCH ERROR  ${err}`);
 //         }
- 
-//     });
 
+//     });
 
 //     it('generates bad email', async () => {
 //         await page.waitForSelector('.Login');
@@ -242,9 +242,6 @@ async function closePage(browser, page) {
 //         ]);
 //         logger.log('info',`bad login clicked ${clicked}`);
 //     });
-
-
-
 
 //     // it('logs in with good email', async () => {
 //     //     await page.reload();
@@ -291,11 +288,11 @@ async function closePage(browser, page) {
 //           return {browser, page};
 //       } catch( err) {
 //           logger.log('error', `CATCH ERROR  ${err}`);
-//       } 
+//       }
 //     });
 //     after(async () => {
 //       try {
-//          await browser.close(); 
+//          await browser.close();
 //          return;
 //       } catch( err) {
 //           logger.log('error', `CATCH ERROR  ${err}`);
@@ -348,7 +345,7 @@ async function closePage(browser, page) {
 //     });
 
 //     it('should succeed in creating new member', async () => {
-    
+
 //         logger.log('info',`NewMember created `);
 //     });
 
@@ -374,11 +371,11 @@ async function closePage(browser, page) {
 //           return {browser, page};
 //       } catch( err) {
 //           logger.log('error', `CATCH ERROR  ${err}`);
-//       } 
+//       }
 //     });
 //     after(async () => {
 //       try {
-//          await browser.close(); 
+//          await browser.close();
 //          return;
 //       } catch( err) {
 //           logger.log('error', `CATCH ERROR  ${err}`);
@@ -390,7 +387,6 @@ async function closePage(browser, page) {
 //         await shouldExist(page, '.Login');
 //         logger.log('info',`loading Login page`);
 //     });
-
 
 //     it('should click forgot password Button', async () => {
 //          const clicked = await Promise.all([
@@ -444,79 +440,67 @@ async function closePage(browser, page) {
 //         )
 //     })
 
-
 // });
 
+describe("SetPassword", () => {
+  let browser;
+  let page;
+  before(async () => {
+    try {
+      browser = await puppeteer.launch({
+        headless: config.isHeadless,
+        slowMo: config.slowMo,
+        devtools: config.isDevTools,
+        timeout: config.launchTimeout,
+      });
+      page = await browser.newPage();
+      await page.setDefaultTimeout(config.waitingTimeout);
+      await page.setViewport({
+        width: config.viewportWidth,
+        height: config.viewportHeight,
+      });
+      return { browser, page };
+    } catch (err) {
+      logger.log("error", `CATCH ERROR  ${err}`);
+    }
+  });
+  after(async () => {
+    try {
+      await browser.close();
+      return;
+    } catch (err) {
+      logger.log("error", `CATCH ERROR  ${err}`);
+    }
+  });
 
+  it("should load setPassword Page", async () => {
+    await page.goto(`${config.routes.public.setpassword}`);
+    await shouldExist(page, "#setpassword");
+    await page.waitForSelector("#setpassword");
+  });
 
-describe('SetPassword', () => {
-    let browser;
-    let page;
-    before(async () => {
-      try {
-          browser = await puppeteer.launch({
-            headless: config.isHeadless,
-            slowMo: config.slowMo,
-            devtools: config.isDevTools,
-            timeout: config.launchTimeout
-          });
-          page = await browser.newPage();
-          await page.setDefaultTimeout(config.waitingTimeout);
-          await page.setViewport({
-              width: config.viewportWidth,
-              height: config.viewportHeight
-          });
-          return {browser, page};
-      } catch( err) {
-          logger.log('error', `CATCH ERROR  ${err}`);
-      } 
-    });
-    after(async () => {
-      try {
-         await browser.close(); 
-         return;
-      } catch( err) {
-          logger.log('error', `CATCH ERROR  ${err}`);
-      }
-    });
+  it("should load SetPassword form", async () => {
+    await shouldExist(page, "#setpassword-form");
+    await page.waitForSelector("#setpassword-form");
+  });
 
-    it('should load setPassword Page', async () => {
-        await page.goto(`${config.routes.public.setpassword}`);
-        await shouldExist(page, '#setpassword');
-        await page.waitForSelector('#setpassword');
-    });
+  it("enter email, phone, zip, password for setPassword", async () => {
+    await typeText(page, config.user.email, "input[name=email]");
+    await typeText(page, config.user.phone, "input[name=phone]");
+    await typeText(page, config.user.zip, "input[name=zip]");
+    await typeText(page, config.user.password, "input[name=password]");
+    const clicked = await Promise.all([
+      await page.waitForSelector("#SetPassword"),
+      await page.click("#SetPassword"),
+    ]);
+    logger.log("info", `SetPassword clicked ${clicked}`);
+  });
 
+  it("should display success message", async () => {
+    await waitForText(page, "body", "success");
+  });
 
-    it('should load SetPassword form', async () => {
-        await shouldExist(page, '#setpassword-form');
-        await page.waitForSelector('#setpassword-form');
-    })
-
-    it('enter email, phone, zip, password for setPassword', async () => {
-        await typeText(page, config.user.email, 'input[name=email]');
-        await typeText(page, config.user.phone, 'input[name=phone]');
-        await typeText(page, config.user.zip, 'input[name=zip]');
-        await typeText(page, config.user.password, 'input[name=password]');
-        const clicked = await Promise.all([
-          await page.waitForSelector('#SetPassword'),
-          await page.click('#SetPassword')
-        ]);
-        logger.log('info',`SetPassword clicked ${clicked}`);
-    });
-
-    it('should display success message', async () => {
-        await waitForText(
-            page,
-            'body',
-            'success'
-        )
-    })
-
-    it('should display failure message', async () => {
-        await waitForText(
-            page,
-            'body',
-            'Error: Please login again'
-        )
-    })
+  it("should display failure message", async () => {
+    await waitForText(page, "body", "Error: Please login again");
+  });
 });

@@ -1,6 +1,6 @@
-import React from 'react';
-import cx from 'classnames';
-import './Footer.scss';
+import React from "react";
+import cx from "classnames";
+import "./Footer.scss";
 
 const Footer = (props) => (
   <footer className="container">
