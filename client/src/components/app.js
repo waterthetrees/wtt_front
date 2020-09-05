@@ -25,7 +25,14 @@ const PrivateRoute = ({ component, isAuthenticated, email, ...rest }) => (
 const Loader = () => <div>Loading</div>;
 
 const queryConfig = {
-  suspense: true,
+    shared: {
+      suspense: true
+    },
+    queries: {
+      refetchOnWindowFocus: true
+    },
+
+
 };
 
 const App = (props) => {

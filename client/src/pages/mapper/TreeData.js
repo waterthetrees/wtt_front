@@ -1,24 +1,13 @@
 import React, { Component, useState, useRef, useEffect } from "react";
-// import { useDispatch, useSelector } from 'react-redux';
 import mapboxgl from "mapbox-gl";
-import useSWR from "swr";
 import { useQuery, useMutation, queryCache } from 'react-query'
 import { ReactQueryDevtools } from 'react-query-devtools'
-
 import {
   Button,
-  ButtonToggle,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Progress,
-  ButtonGroup,
-  Label,
-  Input,
-  Col,
-  Row,
-  Alert
 } from "reactstrap";
 import moment from "moment";
 import cx from "classnames";
@@ -26,35 +15,16 @@ import "./Mapper.scss";
 
 import { getData, postData } from "../../api/queries.js";
 
-import CustomizedSlider from "./Slider.js";
-
-export const serializeData = (data) => {
-  // console.log(data,'serializeData');
-  return Object.entries(data)
-    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-    .join("&");
-};
-
-const fetcher = (url) =>
-  fetch(url)
-    .then((r) => r.text())
-    .then((body_string) => {
-      console.log("body_string", body_string);
-      return JSON.parse(body_string);
-    });
+const treeImagesPath = 'assets/images/trees/';
+const saveTimer = 800;
 
 export function TreeData({ currentTreeId, showTree, setShowTree}) {
-  // console.log("TreeData", currentTreeId, currentTreeId, "showTree", showTree);
-  // const URLHISTORY = `${urlTreehistory}?currentTreeId=${currentTreeId}`;
-  // const { data: tree } = useSWR(URL);
   const treeData = useQuery(['tree', {currentTreeId: currentTreeId}], getData);
-  const [mutateTreeData] = useMutation(postData);
-  // console.log('data', data)
-  // console.log('mapData', mapData);
-  const {data, error, mutate} = treeData || {};
-  const tree = (data) ? data : null;
+  const [mutateTreeData] = useMutation(postData, {onSuccess: () => {
+      queryCache.invalidateQueries('tree')
+    },});
 
-  // const tree = data;
+  const tree = treeData.data || {};
   const {
     id_tree,
     common,
@@ -72,54 +42,27 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
     who,
     notes,
     pictureurl
-  } = tree || {};
-  
-  // const { data: treeHistory, error, mutate } = useSWR(URLHISTORY);
-  // const treeDataRef = useRef(null); // DOM element to render map
-
-  useEffect(() => {
-    if (!tree) return;
-  }, [tree]);
-
-  // const [getmedal, setMedal] = useState(false);
-  const [statusSlider, setStatusSlider] = useState(status);
-
-  const convertedHealth = convertHealthToNumber(health);
-  const [sliderValue, setSlider] = useState(convertedHealth || 100);
-  const [overallHealth, setOverallHealth] = useState(health);
-
-  const image =
-    !tree ||
-    pictureurl === "None" ||
-    pictureurl === null ||
-    pictureurl === undefined
-      ? "icon"
-      : pictureurl;
-  const tree__imageclass =
-    !tree || pictureurl === "None" || pictureurl === undefined
-      ? "tree__icon"
-      : "tree__image";
-
+  } = treeData.data || {};
 
   const toggle = () => setShowTree(!showTree);
 
-
+  const [sliderValue, setSlider] = useState(convertedHealth || 100);
+  const [overallHealth, setOverallHealth] = useState(health);
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
-  const sliderRef = useRef(convertedHealth);
+  const convertedHealth = convertHealthToNumber(health);
+  const sliderRef = useRef();
   const changeSlider = async (event) => {
     const functionName = 'changeSlider';
     try {
-      console.log('slider', sliderRef.current.value);
-
       const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
       setOverallHealth(newHealth);
       if (newHealth !== health) {
         setHealthSaveAlert('SAVING');
-
+        console.log('slider', 'newHealth', newHealth, 'health', health);
         const sendData = {id_tree: currentTreeId, health: newHealth}
         const {data, error}  = await mutateTreeData(['tree', sendData]);
         if ( error ) setHealthSaveAlert(error);
-        setTimeout(() => setHealthSaveAlert(''), 2000);
+        setTimeout(() => setHealthSaveAlert(''), saveTimer);
         // console.log(functionName, 'data', data);
       }
     } catch (err) {
@@ -146,7 +89,6 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
   const handleSubmit = async (event) => {
     const functionName = "handleSubmit";
     event.preventDefault();
-    console.log(functionName, 'event.target.value', event.target.value);
     try {
       if (notesRef.current.value) {
         setNotesButtonStyle('btn-info');
@@ -157,9 +99,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
           setNotesButtonStyle('btn-danger');
           setNotesSaveButton(error)
         };
-        setTimeout(() => handleNotesSave(), 2000);
-        
-        // console.log(functionName, 'data', data);
+        setTimeout(() => handleNotesSave(), saveTimer);
       }
       return;
     } catch (err) {
@@ -200,10 +140,11 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
               <input
                 ref={sliderRef}
                 type="range"
-                min="0"
-                max="100"
+                min="1"
+                max="6"
                 className="slider"
                 id="myRange"
+                defaultValue={sliderRef.current ? sliderRef.current.value : convertedHealth}
                 onChange={changeSlider}
               />
               <h3>
@@ -237,6 +178,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
                 </form> 
               </div>
             </div>
+
             <TreeCare currentTreeId={currentTreeId} common={common}/>
 
             <div className="flex-grid border-top">
@@ -270,29 +212,24 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
 
 const TreeCare = ({currentTreeId, common}) => {
   const componentName = 'TreeCare';
-  // console.log(componentName, 'currentTreeId', currentTreeId)
-  const {data} = useQuery(['treehistory', {currentTreeId}], getData);
-
-  const [mutateHistory] = useMutation(postData);
-  // console.log('data', data);
+  const treeHistoryObj = useQuery(['treehistory', {currentTreeId}], getData);
+  const treeHistory = treeHistoryObj.data;
+  const [mutateHistory] = useMutation(postData, {onSuccess: () => {
+      queryCache.invalidateQueries('treehistory')
+    },});
 
   return (
     <div className="treecare">
-      <TreeMaintenance treeHistory={data} currentTreeId={currentTreeId} common={common} mutateHistory={mutateHistory}/>
-      <TreeHistory treeHistory={data} currentTreeId={currentTreeId} />
+      <TreeMaintenance treeHistory={treeHistory} currentTreeId={currentTreeId} common={common} mutateHistory={mutateHistory}/>
+      <TreeHistory treeHistory={treeHistory} currentTreeId={currentTreeId} />
     </div>
   )
 }
 
-const TreeHistory = ({treeHistory, currentTreeId}) => {
+const TreeHistory = ({currentTreeId, treeHistory}) => {
   const componentName = 'TreeHistory';
 
-  useEffect(() => {
-    if (!treeHistory) return;
-  }, [treeHistory]);
-  // console.log(componentName, 'currentTreeId', currentTreeId);
   return (
-
   <div className="flex-grid border-top">
     {treeHistory && (
       <div className="text-center treehistory-list">
@@ -301,7 +238,7 @@ const TreeHistory = ({treeHistory, currentTreeId}) => {
     )}
 
     {treeHistory &&
-      treeHistory.map((history) => {
+      treeHistory.map((history, index) => {
         const {
           id_treehistory,
           id_tree,
@@ -309,10 +246,10 @@ const TreeHistory = ({treeHistory, currentTreeId}) => {
           comment,
           volunteer,
         } = history || {};
-        const maintenanceString = makeMaintenanceString(history);
-
+      const maintenanceString = makeMaintenanceString(history);
+      const keyName = `${id_treehistory}${index}`;
         return (
-          <div className="treehistory-item">
+          <div className="treehistory-item" key={keyName}>
             <div className="treehistory-item-label">
               {moment(datevisit).format("MMMM Do YYYY")} tree visit by{" "}
               {volunteer || "volunteer"}
@@ -350,23 +287,11 @@ const makeMaintenanceString = (history) => {
     )})
     .map(item => item[0]);
   if (historyArray.length === 0) return '';
-  console.log('historyArray', historyArray)
+  // console.log('historyArray', historyArray);
   return historyArray.join(', ')
 }
 
-const TreeMaintenance = ({treeHistory, currentTreeId, common, mutateHistory}) => {
-  const {
-    id_treehistory,
-    watered,
-    mulched,
-    weeded,
-    staked,
-    braced,
-    pruned,
-    datevisit,
-    comment,
-    volunteer,
-  } = treeHistory || {};
+const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
 
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [statusSelected, setStatusSelected] = useState({});
@@ -387,7 +312,7 @@ const TreeMaintenance = ({treeHistory, currentTreeId, common, mutateHistory}) =>
   const handleSubmit = async (event) => {
     const functionName = "handleSubmit";
     event.preventDefault();
-    console.log(functionName, 'event.target.value', event.target.value, 'statusSelected', statusSelected);
+    // console.log(functionName, 'event.target.value', event.target.value, 'statusSelected', statusSelected);
     try {
       const datevisit = moment().format('YYYY/MM/DD HH:mm:ss');
       const sendData = {id_tree: currentTreeId, datevisit, ...statusSelected}
@@ -411,7 +336,7 @@ const TreeMaintenance = ({treeHistory, currentTreeId, common, mutateHistory}) =>
           setWttButtonStyle('btn-danger');
           setWttSaveButton(error);
         };
-        setTimeout(() => handleMaintenanceSave(), 1200);
+        setTimeout(() => handleMaintenanceSave(), saveTimer);
       }
 
       return;
@@ -420,7 +345,10 @@ const TreeMaintenance = ({treeHistory, currentTreeId, common, mutateHistory}) =>
       return err;
     }
   };
-  
+  const arrowDirection = showDoMaintenance 
+        ? `${treeImagesPath}angle-arrow-down-black.svg`
+        : `${treeImagesPath}angle-arrow-right-black.svg`;
+
   return (
     
      <div className="flex-grid border-top treemaintenance">
@@ -430,19 +358,11 @@ const TreeMaintenance = ({treeHistory, currentTreeId, common, mutateHistory}) =>
                   className="treemaintenance-btn-header text-center"
                   onClick={() => setShowDoMaintenance(!showDoMaintenance)}
                 >
-                  <h4>Tree Maintenance</h4>
-                  {!showDoMaintenance && (
+                  Tree Maintenance
                   <img
                     className="treemaintenance-header__img"
-                    src="assets/images/trees/angle-arrow-right-black.svg"
+                    src={arrowDirection}
                   />
-                )}
-                {showDoMaintenance && (
-                  <img
-                    className="treemaintenance-header__img"
-                    src="assets/images/trees/angle-arrow-down-black.svg"
-                  />
-                )}
                 </button>
 
                 
@@ -529,11 +449,7 @@ const MaintenanceButtons = ({statusSelected, setStatusSelected}) => {
     
 
     const selectedValue = changeYesNo(selected, statusSelected);
-    // console.log(selected,':', selectedValue);
     setStatusSelected({...statusSelected, ...{[selected]: selectedValue}});
-    // console.log('statusSelected', statusSelected);
-
-    // // (statusSelected.length > 0) ? setHealthy(null) : setHealthy('healthy');
 
   };
   const maintenanceImgTextArray = [watered, weeded, mulched, staked, braced, pruned];
@@ -560,24 +476,26 @@ const MaintenanceButtons = ({statusSelected, setStatusSelected}) => {
 }
 
 const convertSliderValuesToHealth = (value) => {
-  if (value >= 80) return 'good';
-  if (value >= 60 && value <= 79) return 'fair';
-  if (value >= 40 && value <= 59) return 'poor';
-  if (value >= 30 && value <= 39) return 'stump';
-  if (value >= 20 && value <= 29) return 'missing';
-  if (value <= 19) return 'dead';
+  console.log('convertSliderValuesToHealth value', value);
+  const numValue = parseInt(value);
+  if (numValue === 6) return 'good';
+  if (numValue === 5) return 'fair';
+  if (numValue === 4) return 'poor';
+  if (numValue === 3) return 'stump';
+  if (numValue === 2) return 'missing';
+  if (numValue === 1) return 'dead';
 }
 
 const convertHealthToNumber = (health) => {
   const healthValue = {
-    good: 100,
-    fair: 70,
-    poor: 50,
-    stump: 30,
-    missing: 20,
-    dead: 0
+    good: 6,
+    fair: 5,
+    poor: 4,
+    stump: 3,
+    missing: 2,
+    dead: 1
   }[health];
-  return healthValue;
+  return parseInt(healthValue);
 }
 
 const changeImageText = (historybutton, statusSelected) => {
@@ -598,7 +516,7 @@ const changeYesNo = (historybutton, statusSelected) => {
 const hasMaintenanceFields = (obj) => {
   const maintenanceArray = ['watered', 'weeded', 'mulched', 'staked', 'braced', 'pruned', 'comment']
   const hasAny = maintenanceArray.some(item => Object.prototype.hasOwnProperty.call(obj, item));
-  console.log('obj',obj,'hasAny',hasAny); 
+  // console.log('obj',obj,'hasAny',hasAny); 
   return hasAny; 
 }
 
