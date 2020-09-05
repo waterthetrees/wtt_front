@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="19.538" height="11.183" viewBox="0 0 19.538 11.183" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>.a{fill:none;stroke:#db4437;stroke-linecap:round;stroke-width:2px;}</style>
+  </defs>
+  <g transform="matrix(0.547376, 0, 0, 0.547376, 1.454958, 0.991757)" style="">
+    <g transform="translate(18.831 -2.121) rotate(90)">
+      <line class="a" y1="8.355" x2="8.355" transform="translate(10.476 2.121) rotate(90)" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"/>
+      <line class="a" x1="8.355" y1="8.355" transform="translate(10.476 10.476) rotate(90)" style="stroke: rgb(0, 0, 0);"/>
+    </g>
+  </g>
+</svg>

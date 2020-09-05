@@ -11,8 +11,8 @@ util = require("util");
 // usage: node stripe_webhook_server.js prod or node stripe_webhook_server.js for dev
 const env = process.argv[2] || "local";
 const host = {
-  prod: "http://live.100ktrees.org",
-  dev: "http://dev.100ktrees.org",
+  prod: "http://waterthetrees.com",
+  dev: "http://dev.waterthetrees.com",
   local: "http://localhost",
 }[env];
 const port = { prod: 3100, dev: 3443, local: 3001 }[env];

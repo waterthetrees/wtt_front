@@ -59,11 +59,12 @@ module.exports = {
       filename: "[name].scss",
       chunkFilename: "[id].scss",
     }),
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, "client/src/assets"),
-        to: path.resolve(__dirname, "client/public/assets"),
-      },
-    ]),
+    new CopyPlugin({
+          patterns: [
+          {
+            from: path.resolve(__dirname, "./client/src/assets"),
+            to: path.resolve(__dirname, "./client/public/assets"),
+          },
+        ]}),
   ],
 };

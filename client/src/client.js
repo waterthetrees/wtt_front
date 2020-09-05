@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, HashRouter} from 'react-router-dom';
 
 import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 // import store from './store/store';
 
 console.log('test')
@@ -15,7 +15,7 @@ const app = (
 )
 
 ReactDOM.render( app, document.querySelector('.root'));
-registerServiceWorker();
+// registerServiceWorker();
 
 
 

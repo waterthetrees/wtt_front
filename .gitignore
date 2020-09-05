@@ -1,3 +1,7 @@
+package-lock.json
+*.DS_Store
+client/public/*
+
 # Logs
 logs
 *.log
