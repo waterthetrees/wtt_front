@@ -66,7 +66,7 @@ export function TreeData({
   );
   // console.log('treeInfo', treeInfo, 'tree POST FETCH DDDDDDDATA treeInfo \n\n\n\n');
   const {
-    id_tree,
+    id_tree: treeId,
     common,
     scientific,
     planted,
@@ -84,14 +84,14 @@ export function TreeData({
   } = tree || {};
 
   const {
-    id_treehistory,
+    id_treehistory: treeHistoryId,
     watered,
     mulched,
     weeded,
     staked,
     braced,
     pruned,
-    datevisit,
+    date_visit: dateVisit,
     comment,
     volunteer,
   } = treeHistory || {};
@@ -101,7 +101,7 @@ export function TreeData({
   // const [issuesSelected, setIssuesSelected] = useState([]);
   // const [moreSelected, setMoreSelected] =useState(false);
   const [dateVisitMaintenance, setDateVisitMaintenance] = useState(
-    datevisit || null
+    dateVisit || null
   );
   // const [getmedal, setMedal] = useState(false);
   const [statusSlider, setStatusSlider] = useState(status);
