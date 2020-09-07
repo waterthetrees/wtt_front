@@ -19,14 +19,15 @@ const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
 
 export function TreeData({ currentTreeId, showTree, setShowTree}) {
+  const componentName = 'TreeData';
   const treeData = useQuery(['tree', {currentTreeId: currentTreeId}], getData);
   const [mutateTreeData] = useMutation(postData, {onSuccess: () => {
       queryCache.invalidateQueries('tree')
     },});
-
+  console.log(componentName, 'treeData', treeData);
   const tree = treeData.data || {};
   const {
-    id_tree,
+    idTree,
     common,
     scientific,
     planted,
@@ -59,7 +60,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
       if (newHealth !== health) {
         setHealthSaveAlert('SAVING');
         console.log('slider', 'newHealth', newHealth, 'health', health);
-        const sendData = {id_tree: currentTreeId, health: newHealth}
+        const sendData = {idTree: currentTreeId, health: newHealth}
         const {data, error}  = await mutateTreeData(['tree', sendData]);
         if ( error ) setHealthSaveAlert(error);
         setTimeout(() => setHealthSaveAlert(''), saveTimer);
@@ -93,7 +94,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
       if (notesRef.current.value) {
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
-        const sendData = {id_tree: currentTreeId, notes: notesRef.current.value}
+        const sendData = {idTree: currentTreeId, notes: notesRef.current.value}
         const {data, error}  = await mutateTreeData(['tree', sendData]);
         if ( error ) {
           setNotesButtonStyle('btn-danger');
@@ -110,7 +111,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
 
   return (
     <div>
-      {id_tree && (
+      {idTree && (
         <Modal isOpen={showTree} toggle={toggle} className="tree__modal">
           <ModalHeader toggle={toggle}>
             <div className="flex-grid-three text-left">
@@ -214,6 +215,7 @@ const TreeCare = ({currentTreeId, common}) => {
   const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', {currentTreeId}], getData);
   const treeHistory = treeHistoryObj.data;
+  console.log(componentName, 'treeHistory', treeHistory);
   const [mutateHistory] = useMutation(postData, {onSuccess: () => {
       queryCache.invalidateQueries('treehistory')
     },});
@@ -240,18 +242,18 @@ const TreeHistory = ({currentTreeId, treeHistory}) => {
     {treeHistory &&
       treeHistory.map((history, index) => {
         const {
-          id_treehistory,
-          id_tree,
-          datevisit,
+          idTreehistory,
+          idTree,
+          dateVisit,
           comment,
           volunteer,
         } = history || {};
       const maintenanceString = makeMaintenanceString(history);
-      const keyName = `${id_treehistory}${index}`;
+      const keyName = `${idTreehistory}${index}`;
         return (
           <div className="treehistory-item" key={keyName}>
             <div className="treehistory-item-label">
-              {moment(datevisit).format("MMMM Do YYYY")} tree visit by{" "}
+              {moment(dateVisit).format("MMMM Do YYYY")} tree visit by{" "}
               {volunteer || "volunteer"}
             </div>
 
@@ -314,8 +316,8 @@ const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
     event.preventDefault();
     // console.log(functionName, 'event.target.value', event.target.value, 'statusSelected', statusSelected);
     try {
-      const datevisit = moment().format('YYYY/MM/DD HH:mm:ss');
-      const sendData = {id_tree: currentTreeId, datevisit, ...statusSelected}
+      const dateVisit = moment().format('YYYY/MM/DD HH:mm:ss');
+      const sendData = {idTree: currentTreeId, dateVisit, ...statusSelected}
       if (commentRef.current.value) sendData['comment'] = commentRef.current.value;
       if (volunteerRef.current.value) sendData['volunteer'] = volunteerRef.current.value;
       const okToSend = hasMaintenanceFields(sendData);
