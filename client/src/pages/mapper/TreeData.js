@@ -196,10 +196,12 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
             <div className="flex-grid border-top">
               <div className="treehistory-list text-left">
                 <h4 className="text-center">More info</h4>
-                Open Tree Standards
-                <a href="https://standards.opencouncildata.org/#/trees">
-                  https://standards.opencouncildata.org/#/trees
-                </a>
+                <div>Open Tree Standards:</div>
+                <div>
+                  <a href="https://standards.opencouncildata.org/#/trees">
+                    standards.opencouncildata.org/#/trees
+                  </a>
+                </div>
               </div>
             </div>
           </ModalBody>
@@ -314,29 +316,24 @@ const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
   const handleSubmit = async (event) => {
     const functionName = "handleSubmit";
     event.preventDefault();
-    // console.log(functionName, 'event.target.value', event.target.value, 'statusSelected', statusSelected);
+    console.log(functionName, 'statusSelected', statusSelected);
     try {
       const dateVisit = moment().format('YYYY/MM/DD HH:mm:ss');
-      const sendData = {idTree: currentTreeId, dateVisit, ...statusSelected}
-      if (commentRef.current.value) sendData['comment'] = commentRef.current.value;
-      if (volunteerRef.current.value) sendData['volunteer'] = volunteerRef.current.value;
+      const sendData = {idTree: currentTreeId, date_visit: dateVisit, ...statusSelected};
+
+      if (commentRef.current && commentRef.current.value) sendData['comment'] = commentRef.current.value;
+      if (volunteerRef.current && volunteerRef.current.value) sendData['volunteer'] = volunteerRef.current.value;
       const okToSend = hasMaintenanceFields(sendData);
-      console.log('okToSend', okToSend);
+      console.log(functionName, 'sendData', sendData);
+      console.log(functionName, 'okToSend', okToSend);
       if (hasMaintenanceFields(sendData)) {
-        setMaintenanceButtonStyle('btn-info');
-        setMaintenanceSaveButton(`SAVING`);
-        setWttButtonStyle('btn-info');
-        setWttSaveButton('THANK YOU!');
-        // const {data, error}  = await mutateTreeData(['treehistory', sendData]);
+        handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
         console.log(functionName, 'has new maintenance sendData', sendData);
         const {data, error} = await mutateHistory(['treehistory', sendData]);
         // console.log(functionName, 'data', data);
         if ( error ) {
           console.log(functionName, 'error', error);
-          setMaintenanceButtonStyle('btn-danger');
-          setMaintenanceSaveButton(error);
-          setWttButtonStyle('btn-danger');
-          setWttSaveButton(error);
+          handleButtonChanges('btn-danger', error, 'btn-danger', error);
         };
         setTimeout(() => handleMaintenanceSave(), saveTimer);
       }
@@ -347,9 +344,16 @@ const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
       return err;
     }
   };
+
+  const handleButtonChanges = (mBtnStyle, mBtnSave, wttBtnStyle, wttBtnSave) => {
+    setMaintenanceButtonStyle(mBtnStyle);
+    setMaintenanceSaveButton(mBtnSave);
+    setWttButtonStyle(wttBtnStyle);
+    setWttSaveButton(wttBtnSave);
+  }
   const arrowDirection = showDoMaintenance 
-        ? `${treeImagesPath}angle-arrow-down-black.svg`
-        : `${treeImagesPath}angle-arrow-right-black.svg`;
+        ? `${treeImagesPath}angle-arrow-up-black.svg`
+        : `${treeImagesPath}angle-arrow-down-black.svg`;
 
   return (
     
