@@ -216,7 +216,8 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
 const TreeCare = ({currentTreeId, common}) => {
   const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', {currentTreeId}], getData);
-  const treeHistory = treeHistoryObj.data;
+  console.log(componentName, 'treeHistoryObj', treeHistoryObj);
+  const treeHistory = (treeHistoryObj.hasOwnProperty('data')) ? treeHistoryObj.data : treeHistoryObj; 
   console.log(componentName, 'treeHistory', treeHistory);
   const [mutateHistory] = useMutation(postData, {onSuccess: () => {
       queryCache.invalidateQueries('treehistory')
@@ -224,11 +225,13 @@ const TreeCare = ({currentTreeId, common}) => {
 
   return (
     <div className="treecare">
-      <TreeMaintenance treeHistory={treeHistory} currentTreeId={currentTreeId} common={common} mutateHistory={mutateHistory}/>
-      <TreeHistory treeHistory={treeHistory} currentTreeId={currentTreeId} />
+      {currentTreeId && mutateHistory &&  <TreeMaintenance currentTreeId={currentTreeId} common={common} mutateHistory={mutateHistory}/>}
+      {treeHistory && treeHistory.length > 0 && <TreeHistory treeHistory={treeHistory} currentTreeId={currentTreeId} />}
     </div>
   )
 }
+
+
 
 const TreeHistory = ({currentTreeId, treeHistory}) => {
   const componentName = 'TreeHistory';
@@ -361,6 +364,7 @@ const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
      <form id="treemaintenance"  onSubmit={handleSubmit}> 
               <div className="treemaintenance-header text-center">
                 <button
+                  type="button"
                   className="treemaintenance-btn-header text-center"
                   onClick={() => setShowDoMaintenance(!showDoMaintenance)}
                 >
@@ -465,6 +469,7 @@ const MaintenanceButtons = ({statusSelected, setStatusSelected}) => {
     <div className="treemaintenance-buttons">
         {maintenanceButtonsArray.map((maintenanceButton, index) => (
           <Button
+            key={maintenanceButton}
             type="button"
             name={maintenanceButton}
             className="treemaintenance-btn btn-sm success text-center"
@@ -533,3 +538,7 @@ const isEmpty = (obj) => {
   }
   return true;
 }
+
+const isEmptyArray = (array) => {
+  return array.length;
+} 

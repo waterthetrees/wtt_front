@@ -223,13 +223,22 @@ element.style {
   border: 1px solid #dee2e6;
 }
 
+.modal.fade{
+  transition: none;
+}
+
+
+
+.modal.fade .modal-dialog {
+  transition: none;
+  transition: none;
+  transition: none;
+  -webkit-transform: none;
+  transform: none;
+}
+
 .tree__modal {
-  height: 100vh;
-  width: 100vw;
-  margin: 0 auto;
-  color: #000;
-  background-color: #fff;
-  z-index: 100000;
+  margin: none;
 }
 
 .tree__col {
@@ -265,13 +274,14 @@ element.style {
   background-size: cover;
 }
 
-@media screen and (max-width: 790px) {
-  .container {
-  }
+.modal-dialog {
+  max-width: 600px;
+  margin: none;
 }
 
+
 .flex-grid {
-  margin: 0 0 2px 0;
+  margin: 0 0 10px 0;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -312,7 +322,9 @@ element.style {
 
 .treehistory-list {
   margin: 15px 0 0 0;
+  word-wrap: break-word;
 }
+
 
 
 .treehistory-item {
@@ -479,6 +491,10 @@ element.style {
   }
 }
 
+@media screen and (max-width: 790px) {
+
+}
+
 /*mobile*/
 @media (max-width: 400px) {
   .flex-grid,
@@ -487,6 +503,13 @@ element.style {
       width: 100%;
       margin: 0 0 2px 0;
     }
+  }
+
+  textarea.form-control {
+    height: auto;
+  }
+  .tree__modal {
+    margin: 0 auto;
   }
 
   .tree {
