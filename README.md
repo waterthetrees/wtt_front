@@ -21,47 +21,50 @@ Clone the latest version of the Portal to your machine by running:
 ```shell
 $ git clone https://github.com/waterthetrees/wtt_front.git
 $ cd wtt_front
-# Install webpack globally
-$ yarn global add --save-dev webpack
-# or specific version
-$ yarn global add --save-dev webpack@<version>
-$ yarn global add --save-dev webpack-cli
 ```
 
-#### 2. Run `yarn install`
+...and install Webpack:
+
+```shell
+# Install Webpack globally
+$ yarn global add --save-dev webpack
+$ yarn global add --save-dev webpack-cli
+
+```
+
+In the future (when we get around to it), we should install webpack locally instead of globally.
+
+#### 2. Install dependencies.
+
+```shell
+$ yarn install
+```
 
 This will install both run-time project dependencies and developer tools listed
 in [package.json](../package.json) file.
 
-#### 3. API endpoints
+#### 3. START ER UP
 
-- Backend endpoints
+##### Build bundle
 
 ```shell
-$ server/server-dashboard.js
+$ webpack # to build bundle once
+$ webpack -w # to watch for dev changes continuously
+
 ```
 
-#### 4. START ER UP
-
-To build bundle once
+If you installed webpack globally, you may have to use a slightly different command:
 
 ```shell
-$ webpack
+$ ./node_modules/.bin/webpack
+$ ./node_modules/.bin/webpack -w
 ```
 
-If you want to watch for dev changes continuously
+##### Start React pages server
 
 ```shell
-$ webpack -w
-```
-
-Start react pages server - change local to dev or live
-
-```shell
+# use dev or live instead of local when relevant
 $ yarn start local
-```
-
-```shell
 $ node server/server-dashboard.js local
 ```
 
