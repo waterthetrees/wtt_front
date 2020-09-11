@@ -15,6 +15,7 @@ function Layout(props) {
       <Header />
       <main role="main">
         <Switch>
+	  <Route path="/" exact component={Mapper} />
           <Route path="/mapper" exact component={Mapper} />
           <Route component={NotFound} />
         </Switch>

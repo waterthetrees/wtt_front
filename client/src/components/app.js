@@ -66,7 +66,6 @@ const App = (props) => {
     <ReactQueryConfigProvider config={queryConfig}>
       <Suspense fallback={<Loader />}>
       <Switch>
-        <Route path="/" exact render={() => <Redirect to="/mapper" />} />
         <PrivateRoute
           isAuthenticated={isAuthenticated}
           email={email}
