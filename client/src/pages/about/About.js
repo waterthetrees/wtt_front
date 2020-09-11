@@ -1,23 +1,35 @@
-import React from "react";
-import Page from "../../components/Page";
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import "./About.scss";
+const INFO_ICON = "assets/images/map/info-icon.svg";
 
-const About = (component, props) => {
-  const componentName = "About Water the Trees";
-  
+export const AboutUs = () => {
+  const [showAboutUsModal, setShowAboutUsModal] = useState(false);
   return (
-    <Page title={componentName} className={componentName}>
-      <div className="d-flex justify-content-sm-center">
-        <div>
-          <p>
-            Water the Trees is working to crowd source tree maintenance and tree planting, restore our
-            natural habitat for birds, insects and fauna, and assure the
-            increase of carbon sequestration capacity.
-          </p>
-        </div>
+    <>
+      <Button
+        key="aboutUsButton"
+        className="aboutIcon"
+        onClick={() => {
+          setShowAboutUsModal(true);
+        }}
+      >
+        <img src={INFO_ICON} />
+      </Button>
+      <div>
+        <Modal isOpen={showAboutUsModal}>
+          <ModalHeader toggle={() => setShowAboutUsModal(false)}>
+            About Us
+          </ModalHeader>
+          <ModalBody>
+            Water The Trees is a platform that helps local communities crowd
+            source urban tree maintenance and planting. We believe the power of
+            urban trees on a multitude of levels: from increasing carbon
+            sequestration to restoring our natural habitat for birds, insects,
+            and fauna.
+          </ModalBody>
+        </Modal>
       </div>
-    </Page>
+    </>
   );
 };
-
-export default About;

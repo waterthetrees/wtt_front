@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 // import useSWR from "swr";
-import { useQuery, useMutation, queryCache } from 'react-query';
+import { useQuery, useMutation, queryCache } from "react-query";
 import moment from "moment";
 
 import {
@@ -19,6 +19,7 @@ import {
 
 import { getData } from "../../api/queries.js";
 import { TreeData } from "./TreeData.js";
+import { AboutUs } from "../about/About.js";
 // import { TreeAdd } from '../treemap/TreeAdd.js';
 // import UserProfile from '../userprofile';
 import config from "../../config.js";
@@ -39,11 +40,10 @@ function Mapper() {
   const [showTree, setShowTree] = useState(false);
   // const { data: mapData, error } = useSWR(['treemap', {city: 'Oakland' }]);
 
-  const treemap = useQuery(['treemap', {city: 'Oakland' }], getData);
+  const treemap = useQuery(["treemap", { city: "Oakland" }], getData);
   // console.log('mapData', mapData);
-  const {data, error} = treemap || {};
-  const mapData = (data) ? data : null;
-
+  const { data, error } = treemap || {};
+  const mapData = data ? data : null;
 
   const mapboxElRef = useRef(null); // DOM element to render map
 
@@ -154,7 +154,6 @@ function Mapper() {
     });
   }, [mapData]);
 
-
   const [userProfileOpen, setUserProfileOpen] = useState(false);
   const toggle = () => setModal(!userProfileOpen);
 
@@ -226,6 +225,7 @@ function Mapper() {
           setShowTree={setShowTree}
         />
       )}
+      <AboutUs />
     </div>
   );
 }
