@@ -127,7 +127,7 @@ function Mapper() {
           map.getCanvas().style.cursor = "pointer";
           const coordinates = e.features[0].geometry.coordinates.slice();
 
-          const HTML = `<p>Common: <b>${common}</b></p><p>Id: <b>${hoveredStateId}</b></p>`;
+          const HTML = `<h1>${common}</h1>`;
 
           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -207,7 +207,7 @@ function Mapper() {
 
   return (
     <div className="App">
-      <div className="mapContainer">
+      <div className="map__container">
         {/* Mapbox container */}
         <div className="mapBox" ref={mapboxElRef} />
       </div>
