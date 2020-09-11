@@ -217,7 +217,7 @@ const TreeCare = ({currentTreeId, common}) => {
   const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', {currentTreeId}], getData);
   console.log(componentName, 'treeHistoryObj', treeHistoryObj);
-  const treeHistory = (treeHistoryObj.hasOwnProperty('data')) ? treeHistoryObj.data : treeHistoryObj; 
+  const treeHistory = treeHistoryObj.data; 
   console.log(componentName, 'treeHistory', treeHistory);
   const [mutateHistory] = useMutation(postData, {onSuccess: () => {
       queryCache.invalidateQueries('treehistory')
@@ -230,8 +230,6 @@ const TreeCare = ({currentTreeId, common}) => {
     </div>
   )
 }
-
-
 
 const TreeHistory = ({currentTreeId, treeHistory}) => {
   const componentName = 'TreeHistory';
