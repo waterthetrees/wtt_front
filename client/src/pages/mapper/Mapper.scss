@@ -1,23 +1,11 @@
 @import "../../styles/app";
 
-.mapContainer {
+.map__container {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-}
-
-.aboutIcon {
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 12px;
-  background-color: transparent;
-  z-index: 1 !important;
-  width: 35px;
-  height: 35px;
 }
 
 .tree__label {
