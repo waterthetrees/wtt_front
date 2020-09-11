@@ -4,7 +4,7 @@ export const updateObject = (oldObject, updateObject) => ({
 });
 
 export const seo = (data = {}) => {
-  data.title = data.title || "TREEME";
-  data.metaDescription = data.metaDescription || "TREEME";
+  data.title = data.title || "Water the Trees";
+  data.metaDescription = data.metaDescription || "Water the Trees";
   document.title = data.title;
 };
