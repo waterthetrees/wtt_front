@@ -1,19 +1,9 @@
 .about__icon {
-  display: inline-block;
-  position: absolute;
-  bottom: 20px;
-  left: 5px;
-  margin: 12px;
-  background-color: transparent;
-  border-color: transparent;
-  z-index: 1 !important;
-  width: 40px;
-  height: 40px;
+  height: 4vh;
 }
 
 .about__icon:hover {
-  background-color: transparent;
-  border-color: transparent;
+  cursor: pointer;
 }
 
 .about__icon:focus {

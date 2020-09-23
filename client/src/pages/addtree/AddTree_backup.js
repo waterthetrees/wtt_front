@@ -1,5 +1,4 @@
 import React, { Component, useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Modal,
   ModalHeader,
@@ -13,7 +12,6 @@ import {
 } from "reactstrap";
 import moment from "moment";
 import cx from "classnames";
-import { getTreeListMapMap } from "../../actions/index.js";
 
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
@@ -81,84 +79,22 @@ const top100Trees = [
   },
 ];
 
-export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
+const PLUS_ICON = "assets/images/map/plus.svg";
+
+export function TreeAdd({ lng, lat, modal, toggle }) {
   const component_name = "AddTree";
+  const [showTreeAddModal, setShowTreeAddModalModal] = useState(false);
+
+
   const [addTreeType, setTreeAddTypeSelected] = useState();
   const [rSelected, setRSelected] = useState(null);
 
-  // const handleSubmit = (event) => {
-  //   // event.preventDefault();
-  //   //console.log(event.target.name);
-  const dispatch = useContext(DispatchContext);
-  const state = useContext(StateContext);
-
-  // }
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchData() {
-      // const response = await dispatch(getTreeListMap({}));
-    }
-    fetchData();
-  }, []);
-
-  // const treeList = useSelector((state) => state.treeList);
-  //console.log(component_name, 'treeList', treeList, 'tictoc');
-
-  const [addTree, setAddTreeSelected] = useState(null);
-
-  const handleAddTree = (event, selected) => {
-    console.log('marker onclicked', marker);
-    addTree === "addTree"
-      ? setAddTreeSelected(null)
-      : setAddTreeSelected("addTree");
-    addTree || addTree === "addTree"
-      ? setMapDraggable(true)
-      : setMapDraggable(false);
-
-    const coordinates = document.getElementById('coordinates');
-
-    const marker = new mapboxgl.Marker({
-          draggable: true
-      })
-      .setLngLat(coordinates)
-      .addTo(mapboxElRef.current); // add the marker to the map
-
-    marker.on('dragend', onDragEnd);
-  };
-
-
-  const onDragEnd = () => {
-      const lngLat = marker.getLngLat();
-      coordinates.style.display = 'block';
-      coordinates.innerHTML =
-        'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
-  }
-
-
-
-  const handleClickedMap = (event) => {
-    const functionName = "handleClickedMap";
-    let lat = event.lat;
-    let lng = event.lng;
-    setLatLng([lat, lng]);
-  };
-
   return (
-    <>
-      <div className="treeadd"
-      >
-        <img 
-          key="treeAddOpener"
-          className="treeadd__icon"
-          onClick={() => {
-            setShowAboutUsModal(!showTreeAddModal);
-          }}
-        src={PLUS_ICON} 
-       />
-      </div>
+    <div>
 
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>
+
+      <Modal isOpen={showTreeAddModal} toggle={() => setShowTreeAddModal(!showTreeAddModal)}>
+        <ModalHeader toggle={() => setShowTreeAddModal(!showTreeAddModal)}>
           <FormControl
             component="fieldset"
             className="flex-grid-third tree__type"
@@ -273,7 +209,6 @@ export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
         </ModalFooter>
       </Modal>
     </div>
-  </>
   );
 }
 const TreeCharacteristicsData = {
@@ -377,7 +312,8 @@ function TreeInput({ treeKey, treeValue, treeDataType }) {
   const { register, handleSubmit, setValue, getValues } = useForm({
     defaultValues: { [treeKey]: treeValue },
   });
-  React.useEffect(() => register({ name: treeKey }));
+  
+  useEffect(() => register({ name: treeKey }));
   const onSubmit = (data) => {
     //console.log(data);
   };

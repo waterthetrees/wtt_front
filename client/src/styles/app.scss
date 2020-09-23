@@ -20,35 +20,14 @@
 @import 'node_modules/bootstrap/scss/code';
 @import 'node_modules/bootstrap/scss/grid';
 
-// Leaflet
-// @import 'leaflet.css';
-// @import 'Control.Geocoder.css';
-
 /**
 * Components
 * @import './components/Layout';
 * @import './components/Header';
 * @import './components/Footer';
-* @import './components/Sidebar';
 * @import './components/Page';
-* @import './components/Widget';
-* @import './components/LinksGroup';
 * Pages
-* @import './pages/Address';
-* @import './pages/Dashboard';
-* @import './pages/ErrorPage';
-* @import './pages/Google';
-* @import './pages/Home';
-* @import './pages/Icons';
-* @import './pages/Login';
-* @import './pages/Notifications';
-* @import './pages/Orders';
-* @import './pages/Payments';
-* @import './pages/PostList';
-* @import './pages/PostNew';
-* @import './pages/Profile';
-* @import './pages/Register';
-* @import './pages/Static';
-* @import './pages/Style';
-* @import './pages/Tracking';
+* @import './pages/about';
+* @import './pages/error';
+* @import './pages/mapper';
 */

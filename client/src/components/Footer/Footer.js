@@ -1,11 +1,11 @@
 import React from "react";
-import cx from "classnames";
 import "./Footer.scss";
 
 const Footer = (props) => (
-  <footer className="container">
-    <p>&copy;Water the Trees {new Date().getFullYear()}</p>
-  </footer>
+  <div className="footer">
+    <div className="footer__content">
+    </div>
+  </div>
 );
-
+     
 export default Footer;

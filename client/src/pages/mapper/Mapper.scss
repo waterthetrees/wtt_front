@@ -8,6 +8,15 @@
   bottom: 0;
 }
 
+
+.mapboxgl-popup {
+  font-family: 'Baloo Thambi 2', cursive;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  color: #424242;
+}
+
 .tree__label {
   color: #ff0000;
 }
@@ -481,6 +490,17 @@ element.style {
     border: 0;
     border-bottom: 1px solid lightgray;
   }
+}
+
+.addtreepage {
+  display: inline-block;
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  opacity: .8;
+  border-color: transparent;
+  z-index: 200 !important;
+  width: 100%;
 }
 
 @media screen and (max-width: 790px) {

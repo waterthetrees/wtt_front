@@ -4,22 +4,24 @@ import cx from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Layout.scss";
 
-import Header from "../Header";
-import Mapper from "../../pages/mapper/Mapper";
-import NotFound from "../../pages/notFound/NotFound";
+const Header = React.lazy(() => import("../Header"));
+const Footer = React.lazy(() => import("../Footer"));
+const Mapper = React.lazy(() => import("../../pages/mapper/Mapper"));
+const AddTree = React.lazy(() => import("../../pages/addtree/AddTree"));
+const About = React.lazy(() => import("../../pages/about/About"));
+const NotFound = React.lazy(() => import("../../pages/notFound/NotFound"));
 
 function Layout(props) {
   const functionName = "Layout";
   return (
     <div className="Layout">
       <Header />
-      <main role="main">
-        <Switch>
-	  <Route path="/" exact component={Mapper} />
-          <Route path="/mapper" exact component={Mapper} />
-          <Route component={NotFound} />
-        </Switch>
-      </main>
+      <Switch>
+        <Route path="/" exact component={Mapper} />
+        <Route path="/addtree" exact component={AddTree} />
+        <Route path="/about" exact component={About} />
+        <Route component={NotFound} />
+      </Switch>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: 'Baloo Thambi 2', cursive;
+  font-family: Arial, sans-serif, "PT Sans";
 }
 
 body {
@@ -22,10 +22,7 @@ body {
   height: 100%;
 }
 
-.mapboxgl-popup {
-  font-family: 'Baloo Thambi 2', cursive;
-  font-size: 12px;
-  padding: 0;
-  margin: 0;
-  color: #424242;
+.mapboxgl-ctrl-top-right {
+  top: 80px;
+  right: 0;
 }
