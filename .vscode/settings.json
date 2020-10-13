@@ -1,0 +1,12 @@
+{
+  "files.watcherExclude": {
+    "**/client/public/**": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "editor.tabSize": 1
+}
