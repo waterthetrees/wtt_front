@@ -22,6 +22,7 @@ const apiEndpoints = {
   treemap: `${url}/treemap`,
   tree: `${url}/tree`,
   treehistory: `${url}/treehistory`,
+  treelist: `${url}/treelist`,
 }
 // console.log(' \n\n\n\n apiEndpoints', apiEndpoints.treemap);
 

@@ -1,16 +1,13 @@
 // queries.js
 import axios from "axios";
 import apiEndpoints from './apiEndpoints.js';
-// const getPokemonDetail = async (key, { id }) => {
-//   const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-//   return data;
-// };
+
 
 async function getData(...args) {
   const functionName = 'getData';
   const [request, params] = args;
 
-  // console.log(functionName, 'request', request, 'params',params, ' \n\n\n\n');
+  console.log(functionName, 'request', request, 'params',params, ' \n\n\n\n');
   const serializedData = serializeData(params);
   const url = `${apiEndpoints[request]}?${serializedData}`;
   // console.log(functionName, 'url', url, '\n\n\n\n');

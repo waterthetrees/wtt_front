@@ -40,7 +40,7 @@ function Mapper() {
 
   const mapboxElRef = useRef(null); // DOM element to render map
   const [map, setMap] = useState(null);
-  const [zoom, setZoom] = useState(15);
+  // const [zoom, setZoom] = useState(15);
 
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const [currentTree, setCurrentTree] = useState({});
@@ -49,10 +49,13 @@ function Mapper() {
   // -------------------------
   // Add search
   // -------------------------
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  let resizeWindow = () => setWindowWidth(window.innerWidth);
 
   // Initialize our map
   useEffect(() => {
+    // resizeWindow();
+    // window.addEventListener("resize", resizeWindow);
     if (!mapData) return;
     console.log('mapData here' ,mapData)
   const map = new mapboxgl.Map({
@@ -61,7 +64,7 @@ function Mapper() {
     style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
     // style: "mapbox://styles/mapbox/light-v10",
     center: [-122.196532, 37.779369],
-    zoom: zoom,
+    zoom: 15,
   });
 
   map.addControl(new mapboxgl.GeolocateControl({
@@ -77,9 +80,12 @@ function Mapper() {
 
     map.once("load", function () {
       // Add our DB SOURCE
-      map.addSource("trees", {
+      map.addSource("treedata", {
         type: "geojson",
         data: mapData,
+        cluster: true,
+        clusterMaxZoom: 14, // Max zoom to cluster points on
+        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
       });
 
       // Add our layer
@@ -89,43 +95,45 @@ function Mapper() {
         // 'source': 'ethnicity',
         // 'source-layer': 'sf2010',
 
-        id: "trees",
-        source: "trees", // this should be the id of source
+        id: "treedata",
+        source: "treedata", // this should be the id of source
         type: "circle",
         paint: {
           "circle-radius": {
             property: 'health',
             base: 1.75,
             stops: [
-              [10, 2],
-              [22, 180],
+              [12, 2],
+              [18, 280],
             ],
           },
-          "circle-color": "green",
-          // 'circle-color': [
-          //   'match',
-          //   ['get', 'health'],
-          //     'good', '#fbb03b',
-          //     'poor', '#223b53',
-          //     'dead', '#e55e5e',
-          //     'missing', '#3bb2d0',
-          //   ]
+
+           // 'circle-radius': [
+           //    'step',
+           //    ['get', 'point-count'],
+           //    20,
+           //    100,
+           //    30,
+           //    750,
+           //    40
+           //  ],
+
+          // "circle-color": "green",
+          'circle-color': [
+            'match',
+            ['get', 'health'],
+              'good', 'green',
+              'fair', 'orange',
+              'poor', 'red',
+              'dead', 'black',
+              'missing', 'darkgray',
+              'stump', 'brown',
+              /* other */ '#ccc'
+            ]
         },
       });
 
-//       'circle-radius': {
-// property: 'sqrt',
-// stops: [
-// [{zoom: 8, value: 0}, 0],
-// [{zoom: 8, value: 250}, 1],
-// [{zoom: 11, value: 0}, 0],
-// [{zoom: 11, value: 250}, 6],
-// [{zoom: 16, value: 0}, 0],
-// [{zoom: 16, value: 250}, 40]
-// ]
-// }
-
-      map.on("click", "circle", function (e) {
+      map.on("click", "treedata", function (e) {
         map.getCanvas().style.cursor = "pointer";
         setCurrentTreeId(e.features[0].properties.id);
         setShowTree(true);
@@ -133,57 +141,64 @@ function Mapper() {
 
       let lastId;
       var hoveredStateId = null;
-      const popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false,
-      });
+      if (windowWidth > 768 ) {
+        const popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+        });
+        map.on("mousemove", "treedata", function (e) {
+          map.getCanvas().style.cursor = "pointer";
+          if (e.features.length > 0) {
+            if (e.features[0].properties.id) {
+              map.setFeatureState(
+                { source: "treedata", id: hoveredStateId },
+                { hover: false }
+              );
+            }
+            hoveredStateId = e.features[0].id;
+            const common = e.features[0].properties.common;
 
-      map.on("mousemove", "circle", function (e) {
-        map.getCanvas().style.cursor = "pointer";
-        if (e.features.length > 0) {
-          if (e.features[0].properties.id) {
+            console.log('e.point', e.point, 'e.features', e.features);
             map.setFeatureState(
-              { source: "points", id: hoveredStateId },
+              { source: "treedata", id: hoveredStateId },
+              { hover: true }
+            );
+            map.getCanvas().style.cursor = "pointer";
+            const coordinates = e.features[0].geometry.coordinates.slice();
+
+            const HTML = `<div><h1>${common}</h4><h4>lng: ${common} / lat: ${common}</h4></div>`;
+
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
+          }
+        });
+
+        // When the mouse leaves the state-fill layer, update the feature state of the
+        // previously hovered feature.
+        map.on("mouseleave", "treedata", function () {
+          if (hoveredStateId) {
+            map.setFeatureState(
+              { source: "treedata", id: hoveredStateId },
               { hover: false }
             );
           }
-          hoveredStateId = e.features[0].id;
-          const common = e.features[0].properties.common;
+          hoveredStateId = null;
+          // lastId = undefined;
+          map.getCanvas().style.cursor = "";
+          popup.remove();
+        });
+      }
 
-          console.log('e.point', e.point, 'e.features', e.features);
-          map.setFeatureState(
-            { source: "points", id: hoveredStateId },
-            { hover: true }
-          );
-          map.getCanvas().style.cursor = "pointer";
-          const coordinates = e.features[0].geometry.coordinates.slice();
 
-          const HTML = `<div><h1>${common}</h4><h4>lng: ${common} / lat: ${common}</h4></div>`;
 
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
-
-          popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
-        }
-      });
-
-      // When the mouse leaves the state-fill layer, update the feature state of the
-      // previously hovered feature.
-      map.on("mouseleave", "circle", function () {
-        if (hoveredStateId) {
-          map.setFeatureState(
-            { source: "points", id: hoveredStateId },
-            { hover: false }
-          );
-        }
-        hoveredStateId = null;
-        // lastId = undefined;
-        map.getCanvas().style.cursor = "";
-        popup.remove();
-      });
       setMap(map);
     });
+    return () => {
+      // window.removeEventListener("resize", resizeWindow);
+    }
   }, [mapData]);
 
 
@@ -251,7 +266,6 @@ function Mapper() {
       <div className="addtreepage">
         <AddTree 
           map={map}
-          setZoom={setZoom}
         />
       </div>
     </div>

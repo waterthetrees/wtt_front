@@ -32,6 +32,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
     scientific,
     planted,
     health,
+    healthNum,
     address,
     city,
     country,
@@ -47,10 +48,9 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
 
   const toggle = () => setShowTree(!showTree);
 
-  const [sliderValue, setSlider] = useState(convertedHealth || 100);
+  const [sliderValue, setSlider] = useState(healthNum || 100);
   const [overallHealth, setOverallHealth] = useState(health);
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
-  const convertedHealth = convertHealthToNumber(health);
   const sliderRef = useRef();
   const changeSlider = async (event) => {
     const functionName = 'changeSlider';
@@ -143,13 +143,23 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
                 type="range"
                 min="1"
                 max="6"
+                step="1"
                 className="slider"
-                id="myRange"
-                defaultValue={sliderRef.current ? sliderRef.current.value : convertedHealth}
+                list="healthSlider"
+                id="healthSlider"
+                defaultValue={sliderRef.current ? sliderRef.current.value : healthNum}
                 onChange={changeSlider}
               />
+              <datalist id="healthSlider">
+                <option value="1" name="dead"></option>
+                <option value="2" name="missing"></option>
+                <option value="3" name="stump"></option>
+                <option value="4" name="poor"></option>
+                <option value="5" name="fair"></option>
+                <option value="6" name="good"></option>
+              </datalist>
               <h3>
-                {health && <span id={sliderValue}>{overallHealth? overallHealth : health}</span>}
+                {health && <span id={sliderValue}>{sliderRef.current ? convertSliderValuesToHealth(sliderRef.current.value) : health}</span>}
               </h3>
                 {healthSaveAlert && <div className="alert alert-success" role="alert">{healthSaveAlert}</div>}
             </div>
@@ -493,18 +503,6 @@ const convertSliderValuesToHealth = (value) => {
   if (numValue === 3) return 'stump';
   if (numValue === 2) return 'missing';
   if (numValue === 1) return 'dead';
-}
-
-const convertHealthToNumber = (health) => {
-  const healthValue = {
-    good: 6,
-    fair: 5,
-    poor: 4,
-    stump: 3,
-    missing: 2,
-    dead: 1
-  }[health];
-  return parseInt(healthValue);
 }
 
 const changeImageText = (historybutton, statusSelected) => {

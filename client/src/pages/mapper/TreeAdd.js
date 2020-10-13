@@ -42,45 +42,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const top100Trees = [
-  {
-    CommonName: "Red Maple",
-    BotanicalName: "Acer Rubrum",
-    Cultivar: "Emperor",
-    Notes: "",
-  },
-  {
-    CommonName: "California Lilac",
-    BotanicalName: "Ceanothus",
-    Cultivar: "Juliana Phelps",
-    Notes: "",
-  },
-  {
-    CommonName: "Eastern Redbud",
-    BotanicalName: "Eastern Redbud",
-    Cultivar: "Weeping",
-    Notes: "",
-  },
-  {
-    CommonName: "Cherry",
-    BotanicalName: "Cherry",
-    Cultivar: "Weeping Snow Cherry",
-    Notes: "",
-  },
-  {
-    CommonName: "Santa Rosa Plum",
-    BotanicalName: "Plum",
-    Cultivar: "Weeping",
-    Notes: "",
-  },
-  {
-    CommonName: "Eureka Lemon",
-    BotanicalName: "Citrus",
-    Cultivar: "Eureka",
-    Notes: "",
-  },
-];
-
 export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
   const component_name = "AddTree";
   const [addTreeType, setTreeAddTypeSelected] = useState();
@@ -118,8 +79,8 @@ export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
     const coordinates = document.getElementById('coordinates');
 
     const marker = new mapboxgl.Marker({
-          draggable: true
-      })
+      draggable: true
+    })
       .setLngLat(coordinates)
       .addTo(mapboxElRef.current); // add the marker to the map
 
@@ -128,10 +89,10 @@ export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
 
 
   const onDragEnd = () => {
-      const lngLat = marker.getLngLat();
-      coordinates.style.display = 'block';
-      coordinates.innerHTML =
-        'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    const lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    coordinates.innerHTML =
+      'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
   }
 
 
@@ -147,14 +108,14 @@ export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
     <>
       <div className="treeadd"
       >
-        <img 
+        <img
           key="treeAddOpener"
           className="treeadd__icon"
           onClick={() => {
             setShowAboutUsModal(!showTreeAddModal);
           }}
-        src={PLUS_ICON} 
-       />
+          src={PLUS_ICON}
+        />
       </div>
 
       <Modal isOpen={modal} toggle={toggle}>
@@ -222,36 +183,36 @@ export function TreeAdd({ latlng, handleSubmit, modal, toggle }) {
               {(addTreeType === "ghost" ||
                 addTreeType === "tagtree" ||
                 addTreeType === "plant") && (
-                <div className="Row">
-                  <div className="col text-center tree__add-label">
-                    {addTreeType === "ghost" && (
-                      <RadioGroup
-                        row
-                        aria-label="position"
-                        name="position"
-                        defaultValue="top"
-                      >
-                        <FormControlLabel
-                          value="requestStreetTree"
-                          control={<Radio color="primary" />}
-                          label="Public Tree"
-                          labelPlacement="bottom"
-                        />
-                        <FormControlLabel
-                          value="planYard"
-                          control={<Radio color="primary" />}
-                          label="Yard Tree"
-                          labelPlacement="bottom"
-                        />
-                      </RadioGroup>
-                    )}
-                  </div>
+                  <div className="Row">
+                    <div className="col text-center tree__add-label">
+                      {addTreeType === "ghost" && (
+                        <RadioGroup
+                          row
+                          aria-label="position"
+                          name="position"
+                          defaultValue="top"
+                        >
+                          <FormControlLabel
+                            value="requestStreetTree"
+                            control={<Radio color="primary" />}
+                            label="Public Tree"
+                            labelPlacement="bottom"
+                          />
+                          <FormControlLabel
+                            value="planYard"
+                            control={<Radio color="primary" />}
+                            label="Yard Tree"
+                            labelPlacement="bottom"
+                          />
+                        </RadioGroup>
+                      )}
+                    </div>
 
-                  <div className="col text-center">
-                    <EnterTreeInfo addTreeType={addTreeType} />
+                    <div className="col text-center">
+                      <EnterTreeInfo addTreeType={addTreeType} />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
             <div className="col-12">
               <div className="col-12">
@@ -489,13 +450,13 @@ function treeProgress(tree, today) {
     daysSinceLastWatered < 7
       ? 100
       : daysSinceLastWatered >= 7 && daysSinceLastWatered < 14
-      ? 80
-      : daysSinceLastWatered >= 14 && daysSinceLastWatered < 21
-      ? 60
-      : daysSinceLastWatered >= 21 && daysSinceLastWatered < 28
-      ? 40
-      : daysSinceLastWatered >= 28 && daysSinceLastWatered < 35
-      ? 20
-      : 0;
+        ? 80
+        : daysSinceLastWatered >= 14 && daysSinceLastWatered < 21
+          ? 60
+          : daysSinceLastWatered >= 21 && daysSinceLastWatered < 28
+            ? 40
+            : daysSinceLastWatered >= 28 && daysSinceLastWatered < 35
+              ? 20
+              : 0;
   return { progressNumber, dateWateredFormatted };
 }
