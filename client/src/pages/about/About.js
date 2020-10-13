@@ -6,7 +6,7 @@ import "./About.scss";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-fat.svg";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-viga.svg";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-riteous.svg";
-const WATER_THE_TREES = "assets/images/logos/waterthetrees-fatstraight.svg";
+const WATER_THE_TREES = "assets/images/logos/waterthetrees-fatgraff.svg";
 // const WTT_FAT = "assets/images/logos/wtt-fatter.svg";
 // const WTT_FAT = "assets/images/logos/wtt-riteous.svg";
 // const WTT_FAT = "assets/images/logos/wtt-viga.svg";
