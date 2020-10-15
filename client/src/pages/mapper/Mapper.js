@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 // import useSWR from "swr";
 import { useQuery, useMutation, queryCache } from "react-query";
-import moment from "moment";
+import format from 'date-fns/format';
 
 import {
   Button,
@@ -26,7 +26,7 @@ import config from "../../config.js";
 mapboxgl.accessToken = config.mapbox.key;
 
 const has = Object.prototype.hasOwnProperty;
-const today = moment().format("YYYY-MM-DD");
+const today = format(new Date(), 'YYYY-MM-DD');
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 

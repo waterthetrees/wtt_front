@@ -9,8 +9,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import moment from "moment";
 import cx from "classnames";
+import format from 'date-fns/format';
 import "./Mapper.scss";
 
 import { getData, postData } from "../../api/queries.js";
@@ -127,7 +127,7 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
               )}
               {planted && (
                 <div>
-                  <h5>Planted: {moment(planted).format("MMMM Do YYYY")}</h5>
+                  <h5>Planted: {format(new Date(planted), 'MMMM Do YYYY')}</h5>
                 </div>
               )}
             </div>
@@ -266,7 +266,7 @@ const TreeHistory = ({currentTreeId, treeHistory}) => {
         return (
           <div className="treehistory-item" key={keyName}>
             <div className="treehistory-item-label">
-              {moment(dateVisit).format("MMMM Do YYYY")} tree visit by{" "}
+              {format(new Date(dateVisit), 'MMMM Do YYYY')} tree visit by{" "}
               {volunteer || "volunteer"}
             </div>
 
@@ -329,7 +329,7 @@ const TreeMaintenance = ({currentTreeId, common, mutateHistory}) => {
     event.preventDefault();
     console.log(functionName, 'statusSelected', statusSelected);
     try {
-      const dateVisit = moment().format('YYYY/MM/DD HH:mm:ss');
+      const dateVisit = format(new Date(), 'YYYY/MM/DD HH:mm:ss')
       const sendData = {idTree: currentTreeId, date_visit: dateVisit, ...statusSelected};
 
       if (commentRef.current && commentRef.current.value) sendData['comment'] = commentRef.current.value;
