@@ -3,10 +3,13 @@
     "**/client/public/**": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+		"source.fixAll": true,
+		"source.fixAll.eslint": true
   },
   "eslint.validate": [
     "javascript"
   ],
-  "editor.tabSize": 1
+  "editor.formatOnSave": false,
+  "editor.tabSize": 1,
+  "eslint.alwaysShowStatus": true
 }
