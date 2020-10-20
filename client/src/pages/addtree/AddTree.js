@@ -62,7 +62,7 @@ export const AddTree = (props) => {
     lat: (coordinatesNewTree) ? coordinatesNewTree.lat : '',
     lng: (coordinatesNewTree) ? coordinatesNewTree.lng : '',
     owner: 'public',
-    owner2: 'public',
+    public: true,
     organization: '',
     volunteer: 'Volunteer',
     ref: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,

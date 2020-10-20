@@ -12,33 +12,48 @@ import Widget from '../../components/Widget';
 export default function TreePlanter({ control }) {
   return (
     <Widget title="Tree Planter" classes="treeplanter">
-      <Controller
-        name="owner2"
-        control={control}
-        render={(props) => (
-          <Switch
-            onChange={(e) => props.onChange(e.target.checked)}
-            checked={props.value}
-          />
-        )}
-      />
-
-      <Controller
-        as={(
-          <RadioGroup aria-label="owner">
-            <FormControlLabel
-              value="public"
-              control={<Radio />}
+      <span>
+        <label>Private Land</label>
+        {' '}
+        <Controller
+          name="public"
+          control={control}
+          label="Public Land"
+          render={(props) => (
+            <Switch
+              onChange={(e) => props.onChange(e.target.checked)}
+              checked={props.value}
+              name="public"
+              color="primary"
               label="Public Land"
+              size="medium"
             />
-            <FormControlLabel value="private" control={<Radio />} label="Private Land" />
-          </RadioGroup>
-        )}
-        name="owner"
-        label="Owner"
-        control={control}
-        size="small"
-      />
+          )}
+        />
+        {' '}
+        <label>Public Land</label>
+      </span>
+      <span>
+        <Controller
+          as={(
+            <RadioGroup aria-label="owner" name="position" row>
+              <FormControlLabel
+                value="private"
+                control={<Radio color="secondary" value="private" />}
+                label="Private Land"
+              />
+              <FormControlLabel
+                value="public"
+                control={<Radio color="primary" value="public" />}
+                label="Public Land"
+              />
+            </RadioGroup>
+          )}
+          name="owner"
+          control={control}
+          size="medium"
+        />
+      </span>
 
       <Controller
         as={TextField}
