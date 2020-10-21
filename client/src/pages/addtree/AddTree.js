@@ -13,6 +13,7 @@ import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
 import { Button } from '@material-ui/core';
+import { useAuth0 } from '@auth0/auth0-react';
 import { getData, postData } from '../../api/queries';
 
 import TreeHeader from './TreeHeader';
@@ -134,17 +135,19 @@ export const AddTree = (props) => {
   };
   const onError = (errors, e) => console.log('errors, e', errors, e);
   console.log('coordinatesNewTree', coordinatesNewTree);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
   return (
     <div className="addtree">
-      <Button type="toggle" className="addtree__btn" onClick={() => { setClickable(true); setAddTreeSelected(!addTree); }}>
-        <img
-          alt="addtree"
-          id="addtree"
-          key="AddTreeButton"
-          className="addtree__icon"
-          src={PLUS}
-        />
-      </Button>
+      {isAuthenticated && (
+        <button type="button" className="addtree__btn" onClick={() => { setClickable(true); setAddTreeSelected(!addTree); }}>
+          Add a Tree
+        </button>
+      )}
 
       {coordinatesNewTree && (
         <div>

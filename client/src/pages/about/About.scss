@@ -10,3 +10,12 @@
   box-shadow: none;
   outline: none;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+  .about__icon {
+    // height: 1.85rem;
+    width: 70vw;
+  }
+}

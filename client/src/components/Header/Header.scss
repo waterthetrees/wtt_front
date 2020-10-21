@@ -15,7 +15,7 @@
 .header__content {
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  padding: 5px 10px;
   justify-content: space-around;
 }
 
@@ -24,8 +24,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .header__content {
-    justify-content: center;
-  }
+
 }
  
