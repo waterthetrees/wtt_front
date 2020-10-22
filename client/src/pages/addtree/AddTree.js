@@ -143,11 +143,11 @@ export const AddTree = (props) => {
 
   return (
     <div className="addtree">
-      {isAuthenticated && (
+      
         <button type="button" className="addtree__btn" onClick={() => { setClickable(true); setAddTreeSelected(!addTree); }}>
           Add a Tree
         </button>
-      )}
+      
 
       {coordinatesNewTree && (
         <div>
