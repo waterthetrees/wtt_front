@@ -28,11 +28,12 @@ const Loader = () => (
     style={{
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontFamily: 'Arial Black, Arial Bold, Helvetica, sans-serif',
+      justifyContent: 'left',
+      alignItems: 'left',
       color: 'green',
       fontSize: '24px',
+      margin: '10px',
+      fontStyle: 'italic',
     }}
   >
     Water the Trees
