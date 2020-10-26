@@ -4,10 +4,12 @@ import {
   TextField,
   Select,
   MenuItem,
+  FormControl,
+  InputLabel,
 } from '@material-ui/core';
 import Widget from '../../components/Widget';
 
-export default function TreeAddress({ control, coordinates }) {
+export default function TreeAddress({ control, coordinates, errors }) {
   const { lng, lat } = Object(coordinates);
   console.log('lng, lat', lng, lat);
   return (
@@ -22,6 +24,8 @@ export default function TreeAddress({ control, coordinates }) {
         variant="standard"
         size="small"
       />
+      {errors.address && <ErrorMessageAll errors={errors} name={"address"}/>}
+
       <Controller
         as={TextField}
         name="city"
@@ -31,6 +35,10 @@ export default function TreeAddress({ control, coordinates }) {
         variant="standard"
         size="small"
       />
+      {errors.city && <ErrorMessageAll errors={errors} name={"city"}/>}
+
+      <FormControl>
+      <InputLabel id="state">State</InputLabel>
       <Controller
         as={(
           <Select name="input" label="State">
@@ -96,6 +104,9 @@ export default function TreeAddress({ control, coordinates }) {
         variant="standard"
         size="small"
       />
+      </FormControl>
+      {errors.state && <ErrorMessageAll errors={errors} name={"state"}/>}
+
 
       <Controller
         as={TextField}
@@ -108,6 +119,7 @@ export default function TreeAddress({ control, coordinates }) {
         variant="standard"
         size="small"
       />
+      {errors.zipcode && <ErrorMessageAll errors={errors} name={"zipcode"}/>}
 
       <Controller
         as={TextField}

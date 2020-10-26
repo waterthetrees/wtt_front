@@ -68,7 +68,7 @@ export const AddTree = (props) => {
     volunteer: 'Volunteer',
     ref: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
-  const { handleSubmit, reset, control } = useForm({ defaultValues });
+  const { handleSubmit, reset, control, errors } = useForm({ defaultValues });
   const [data, setData] = useState(null);
   renderCount += 1;
 
@@ -158,9 +158,9 @@ export const AddTree = (props) => {
 
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-                <TreeInfo control={control} coordinates={coordinatesNewTree} />
-                <TreeAddress control={control} coordinates={coordinatesNewTree} />
-                <TreePlanter control={control} />
+                <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors}/>
+                <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors}/>
+                <TreePlanter control={control} errors={errors}/>
                 <ButtonsResult {...{ data, reset, defaultValues }} />
               </form>
             </ModalBody>

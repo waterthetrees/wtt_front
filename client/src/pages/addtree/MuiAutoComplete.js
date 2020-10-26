@@ -6,8 +6,9 @@ import { Controller } from 'react-hook-form';
 import { useQuery, useMutation, queryCache } from 'react-query';
 
 import { getData, postData } from '../../api/queries';
+import ErrorMessageAll from '../error/ErrorPage';
 
-export default function TreeName({ control, keyName, coordinates }) {
+export default function TreeName({ control, keyName, errors, coordinates }) {
   const treelist = useQuery(['treelist', { coordinates }], getData);
   // const [mutateTreelist] = useMutation(postData, {
   //   onSuccess: () => {
@@ -46,6 +47,7 @@ export default function TreeName({ control, keyName, coordinates }) {
       name={keyName}
       control={control}
     />
+      
   );
 }
 

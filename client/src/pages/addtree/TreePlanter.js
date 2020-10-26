@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Controller } from 'react-hook-form';
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   TextField,
   RadioGroup,
@@ -8,31 +9,12 @@ import {
   Switch,
 } from '@material-ui/core';
 import Widget from '../../components/Widget';
+import ErrorMessageAll from '../error/ErrorPage';
 
-export default function TreePlanter({ control }) {
+export default function TreePlanter({ control, errors }) {
+  const { user } = useAuth0();
   return (
     <Widget title="Tree Planter" classes="treeplanter">
-      <span>
-        <label>Private Land</label>
-        {' '}
-        <Controller
-          name="public"
-          control={control}
-          label="Public Land"
-          render={(props) => (
-            <Switch
-              onChange={(e) => props.onChange(e.target.checked)}
-              checked={props.value}
-              name="public"
-              color="primary"
-              label="Public Land"
-              size="medium"
-            />
-          )}
-        />
-        {' '}
-        <label>Public Land</label>
-      </span>
       <span>
         <Controller
           as={(
@@ -54,6 +36,8 @@ export default function TreePlanter({ control }) {
           size="medium"
         />
       </span>
+      {errors.datePlanted && <ErrorMessageAll errors={errors} name={"datePlanted"}/>}
+
 
       <Controller
         as={TextField}
@@ -64,8 +48,10 @@ export default function TreePlanter({ control }) {
         variant="standard"
         size="small"
       />
+      {errors.organization && <ErrorMessageAll errors={errors} name={"organization"}/>}
 
-      <Controller
+
+      {/*<Controller
         as={TextField}
         name="volunteer"
         label="Planted By"
@@ -74,6 +60,14 @@ export default function TreePlanter({ control }) {
         variant="standard"
         size="small"
       />
+      {errors.volunteer && <ErrorMessageAll errors={errors} name={"volunteer"}/>*/}
+}
+      {user && (
+        <span>
+          <InputLabel id="volunteer">Volunteer</InputLabel>
+          <h4>{user}</h4>
+        </span>
+      )}
 
       <Controller
         as={TextField}
@@ -84,6 +78,8 @@ export default function TreePlanter({ control }) {
         variant="standard"
         size="small"
       />
+      {errors.ref && <ErrorMessageAll errors={errors} name={"ref"}/>}
+
 
     </Widget>
   );
