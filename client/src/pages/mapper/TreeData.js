@@ -216,7 +216,9 @@ export function TreeData({ currentTreeId, showTree, setShowTree}) {
             </div>
           </ModalBody>
 
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            <Footer/>
+          </ModalFooter>
         </Modal>
       )}
     </div>

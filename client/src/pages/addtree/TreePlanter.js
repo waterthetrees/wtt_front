@@ -7,12 +7,25 @@ import {
   FormControlLabel,
   Radio,
   Switch,
+  InputLabel
 } from '@material-ui/core';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
+      /*<Controller
+        as={TextField}
+        name="volunteer"
+        label="Planted By"
+        control={control}
+        rules={{ required: true, minLength: 1, maxLength: 100 }}
+        variant="standard"
+        size="small"
+      />
+      {errors.volunteer && <ErrorMessageAll errors={errors} name={"volunteer"}/>*/
+
 export default function TreePlanter({ control, errors }) {
   const { user } = useAuth0();
+  console.log('user', user);
   return (
     <Widget title="Tree Planter" classes="treeplanter">
       <span>
@@ -51,23 +64,30 @@ export default function TreePlanter({ control, errors }) {
       {errors.organization && <ErrorMessageAll errors={errors} name={"organization"}/>}
 
 
-      {/*<Controller
+
+
+      <Controller
         as={TextField}
         name="volunteer"
-        label="Planted By"
+        label="Volunteer Name"
         control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
+        rules={{ required: true }}
         variant="standard"
         size="small"
+        disabled
       />
-      {errors.volunteer && <ErrorMessageAll errors={errors} name={"volunteer"}/>*/}
-}
-      {user && (
-        <span>
-          <InputLabel id="volunteer">Volunteer</InputLabel>
-          <h4>{user}</h4>
-        </span>
-      )}
+
+
+      <Controller
+        as={TextField}
+        name="email"
+        label="Volunteer Email"
+        control={control}
+        rules={{ required: true }}
+        variant="standard"
+        size="small"
+        disabled
+      />
 
       <Controller
         as={TextField}

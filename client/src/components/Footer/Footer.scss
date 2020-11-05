@@ -1,15 +1,7 @@
 @import "../../styles/app";
 
 .footer {
-  display: inline-block;
-  position: absolute;
-  bottom: 35px;
-  left: 0;
-  width: 100%;
-  background-color: cornflowerblue;
-  opacity: .8;
-  border-color: transparent;
-  z-index: 200 !important;
+
 }
 
 .footer__content {
@@ -19,16 +11,9 @@
   justify-content: space-around;
 }
 
-.aboutpage{
-  flex-basis: auto;
-}
-
-.treeadd__icon{
- height: 4vh;
-}
 
 @media only screen and (max-width: 768px) {
   .footer__content {
-    justify-content: space-between;
+    padding: 5px;
   }
 }

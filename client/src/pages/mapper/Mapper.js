@@ -257,9 +257,7 @@ function Mapper() {
         />
       )}
       <div className="addtreepage">
-        <AddTree
-          map={map}
-        />
+        <AddTree map={map} />
       </div>
     </div>
   );
@@ -287,4 +285,5 @@ export const serializeData = (data) =>
   Object.entries(data)
     .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
     .join('&');
+
 export default Mapper;

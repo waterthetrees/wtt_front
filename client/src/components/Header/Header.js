@@ -7,7 +7,6 @@ const Header = () => (
   <div className="header">
     <div className="header__content">
       <AboutUs />
-
       <AuthenticationButton />
     </div>
   </div>
