@@ -29,14 +29,14 @@
 
 .addtree__btn {
  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwLjQyNSAtMTEuNjc3IDU0NS4wMTEgNTEwLjIzNiIgd2lkdGg9IjU0NS4wMTEiIGhlaWdodD0iNTEwLjIzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDE2My45NzMgMzAuMTUyIEwgMzgxLjg4NyAzMC4xNTIgTCAzODEuODg3IDE1MC4wMzkgTCA1MDEuODUxIDE1MC4wMzkgTCA1MDEuODUxIDMzNi44NDMgTCAzODEuODg3IDMzNi44NDMgTCAzODEuODg3IDQ1Ni43MyBMIDE2My45NzMgNDU2LjczIEwgMTYzLjk3MyAzMzYuODQzIEwgNDQuMDExIDMzNi44NDMgTCA0NC4wMTEgMTUwLjAzOSBMIDE2My45NzMgMTUwLjAzOSBaIiBzdHlsZT0iZmlsbDogcmdiKDI1NSwgMjU1LCAyNTUpOyBzdHJva2U6IHJnYigyMDgsIDIwOSwgMjA1KTsgc3Ryb2tlLXdpZHRoOiA0cHg7Ii8+Cjwvc3ZnPg==);
- font-size: 1.1rem;
  background-size: cover;
  background-position: center;
- height: 6rem;
- width: 6rem;
+ font-size: 2.5rem;
+ line-height: 1.9rem;
+ height: 12rem;
+ width: 12rem;
  border: none;
  color: black;
- line-height: .9rem;
  word-spacing:9999px;
  padding:5px;
  margin: 0 7px 10px;
@@ -231,5 +231,11 @@
 @media only screen and (max-width: 768px) {
  .addtree {
   justify-content: flex-end;
+ }
+ .addtree__btn {
+  font-size: 1.1rem;
+  line-height: .9rem;
+  height: 6rem;
+  width: 6rem;
  }
 }

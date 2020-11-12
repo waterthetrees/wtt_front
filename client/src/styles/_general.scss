@@ -39,7 +39,29 @@ body {
   .authbutton {
     width: fit-content;
     height: fit-content;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    padding: 1px 4px;
+    margin: 0;
+  
+    .btn {
+      padding: 0 .75rem;
+    }
+  }
+
+  .authbutton .btn {
+    padding: 0 .75rem;
+  }
+}
+
+
+@media only screen and (max-width: 413px) {
+  .authbutton {
+    width: fit-content;
+    height: fit-content;
+    font-size: 1rem;
+    padding: 1px 4px;
+    margin: 0;
+  
     .btn {
       padding: 0 .75rem;
     }
