@@ -43,7 +43,7 @@ function Mapper() {
     // resizeWindow();
     // window.addEventListener("resize", resizeWindow);
     if (isAuthenticated) {
-      console.log(componentName, 'user', user);
+      console.log(componentName, 'user', user, 'isAuthenticated', isAuthenticated);
       mutateUser(['user', user]);
     }
     if (!mapData) return;
