@@ -4,26 +4,12 @@ import {
   Switch, Route, Redirect, withRouter,
 } from 'react-router-dom';
 import { ReactQueryConfigProvider } from 'react-query';
+import { useAuth0 } from '@auth0/auth0-react';
 import Layout from './Layout/Layout';
 
 const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
-const PrivateRoute = ({
-  component, isAuthenticated, map, email, ...rest
-}) => (
-  <Route
-    {...rest}
-    render={(props) => (isAuthenticated ? (
-      React.createElement(component, props)
-    ) : (
-      <Redirect
-        to={{ pathname: '/login', state: { from: props.location } }}
-      />
-    ))}
-  />
-);
-
-const Loader = () => (
+const Loading = () => (
   <div
     style={{
       display: 'flex',
@@ -49,22 +35,19 @@ const queryConfig = {
   },
 };
 
-const App = (props) => {
-  const component_name = 'App!!!!\n\n\n';
-  const email = 'rose@waterthetrees.com';
-  // const { isAuthenticated } = useAuth0();
-  const isAuthenticated = true;
+const App = () => {
+  const componentName = 'App';
+  const { isLoading, isAuthenticated, user } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <ReactQueryConfigProvider config={queryConfig}>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loading />}>
         <Switch>
-          <PrivateRoute
-            isAuthenticated={isAuthenticated}
-            email={email}
-            path="/"
-            component={Layout}
-          />
+          <Route component={Layout} />
           <Route component={NotFound} />
         </Switch>
       </Suspense>

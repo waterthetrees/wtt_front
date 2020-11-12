@@ -6,26 +6,12 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Switch,
-  InputLabel
 } from '@material-ui/core';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
-      /*<Controller
-        as={TextField}
-        name="volunteer"
-        label="Planted By"
-        control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
-        variant="standard"
-        size="small"
-      />
-      {errors.volunteer && <ErrorMessageAll errors={errors} name={"volunteer"}/>*/
-
 export default function TreePlanter({ control, errors }) {
   const { user } = useAuth0();
-  console.log('user', user);
   return (
     <Widget title="Tree Planter" classes="treeplanter">
       <span>
@@ -49,22 +35,18 @@ export default function TreePlanter({ control, errors }) {
           size="medium"
         />
       </span>
-      {errors.datePlanted && <ErrorMessageAll errors={errors} name={"datePlanted"}/>}
-
+      {errors.owner && <ErrorMessageAll errors={errors} name="owner" />}
 
       <Controller
         as={TextField}
-        name="organization"
+        name="who"
         label="Organization"
         control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
+        rules={{ required: false, minLength: 1, maxLength: 100 }}
         variant="standard"
         size="small"
       />
-      {errors.organization && <ErrorMessageAll errors={errors} name={"organization"}/>}
-
-
-
+      {errors.who && <ErrorMessageAll errors={errors} name="who" />}
 
       <Controller
         as={TextField}
@@ -76,7 +58,6 @@ export default function TreePlanter({ control, errors }) {
         size="small"
         disabled
       />
-
 
       <Controller
         as={TextField}
@@ -98,8 +79,7 @@ export default function TreePlanter({ control, errors }) {
         variant="standard"
         size="small"
       />
-      {errors.ref && <ErrorMessageAll errors={errors} name={"ref"}/>}
-
+      {errors.ref && <ErrorMessageAll errors={errors} name="ref" />}
 
     </Widget>
   );

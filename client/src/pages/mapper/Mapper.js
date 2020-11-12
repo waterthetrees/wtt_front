@@ -1,39 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-// import useSWR from "swr";
 import { useQuery, useMutation, queryCache } from 'react-query';
-import format from 'date-fns/format';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import {
-  Button,
-  ButtonToggle,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Progress,
-  ButtonGroup,
-  Label,
-  Input,
-} from 'reactstrap';
-
-import { getData } from '../../api/queries.js';
-import { TreeData } from './TreeData.js';
-import { AddTree } from '../addtree/AddTree.js';
-// import { TreeAdd } from '../treemap/TreeAdd.js';
+import { getData, postData } from '../../api/queries';
+import TreeData from '../treedata/TreeData';
+import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
-import config from '../../config.js';
+import config from '../../config';
 
 mapboxgl.accessToken = config.mapbox.key;
 
-const has = Object.prototype.hasOwnProperty;
-const today = format(new Date(), 'yyyy-MM-dd');
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 function Mapper() {
   const componentName = 'Mapper';
-
+  const { isAuthenticated, user } = useAuth0();
+  const [mutateUser] = useMutation(postData, {
+    onSuccess: () => {
+      queryCache.invalidateQueries('user');
+    },
+  });
   // getData from DB
   const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
   const { data, error } = treemap || {};
@@ -57,6 +42,10 @@ function Mapper() {
   useEffect(() => {
     // resizeWindow();
     // window.addEventListener("resize", resizeWindow);
+    if (isAuthenticated) {
+      console.log(componentName, 'user', user);
+      mutateUser(['user', user]);
+    }
     if (!mapData) return;
     console.log('mapData here', mapData);
     const map = new mapboxgl.Map({

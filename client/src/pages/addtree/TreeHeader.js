@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorMessageAll from '../error/ErrorPage';
 
 const ADDATREE = 'assets/images/logos/addatree.svg';
 const TREETITLEIMAGE = 'assets/images/addtree/tree16.svg';

@@ -29,6 +29,18 @@ p {
   width: 280px;
 }
 
+
+.alert {
+  position: relative;
+  padding: 0px;
+  margin-bottom: 0rem;
+  border: 0px solid transparent;
+  border-radius: .25rem;
+  color: red;
+  font-size: 1.2rem;
+}
+
+
 pre {
   text-align: left;
   margin-top: 2rem;

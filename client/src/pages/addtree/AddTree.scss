@@ -46,11 +46,16 @@
 
 .addtree__btn:focus {
  outline: none;
+ background: green;
 }
 
 .addtree__btn:active {
- background-color: blue;
+ background-color: green;
 }
+
+.addtree__btn:hover {
+  background-color: green;
+ }
 
 .addtree__icon {
  height: 9vh;

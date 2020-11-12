@@ -15,9 +15,9 @@ const url = {
 // console.log('\n\n\n\n url', url);
 
 const apiEndpoints = {
-  urlUser: `${url}/user`,
-  urlLogin: `${url}/userhistory`,
-  urlCustomer: `${url}/userprofile`,
+  user: `${url}/user`,
+  userhistory: `${url}/userhistory`,
+  userprofile: `${url}/userprofile`,
   treemap: `${url}/treemap`,
   tree: `${url}/tree`,
   treehistory: `${url}/treehistory`,

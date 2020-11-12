@@ -1,0 +1,6 @@
+{
+  "name": "TreeData",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TreeData.js"
+}

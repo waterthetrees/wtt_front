@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import "./About.scss";
+import React, { useState } from 'react';
+import {
+  Modal, ModalHeader, ModalBody,
+} from 'reactstrap';
+import './About.scss';
 // const INFO_ICON = "assets/images/map/info-icon.svg";
 // const WTT_FAT = "assets/images/logos/wtt-fat.svg";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-fat.svg";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-viga.svg";
 // const WATER_THE_TREES = "assets/images/logos/waterthetrees-riteous.svg";
-const WATER_THE_TREES = "assets/images/logos/waterthetrees-fatgraff.svg";
+const WATER_THE_TREES = 'assets/images/logos/waterthetrees-fatgraff.svg';
 // const WTT_FAT = "assets/images/logos/wtt-fatter.svg";
 // const WTT_FAT = "assets/images/logos/wtt-riteous.svg";
 // const WTT_FAT = "assets/images/logos/wtt-viga.svg";
@@ -15,14 +17,24 @@ export const AboutUs = () => {
   const [showAboutUsModal, setShowAboutUsModal] = useState(false);
   return (
     <>
-      <div className="about">
-        <img 
+      <div
+        className="about"
+        role="button"
+        onClick={() => {
+          setShowAboutUsModal(!showAboutUsModal);
+        }}
+        onKeyPress={() => {
+          setShowAboutUsModal(!showAboutUsModal);
+        }}
+        tabIndex="0"
+      >
+        <img
+          alt="About us"
           key="aboutUsButton"
           className="about__icon"
-          onClick={() => {
-            setShowAboutUsModal(!showAboutUsModal);
-          }}
-        src={WATER_THE_TREES} />
+          src={WATER_THE_TREES}
+        />
+
       </div>
       <div>
         <Modal isOpen={showAboutUsModal}>
