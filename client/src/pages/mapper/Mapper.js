@@ -194,37 +194,6 @@ function Mapper() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!userProfileOpen);
 
-  // const handleOpenUserProfile = (selected) => {
-  //   userProfileOpen === "userProfileOpen"
-  //     ? setUserProfileOpen(null)
-  //     : setUserProfileOpen("userProfileOpen");
-  //   userProfileOpen || userProfileOpen === "userProfileOpen"
-  //     ? setMapDraggable(true)
-  //     : setMapDraggable(false);
-  // };
-  // --------------------------
-
-  const url = window.location.origin;
-  const imagepath = `${url}/assets/images/map/`;
-  const treeIcons = {
-    fair: `${imagepath}treeYellow.svg`,
-    poor: `${imagepath}treeRed.svg`,
-    missing: `${imagepath}treeOrange.svg`,
-    good: `${imagepath}treeGreen.svg`,
-    well: `${imagepath}treeGray.svg`,
-    dead: `${imagepath}treeBlack.svg`,
-  };
-
-  // Create an image for the Layer
-  // const image = new Image();
-  // image.src = treeIcons.green;
-  // const images = ["londonCycle", image];
-  // const treeRef = useRef();
-
-  const iconCurrent = treeIcons.green;
-
-  // console.log('treeee RIGHT BEFORE RENDER',showTree, currentTree);
-
   return (
     <div className="App">
       <div className="map__container">
@@ -238,9 +207,6 @@ function Mapper() {
       {currentTreeId && (
         <TreeData
           currentTreeId={currentTreeId}
-          lng={currentTree.lng}
-          lat={currentTree.lat}
-          icon={iconCurrent}
           showTree={showTree}
           setShowTree={setShowTree}
         />
@@ -251,23 +217,6 @@ function Mapper() {
     </div>
   );
 }
-
-// const handleClickedTree = async (tree) => {
-//   console.log('tree', tree);
-//   const request = {
-//       requestType: 'GetTree',
-//       lat: tree.lat,
-//       lng:tree.lng
-//     }
-//   const dataSerialized = serializeData(request);
-//   const BASE_URL = 'http://localhost:3002/treemap';
-//   const URL = `${BASE_URL}?${dataSerialized}`;
-//   const { data, error } = useSWR( URL, fetcher);
-//   // console.log(await data, 'data DDDDDDD \n\n\n\n');
-//   // setCurrentTree(await data);
-//   // setShowTree(true);
-//   return `<TreeData tree={${await data}} icon={iconCurrent} showTree={${true}} setShowTree={${setShowTree}}/>`;
-// }
 
 export const serializeData = (data) =>
   // console.log(data,'serializeData');

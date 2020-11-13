@@ -72,14 +72,14 @@ export default function TreePlanter({ control, errors }) {
 
       <Controller
         as={TextField}
-        name="ref"
+        name="idReference"
         label="Reference Number"
         control={control}
         rules={{ required: true, minLength: 1, maxLength: 100 }}
         variant="standard"
         size="small"
       />
-      {errors.ref && <ErrorMessageAll errors={errors} name="ref" />}
+      {errors.idReference && <ErrorMessageAll errors={errors} name="idReference" />}
 
     </Widget>
   );

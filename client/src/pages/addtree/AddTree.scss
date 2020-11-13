@@ -31,6 +31,9 @@
  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwLjQyNSAtMTEuNjc3IDU0NS4wMTEgNTEwLjIzNiIgd2lkdGg9IjU0NS4wMTEiIGhlaWdodD0iNTEwLjIzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDE2My45NzMgMzAuMTUyIEwgMzgxLjg4NyAzMC4xNTIgTCAzODEuODg3IDE1MC4wMzkgTCA1MDEuODUxIDE1MC4wMzkgTCA1MDEuODUxIDMzNi44NDMgTCAzODEuODg3IDMzNi44NDMgTCAzODEuODg3IDQ1Ni43MyBMIDE2My45NzMgNDU2LjczIEwgMTYzLjk3MyAzMzYuODQzIEwgNDQuMDExIDMzNi44NDMgTCA0NC4wMTEgMTUwLjAzOSBMIDE2My45NzMgMTUwLjAzOSBaIiBzdHlsZT0iZmlsbDogcmdiKDI1NSwgMjU1LCAyNTUpOyBzdHJva2U6IHJnYigyMDgsIDIwOSwgMjA1KTsgc3Ryb2tlLXdpZHRoOiA0cHg7Ii8+Cjwvc3ZnPg==);
  background-size: cover;
  background-position: center;
+ -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
  font-size: 2.5rem;
  line-height: 1.9rem;
  height: 12rem;
@@ -47,10 +50,16 @@
 .addtree__btn:focus {
  outline: none;
  background: green;
+ -webkit-background-color: green;
+-moz-background-color: green;
+-o-background-color: green;
 }
 
 .addtree__btn:active {
  background-color: green;
+ -webkit-background-color: green;
+ -moz-background-color: green;
+ -o-background-color: green;
 }
 
 .addtree__btn:hover {

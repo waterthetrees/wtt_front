@@ -31,12 +31,12 @@ const convertSliderValuesToHealth = (value) => {
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   const componentName = 'TreeData';
   const treeData = useQuery(['tree', { currentTreeId }], getData);
-  const [mutateTreeData] = useMutation(putData, {
-    onSuccess: () => {
-      queryCache.invalidateQueries('tree');
-    },
-  });
-  // const tree = treeData.data || {};
+  // const [mutateTreeData] = useMutation(putData, {
+  //   onSuccess: () => {
+  //     queryCache.invalidateQueries('tree');
+  //   },
+  // });
+  const tree = treeData.data || {};
   const {
     idTree,
     common,
@@ -49,21 +49,101 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     neighborhood,
     lat,
     lng,
-    // owner,
-    // ref,
-    // who,
+    owner,
+    idReference,
+    who,
+    country,
+    zip,
     notes,
   } = treeData.data || {};
 
   const toggle = () => setShowTree(!showTree);
 
+  return (
+    <div>
+      {idTree && (
+        <Modal isOpen={showTree} toggle={toggle} className="tree__modal">
+          <ModalHeader toggle={toggle}>
+            <TreeHeader common={common} scientific={scientific} datePlanted={datePlanted} />
+          </ModalHeader>
+
+          <ModalBody>
+            <TreeHealthSlider
+              health={health}
+              healthNum={healthNum}
+              currentTreeId={currentTreeId}
+            />
+            <TreeNotes
+              notes={notes}
+              currentTreeId={currentTreeId}
+            />
+            <TreeCare currentTreeId={currentTreeId} common={common} />
+            <TreeLocation
+              address={address}
+              city={city}
+              zip={zip}
+              country={country}
+              neighborhood={neighborhood}
+              lng={lng}
+              lat={lat}
+              owner={owner}
+            />
+            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Footer />
+          </ModalFooter>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+const TreeHeader = ({ common, scientific, datePlanted }) => (
+  <div className="flex-grid-three text-left">
+    {common && (
+      <div>
+        <h3>{common}</h3>
+      </div>
+    )}
+    {scientific && (
+      <div>
+        <h4>{scientific}</h4>
+      </div>
+    )}
+    {datePlanted && (
+      <div>
+        <h5>
+          Planted:
+          {' '}
+          {format(new Date(datePlanted), 'MMMM dd, yyyy')}
+        </h5>
+      </div>
+    )}
+  </div>
+);
+
+const TreeHealthSlider = ({
+  currentTreeId, healthNum, health,
+}) => {
+  const componentName = 'TreeHealthSlider';
+  const { isAuthenticated } = useAuth0();
+  const [mutateTreeData] = useMutation(putData, {
+    onSuccess: () => {
+      queryCache.invalidateQueries('tree');
+    },
+  });
+
   const [sliderValue, setSlider] = useState(healthNum || 100);
   // const [overallHealth, setOverallHealth] = useState(health);
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const sliderRef = useRef();
+
   const changeSlider = async (event) => {
     const functionName = 'changeSlider';
     try {
+      if (!isAuthenticated) loginWithRedirect();
       const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
       // setOverallHealth(newHealth);
       if (newHealth !== health) {
@@ -81,156 +161,46 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     }
   };
 
-  const [showSave, setShowSave] = useState(false);
-  const [notesButtonStyle, setNotesButtonStyle] = useState('btn-light');
-  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
-  const notesRef = useRef();
-  const handleOnChange = () => {
-    console.log('notesRef.current', notesRef.current);
-    if (notesRef.current.value !== notes) setShowSave(true);
-  };
-
-  const handleNotesSave = () => {
-    setNotesSaveButton('SAVE');
-    setNotesButtonStyle('btn-light');
-    setShowSave(false);
-  };
-
-  const handleSubmit = async (event) => {
-    const functionName = 'handleSubmit';
-    event.preventDefault();
-    try {
-      if (notesRef.current.value) {
-        setNotesButtonStyle('btn-info');
-        setNotesSaveButton('SAVING');
-        const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-        const { data, error } = await mutateTreeData(['tree', sendData]);
-        if (error) {
-          setNotesButtonStyle('btn-danger');
-          setNotesSaveButton(error);
-        }
-        setTimeout(() => handleNotesSave(), saveTimer);
-      }
-      return;
-    } catch (err) {
-      console.log('\n\n\n\n ------', functionName, 'err', err);
-      return err;
-    }
-  };
-
   return (
-    <div>
-      {idTree && (
-        <Modal isOpen={showTree} toggle={toggle} className="tree__modal">
-          <ModalHeader toggle={toggle}>
-            <div className="flex-grid-three text-left">
-              {common && (
-                <div>
-                  <h3>{common}</h3>
-                </div>
-              )}
-              {scientific && (
-                <div>
-                  <h4>{scientific}</h4>
-                </div>
-              )}
-              {datePlanted && (
-                <div>
-                  <h5>
-                    Planted:
-                    {' '}
-                    {format(new Date(datePlanted), 'MMMM dd, yyyy')}
-                  </h5>
-                </div>
-              )}
-            </div>
-          </ModalHeader>
-
-          <ModalBody>
-            <div className="flex-grid tree_history-list text-center">
-              <h4>Overall Health</h4>
-            </div>
-            <div className="tree__status text-center">
-              <input
-                ref={sliderRef}
-                type="range"
-                min="1"
-                max="6"
-                step="1"
-                className="slider"
-                list="healthSlider"
-                id="healthSlider"
-                defaultValue={sliderRef.current ? sliderRef.current.value : healthNum}
-                onChange={changeSlider}
-              />
-              <datalist id="healthSlider">
-                <option value="1" name="dead" />
-                <option value="2" name="missing" />
-                <option value="3" name="stump" />
-                <option value="4" name="poor" />
-                <option value="5" name="fair" />
-                <option value="6" name="good" />
-              </datalist>
-              <h3>
-                {health && (
-                  <span id={sliderValue}>
-                    {sliderRef.current
-                      ? convertSliderValuesToHealth(sliderRef.current.value)
-                      : health}
-                  </span>
-                )}
-              </h3>
-              {healthSaveAlert && <div className="alert alert-success" role="alert">{healthSaveAlert}</div>}
-            </div>
-
-            <TreeNotes notes={notes} currentTreeId={currentTreeId} />
-
-            <TreeCare currentTreeId={currentTreeId} common={common} />
-
-            <div className="flex-grid border-top">
-              <div className="treehistory-list text-left">
-                <h4 className="text-center">Location</h4>
-                <div>{address}</div>
-                <div>{city}</div>
-                <div>
-                  Neighborhood:
-                  {' '}
-                  {neighborhood}
-                </div>
-                <div>
-                  Lat:
-                  {' '}
-                  {lat}
-                </div>
-                <div>
-                  Lng:
-                  {' '}
-                  {lng}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex-grid border-top">
-              <div className="treehistory-list text-left">
-                <h4 className="text-center">More info</h4>
-                <div>Open Tree Standards:</div>
-                <div>
-                  <a href="https://standards.opencouncildata.org/#/trees">
-                    standards.opencouncildata.org/#/trees
-                  </a>
-                </div>
-              </div>
-            </div>
-          </ModalBody>
-
-          <ModalFooter>
-            <Footer />
-          </ModalFooter>
-        </Modal>
-      )}
-    </div>
+    <>
+      <div className="flex-grid tree_history-list text-center">
+        <h4>Overall Health</h4>
+      </div>
+      <div className="tree__status text-center">
+        <input
+          ref={sliderRef}
+          type="range"
+          min="1"
+          max="6"
+          step="1"
+          className="slider"
+          list="healthSlider"
+          id="healthSlider"
+          defaultValue={sliderRef.current ? sliderRef.current.value : healthNum}
+          onChange={changeSlider}
+        />
+        <datalist id="healthSlider">
+          <option value="1" name="dead" />
+          <option value="2" name="missing" />
+          <option value="3" name="stump" />
+          <option value="4" name="poor" />
+          <option value="5" name="fair" />
+          <option value="6" name="good" />
+        </datalist>
+        <h3>
+          {health && (
+            <span id={sliderValue}>
+              {sliderRef.current
+                ? convertSliderValuesToHealth(sliderRef.current.value)
+                : health}
+            </span>
+          )}
+        </h3>
+        {healthSaveAlert && <div className="alert alert-success" role="alert">{healthSaveAlert}</div>}
+      </div>
+    </>
   );
-}
+};
 
 const TreeNotes = ({ notes, currentTreeId }) => {
   const componentName = 'TreeNotes';
@@ -283,7 +253,7 @@ const TreeNotes = ({ notes, currentTreeId }) => {
         <h4>Tree Notes</h4>
       </div>
       <div className="flex-grid tree__status__note">
-        {!isAuthenticated && (<p>{ notes }</p>)}
+        {!isAuthenticated && (<h5>{ notes }</h5>)}
         {isAuthenticated && (
           <form id="treenote" onSubmit={handleNotesSubmit}>
             <textarea
@@ -400,6 +370,96 @@ const TreeHistory = ({ currentTreeId, treeHistory }) => {
   );
 };
 
+const TreeLocation = ({
+  address, city, zip, country, neighborhood, lng, lat,
+}) => (
+  <div className="flex-grid border-top">
+    <div className="treehistory-list text-left">
+      <h4 className="text-center">Location</h4>
+      {address && (
+        <div>
+          Address:
+          {' '}
+          {address}
+        </div>
+      )}
+      {city && (
+        <div>
+          City:
+          {' '}
+          {city}
+        </div>
+      )}
+      {zip && (
+        <div>
+          Zip:
+          {' '}
+          {zip}
+        </div>
+      )}
+      {country && (
+        <div>
+          Country:
+          {' '}
+          {country}
+        </div>
+      )}
+      {neighborhood && (
+        <div>
+          Neighborhood:
+          {' '}
+          {neighborhood}
+        </div>
+      )}
+      <div>
+        Lat:
+        {' '}
+        {lat}
+      </div>
+      <div>
+        Lng:
+        {' '}
+        {lng}
+      </div>
+    </div>
+  </div>
+);
+
+const TreeMoreInfo = ({ who, idReference, owner }) => (
+  <div className="flex-grid border-top">
+    <div className="treehistory-list">
+      <h4 className="text-center">More info</h4>
+      {owner && (
+        <div>
+          Owner:
+          {' '}
+          {owner}
+        </div>
+      )}
+      {who && (
+        <div>
+          Organization:
+          {' '}
+          {who}
+        </div>
+      )}
+      {idReference && (
+        <div>
+          Reference Number:
+          {' '}
+          {idReference}
+        </div>
+      )}
+      <div>Open Tree Standards:</div>
+      <div>
+        <a href="https://standards.opencouncildata.org/#/trees">
+          standards.opencouncildata.org/#/trees
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
 const makeMaintenanceString = (history) => {
   const historyArray = Object.entries(history)
     .filter(([key, value]) => value !== 'no' && value !== null)
@@ -425,7 +485,7 @@ const hasMaintenanceFields = (obj) => {
 };
 
 const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [statusSelected, setStatusSelected] = useState({});
   const commentRef = useRef('');
@@ -484,7 +544,10 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
       return err;
     }
   };
-
+  const handleClickArrow = () => {
+    if (!isAuthenticated) loginWithRedirect();
+    setShowDoMaintenance(!showDoMaintenance);
+  };
   const arrowDirection = showDoMaintenance
     ? `${treeImagesPath}angle-arrow-up-black.svg`
     : `${treeImagesPath}angle-arrow-down-black.svg`;
@@ -497,7 +560,7 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
           <button
             type="button"
             className="treemaintenance-btn-header text-center"
-            onClick={() => setShowDoMaintenance(!showDoMaintenance)}
+            onClick={handleClickArrow}
           >
             Tree Maintenance
             <img

@@ -163,7 +163,7 @@ const AddTreeModal = ({
     notes: '',
     health: 'good',
     email: email || '',
-    ref: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
+    idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
   const {
     handleSubmit, reset, control, errors,

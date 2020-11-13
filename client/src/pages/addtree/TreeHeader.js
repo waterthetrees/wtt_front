@@ -3,7 +3,7 @@ import React from 'react';
 const ADDATREE = 'assets/images/logos/addatree.svg';
 const TREETITLEIMAGE = 'assets/images/addtree/tree16.svg';
 
-export default ({ renderCount }) => (
+export default () => (
   <>
     <img
       alt="ADDATREE"
@@ -15,10 +15,5 @@ export default ({ renderCount }) => (
       className="addtreemodal__header-image"
       src={TREETITLEIMAGE}
     />
-    <span className="counter">
-      Render Count:
-      {' '}
-      {renderCount}
-    </span>
   </>
 );
