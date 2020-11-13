@@ -17,7 +17,7 @@ const host = {
   blue: 'http://localhost',
 }[env];
 const port = {
-  prod: 3100, blue: 3000, dev: 3443, local: 3001,
+  prod: 3100, blue: 3000, dev: 3443, local: 3000,
 }[env];
 
 app.use(morgan('dev'));

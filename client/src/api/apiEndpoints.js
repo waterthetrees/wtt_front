@@ -2,10 +2,10 @@ const env = {
   'waterthetrees.com': 'prod',
   'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
-  localhost: 'local',
+  localhost: 'dev',
 }[window.location.hostname];
 // console.log('\n\n\n\n env', env, window.location.hostname);
-// env = 'dev';
+
 const port = { prod: 3100, dev: 3443, local: 3002 }[env];
 
 const url = {

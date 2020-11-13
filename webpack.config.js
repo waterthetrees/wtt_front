@@ -6,8 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   watch: true,
-  //mode: 'development',
-  mode: 'production',
+  mode: 'development',
+  // mode: 'production',
   // https://webpack.js.org/concepts/mode/
   entry: { main: './client/src/client.js' },
   output: {
