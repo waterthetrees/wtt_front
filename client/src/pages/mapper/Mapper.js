@@ -13,12 +13,25 @@ mapboxgl.accessToken = config.mapbox.key;
 
 function Mapper() {
   const componentName = 'Mapper';
+
+  // TODO use Navigators current location??
+  // const [currentLocation, setCurrentLocation] = useState(null);
+  // console.log('currentLocation', currentLocation);
+  // navigator.geolocation.getCurrentPosition((position) => {
+  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
+  // });
+  // const watchID = navigator.geolocation.watchPosition((position) => {
+  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
+  // });
+  // END CODE use Navigators current location??
+
   const { isAuthenticated, user } = useAuth0();
   const [mutateUser] = useMutation(postData, {
     onSuccess: () => {
       queryCache.invalidateQueries('user');
     },
   });
+
   // getData from DB
   const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
   const { data, error } = treemap || {};
@@ -40,35 +53,50 @@ function Mapper() {
 
   // Initialize our map
   useEffect(() => {
-    // resizeWindow();
-    // window.addEventListener("resize", resizeWindow);
-    if (isAuthenticated) {
-      console.log(componentName, 'user', user, 'isAuthenticated', isAuthenticated);
-      mutateUser(['user', user]);
-    }
+    if (isAuthenticated) mutateUser(['user', user]);
     if (!mapData) return;
-    console.log('mapData here', mapData);
-    const map = new mapboxgl.Map({
-      container: mapboxElRef.current,
-      // style: 'mapbox://styles/notalemesa/ck8dqwdum09ju1ioj65e3ql3k',
-      style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-      // style: "mapbox://styles/mapbox/light-v10",
-      center: [-122.196532, 37.779369],
-      zoom: 15,
-    });
 
-    map.addControl(new mapboxgl.GeolocateControl({
+    // const options = {
+    //   enableHighAccuracy: true,
+    //   timeout: 5000,
+    //   maximumAge: 0,
+    // };
+    // function successGetPostion(pos) {
+    //   return pos.coords;
+    // }
+    // const success = successGetPostion;
+    // const error = (err) => console.warn(`ERROR(${err.code}): ${err.message}`);
+    // const currentPosition = navigator.geolocation;
+    // console.log('currentPosition', currentPosition);
+
+    const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
       },
       trackUserLocation: true,
-    }));
+    });
+    console.log('geolocate', geolocate);
 
+    const map = new mapboxgl.Map({
+      container: mapboxElRef.current,
+      style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
+      // center: [-122.196532, 37.779369],
+      center: [-122.196532, 37.779369],
+      zoom: 15,
+    });
+
+    // Add the control to the map.
+    map.addControl(geolocate);
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
       // Add our DB SOURCE
+      if (!navigator.geolocation) {
+        geolocate.innerHTML = 'Geolocation is not available';
+      } else {
+        geolocate.trigger();
+      }
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
@@ -79,11 +107,6 @@ function Mapper() {
 
       // Add our layer
       map.addLayer({
-        // 'id': 'population',
-        // 'type': 'circle',
-        // 'source': 'ethnicity',
-        // 'source-layer': 'sf2010',
-
         id: 'treedata',
         source: 'treedata', // this should be the id of source
         type: 'circle',
