@@ -16,7 +16,6 @@ function Mapper() {
 
   // TODO use Navigators current location??
   // const [currentLocation, setCurrentLocation] = useState(null);
-  // console.log('currentLocation', currentLocation);
   // navigator.geolocation.getCurrentPosition((position) => {
   //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
   // });
@@ -75,7 +74,6 @@ function Mapper() {
       },
       trackUserLocation: true,
     });
-    console.log('geolocate', geolocate);
 
     const map = new mapboxgl.Map({
       container: mapboxElRef.current,
@@ -92,11 +90,11 @@ function Mapper() {
 
     map.once('load', () => {
       // Add our DB SOURCE
-      if (!navigator.geolocation) {
-        geolocate.innerHTML = 'Geolocation is not available';
-      } else {
-        geolocate.trigger();
-      }
+      //if (!navigator.geolocation) {
+        //geolocate.innerHTML = 'Geolocation is not available';
+      //} else {
+        //geolocate.trigger();
+      //}
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
@@ -170,7 +168,6 @@ function Mapper() {
             hoveredStateId = e.features[0].id;
             const { common } = e.features[0].properties;
 
-            console.log('e.point', e.point, 'e.features', e.features);
             map.setFeatureState(
               { source: 'treedata', id: hoveredStateId },
               { hover: true },
@@ -242,7 +239,6 @@ function Mapper() {
 }
 
 export const serializeData = (data) =>
-  // console.log(data,'serializeData');
   Object.entries(data)
     .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
     .join('&');

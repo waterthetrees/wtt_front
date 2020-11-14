@@ -11,13 +11,13 @@ util = require('util');
 // usage: node stripe_webhook_server.js prod or node stripe_webhook_server.js for dev
 const env = process.argv[2] || 'local';
 const host = {
-  prod: 'http://waterthetrees.com',
+  //prod: 'http://waterthetrees.com',
   dev: 'http://dev.waterthetrees.com',
-  local: 'http://localhost',
+  prod: 'http://localhost',
   blue: 'http://localhost',
 }[env];
 const port = {
-  prod: 3100, blue: 3000, dev: 3443, local: 3000,
+  prod: 3001, blue: 3000, dev: 3443, local: 3001,
 }[env];
 
 app.use(morgan('dev'));

@@ -29,10 +29,12 @@ body {
 }
 
 .authbutton {
-  width: fit-content;
-  height: fit-content;
-  font-size: 3rem;
-  font-family: 'Roboto Mono', monospace;
+      width: fit-content;
+    max-width: 200px;
+    height: fit-content;
+    max-height: 50px;
+    font-size: 2rem;
+	font-family: 'Roboto Mono', monospace;
 }
 
 @media only screen and (max-width: 768px) {
