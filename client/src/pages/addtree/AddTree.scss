@@ -28,45 +28,73 @@
  }
 
 .addtree__btn {
- background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwLjQyNSAtMTEuNjc3IDU0NS4wMTEgNTEwLjIzNiIgd2lkdGg9IjU0NS4wMTEiIGhlaWdodD0iNTEwLjIzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNIDE2My45NzMgMzAuMTUyIEwgMzgxLjg4NyAzMC4xNTIgTCAzODEuODg3IDE1MC4wMzkgTCA1MDEuODUxIDE1MC4wMzkgTCA1MDEuODUxIDMzNi44NDMgTCAzODEuODg3IDMzNi44NDMgTCAzODEuODg3IDQ1Ni43MyBMIDE2My45NzMgNDU2LjczIEwgMTYzLjk3MyAzMzYuODQzIEwgNDQuMDExIDMzNi44NDMgTCA0NC4wMTEgMTUwLjAzOSBMIDE2My45NzMgMTUwLjAzOSBaIiBzdHlsZT0iZmlsbDogcmdiKDI1NSwgMjU1LCAyNTUpOyBzdHJva2U6IHJnYigyMDgsIDIwOSwgMjA1KTsgc3Ryb2tlLXdpZHRoOiA0cHg7Ii8+Cjwvc3ZnPg==);
- background-size: cover;
- background-position: center;
- -webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
- font-size: 2.5rem;
- line-height: 1.9rem;
- height: 12rem;
- width: 12rem;
- font-size: 2rem;
- line-height: 1.6rem;
- color: black;
- word-spacing:9999px;
- padding:5px;
- margin: 0 7px 10px;
- background-color: #147d16;
- border-radius: 50%;
- font-family: 'Roboto Mono', monospace;
+  background-color: white;
+  border-radius: 13%;
+  position: relative;
+  padding: 1px 1px;
+  border-width: 0;
+  border-style: solid;
+  border-color: 0 0 0 2px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
+  box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+  margin: 0 10px 20px;
+}
+
+.addtree__btn-selected{
+  background-color: #147d16;
 }
 
 .addtree__btn:focus {
  outline: none;
- background: green;
- -webkit-background-color: green;
--moz-background-color: green;
--o-background-color: green;
+ background-color: #147d16;
+ -webkit-background-color: #147d16;
+-moz-background-color: #147d16;
+-o-background-color: #147d16;
 }
 
 .addtree__btn:active {
- background-color: green;
- -webkit-background-color: green;
- -moz-background-color: green;
- -o-background-color: green;
+ background-color: #147d16;
+ -webkit-background-color: #147d16;
+ -moz-background-color: #147d16;
+ -o-background-color: #147d16;
 }
 
 .addtree__btn:hover {
-  background-color: green;
+  background-color: #147d16;
  }
+
+.addtree__btn:visited {
+background-color: #147d16;
+}
+
+ .addree__plus {
+  height: 8vh;
+  min-width: 50px;
+  opacity: 1;
+ }
+
+ /* Centered text */
+.addree__plus-centeredtxt {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: 'Roboto Mono', monospace;
+  color: black;
+  font-size: 1.2rem;
+  line-height: 1.1rem;
+}
+
+.addree__plus-centeredtxt:active {
+  color: white;
+  background-color: #147d16;
+}
+
 
 .addtree__icon {
  height: 9vh;

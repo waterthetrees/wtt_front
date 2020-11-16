@@ -3,7 +3,9 @@ import { convertToRaw } from 'draft-js';
 // import { Button } from '@material-ui/core';
 
 const EARTH = 'assets/images/addtree/earth2.svg';
-export default ({ data, reset, defaultValues }) => (
+export default ({
+  data, reset, defaultValues, setAddTreeSelected,
+}) => (
   <div className="addtree_btngroup">
     {data && (
       <pre>
@@ -32,6 +34,11 @@ export default ({ data, reset, defaultValues }) => (
     >
       RESET FORM
     </button>
-    <button className="addtree_btn__save button btn btn-dark btn-lg">SAVE</button>
+    <button
+      className="addtree_btn__save button btn btn-dark btn-lg"
+      onClick={() => setAddTreeSelected(false)}
+    >
+      SAVE
+    </button>
   </div>
 );

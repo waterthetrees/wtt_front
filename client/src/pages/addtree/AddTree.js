@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, queryCache } from 'react-query';
 import {
   Modal,
@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import mapboxgl from 'mapbox-gl';
 import format from 'date-fns/format';
+import cx from 'classnames';
 import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
@@ -25,31 +26,86 @@ import ButtonsResult from './ButtonsResult';
 import { randomInteger } from './utilities';
 
 let renderCount = 0;
+const currentMarkers = [];
 
 // import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 function AddTree(props) {
   const componentName = 'AddTree';
-  const { map } = Object(props);
-  const {
-    isAuthenticated, isLoading, loginWithRedirect,
-  } = useAuth0();
-
-  const [addTree, setAddTreeSelected] = useState(false);
-  const [clickable, setClickable] = useState(false);
-  const [showAddTreeModal, setShowAddTreeModal] = useState(false);
-
-  const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
-  let markerNewTree;
-  // TODO set defaults depending on user location.
-
   renderCount += 1;
+  const {
+    map, setZoom,
+    coordinatesNewTree,
+    setCoordinatesNewTree,
+  } = Object(props);
+  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const [addTreeSelected, setAddTreeSelected] = useState(null);
 
-  const handleClickedNewTree = () => {
-    setShowAddTreeModal(!showAddTreeModal);
-    setAddTreeSelected(false);
-    // TODO figure out off click
-    // map.off("click", handleClickedNewTree);
+  const handleOnClick = () => {
+    if (!isAuthenticated) loginWithRedirect();
+    console.log(addTreeSelected, currentMarkers);
+
+    if (!addTreeSelected) {
+      setAddTreeSelected(true);
+    } else {
+      setAddTreeSelected(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log('in useEffect addTree', addTreeSelected);
+    if (!addTreeSelected) {
+      if (currentMarkers !== null) {
+        currentMarkers.map((currentMarker) => {
+          currentMarker.remove();
+        });
+      }
+    }
+  }, [addTreeSelected]);
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  const ADDATREEPLUS = (addTreeSelected)
+    ? 'assets/images/addtree/plus1.svg'
+    : 'assets/images/addtree/plus2.svg';
+
+  const ADDTREEPLUSCLASS = (addTreeSelected)
+    ? 'addtree__btn-selected'
+    : '';
+  console.log('outside addTreeSelected', addTreeSelected);
+  return (
+    <div className="addtree">
+      <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
+        <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
+        <div className="addree__plus-centeredtxt">Add a Tree</div>
+      </button>
+
+      <TreeMarker
+        map={map}
+        setAddTreeSelected={setAddTreeSelected}
+        addTreeSelected={addTreeSelected}
+        setZoom={setZoom}
+        coordinatesNewTree={coordinatesNewTree}
+        setCoordinatesNewTree={setCoordinatesNewTree}
+      />
+
+    </div>
+  );
+}
+
+const TreeMarker = ({
+  map, addTreeSelected, setAddTreeSelected,
+  setZoom, coordinatesNewTree, setCoordinatesNewTree,
+}) => {
+  console.log('TreeMarker', 'addTreeSelected', addTreeSelected);
+  const [showAddTreeModal, setShowAddTreeModal] = useState(false);
+  // const [newMarker, setNewMarker] = useState(null);
+  // TODO set defaults depending on user location.
+  // const isMountedRef = useRef(true);
+  // useEffect(() => () => { isMountedRef.current = false; }, []);
+  const handleMarkerClick = () => {
+    setShowAddTreeModal(true);
   };
 
   const loadNewMarker = (coordinates) => {
@@ -72,69 +128,62 @@ function AddTree(props) {
     }
 
     marker.on('dragend', onDragEndd);
+    currentMarkers.push(marker);
+    marker.getElement().addEventListener('click', handleMarkerClick);
     return marker;
   };
 
-  const handleAddTreeClick = (event) => {
-    setClickable(false);
-    setAddTreeSelected(false);
+  const handleMapClick = (event) => {
+    // setAddTreeSelected(false);
+    // setClickableMarker(!clickableMarker);
+    // setClickableMarker(false);
 
     const coordinates = event.lngLat;
-    console.log('coordinatesNewTree', coordinatesNewTree, coordinates);
-    const marker = loadNewMarker(coordinates);
-    markerNewTree = marker;
-    map.off('click', handleAddTreeClick);
+    // console.log('coordinatesNewTree', coordinatesNewTree, coordinates);
+    loadNewMarker(coordinates);
+
+    map.off('click', handleMapClick);
+    setZoom(19);
     map.flyTo({
       center: coordinates,
       zoom: [19],
     });
-
-    map.on('click', handleClickedNewTree);
-  };
-
-  const handleOnClick = () => {
-    if (!isAuthenticated) loginWithRedirect();
-    setClickable(true);
-    setAddTreeSelected(true);
-    if (markerNewTree) markerNewTree.remove();
   };
 
   useEffect(() => {
-    if (!addTree) return;
+    console.log('in useEffect addTree', addTreeSelected);
+    if (!addTreeSelected) return;
 
-    if (addTree && clickable) {
-      map.on('click', handleAddTreeClick);
+    if (addTreeSelected) {
+      map.on('click', handleMapClick);
+    } else {
+      map.off('click', handleMapClick);
     }
-  }, [addTree, clickable]);
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+    // if (newMarker) map.on('click', handleMarkerClick);
+  }, [addTreeSelected]);
 
   return (
-    <div className="addtree">
-
-      <button type="button" className="addtree__btn" onClick={handleOnClick}>
-        Add a Tree
-      </button>
-
+    <div>
       {coordinatesNewTree
         && showAddTreeModal
-        && isAuthenticated
         && (
           <AddTreeModal
             showAddTreeModal={showAddTreeModal}
             setShowAddTreeModal={setShowAddTreeModal}
             renderCount={renderCount}
             coordinatesNewTree={coordinatesNewTree}
+            setAddTreeSelected={setAddTreeSelected}
           />
         )}
     </div>
   );
-}
+};
 
 const AddTreeModal = ({
-  showAddTreeModal, setShowAddTreeModal, coordinatesNewTree,
+  showAddTreeModal,
+  setShowAddTreeModal,
+  coordinatesNewTree,
+  setAddTreeSelected,
 }) => {
   const {
     user, isAuthenticated, error,
@@ -198,7 +247,7 @@ const AddTreeModal = ({
           <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
           <TreePlanter control={control} errors={errors} />
           <ButtonsResult {...{
-            data, reset, defaultValues, notesSaveButton,
+            data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
           }}
           />
         </form>
