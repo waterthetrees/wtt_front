@@ -1,11 +1,14 @@
 import React from "react";
-import cx from "classnames";
 import "./Footer.scss";
+import { Link } from 'react-router-dom'
 
 const Footer = (props) => (
-  <footer className="container">
-    <p>&copy;Water the Trees {new Date().getFullYear()}</p>
-  </footer>
+  <div className="footer">
+    <div className="footer__content">
+      <Link to={'/privacy'} />
+      <Link to={'/terms'} />
+    </div>
+  </div>
 );
-
+     
 export default Footer;

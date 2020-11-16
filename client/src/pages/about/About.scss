@@ -1,22 +1,26 @@
+
+.about:focus{
+  outline: none;
+}
+
 .about__icon {
-  display: inline-block;
-  position: absolute;
-  bottom: 20px;
-  left: 5px;
-  margin: 12px;
-  background-color: transparent;
-  border-color: transparent;
-  z-index: 1 !important;
-  width: 40px;
-  height: 40px;
+  height: 5vh;
 }
 
 .about__icon:hover {
-  background-color: transparent;
-  border-color: transparent;
+  cursor: pointer;
 }
 
 .about__icon:focus {
   box-shadow: none;
   outline: none;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .about__icon {
+    // height: 1.85rem;
+    width: 70vw;
+  }
 }

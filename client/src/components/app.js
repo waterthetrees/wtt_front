@@ -1,79 +1,55 @@
-import React, { useState, Suspense } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { SWRConfig } from "swr";
-import { ReactQueryConfigProvider } from "react-query";
-import LayoutComponent from "../components/Layout/Layout";
-import NotFoundComponent from "../pages/notFound/NotFound";
-// import 'mapbox-gl/dist/mapbox-gl.css';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { Suspense } from 'react';
+import {
+  Switch, Route, Redirect, withRouter,
+} from 'react-router-dom';
+import { ReactQueryConfigProvider } from 'react-query';
+import { useAuth0 } from '@auth0/auth0-react';
+import Layout from './Layout/Layout';
 
+const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
-const PrivateRoute = ({ component, isAuthenticated, email, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuthenticated ? (
-        React.createElement(component, props)
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
+const Loading = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'left',
+      alignItems: 'left',
+      color: 'green',
+      fontSize: '24px',
+      margin: '10px',
+      fontStyle: 'italic',
+    }}
+  >
+    Water the Trees
+  </div>
 );
 
-const Loader = () => <div>Loading</div>;
-
 const queryConfig = {
-    shared: {
-      suspense: true
-    },
-    queries: {
-      refetchOnWindowFocus: true
-    },
-
-
+  shared: {
+    suspense: true,
+  },
+  queries: {
+    refetchOnWindowFocus: true,
+  },
 };
 
-const App = (props) => {
-  const component_name = "App!!!!\n\n\n";
-  // const email = useSelector(state => state.auth.email);
-  const email = "testrose@gamma.com";
-  // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const isAuthenticated = true;
-  // return (
-  //   <SWRConfig
-  //     value={{
-  //       fetcher: getData,
-  //     }}
-  //   >
-  //     <Suspense fallback={<Loader />}>
-  //     <Switch>
-  //       <Route path="/" exact render={() => <Redirect to="/mapper" />} />
-  //       <PrivateRoute
-  //         isAuthenticated={isAuthenticated}
-  //         email={email}
-  //         path="/"
-  //         component={LayoutComponent}
-  //       />
-  //       <Route component={NotFoundComponent} />
-  //     </Switch>
-  //     </Suspense>
-  //   </SWRConfig>
-  // );
+const App = () => {
+  const componentName = 'App';
+  const { isLoading, isAuthenticated, user } = useAuth0();
 
-  return (    
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return (
     <ReactQueryConfigProvider config={queryConfig}>
-      <Suspense fallback={<Loader />}>
-      <Switch>
-        <PrivateRoute
-          isAuthenticated={isAuthenticated}
-          email={email}
-          path="/"
-          component={LayoutComponent}
-        />
-        <Route component={NotFoundComponent} />
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route component={Layout} />
+          <Route component={NotFound} />
+        </Switch>
       </Suspense>
     </ReactQueryConfigProvider>
   );

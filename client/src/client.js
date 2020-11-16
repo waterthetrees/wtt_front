@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './style.css';
-import { BrowserRouter, HashRouter} from 'react-router-dom';
-
-import App from './components/app.js';
+import { BrowserRouter } from 'react-router-dom';
+// import { Auth0Provider } from '@auth0/auth0-react';
+import App from './components/app';
 // import registerServiceWorker from './registerServiceWorker';
-// import store from './store/store';
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 
-console.log('test')
 const app = (
- <BrowserRouter>
-   <App />
- </BrowserRouter>
-)
+  <BrowserRouter>
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </BrowserRouter>
+);
 
-ReactDOM.render( app, document.querySelector('.root'));
+ReactDOM.render(app, document.querySelector('.root'));
 // registerServiceWorker();
-
-
-

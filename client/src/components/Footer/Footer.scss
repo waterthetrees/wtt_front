@@ -1,12 +1,19 @@
 @import "../../styles/app";
-.Footer {
-  max-width: 960px;
-  padding: 15px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  /*border-top: 1px solid rgba(0,0,0,.1);*/
+
+.footer {
+
 }
 
+.footer__content {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+
 @media only screen and (max-width: 768px) {
+  .footer__content {
+    padding: 5px;
+  }
 }

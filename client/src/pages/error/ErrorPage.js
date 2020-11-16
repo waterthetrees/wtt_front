@@ -1,38 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+/* eslint-disable consistent-return */
+import React from 'react';
+import './ErrorPage.scss';
+import cx from 'classnames';
 
-import s from "./../../styles/app.scss";
-
-class ErrorPage extends React.Component {
-  static propTypes = {
-    error: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
-      stack: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  render() {
-    if (__DEV__) {
-      const { error } = this.props;
-      return (
-        <div>
-          <h1>{error.name}</h1>
-          <p>{error.message}</p>
-          <pre>{error.stack}</pre>
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>Sorry, a critical error occurred on this page.</p>
-      </div>
-    );
+export default function ErrorMessageAll({
+  errors, name, error, variant, message,
+}) {
+  // console.log(errors, name, error, variant, message);
+  if (!error && !message && Object.keys(errors).length === 0) return;
+  const type = (!error && !message && errors[name] && errors[name].type) ? errors[name].type : name;
+  switch (type) {
+  case 'required': return <ErrorMessage variant={variant} errorMessage={`${name} is required`} />;
+  case 'minLength': return <ErrorMessage variant={variant} errorMessage={`${name} is too short`} />;
+  case 'maxLength': return <ErrorMessage variant={variant} errorMessage={`${name} exceeds maximum length`} />;
+  case 'pattern': return <ErrorMessage variant={variant} errorMessage={`${name} needs correct format.`} />;
+  case 'error': return <ErrorMessage variant={variant} errorMessage={error} />;
+  case 'message': return <ErrorMessage variant={variant} errorMessage={message} />;
+  default: return (<ErrorMessage variant={variant} errorMessage={error} />);
   }
 }
 
-export { ErrorPage as ErrorPageWithoutStyle };
-export default ErrorPage;
+const ErrorMessage = ({ errorMessage, variant }) => (<div role="alert" className={cx('alert', `alert-${variant}`)}>{errorMessage}</div>);

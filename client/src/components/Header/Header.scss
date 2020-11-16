@@ -1,1 +1,30 @@
+@import "../../styles/app";
+
+.header {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  background-color: #147d16;
+  opacity: .8;
+  border-color: transparent;
+  z-index: 200 !important;
+}
+
+.header__content {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.aboutpage{
+  flex-basis: auto;
+}
+
+@media only screen and (max-width: 768px) {
+
+}
  

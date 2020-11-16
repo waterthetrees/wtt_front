@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi+2&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: 'Baloo Thambi 2', cursive;
+  font-family: Arial, sans-serif, "PT Sans";
 }
 
 body {
@@ -12,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: 'Roboto Mono', monospace;
 }
 
 #root,
@@ -22,10 +23,58 @@ body {
   height: 100%;
 }
 
-.mapboxgl-popup {
-  font-family: 'Baloo Thambi 2', cursive;
-  font-size: 12px;
-  padding: 0;
-  margin: 0;
-  color: #424242;
+.mapboxgl-ctrl-top-right {
+  top: 80px;
+  right: 0;
+}
+
+.authbutton {
+      width: fit-content;
+    max-width: 200px;
+    height: fit-content;
+    max-height: 50px;
+    font-size: 2rem;
+	font-family: 'Roboto Mono', monospace;
+}
+
+@media only screen and (max-width: 768px) {
+  .authbutton {
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.4rem;
+    padding: 1px 4px;
+    margin: 0;
+  
+    .btn {
+      padding: 0 .75rem;
+    }
+  }
+
+  .authbutton .btn {
+    padding: 0 .75rem;
+  }
+}
+
+
+@media only screen and (max-width: 413px) {
+  .authbutton {
+    width: fit-content;
+    height: fit-content;
+    font-size: 1rem;
+    padding: 1px 4px;
+    margin: 0;
+  
+    .btn {
+      padding: 0 .75rem;
+    }
+  }
+
+  .authbutton .btn {
+    padding: 0 .75rem;
+  }
+}
+
+.authbutton__img {
+  height: 25px;
+  margin: 0 0 0 3px;
 }
