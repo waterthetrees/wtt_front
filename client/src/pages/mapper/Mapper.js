@@ -14,16 +14,6 @@ mapboxgl.accessToken = config.mapbox.key;
 function Mapper() {
   const componentName = 'Mapper';
 
-  // TODO use Navigators current location??
-  // const [currentLocation, setCurrentLocation] = useState(null);
-  // navigator.geolocation.getCurrentPosition((position) => {
-  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
-  // });
-  // const watchID = navigator.geolocation.watchPosition((position) => {
-  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
-  // });
-  // END CODE use Navigators current location??
-
   const { isAuthenticated, user } = useAuth0();
   const [mutateUser] = useMutation(postData, {
     onSuccess: () => {
@@ -56,19 +46,6 @@ function Mapper() {
     if (isAuthenticated) mutateUser(['user', user]);
     if (!mapData) return;
 
-    // const options = {
-    //   enableHighAccuracy: true,
-    //   timeout: 5000,
-    //   maximumAge: 0,
-    // };
-    // function successGetPostion(pos) {
-    //   return pos.coords;
-    // }
-    // const success = successGetPostion;
-    // const error = (err) => console.warn(`ERROR(${err.code}): ${err.message}`);
-    // const currentPosition = navigator.geolocation;
-    // console.log('currentPosition', currentPosition);
-
     const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
@@ -76,11 +53,9 @@ function Mapper() {
       trackUserLocation: true,
     });
 
-    console.log('coordinatesNewTree', coordinatesNewTree);
     const map = new mapboxgl.Map({
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-      // center: [-122.196532, 37.779369],
       center: coordinatesNewTree || [-122.196532, 37.779369],
       zoom: zoomUserSet || 15,
     });
@@ -120,16 +95,6 @@ function Mapper() {
                 [18, 280],
               ],
             },
-
-            'circle-radius': [
-              'step',
-              ['get', 'point-count'],
-              20,
-              100,
-              30,
-              750,
-              40,
-            ],
 
             // "circle-color": "green",
             'circle-color': [

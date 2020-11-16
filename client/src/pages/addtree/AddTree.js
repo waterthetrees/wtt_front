@@ -28,8 +28,6 @@ import { randomInteger } from './utilities';
 let renderCount = 0;
 const currentMarkers = [];
 
-// import { withAuthenticationRequired } from '@auth0/auth0-react';
-
 function AddTree(props) {
   const componentName = 'AddTree';
   renderCount += 1;
@@ -43,7 +41,6 @@ function AddTree(props) {
 
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
-    console.log(addTreeSelected, currentMarkers);
 
     if (!addTreeSelected) {
       setAddTreeSelected(true);
@@ -53,7 +50,6 @@ function AddTree(props) {
   };
 
   useEffect(() => {
-    console.log('in useEffect addTree', addTreeSelected);
     if (!addTreeSelected) {
       if (currentMarkers !== null) {
         currentMarkers.map((currentMarker) => {
@@ -73,7 +69,6 @@ function AddTree(props) {
   const ADDTREEPLUSCLASS = (addTreeSelected)
     ? 'addtree__btn-selected'
     : '';
-  console.log('outside addTreeSelected', addTreeSelected);
   return (
     <div className="addtree">
       <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
@@ -98,12 +93,7 @@ const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
   setZoom, coordinatesNewTree, setCoordinatesNewTree,
 }) => {
-  console.log('TreeMarker', 'addTreeSelected', addTreeSelected);
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
-  // const [newMarker, setNewMarker] = useState(null);
-  // TODO set defaults depending on user location.
-  // const isMountedRef = useRef(true);
-  // useEffect(() => () => { isMountedRef.current = false; }, []);
   const handleMarkerClick = () => {
     setShowAddTreeModal(true);
   };
@@ -134,12 +124,7 @@ const TreeMarker = ({
   };
 
   const handleMapClick = (event) => {
-    // setAddTreeSelected(false);
-    // setClickableMarker(!clickableMarker);
-    // setClickableMarker(false);
-
     const coordinates = event.lngLat;
-    // console.log('coordinatesNewTree', coordinatesNewTree, coordinates);
     loadNewMarker(coordinates);
 
     map.off('click', handleMapClick);
@@ -151,7 +136,6 @@ const TreeMarker = ({
   };
 
   useEffect(() => {
-    console.log('in useEffect addTree', addTreeSelected);
     if (!addTreeSelected) return;
 
     if (addTreeSelected) {
@@ -159,7 +143,6 @@ const TreeMarker = ({
     } else {
       map.off('click', handleMapClick);
     }
-    // if (newMarker) map.on('click', handleMarkerClick);
   }, [addTreeSelected]);
 
   return (
@@ -191,7 +174,6 @@ const AddTreeModal = ({
   const { nickname, email, name } = Object(user);
 
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
-  console.log('isAuthenticated', isAuthenticated, 'error', error);
   const defaultValues = {
     common: '',
     scientific: '',
@@ -226,9 +208,7 @@ const AddTreeModal = ({
   });
 
   const onSubmit = (data, e) => {
-    console.log('\n\n\n\ndata', data);
     const sendData = { ...defaultValues, ...data, ...coordinatesNewTree };
-    console.log('\n\n\n\nsendData', sendData);
     mutateTreeData(['tree', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
