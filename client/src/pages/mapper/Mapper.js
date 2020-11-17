@@ -62,15 +62,21 @@ function Mapper() {
 
     // Add the control to the map.
     map.addControl(geolocate);
+    geolocate.on('geolocate', (e) => {
+      console.log('e', e);
+    });
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
       // Add our DB SOURCE
       // if (!navigator.geolocation) {
-      // geolocate.innerHTML = 'Geolocation is not available';
+      //   geolocate.innerHTML = 'Geolocation is not available';
       // } else {
       // geolocate.trigger();
+      //   geolocate.on('geolocate', (e) => {
+      //     console.log('e', e);
+      //   });
       // }
       map.addSource('treedata', {
         type: 'geojson',
