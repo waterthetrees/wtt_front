@@ -1,17 +1,17 @@
 const env = {
   'waterthetrees.com': 'prod',
-  'dev.waterthetrees.com': 'dev',
+  'dev.waterthetrees.com': 'local',
   'blue.waterthetrees.com': 'blue',
-  localhost: 'dev',
+  localhost: 'localserver',
 }[window.location.hostname];
 
-const port = { prod: 3100, dev: 3443, local: 3002 }[env];
+const port = { localserver: 3002 }[env];
 
 const url = {
   prod: 'https://waterthetrees.com/api',
   dev: 'https://dev.waterthetrees.com/api',
   blue: 'https://blue.waterthetrees.com/api',
-  local: `http://localhost:${port}/api`,
+  localserver: `http://localhost:${port}/api`,
 }[env];
 
 const apiEndpoints = {
@@ -23,5 +23,4 @@ const apiEndpoints = {
   treehistory: `${url}/treehistory`,
   treelist: `${url}/treelist`,
 };
-
 export default apiEndpoints;
