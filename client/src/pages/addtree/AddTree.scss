@@ -86,8 +86,8 @@ background-color: #147d16;
   bottom: 0;
   font-family: 'Roboto Mono', monospace;
   color: black;
-  font-size: 1.2rem;
-  line-height: 1.1rem;
+  font-size: 2.2rem;
+  line-height: 2rem;
 }
 
 .addree__plus-centeredtxt:active {
@@ -265,14 +265,28 @@ background-color: #147d16;
  font-weight: 600;
 }
 
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 767px) {
  .addtree {
   justify-content: flex-end;
  }
+ .addree__plus-centeredtxt {
+    font-size: 1.1rem;
+    line-height: .9rem;
+  }
  .addtree__btn {
-  font-size: 1.1rem;
-  line-height: .9rem;
   height: 6rem;
   width: 6rem;
  }
 }
+
+@media only screen and (max-width: 414px) {
+
+  .addtree {
+   justify-content: flex-end;
+  }
+  .addree__plus-centeredtxt {
+     font-size: 1.2rem;
+     line-height: 1rem;
+   }
+ }
