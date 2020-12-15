@@ -93,16 +93,33 @@ function Mapper() {
           source: 'treedata', // this should be the id of source
           type: 'circle',
           paint: {
+            'circle-stroke-color': [
+              'case',
+              ['boolean', ['feature-state', 'hover'], false],
+              1,
+              0.5,
+            ],
+            // 'circle-radius': 55,
             'circle-radius': {
               property: 'health',
-              base: 1.75,
-              stops: [
-                [12, 2],
-                [18, 280],
-              ],
+              base: 1,
+              stops: [[10, 8], [12, 16]],
             },
-
-            // "circle-color": "green",
+            // 'circle-stroke-color': '#000',
+            'circle-stroke-color': [
+              'match',
+              ['get', 'health'],
+              'good', 'green',
+              'fair', 'orange',
+              'poor', 'red',
+              'dead', 'black',
+              'missing', 'darkgray',
+              'stump', 'brown',
+              /* other */ '#ccc',
+            ],
+            'circle-stroke-width': 3,
+            // 'circle-color': 'transparent',
+            // 'circle-color': '#000',
             'circle-color': [
               'match',
               ['get', 'health'],
@@ -126,34 +143,43 @@ function Mapper() {
         let hoveredStateId = null;
         if (windowWidth > 768) {
           const popup = new mapboxgl.Popup({
-             closeButton: false,
-             closeOnClick: false,
+            closeButton: false,
+            closeOnClick: false,
           });
           map.on('mousemove', 'treedata', (e) => {
             map.getCanvas().style.cursor = 'pointer';
             if (e.features.length > 0) {
               if (e.features[0].properties.id) {
-		hoveredStateId = e.features[0].properties.id;
+                hoveredStateId = e.features[0].properties.id;
                 map.setFeatureState(
                   { source: 'treedata', id: hoveredStateId },
                   { hover: false },
                 );
-                const { common,scientific } = e.features[0].properties;
+                const { common, scientific } = e.features[0].properties;
 
                 map.setFeatureState(
-                { source: 'treedata', id: hoveredStateId },
-                { hover: true },
+                  {
+                    source: 'treedata',
+                    id: hoveredStateId,
+                    type: 'circle',
+                    paint: {
+                      'circle-stroke-color': '#000',
+                      'circle-stroke-width': 6,
+                      'circle-color': '#000',
+                    },
+                  },
+                  { hover: true },
                 );
-              map.getCanvas().style.cursor = 'pointer';
-              const coordinates = e.features[0].geometry.coordinates.slice();
+                map.getCanvas().style.cursor = 'pointer';
+                const coordinates = e.features[0].geometry.coordinates.slice();
 
-              const HTML = `<div><h1>${common}</h1><h4>${scientific||''}</h4></div>`;
+                const HTML = `<div><h1>${common}</h1><h4>${scientific || ''}</h4></div>`;
 
-              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-              }
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
 
-              popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
+                popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
 	      }
             }
           });
@@ -170,7 +196,7 @@ function Mapper() {
             hoveredStateId = null;
             // lastId = undefined;
             map.getCanvas().style.cursor = '';
-            // popup.remove();
+            popup.remove();
           });
         }
       }
@@ -203,21 +229,15 @@ function Mapper() {
         />
       )}
       {mapData && (
-        <div className="addtreepage">
-          <AddTree
-            map={map}
-            setZoom={setZoom}
-            coordinatesNewTree={coordinatesNewTree}
-            setCoordinatesNewTree={setCoordinatesNewTree}
-          />
-        </div>
+        <AddTree
+          map={map}
+          setZoom={setZoom}
+          coordinatesNewTree={coordinatesNewTree}
+          setCoordinatesNewTree={setCoordinatesNewTree}
+        />
       )}
     </div>
   );
 }
-
-export const serializeData = (data) => Object.entries(data)
-  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-  .join('&');
 
 export default Mapper;
