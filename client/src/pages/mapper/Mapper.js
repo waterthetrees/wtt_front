@@ -125,36 +125,36 @@ function Mapper() {
 
         let hoveredStateId = null;
         if (windowWidth > 768) {
-          // const popup = new mapboxgl.Popup({
-          //   closeButton: false,
-          //   closeOnClick: false,
-          // });
+          const popup = new mapboxgl.Popup({
+             closeButton: false,
+             closeOnClick: false,
+          });
           map.on('mousemove', 'treedata', (e) => {
             map.getCanvas().style.cursor = 'pointer';
             if (e.features.length > 0) {
               if (e.features[0].properties.id) {
+		hoveredStateId = e.features[0].properties.id;
                 map.setFeatureState(
                   { source: 'treedata', id: hoveredStateId },
                   { hover: false },
                 );
-              }
-              hoveredStateId = e.features[0].id;
-              const { common } = e.features[0].properties;
+                const { common,scientific } = e.features[0].properties;
 
-              map.setFeatureState(
+                map.setFeatureState(
                 { source: 'treedata', id: hoveredStateId },
                 { hover: true },
-              );
+                );
               map.getCanvas().style.cursor = 'pointer';
               const coordinates = e.features[0].geometry.coordinates.slice();
 
-              const HTML = `<div><h1>${common}</h4><h4>lng: ${common} / lat: ${common}</h4></div>`;
+              const HTML = `<div><h1>${common}</h1><h4>${scientific||''}</h4></div>`;
 
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
               }
 
               popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
+	      }
             }
           });
 
