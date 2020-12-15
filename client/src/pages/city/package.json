@@ -1,0 +1,6 @@
+{
+  "name": "City",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./City.js"
+}

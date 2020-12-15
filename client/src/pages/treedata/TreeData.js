@@ -18,7 +18,7 @@ const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
 
 const convertSliderValuesToHealth = (value) => {
-  console.log('convertSliderValuesToHealth value', value);
+  // console.log('convertSliderValuesToHealth value', value);
   const numValue = parseInt(value, 10);
   if (numValue === 6) return 'good';
   if (numValue === 5) return 'fair';
@@ -156,7 +156,7 @@ const TreeHealthSlider = ({
         // console.log(functionName, 'data', data);
       }
     } catch (err) {
-      console.log(functionName, 'err', err);
+      console.error(functionName, 'err', err);
       return err;
     }
   };
@@ -215,7 +215,7 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const notesRef = useRef();
   const handleOnChange = () => {
-    console.log('notesRef.current', notesRef.current);
+    // console.warn('notesRef.current', notesRef.current);
     if (notesRef.current.value !== notes) setShowSave(true);
   };
 
@@ -242,7 +242,7 @@ const TreeNotes = ({ notes, currentTreeId }) => {
       }
       return;
     } catch (err) {
-      console.log('\n\n\n\n ------', functionName, 'err', err);
+      console.error('\n\n\n\n ------', functionName, 'err', err);
       return err;
     }
   };
@@ -284,9 +284,9 @@ const TreeNotes = ({ notes, currentTreeId }) => {
 const TreeCare = ({ currentTreeId, common }) => {
   const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', { currentTreeId }], getData);
-  console.log(componentName, 'treeHistoryObj', treeHistoryObj);
+  // console.log(componentName, 'treeHistoryObj', treeHistoryObj);
   const treeHistory = treeHistoryObj.data;
-  console.log(componentName, 'treeHistory', treeHistory);
+  // console.log(componentName, 'treeHistory', treeHistory);
   const [mutateHistory] = useMutation(postData, {
     onSuccess: () => {
       queryCache.invalidateQueries('treehistory');
