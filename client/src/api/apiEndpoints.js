@@ -1,6 +1,6 @@
 const env = {
   'waterthetrees.com': 'prod',
-  'dev.waterthetrees.com': 'local',
+  'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
   localhost: 'localserver',
 }[window.location.hostname];
