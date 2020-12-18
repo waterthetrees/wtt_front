@@ -57,7 +57,7 @@ function Mapper() {
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
       center: coordinatesNewTree || [-122.196532, 37.779369],
-      zoom: zoomUserSet || 15,
+      zoom: zoomUserSet || 11,
     });
 
     // Add the control to the map.
