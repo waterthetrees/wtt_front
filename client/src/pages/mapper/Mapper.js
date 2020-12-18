@@ -81,7 +81,7 @@ function Mapper() {
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
-        cluster: true,
+        cluster: false,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
       });
@@ -115,7 +115,7 @@ function Mapper() {
               'dead', 'black',
               'missing', 'darkgray',
               'stump', 'brown',
-              /* other */ '#ccc',
+              /* other */ 'green',
             ],
             'circle-stroke-width': 3,
             // 'circle-color': 'transparent',
@@ -129,7 +129,7 @@ function Mapper() {
               'dead', 'black',
               'missing', 'darkgray',
               'stump', 'brown',
-              /* other */ '#ccc',
+              /* other */ 'green',
             ],
           },
         });
