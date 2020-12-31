@@ -30,7 +30,9 @@
 .addtree__btn {
   background-color: white;
   border-radius: 13%;
-  position: relative;
+  position: absolute;
+  right:10px;
+  bottom:50px;
   padding: 1px 1px;
   border-width: 0;
   border-style: solid;
@@ -38,7 +40,6 @@
   -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
   -webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
   box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-  margin: 0 10px 20px;
 }
 
 .addtree__btn-selected{
@@ -86,8 +87,8 @@ background-color: #147d16;
   bottom: 0;
   font-family: 'Roboto Mono', monospace;
   color: black;
-  font-size: 2.2rem;
-  line-height: 2rem;
+      font-size: 1.5rem;
+    line-height: 1.5rem;
 }
 
 .addree__plus-centeredtxt:active {

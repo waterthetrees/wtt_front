@@ -70,7 +70,7 @@ function AddTree(props) {
     ? 'addtree__btn-selected'
     : '';
   return (
-    <div className="addtree">
+    <div>
       <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
         <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
         <div className="addree__plus-centeredtxt">Add a Tree</div>
