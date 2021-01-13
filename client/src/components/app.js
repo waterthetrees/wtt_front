@@ -1,30 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { Suspense } from 'react';
 import {
-  Switch, Route, Redirect, withRouter,
+  Switch, Route, withRouter,
 } from 'react-router-dom';
 import { ReactQueryConfigProvider } from 'react-query';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
 import Layout from './Layout/Layout';
-
-const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
-
-const Loading = () => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'left',
-      alignItems: 'left',
-      color: 'green',
-      fontSize: '24px',
-      margin: '10px',
-      fontStyle: 'italic',
-    }}
-  >
-    Water the Trees
-  </div>
-);
+import NotFound from '../pages/notFound/NotFound';
+// const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
 const queryConfig = {
   shared: {
@@ -34,23 +17,18 @@ const queryConfig = {
     refetchOnWindowFocus: true,
   },
 };
-
+let renderCount = 0;
 const App = () => {
   const componentName = 'App';
-  const { isLoading, isAuthenticated, user } = useAuth0();
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  renderCount += 1;
 
   return (
     <ReactQueryConfigProvider config={queryConfig}>
-      <Suspense fallback={<Loading />}>
-        <Switch>
-          <Route component={Layout} />
-          <Route component={NotFound} />
-        </Switch>
-      </Suspense>
+      <Switch>
+        <Route component={Layout} />
+        <Route component={NotFound} />
+      </Switch>
     </ReactQueryConfigProvider>
   );
 };

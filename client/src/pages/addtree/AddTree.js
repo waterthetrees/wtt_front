@@ -32,7 +32,7 @@ function AddTree(props) {
   const componentName = 'AddTree';
   renderCount += 1;
   const {
-    map, setZoom,
+    map,
     coordinatesNewTree,
     setCoordinatesNewTree,
   } = Object(props);
@@ -50,12 +50,13 @@ function AddTree(props) {
   };
 
   useEffect(() => {
-    if (!addTreeSelected) {
-      if (currentMarkers !== null) {
-        currentMarkers.map((currentMarker) => {
-          currentMarker.remove();
-        });
-      }
+    if (addTreeSelected) return;
+
+    if (currentMarkers !== null) {
+      currentMarkers.map((currentMarker) => {
+        currentMarker.remove();
+        return currentMarker;
+      });
     }
   }, [addTreeSelected]);
 
@@ -80,7 +81,6 @@ function AddTree(props) {
         map={map}
         setAddTreeSelected={setAddTreeSelected}
         addTreeSelected={addTreeSelected}
-        setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}
       />
@@ -91,7 +91,7 @@ function AddTree(props) {
 
 const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
-  setZoom, coordinatesNewTree, setCoordinatesNewTree,
+  coordinatesNewTree, setCoordinatesNewTree,
 }) => {
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
   const handleMarkerClick = () => {
@@ -128,7 +128,7 @@ const TreeMarker = ({
     loadNewMarker(coordinates);
 
     map.off('click', handleMapClick);
-    setZoom(19);
+    // map.setZoom(19);
     map.flyTo({
       center: coordinates,
       zoom: [19],

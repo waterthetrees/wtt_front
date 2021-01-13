@@ -1,6 +1,9 @@
 // queries.js
-import axios from 'axios';
 import apiEndpoints from './apiEndpoints.js';
+
+const serializeData = (data) => Object.entries(data)
+  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+  .join('&');
 
 async function getData(...args) {
   const functionName = 'getData';
@@ -20,18 +23,19 @@ async function getData(...args) {
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     // redirect: 'follow', // manual, *follow, error
-    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    // referrerPolicy: 'no-referrer',
+    // no-referrer, *no-referrer-when-downgrade,
+    // origin, origin-when-cross-origin,
+    // same-origin,
+    // strict-origin,
+    // strict-origin-when-cross-origin,
+    // unsafe-url
     params,
   };
   const response = await fetch(url, options);
-
+  // console.log(functionName, args, response);
   return await response.json(); // parses JSON response into native JavaScript objects
 }
-
-const serializeData = (data) =>
-  Object.entries(data)
-    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-    .join('&');
 
 async function postData(...args) {
   const functionName = 'postData';

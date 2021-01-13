@@ -13,7 +13,7 @@ const url = {
   blue: 'https://blue.waterthetrees.com/api',
   localserver: `http://localhost:${port}/api`,
 }[env];
-
+// console.log(env, port, url);
 const apiEndpoints = {
   user: `${url}/user`,
   userhistory: `${url}/userhistory`,
@@ -22,5 +22,8 @@ const apiEndpoints = {
   tree: `${url}/tree`,
   treehistory: `${url}/treehistory`,
   treelist: `${url}/treelist`,
+  cities: `${url}/treemap`,
+  city: `${url}/treemap`,
 };
+// console.log(apiEndpoints);
 export default apiEndpoints;
