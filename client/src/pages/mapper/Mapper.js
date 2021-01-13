@@ -57,7 +57,7 @@ function Mapper() {
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
       center: coordinatesNewTree || [-122.196532, 37.779369],
-      zoom: zoomUserSet || 15,
+      zoom: zoomUserSet || 11,
     });
 
     // Add the control to the map.
@@ -69,19 +69,10 @@ function Mapper() {
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
-      // Add our DB SOURCE
-      // if (!navigator.geolocation) {
-      //   geolocate.innerHTML = 'Geolocation is not available';
-      // } else {
-      // geolocate.trigger();
-      //   geolocate.on('geolocate', (e) => {
-      //     console.log('e', e);
-      //   });
-      // }
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
-        cluster: true,
+        cluster: false,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
       });
@@ -92,18 +83,28 @@ function Mapper() {
           id: 'treedata',
           source: 'treedata', // this should be the id of source
           type: 'circle',
+          filter: ['!', ['has', 'point_count']],
           paint: {
-            'circle-stroke-color': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              1,
-              0.5,
+            // 'circle-radius': 1,
+            // 'circle-color': 'black',
+            'circle-color': [
+              'match',
+              ['get', 'health'],
+              'good', 'green',
+              'fair', 'orange',
+              'poor', 'red',
+              'dead', 'black',
+              'missing', 'darkgray',
+              'stump', 'brown',
+              /* other */ 'green',
             ],
-            // 'circle-radius': 55,
             'circle-radius': {
               property: 'health',
               base: 1,
-              stops: [[10, 8], [12, 16]],
+              stops: [
+                [12, 8],
+                [18, 280],
+              ],
             },
             // 'circle-stroke-color': '#000',
             'circle-stroke-color': [
@@ -115,22 +116,10 @@ function Mapper() {
               'dead', 'black',
               'missing', 'darkgray',
               'stump', 'brown',
-              /* other */ '#ccc',
+              /* other */ 'green',
             ],
             'circle-stroke-width': 3,
-            // 'circle-color': 'transparent',
-            // 'circle-color': '#000',
-            'circle-color': [
-              'match',
-              ['get', 'health'],
-              'good', 'green',
-              'fair', 'orange',
-              'poor', 'red',
-              'dead', 'black',
-              'missing', 'darkgray',
-              'stump', 'brown',
-              /* other */ '#ccc',
-            ],
+
           },
         });
 

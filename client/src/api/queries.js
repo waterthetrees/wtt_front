@@ -28,10 +28,9 @@ async function getData(...args) {
   return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-const serializeData = (data) =>
-  Object.entries(data)
-    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-    .join('&');
+const serializeData = (data) => Object.entries(data)
+  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+  .join('&');
 
 async function postData(...args) {
   const functionName = 'postData';
