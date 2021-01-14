@@ -3,34 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useQuery, useMutation, queryCache } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
-
-// import { PlayCircleFilledWhite } from '@material-ui/icons';
 import { getData, postData } from '../../api/queries';
 import Cities from '../cities/Cities';
-// import TreeData from '../treedata/TreeData';
 import AddTree from '../addtree/AddTree';
-// import UserProfile from '../userprofile';
 import config from '../../config';
-// import getCityCenters from './cities';
 
 mapboxgl.accessToken = config.mapbox.key;
-const CITYIMAGE = 'assets/images/map/mapface.png';
-
-// function getFeatures(cityData) {
-//   const cities = cityData.map((city) => ({
-//     type: 'Feature',
-//     geometry: {
-//       type: 'Point',
-//       coordinates: [city.lng, city.lat],
-//     },
-//     properties: {
-//       'image-name': 'city',
-//       name: city.city,
-//     },
-//   }));
-//   // console.log('cities', cities);
-//   return cities;
-// }
 
 function Mapper() {
   const componentName = 'Mapper';
@@ -38,7 +16,6 @@ function Mapper() {
   const { isAuthenticated, user } = useAuth0();
 
   const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
-
   const { data, error } = cities || {};
   const citiesData = data || null;
   console.log('citiesData', citiesData);
@@ -73,7 +50,7 @@ function Mapper() {
 
       const map = new mapboxgl.Map({
         container: mapboxElRef.current,
-        style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
+        style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps?optimize=true',
         // center: coordinatesNewTree || currentCenter || [-122.3366087, 37.8121351],
         // zoom: zoomUserSet || zoomWindowWidth,
         center: [-122.2639432, 37.8040353],
@@ -87,14 +64,12 @@ function Mapper() {
     }
     //
   }, [mapHolder]);
-  // console.log('mapHolder', mapHolder, 'mapboxElRef', mapboxElRef);
   // USER PROFILE
   // --------------------------
   // const [userProfileOpen, setUserProfileOpen] = useState(false);
   // const [modal, setModal] = useState(false);
   // const toggle = () => setModal(!userProfileOpen);
-  // if (error) return (<div>Failed to load trees</div>);
-  // const [citiesShowing, setCitiesShowing] = useState([]);
+  if (error) return (<div>Failed to load trees</div>);
   const citiesList = [];
   return (
     <div className="App">
@@ -102,7 +77,7 @@ function Mapper() {
         {/* Mapbox container */}
         <div className="mapBox" ref={mapboxElRef} />
       </div>
-      {mapHolder && (
+      {mapHolder && citiesData && (
         <Cities
           map={mapHolder}
           citiesData={citiesData}

@@ -14,12 +14,9 @@ function City(props) {
   const {
     map,
     cityId,
-    zoom,
-    citiesShowing,
-    setCitiesShowing,
   } = Object(props);
   // console.log(componentName, 'map', map);
-  // console.log(componentName, 'cityId', cityId);
+  console.log(componentName, 'cityId', cityId);
 
   // const { isAuthenticated, user } = useAuth0();
   // const [mutateUser] = useMutation(postData, {
@@ -30,7 +27,7 @@ function City(props) {
 
   // getData from DB
   const city = useQuery(['city', { city: cityId }], getData);
-  // console.log(componentName, 'city', city);
+  console.log(componentName, 'city', city);
   const cityData = Object(city.data);
   const error = Object(city.error);
 
