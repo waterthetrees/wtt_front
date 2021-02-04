@@ -15,10 +15,11 @@ function Mapper() {
 
   const { isAuthenticated, user } = useAuth0();
 
-  const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
+  const cities = useQuery(['cities', { city: 'All' }], getData);
+  // const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
   const { data, error } = cities || {};
   const citiesData = data || null;
-  console.log('citiesData', citiesData);
+  console.log('cities', cities);
 
   const [mutateUser] = useMutation(postData, {
     onSuccess: () => {
