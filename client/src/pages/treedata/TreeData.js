@@ -18,7 +18,6 @@ const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
 
 const convertSliderValuesToHealth = (value) => {
-  console.log('convertSliderValuesToHealth value', value);
   const numValue = parseInt(value, 10);
   if (numValue === 6) return 'good';
   if (numValue === 5) return 'fair';
@@ -36,7 +35,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   //     queryCache.invalidateQueries('tree');
   //   },
   // });
-  const tree = treeData.data || {};
+  // const tree = treeData.data || {};
   const {
     idTree,
     common,
@@ -55,6 +54,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     country,
     zip,
     notes,
+    volunteer,
   } = treeData.data || {};
 
   const toggle = () => setShowTree(!showTree);
@@ -89,6 +89,9 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
               owner={owner}
             />
             <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+            {idTree && (
+              <TreeRemoval idTree={idTree} common={common} volunteer={volunteer} />
+            )}
           </ModalBody>
 
           <ModalFooter>
@@ -460,6 +463,93 @@ const TreeMoreInfo = ({ who, idReference, owner }) => (
   </div>
 );
 
+const TreeRemoval = ({ idTree, common }) => {
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const [mutateTreeData] = useMutation(putData, {
+    onSuccess: () => {
+      queryCache.invalidateQueries('tree');
+    },
+  });
+
+  const [reallyDelete, setReallyDelete] = useState(false);
+  const [deleteAlert, setDeleteAlert] = useState('Removing Tree');
+  const handleRemoveTree = () => {
+    if (!isAuthenticated) loginWithRedirect();
+    setReallyDelete(!reallyDelete);
+  };
+
+  console.log('user', user);
+  const handleYesRemoveTree = async (event) => {
+    const functionName = 'handleRemoveTree';
+
+    try {
+      const today = new Date().toISOString().slice(0, 10);
+      const sendData = {
+        idTree,
+        common: 'VACANT SITE',
+        scientific: '',
+        genus: '',
+        email: user.email,
+        health: 'removed',
+        notes: `${common} was removed by ${user.nickname} on ${today}`,
+      };
+      console.log(functionName, 'sendData', sendData);
+      const { data, error } = await mutateTreeData(['tree', sendData]);
+      if (error) setDeleteAlert(error);
+      setTimeout(() => setDeleteAlert(''), saveTimer);
+      console.log(functionName, 'data', data);
+    } catch (err) {
+      console.error(functionName, 'err', err);
+      return err;
+    }
+  };
+
+  return (
+    <div className="treeremoval">
+      <Button
+        className="treeremoval-btn"
+        size="small"
+        color="warning"
+        id="removeTree"
+        name="removeTree"
+        onClick={handleRemoveTree}
+      >
+        Remove this
+        {' '}
+        {common}
+        {' '}
+        Tree
+      </Button>
+      {reallyDelete && (
+        <span>
+          <div><h3>Are you sure you want to remove this tree?</h3></div>
+          <Button
+            className="treeremoval-btn"
+            size="small"
+            color="danger"
+            id="yesRemoveTree"
+            name="yesRemoveTree"
+            onClick={handleYesRemoveTree}
+          >
+            Yes
+          </Button>
+          <Button
+            className="treeremoval-btn"
+            size="small"
+            color="secondary"
+            id="noRemoveTree"
+            name="noRemoveTree"
+            onClick={() => setReallyDelete(false)}
+          >
+            No
+          </Button>
+        </span>
+      )}
+
+    </div>
+  );
+};
+
 const makeMaintenanceString = (history) => {
   const historyArray = Object.entries(history)
     .filter(([key, value]) => value !== 'no' && value !== null)
@@ -524,15 +614,15 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
         sendData.volunteer = volunteerRef.current.value;
       }
       const okToSend = hasMaintenanceFields(sendData);
-      console.log(functionName, 'sendData', sendData);
-      console.log(functionName, 'okToSend', okToSend);
+      // console.log(functionName, 'sendData', sendData);
+      // console.log(functionName, 'okToSend', okToSend);
       if (hasMaintenanceFields(sendData)) {
         handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
-        console.log(functionName, 'has new maintenance sendData', sendData);
+        // console.log(functionName, 'has new maintenance sendData', sendData);
         const { data, error } = await mutateHistory(['treehistory', sendData]);
         // console.log(functionName, 'data', data);
         if (error) {
-          console.log(functionName, 'error', error);
+          // console.log(functionName, 'error', error);
           handleButtonChanges('btn-danger', error, 'btn-danger', error);
         }
         setTimeout(() => handleMaintenanceSave(), saveTimer);
@@ -687,8 +777,11 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
 };
 
 const isEmpty = (obj) => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const prop in obj) {
-    if (obj.hasOwnProperty(prop)) { return false; }
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      return false;
+    }
   }
   return true;
 };
@@ -702,14 +795,14 @@ const changeImageText = (historybutton, statusSelected) => {
     watered: 'watered', weeded: 'weeded', mulched: 'mulched', staked: 'staked', braced: 'braced', pruned: 'pruned',
   };
   if (isEmpty(statusSelected)) return yes[historybutton];
-  if (!statusSelected.hasOwnProperty(historybutton)) return yes[historybutton];
+  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) {
+    return yes[historybutton];
+  }
   return (statusSelected[historybutton] === 'no') ? yes[historybutton] : no[historybutton];
 };
 
 const changeYesNo = (historybutton, statusSelected) => {
   if (isEmpty(statusSelected)) return 'yes';
-  if (!statusSelected.hasOwnProperty(historybutton)) return 'yes';
+  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) return 'yes';
   return (statusSelected[historybutton] === 'no') ? 'yes' : 'no';
 };
-
-const isEmptyArray = (array) => array.length;
