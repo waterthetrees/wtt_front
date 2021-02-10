@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useQuery, useMutation, queryCache } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { getData, postData } from '../../api/queries';
@@ -13,18 +13,23 @@ mapboxgl.accessToken = config.mapbox.key;
 
 function Mapper() {
   const componentName = 'Mapper';
-
+  const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
-  const [mutateUser] = useMutation(postData, {
-    onSuccess: () => {
-      queryCache.invalidateQueries('user');
-    },
-  });
 
   // getData from DB
   const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
-  const { data, error } = treemap || {};
-  const mapData = data || null;
+  console.log('treemap', treemap);
+  // const mapData = Object(treemap.data) || {};
+  const error = treemap.error || null;
+  // const { data, error } = treemap || {};
+  // console.log('mapData', mapData);
+  // console.log('error', error);
+  const mapData = treemap.data || null;
+  const mutateUser = useMutation(postData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+  });
 
   const mapboxElRef = useRef(null); // DOM element to render map
   const [map, setMap] = useState(null);
@@ -43,7 +48,7 @@ function Mapper() {
 
   // Initialize our map
   useEffect(() => {
-    if (isAuthenticated) mutateUser(['user', user]);
+    if (isAuthenticated) mutateUser.mutate(['user', user]);
     if (!mapData) return;
 
     const geolocate = new mapboxgl.GeolocateControl({
@@ -94,7 +99,9 @@ function Mapper() {
               'fair', 'orange',
               'poor', 'red',
               'dead', 'black',
-              'missing', 'darkgray',
+              'vacant', '#7c501a',
+              'missing', '#7c501a',
+              'concrete', '#808080',
               'stump', 'brown',
               /* other */ 'green',
             ],
@@ -114,7 +121,9 @@ function Mapper() {
               'fair', 'orange',
               'poor', 'red',
               'dead', 'black',
-              'missing', 'darkgray',
+              'vacant', '#7c501a',
+              'missing', '#7c501a',
+              'concrete', '#808080',
               'stump', 'brown',
               /* other */ 'green',
             ],

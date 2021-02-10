@@ -67,7 +67,7 @@
     "react-hook-form": "^6.5.0",
     "react-map-gl": "^5.2.5",
     "react-mapbox-gl": "^4.8.6",
-    "react-query": "^2.26.2",
+    "react-query": "^3.8.2",
     "react-redux": "^7.1.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
