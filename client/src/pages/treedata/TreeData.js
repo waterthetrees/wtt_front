@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { useQuery, useMutation, queryCache } from 'react-query';
+import React, { useState, useRef, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import {
   Button,
   Modal,
@@ -25,16 +25,24 @@ const convertSliderValuesToHealth = (value) => {
   if (numValue === 3) return 'stump';
   if (numValue === 2) return 'missing';
   if (numValue === 1) return 'dead';
+  if (numValue === 0) return 'vacant';
+  return 'good';
 };
 
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   const componentName = 'TreeData';
+  const queryClient = useQueryClient();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
-  // const [mutateTreeData] = useMutation(putData, {
-  //   onSuccess: () => {
-  //     queryCache.invalidateQueries('tree');
-  //   },
-  // });
+  const mutateTreeData = useMutation(putData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('tree');
+    },
+  });
+  const mutateHistory = useMutation(postData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('treehistory');
+    },
+  });
   // const tree = treeData.data || {};
   const {
     idTree,
@@ -54,7 +62,6 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     country,
     zip,
     notes,
-    volunteer,
   } = treeData.data || {};
 
   const toggle = () => setShowTree(!showTree);
@@ -76,6 +83,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
             <TreeNotes
               notes={notes}
               currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
             />
             <TreeCare currentTreeId={currentTreeId} common={common} />
             <TreeLocation
@@ -89,8 +97,14 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
               owner={owner}
             />
             <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
-            {idTree && (
-              <TreeRemoval idTree={idTree} common={common} volunteer={volunteer} />
+            {idTree && !common.includes('VACANT') && (
+              <TreeRemoval
+                idTree={idTree}
+                common={common}
+                notes={notes}
+                mutateTreeData={mutateTreeData}
+                mutateHistory={mutateHistory}
+              />
             )}
           </ModalBody>
 
@@ -129,14 +143,10 @@ const TreeHeader = ({ common, scientific, datePlanted }) => (
 
 const TreeHealthSlider = ({
   currentTreeId, healthNum, health,
+  mutateTreeData,
 }) => {
   const componentName = 'TreeHealthSlider';
   const { isAuthenticated } = useAuth0();
-  const [mutateTreeData] = useMutation(putData, {
-    onSuccess: () => {
-      queryCache.invalidateQueries('tree');
-    },
-  });
 
   const [sliderValue, setSlider] = useState(healthNum || 100);
   // const [overallHealth, setOverallHealth] = useState(health);
@@ -153,7 +163,7 @@ const TreeHealthSlider = ({
         setHealthSaveAlert('SAVING');
         console.log('slider', 'newHealth', newHealth, 'health', health);
         const sendData = { idTree: currentTreeId, health: newHealth };
-        const { data, error } = await mutateTreeData(['tree', sendData]);
+        const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
         if (error) setHealthSaveAlert(error);
         setTimeout(() => setHealthSaveAlert(''), saveTimer);
         // console.log(functionName, 'data', data);
@@ -173,7 +183,7 @@ const TreeHealthSlider = ({
         <input
           ref={sliderRef}
           type="range"
-          min="1"
+          min="0"
           max="6"
           step="1"
           className="slider"
@@ -183,6 +193,7 @@ const TreeHealthSlider = ({
           onChange={changeSlider}
         />
         <datalist id="healthSlider">
+          <option value="0" name="vacant" />
           <option value="1" name="dead" />
           <option value="2" name="missing" />
           <option value="3" name="stump" />
@@ -208,9 +219,10 @@ const TreeHealthSlider = ({
 const TreeNotes = ({ notes, currentTreeId }) => {
   const componentName = 'TreeNotes';
   const { isAuthenticated } = useAuth0();
-  const [mutateTreeData] = useMutation(putData, {
+  const queryClient = useQueryClient();
+  const mutateTreeData = useMutation(putData, {
     onSuccess: () => {
-      queryCache.invalidateQueries('tree');
+      queryClient.invalidateQueries('tree');
     },
   });
   const [showSave, setShowSave] = useState(false);
@@ -236,7 +248,7 @@ const TreeNotes = ({ notes, currentTreeId }) => {
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
         const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-        const { data, error } = await mutateTreeData(['tree', sendData]);
+        const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
         if (error) {
           setNotesButtonStyle('btn-danger');
           setNotesSaveButton(error);
@@ -287,12 +299,13 @@ const TreeNotes = ({ notes, currentTreeId }) => {
 const TreeCare = ({ currentTreeId, common }) => {
   const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', { currentTreeId }], getData);
-  console.log(componentName, 'treeHistoryObj', treeHistoryObj);
+  // console.log(componentName, 'treeHistoryObj', treeHistoryObj);
   const treeHistory = treeHistoryObj.data;
-  console.log(componentName, 'treeHistory', treeHistory);
-  const [mutateHistory] = useMutation(postData, {
+  // console.log(componentName, 'treeHistory', treeHistory);
+  const queryClient = useQueryClient();
+  const mutateHistory = useMutation(postData, {
     onSuccess: () => {
-      queryCache.invalidateQueries('treehistory');
+      queryClient.invalidateQueries('treehistory');
     },
   });
 
@@ -305,6 +318,7 @@ const TreeCare = ({ currentTreeId, common }) => {
           mutateHistory={mutateHistory}
         />
       )}
+
       {treeHistory && treeHistory.length > 0 && (
         <TreeHistory
           treeHistory={treeHistory}
@@ -463,66 +477,87 @@ const TreeMoreInfo = ({ who, idReference, owner }) => (
   </div>
 );
 
-const TreeRemoval = ({ idTree, common }) => {
+const TreeRemoval = ({
+  idTree, common, notes,
+  mutateTreeData, mutateHistory,
+}) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const [mutateTreeData] = useMutation(putData, {
-    onSuccess: () => {
-      queryCache.invalidateQueries('tree');
-    },
-  });
-
+  const mountedRef = useRef(true);
   const [reallyDelete, setReallyDelete] = useState(false);
-  const [deleteAlert, setDeleteAlert] = useState('Removing Tree');
+  const [showDelete, setShowDelete] = useState(true);
+  const [message, setMessage] = useState('Are you sure you want to remove this tree?');
+
   const handleRemoveTree = () => {
     if (!isAuthenticated) loginWithRedirect();
     setReallyDelete(!reallyDelete);
   };
 
-  console.log('user', user);
+  // console.log('user', user);
   const handleYesRemoveTree = async (event) => {
     const functionName = 'handleRemoveTree';
 
     try {
       const today = new Date().toISOString().slice(0, 10);
-      const sendData = {
+      const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
+      const sendTreeHistory = {
+        idTree,
+        // currentTreeId: idTree,
+        date_visit: dateVisit,
+        comment: `${common} was removed by ${user.nickname} on ${today}`,
+      };
+      console.log(functionName, 'sendTreeHistory', sendTreeHistory);
+      const sendTreeData = {
         idTree,
         common: 'VACANT SITE',
         scientific: '',
         genus: '',
         email: user.email,
-        health: 'removed',
-        notes: `${common} was removed by ${user.nickname} on ${today}`,
+        health: 'vacant',
+        notes: `${common} was removed by ${user.nickname} on ${today}, ${notes}`,
+        // TODO: SHOULD NOTES OF PREVIOUS TREE BE DELETED or concated
       };
-      console.log(functionName, 'sendData', sendData);
-      const { data, error } = await mutateTreeData(['tree', sendData]);
-      if (error) setDeleteAlert(error);
-      setTimeout(() => setDeleteAlert(''), saveTimer);
-      console.log(functionName, 'data', data);
+
+      setMessage(`Removing ${common}.`);
+
+      const mutatedTreeHistory = await mutateHistory.mutate(['treehistory', sendTreeHistory]);
+      console.log(functionName, 'mutatedTreeHistory.data', mutatedTreeHistory);
+      const mutatedTreeData = await mutateTreeData.mutate(['tree', sendTreeData]);
+      console.log(functionName, 'mutatedTreeData', mutatedTreeData);
+      // if (mutatedTreeData.data.isError) setMessage(mutatedTreeData.data.isError);
+      setTimeout(() => setReallyDelete(false), 500);
+      setTimeout(() => setShowDelete(false), 2000);
+      setTimeout(() => setMessage(''), 1900);
+
+      // console.log(functionName, 'mutatedTreeData', mutatedTreeData);
     } catch (err) {
-      console.error(functionName, 'err', err);
+      console.error('CATCH', functionName, 'err', err);
       return err;
     }
   };
 
+  useEffect(() => () => {
+    mountedRef.current = false;
+  }, []);
+
   return (
     <div className="treeremoval">
-      <Button
-        className="treeremoval-btn"
-        size="small"
-        color="warning"
-        id="removeTree"
-        name="removeTree"
-        onClick={handleRemoveTree}
-      >
-        Remove this
-        {' '}
-        {common}
-        {' '}
-        Tree
-      </Button>
+      {showDelete && (
+        <Button
+          className="treeremoval-btn"
+          size="small"
+          color="warning"
+          id="removeTree"
+          name="removeTree"
+          onClick={handleRemoveTree}
+        >
+          Remove this
+          {' '}
+          {common}
+        </Button>
+      )}
       {reallyDelete && (
         <span>
-          <div><h3>Are you sure you want to remove this tree?</h3></div>
+          <div><h3>{message}</h3></div>
           <Button
             className="treeremoval-btn"
             size="small"
@@ -619,7 +654,7 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
       if (hasMaintenanceFields(sendData)) {
         handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
         // console.log(functionName, 'has new maintenance sendData', sendData);
-        const { data, error } = await mutateHistory(['treehistory', sendData]);
+        const { data, error } = await mutateHistory.mutate(['treehistory', sendData]);
         // console.log(functionName, 'data', data);
         if (error) {
           // console.log(functionName, 'error', error);
