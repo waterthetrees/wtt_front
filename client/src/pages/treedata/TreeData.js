@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useForm } from 'react-hook-form';
 import {
   Button,
   Modal,
@@ -13,6 +14,11 @@ import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import Footer from '../../components/Footer';
 import { getData, putData, postData } from '../../api/queries';
+
+import TreeHeaderForm from './TreeDataEdit';
+import TreeRemoval from './TreeRemoval';
+// const TreeHeaderForm = React.lazy(() => import('./TreeDataEdit'));
+// const ButtonsResult = React.lazy(() => import('../addtree/ButtonsResult'));
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -31,13 +37,30 @@ const convertSliderValuesToHealth = (value) => {
 
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   const componentName = 'TreeData';
+
+  const toggle = () => setShowTree(!showTree);
+
+  return (
+    <Modal isOpen={showTree} className="tree__modal">
+      <ModalHeader toggle={toggle} />
+      <TreeContent currentTreeId={currentTreeId} />
+      <ModalFooter>
+        <Footer />
+      </ModalFooter>
+    </Modal>
+  );
+}
+
+const TreeContent = ({ currentTreeId }) => {
   const queryClient = useQueryClient();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
   const mutateTreeData = useMutation(putData, {
     onSuccess: () => {
       queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('treemap');
     },
   });
+
   const mutateHistory = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('treehistory');
@@ -48,6 +71,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     idTree,
     common,
     scientific,
+    genus,
     datePlanted,
     health,
     healthNum,
@@ -59,26 +83,53 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     owner,
     idReference,
     who,
+    dbh,
+    height,
     country,
     zip,
     notes,
   } = treeData.data || {};
 
-  const toggle = () => setShowTree(!showTree);
+  console.log('treeData.data', treeData.data);
+
+  const [editTree, setEditTree] = useState(false);
+  const edit = () => setEditTree(!editTree);
 
   return (
-    <div>
+    <>
       {idTree && (
-        <Modal isOpen={showTree} toggle={toggle} className="tree__modal">
-          <ModalHeader toggle={toggle}>
-            <TreeHeader common={common} scientific={scientific} datePlanted={datePlanted} />
-          </ModalHeader>
+        <div className="tree text-center">
 
-          <ModalBody>
+          <div className="tree__header">
+            {!editTree && (
+              <TreeHeader
+                common={common}
+                scientific={scientific}
+                genus={genus}
+                datePlanted={datePlanted}
+                edit={edit}
+              />
+            )}
+            {editTree && (
+              <TreeHeaderForm
+                idTree={idTree}
+                common={common}
+                scientific={scientific}
+                genus={genus}
+                treeData={treeData.data}
+                datePlanted={datePlanted}
+                mutateTreeData={mutateTreeData}
+                setEditTree={setEditTree}
+              />
+            )}
+
+          </div>
+          <div className="tree__body">
             <TreeHealthSlider
               health={health}
               healthNum={healthNum}
               currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
             />
             <TreeNotes
               notes={notes}
@@ -97,7 +148,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
               owner={owner}
             />
             <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
-            {idTree && !common.includes('VACANT') && (
+            {!common.includes('VACANT') && (
               <TreeRemoval
                 idTree={idTree}
                 common={common}
@@ -106,18 +157,18 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
                 mutateHistory={mutateHistory}
               />
             )}
-          </ModalBody>
+          </div>
 
-          <ModalFooter>
-            <Footer />
-          </ModalFooter>
-        </Modal>
+        </div>
       )}
-    </div>
+    </>
   );
-}
+};
 
-const TreeHeader = ({ common, scientific, datePlanted }) => (
+const TreeHeader = ({
+  common, scientific, genus,
+  datePlanted, edit,
+}) => (
   <div className="flex-grid-three text-left">
     {common && (
       <div>
@@ -129,7 +180,12 @@ const TreeHeader = ({ common, scientific, datePlanted }) => (
         <h4>{scientific}</h4>
       </div>
     )}
-    {datePlanted && (
+    {genus && (
+      <div>
+        <h4>{genus}</h4>
+      </div>
+    )}
+    {datePlanted && !common.includes('VACANT') && (
       <div>
         <h5>
           Planted:
@@ -138,6 +194,9 @@ const TreeHeader = ({ common, scientific, datePlanted }) => (
         </h5>
       </div>
     )}
+    <div className="treedata__edit-btn text-right">
+      <Button color="link" className="btn-sm" onClick={edit}>Edit Tree Name</Button>
+    </div>
   </div>
 );
 
@@ -158,13 +217,17 @@ const TreeHealthSlider = ({
     try {
       if (!isAuthenticated) loginWithRedirect();
       const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
+      console.log('HEALTH', health, newHealth);
       // setOverallHealth(newHealth);
       if (newHealth !== health) {
         setHealthSaveAlert('SAVING');
         console.log('slider', 'newHealth', newHealth, 'health', health);
-        const sendData = { idTree: currentTreeId, health: newHealth };
-        const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
-        if (error) setHealthSaveAlert(error);
+        const sendTreeData = { idTree: currentTreeId, health: newHealth };
+        // const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
+        const mutatedTreeData = await mutateTreeData.mutate(['tree', sendTreeData]);
+
+        console.log('mutatedTreeData', mutatedTreeData);
+        // if (error) setHealthSaveAlert(error);
         setTimeout(() => setHealthSaveAlert(''), saveTimer);
         // console.log(functionName, 'data', data);
       }
@@ -175,11 +238,11 @@ const TreeHealthSlider = ({
   };
 
   return (
-    <>
-      <div className="flex-grid tree_history-list text-center">
+    <div className="flex-grid border-top text-center">
+      <div className="treehistory-list">
         <h4>Overall Health</h4>
       </div>
-      <div className="tree__status text-center">
+      <div className="tree__status">
         <input
           ref={sliderRef}
           type="range"
@@ -212,7 +275,7 @@ const TreeHealthSlider = ({
         </h3>
         {healthSaveAlert && <div className="alert alert-success" role="alert">{healthSaveAlert}</div>}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -444,7 +507,7 @@ const TreeLocation = ({
 
 const TreeMoreInfo = ({ who, idReference, owner }) => (
   <div className="flex-grid border-top">
-    <div className="treehistory-list">
+    <div className="treehistory-list text-left">
       <h4 className="text-center">More info</h4>
       {owner && (
         <div>
@@ -476,114 +539,6 @@ const TreeMoreInfo = ({ who, idReference, owner }) => (
     </div>
   </div>
 );
-
-const TreeRemoval = ({
-  idTree, common, notes,
-  mutateTreeData, mutateHistory,
-}) => {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const mountedRef = useRef(true);
-  const [reallyDelete, setReallyDelete] = useState(false);
-  const [showDelete, setShowDelete] = useState(true);
-  const [message, setMessage] = useState('Are you sure you want to remove this tree?');
-
-  const handleRemoveTree = () => {
-    if (!isAuthenticated) loginWithRedirect();
-    setReallyDelete(!reallyDelete);
-  };
-
-  // console.log('user', user);
-  const handleYesRemoveTree = async (event) => {
-    const functionName = 'handleRemoveTree';
-
-    try {
-      const today = new Date().toISOString().slice(0, 10);
-      const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
-      const sendTreeHistory = {
-        idTree,
-        // currentTreeId: idTree,
-        date_visit: dateVisit,
-        comment: `${common} was removed by ${user.nickname} on ${today}`,
-      };
-      console.log(functionName, 'sendTreeHistory', sendTreeHistory);
-      const sendTreeData = {
-        idTree,
-        common: 'VACANT SITE',
-        scientific: '',
-        genus: '',
-        email: user.email,
-        health: 'vacant',
-        notes: `${common} was removed by ${user.nickname} on ${today}, ${notes}`,
-        // TODO: SHOULD NOTES OF PREVIOUS TREE BE DELETED or concated
-      };
-
-      setMessage(`Removing ${common}.`);
-
-      const mutatedTreeHistory = await mutateHistory.mutate(['treehistory', sendTreeHistory]);
-      console.log(functionName, 'mutatedTreeHistory.data', mutatedTreeHistory);
-      const mutatedTreeData = await mutateTreeData.mutate(['tree', sendTreeData]);
-      console.log(functionName, 'mutatedTreeData', mutatedTreeData);
-      // if (mutatedTreeData.data.isError) setMessage(mutatedTreeData.data.isError);
-      setTimeout(() => setReallyDelete(false), 500);
-      setTimeout(() => setShowDelete(false), 2000);
-      setTimeout(() => setMessage(''), 1900);
-
-      // console.log(functionName, 'mutatedTreeData', mutatedTreeData);
-    } catch (err) {
-      console.error('CATCH', functionName, 'err', err);
-      return err;
-    }
-  };
-
-  useEffect(() => () => {
-    mountedRef.current = false;
-  }, []);
-
-  return (
-    <div className="treeremoval">
-      {showDelete && (
-        <Button
-          className="treeremoval-btn"
-          size="small"
-          color="warning"
-          id="removeTree"
-          name="removeTree"
-          onClick={handleRemoveTree}
-        >
-          Remove this
-          {' '}
-          {common}
-        </Button>
-      )}
-      {reallyDelete && (
-        <span>
-          <div><h3>{message}</h3></div>
-          <Button
-            className="treeremoval-btn"
-            size="small"
-            color="danger"
-            id="yesRemoveTree"
-            name="yesRemoveTree"
-            onClick={handleYesRemoveTree}
-          >
-            Yes
-          </Button>
-          <Button
-            className="treeremoval-btn"
-            size="small"
-            color="secondary"
-            id="noRemoveTree"
-            name="noRemoveTree"
-            onClick={() => setReallyDelete(false)}
-          >
-            No
-          </Button>
-        </span>
-      )}
-
-    </div>
-  );
-};
 
 const makeMaintenanceString = (history) => {
   const historyArray = Object.entries(history)

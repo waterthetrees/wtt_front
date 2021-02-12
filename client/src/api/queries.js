@@ -7,7 +7,7 @@ async function getData(...args) {
   // const [request, params] = args;
   const { queryKey } = args[0];
 
-  console.log('queryKey', queryKey[1], queryKey[0], '\nurl', url, '\nargs', args);
+  // console.log('\n\n\n TEST queryKey', queryKey[0], queryKey[1]);
   const serializedData = serializeData(queryKey[1]);
   const endpoint = queryKey[0];
   const url = `${apiEndpoints[endpoint]}?${serializedData}`;
@@ -66,6 +66,7 @@ async function putData(...args) {
   const functionName = 'putData';
   const [request] = args;
   const data = request[1];
+  // console.log(functionName, 'data,', data, '\n\nrequest', request);
   // Default options are marked with *
   const url = apiEndpoints[request[0]];
   const options = {
