@@ -9,7 +9,7 @@ import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
 import config from '../../config';
 
-mapboxgl.accessToken = config.mapbox.key;
+mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
   const componentName = 'Mapper';
@@ -18,12 +18,7 @@ function Mapper() {
 
   // getData from DB
   const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
-  console.log('treemap', treemap);
-  // const mapData = Object(treemap.data) || {};
   const error = treemap.error || null;
-  // const { data, error } = treemap || {};
-  // console.log('mapData', mapData);
-  // console.log('error', error);
   const mapData = treemap.data || null;
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
@@ -68,7 +63,7 @@ function Mapper() {
     // Add the control to the map.
     map.addControl(geolocate);
     geolocate.on('geolocate', (e) => {
-      console.log('e', e);
+      // console.log('e', e);
     });
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());

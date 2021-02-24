@@ -9,9 +9,9 @@ import { getData } from '../../api/queries';
 export default function TreeName({
   control, keyName, coordinates,
 }) {
-  console.log('coordinates', coordinates);
+  // console.log('coordinates', coordinates);
   const treelist = useQuery(['treelist', { coordinates }], getData);
-  console.log('treelist', treelist);
+  // console.log('treelist', treelist);
 
   // const topTrees = treelist.data || {};
   // console.log('topTrees', topTrees);

@@ -1,20 +1,30 @@
 @import '../../styles/app';
 
 .addtree {
- display: flex;
- flex-direction: row;
- justify-content: flex-end;
- .MuiAutocomplete-inputRoot[class*='MuiFilledInput-root'] {
-  padding-top: 3px;
-  padding-left: 3px;
- }
- .MuiButton-label {
-  line-height: 1;
-  color: black;
-  font-weight: 700;
-  font-size: 1.6rem;
-  font-family: 'Roboto Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  .MuiAutocomplete-inputRoot[class*='MuiFilledInput-root'] {
+    padding-top: 3px;
+    padding-left: 3px;
+  }
+  .MuiButton-label {
+    line-height: 1;
+    color: black;
+    font-weight: 700;
+    font-size: 1.6rem;
+    font-family: 'Roboto Mono', monospace;
+  }
 }
+
+.modal-header {
+  border: 0;
+  padding: 0;
+}
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -.2rem -.2rem -1rem auto;
 }
 
 .addtree_btngroup {
@@ -172,13 +182,13 @@ background-color: #147d16;
 }
 
 .addtreemodal__header-logo {
- width: 150px;
- margin: 0 0px;
+  width: 200px;
+  margin: 0 0px;
 }
 
 .addtreemodal__header-image {
- width: 25px;
- margin: 0 10px;
+ width: 32px;
+ margin: 0 10px 3px;
 }
 
 .addtreemodal__owner {

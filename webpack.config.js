@@ -3,6 +3,8 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin'); // gzip
+const BrotliPlugin = require('brotli-webpack-plugin'); // brotli
 
 module.exports = {
   watch: true,
@@ -74,5 +76,18 @@ module.exports = {
         },
       ],
     }),
+    // new CompressionPlugin({
+    //   filename: '[path].gz[query]',
+    //   algorithm: 'gzip',
+    //   test: /\.(js|css|html|svg)$/,
+    //   threshold: 8192,
+    //   minRatio: 0.8,
+    // }),
+    // new BrotliPlugin({ // brotli plugin
+    //   asset: '[path].br[query]',
+    //   test: /\.(js|css|html|svg)$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8,
+    // }),
   ],
 };

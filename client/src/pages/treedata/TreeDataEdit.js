@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQueryClient, useQuery } from 'react-query';
+// import { useQueryClient } from 'react-query';
 
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -7,10 +7,9 @@ import {
   Button,
   ButtonGroup,
 } from 'reactstrap';
-import cx from 'classnames';
 import format from 'date-fns/format';
 import './TreeData.scss';
-import { putData, postData } from '../../api/queries';
+// import { putData, postData } from '../../api/queries';
 
 // import TreeInfo from '../addtree/TreeInfo';
 // import ButtonsResult from '../addtree/ButtonsResult';
@@ -21,14 +20,16 @@ import MuiAutoComplete from '../addtree/MuiAutoComplete';
 import ErrorMessageAll from '../error/ErrorPage';
 
 const filteredObj = (obj) => Object.entries(obj)
+  // eslint-disable-next-line no-unused-vars
   .filter(([_, value]) => !!value)
   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 export default function TreeHeaderForm({
   idTree, common, scientific, genus, treeData, setEditTree,
+  mutateTreeData, mutateHistory,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const treeHistoryObj = useQuery(['treehistory', { currentTreeId: idTree }], getData);
+  // const treeHistoryObj = useQuery(['treehistory', { currentTreeId: idTree }], getData);
   const defaultValues = {
     idTree,
     common: common || '',
@@ -41,44 +42,37 @@ export default function TreeHeaderForm({
   };
 
   const {
-    handleSubmit, reset, control, errors,
+    handleSubmit, control, errors,
   } = useForm({ defaultValues });
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  const queryClient = useQueryClient();
-  const mutateTreeData = useMutation(putData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('tree');
-    },
-  });
-
-  const mutateHistory = useMutation(postData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('treehistory');
-    },
-  });
+  // const queryClient = useQueryClient();
 
   const [newTree, setNewTree] = useState(null);
   const onSubmit = async (data) => {
+    if (!isAuthenticated) loginWithRedirect();
+
     const sendData = { ...defaultValues, ...data };
-    // update tree
     sendData.health = (!treeData.health || treeData.health === 'vacant')
       ? 'good'
       : treeData.health;
 
-    sendData.datePlanted = (newTree)
+    sendData.datePlanted = (newTree === 'yes')
       ? format(new Date(), 'yyyy/MM/dd')
       : treeData.datePlanted;
 
     const sendDataFiltered = filteredObj(sendData);
+    const lowercaseCommon = sendDataFiltered.common.toLowerCase();
+
     if (sendDataFiltered.common !== common
-       && sendDataFiltered.scientific !== scientific
-       && sendDataFiltered.genus !== genus) {
+       || sendDataFiltered.scientific !== scientific
+       || sendDataFiltered.genus !== genus) {
+      // console.log('mutateTreeData sendDataFiltered', sendDataFiltered);
       mutateTreeData.mutate(['tree', sendDataFiltered]);
     }
 
     // new history
-    const comment = (newTree)
+    const comment = (newTree === 'yes')
       ? `${sendData.common} was planted`
       : `${sendData.common} name was editted`;
 
@@ -88,14 +82,14 @@ export default function TreeHeaderForm({
       comment,
       volunteer: user.nickname,
     };
-    const lowercaseCommon = sendDataFiltered.common.toLowerCase();
+
     if (!lowercaseCommon.includes('vacant')) {
       mutateHistory.mutate(['treehistory', sendTreeHistory]);
     }
 
     setEditTree(false);
   };
-  const onError = (errors, e) => console.error('errors, e', errors, e);
+  const onError = (errorLog, e) => console.error('errors, e', errorLog, e);
   const coordinates = { lng: treeData.lng, lat: treeData.lat };
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="form">

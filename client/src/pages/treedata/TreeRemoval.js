@@ -24,26 +24,21 @@ export default function TreeRemoval({
 
   const handleRemoveTree = (event) => {
     event.preventDefault();
-    console.log('event', event.target.name);
     if (!isAuthenticated) loginWithRedirect();
     setReason(event.target.name);
     setReallyDelete(true);
   };
 
   // console.log('user', user);
-  const handleYesRemoveTree = async (event) => {
+  const handleYesRemoveTree = async () => {
     const functionName = 'handleRemoveTree';
 
-    console.log('event', event);
     try {
       const today = new Date().toISOString().slice(0, 10);
       const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
       const comment = (commentRef.current && commentRef.current.value)
         ? commentRef.current.value
         : reason;
-
-      console.log('comment', comment);
-      console.log('commentRef', commentRef.current.value);
 
       const sendTreeHistory = {
         idTree,
@@ -63,9 +58,10 @@ export default function TreeRemoval({
         datePlanted: dateVisit,
         // TODO: SHOULD NOTES OF PREVIOUS TREE BE DELETED or concated
       };
-      sendTreeData.notes = (notes)
-        ? `${common} was removed by ${user.nickname} ${today} - ${comment}, ${notes}`
-        : `${common} was removed by ${user.nickname} ${today} - ${comment}`;
+      const newNote = `${common} was removed by ${user.nickname} ${today} - ${comment}`;
+      sendTreeData.notes = (notes && notes !== newNote)
+        ? `${newNote}, ${notes}`
+        : newNote;
 
       setMessage(`Removing ${common}.`);
 
@@ -74,9 +70,7 @@ export default function TreeRemoval({
       setReallyDelete(false);
       setShowDelete(false);
       setMessage('');
-      // setTimeout(() => setReallyDelete(false), 500);
-      // setTimeout(() => setShowDelete(false), 2000);
-      // setTimeout(() => setMessage(''), 1900);
+      return sendTreeData;
     } catch (err) {
       console.error('CATCH', functionName, 'err', err);
       return err;

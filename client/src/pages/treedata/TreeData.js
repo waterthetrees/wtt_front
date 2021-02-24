@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { useForm } from 'react-hook-form';
 import {
   Button,
   Modal,
   ModalHeader,
-  ModalBody,
   ModalFooter,
 } from 'reactstrap';
 import cx from 'classnames';
@@ -17,8 +15,6 @@ import { getData, putData, postData } from '../../api/queries';
 
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
-// const TreeHeaderForm = React.lazy(() => import('./TreeDataEdit'));
-// const ButtonsResult = React.lazy(() => import('../addtree/ButtonsResult'));
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -36,7 +32,7 @@ const convertSliderValuesToHealth = (value) => {
 };
 
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
-  const componentName = 'TreeData';
+  // const componentName = 'TreeData';
 
   const toggle = () => setShowTree(!showTree);
 
@@ -52,8 +48,10 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
 }
 
 const TreeContent = ({ currentTreeId }) => {
-  const queryClient = useQueryClient();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
   const treeData = useQuery(['tree', { currentTreeId }], getData);
+  const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
     onSuccess: () => {
       queryClient.invalidateQueries('tree');
@@ -66,7 +64,7 @@ const TreeContent = ({ currentTreeId }) => {
       queryClient.invalidateQueries('treehistory');
     },
   });
-  // const tree = treeData.data || {};
+
   const {
     idTree,
     common,
@@ -90,10 +88,11 @@ const TreeContent = ({ currentTreeId }) => {
     notes,
   } = treeData.data || {};
 
-  console.log('treeData.data', treeData.data);
-
   const [editTree, setEditTree] = useState(false);
-  const edit = () => setEditTree(!editTree);
+  const edit = () => {
+    if (!isAuthenticated) loginWithRedirect();
+    setEditTree(!editTree);
+  };
 
   return (
     <>
@@ -107,6 +106,8 @@ const TreeContent = ({ currentTreeId }) => {
                 scientific={scientific}
                 genus={genus}
                 datePlanted={datePlanted}
+                dbh={dbh}
+                height={height}
                 edit={edit}
               />
             )}
@@ -119,6 +120,7 @@ const TreeContent = ({ currentTreeId }) => {
                 treeData={treeData.data}
                 datePlanted={datePlanted}
                 mutateTreeData={mutateTreeData}
+                mutateHistory={mutateHistory}
                 setEditTree={setEditTree}
               />
             )}
@@ -136,7 +138,7 @@ const TreeContent = ({ currentTreeId }) => {
               currentTreeId={currentTreeId}
               mutateTreeData={mutateTreeData}
             />
-            <TreeCare currentTreeId={currentTreeId} common={common} />
+            <TreeCare currentTreeId={currentTreeId} common={common} health={health} />
             <TreeLocation
               address={address}
               city={city}
@@ -167,7 +169,7 @@ const TreeContent = ({ currentTreeId }) => {
 
 const TreeHeader = ({
   common, scientific, genus,
-  datePlanted, edit,
+  datePlanted, edit, height, dbh,
 }) => (
   <div className="flex-grid-three text-left">
     {common && (
@@ -194,6 +196,24 @@ const TreeHeader = ({
         </h5>
       </div>
     )}
+    {height && (
+      <div>
+        <h5>
+          Height:
+          {' '}
+          {height}
+        </h5>
+      </div>
+    )}
+    {dbh && (
+      <div>
+        <h5>
+          DBH:
+          {' '}
+          {dbh}
+        </h5>
+      </div>
+    )}
     <div className="treedata__edit-btn text-right">
       <Button color="link" className="btn-sm" onClick={edit}>Edit Tree Name</Button>
     </div>
@@ -204,35 +224,28 @@ const TreeHealthSlider = ({
   currentTreeId, healthNum, health,
   mutateTreeData,
 }) => {
-  const componentName = 'TreeHealthSlider';
-  const { isAuthenticated } = useAuth0();
-
-  const [sliderValue, setSlider] = useState(healthNum || 100);
-  // const [overallHealth, setOverallHealth] = useState(health);
+  // const componentName = 'TreeHealthSlider';
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
-  const sliderRef = useRef();
-
-  const changeSlider = async (event) => {
+  const sliderRef = useRef(healthNum);
+  const changeSlider = async () => {
     const functionName = 'changeSlider';
     try {
       if (!isAuthenticated) loginWithRedirect();
       const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
-      console.log('HEALTH', health, newHealth);
-      // setOverallHealth(newHealth);
       if (newHealth !== health) {
         setHealthSaveAlert('SAVING');
-        console.log('slider', 'newHealth', newHealth, 'health', health);
-        const sendTreeData = { idTree: currentTreeId, health: newHealth };
-        // const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
-        const mutatedTreeData = await mutateTreeData.mutate(['tree', sendTreeData]);
-
-        console.log('mutatedTreeData', mutatedTreeData);
-        // if (error) setHealthSaveAlert(error);
+        const sendTreeData = {
+          idTree: currentTreeId,
+          health: newHealth,
+          healthNum: sliderRef.current.value,
+        };
+        await mutateTreeData.mutate(['tree', sendTreeData]);
         setTimeout(() => setHealthSaveAlert(''), saveTimer);
-        // console.log(functionName, 'data', data);
       }
+      return newHealth;
     } catch (err) {
-      console.log(functionName, 'err', err);
+      console.error(functionName, 'CATCH', err);
       return err;
     }
   };
@@ -252,21 +265,21 @@ const TreeHealthSlider = ({
           className="slider"
           list="healthSlider"
           id="healthSlider"
-          defaultValue={sliderRef.current ? sliderRef.current.value : healthNum}
+          defaultValue={healthNum}
           onChange={changeSlider}
         />
-        <datalist id="healthSlider">
-          <option value="0" name="vacant" />
-          <option value="1" name="dead" />
-          <option value="2" name="missing" />
-          <option value="3" name="stump" />
-          <option value="4" name="poor" />
-          <option value="5" name="fair" />
-          <option value="6" name="good" />
+        <datalist id="healthSlider" aria-label="healthSlider">
+          <option value="0" name="vacant" aria-label="vacant" />
+          <option value="1" name="dead" aria-label="dead" />
+          <option value="2" name="missing" aria-label="missing" />
+          <option value="3" name="stump" aria-label="stump" />
+          <option value="4" name="poor" aria-label="poor" />
+          <option value="5" name="fair" aria-label="fair" />
+          <option value="6" name="good" aria-label="good" />
         </datalist>
         <h3>
           {health && (
-            <span id={sliderValue}>
+            <span id={health}>
               {sliderRef.current
                 ? convertSliderValuesToHealth(sliderRef.current.value)
                 : health}
@@ -280,7 +293,7 @@ const TreeHealthSlider = ({
 };
 
 const TreeNotes = ({ notes, currentTreeId }) => {
-  const componentName = 'TreeNotes';
+  // const componentName = 'TreeNotes';
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
@@ -293,7 +306,6 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const notesRef = useRef();
   const handleOnChange = () => {
-    console.log('notesRef.current', notesRef.current);
     if (notesRef.current.value !== notes) setShowSave(true);
   };
 
@@ -304,24 +316,20 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   };
 
   const handleNotesSubmit = async (event) => {
-    const functionName = 'handleSubmit';
+    // const functionName = 'handleSubmit';
     event.preventDefault();
     try {
       if (notesRef.current.value) {
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
         const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-        const { data, error } = await mutateTreeData.mutate(['tree', sendData]);
-        if (error) {
-          setNotesButtonStyle('btn-danger');
-          setNotesSaveButton(error);
-        }
+        await mutateTreeData.mutate(['tree', sendData]);
+
         setTimeout(() => handleNotesSave(), saveTimer);
       }
       return;
     } catch (err) {
-      console.log('\n\n\n\n ------', functionName, 'err', err);
-      return err;
+      console.error('\n CATCH', err);
     }
   };
 
@@ -359,12 +367,10 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   );
 };
 
-const TreeCare = ({ currentTreeId, common }) => {
-  const componentName = 'TreeCare';
+const TreeCare = ({ currentTreeId, common, health }) => {
+  // const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', { currentTreeId }], getData);
-  // console.log(componentName, 'treeHistoryObj', treeHistoryObj);
   const treeHistory = treeHistoryObj.data;
-  // console.log(componentName, 'treeHistory', treeHistory);
   const queryClient = useQueryClient();
   const mutateHistory = useMutation(postData, {
     onSuccess: () => {
@@ -374,13 +380,18 @@ const TreeCare = ({ currentTreeId, common }) => {
 
   return (
     <div className="treecare">
-      {currentTreeId && mutateHistory && (
-        <TreeMaintenance
-          currentTreeId={currentTreeId}
-          common={common}
-          mutateHistory={mutateHistory}
-        />
-      )}
+      {currentTreeId
+        && mutateHistory
+        && health !== 'dead'
+        && health !== 'vacant'
+        && health !== 'missing'
+        && (
+          <TreeMaintenance
+            currentTreeId={currentTreeId}
+            common={common}
+            mutateHistory={mutateHistory}
+          />
+        )}
 
       {treeHistory && treeHistory.length > 0 && (
         <TreeHistory
@@ -392,22 +403,36 @@ const TreeCare = ({ currentTreeId, common }) => {
   );
 };
 
-const TreeHistory = ({ currentTreeId, treeHistory }) => {
-  const componentName = 'TreeHistory';
+const makeMaintenanceString = (history) => {
+  const historyArray = Object.entries(history)
+    // eslint-disable-next-line no-unused-vars
+    .filter(([key, value]) => value !== 'no' && value !== null)
+    // eslint-disable-next-line no-unused-vars
+    .filter(([key, value]) => (
+      key === 'watered'
+      || key === 'mulched'
+      || key === 'weeded'
+      || key === 'staked'
+      || key === 'braced'
+      || key === 'pruned'
+    ))
+    .map((item) => item[0]);
+  if (historyArray.length === 0) return '';
+  return historyArray.join(', ');
+};
 
-  return (
-    <div className="flex-grid border-top">
-      {treeHistory && (
-        <div className="text-center treehistory-list">
-          <h4>Tree Visit History</h4>
-        </div>
-      )}
+const TreeHistory = ({ treeHistory }) => (
+  <div className="flex-grid border-top">
+    {treeHistory && (
+      <div className="text-center treehistory-list">
+        <h4>Tree Visit History</h4>
+      </div>
+    )}
 
-      {treeHistory
+    {treeHistory
       && treeHistory.map((history, index) => {
         const {
           idTreehistory,
-          idTree,
           dateVisit,
           comment,
           volunteer,
@@ -446,10 +471,8 @@ const TreeHistory = ({ currentTreeId, treeHistory }) => {
           </div>
         );
       })}
-    </div>
-  );
-};
-
+  </div>
+);
 const TreeLocation = ({
   address, city, zip, country, neighborhood, lng, lat,
 }) => (
@@ -532,30 +555,13 @@ const TreeMoreInfo = ({ who, idReference, owner }) => (
       )}
       <div>Open Tree Standards:</div>
       <div>
-        <a href="https://standards.opencouncildata.org/#/trees">
+        <a href="https://standards.opencouncildata.org/#/trees" name="opencouncildata.org trees">
           standards.opencouncildata.org/#/trees
         </a>
       </div>
     </div>
   </div>
 );
-
-const makeMaintenanceString = (history) => {
-  const historyArray = Object.entries(history)
-    .filter(([key, value]) => value !== 'no' && value !== null)
-    .filter(([key, value]) => (
-      key === 'watered'
-      || key === 'mulched'
-      || key === 'weeded'
-      || key === 'staked'
-      || key === 'braced'
-      || key === 'pruned'
-    ))
-    .map((item) => item[0]);
-  if (historyArray.length === 0) return '';
-  // console.log('historyArray', historyArray);
-  return historyArray.join(', ');
-};
 
 const hasMaintenanceFields = (obj) => {
   const maintenanceArray = ['watered', 'weeded', 'mulched', 'staked', 'braced', 'pruned', 'comment'];
@@ -564,7 +570,7 @@ const hasMaintenanceFields = (obj) => {
   return hasAny;
 };
 
-const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
+const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [statusSelected, setStatusSelected] = useState({});
@@ -573,26 +579,19 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
 
   const [maintenanceButtonStyle, setMaintenanceButtonStyle] = useState('btn-light');
   const [maintenanceSaveButton, setMaintenanceSaveButton] = useState('SAVE');
-  const [wttButtonStyle, setWttButtonStyle] = useState('btn-light');
-  const [wttSaveButton, setWttSaveButton] = useState('Water the Tree!');
   const handleMaintenanceSave = () => {
     setMaintenanceSaveButton('SAVE');
     setMaintenanceButtonStyle('btn-outline-success');
-    setWttSaveButton('Water the Tree!');
-    setWttButtonStyle('btn-outline-success');
   };
 
-  const handleButtonChanges = (mBtnStyle, mBtnSave, wttBtnStyle, wttBtnSave) => {
+  const handleButtonChanges = (mBtnStyle, mBtnSave) => {
     setMaintenanceButtonStyle(mBtnStyle);
     setMaintenanceSaveButton(mBtnSave);
-    setWttButtonStyle(wttBtnStyle);
-    setWttSaveButton(wttBtnSave);
   };
 
   const handleSubmit = async (event) => {
-    const functionName = 'handleSubmit';
+    // const functionName = 'handleSubmit';
     event.preventDefault();
-    console.log(functionName, 'statusSelected', statusSelected);
     try {
       const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
       const sendData = { idTree: currentTreeId, date_visit: dateVisit, ...statusSelected };
@@ -603,25 +602,15 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
       if (volunteerRef.current && volunteerRef.current.value) {
         sendData.volunteer = volunteerRef.current.value;
       }
-      const okToSend = hasMaintenanceFields(sendData);
-      // console.log(functionName, 'sendData', sendData);
-      // console.log(functionName, 'okToSend', okToSend);
       if (hasMaintenanceFields(sendData)) {
         handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
-        // console.log(functionName, 'has new maintenance sendData', sendData);
-        const { data, error } = await mutateHistory.mutate(['treehistory', sendData]);
-        // console.log(functionName, 'data', data);
-        if (error) {
-          // console.log(functionName, 'error', error);
-          handleButtonChanges('btn-danger', error, 'btn-danger', error);
-        }
+        await mutateHistory.mutate(['treehistory', sendData]);
         setTimeout(() => handleMaintenanceSave(), saveTimer);
       }
 
       return;
     } catch (err) {
-      console.log('\n\n\n\n ------', functionName, 'err', err);
-      return err;
+      console.error('CATCH err', err);
     }
   };
   const handleClickArrow = () => {
@@ -712,8 +701,38 @@ const TreeMaintenance = ({ currentTreeId, common, mutateHistory }) => {
   );
 };
 
+const isEmpty = (obj) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const prop in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const changeYesNo = (historybutton, statusSelected) => {
+  if (isEmpty(statusSelected)) return 'yes';
+  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) return 'yes';
+  return (statusSelected[historybutton] === 'no') ? 'yes' : 'no';
+};
+
+const changeImageText = (historybutton, statusSelected) => {
+  // console.log('changeImageText', historybutton, 'statusSelected', statusSelected)
+  const no = {
+    watered: 'water', weeded: 'weed', mulched: 'mulch', staked: 'stake', braced: 'brace', pruned: 'prune',
+  };
+  const yes = {
+    watered: 'watered', weeded: 'weeded', mulched: 'mulched', staked: 'staked', braced: 'braced', pruned: 'pruned',
+  };
+  if (isEmpty(statusSelected)) return yes[historybutton];
+  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) {
+    return yes[historybutton];
+  }
+  return (statusSelected[historybutton] === 'no') ? yes[historybutton] : no[historybutton];
+};
+
 const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
-  console.log('\n\n\n\n statusSelected', statusSelected);
   const [watered, setWater] = useState('water');
   const [weeded, setWeed] = useState('weed');
   const [mulched, setMulch] = useState('mulch');
@@ -723,10 +742,7 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
 
   const onCheckboxBtnClick = (event) => {
     event.preventDefault();
-    // console.log('event.target.name', event.target.name, event.target);
-    // console.log('event.target.value', event.target.value);
     const selected = event.target.name;
-    // console.log('selected', selected);
 
     const newImageText = changeImageText(selected, statusSelected);
     if (selected === 'watered') setWater(newImageText);
@@ -762,37 +778,5 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
         </Button>
       ))}
     </div>
-
   );
-};
-
-const isEmpty = (obj) => {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const prop in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-      return false;
-    }
-  }
-  return true;
-};
-
-const changeImageText = (historybutton, statusSelected) => {
-  // console.log('changeImageText', historybutton, 'statusSelected', statusSelected)
-  const no = {
-    watered: 'water', weeded: 'weed', mulched: 'mulch', staked: 'stake', braced: 'brace', pruned: 'prune',
-  };
-  const yes = {
-    watered: 'watered', weeded: 'weeded', mulched: 'mulched', staked: 'staked', braced: 'braced', pruned: 'pruned',
-  };
-  if (isEmpty(statusSelected)) return yes[historybutton];
-  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) {
-    return yes[historybutton];
-  }
-  return (statusSelected[historybutton] === 'no') ? yes[historybutton] : no[historybutton];
-};
-
-const changeYesNo = (historybutton, statusSelected) => {
-  if (isEmpty(statusSelected)) return 'yes';
-  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) return 'yes';
-  return (statusSelected[historybutton] === 'no') ? 'yes' : 'no';
 };
