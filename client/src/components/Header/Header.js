@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import AuthenticationButton from '../Auth/auth-button';
-import { AboutUs } from '../../pages/about/About';
 import './Header.scss';
+import { AboutUs } from '../../pages/about/About';
+// const AboutUs = lazy(() => import('../../pages/about/About'));
 
 const Header = () => (
-  <div className="header">
+  <div id="header" className="header">
     <div className="header__content">
       <AboutUs />
       <AuthenticationButton />

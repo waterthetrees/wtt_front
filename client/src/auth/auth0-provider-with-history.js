@@ -1,10 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
+import config from '../config';
+
+const { domain, clientId } = config.auth0;
 
 const Auth0ProviderWithHistory = ({ children }) => {
-  const domain = 'trees.us.auth0.com';
-  const clientId = 'rUv8qhefpscOANXBfanD0fwSjTMz2ZpW';
   const redirectUri = window.location.origin;
 
   const history = useHistory();

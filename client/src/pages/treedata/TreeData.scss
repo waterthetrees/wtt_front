@@ -1,5 +1,64 @@
 @import "../../styles/app";
 
+.modal-header {
+  border: 0;
+  padding: 0;
+}
+.modal-footer {
+  border: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -.2rem -.2rem -1rem auto;
+}
+.treeremoval__reason{
+  // margin:0 5px;
+  padding: 0 5px;
+  width:100%;
+}
+.treeremoval__reason-btngrp{
+  width:100%;
+}
+.treeremoval__reason-btn{
+  padding: 3px;
+}
+.treeremoval__reason-input {
+  border: 1px solid gray;
+  background-color: #f9f6f2;
+  margin: 3px 0;
+  padding: 0.375rem 0.75rem;
+  font-size: 1.2rem;
+  width:100%;
+}
+
+.treedata__edit {
+  padding: 5px 0;
+}
+.treedata__edit-btngrp{
+  // padding: 0 0 0 10px;
+}
+.treedata__edit-txt{
+  padding: 0 10px;
+  display: inline-flex;
+}
+.treedata__edit-btn{
+  // padding: 3px;
+  // margin: 0 3px;
+}
+
+.tree__header {
+  margin: 0 1.2rem;
+  border-bottom-right-radius: calc(.3rem - 1px);
+  border-bottom-left-radius: calc(.3rem - 1px);
+}
+
+.tree__body{
+  margin:1.2rem;
+}
+
 .map__container {
   position: absolute;
   top: 0;
@@ -123,7 +182,7 @@ element.style {
 }
 
 .tree__status {
-  padding: 2px 2px;
+  padding: 0 1.2rem;
 
   p {
     margin: 0;
@@ -278,8 +337,9 @@ element.style {
   margin: none;
 }
 
+
 .flex-grid {
-  margin: 0 0 10px 0;
+  margin: 4px 0;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -486,6 +546,17 @@ element.style {
   }
 }
 
+.treeremoval {
+  margin:10px 10px 10px 0;
+  padding:10px 10px 10px 0;
+}
+
+.treeremoval-btn {
+  margin:10px 10px 10px 0;
+}
+
+
+
 .addtreepage {
   display: inline-block;
   position: absolute;
@@ -551,7 +622,7 @@ element.style {
   height: 25px;
   width: 100%;
   border-radius: 1px;
-  margin: 1px 3px;
+  margin: 0;
   background-color: #008c00; /* For browsers that do not support gradients */
   background-image: linear-gradient(
     to right,

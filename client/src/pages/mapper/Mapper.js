@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useQuery, useMutation, queryCache } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { getData, postData } from '../../api/queries';
@@ -9,22 +9,22 @@ import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
 import config from '../../config';
 
-mapboxgl.accessToken = config.mapbox.key;
+mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
   const componentName = 'Mapper';
-
+  const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
-  const [mutateUser] = useMutation(postData, {
-    onSuccess: () => {
-      queryCache.invalidateQueries('user');
-    },
-  });
 
   // getData from DB
   const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
-  const { data, error } = treemap || {};
-  const mapData = data || null;
+  const error = treemap.error || null;
+  const mapData = treemap.data || null;
+  const mutateUser = useMutation(postData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+  });
 
   const mapboxElRef = useRef(null); // DOM element to render map
   const [map, setMap] = useState(null);
@@ -43,7 +43,7 @@ function Mapper() {
 
   // Initialize our map
   useEffect(() => {
-    if (isAuthenticated) mutateUser(['user', user]);
+    if (isAuthenticated) mutateUser.mutate(['user', user]);
     if (!mapData) return;
 
     const geolocate = new mapboxgl.GeolocateControl({
@@ -63,21 +63,12 @@ function Mapper() {
     // Add the control to the map.
     map.addControl(geolocate);
     geolocate.on('geolocate', (e) => {
-      console.log('e', e);
+      // console.log('e', e);
     });
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
-      // Add our DB SOURCE
-      // if (!navigator.geolocation) {
-      //   geolocate.innerHTML = 'Geolocation is not available';
-      // } else {
-      // geolocate.trigger();
-      //   geolocate.on('geolocate', (e) => {
-      //     console.log('e', e);
-      //   });
-      // }
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
@@ -92,18 +83,30 @@ function Mapper() {
           id: 'treedata',
           source: 'treedata', // this should be the id of source
           type: 'circle',
+          filter: ['!', ['has', 'point_count']],
           paint: {
-            'circle-stroke-color': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              1,
-              0.5,
+            // 'circle-radius': 1,
+            // 'circle-color': 'black',
+            'circle-color': [
+              'match',
+              ['get', 'health'],
+              'good', 'green',
+              'fair', 'orange',
+              'poor', 'red',
+              'dead', 'black',
+              'vacant', '#7c501a',
+              'missing', '#7c501a',
+              'concrete', '#808080',
+              'stump', 'brown',
+              /* other */ 'green',
             ],
-            // 'circle-radius': 55,
             'circle-radius': {
               property: 'health',
               base: 1,
-              stops: [[10, 8], [12, 16]],
+              stops: [
+                [12, 8],
+                [18, 280],
+              ],
             },
             // 'circle-stroke-color': '#000',
             'circle-stroke-color': [
@@ -113,24 +116,14 @@ function Mapper() {
               'fair', 'orange',
               'poor', 'red',
               'dead', 'black',
-              'missing', 'darkgray',
+              'vacant', '#7c501a',
+              'missing', '#7c501a',
+              'concrete', '#808080',
               'stump', 'brown',
               /* other */ 'green',
             ],
             'circle-stroke-width': 3,
-            // 'circle-color': 'transparent',
-            // 'circle-color': '#000',
-            'circle-color': [
-              'match',
-              ['get', 'health'],
-              'good', 'green',
-              'fair', 'orange',
-              'poor', 'red',
-              'dead', 'black',
-              'missing', 'darkgray',
-              'stump', 'brown',
-              /* other */ 'green',
-            ],
+
           },
         });
 

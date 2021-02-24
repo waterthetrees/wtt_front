@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useRef } from 'react';
-import { useMutation, queryCache } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import {
   Modal,
   ModalHeader,
@@ -52,9 +52,7 @@ function AddTree(props) {
   useEffect(() => {
     if (!addTreeSelected) {
       if (currentMarkers !== null) {
-        currentMarkers.map((currentMarker) => {
-          currentMarker.remove();
-        });
+        currentMarkers.map((currentMarker) => currentMarker.remove());
       }
     }
   }, [addTreeSelected]);
@@ -200,16 +198,18 @@ const AddTreeModal = ({
     handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
   const [data, setData] = useState(null);
-
-  const [mutateTreeData] = useMutation(postData, {
+  const queryClient = useQueryClient();
+  const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
-      queryCache.invalidateQueries('treemap');
+      queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('treemap');
     },
   });
 
   const onSubmit = (data, e) => {
     const sendData = { ...defaultValues, ...data, ...coordinatesNewTree };
-    mutateTreeData(['tree', sendData]);
+    console.log('\n\n\n\n\nsendData', sendData);
+    mutateTreeData.mutate(['tree', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
   };
@@ -217,21 +217,23 @@ const AddTreeModal = ({
   const onError = (errors, e) => console.log('errors, e', errors, e);
   return (
     <Modal isOpen={showAddTreeModal}>
-      <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)}>
-        <TreeHeader renderCount={renderCount} />
-      </ModalHeader>
-
-      <ModalBody>
-        <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-          <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
-          <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
-          <TreePlanter control={control} errors={errors} />
-          <ButtonsResult {...{
-            data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
-          }}
-          />
-        </form>
-      </ModalBody>
+      <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)} />
+      <div className="addtree">
+        <div className="addtree__header">
+          <TreeHeader renderCount={renderCount} />
+        </div>
+        <div className="addtree__body">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
+            <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreePlanter control={control} errors={errors} />
+            <ButtonsResult {...{
+              data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
+            }}
+            />
+          </form>
+        </div>
+      </div>
 
       <ModalFooter>
         <Footer />
