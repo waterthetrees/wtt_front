@@ -17,7 +17,7 @@ function Mapper() {
   const { isAuthenticated, user } = useAuth0();
 
   // getData from DB
-  const treemap = useQuery(['treemap', { city: 'Oakland' }], getData);
+  const treemap = useQuery(['treemap', { city: 'All' }], getData);
   const error = treemap.error || null;
   const mapData = treemap.data || null;
   const mutateUser = useMutation(postData, {
@@ -198,6 +198,7 @@ function Mapper() {
     });
     // return () => {};
   }, [mapData]);
+  console.log('mapData',mapData);
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
