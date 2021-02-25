@@ -6,8 +6,8 @@ const app = express();
 // const fs = require('fs');
 const morgan = require('morgan');
 // const util = require('util');
+const path = require('path');
 const { logger } = require('../logger.js');
-
 // usage: node stripe_webhook_server.js prod or node stripe_webhook_server.js for dev
 const env = process.argv[2] || 'local';
 const host = {
@@ -22,6 +22,13 @@ const port = {
 
 app.use(morgan('dev'));
 app.use('/', express.static('client/public'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // const options = {
 // cert : fs.readFileSync('/etc/letsencrypt/live/dev.100ktrees.com/fullchain.pem'),

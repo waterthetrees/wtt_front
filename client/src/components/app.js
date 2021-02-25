@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Suspense } from 'react';
+import React, { lazy } from 'react';
 import {
   Switch, Route, Redirect, withRouter,
 } from 'react-router-dom';
@@ -40,24 +40,11 @@ const Loading = () => (
 // };
 const queryClient = new QueryClient();
 
-const App = () => {
-  const componentName = 'App';
-  const { isLoading, isAuthenticated, user } = useAuth0();
-
-  if (isLoading) {
-    return <Loading />;
-  }
-  return (
-    <QueryClientProvider client={queryClient}>
-
-      <Suspense fallback={<Loading />}>
-        <Switch>
-          <Route component={Layout} />
-          <Route component={NotFound} />
-        </Switch>
-      </Suspense>
-    </QueryClientProvider>
-  );
-};
+const App = () => (
+  <Switch>
+    <Route component={Layout} />
+    <Route component={NotFound} />
+  </Switch>
+);
 
 export default withRouter(App);

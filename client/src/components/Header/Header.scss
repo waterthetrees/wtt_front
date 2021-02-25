@@ -20,9 +20,33 @@
   align-items: center;
 }
 
-.aboutpage{
-  flex-basis: auto;
+.header:focus{
+  outline: none;
 }
+
+.header__icon {
+  height: 5vh;
+}
+
+.header__icon:hover {
+  cursor: pointer;
+}
+
+.header__icon:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .header__icon {
+    // height: 1.85rem;
+    width: 70vw;
+  }
+}
+
+
 
 @media only screen and (max-width: 768px) {
 
