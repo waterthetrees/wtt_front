@@ -3,7 +3,7 @@
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: Arial, sans-serif, "PT Sans";
+  font-family: 'Roboto Mono', monospace, Arial, sans-serif, "PT Sans";
 }
 
 body {
@@ -11,8 +11,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Mono', monospace, Arial, sans-serif, "PT Sans";
 }
 
 #root,
@@ -95,6 +94,8 @@ body {
   height: 25px;
   margin: 0 0 0 3px;
 }
+
+
 
 
 
