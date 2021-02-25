@@ -3,11 +3,13 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin'); // gzip
-const BrotliPlugin = require('brotli-webpack-plugin'); // brotli
+// const CompressionPlugin = require('compression-webpack-plugin'); // gzip
+// const BrotliPlugin = require('brotli-webpack-plugin'); // brotli
 
 module.exports = {
   watch: true,
+  // publicPath: '/',
+  // historyApiFallback: true,
   mode: 'development',
   // mode: 'production',
   // https://webpack.js.org/concepts/mode/
@@ -15,8 +17,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'client/public'),
     filename: 'bundle.js',
+    publicPath: '/',
     // filename: 'bundle.production.min.js'
     sourceMapFilename: '[name].js.map',
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true,
   },
   devtool: 'source-map',
   module: {

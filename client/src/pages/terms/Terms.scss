@@ -1,9 +1,10 @@
-.terms__icon {
-  height: 5vh;
+.terms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:5rem;
 }
 
 @media only screen and (max-width: 768px) {
-  .terms__icon {
-    width: 70vw;
-  }
+
 }

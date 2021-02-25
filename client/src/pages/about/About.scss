@@ -1,4 +1,11 @@
 
+.about{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:5rem;
+}
+
 .about:focus{
   outline: none;
 }
