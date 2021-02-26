@@ -40,9 +40,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
     <Modal isOpen={showTree} className="tree__modal">
       <ModalHeader toggle={toggle} />
       <TreeContent currentTreeId={currentTreeId} />
-      <ModalFooter>
-        <Footer />
-      </ModalFooter>
+      <ModalFooter />
     </Modal>
   );
 }
@@ -127,29 +125,41 @@ const TreeContent = ({ currentTreeId }) => {
 
           </div>
           <div className="tree__body">
-            <TreeHealthSlider
-              health={health}
-              healthNum={healthNum}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-            />
-            <TreeNotes
-              notes={notes}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-            />
-            <TreeCare currentTreeId={currentTreeId} common={common} health={health} />
-            <TreeLocation
-              address={address}
-              city={city}
-              zip={zip}
-              country={country}
-              neighborhood={neighborhood}
-              lng={lng}
-              lat={lat}
-              owner={owner}
-            />
-            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+            {!editTree && (
+              <TreeHealthSlider
+                health={health}
+                healthNum={healthNum}
+                currentTreeId={currentTreeId}
+                mutateTreeData={mutateTreeData}
+              />
+            )}
+            {!editTree && (
+              <TreeNotes
+                notes={notes}
+                currentTreeId={currentTreeId}
+                mutateTreeData={mutateTreeData}
+              />
+            )}
+            {!editTree && (
+              <TreeCare
+                currentTreeId={currentTreeId}
+                common={common}
+                health={health}
+              />
+            )}
+            {!editTree && (
+              <TreeLocation
+                address={address}
+                city={city}
+                zip={zip}
+                country={country}
+                neighborhood={neighborhood}
+                lng={lng}
+                lat={lat}
+                owner={owner}
+              />
+            )}
+            {!editTree && (<TreeMoreInfo owner={owner} idReference={idReference} who={who} />)}
             {!common.includes('VACANT') && (
               <TreeRemoval
                 idTree={idTree}
@@ -238,7 +248,6 @@ const TreeHealthSlider = ({
         const sendTreeData = {
           idTree: currentTreeId,
           health: newHealth,
-          healthNum: sliderRef.current.value,
         };
         await mutateTreeData.mutate(['tree', sendTreeData]);
         setTimeout(() => setHealthSaveAlert(''), saveTimer);
