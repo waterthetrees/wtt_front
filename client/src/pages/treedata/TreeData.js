@@ -10,7 +10,6 @@ import cx from 'classnames';
 import format from 'date-fns/format';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
-import Footer from '../../components/Footer';
 import { getData, putData, postData } from '../../api/queries';
 
 import TreeHeaderForm from './TreeDataEdit';
@@ -125,41 +124,37 @@ const TreeContent = ({ currentTreeId }) => {
 
           </div>
           <div className="tree__body">
-            {!editTree && (
-              <TreeHealthSlider
-                health={health}
-                healthNum={healthNum}
-                currentTreeId={currentTreeId}
-                mutateTreeData={mutateTreeData}
-              />
-            )}
-            {!editTree && (
-              <TreeNotes
-                notes={notes}
-                currentTreeId={currentTreeId}
-                mutateTreeData={mutateTreeData}
-              />
-            )}
-            {!editTree && (
-              <TreeCare
-                currentTreeId={currentTreeId}
-                common={common}
-                health={health}
-              />
-            )}
-            {!editTree && (
-              <TreeLocation
-                address={address}
-                city={city}
-                zip={zip}
-                country={country}
-                neighborhood={neighborhood}
-                lng={lng}
-                lat={lat}
-                owner={owner}
-              />
-            )}
-            {!editTree && (<TreeMoreInfo owner={owner} idReference={idReference} who={who} />)}
+            <TreeHealthSlider
+              health={health}
+              healthNum={healthNum}
+              currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
+            />
+
+            <TreeNotes
+              notes={notes}
+              currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
+            />
+
+            <TreeCare
+              currentTreeId={currentTreeId}
+              common={common}
+              health={health}
+            />
+
+            <TreeLocation
+              address={address}
+              city={city}
+              zip={zip}
+              country={country}
+              neighborhood={neighborhood}
+              lng={lng}
+              lat={lat}
+              owner={owner}
+            />
+
+            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
             {!common.includes('VACANT') && (
               <TreeRemoval
                 idTree={idTree}
@@ -295,7 +290,14 @@ const TreeHealthSlider = ({
             </span>
           )}
         </h3>
-        {healthSaveAlert && <div className="alert alert-success" role="alert">{healthSaveAlert}</div>}
+        {healthSaveAlert && (
+          <div
+            className="alert alert-success"
+            role="alert"
+          >
+            {healthSaveAlert}
+          </div>
+        )}
       </div>
     </div>
   );
