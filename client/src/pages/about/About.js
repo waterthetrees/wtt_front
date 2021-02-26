@@ -10,8 +10,9 @@ function About() {
         <h2>
           Water The Trees is a platform that crowd
           sources tree planting and maintenance. We believe in the power of
-          trees to restore natural habitat for animals, insects, and fauna,
-          We are interesting in mass local tree planting to help sequester carbon
+          trees to restore natural habitat for animals, insects, and fauna.
+          We are interesting in continuous massive tree planting events
+          to help sequester carbon
           and stabilize climate change extremes.
         </h2>
       </div>
