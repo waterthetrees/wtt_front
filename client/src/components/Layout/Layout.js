@@ -11,7 +11,7 @@ import Mapper from '../../pages/mapper/Mapper';
 import About from '../../pages/about/About';
 // import About from '../../pages/about/About';
 import Privacy from '../../pages/privacy/Privacy';
-import Terms from '../../pages/terms/Terms';
+import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
 // const Header = lazy(() => import('../Header'));
 // const Terms = lazy(() => import('../../pages/terms/Terms'));
@@ -33,11 +33,12 @@ function Layout() {
           <Route path="/userprofile" exact component={UserProfile} />
           <Route path="/about" exact component={About} />
           <Route path="/privacy" exact component={Privacy} />
-          <Route path="/terms" exact component={Terms} />
+          <Route path="/license" exact component={License} />
           <Route component={NotFound} />
         </Switch>
 
       </QueryClientProvider>
+
     </div>
   );
 }
