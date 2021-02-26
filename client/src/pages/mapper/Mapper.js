@@ -198,7 +198,7 @@ function Mapper() {
     });
     // return () => {};
   }, [mapData]);
-  console.log('mapData',mapData);
+  //console.log('mapData',mapData);
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
