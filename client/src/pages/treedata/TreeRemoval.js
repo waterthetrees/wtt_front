@@ -130,7 +130,7 @@ export default function TreeRemoval({
               ref={commentRef}
               placeholder="Other"
               name="otherreason"
-              id="comment"
+              id="otherreason"
               className="treeremoval__reason-input"
               onBlur={handleRemoveTree}
             />
