@@ -150,8 +150,7 @@
     "render": "babel-node tools/run render",
     "watch": "webpack -w",
     "ngrok": "ngrok start --all -config ./ngrok.yml",
-    "serve": "node server/server-api.js",
-    "start": "node server/server-dashboard.js",
+    "start": "node server/server-dashboard.js local",
     "test": "mocha --timeout=90000 ./test/react-tests.js"
   }
 }
