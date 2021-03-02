@@ -2,27 +2,43 @@ import React, { lazy } from 'react';
 import { Switch, Route, withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Layout.scss';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 import Header from '../Header';
 import Mapper from '../../pages/mapper/Mapper';
-
-const TreeData = lazy(() => import('../../pages/treedata/TreeData'));
-const AddTree = lazy(() => import('../../pages/addtree/AddTree'));
-const Terms = lazy(() => import('../../pages/terms/Terms'));
-const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
+import About from '../../pages/about/About';
+// import About from '../../pages/about/About';
+import Privacy from '../../pages/privacy/Privacy';
+import License from '../../pages/license/License';
+import UserProfile from '../../pages/userprofile/UserProfile';
+// const Header = lazy(() => import('../Header'));
+// const Terms = lazy(() => import('../../pages/terms/Terms'));
+// const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
 const NotFound = lazy(() => import('../../pages/notFound/NotFound'));
+
+const queryClient = new QueryClient();
 
 function Layout() {
   return (
-    <div className="Layout">
+    <div className="layout">
       <Header />
-      <Switch>
-        <Route path="/" exact component={Mapper} />
-        <Route path="/treedata" exact component={TreeData} />
-        <Route path="/addtree" exact component={AddTree} />
-        <Route path="/terms" exact component={Terms} />
-        <Route path="/privacy" exact component={Privacy} />
-        <Route component={NotFound} />
-      </Switch>
+
+      <QueryClientProvider client={queryClient}>
+        <Switch>
+          <Route path="/" exact component={Mapper} />
+          <Route path="/treemap" exact component={Mapper} />
+
+          <Route path="/userprofile" exact component={UserProfile} />
+          <Route path="/about" exact component={About} />
+          <Route path="/privacy" exact component={Privacy} />
+          <Route path="/license" exact component={License} />
+          <Route component={NotFound} />
+        </Switch>
+
+      </QueryClientProvider>
+
     </div>
   );
 }

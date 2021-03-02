@@ -4,10 +4,13 @@ import apiEndpoints from './apiEndpoints.js';
 
 async function getData(...args) {
   const functionName = 'getData';
-  const [request, params] = args;
+  // const [request, params] = args;
+  const { queryKey } = args[0];
 
-  const serializedData = serializeData(params);
-  const url = `${apiEndpoints[request]}?${serializedData}`;
+  // console.log('\n\n\n TEST queryKey', queryKey[0], queryKey[1]);
+  const serializedData = serializeData(queryKey[1]);
+  const endpoint = queryKey[0];
+  const url = `${apiEndpoints[endpoint]}?${serializedData}`;
 
   const options = {
     // url,
@@ -20,18 +23,20 @@ async function getData(...args) {
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     // redirect: 'follow', // manual, *follow, error
-    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    params,
+    // referrerPolicy: 'no-referrer',
+    // no-referrer, *no-referrer-when-downgrade,
+    // origin, origin-when-cross-origin, same-origin,
+    // strict-origin, strict-origin-when-cross-origin, unsafe-url
+    params: queryKey[0],
   };
   const response = await fetch(url, options);
 
   return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-const serializeData = (data) =>
-  Object.entries(data)
-    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-    .join('&');
+const serializeData = (data) => Object.entries(data)
+  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+  .join('&');
 
 async function postData(...args) {
   const functionName = 'postData';
@@ -58,9 +63,10 @@ async function postData(...args) {
 }
 
 async function putData(...args) {
-  const functionName = 'postData';
+  const functionName = 'putData';
   const [request] = args;
   const data = request[1];
+  // console.log(functionName, 'data,', data, '\n\nrequest', request);
   // Default options are marked with *
   const url = apiEndpoints[request[0]];
   const options = {
@@ -78,7 +84,7 @@ async function putData(...args) {
     data, // body data type must match "Content-Type" header
   };
   const response = await fetch(url, options);
-  return await response.json(); // parses JSON response into native JavaScript objects
+  return response.json(); // parses JSON response into native JavaScript objects
 }
 
 export { postData, putData, getData };

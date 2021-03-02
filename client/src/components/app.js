@@ -1,9 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Suspense } from 'react';
+import React, { lazy } from 'react';
 import {
   Switch, Route, Redirect, withRouter,
 } from 'react-router-dom';
-import { ReactQueryConfigProvider } from 'react-query';
+// import { ReactQueryConfigProvider } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 import Layout from './Layout/Layout';
 
@@ -26,33 +30,21 @@ const Loading = () => (
   </div>
 );
 
-const queryConfig = {
-  shared: {
-    suspense: true,
-  },
-  queries: {
-    refetchOnWindowFocus: true,
-  },
-};
+// const queryConfig = {
+//   shared: {
+//     suspense: true,
+//   },
+//   queries: {
+//     refetchOnWindowFocus: true,
+//   },
+// };
+const queryClient = new QueryClient();
 
-const App = () => {
-  const componentName = 'App';
-  const { isLoading, isAuthenticated, user } = useAuth0();
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  return (
-    <ReactQueryConfigProvider config={queryConfig}>
-      <Suspense fallback={<Loading />}>
-        <Switch>
-          <Route component={Layout} />
-          <Route component={NotFound} />
-        </Switch>
-      </Suspense>
-    </ReactQueryConfigProvider>
-  );
-};
+const App = () => (
+  <Switch>
+    <Route component={Layout} />
+    <Route component={NotFound} />
+  </Switch>
+);
 
 export default withRouter(App);

@@ -1,18 +1,16 @@
-
-.about{
+.license {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin:10rem 8rem;
 }
 
-.about__p{
-  margin:3rem 0;
+.license__p {
+  margin: 0 0 2rem 0;
 }
 
-
 @media only screen and (max-width: 768px) {
-  .about {
+  .license {
     margin:5rem 2rem;
   }
 }

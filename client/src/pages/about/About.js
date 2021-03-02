@@ -1,55 +1,41 @@
-import React, { useState } from 'react';
-import {
-  Modal, ModalHeader, ModalBody,
-} from 'reactstrap';
+import React from 'react';
 import './About.scss';
-// const INFO_ICON = "assets/images/map/info-icon.svg";
-// const WTT_FAT = "assets/images/logos/wtt-fat.svg";
-// const WATER_THE_TREES = "assets/images/logos/waterthetrees-fat.svg";
-// const WATER_THE_TREES = "assets/images/logos/waterthetrees-viga.svg";
-// const WATER_THE_TREES = "assets/images/logos/waterthetrees-riteous.svg";
-const WATER_THE_TREES = 'assets/images/logos/waterthetrees-fatgraff.svg';
-// const WTT_FAT = "assets/images/logos/wtt-fatter.svg";
-// const WTT_FAT = "assets/images/logos/wtt-riteous.svg";
-// const WTT_FAT = "assets/images/logos/wtt-viga.svg";
 
-export const AboutUs = () => {
-  const [showAboutUsModal, setShowAboutUsModal] = useState(false);
+import Footer from '../../components/Footer';
+
+function About() {
   return (
-    <>
-      <div
-        className="about"
-        role="button"
-        onClick={() => {
-          setShowAboutUsModal(!showAboutUsModal);
-        }}
-        onKeyPress={() => {
-          setShowAboutUsModal(!showAboutUsModal);
-        }}
-        tabIndex="0"
-      >
-        <img
-          alt="About us"
-          key="aboutUsButton"
-          className="about__icon"
-          src={WATER_THE_TREES}
-        />
-
+    <div className="about">
+      <div className="about__p">
+        <h2>
+          Water The Trees is a platform that crowd
+          sources tree planting and maintenance. We believe in the power of
+          trees to restore natural habitat for animals, insects, and fauna.
+          We are interesting in continuous massive tree planting events
+          to help sequester carbon
+          and stabilize climate change extremes.
+        </h2>
       </div>
-      <div>
-        <Modal isOpen={showAboutUsModal}>
-          <ModalHeader toggle={() => setShowAboutUsModal(!showAboutUsModal)}>
-            About Water the Trees
-          </ModalHeader>
-          <ModalBody>
-            Water The Trees is a platform that helps local communities crowd
-            source urban tree maintenance and planting. We believe in the power of
-            urban trees on a multitude of levels: from increasing carbon
-            sequestration to restoring our natural habitat for birds, insects,
-            and fauna.
-          </ModalBody>
-        </Modal>
+      <div className="about__p">
+        <h4>
+          <a
+            name="onboarding"
+            target="blank"
+            href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
+            className="footer__joinus"
+          >
+            Join Us!
+          </a>
+        </h4>
+        <h4>
+          Water the Trees is an open source project
+          run by tree planting volunteers at Sierra Club,
+          Public Works, and developers at Code for America.
+        </h4>
       </div>
-    </>
+      <Footer />
+    </div>
   );
-};
+}
+
+export default About;

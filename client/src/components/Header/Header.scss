@@ -1,10 +1,8 @@
 @import "../../styles/app";
 
 .header {
-  display: inline-block;
-  position: absolute;
-  top: 0px;
-  left: 0;
+  position: fixed;
+  top: 0;
   width: 100%;
   background-color: #147d16;
   opacity: .8;
@@ -20,9 +18,47 @@
   align-items: center;
 }
 
-.aboutpage{
-  flex-basis: auto;
+.header:focus{
+  outline: none;
 }
+
+.header__icon {
+  height: 5vh;
+}
+
+.header__icon:hover {
+  cursor: pointer;
+}
+
+.header__icon:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.header__link { 
+  width:100%;
+}
+
+.MuiListItem-gutters {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.MuiButton-label {
+  background: white;
+  border-radius: 5px;
+  padding: .1rem 0;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .header__icon {
+    // height: 1.85rem;
+    width: 70vw;
+  }
+}
+
+
 
 @media only screen and (max-width: 768px) {
 
