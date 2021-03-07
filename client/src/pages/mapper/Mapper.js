@@ -80,6 +80,8 @@ function Mapper() {
       // }
       map.addSource('treeVectorTiles', {
         type: 'vector',
+        // TODO(Ted): This is going to send back https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+        // not lat/long, we need to rework this on the backend as well
         tiles: [
           'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt',
         ],
