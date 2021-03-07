@@ -69,6 +69,22 @@ function Mapper() {
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
+      // Add our DB SOURCE
+      // if (!navigator.geolocation) {
+      //   geolocate.innerHTML = 'Geolocation is not available';
+      // } else {
+      // geolocate.trigger();
+      //   geolocate.on('geolocate', (e) => {
+      //     console.log('e', e);
+      //   });
+      // }
+      map.addSource('treeVectorTiles', {
+        type: 'vector',
+        tiles: [
+          'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt',
+        ],
+      });
+
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
@@ -198,7 +214,7 @@ function Mapper() {
     });
     // return () => {};
   }, [mapData]);
-  //console.log('mapData',mapData);
+  // console.log('mapData',mapData);
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
