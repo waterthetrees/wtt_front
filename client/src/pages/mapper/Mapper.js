@@ -78,6 +78,13 @@ function Mapper() {
       //     console.log('e', e);
       //   });
       // }
+      map.addSource('treeVectorTiles', {
+        type: 'vector',
+        tiles: [
+          'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt'
+        ],
+      });
+
       map.addSource('treedata', {
         type: 'geojson',
         data: mapData,
