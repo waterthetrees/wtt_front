@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD npm start && npm run docker-wp
+CMD npm run watch & npm run start-dev
