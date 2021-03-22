@@ -22,6 +22,7 @@ module.exports = {
     semi: ['error', 'always'],
     // we use 2 spaces to indent our code
     indent: ['error', 2],
+    'max-len': ['error', { code: 100, ignoreUrls: true }],
     // we want to avoid useless spaces
     'no-multi-spaces': ['error'],
     'react/prop-types': [0, { skipUndeclared: 1 }],
