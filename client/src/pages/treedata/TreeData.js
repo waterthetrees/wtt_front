@@ -14,6 +14,8 @@ import { getData, putData, postData } from '../../api/queries';
 
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
+import TreeHeader from './TreeHeader';
+import TreeAdopt from './TreeAdopt';
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -91,13 +93,20 @@ const TreeContent = ({ currentTreeId }) => {
     setEditTree(!editTree);
   };
 
+  const [adoptTree, setAdoptTree] = useState(false);
+  const adopt = (event) => {
+    console.log(event.target);
+    if (!isAuthenticated) loginWithRedirect();
+    setAdoptTree(!adoptTree);
+  };
+
   return (
     <>
       {idTree && (
         <div className="tree text-center">
 
           <div className="tree__header">
-            {!editTree && (
+            {!editTree && !adoptTree && (
               <TreeHeader
                 common={common}
                 scientific={scientific}
@@ -106,6 +115,7 @@ const TreeContent = ({ currentTreeId }) => {
                 dbh={dbh}
                 height={height}
                 edit={edit}
+                adopt={adopt}
               />
             )}
             {editTree && (
@@ -122,108 +132,69 @@ const TreeContent = ({ currentTreeId }) => {
               />
             )}
 
-          </div>
-          <div className="tree__body">
-            <TreeHealthSlider
-              health={health}
-              healthNum={healthNum}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-            />
-
-            <TreeNotes
-              notes={notes}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-            />
-
-            <TreeCare
-              currentTreeId={currentTreeId}
-              common={common}
-              health={health}
-            />
-
-            <TreeLocation
-              address={address}
-              city={city}
-              zip={zip}
-              country={country}
-              neighborhood={neighborhood}
-              lng={lng}
-              lat={lat}
-              owner={owner}
-            />
-
-            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
-            {!common.includes('VACANT') && (
-              <TreeRemoval
+            {adoptTree && (
+              <TreeAdopt
                 idTree={idTree}
                 common={common}
-                notes={notes}
-                mutateTreeData={mutateTreeData}
                 mutateHistory={mutateHistory}
+                setAdoptTree={setAdoptTree}
               />
             )}
-          </div>
 
+          </div>
+          
+            <div className="tree__body">
+            {!adoptTree && (
+              <TreeHealthSlider
+                health={health}
+                healthNum={healthNum}
+                currentTreeId={currentTreeId}
+                mutateTreeData={mutateTreeData}
+              />
+            )}
+            {!adoptTree && (
+              <TreeNotes
+                notes={notes}
+                currentTreeId={currentTreeId}
+                mutateTreeData={mutateTreeData}
+              />
+              )}
+              <TreeCare
+                currentTreeId={currentTreeId}
+                common={common}
+                health={health}
+              />
+              
+              <TreeLocation
+                address={address}
+                city={city}
+                zip={zip}
+                country={country}
+                neighborhood={neighborhood}
+                lng={lng}
+                lat={lat}
+                owner={owner}
+              />
+              
+              <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+
+              {!common.includes('VACANT') && !adoptTree && (
+                <TreeRemoval
+                  idTree={idTree}
+                  common={common}
+                  notes={notes}
+                  mutateTreeData={mutateTreeData}
+                  mutateHistory={mutateHistory}
+                />
+              )}
+
+            </div>
+          )}
         </div>
       )}
     </>
   );
 };
-
-const TreeHeader = ({
-  common, scientific, genus,
-  datePlanted, edit, height, dbh,
-}) => (
-  <div className="flex-grid-three text-left">
-    {common && (
-      <div>
-        <h3>{common}</h3>
-      </div>
-    )}
-    {scientific && (
-      <div>
-        <h4>{scientific}</h4>
-      </div>
-    )}
-    {genus && (
-      <div>
-        <h4>{genus}</h4>
-      </div>
-    )}
-    {datePlanted && !common.includes('VACANT') && (
-      <div>
-        <h5>
-          Planted:
-          {' '}
-          {format(new Date(datePlanted), 'MMMM dd, yyyy')}
-        </h5>
-      </div>
-    )}
-    {height && (
-      <div>
-        <h5>
-          Height:
-          {' '}
-          {height}
-        </h5>
-      </div>
-    )}
-    {dbh && (
-      <div>
-        <h5>
-          DBH:
-          {' '}
-          {dbh}
-        </h5>
-      </div>
-    )}
-    <div className="treedata__edit-btn text-right">
-      <Button color="link" className="btn-sm" onClick={edit}>Edit Tree Name</Button>
-    </div>
-  </div>
-);
 
 const TreeHealthSlider = ({
   currentTreeId, healthNum, health,
