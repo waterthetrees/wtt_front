@@ -1,0 +1,20 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:10rem 8rem;
+}
+
+.contact__p {
+  margin: 0 0 2rem 0;
+}
+
+.contact__main {
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .contact {
+    margin:5rem 2rem;
+  }
+}
