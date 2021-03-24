@@ -13,6 +13,7 @@ import About from '../../pages/about/About';
 import Privacy from '../../pages/privacy/Privacy';
 import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
+import Contact from '../../pages/contact/Contact';
 // const Header = lazy(() => import('../Header'));
 // const Terms = lazy(() => import('../../pages/terms/Terms'));
 // const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
@@ -34,6 +35,7 @@ function Layout() {
           <Route path="/about" exact component={About} />
           <Route path="/privacy" exact component={Privacy} />
           <Route path="/license" exact component={License} />
+          <Route path="/contact" exact component={Contact} />
           <Route component={NotFound} />
         </Switch>
 
