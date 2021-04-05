@@ -78,14 +78,41 @@ function Mapper() {
       //     console.log('e', e);
       //   });
       // }
-      map.addSource('treeVectorTiles', {
-        type: 'vector',
-        // TODO(Ted): This is going to send back https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-        // not lat/long, we need to rework this on the backend as well
-        tiles: [
-          'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt',
-        ],
-      });
+
+      // map.addLayer({
+      //   id: 'public.points',
+      //   type: 'circle',
+      //   source: {
+      //     type: 'vector',
+      //     url: 'http://localhost:3001/public.points.json',
+      //   },
+      //   'source-layer': 'public.points',
+      //   paint: {
+      //     'circle-color': 'red',
+      //   },
+      // });
+
+      // map.addLayer({
+      //   id: 'public.table_source',
+      //   type: 'circle',
+      //   source: {
+      //     type: 'vector',
+      //     url: 'http://localhost:3001/public.table_source.json',
+      //   },
+      //   'source-layer': 'public.table_source',
+      //   paint: {
+      //     'circle-color': 'red',
+      //   },
+      // });
+
+      // map.addSource('treeVectorTiles', {
+      //   type: 'vector',
+      //   // TODO(Ted): This is going to send back https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+      //   // not lat/long, we need to rework this on the backend as well
+      //   tiles: [
+      //     'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt',
+      //   ],
+      // });
 
       map.addSource('treedata', {
         type: 'geojson',
