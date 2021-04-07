@@ -37,16 +37,10 @@
 .treedata__edit {
   padding: 5px 0;
 }
-.treedata__edit-btngrp{
-  // padding: 0 0 0 10px;
-}
+
 .treedata__edit-txt{
   padding: 0 10px;
   display: inline-flex;
-}
-.treedata__edit-btn{
-  // padding: 3px;
-  // margin: 0 3px;
 }
 
 .tree__header {
@@ -56,7 +50,7 @@
 }
 
 .tree__body{
-  margin:1.2rem;
+  margin: 0 1.2rem;
 }
 
 .map__container {
@@ -384,6 +378,12 @@ element.style {
   font-size: 1.2rem;
 }
 
+.treehistory-list__header{
+  margin: 15px 0 0 0;
+  padding: 5px;
+  background-color: #e9ecef;
+}
+
 .treehistory-item {
   border: 2px solid #e9ecef;
   padding: 10px;
@@ -408,6 +408,15 @@ element.style {
 .tree__imagelocation > img {
   width: 100vw;
   height: 100%;
+}
+.adopt__label {
+  margin-bottom: 0 !important;
+  border: 1px;
+}
+
+.MuiButton-root {
+  padding: 0;
+  text-transform: none;
 }
 
 .progressbar {
@@ -472,10 +481,11 @@ element.style {
     rgba(84, 219, 22, 1) 100%
   ); /* w3c */
 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54DB16', endColorstr='#000000',GradientType=1 ); /* ie6-9 */
-}
-
-.status {
+  filter: progid:DXImageTransform.Microsoft.gradient( 
+    startColorstr='#54DB16', 
+    endColorstr='#000000',
+    GradientType=1 
+  ); /* ie6-9 */
 }
 
 .container_popup {
@@ -656,7 +666,4 @@ element.style {
   height: 25px;
   background: #4caf50;
   cursor: pointer;
-}
-
-.save__btn {
 }

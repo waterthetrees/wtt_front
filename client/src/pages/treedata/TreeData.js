@@ -11,11 +11,10 @@ import format from 'date-fns/format';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, putData, postData } from '../../api/queries';
-
+import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
 import TreeHeader from './TreeHeader';
-import TreeAdopt from './TreeAdopt';
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -47,8 +46,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
 }
 
 const TreeContent = ({ currentTreeId }) => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
@@ -93,20 +91,13 @@ const TreeContent = ({ currentTreeId }) => {
     setEditTree(!editTree);
   };
 
-  const [adoptTree, setAdoptTree] = useState(false);
-  const adopt = (event) => {
-    console.log(event.target);
-    if (!isAuthenticated) loginWithRedirect();
-    setAdoptTree(!adoptTree);
-  };
-
   return (
     <>
       {idTree && (
         <div className="tree text-center">
 
           <div className="tree__header">
-            {!editTree && !adoptTree && (
+            {!editTree && (
               <TreeHeader
                 common={common}
                 scientific={scientific}
@@ -115,7 +106,10 @@ const TreeContent = ({ currentTreeId }) => {
                 dbh={dbh}
                 height={height}
                 edit={edit}
-                adopt={adopt}
+                idTree={idTree}
+                mutateHistory={mutateHistory}
+                email={user.email}
+
               />
             )}
             {editTree && (
@@ -131,65 +125,59 @@ const TreeContent = ({ currentTreeId }) => {
                 setEditTree={setEditTree}
               />
             )}
+            <AdoptLikeCheckboxes
+              idTree={idTree}
+              mutateHistory={mutateHistory}
+              common={common}
+            />
 
-            {adoptTree && (
-              <TreeAdopt
+          </div>
+
+          <div className="tree__body">
+            <TreeHealthSlider
+              health={health}
+              healthNum={healthNum}
+              currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
+            />
+
+            <TreeNotes
+              notes={notes}
+              currentTreeId={currentTreeId}
+              mutateTreeData={mutateTreeData}
+            />
+
+            <TreeCare
+              currentTreeId={currentTreeId}
+              common={common}
+              health={health}
+            />
+
+            <TreeLocation
+              address={address}
+              city={city}
+              zip={zip}
+              country={country}
+              neighborhood={neighborhood}
+              lng={lng}
+              lat={lat}
+              owner={owner}
+            />
+
+            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+
+            {!common.includes('VACANT') && (
+              <TreeRemoval
                 idTree={idTree}
                 common={common}
+                notes={notes}
+                mutateTreeData={mutateTreeData}
                 mutateHistory={mutateHistory}
-                setAdoptTree={setAdoptTree}
               />
             )}
 
           </div>
-          
-            <div className="tree__body">
-            {!adoptTree && (
-              <TreeHealthSlider
-                health={health}
-                healthNum={healthNum}
-                currentTreeId={currentTreeId}
-                mutateTreeData={mutateTreeData}
-              />
-            )}
-            {!adoptTree && (
-              <TreeNotes
-                notes={notes}
-                currentTreeId={currentTreeId}
-                mutateTreeData={mutateTreeData}
-              />
-              )}
-              <TreeCare
-                currentTreeId={currentTreeId}
-                common={common}
-                health={health}
-              />
-              
-              <TreeLocation
-                address={address}
-                city={city}
-                zip={zip}
-                country={country}
-                neighborhood={neighborhood}
-                lng={lng}
-                lat={lat}
-                owner={owner}
-              />
-              
-              <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
 
-              {!common.includes('VACANT') && !adoptTree && (
-                <TreeRemoval
-                  idTree={idTree}
-                  common={common}
-                  notes={notes}
-                  mutateTreeData={mutateTreeData}
-                  mutateHistory={mutateHistory}
-                />
-              )}
-
-            </div>
-          )}
         </div>
       )}
     </>
