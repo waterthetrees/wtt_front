@@ -27,7 +27,6 @@ const Header = () => {
       <div className="header__content">
 
         <Link to="/">
-
           <div className="header__font">WATER THE TREES</div>
         </Link>
 
@@ -55,6 +54,11 @@ const Header = () => {
           <MenuItem onClick={handleClose}>
             <Link to="/about" className="header__link">
               <HeaderButton menuItem="About" />
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/contact" className="header__link">
+              <HeaderButton menuItem="Contact" />
             </Link>
           </MenuItem>
 
