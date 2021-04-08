@@ -15,7 +15,7 @@ const url = {
   localserver: 'http://localhost:3002/api',
   docker: 'http://localhost:3002/api',
 }[env];
-// console.log(env, port, url);
+// console.log('env', env, 'url', url);
 
 const apiEndpoints = {
   user: `${url}/user`,
@@ -25,5 +25,10 @@ const apiEndpoints = {
   tree: `${url}/tree`,
   treehistory: `${url}/treehistory`,
   treelist: `${url}/treelist`,
+  treeadoption: `${url}/treeuser`,
+  treelikes: `${url}/treeuser`,
 };
+
+// console.log('apiEndpoints', apiEndpoints);
+
 export default apiEndpoints;

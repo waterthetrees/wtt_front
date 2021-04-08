@@ -37,16 +37,10 @@
 .treedata__edit {
   padding: 5px 0;
 }
-.treedata__edit-btngrp{
-  // padding: 0 0 0 10px;
-}
+
 .treedata__edit-txt{
   padding: 0 10px;
   display: inline-flex;
-}
-.treedata__edit-btn{
-  // padding: 3px;
-  // margin: 0 3px;
 }
 
 .tree__header {
@@ -56,7 +50,7 @@
 }
 
 .tree__body{
-  margin:1.2rem;
+  margin: 0 1.2rem;
 }
 
 .map__container {
@@ -261,6 +255,57 @@ element.style {
   break-after: always; /* New syntax */
   font-size: 1.5rem;
 }
+.adoption{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.infobutton {
+  border-radius: 50%;
+  background-color: #cccbca;
+  border: 0;
+  color: black;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.infobutton-selected {
+  background-color: #4CAF50;
+  color: white;
+  border: 0;
+}
+.infobutton:hover:active { 
+  background-color: #4CAF50;
+  color: white;
+  border: 0;
+}
+
+.heart {
+  content: '&#9829';
+}
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #28a745;
+}
+
+.MuiSvgIcon-root {
+  width: 7em;
+  height: 1em;
+  font-size: 2.5rem;
+}
+.MuiSvgIcon-root .adopt {
+  width: 7em;
+  height: 1em;
+  font-size: 2.5rem;
+}
+
+.MuiTypography-body1 .adopt {
+  font-size: 2rem;
+}
 
 .tree__status__textarea {
   border: 1px solid #f9f6f2;
@@ -384,6 +429,12 @@ element.style {
   font-size: 1.2rem;
 }
 
+.treehistory-list__header{
+  margin: 15px 0 0 0;
+  padding: 5px;
+  background-color: #e9ecef;
+}
+
 .treehistory-item {
   border: 2px solid #e9ecef;
   padding: 10px;
@@ -408,6 +459,49 @@ element.style {
 .tree__imagelocation > img {
   width: 100vw;
   height: 100%;
+}
+.adopt {
+  margin-bottom: 0 !important;
+  border: 1px;
+}
+
+input[type="radio"], input[type="checkbox"].adopt {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.6);; /* IE */
+  -moz-transform: scale(1.6);; /* FF */
+  -webkit-transform: scale(1.6);; /* Safari and Chrome */
+  -o-transform: scale(1.6);; /* Opera */
+  transform: scale(1.6);;
+  margin: 10px;
+  cursor: pointer;
+}
+
+input[type="checkbox"].adopt:hover {
+    background-color: yellow;
+}
+  
+/* Specify the background color to be
+shown when checkbox is active */
+input[type="checkbox"].adopt:active {
+    background-color: red;
+}
+
+adopt[type="checkbox"]:checked {
+  background-color: green;
+}
+
+label.adopt {
+  font-size: 1.25rem;
+  margin:0 10px 0 5px;
+  color:rgba(0, 0, 0, 0.54);;
+}
+
+.MuiButton-root {
+  padding: 0;
+  text-transform: none;
+}
+.MuiFormGroup-root {
+  align-items: center;
 }
 
 .progressbar {
@@ -472,10 +566,11 @@ element.style {
     rgba(84, 219, 22, 1) 100%
   ); /* w3c */
 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54DB16', endColorstr='#000000',GradientType=1 ); /* ie6-9 */
-}
-
-.status {
+  filter: progid:DXImageTransform.Microsoft.gradient( 
+    startColorstr='#54DB16', 
+    endColorstr='#000000',
+    GradientType=1 
+  ); /* ie6-9 */
 }
 
 .container_popup {
@@ -656,7 +751,4 @@ element.style {
   height: 25px;
   background: #4caf50;
   cursor: pointer;
-}
-
-.save__btn {
 }
