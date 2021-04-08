@@ -32,7 +32,6 @@ export default function AdoptLikeCheckboxes({
   mutateHistory,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-
   const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
   const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
 

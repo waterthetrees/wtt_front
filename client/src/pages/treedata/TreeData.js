@@ -33,7 +33,8 @@ const convertSliderValuesToHealth = (value) => {
 
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   // const componentName = 'TreeData';
-
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  if (!isAuthenticated) loginWithRedirect();
   const toggle = () => setShowTree(!showTree);
 
   return (
@@ -108,7 +109,6 @@ const TreeContent = ({ currentTreeId }) => {
                 edit={edit}
                 idTree={idTree}
                 mutateHistory={mutateHistory}
-                email={user.email}
 
               />
             )}
