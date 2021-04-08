@@ -9,7 +9,6 @@ export default function Contact() {
       <div className="contact__header">
         <h2>Contact</h2>
       </div>
-
       <div className="contact__main">
         <div className="contact__p">
           Join us on slack to get involved in coding for the trees and climate change!
