@@ -6,7 +6,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import cx from 'classnames';
 import {
   useQuery, useMutation, useQueryClient,
 } from 'react-query';
@@ -16,6 +17,7 @@ import './TreeData.scss';
 import { postData, getData } from '../../api/queries';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 
+const treeImagesPath = 'assets/images/trees/';
 const GreenCheckbox = withStyles({
   root: {
     color: green[400],
@@ -34,6 +36,7 @@ export default function AdoptLikeCheckboxes({
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
   const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
+  const infoImage = `${treeImagesPath}info.svg`;
 
   const { adopted } = treeAdoption.data || {};
   const { liked } = treeLikes.data || {};
@@ -64,8 +67,8 @@ export default function AdoptLikeCheckboxes({
       const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
       const sendTreeHistory = {
         idTree,
-        date_visit: dateVisit,
-        comment: `${common} was adopted by ${user.nickname}`,
+        dateVisit,
+        comment: `${common} Adoption by ${user.nickname}`,
         volunteer: user.nickname,
       };
 
@@ -94,29 +97,60 @@ export default function AdoptLikeCheckboxes({
   };
 
   return (
-    <div className="text-center">
+    <div>
+      <div className="adoption">
 
-      <FormGroup row>
-        {treeLikes && treeLikes.isFetched && (
-          <FormControlLabel
-            className="adopt__label"
-            control={(<Checkbox checked={liked} icon={<FavoriteBorder />} onChange={handleChange} checkedIcon={<Favorite />} name="liked" />)}
-            label="Like"
-          />
-        )}
-        {treeAdoption && treeAdoption.isFetched && (
-          <FormControlLabel
-            className="adopt__label"
-            control={<GreenCheckbox checked={adopted} onChange={handleChange} name="adopted" />}
-            label="Adopt"
-          />
-        )}
-        <Button color="default" onClick={() => showAdoptionDirections(!adoptionDirections)}>
-          (HowTo)
-        </Button>
+        <div>
+          <Liked liked={liked} treeLikes={treeLikes} handleChange={handleChange} />
+        </div>
+
+        <div>
+          {treeAdoption && treeAdoption.isFetched && (
+            <label
+              className="adopt"
+              htmlFor="adopted"
+            >
+              <span>
+                Adopt
+                <input
+                  type="checkbox"
+                  id="adopted"
+                  onChange={handleChange}
+                  checked={adopted}
+                  name="adopted"
+                  className="adopt"
+                />
+              </span>
+            </label>
+          )}
+
+          <button
+            className={cx('infobutton', (adoptionDirections) ? 'infobutton-selected' : '')}
+            type="button"
+            onClick={() => showAdoptionDirections(!adoptionDirections)}
+          >
+            i
+          </button>
+        </div>
+      </div>
+      <div>
         {adoptionDirections && <TreeAdoptionDirections common={common} />}
-      </FormGroup>
+      </div>
 
+    </div>
+  );
+}
+
+function Liked({ treeLikes, handleChange, liked }) {
+  return (
+    <div className="text-center heart">
+      {treeLikes && treeLikes.isFetched && (
+        <FormControlLabel
+          className="adopt"
+          control={(<Checkbox checked={liked} icon={<FavoriteBorder fontSize="large" />} onChange={handleChange} checkedIcon={<Favorite fontSize="large" />} name="liked" />)}
+          label=""
+        />
+      )}
     </div>
   );
 }
