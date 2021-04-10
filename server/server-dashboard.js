@@ -7,6 +7,7 @@ const app = express();
 const morgan = require('morgan');
 // const util = require('util');
 const path = require('path');
+const compression = require('compression');
 const { logger } = require('../logger.js');
 // usage: node stripe_webhook_server.js prod or node stripe_webhook_server.js for dev
 const env = process.argv[2] || 'local';
@@ -20,6 +21,7 @@ const port = {
   prod: 3001, blue: 3000, dev: 3001, local: 3001, localserver: 3000,
 }[env];
 
+app.use(compression());
 app.use(morgan('dev'));
 app.use('/', express.static('client/public'));
 app.get('/*', (req, res) => {
