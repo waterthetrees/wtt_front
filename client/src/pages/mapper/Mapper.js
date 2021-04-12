@@ -9,6 +9,10 @@ import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
 import config from '../../config';
 
+const featureFlag = {
+  vector: true,
+};
+
 mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
@@ -17,9 +21,12 @@ function Mapper() {
   const { isAuthenticated, user } = useAuth0();
 
   // getData from DB
-  const treemap = useQuery(['treemap', { city: 'All' }], getData);
-  const error = treemap.error || null;
-  const mapData = treemap.data || null;
+  const treemap = (!featureFlag.vector)
+    ? useQuery(['treemap', { city: 'All' }], getData)
+    : null;
+  // const error = treemap.error || null;
+  const mapData = (!featureFlag.vector) ? treemap.data : null;
+
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('user');
@@ -44,7 +51,7 @@ function Mapper() {
   // Initialize our map
   useEffect(() => {
     if (isAuthenticated) mutateUser.mutate(['user', user]);
-    if (!mapData) return;
+    // if (!mapData) return;
 
     const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -69,196 +76,169 @@ function Mapper() {
     map.addControl(new mapboxgl.NavigationControl());
 
     map.once('load', () => {
-      // Add our DB SOURCE
-      // if (!navigator.geolocation) {
-      //   geolocate.innerHTML = 'Geolocation is not available';
-      // } else {
-      // geolocate.trigger();
-      //   geolocate.on('geolocate', (e) => {
-      //     console.log('e', e);
-      //   });
-      // }
-
-      // map.addLayer({
-      //   id: 'public.points',
-      //   type: 'circle',
-      //   source: {
-      //     type: 'vector',
-      //     url: 'http://localhost:3001/public.points.json',
-      //   },
-      //   'source-layer': 'public.points',
-      //   paint: {
-      //     'circle-color': 'red',
-      //   },
-      // });
-
-      // map.addLayer({
-      //   id: 'public.table_source',
-      //   type: 'circle',
-      //   source: {
-      //     type: 'vector',
-      //     url: 'http://localhost:3001/public.table_source.json',
-      //   },
-      //   'source-layer': 'public.table_source',
-      //   paint: {
-      //     'circle-color': 'red',
-      //   },
-      // });
-
-      // map.addSource('treeVectorTiles', {
-      //   type: 'vector',
-      //   // TODO(Ted): This is going to send back https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-      //   // not lat/long, we need to rework this on the backend as well
-      //   tiles: [
-      //     'https://localhost:3002/v0.1/{z}/{x}/{y}.mvt',
-      //   ],
-      // });
-
-      map.addSource('treedata', {
-        type: 'geojson',
-        data: mapData,
-        cluster: false,
-        clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
-      });
-
-      // Add our layer
-      if (mapData) {
+      if (featureFlag.vector) {
         map.addLayer({
-          id: 'treedata',
-          source: 'treedata', // this should be the id of source
+          id: 'public.treedata',
           type: 'circle',
-          filter: ['!', ['has', 'point_count']],
+          source: {
+            type: 'vector',
+            url: 'http://localhost:3001/public.treedata.json',
+            // url: 'http://localhost:3001/public.treedata/13/37.779369/-122.196532.pbf',
+          },
+          'source-layer': 'public.treedata',
           paint: {
-            // 'circle-radius': 1,
-            // 'circle-color': 'black',
-            'circle-color': [
-              'match',
-              ['get', 'health'],
-              'good', 'green',
-              'fair', 'orange',
-              'poor', 'red',
-              'dead', 'black',
-              'vacant', '#7c501a',
-              'missing', '#7c501a',
-              'concrete', '#808080',
-              'stump', 'brown',
-              /* other */ 'green',
-            ],
-            'circle-radius': {
-              property: 'health',
-              base: 1,
-              stops: [
-                [12, 8],
-                [18, 280],
-              ],
-            },
-            // 'circle-stroke-color': '#000',
-            'circle-stroke-color': [
-              'match',
-              ['get', 'health'],
-              'good', 'green',
-              'fair', 'orange',
-              'poor', 'red',
-              'dead', 'black',
-              'vacant', '#7c501a',
-              'missing', '#7c501a',
-              'concrete', '#808080',
-              'stump', 'brown',
-              /* other */ 'green',
-            ],
-            'circle-stroke-width': 3,
-
+            'circle-color': 'red',
           },
         });
+      }
 
-        map.on('click', 'treedata', (e) => {
-          map.getCanvas().style.cursor = 'pointer';
-          setCurrentTreeId(e.features[0].properties.id);
-          setShowTree(true);
+      if (!featureFlag.vector) {
+        map.addSource('treedata', {
+          type: 'geojson',
+          data: mapData,
+          cluster: false,
+          clusterMaxZoom: 14, // Max zoom to cluster points on
+          clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
         });
 
-        let hoveredStateId = null;
-        if (windowWidth > 768) {
-          const popup = new mapboxgl.Popup({
-            closeButton: false,
-            closeOnClick: false,
+        // Add our layer
+        if (mapData) {
+          map.addLayer({
+            id: 'treedata',
+            source: 'treedata', // this should be the id of source
+            type: 'circle',
+            filter: ['!', ['has', 'point_count']],
+            paint: {
+              // 'circle-radius': 1,
+              // 'circle-color': 'black',
+              'circle-color': [
+                'match',
+                ['get', 'health'],
+                'good', 'green',
+                'fair', 'orange',
+                'poor', 'red',
+                'dead', 'black',
+                'vacant', '#7c501a',
+                'missing', '#7c501a',
+                'concrete', '#808080',
+                'stump', 'brown',
+                /* other */ 'green',
+              ],
+              'circle-radius': {
+                property: 'health',
+                base: 1,
+                stops: [
+                  [12, 8],
+                  [18, 280],
+                ],
+              },
+              // 'circle-stroke-color': '#000',
+              'circle-stroke-color': [
+                'match',
+                ['get', 'health'],
+                'good', 'green',
+                'fair', 'orange',
+                'poor', 'red',
+                'dead', 'black',
+                'vacant', '#7c501a',
+                'missing', '#7c501a',
+                'concrete', '#808080',
+                'stump', 'brown',
+                /* other */ 'green',
+              ],
+              'circle-stroke-width': 3,
+
+            },
           });
-          map.on('mousemove', 'treedata', (e) => {
+
+          map.on('click', 'treedata', (e) => {
             map.getCanvas().style.cursor = 'pointer';
-            if (e.features.length > 0) {
-              if (e.features[0].properties.id) {
-                hoveredStateId = e.features[0].properties.id;
+            setCurrentTreeId(e.features[0].properties.id);
+            setShowTree(true);
+          });
+
+          let hoveredStateId = null;
+          if (windowWidth > 768) {
+            const popup = new mapboxgl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+            });
+            map.on('mousemove', 'treedata', (e) => {
+              map.getCanvas().style.cursor = 'pointer';
+              if (e.features.length > 0) {
+                if (e.features[0].properties.id) {
+                  hoveredStateId = e.features[0].properties.id;
+                  map.setFeatureState(
+                    { source: 'treedata', id: hoveredStateId },
+                    { hover: false },
+                  );
+                  const { common, scientific } = e.features[0].properties;
+
+                  map.setFeatureState(
+                    {
+                      source: 'treedata',
+                      id: hoveredStateId,
+                      type: 'circle',
+                      paint: {
+                        'circle-stroke-color': '#000',
+                        'circle-stroke-width': 6,
+                        'circle-color': '#000',
+                      },
+                    },
+                    { hover: true },
+                  );
+                  map.getCanvas().style.cursor = 'pointer';
+                  const coordinates = e.features[0].geometry.coordinates.slice();
+
+                  const HTML = `<div><h1>${common}</h1><h4>${scientific || ''}</h4></div>`;
+
+                  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                  }
+
+                  popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
+	      }
+              }
+            });
+
+            // When the mouse leaves the state-fill layer, update the feature state of the
+            // previously hovered feature.
+            map.on('mouseleave', 'treedata', () => {
+              if (hoveredStateId) {
                 map.setFeatureState(
                   { source: 'treedata', id: hoveredStateId },
                   { hover: false },
                 );
-                const { common, scientific } = e.features[0].properties;
-
-                map.setFeatureState(
-                  {
-                    source: 'treedata',
-                    id: hoveredStateId,
-                    type: 'circle',
-                    paint: {
-                      'circle-stroke-color': '#000',
-                      'circle-stroke-width': 6,
-                      'circle-color': '#000',
-                    },
-                  },
-                  { hover: true },
-                );
-                map.getCanvas().style.cursor = 'pointer';
-                const coordinates = e.features[0].geometry.coordinates.slice();
-
-                const HTML = `<div><h1>${common}</h1><h4>${scientific || ''}</h4></div>`;
-
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-
-                popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
-	      }
-            }
-          });
-
-          // When the mouse leaves the state-fill layer, update the feature state of the
-          // previously hovered feature.
-          map.on('mouseleave', 'treedata', () => {
-            if (hoveredStateId) {
-              map.setFeatureState(
-                { source: 'treedata', id: hoveredStateId },
-                { hover: false },
-              );
-            }
-            hoveredStateId = null;
-            // lastId = undefined;
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-          });
+              }
+              hoveredStateId = null;
+              // lastId = undefined;
+              map.getCanvas().style.cursor = '';
+              popup.remove();
+            });
+          }
         }
-      }
 
-      setMap(map);
+        setMap(map);
+      }
     });
     // return () => {};
   }, [mapData]);
-  // console.log('mapData',mapData);
+  console.log('mapData', mapData);
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!userProfileOpen);
-  if (error) return (<div>Failed to load trees</div>);
+  // if (error) return (<div>Failed to load trees</div>);
   return (
     <div className="App">
       <div className="map__container">
         {/* Mapbox container */}
         <div className="mapBox" ref={mapboxElRef} />
       </div>
-      {userProfileOpen && (
+      {/* userProfileOpen && (
         <UserProfile toggle={toggle} modal={userProfileOpen} />
-      )}
+      ) */}
       {currentTreeId && (
         <TreeData
           currentTreeId={currentTreeId}
@@ -266,14 +246,14 @@ function Mapper() {
           setShowTree={setShowTree}
         />
       )}
-      {mapData && (
+      {/* mapData && (
         <AddTree
           map={map}
           setZoom={setZoom}
           coordinatesNewTree={coordinatesNewTree}
           setCoordinatesNewTree={setCoordinatesNewTree}
         />
-      )}
+      ) */}
     </div>
   );
 }
