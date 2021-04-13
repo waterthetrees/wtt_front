@@ -279,7 +279,7 @@ element.style {
   color: white;
   border: 0;
 }
-.infobutton:hover:active { 
+.infobutton:hover:active {
   background-color: #4CAF50;
   color: white;
   border: 0;
@@ -332,6 +332,10 @@ element.style {
   transition: none;
 }
 
+.modal {
+  position: relative;
+}
+
 .modal.fade .modal-dialog {
   transition: none;
   transition: none;
@@ -341,7 +345,9 @@ element.style {
 }
 
 .tree__modal {
-  margin: none;
+  max-height: 90vh;
+  width: 100vw;
+  color: white;
 }
 
 .tree__col {
@@ -379,7 +385,6 @@ element.style {
 
 .modal-dialog {
   max-width: 600px;
-  margin: none;
 }
 
 
@@ -479,7 +484,7 @@ input[type="radio"], input[type="checkbox"].adopt {
 input[type="checkbox"].adopt:hover {
     background-color: yellow;
 }
-  
+
 /* Specify the background color to be
 shown when checkbox is active */
 input[type="checkbox"].adopt:active {
@@ -566,10 +571,10 @@ label.adopt {
     rgba(84, 219, 22, 1) 100%
   ); /* w3c */
 
-  filter: progid:DXImageTransform.Microsoft.gradient( 
-    startColorstr='#54DB16', 
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr='#54DB16',
     endColorstr='#000000',
-    GradientType=1 
+    GradientType=1
   ); /* ie6-9 */
 }
 
@@ -642,8 +647,8 @@ label.adopt {
 }
 
 .treeremoval {
-  margin:10px 10px 10px 0;
-  padding:10px 10px 10px 0;
+  margin:10px 0;
+  padding:10px 0;
 }
 
 .treeremoval-btn {
