@@ -1,17 +1,18 @@
 // queries.js
-import axios from 'axios';
-import apiEndpoints from './apiEndpoints.js';
+import apiEndpoints from './apiEndpoints';
+
+const serializeData = (data) => Object.entries(data)
+  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+  .join('&');
 
 async function getData(...args) {
-  const functionName = 'getData';
+  // const functionName = 'getData';
   // const [request, params] = args;
   const { queryKey } = args[0];
 
-  // console.log('\n\n\n TEST queryKey', queryKey[0], queryKey[1]);
   const serializedData = serializeData(queryKey[1]);
   const endpoint = queryKey[0];
   const url = `${apiEndpoints[endpoint]}?${serializedData}`;
-
   const options = {
     // url,
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -30,16 +31,12 @@ async function getData(...args) {
     params: queryKey[0],
   };
   const response = await fetch(url, options);
-
-  return await response.json(); // parses JSON response into native JavaScript objects
+  const responseJSON = await response.json();
+  return responseJSON; // parses JSON response into native JavaScript objects
 }
 
-const serializeData = (data) => Object.entries(data)
-  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-  .join('&');
-
 async function postData(...args) {
-  const functionName = 'postData';
+  // const functionName = 'postData';
   const [request] = args;
   const data = request[1];
   // Default options are marked with *
@@ -59,11 +56,11 @@ async function postData(...args) {
     data, // body data type must match "Content-Type" header
   };
   const response = await fetch(url, options);
-  return await response.json(); // parses JSON response into native JavaScript objects
+  return response.json(); // parses JSON response into native JavaScript objects
 }
 
 async function putData(...args) {
-  const functionName = 'putData';
+  // const functionName = 'putData';
   const [request] = args;
   const data = request[1];
   // console.log(functionName, 'data,', data, '\n\nrequest', request);

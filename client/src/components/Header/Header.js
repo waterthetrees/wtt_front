@@ -27,26 +27,20 @@ const Header = () => {
       <div className="header__content">
 
         <Link to="/">
-          <img
-            alt="water the trees"
-            key="water the trees map"
-            className="header__icon"
-            src={WATER_THE_TREES}
-          />
+          <div className="header__font">WATER THE TREES</div>
         </Link>
 
-        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M2 15.5v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20v-2H2z" />
-          </svg>
-        </Button>
+        <button
+          type="button"
+          className="header__btn-menu"
+          aria-controls="wtt-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          &#9776;
+        </button>
         <Menu
-          id="simple-menu"
+          id="wtt-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
@@ -60,6 +54,11 @@ const Header = () => {
           <MenuItem onClick={handleClose}>
             <Link to="/about" className="header__link">
               <HeaderButton menuItem="About" />
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/contact" className="header__link">
+              <HeaderButton menuItem="Contact" />
             </Link>
           </MenuItem>
 

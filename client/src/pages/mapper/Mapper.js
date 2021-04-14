@@ -17,7 +17,7 @@ const featureFlag = {
 mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
-  const componentName = 'Mapper';
+  // const componentName = 'Mapper';
   const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
 
@@ -40,7 +40,7 @@ function Mapper() {
 
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  const [currentTree, setCurrentTree] = useState({});
+  // const [currentTree, setCurrentTree] = useState({});
   const [showTree, setShowTree] = useState(false);
   const [zoomUserSet, setZoom] = useState(9);
   const [health, setHealth] = useState(null);
@@ -48,7 +48,7 @@ function Mapper() {
   // Add search
   // -------------------------
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const resizeWindow = () => setWindowWidth(window.innerWidth);
+  // const resizeWindow = () => setWindowWidth(window.innerWidth);
 
   // Initialize our map
   useEffect(() => {

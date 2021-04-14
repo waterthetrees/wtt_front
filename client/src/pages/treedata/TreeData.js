@@ -11,9 +11,10 @@ import format from 'date-fns/format';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, putData, postData } from '../../api/queries';
-
+import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
+import TreeHeader from './TreeHeader';
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -32,7 +33,8 @@ const convertSliderValuesToHealth = (value) => {
 
 export default function TreeData({ currentTreeId, showTree, setShowTree }) {
   // const componentName = 'TreeData';
-
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  if (!isAuthenticated) loginWithRedirect();
   const toggle = () => setShowTree(!showTree);
 
   return (
@@ -45,8 +47,7 @@ export default function TreeData({ currentTreeId, showTree, setShowTree }) {
 }
 
 const TreeContent = ({ currentTreeId }) => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
@@ -106,6 +107,9 @@ const TreeContent = ({ currentTreeId }) => {
                 dbh={dbh}
                 height={height}
                 edit={edit}
+                idTree={idTree}
+                mutateHistory={mutateHistory}
+
               />
             )}
             {editTree && (
@@ -121,8 +125,14 @@ const TreeContent = ({ currentTreeId }) => {
                 setEditTree={setEditTree}
               />
             )}
+            <AdoptLikeCheckboxes
+              idTree={idTree}
+              mutateHistory={mutateHistory}
+              common={common}
+            />
 
           </div>
+
           <div className="tree__body">
             <TreeHealthSlider
               health={health}
@@ -155,6 +165,7 @@ const TreeContent = ({ currentTreeId }) => {
             />
 
             <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+
             {!common.includes('VACANT') && (
               <TreeRemoval
                 idTree={idTree}
@@ -164,6 +175,7 @@ const TreeContent = ({ currentTreeId }) => {
                 mutateHistory={mutateHistory}
               />
             )}
+
           </div>
 
         </div>
@@ -171,59 +183,6 @@ const TreeContent = ({ currentTreeId }) => {
     </>
   );
 };
-
-const TreeHeader = ({
-  common, scientific, genus,
-  datePlanted, edit, height, dbh,
-}) => (
-  <div className="flex-grid-three text-left">
-    {common && (
-      <div>
-        <h3>{common}</h3>
-      </div>
-    )}
-    {scientific && (
-      <div>
-        <h4>{scientific}</h4>
-      </div>
-    )}
-    {genus && (
-      <div>
-        <h4>{genus}</h4>
-      </div>
-    )}
-    {datePlanted && !common.includes('VACANT') && (
-      <div>
-        <h5>
-          Planted:
-          {' '}
-          {format(new Date(datePlanted), 'MMMM dd, yyyy')}
-        </h5>
-      </div>
-    )}
-    {height && (
-      <div>
-        <h5>
-          Height:
-          {' '}
-          {height}
-        </h5>
-      </div>
-    )}
-    {dbh && (
-      <div>
-        <h5>
-          DBH:
-          {' '}
-          {dbh}
-        </h5>
-      </div>
-    )}
-    <div className="treedata__edit-btn text-right">
-      <Button color="link" className="btn-sm" onClick={edit}>Edit Tree Name</Button>
-    </div>
-  </div>
-);
 
 const TreeHealthSlider = ({
   currentTreeId, healthNum, health,
