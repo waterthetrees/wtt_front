@@ -35,7 +35,7 @@ function Mapper() {
   });
 
   const mapboxElRef = useRef(null); // DOM element to render map
-  const [map, setMap] = useState(null);
+  const [mapContainer, setMap] = useState();
   // const [zoom, setZoom] = useState(15);
 
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
@@ -43,6 +43,7 @@ function Mapper() {
   const [currentTree, setCurrentTree] = useState({});
   const [showTree, setShowTree] = useState(false);
   const [zoomUserSet, setZoom] = useState(9);
+  const [health, setHealth] = useState(null);
   // -------------------------
   // Add search
   // -------------------------
@@ -70,10 +71,14 @@ function Mapper() {
     geolocate.on('geolocate');
     // Add navigation controls to the top right of the canvas
     map.addControl(new mapboxgl.NavigationControl());
+    setMap(map);
+  }, []);
 
-    map.once('load', () => {
+  useEffect(() => {
+    if (!mapContainer) return;
+    mapContainer.once('load', () => {
       if (featureFlag.vector) {
-        map.addLayer({
+        mapContainer.addLayer({
           id: 'public.treedata',
           type: 'circle',
           'source-layer': 'public.treedata',
@@ -122,10 +127,10 @@ function Mapper() {
           },
         });
 
-        map.on('click', 'public.treedata', (e) => {
+        mapContainer.on('click', 'public.treedata', (e) => {
           console.log('e1e1e1e1e1', 'e.features[0].properties', e.features[0].properties);
           console.log('e1e1e1e1e1', e.lngLat, 'lngLat');
-          map.getCanvas().style.cursor = 'pointer';
+          mapContainer.getCanvas().style.cursor = 'pointer';
           setCurrentTreeId(e.features[0].properties.id_tree);
           setShowTree(true);
         });
@@ -136,15 +141,15 @@ function Mapper() {
             closeButton: false,
             closeOnClick: false,
           });
-          map.on('mousemove', 'public.treedata', (e) => {
+          mapContainer.on('mousemove', 'public.treedata', (e) => {
             if (e.features.length > 0) {
               if (e.features[0].properties.id_tree) {
                 console.log('e.features[0] hover', e.features[0]);
                 hoveredStateId = e.features[0].properties.id_tree;
                 const hoverState = setHoverState(hoveredStateId, false, hoveredStateId);
-                map.setFeatureState(hoverState);
-                map.setFeatureState({ ...hoverState, ...{ hover: true } });
-                map.getCanvas().style.cursor = 'pointer';
+                mapContainer.setFeatureState(hoverState);
+                mapContainer.setFeatureState({ ...hoverState, ...{ hover: true } });
+                mapContainer.getCanvas().style.cursor = 'pointer';
 
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -159,21 +164,19 @@ function Mapper() {
 
           // When the mouse leaves the state-fill layer, update the feature state of the
           // previously hovered feature.
-          map.on('mouseleave', 'public.treedata', () => {
+          mapContainer.on('mouseleave', 'public.treedata', () => {
             if (hoveredStateId) {
               const hoverState = setHoverState(hoveredStateId, false, hoveredStateId);
-              map.setFeatureState(hoverState);
+              mapContainer.setFeatureState(hoverState);
             }
             hoveredStateId = null;
-            map.getCanvas().style.cursor = '';
+            mapContainer.getCanvas().style.cursor = '';
             popup.remove();
           });
         }
       }
-      setMap(map);
     });
-    // return () => {};
-  }, []);
+  }, [mapContainer, health]);
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
@@ -194,10 +197,12 @@ function Mapper() {
           currentTreeId={currentTreeId}
           showTree={showTree}
           setShowTree={setShowTree}
+          health={health}
+          setHealth={setHealth}
         />
       )}
       <AddTree
-        map={map}
+        map={mapboxElRef}
         setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}
