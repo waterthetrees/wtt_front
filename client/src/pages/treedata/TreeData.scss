@@ -49,8 +49,19 @@
   border-bottom-left-radius: calc(.3rem - 1px);
 }
 
+hr.divider-solid {
+  border-top: 3px solid #dee2e6;
+  margin: 0;
+  width: 100%;
+}
+
 .tree__body{
   margin: 0 1.2rem;
+  overflow: scroll;
+}
+
+.tree__body::-webkit-scrollbar {
+  display: none;
 }
 
 .map__container {
@@ -60,8 +71,6 @@
   left: 0;
   bottom: 0;
 }
-
-
 
 .tree__label {
   color: #ff0000;
@@ -161,6 +170,9 @@
   letter-spacing: 0;
   color: #000000;
   opacity: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .container {
@@ -200,7 +212,7 @@ element.style {
 
 .treemaintenance-header__img {
   width: 42px;
-  margin: 2px 15px;
+  margin-left: 10px;
 }
 .treemaintenance-header__arrow {
   width: 20px;
@@ -385,8 +397,12 @@ element.style {
 
 .modal-dialog {
   max-width: 600px;
+  margin: auto;
 }
 
+.modal-content {
+  max-height: 90vh;
+}
 
 .flex-grid {
   margin: 4px 0;
@@ -429,7 +445,7 @@ element.style {
 }
 
 .treehistory-list {
-  margin: 15px 0 0 0;
+  margin: 15px 0;
   word-wrap: break-word;
   font-size: 1.2rem;
 }
@@ -647,15 +663,8 @@ label.adopt {
 }
 
 .treeremoval {
-  margin:10px 0;
-  padding:10px 0;
+  padding: 20px 0;
 }
-
-.treeremoval-btn {
-  margin:10px 10px 10px 0;
-}
-
-
 
 .addtreepage {
   display: inline-block;
