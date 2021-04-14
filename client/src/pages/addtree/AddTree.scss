@@ -3,8 +3,7 @@
 .addtree {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 10px;
+  overflow: hidden;
   .MuiAutocomplete-inputRoot[class*='MuiFilledInput-root'] {
     padding-top: 3px;
     padding-left: 3px;
@@ -16,6 +15,19 @@
     font-size: 1.6rem;
     font-family: 'Roboto Mono', monospace;
   }
+}
+
+.addtree__header {
+  margin: 10px;
+}
+
+.addtree__body {
+  overflow: scroll;
+  padding: 10px
+}
+
+.addtree__body::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-header {

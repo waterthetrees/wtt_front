@@ -12,7 +12,7 @@ import config from '../../config';
 mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
-  const componentName = 'Mapper';
+  // const componentName = 'Mapper';
   const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
 
@@ -32,14 +32,14 @@ function Mapper() {
 
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  const [currentTree, setCurrentTree] = useState({});
+  // const [currentTree, setCurrentTree] = useState({});
   const [showTree, setShowTree] = useState(false);
   const [zoomUserSet, setZoom] = useState(null);
   // -------------------------
   // Add search
   // -------------------------
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const resizeWindow = () => setWindowWidth(window.innerWidth);
+  // const resizeWindow = () => setWindowWidth(window.innerWidth);
 
   // Initialize our map
   useEffect(() => {
@@ -62,6 +62,7 @@ function Mapper() {
 
     // Add the control to the map.
     map.addControl(geolocate);
+    // eslint-disable-next-line no-unused-vars
     geolocate.on('geolocate', (e) => {
       // console.log('e', e);
     });
@@ -173,7 +174,7 @@ function Mapper() {
                 }
 
                 popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
-	      }
+              }
             }
           });
 
@@ -196,14 +197,14 @@ function Mapper() {
 
       setMap(map);
     });
-    // return () => {};
   }, [mapData]);
-  //console.log('mapData',mapData);
   // USER PROFILE
   // --------------------------
-  const [userProfileOpen, setUserProfileOpen] = useState(false);
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!userProfileOpen);
+  // eslint-disable-next-line no-unused-vars
+  // const [userProfileOpen, setUserProfileOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  // const [modal, setModal] = useState(false);
+  // const toggle = () => setModal(!userProfileOpen);
   if (error) return (<div>Failed to load trees</div>);
   return (
     <div className="App">
@@ -211,9 +212,9 @@ function Mapper() {
         {/* Mapbox container */}
         <div className="mapBox" ref={mapboxElRef} />
       </div>
-      {userProfileOpen && (
+      {/* userProfileOpen && (
         <UserProfile toggle={toggle} modal={userProfileOpen} />
-      )}
+      ) */}
       {currentTreeId && (
         <TreeData
           currentTreeId={currentTreeId}
