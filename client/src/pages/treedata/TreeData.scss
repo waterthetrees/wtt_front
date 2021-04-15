@@ -71,6 +71,15 @@
   height: 50px;
 }
 
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: transparent;
+  // border: 5px solid #000000;
+}
+
 .tree__nav {
   z-index: 1040;
   position: absolute;

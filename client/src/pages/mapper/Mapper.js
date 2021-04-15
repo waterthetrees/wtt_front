@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
-
 import { getData, postData } from '../../api/queries';
 import TreeData from '../treedata/TreeData';
 import AddTree from '../addtree/AddTree';
@@ -40,7 +39,6 @@ function Mapper() {
 
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  // const [currentTree, setCurrentTree] = useState({});
   const [showTree, setShowTree] = useState(false);
   const [zoomUserSet, setZoom] = useState(9);
   const [health, setHealth] = useState(null);
@@ -48,7 +46,6 @@ function Mapper() {
   // Add search
   // -------------------------
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const resizeWindow = () => setWindowWidth(window.innerWidth);
 
   // Initialize our map
   useEffect(() => {
@@ -175,8 +172,11 @@ function Mapper() {
           });
         }
       }
+
+      //
     });
   }, [mapContainer, health]);
+
   // USER PROFILE
   // --------------------------
   const [userProfileOpen, setUserProfileOpen] = useState(false);
@@ -194,6 +194,7 @@ function Mapper() {
       ) */}
       {currentTreeId && (
         <TreeData
+          map={mapContainer}
           currentTreeId={currentTreeId}
           showTree={showTree}
           setShowTree={setShowTree}
@@ -202,7 +203,7 @@ function Mapper() {
         />
       )}
       <AddTree
-        map={mapboxElRef}
+        map={mapContainer}
         setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}

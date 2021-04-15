@@ -15,38 +15,34 @@ import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
 import TreeHeader from './TreeHeader';
+import TreeHealthSlider from './TreeHealth';
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
 
-const convertSliderValuesToHealth = (value) => {
-  const numValue = parseInt(value, 10);
-  if (numValue === 6) return 'good';
-  if (numValue === 5) return 'fair';
-  if (numValue === 4) return 'poor';
-  if (numValue === 3) return 'stump';
-  if (numValue === 2) return 'missing';
-  if (numValue === 1) return 'dead';
-  if (numValue === 0) return 'vacant';
-  return 'good';
-};
-
-export default function TreeData({ currentTreeId, showTree, setShowTree }) {
+export default function TreeData({
+  currentTreeId, showTree, setShowTree, map,
+}) {
   // const componentName = 'TreeData';
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  if (!isAuthenticated) loginWithRedirect();
+
   const toggle = () => setShowTree(!showTree);
 
   return (
     <Modal isOpen={showTree} className="tree__modal">
       <ModalHeader toggle={toggle} />
-      <TreeContent currentTreeId={currentTreeId} />
+      <TreeContent
+        currentTreeId={currentTreeId}
+        map={map}
+      />
       <ModalFooter />
     </Modal>
   );
 }
 
-const TreeContent = ({ currentTreeId }) => {
+const TreeContent = ({
+  currentTreeId, map,
+}) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
   const queryClient = useQueryClient();
@@ -139,6 +135,10 @@ const TreeContent = ({ currentTreeId }) => {
               healthNum={healthNum}
               currentTreeId={currentTreeId}
               mutateTreeData={mutateTreeData}
+              common={common}
+              lng={lng}
+              lat={lat}
+              map={map}
             />
 
             <TreeNotes
@@ -181,84 +181,6 @@ const TreeContent = ({ currentTreeId }) => {
         </div>
       )}
     </>
-  );
-};
-
-const TreeHealthSlider = ({
-  currentTreeId, healthNum, health,
-  mutateTreeData,
-}) => {
-  // const componentName = 'TreeHealthSlider';
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-  const [healthSaveAlert, setHealthSaveAlert] = useState('');
-  const sliderRef = useRef(healthNum);
-  const changeSlider = async () => {
-    const functionName = 'changeSlider';
-    try {
-      if (!isAuthenticated) loginWithRedirect();
-      const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
-      if (newHealth !== health) {
-        setHealthSaveAlert('SAVING');
-        const sendTreeData = {
-          idTree: currentTreeId,
-          health: newHealth,
-        };
-        await mutateTreeData.mutate(['tree', sendTreeData]);
-        setTimeout(() => setHealthSaveAlert(''), saveTimer);
-      }
-      return newHealth;
-    } catch (err) {
-      console.error(functionName, 'CATCH', err);
-      return err;
-    }
-  };
-
-  return (
-    <div className="flex-grid border-top text-center">
-      <div className="treehistory-list">
-        <h4>Overall Health</h4>
-      </div>
-      <div className="tree__status">
-        <input
-          ref={sliderRef}
-          type="range"
-          min="0"
-          max="6"
-          step="1"
-          className="slider"
-          list="healthSlider"
-          id="healthSlider"
-          defaultValue={healthNum}
-          onChange={changeSlider}
-        />
-        <datalist id="healthSlider" aria-label="healthSlider">
-          <option value="0" name="vacant" aria-label="vacant" />
-          <option value="1" name="dead" aria-label="dead" />
-          <option value="2" name="missing" aria-label="missing" />
-          <option value="3" name="stump" aria-label="stump" />
-          <option value="4" name="poor" aria-label="poor" />
-          <option value="5" name="fair" aria-label="fair" />
-          <option value="6" name="good" aria-label="good" />
-        </datalist>
-        <h3>
-          {health && (
-            <span id={health}>
-              {sliderRef.current
-                ? convertSliderValuesToHealth(sliderRef.current.value)
-                : health}
-            </span>
-          )}
-        </h3>
-        {healthSaveAlert && (
-          <div
-            className="alert alert-success"
-            role="alert"
-          >
-            {healthSaveAlert}
-          </div>
-        )}
-      </div>
-    </div>
   );
 };
 
