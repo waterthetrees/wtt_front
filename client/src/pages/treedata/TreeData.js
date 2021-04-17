@@ -126,8 +126,9 @@ const TreeContent = ({
               mutateHistory={mutateHistory}
               common={common}
             />
-
           </div>
+
+          <hr className="divider-solid" />
 
           <div className="tree__body">
             <TreeHealthSlider
@@ -231,7 +232,7 @@ const TreeNotes = ({ notes, currentTreeId }) => {
         <h4>Tree Notes</h4>
       </div>
       <div className="flex-grid tree__status__note">
-        {!isAuthenticated && (<h5>{ notes }</h5>)}
+        {!isAuthenticated && (<h5>{notes}</h5>)}
         {isAuthenticated && (
           <form id="treenote" onSubmit={handleNotesSubmit}>
             <textarea
