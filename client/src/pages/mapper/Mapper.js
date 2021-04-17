@@ -141,7 +141,7 @@ function Mapper() {
           mapContainer.on('mousemove', 'public.treedata', (e) => {
             if (e.features.length > 0) {
               if (e.features[0].properties.id_tree) {
-                console.log('e.features[0] hover', e.features[0]);
+                // console.log('e.features[0] hover', e.features[0]);
                 hoveredStateId = e.features[0].properties.id_tree;
                 const hoverState = setHoverState(hoveredStateId, false, hoveredStateId);
                 mapContainer.setFeatureState(hoverState);
@@ -154,7 +154,7 @@ function Mapper() {
                 }
 
                 const HTML = makePopupString(e.features[0].properties);
-                popup.setLngLat(coordinates).setHTML(HTML).addTo(map);
+                popup.setLngLat(coordinates).setHTML(HTML).addTo(mapContainer);
               }
             }
           });

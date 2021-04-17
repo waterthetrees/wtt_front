@@ -35,6 +35,7 @@ export default ({
       RESET FORM
     </button>
     <button
+      type="submit"
       className="addtree_btn__save button btn btn-dark btn-lg"
       onClick={() => setAddTreeSelected(false)}
     >
