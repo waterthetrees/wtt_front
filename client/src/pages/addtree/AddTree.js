@@ -228,6 +228,7 @@ const AddTreeModal = ({
         <div className="addtree__header">
           <TreeHeader renderCount={renderCount} />
         </div>
+        <hr className="divider-solid" />
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
