@@ -49,13 +49,14 @@ function AddTree(props) {
     }
   };
 
-  useEffect(() => {
-    if (!addTreeSelected) {
-      if (currentMarkers !== null) {
-        currentMarkers.map((currentMarker) => currentMarker.remove());
-      }
-    }
-  }, [addTreeSelected]);
+  // REMOVE THIS FOR PURELY DOM MARKER
+  // useEffect(() => {
+  //   if (!addTreeSelected) {
+  //     if (currentMarkers !== null) {
+  //       currentMarkers.map((currentMarker) => currentMarker.remove());
+  //     }
+  //   }
+  // }, [addTreeSelected]);
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -206,8 +207,13 @@ const AddTreeModal = ({
     },
   });
 
-  const onSubmit = (data, e) => {
-    const sendData = { ...defaultValues, ...data, ...coordinatesNewTree };
+  const onSubmit = (dataIn, event) => {
+    console.log('dataIn', dataIn, data, event);
+    const sendData = {
+      ...defaultValues,
+      ...dataIn,
+      ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
+    };
     console.log('\n\n\n\n\nsendData', sendData);
     mutateTreeData.mutate(['tree', sendData]);
     setNotesSaveButton('SAVING');
@@ -222,6 +228,7 @@ const AddTreeModal = ({
         <div className="addtree__header">
           <TreeHeader renderCount={renderCount} />
         </div>
+        <hr className="divider-solid" />
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />

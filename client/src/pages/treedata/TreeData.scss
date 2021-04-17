@@ -49,8 +49,19 @@
   border-bottom-left-radius: calc(.3rem - 1px);
 }
 
+hr.divider-solid {
+  border-top: 3px solid #dee2e6;
+  margin: 0;
+  width: 100%;
+}
+
 .tree__body{
   margin: 0 1.2rem;
+  overflow: scroll;
+}
+
+.tree__body::-webkit-scrollbar {
+  display: none;
 }
 
 .map__container {
@@ -61,14 +72,21 @@
   bottom: 0;
 }
 
-
-
 .tree__label {
   color: #ff0000;
 }
 
 .tree__label img {
   height: 50px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: transparent;
+  // border: 5px solid #000000;
 }
 
 .tree__nav {
@@ -161,6 +179,9 @@
   letter-spacing: 0;
   color: #000000;
   opacity: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .container {
@@ -200,7 +221,7 @@ element.style {
 
 .treemaintenance-header__img {
   width: 42px;
-  margin: 2px 15px;
+  margin-left: 10px;
 }
 .treemaintenance-header__arrow {
   width: 20px;
@@ -279,7 +300,7 @@ element.style {
   color: white;
   border: 0;
 }
-.infobutton:hover:active { 
+.infobutton:hover:active {
   background-color: #4CAF50;
   color: white;
   border: 0;
@@ -332,6 +353,10 @@ element.style {
   transition: none;
 }
 
+.modal {
+  position: relative;
+}
+
 .modal.fade .modal-dialog {
   transition: none;
   transition: none;
@@ -341,7 +366,9 @@ element.style {
 }
 
 .tree__modal {
-  margin: none;
+  max-height: 90vh;
+  width: 100vw;
+  color: white;
 }
 
 .tree__col {
@@ -379,9 +406,12 @@ element.style {
 
 .modal-dialog {
   max-width: 600px;
-  margin: none;
+  margin: auto;
 }
 
+.modal-content {
+  max-height: 90vh;
+}
 
 .flex-grid {
   margin: 4px 0;
@@ -424,7 +454,7 @@ element.style {
 }
 
 .treehistory-list {
-  margin: 15px 0 0 0;
+  margin: 15px 0;
   word-wrap: break-word;
   font-size: 1.2rem;
 }
@@ -479,7 +509,7 @@ input[type="radio"], input[type="checkbox"].adopt {
 input[type="checkbox"].adopt:hover {
     background-color: yellow;
 }
-  
+
 /* Specify the background color to be
 shown when checkbox is active */
 input[type="checkbox"].adopt:active {
@@ -566,10 +596,10 @@ label.adopt {
     rgba(84, 219, 22, 1) 100%
   ); /* w3c */
 
-  filter: progid:DXImageTransform.Microsoft.gradient( 
-    startColorstr='#54DB16', 
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr='#54DB16',
     endColorstr='#000000',
-    GradientType=1 
+    GradientType=1
   ); /* ie6-9 */
 }
 
@@ -642,15 +672,8 @@ label.adopt {
 }
 
 .treeremoval {
-  margin:10px 10px 10px 0;
-  padding:10px 10px 10px 0;
+  padding: 20px 0;
 }
-
-.treeremoval-btn {
-  margin:10px 10px 10px 0;
-}
-
-
 
 .addtreepage {
   display: inline-block;

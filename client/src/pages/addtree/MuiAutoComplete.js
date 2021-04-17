@@ -11,21 +11,25 @@ export default function TreeName({
 }) {
   // console.log('coordinates', coordinates);
   const treelist = useQuery(['treelist', { coordinates }], getData);
-  // console.log('treelist', treelist);
+  console.log('treelist', treelist);
 
-  // const topTrees = treelist.data || {};
+  let topTrees = treelist.data || [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
+  topTrees = topTrees.length > 1
+    ? [...[{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }], ...topTrees]
+    : topTrees;
   // console.log('topTrees', topTrees);
+
   const handleInputChange = (e, data) => data;
 
   return (
     <div>
       {!treelist && (<div>test</div>)}
-      {treelist && treelist.status !== 'loading' && (
+      {treelist && treelist.status !== 'loading' && topTrees && (
         <Controller
           render={(props) => (
             <Autocomplete
               {...props}
-              options={treelist.data.map((option) => option[keyName])}
+              options={topTrees.map((option) => option[keyName])}
               id={keyName}
               freeSolo
               autoSelect
