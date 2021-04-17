@@ -49,6 +49,7 @@ function AddTree(props) {
     }
   };
 
+  // REMOVE THIS FOR PURELY DOM MARKER
   // useEffect(() => {
   //   if (!addTreeSelected) {
   //     if (currentMarkers !== null) {

@@ -81,7 +81,14 @@ function Mapper() {
           'source-layer': 'public.treedata',
           source: {
             type: 'vector',
-            url: 'http://localhost:3001/public.treedata.json',
+            // url: 'http://localhost:3001/public.treedata.json',
+            tiles: [
+              'http://localhost:3001/tiles/public.treedata/{z}/{x}/{y}.pbf',
+            ],
+            // Functions
+            // tiles: [
+            //   'http://localhost:3001/rpc/public.get_treedata/{z}/{x}/{y}.pbf',
+            // ],
           },
           filter: ['!', ['has', 'point_count']],
           paint: {
