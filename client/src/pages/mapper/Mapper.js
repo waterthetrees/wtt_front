@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, postData } from '../../api/queries';
+import { url } from '../../api/apiEndpoints';
 import TreeData from '../treedata/TreeData';
 import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
@@ -83,7 +84,7 @@ function Mapper() {
             type: 'vector',
             // url: 'http://localhost:3001/public.treedata.json',
             tiles: [
-              'http://localhost:3001/tiles/public.treedata/{z}/{x}/{y}.pbf',
+              `${url}/tiles/public.treedata/{z}/{x}/{y}.pbf`,
             ],
             // Functions
             // tiles: [
@@ -132,8 +133,6 @@ function Mapper() {
         });
 
         mapContainer.on('click', 'public.treedata', (e) => {
-          console.log('e1e1e1e1e1', 'e.features[0].properties', e.features[0].properties);
-          console.log('e1e1e1e1e1', e.lngLat, 'lngLat');
           mapContainer.getCanvas().style.cursor = 'pointer';
           setCurrentTreeId(e.features[0].properties.id_tree);
           setShowTree(true);
@@ -148,7 +147,6 @@ function Mapper() {
           mapContainer.on('mousemove', 'public.treedata', (e) => {
             if (e.features.length > 0) {
               if (e.features[0].properties.id_tree) {
-                // console.log('e.features[0] hover', e.features[0]);
                 hoveredStateId = e.features[0].properties.id_tree;
                 const hoverState = setHoverState(hoveredStateId, false, hoveredStateId);
                 mapContainer.setFeatureState(hoverState);
