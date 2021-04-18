@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, postData } from '../../api/queries';
-import { url } from '../../api/apiEndpoints';
+import { url, port } from '../../api/apiEndpoints';
 import TreeData from '../treedata/TreeData';
 import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
@@ -76,6 +76,8 @@ function Mapper() {
     if (!mapContainer) return;
     mapContainer.once('load', () => {
       if (featureFlag.vector) {
+        const URLTILES = `${url}${port('tileslocal')}/public.treedata/{z}/{x}/{y}.pbf`;
+        console.log(URLTILES, 'URLTILES');
         mapContainer.addLayer({
           id: 'public.treedata',
           type: 'circle',
@@ -83,9 +85,7 @@ function Mapper() {
           source: {
             type: 'vector',
             // url: 'http://localhost:3001/public.treedata.json',
-            tiles: [
-              `${url}/tiles/public.treedata/{z}/{x}/{y}.pbf`,
-            ],
+            tiles: [URLTILES],
             // Functions
             // tiles: [
             //   'http://localhost:3001/rpc/public.get_treedata/{z}/{x}/{y}.pbf',
