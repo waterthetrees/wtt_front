@@ -6,8 +6,8 @@ import {
   ModalHeader,
   ModalFooter,
 } from 'reactstrap';
-import cx from 'classnames';
 import format from 'date-fns/format';
+import cx from 'classnames';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, putData, postData } from '../../api/queries';
@@ -16,6 +16,7 @@ import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
 import TreeHeader from './TreeHeader';
 import TreeHealthSlider from './TreeHealth';
+import TreeHistory from './TreeHistory';
 
 const treeImagesPath = 'assets/images/trees/';
 const saveTimer = 800;
@@ -296,76 +297,6 @@ const TreeCare = ({ currentTreeId, common, health }) => {
   );
 };
 
-const makeMaintenanceString = (history) => {
-  const historyArray = Object.entries(history)
-    // eslint-disable-next-line no-unused-vars
-    .filter(([key, value]) => value !== 'no' && value !== null)
-    // eslint-disable-next-line no-unused-vars
-    .filter(([key, value]) => (
-      key === 'watered'
-      || key === 'mulched'
-      || key === 'weeded'
-      || key === 'staked'
-      || key === 'braced'
-      || key === 'pruned'
-    ))
-    .map((item) => item[0]);
-  if (historyArray.length === 0) return '';
-  return historyArray.join(', ');
-};
-
-const TreeHistory = ({ treeHistory }) => (
-  <div className="flex-grid border-top">
-    {treeHistory && (
-      <div className="text-center treehistory-list">
-        <h4>Tree Visit History</h4>
-      </div>
-    )}
-
-    {treeHistory
-      && treeHistory.map((history, index) => {
-        const {
-          idTreehistory,
-          dateVisit,
-          comment,
-          volunteer,
-        } = history || {};
-        const maintenanceString = makeMaintenanceString(history);
-        const keyName = `${idTreehistory}${index}`;
-        return (
-          <div className="treehistory-item" key={keyName}>
-            <div className="treehistory-item-label">
-              {format(new Date(dateVisit), 'MMMM dd yyyy')}
-              {' '}
-              tree visit by
-              {' '}
-              {volunteer || 'volunteer'}
-            </div>
-
-            {comment && (
-              <div className="">
-                <span>
-                  <div className="treehistory-item-label">Comment:</div>
-                  {' '}
-                  {comment}
-                </span>
-              </div>
-            )}
-
-            {maintenanceString && (
-              <div className="">
-                <span>
-                  <div className="treehistory-item-label">Maintenance Done:</div>
-                  {' '}
-                  {maintenanceString}
-                </span>
-              </div>
-            )}
-          </div>
-        );
-      })}
-  </div>
-);
 const TreeLocation = ({
   address, city, zip, country, neighborhood, lng, lat,
 }) => (

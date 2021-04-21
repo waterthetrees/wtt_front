@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, postData } from '../../api/queries';
 import { url, port } from '../../api/apiEndpoints';
@@ -22,11 +22,11 @@ function Mapper() {
   const { isAuthenticated, user } = useAuth0();
 
   // getData from DB
-  const treemap = (!featureFlag.vector)
-    ? useQuery(['treemap', { city: 'All' }], getData)
-    : null;
+  // const treemap = (!featureFlag.vector)
+  //   ? useQuery(['treemap', { city: 'All' }], getData)
+  //   : null;
   // const error = treemap.error || null;
-  const mapData = (!featureFlag.vector) ? treemap.data : null;
+  // const mapData = (!featureFlag.vector) ? treemap.data : null;
 
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
@@ -43,10 +43,11 @@ function Mapper() {
   const [showTree, setShowTree] = useState(false);
   const [zoomUserSet, setZoom] = useState(9);
   const [health, setHealth] = useState(null);
+  const [newTreeAdded, setNewTreeAdded] = useState();
   // -------------------------
   // Add search
   // -------------------------
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = window.innerWidth;
 
   // Initialize our map
   useEffect(() => {
@@ -71,13 +72,14 @@ function Mapper() {
     map.addControl(new mapboxgl.NavigationControl());
     setMap(map);
   }, []);
-
+  console.log('newTreeAdded', newTreeAdded);
   useEffect(() => {
     if (!mapContainer) return;
     mapContainer.once('load', () => {
       if (featureFlag.vector) {
         const URLTILES = `${url}${port('tileslocal')}/public.treedata/{z}/{x}/{y}.pbf`;
-        console.log(URLTILES, 'URLTILES');
+        console.log('newTreeAdded', newTreeAdded);
+        console.log(URLTILES, 'URLTILES', mapContainer.getZoom());
         mapContainer.addLayer({
           id: 'public.treedata',
           type: 'circle',
@@ -106,14 +108,16 @@ function Mapper() {
               'stump', 'white',
               /* other */ '#309000',
             ],
-             'circle-radius': {
-               property: 'dbh',
-               base: 1.75,
-               stops: [
-                 [8, 4],
-                 [18, 280],
-               ],
-             },
+            'circle-radius': {
+              property: 'dbh',
+              base: 1.75,
+              stops: [
+                [8, 4],
+                [10, 100],
+                [12, 180],
+                [18, 280],
+              ],
+            },
             'circle-opacity': 0.8,
             'circle-stroke-color': [
               'match',
@@ -181,7 +185,7 @@ function Mapper() {
 
       //
     });
-  }, [mapContainer, health]);
+  }, [mapContainer, health, newTreeAdded]);
 
   // USER PROFILE
   // --------------------------
@@ -213,6 +217,8 @@ function Mapper() {
         setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}
+        newTreeAdded={newTreeAdded}
+        setNewTreeAdded={setNewTreeAdded}
       />
 
     </div>
