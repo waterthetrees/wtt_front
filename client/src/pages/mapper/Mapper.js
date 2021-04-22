@@ -62,9 +62,9 @@ function Mapper() {
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
       center: coordinatesNewTree ||[-122.2517561,37.7892968]|| [-122.196532, 37.779369],
-      zoom: zoomUserSet || 13,
+      zoom: zoomUserSet || 11,
     });
-
+    console.log('map',map)
     // Add the control to the map.
     map.addControl(geolocate);
     geolocate.on('geolocate');
@@ -95,6 +95,7 @@ function Mapper() {
           },
           // filter: ['!', ['has', 'point_count']],
           paint: {
+            //'circle-color':'#309000',
             'circle-color': [
               'match',
               ['get', 'health'],
@@ -105,35 +106,33 @@ function Mapper() {
               'vacant', 'white',
               'missing', 'white',
               'concrete', '#808080',
-              'stump', 'white',
-              /* other */ '#309000',
+             'stump', 'white',
+              '#309000',
             ],
             'circle-radius': {
               property: 'dbh',
-              base: 1.75,
-              stops: [
-                [8, 4],
-                [10, 100],
-                [12, 180],
-                [18, 280],
-              ],
+		    'base': 1.25,
+		    'stops': [
+                      [12, 1],
+                      [22, 180]
+                     ]
             },
             'circle-opacity': 0.8,
-            'circle-stroke-color': [
-              'match',
-              ['get', 'health'],
-              'good', '#309000',
-              'fair', '#889944',
-              'poor', '#be9b7b',
-              'dead', 'black',
-              'vacant', '#8d5524',
-              'missing', '#c68642',
-              'concrete', '#808080',
-              'stump', '#f1c27d',
-              /* other */ '#309000',
-            ],
-            'circle-stroke-width': 1,
-
+            //'circle-stroke-color': [
+             // 'match',
+             // ['get', 'health'],
+             // 'good', '#309000',
+             // 'fair', '#889944',
+             // 'poor', '#be9b7b',
+             // 'dead', 'black',
+             // 'vacant', '#8d5524',
+             // 'missing', '#c68642',
+             // 'concrete', '#808080',
+             // 'stump', '#f1c27d',
+              /* other */ //'#309000',
+           // ],
+            //'circle-stroke-width': 1,
+            //'circle-stroke-color': 'black'
           },
         });
 
