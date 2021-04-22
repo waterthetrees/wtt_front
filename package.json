@@ -107,6 +107,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "google-map-react": "^1.1.7",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "puppeteer": "^2.0.0",
@@ -158,6 +159,7 @@
     "start-dev": "nodemon server/server-dashboard.js localserver",
     "ngrok": "ngrok start --all -config ./ngrok.yml",
     "start": "node server/server-dashboard.js localserver",
-    "test": "mocha --timeout=90000 ./test/react-tests.js"
+    "test": "mocha --timeout=90000 ./test/react-tests.js",
+    "jest-test": "jest --watch"
   }
 }
