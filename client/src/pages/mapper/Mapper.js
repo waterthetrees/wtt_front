@@ -93,6 +93,8 @@ function Mapper() {
             //   'http://localhost:3001/rpc/public.get_treedata/{z}/{x}/{y}.pbf',
             // ],
           },
+	  minzoom:9,
+	  maxzoom:20,
           // filter: ['!', ['has', 'point_count']],
           paint: {
             //'circle-color':'#309000',
@@ -111,10 +113,10 @@ function Mapper() {
             ],
             'circle-radius': {
               property: 'dbh',
-		    'base': 1.25,
+		    'base': 1,
 		    'stops': [
                       [12, 1],
-                      [22, 180]
+                      [17, 480]
                      ]
             },
             'circle-opacity': 0.8,
