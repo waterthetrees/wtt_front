@@ -1,4 +1,4 @@
-const env = {
+export const env = {
   'waterthetrees.com': 'prod',
   'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
@@ -24,6 +24,7 @@ export const port = (serverName) => ({
   docker: ':3002',
   tilesdev: ':3001/tiles',
   tileslocal: ':3001',
+  tilesblue: '/tiles',
 }[serverName]);
 // console.log('env', env, 'url', url);
 
@@ -39,5 +40,5 @@ const apiEndpoints = {
   treelikes: `${url}${port(env)}/api/treeuser`,
 };
 
-// console.log('apiEndpoints', apiEndpoints);
+console.log('apiEndpoints', apiEndpoints);
 export default apiEndpoints;

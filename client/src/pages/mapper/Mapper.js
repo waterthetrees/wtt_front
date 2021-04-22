@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, postData } from '../../api/queries';
-import { url, port } from '../../api/apiEndpoints';
+import { env, url, port } from '../../api/apiEndpoints';
 import TreeData from '../treedata/TreeData';
 import AddTree from '../addtree/AddTree';
 // import UserProfile from '../userprofile';
@@ -41,7 +41,7 @@ function Mapper() {
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const [showTree, setShowTree] = useState(false);
-  const [zoomUserSet, setZoom] = useState(9);
+  const [zoomUserSet, setZoom] = useState();
   const [health, setHealth] = useState(null);
   const [newTreeAdded, setNewTreeAdded] = useState();
   // -------------------------
@@ -61,8 +61,8 @@ function Mapper() {
     const map = new mapboxgl.Map({
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-      center: coordinatesNewTree || [-122.196532, 37.779369],
-      zoom: zoomUserSet || 11,
+      center: coordinatesNewTree ||[-122.2517561,37.7892968]|| [-122.196532, 37.779369],
+      zoom: zoomUserSet || 13,
     });
 
     // Add the control to the map.
@@ -77,7 +77,7 @@ function Mapper() {
     if (!mapContainer) return;
     mapContainer.once('load', () => {
       if (featureFlag.vector) {
-        const URLTILES = `${url}${port('tileslocal')}/public.treedata/{z}/{x}/{y}.pbf`;
+        const URLTILES = `${url}${port('tilesblue')}/public.treedata/{z}/{x}/{y}.pbf`;
         console.log('newTreeAdded', newTreeAdded);
         console.log(URLTILES, 'URLTILES', mapContainer.getZoom());
         mapContainer.addLayer({

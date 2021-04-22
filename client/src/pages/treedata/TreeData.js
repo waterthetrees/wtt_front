@@ -28,7 +28,7 @@ export default function TreeData({
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
   const toggle = () => setShowTree(!showTree);
-
+  console.log('zoom', map.getZoom());
   return (
     <Modal isOpen={showTree} className="tree__modal">
       <ModalHeader toggle={toggle} />

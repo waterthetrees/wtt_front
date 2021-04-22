@@ -33,14 +33,6 @@ export default function AdoptLikeCheckboxes({
   mutateHistory,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const treeAdoption = (isAuthenticated)
-    ? useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData) : '';
-  const treeLikes = (!isAuthenticated)
-    ? useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData) : '';
-
-  const { adopted } = treeAdoption.data || false;
-  const { liked } = treeLikes.data || false;
-
   const queryClient = useQueryClient();
   const mutateTreeLikes = useMutation(postData, {
     onSuccess: () => {
@@ -54,7 +46,7 @@ export default function AdoptLikeCheckboxes({
       queryClient.invalidateQueries('treehistory');
     },
   });
-  const [adoptionDirections, showAdoptionDirections] = React.useState(false);
+  const [adoptionDirections, showAdoptionDirections] = useState(false);
 
   const handleChange = async (event) => {
     const functionName = 'handleadoptTree';
@@ -69,7 +61,6 @@ export default function AdoptLikeCheckboxes({
         volunteer: user.nickname,
       };
 
-      console.log('sendTreeHistory', sendTreeHistory);
       const sendTreeUser = {
         idTree,
         common,
@@ -94,16 +85,51 @@ export default function AdoptLikeCheckboxes({
       console.error('CATCH', functionName, 'err', err);
     }
   };
-
   return (
     <div>
       <div className="adoption">
 
         <div>
-          <Liked liked={liked} treeLikes={treeLikes} handleChange={handleChange} />
+	  {user && (<Liked user={user}  idTree={idTree} handleChange={handleChange} />)}
         </div>
 
         <div>
+	  {user && (<Adopted 
+		  handleChange={handleChange}
+		  user={user}
+		  idTree={idTree}
+		 adoptionDirections={adoptionDirections}
+		 showAdoptionDirections={showAdoptionDirections}/>
+           )}
+        </div>
+      </div>
+      <div>
+        {adoptionDirections && <TreeAdoptionDirections common={common} />}
+      </div>
+
+    </div>
+  );
+}
+
+function Liked({ handleChange,idTree,user }) {
+  const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
+  const { liked } = treeLikes.data || false;
+  return (
+    <div className="text-center heart">
+      <FormControlLabel
+        className="adopt"
+        control={(<Checkbox checked={liked} icon={<FavoriteBorder fontSize="large" />} onChange={handleChange} checkedIcon={<Favorite fontSize="large" />} name="liked" />)}
+        label=""
+      />
+    </div>
+  );
+}
+ 
+function Adopted({handleChange,user,idTree, adoptionDirections, showAdoptionDirections}){
+  const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
+  const { adopted } = treeAdoption.data || false;
+  return (
+   <div>
           <label
             className="adopt"
             htmlFor="adopted"
@@ -128,24 +154,7 @@ export default function AdoptLikeCheckboxes({
           >
             i
           </button>
-        </div>
-      </div>
-      <div>
-        {adoptionDirections && <TreeAdoptionDirections common={common} />}
-      </div>
-
-    </div>
-  );
+   </div>
+  )
 }
 
-function Liked({ handleChange, liked }) {
-  return (
-    <div className="text-center heart">
-      <FormControlLabel
-        className="adopt"
-        control={(<Checkbox checked={liked} icon={<FavoriteBorder fontSize="large" />} onChange={handleChange} checkedIcon={<Favorite fontSize="large" />} name="liked" />)}
-        label=""
-      />
-    </div>
-  );
-}
