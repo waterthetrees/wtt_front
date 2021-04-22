@@ -61,10 +61,10 @@ function Mapper() {
     const map = new mapboxgl.Map({
       container: mapboxElRef.current,
       style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-      center: coordinatesNewTree ||[-122.2517561,37.7892968]|| [-122.196532, 37.779369],
+      center: coordinatesNewTree || [-122.2517561, 37.7892968] || [-122.196532, 37.779369],
       zoom: zoomUserSet || 11,
     });
-    console.log('map',map)
+    console.log('map', map);
     // Add the control to the map.
     map.addControl(geolocate);
     geolocate.on('geolocate');
@@ -77,7 +77,7 @@ function Mapper() {
     if (!mapContainer) return;
     mapContainer.once('load', () => {
       if (featureFlag.vector) {
-        const URLTILES = `${url}${port('tilesblue')}/public.treedata/{z}/{x}/{y}.pbf`;
+        const URLTILES = `${url}${port('tileslocal')}/public.treedata/{z}/{x}/{y}.pbf`;
         console.log('newTreeAdded', newTreeAdded);
         console.log(URLTILES, 'URLTILES', mapContainer.getZoom());
         mapContainer.addLayer({
@@ -93,11 +93,11 @@ function Mapper() {
             //   'http://localhost:3001/rpc/public.get_treedata/{z}/{x}/{y}.pbf',
             // ],
           },
-	  minzoom:9,
-	  maxzoom:20,
+          minzoom: 9,
+          maxzoom: 20,
           // filter: ['!', ['has', 'point_count']],
           paint: {
-            //'circle-color':'#309000',
+            // 'circle-color':'#309000',
             'circle-color': [
               'match',
               ['get', 'health'],
@@ -108,33 +108,33 @@ function Mapper() {
               'vacant', 'white',
               'missing', 'white',
               'concrete', '#808080',
-             'stump', 'white',
+              'stump', 'white',
               '#309000',
             ],
             'circle-radius': {
               property: 'dbh',
-		    'base': 1,
-		    'stops': [
-                      [12, 1],
-                      [17, 480]
-                     ]
+              base: 1,
+              stops: [
+                [12, 1],
+                [17, 480],
+              ],
             },
             'circle-opacity': 0.8,
-            //'circle-stroke-color': [
-             // 'match',
-             // ['get', 'health'],
-             // 'good', '#309000',
-             // 'fair', '#889944',
-             // 'poor', '#be9b7b',
-             // 'dead', 'black',
-             // 'vacant', '#8d5524',
-             // 'missing', '#c68642',
-             // 'concrete', '#808080',
-             // 'stump', '#f1c27d',
-              /* other */ //'#309000',
-           // ],
-            //'circle-stroke-width': 1,
-            //'circle-stroke-color': 'black'
+            // 'circle-stroke-color': [
+            // 'match',
+            // ['get', 'health'],
+            // 'good', '#309000',
+            // 'fair', '#889944',
+            // 'poor', '#be9b7b',
+            // 'dead', 'black',
+            // 'vacant', '#8d5524',
+            // 'missing', '#c68642',
+            // 'concrete', '#808080',
+            // 'stump', '#f1c27d',
+            /* other */ // '#309000',
+            // ],
+            // 'circle-stroke-width': 1,
+            // 'circle-stroke-color': 'black'
           },
         });
 

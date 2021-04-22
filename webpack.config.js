@@ -7,10 +7,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 // const BrotliPlugin = require('brotli-webpack-plugin'); // brotli
 
 module.exports = {
-  watch: false,
+  watch: true,
   // publicPath: '/',
   // historyApiFallback: true,
-  mode: 'production',
+  // mode: 'production',
+  mode: 'development',
   // https://webpack.js.org/concepts/mode/
   entry: { main: './client/src/client.js' },
   output: {
