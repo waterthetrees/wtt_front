@@ -17,7 +17,7 @@ function City(props) {
     cityName,
     newTreeAdded,
   } = Object(props);
-
+  
   const treemap = useQuery(['treemap', { city: cityName }], getData);
   const mapData = treemap.data || null;
   const [currentTreeId, setCurrentTreeId] = useState(null);
@@ -32,7 +32,7 @@ function City(props) {
     makeLayerGeo(map, setCurrentTreeId, setShowTree,
       'treedata', cityName, mapData);
   }, [mapData, newTreeAdded]);
-
+  
   return (
     <div className="TreeData">
       {currentTreeId && (

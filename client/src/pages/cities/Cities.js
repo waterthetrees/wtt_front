@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useQuery } from 'react-query';
 import { getData } from '../../api/queries';
@@ -135,15 +135,16 @@ function Cities(props) {
       map.getCanvas().style.cursor = '';
     });
   }, [map, citiesData]);
-  const currentZoom = map.getZoom();
-  console.log(currentZoom);
-  // if (currentZoom >= 12) setCityClicked('Oakland');  
+  
+  map.on('zoom', function() {
+   if (!cityClicked) setCityClicked('%');	  
+  });
+ 
   return (
     <div className="TreeData">
       {map && cityClicked && (
         <City
           map={map}
-          zoom={12}
           cityName={cityClicked}
         />
       )}

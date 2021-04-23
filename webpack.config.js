@@ -10,8 +10,8 @@ module.exports = {
   watch: false,
   // publicPath: '/',
   // historyApiFallback: true,
-   mode: 'production',
-  //mode: 'development',
+  // mode: 'production',
+  mode: 'development',
   // https://webpack.js.org/concepts/mode/
   entry: { main: './client/src/client.js' },
   output: {
