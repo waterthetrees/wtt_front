@@ -27,7 +27,7 @@ function getFeatures(citiesData) {
 }
 
 function Cities(props) {
-  const componentName = 'Cities';
+  // const componentName = 'Cities';
   const {
     map,
   } = Object(props);
@@ -93,25 +93,12 @@ function Cities(props) {
           });
         },
         {
-        // The two (blue) columns of pixels that can be stretched horizontally:
-        //   - the pixels between x: 25 and x: 55 can be stretched
-        //   - the pixels between x: 85 and x: 115 can be stretched.
           stretchX: [
-          // [25, 55],
-          // [85, 115],
-          // [45, 55],
-          // [25, 115],
             [10, 25],
             [25, 55],
           ],
-          // The one (red) row of pixels that can be stretched vertically:
-          //   - the pixels between y: 25 and y: 100 can be stretched
-          // stretchY: [[25, 100]],
           stretchY: [[25, 55]],
-          // stretchY: [[45, 55]],
-          // This part of the image that can contain text ([x1, y1, x2, y2]):
           content: [25, 25, 115, 100],
-          // This is a high-dpi image:
           pixelRatio: 2,
         },
       );
@@ -137,16 +124,6 @@ function Cities(props) {
       }, {
         hover: true,
       });
-
-      // if (citiesList.length) {
-      //   if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
-      //   const citiesFilter = ['in', 'name', ['literal', [...citiesList]]];
-      //   map.setFilter('cities', citiesFilter);
-      // } else {
-      //   if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
-      //   const citiesFilter = ['!=', 'name', cityCurrent];
-      //   map.setFilter('cities', citiesFilter);
-      // }
 
       setCityClicked(cityCurrent);
     });

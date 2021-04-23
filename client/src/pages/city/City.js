@@ -11,34 +11,24 @@ import makeLayerGeo from './makeLayerGeo';
 mapboxgl.accessToken = config.mapbox.key;
 
 function City(props) {
-  const componentName = 'City';
+  // const componentName = 'City';
   const {
     map,
     cityName,
     newTreeAdded,
   } = Object(props);
-  console.info(componentName, 'map', map);
-  console.log(componentName, 'cityName', cityName);
 
   const treemap = useQuery(['treemap', { city: cityName }], getData);
   const mapData = treemap.data || null;
-  console.log(' mapData', mapData, map.getZoom());
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const [showTree, setShowTree] = useState(false);
   const [health, setHealth] = useState(null);
-  console.log(' showTree', showTree, map.getZoom());
-  console.log('health', health, map.getZoom());
-  console.log('currentTreeId', currentTreeId, map.getZoom());
 
   useEffect(() => {
-    console.log('useEffect', map.getZoom());
-    console.log('load', map.getZoom());
     makeLayerTile(map, setCurrentTreeId, setShowTree);
   }, [map, health, newTreeAdded]);
 
   useEffect(() => {
-    console.log('useEffect', map.getZoom());
-    console.log('load', map.getZoom());
     makeLayerGeo(map, setCurrentTreeId, setShowTree,
       'treedata', cityName, mapData);
   }, [mapData, newTreeAdded]);

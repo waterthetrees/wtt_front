@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import mapboxgl from 'mapbox-gl';
-import { env, url, port } from '../../api/apiEndpoints';
 import mouseMoveMap from './mapboxUtilities';
 
 export default function makeLayerGeo(
@@ -8,9 +7,7 @@ export default function makeLayerGeo(
   setCurrentTreeId, setShowTree,
   sourceId, layerId, mapData,
 ) {
-  console.log(' mapData', mapData, map.getZoom(), sourceId);
   if (!map.getSource(sourceId) && mapData) {
-    console.log('doesnt have sourc yet', sourceId);
     map.addSource(sourceId, {
       type: 'geojson',
       data: mapData,

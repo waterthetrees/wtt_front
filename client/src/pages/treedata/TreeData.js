@@ -24,11 +24,9 @@ const saveTimer = 800;
 export default function TreeData({
   currentTreeId, showTree, setShowTree, map,
 }) {
-  const componentName = 'TreeData';
+  // const componentName = 'TreeData';
 
   const toggle = () => setShowTree(!showTree);
-  console.log(componentName, 'currentTreeId, showTree', currentTreeId, showTree);
-  console.log('zoom', map.getZoom());
   return (
     <Modal isOpen={showTree} className="tree__modal">
       <ModalHeader toggle={toggle} />
@@ -44,7 +42,7 @@ export default function TreeData({
 const TreeContent = ({
   currentTreeId, map,
 }) => {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   const treeData = useQuery(['tree', { currentTreeId }], getData);
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
