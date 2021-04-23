@@ -62,7 +62,7 @@ function Cities(props) {
             id: 'cities',
             type: 'symbol',
             source: 'cityFeatures',
-            minzoom: 5,
+            //minzoom: 5,
             maxzoom: 11,
             layout: {
               visibility: 'visible',
@@ -135,7 +135,8 @@ function Cities(props) {
       map.getCanvas().style.cursor = '';
     });
   }, [map, citiesData]);
-
+  const currentZoom = map.getZoom();
+  console.log(currentZoom);
   return (
     <div className="TreeData">
       {map && cityClicked && (
