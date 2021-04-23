@@ -1,0 +1,38 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:10rem 8rem;
+}
+
+.contact__p {
+  margin: 0 0 2rem 0;
+}
+
+.contact__p a{
+  font-weight:bold;
+  cursor: pointer;
+  a:link {
+    color: #ccc;
+  }
+  /* visited link */
+  a:visited {
+    color: #095484;
+  }
+  /* mouse over link */
+  a:hover {
+    color: #8ebf42;
+  }
+  /* selected link */
+  a:active {
+    color: #800000;
+  }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .contact {
+    margin:5rem 2rem;
+  }
+}

@@ -1,6 +1,6 @@
-const env = {
+export const env = {
   'waterthetrees.com': 'prod',
-  'dev.waterthetrees.com': 'local',
+  'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
   localhost: 'localserver',
   // localhost: 'docker',
@@ -8,24 +8,39 @@ const env = {
 
 // const port = { localserver: 3002 }[env];
 
-const url = {
-  prod: 'https://waterthetrees.com/api',
-  dev: 'https://dev.waterthetrees.com/api',
-  blue: 'https://blue.waterthetrees.com/api',
-  localserver: 'http://localhost:3002/api',
-  docker: 'http://localhost:3002/api',
+export const url = {
+  prod: 'https://waterthetrees.com',
+  dev: 'https://dev.waterthetrees.com',
+  blue: 'https://blue.waterthetrees.com',
+  localserver: 'http://localhost',
+  docker: 'http://localhost',
 }[env];
-// console.log(env, port, url);
+
+export const port = (serverName) => ({
+  prod: '',
+  dev: '',
+  blue: '',
+  localserver: ':3002',
+  docker: ':3002',
+  tilesdev: ':3001/tiles',
+  tileslocal: ':3001',
+  tilesblue: '/tiles',
+}[serverName]);
+// console.log('env', env, 'url', url);
+
 const apiEndpoints = {
-  user: `${url}/user`,
-  userhistory: `${url}/userhistory`,
-  userprofile: `${url}/userprofile`,
-  treemap: `${url}/treemap`,
-  tree: `${url}/tree`,
-  treehistory: `${url}/treehistory`,
-  treelist: `${url}/treelist`,
-  cities: `${url}/treemap`,
-  city: `${url}/treemap`,
+  user: `${url}${port(env)}/api/user`,
+  userhistory: `${url}${port(env)}/api/userhistory`,
+  userprofile: `${url}${port(env)}/api/userprofile`,
+  treemap: `${url}${port(env)}/api/treemap`,
+  tree: `${url}${port(env)}/api/tree`,
+  treehistory: `${url}${port(env)}/api/treehistory`,
+  treelist: `${url}${port(env)}/api/treelist`,
+  treeadoption: `${url}${port(env)}/api/treeuser`,
+  treelikes: `${url}${port(env)}/api/treeuser`,
+  cities: `${url}${port(env)}/api/cities`,
+  city: `${url}${port(env)}/api/cities`,
 };
-// console.log(apiEndpoints);
+
+// console.log('apiEndpoints', apiEndpoints);
 export default apiEndpoints;

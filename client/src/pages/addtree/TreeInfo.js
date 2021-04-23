@@ -113,20 +113,6 @@ export default function TreeInfo({ control, coordinates, errors }) {
       />
       {errors.notes && <ErrorMessageAll errors={errors} name="notes" />}
 
-      <Controller
-        as={TextField}
-        name="url"
-        label="Url"
-        control={control}
-        rules={{
-          required: false,
-          pattern: /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/i,
-        }}
-        variant="standard"
-        size="small"
-      />
-      {errors.url && <ErrorMessageAll errors={errors} name="url" />}
-
     </Widget>
 
   );

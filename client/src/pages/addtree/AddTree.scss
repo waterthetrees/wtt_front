@@ -1,20 +1,42 @@
 @import '../../styles/app';
 
 .addtree {
- display: flex;
- flex-direction: row;
- justify-content: flex-end;
- .MuiAutocomplete-inputRoot[class*='MuiFilledInput-root'] {
-  padding-top: 3px;
-  padding-left: 3px;
- }
- .MuiButton-label {
-  line-height: 1;
-  color: black;
-  font-weight: 700;
-  font-size: 1.6rem;
-  font-family: 'Roboto Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  .MuiAutocomplete-inputRoot[class*='MuiFilledInput-root'] {
+    padding-top: 3px;
+    padding-left: 3px;
+  }
+  .MuiButton-label {
+    line-height: 1;
+    color: black;
+    font-weight: 700;
+    font-size: 1.6rem;
+    font-family: 'Roboto Mono', monospace;
+  }
 }
+
+.addtree__header {
+  margin: 10px;
+}
+
+.addtree__body {
+  overflow: scroll;
+  padding: 10px
+}
+
+.addtree__body::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-header {
+  border: 0;
+  padding: 0;
+}
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -.2rem -.2rem -1rem auto;
 }
 
 .addtree_btngroup {
@@ -30,7 +52,9 @@
 .addtree__btn {
   background-color: white;
   border-radius: 13%;
-  position: relative;
+  position: absolute;
+  right:10px;
+  bottom:50px;
   padding: 1px 1px;
   border-width: 0;
   border-style: solid;
@@ -38,7 +62,6 @@
   -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
   -webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
   box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-  margin: 0 10px 20px;
 }
 
 .addtree__btn-selected{
@@ -86,8 +109,8 @@ background-color: #147d16;
   bottom: 0;
   font-family: 'Roboto Mono', monospace;
   color: black;
-  font-size: 1.2rem;
-  line-height: 1.1rem;
+      font-size: 1.5rem;
+    line-height: 1.5rem;
 }
 
 .addree__plus-centeredtxt:active {
@@ -171,13 +194,13 @@ background-color: #147d16;
 }
 
 .addtreemodal__header-logo {
- width: 150px;
- margin: 0 0px;
+  width: 200px;
+  margin: 0 0px;
 }
 
 .addtreemodal__header-image {
- width: 25px;
- margin: 0 10px;
+ width: 32px;
+ margin: 0 10px 3px;
 }
 
 .addtreemodal__owner {
@@ -247,9 +270,6 @@ background-color: #147d16;
  justify-content: flex-start;
  flex-direction: column;
  font-size: 1.2rem;
-}
-
-.treeaddress-item__label {
 }
 
 .treeaddress-item__entry {

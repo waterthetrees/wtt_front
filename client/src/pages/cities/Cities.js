@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useQuery, useMutation, queryCache } from 'react-query';
-import { useAuth0 } from '@auth0/auth0-react';
-
-import { getData, postData } from '../../api/queries';
-import City from './City';
+import { useQuery } from 'react-query';
+import { getData } from '../../api/queries';
+import City from '../city/City';
 import config from '../../config';
 
 const CITYIMAGE = 'assets/images/map/mapface.png';
@@ -25,63 +23,47 @@ function getFeatures(citiesData) {
       id: `${city.city}Id`,
     },
   }));
-  // console.log('cities', cities);
   return cities;
-}
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
 }
 
 function Cities(props) {
   const componentName = 'Cities';
   const {
     map,
-    citiesData,
-    citiesList,
   } = Object(props);
-  console.log(componentName, 'citiesList', citiesList);
-  // const cities = useQuery(['cities', { city: 'All' }], getData);
-  // const { data, error } = cities || {};
-  // const citiesData = data || null;
-  // console.log('citiesData', citiesData);
 
-  // const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
-  // const [currentTreeId, setCurrentTreeId] = useState(null);
-  // const [showTree, setShowTree] = useState(false);
+  // CITIES
+  const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
+  const citiesData = cities.data || null;
+  // CITIES
+
   const [cityClicked, setCityClicked] = useState(null);
-  //
   useEffect(() => {
-  //   // if (isAuthenticated) mutateUser(['user', user]);
-    // if (!citiesData) return;
-    // if (!map) return;
-
+    if (!map) return;
+    if (!citiesData) return;
     map.on('load', () => {
       if (map.hasImage('cityImage')) return;
-      const cities = getFeatures(citiesData);
+      const cityFeaturesArray = getFeatures(citiesData);
       const randNum = Math.floor(Math.random() * 100) + 1;
       const cityImage = `cityImage${randNum}`;
       map.loadImage(
         CITYIMAGE,
         (error, image) => {
-          console.log('image', image);
           if (error) throw error;
           map.addImage(cityImage, image);
           map.addSource('cityFeatures', {
             type: 'geojson',
             data: {
               type: 'FeatureCollection',
-              features: cities,
+              features: cityFeaturesArray,
             },
           });
           map.addLayer({
             id: 'cities',
             type: 'symbol',
             source: 'cityFeatures',
+            minzoom: 5,
+            maxzoom: 11,
             layout: {
               visibility: 'visible',
               'icon-image': cityImage,
@@ -139,7 +121,6 @@ function Cities(props) {
       e.preventDefault();
       const coordinates = e.features[0].geometry.coordinates.slice();
       const cityCurrent = e.features[0].properties.name;
-      console.log('clicked', cityCurrent);
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -150,22 +131,22 @@ function Cities(props) {
         center: coordinates,
         zoom: [12],
       });
-      // map.setFeatureState({
-      //   source: 'cityFeatures',
-      //   id: cityCurrent,
-      // }, {
-      //   hover: true,
-      // });
+      map.setFeatureState({
+        source: 'cityFeatures',
+        id: cityCurrent,
+      }, {
+        hover: true,
+      });
 
-      if (citiesList.length) {
-        if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
-        const citiesFilter = ['in', 'name', ['literal', [...citiesList]]];
-        map.setFilter('cities', citiesFilter);
-      } else {
-        if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
-        const citiesFilter = ['!=', 'name', cityCurrent];
-        map.setFilter('cities', citiesFilter);
-      }
+      // if (citiesList.length) {
+      //   if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
+      //   const citiesFilter = ['in', 'name', ['literal', [...citiesList]]];
+      //   map.setFilter('cities', citiesFilter);
+      // } else {
+      //   if (!citiesList.includes(cityCurrent)) citiesList.push(cityCurrent);
+      //   const citiesFilter = ['!=', 'name', cityCurrent];
+      //   map.setFilter('cities', citiesFilter);
+      // }
 
       setCityClicked(cityCurrent);
     });
@@ -176,15 +157,15 @@ function Cities(props) {
     map.on('mouseleave', 'cities', () => {
       map.getCanvas().style.cursor = '';
     });
-  }, [map]);
-  // if (error) return (<div>Failed to load trees</div>);
+  }, [map, citiesData]);
+
   return (
     <div className="TreeData">
-      {cityClicked && (
+      {map && cityClicked && (
         <City
           map={map}
           zoom={12}
-          cityId={cityClicked}
+          cityName={cityClicked}
         />
       )}
     </div>

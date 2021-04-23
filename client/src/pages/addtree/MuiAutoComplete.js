@@ -10,37 +10,47 @@ export default function TreeName({
   control, keyName, coordinates,
 }) {
   const treelist = useQuery(['treelist', { coordinates }], getData);
-  const topTrees = treelist.data || {};
+
+  let topTrees = treelist.data || [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
+  topTrees = topTrees.length > 1
+    ? [...[{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }], ...topTrees]
+    : topTrees;
+
   const handleInputChange = (e, data) => data;
 
   return (
-    <Controller
-      render={(props) => (
-        <Autocomplete
-          {...props}
-          options={topTrees.map((option) => option[keyName])}
-          id={keyName}
-          freeSolo
-          autoSelect
-          handleHomeEndKeys
-          clearOnBlur
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label={keyName}
-              variant="standard"
-              size="small"
-              className="addtree__infoname"
-              name={keyName}
+    <div>
+      {!treelist && (<div>test</div>)}
+      {treelist && treelist.status !== 'loading' && topTrees && (
+        <Controller
+          render={(props) => (
+            <Autocomplete
+              {...props}
+              options={topTrees.map((option) => option[keyName])}
+              id={keyName}
+              freeSolo
+              autoSelect
+              handleHomeEndKeys
+              clearOnBlur
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={keyName}
+                  variant="standard"
+                  size="small"
+                  className="addtree__infoname"
+                  name={keyName}
+                />
+              )}
+              onInputChange={handleInputChange}
+              onChange={(_, data) => props.onChange(data)}
             />
           )}
-          onInputChange={handleInputChange}
-          onChange={(_, data) => props.onChange(data)}
+          name={keyName}
+          control={control}
+          rules={(keyName === 'common') ? { required: true, minLength: 1, maxLength: 100 } : { required: false, minLength: 1, maxLength: 100 }}
         />
       )}
-      name={keyName}
-      control={control}
-      rules={(keyName === 'common') ? { required: true, minLength: 1, maxLength: 100 } : { required: false, minLength: 1, maxLength: 100 }}
-    />
+    </div>
   );
 }

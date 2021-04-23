@@ -1,78 +1,90 @@
-# wtt
+# waterthetrees
 
-## wtt_front
+Water The Trees is a platform that crowd sources tree planting and maintenance. We believe in the power of trees to restore natural habitat for animals, insects, and fauna. We are interesting in continuous massive tree planting events to help sequester carbon and stabilize climate change extremes.
 
-## Features
+## Join Us!
 
-- React
-- React Router
-- Redux
-- Bootstrap4
-- Reactstrap
-- Webpack build
-- Sass styles
+https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit
+Water the Trees is an open source project run by tree planting volunteers at Sierra Club, Public Works, and developers at Code for America.
 
-## Quick Start
+### INSTALL GIT
 
-#### 1. Get the latest version
+1. install git https://git-scm.com/downloads
 
-Clone the latest version of the Portal to your machine by running:
+### INSTALL DOCKER
 
-```shell
-$ git clone https://github.com/waterthetrees/wtt_front.git
-$ cd wtt_front
-```
+1. install docker https://www.docker.com/get-started
+2. install docker-compose (only on linux, on osx this installs with docker)
 
-...and install Webpack:
+### CLONE REPO
+
+1. Open terminal and run this
 
 ```shell
-# Install Webpack globally
-$ yarn global add --save-dev webpack
-$ yarn global add --save-dev webpack-cli
-
+$ git clone https://github.com/waterthetrees/waterthetrees.git
+$ cd waterthetrees
 ```
 
-In the future (when we get around to it), we should install webpack locally instead of globally.
+### BUILD AND START THE DOCKER
 
-#### 2. Install dependencies.
+1. run shell script to clone all repos and do docker-compose:
 
 ```shell
-$ yarn install
+$ ./install_and_build.sh
 ```
 
-This will install both run-time project dependencies and developer tools listed
-in [package.json](../package.json) file.
+### OPEN TABS and start the servers
 
-#### 3. START ER UP
-
-##### Build bundle
+1. Command T (on osx)
 
 ```shell
-$ webpack # to build bundle once
-$ webpack -w # to watch for dev changes continuously
-
+$ cd wtt_front;npm start;
 ```
 
-If you installed webpack globally, you may have to use a slightly different command:
+2. Command T (on osx)
 
 ```shell
-$ ./node_modules/.bin/webpack
-$ ./node_modules/.bin/webpack -w
+$ cd wtt_server;npm start;
 ```
 
-##### Start React pages server
+# OTHER STUFF TO INSTALL IF YOU ARE NEW TO NODE DEVELOPMENT
 
-```shell
-# use dev or live instead of local when relevant
-$ yarn start local
-$ node server/server-dashboard.js local
+## Install Node.js 14.x and npm
+
+1. On linux
+
+```
+$ sudo apt-get install -y nodejs
 ```
 
-### License
+1. On OSX
+   https://nodejs.org/en/download/
+   https://github.com/tj/n
 
-Code written by Rose Meyers, Victoria Tan
-Design by Vivien Muller
+```
+$ npm install -g n
+```
 
-All code released under Creative Commons Attribution Non-Commercial (CC-BY-NC 4.0)
+## You may also need development tools to build native addons:
 
-https://creativecommons.org/licenses/by-nc/4.0/
+1. On linux
+
+```
+$ sudo apt-get install gcc g++ make
+```
+
+1. On OSX
+
+```
+$ xcode-select --install
+```
+
+## To install the Yarn package manager, run:
+
+1. On linux
+
+```
+$ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+$ sudo apt-get update && sudo apt-get install yarn
+```

@@ -1,36 +1,50 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Suspense } from 'react';
+import React, { lazy } from 'react';
 import {
-  Switch, Route, withRouter,
+  Switch, Route, Redirect, withRouter,
 } from 'react-router-dom';
-import { ReactQueryConfigProvider } from 'react-query';
-// import { useAuth0 } from '@auth0/auth0-react';
+// import { ReactQueryConfigProvider } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
+import { useAuth0 } from '@auth0/auth0-react';
 import Layout from './Layout/Layout';
-import NotFound from '../pages/notFound/NotFound';
-// const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
-const queryConfig = {
-  shared: {
-    suspense: true,
-  },
-  queries: {
-    refetchOnWindowFocus: true,
-  },
-};
-let renderCount = 0;
-const App = () => {
-  const componentName = 'App';
+const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
-  renderCount += 1;
+const Loading = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'left',
+      alignItems: 'left',
+      color: 'green',
+      fontSize: '24px',
+      margin: '10px',
+      fontStyle: 'italic',
+    }}
+  >
+    Water the Trees
+  </div>
+);
 
-  return (
-    <ReactQueryConfigProvider config={queryConfig}>
-      <Switch>
-        <Route component={Layout} />
-        <Route component={NotFound} />
-      </Switch>
-    </ReactQueryConfigProvider>
-  );
-};
+// const queryConfig = {
+//   shared: {
+//     suspense: true,
+//   },
+//   queries: {
+//     refetchOnWindowFocus: true,
+//   },
+// };
+const queryClient = new QueryClient();
+
+const App = () => (
+  <Switch>
+    <Route component={Layout} />
+    <Route component={NotFound} />
+  </Switch>
+);
 
 export default withRouter(App);

@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
-
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: Arial, sans-serif, "PT Sans";
+  font-family: 'Roboto Mono', monospace, Arial, sans-serif, "PT Sans";
 }
 
 body {
@@ -21,6 +19,20 @@ body {
 .mapBox {
   width: 100%;
   height: 100%;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 .mapboxgl-ctrl-top-right {
@@ -81,6 +93,8 @@ body {
   height: 25px;
   margin: 0 0 0 3px;
 }
+
+
 
 
 

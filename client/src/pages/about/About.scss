@@ -1,26 +1,19 @@
-
-.about:focus{
-  outline: none;
+.about{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:10rem 8rem;
 }
 
-.about__icon {
-  height: 5vh;
-}
 
-.about__icon:hover {
-  cursor: pointer;
-}
 
-.about__icon:focus {
-  box-shadow: none;
-  outline: none;
+.about__p{
+  margin: 0 0 3rem 0;
 }
-
 
 
 @media only screen and (max-width: 768px) {
-  .about__icon {
-    // height: 1.85rem;
-    width: 70vw;
+  .about {
+    margin:5rem 2rem;
   }
 }

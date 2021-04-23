@@ -1,6 +1,6 @@
 {
-  "name": "Privacy",
+  "name": "Contact",
   "version": "0.0.0",
   "private": false,
-  "main": "./Privacy.js"
+  "main": "./Contact.js"
 }

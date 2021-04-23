@@ -6,6 +6,17 @@
   right: 0;
   left: 0;
   bottom: 0;
+  overflow:hidden;
+  height:100vh;
+  width: 100vw;
+}
+
+
+.mapboxgl-popup {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  color: #424242;
 }
 
 .tree__label {
@@ -410,9 +421,6 @@ element.style {
   ); /* w3c */
 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54DB16', endColorstr='#000000',GradientType=1 ); /* ie6-9 */
-}
-
-.status {
 }
 
 .container_popup {

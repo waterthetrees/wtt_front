@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect, useRef } from 'react';
-import { useMutation, queryCache } from 'react-query';
+import React, { useState, useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import {
   Modal,
   ModalHeader,
-  ModalBody,
   ModalFooter,
 } from 'reactstrap';
 import mapboxgl from 'mapbox-gl';
@@ -29,12 +28,14 @@ let renderCount = 0;
 const currentMarkers = [];
 
 function AddTree(props) {
-  const componentName = 'AddTree';
+  // const componentName = 'AddTree';
   renderCount += 1;
   const {
-    map,
+    map, setZoom,
     coordinatesNewTree,
     setCoordinatesNewTree,
+    setNewTreeAdded,
+    newTreeAdded,
   } = Object(props);
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
   const [addTreeSelected, setAddTreeSelected] = useState(null);
@@ -49,14 +50,12 @@ function AddTree(props) {
     }
   };
 
+  // REMOVE THIS FOR PURELY DOM MARKER
   useEffect(() => {
-    if (addTreeSelected) return;
-
-    if (currentMarkers !== null) {
-      currentMarkers.map((currentMarker) => {
-        currentMarker.remove();
-        return currentMarker;
-      });
+    if (!addTreeSelected) {
+      if (currentMarkers !== null) {
+        currentMarkers.map((currentMarker) => currentMarker.remove());
+      }
     }
   }, [addTreeSelected]);
 
@@ -71,7 +70,7 @@ function AddTree(props) {
     ? 'addtree__btn-selected'
     : '';
   return (
-    <div className="addtree">
+    <div>
       <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
         <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
         <div className="addree__plus-centeredtxt">Add a Tree</div>
@@ -81,8 +80,11 @@ function AddTree(props) {
         map={map}
         setAddTreeSelected={setAddTreeSelected}
         addTreeSelected={addTreeSelected}
+        setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}
+        setNewTreeAdded={setNewTreeAdded}
+        newTreeAdded={newTreeAdded}
       />
 
     </div>
@@ -91,7 +93,8 @@ function AddTree(props) {
 
 const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
-  coordinatesNewTree, setCoordinatesNewTree,
+  setZoom, coordinatesNewTree, setCoordinatesNewTree,
+  setNewTreeAdded, newTreeAdded,
 }) => {
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
   const handleMarkerClick = () => {
@@ -128,7 +131,7 @@ const TreeMarker = ({
     loadNewMarker(coordinates);
 
     map.off('click', handleMapClick);
-    // map.setZoom(19);
+    setZoom(19);
     map.flyTo({
       center: coordinates,
       zoom: [19],
@@ -156,6 +159,8 @@ const TreeMarker = ({
             renderCount={renderCount}
             coordinatesNewTree={coordinatesNewTree}
             setAddTreeSelected={setAddTreeSelected}
+            setNewTreeAdded={setNewTreeAdded}
+            newTreeAdded={newTreeAdded}
           />
         )}
     </div>
@@ -167,9 +172,11 @@ const AddTreeModal = ({
   setShowAddTreeModal,
   coordinatesNewTree,
   setAddTreeSelected,
+  setNewTreeAdded,
+  newTreeAdded,
 }) => {
   const {
-    user, isAuthenticated, error,
+    user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
 
@@ -195,45 +202,54 @@ const AddTreeModal = ({
     health: 'good',
     email: email || '',
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
-    url: '',
-    urlimage: '',
   };
   const {
     handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
-  const [data, setData] = useState(null);
-
-  const [mutateTreeData] = useMutation(postData, {
+  const [data] = useState(null);
+  const queryClient = useQueryClient();
+  const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
-      queryCache.invalidateQueries('treemap');
+      queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('treemap');
     },
   });
 
-  const onSubmit = (data, e) => {
-    const sendData = { ...defaultValues, ...data, ...coordinatesNewTree };
-    mutateTreeData(['tree', sendData]);
+  const onSubmit = (dataIn) => {
+    setNewTreeAdded(true);
+    const sendData = {
+      ...defaultValues,
+      ...dataIn,
+      ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
+    };
+    // console.log('newTreeAdded', newTreeAdded);
+    mutateTreeData.mutate(['tree', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
+    setNewTreeAdded(true);
   };
 
-  const onError = (errors, e) => console.log('errors, e', errors, e);
+  const onError = (err, e) => console.error('errors, e', err, e);
   return (
     <Modal isOpen={showAddTreeModal}>
-      <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)}>
-        <TreeHeader renderCount={renderCount} />
-      </ModalHeader>
-
-      <ModalBody>
-        <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-          <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
-          <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
-          <TreePlanter control={control} errors={errors} />
-          <ButtonsResult {...{
-            data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
-          }}
-          />
-        </form>
-      </ModalBody>
+      <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)} />
+      <div className="addtree">
+        <div className="addtree__header">
+          <TreeHeader renderCount={renderCount} />
+        </div>
+        <hr className="divider-solid" />
+        <div className="addtree__body">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
+            <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreePlanter control={control} errors={errors} />
+            <ButtonsResult {...{
+              data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
+            }}
+            />
+          </form>
+        </div>
+      </div>
 
       <ModalFooter>
         <Footer />
