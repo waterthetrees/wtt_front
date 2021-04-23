@@ -25,6 +25,7 @@ export const port = (serverName) => ({
   tilesdev: ':3001/tiles',
   tileslocal: ':3001',
   tilesblue: '/tiles',
+  tilesprod: '/tiles',
 }[serverName]);
 // console.log('env', env, 'url', url);
 

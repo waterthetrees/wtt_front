@@ -118,7 +118,6 @@ function Liked({ handleChange, idTree, user }) {
   const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
   const { data } = treeLikes;
   const liked = (data) ? data.liked : false;
-  console.log('liked', liked);
   return (
     <div className="text-center heart">
       <FormControlLabel
@@ -136,7 +135,6 @@ function Adopted({
   const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
   const { data } = treeAdoption;
   const adopted = (data) ? data.adopted : false;
-  console.log('adopted', adopted);
   return (
     <div>
       <label

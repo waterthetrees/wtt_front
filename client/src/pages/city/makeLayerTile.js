@@ -13,8 +13,7 @@ function setHoverState(hoveredStateId, hover, sourceLayer) {
 }
 
 export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
-  const URLTILES = `${url}${port('tileslocal')}/public.treedata/{z}/{x}/{y}.pbf`;
-  console.log(URLTILES, 'URLTILES', map.getZoom());
+  const URLTILES = `${url}${port('tilesprod')}/public.treedata/{z}/{x}/{y}.pbf`;
   map.addLayer({
     id: 'public.treedata',
     type: 'circle',
