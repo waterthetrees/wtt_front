@@ -28,7 +28,7 @@ export default function makeLayerGeo(
       source: sourceId, // this should be the id of source
       type: 'circle',
       minzoom: 11,
-      maxzoom: 20,
+      maxzoom: 22,
       //filter: ['!', ['has', 'point_count']],
       paint: {
       // 'circle-radius': 1,

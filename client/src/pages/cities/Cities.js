@@ -137,6 +137,7 @@ function Cities(props) {
   }, [map, citiesData]);
   const currentZoom = map.getZoom();
   console.log(currentZoom);
+  // if (currentZoom >= 12) setCityClicked('Oakland');  
   return (
     <div className="TreeData">
       {map && cityClicked && (

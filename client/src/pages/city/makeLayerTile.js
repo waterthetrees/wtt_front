@@ -30,7 +30,7 @@ export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
     },
 
     minzoom: 11,
-    maxzoom: 20,
+    maxzoom: 22,
     // filter: ['!', ['has', 'point_count']],
     paint: {
       // 'circle-color':'#309000',
