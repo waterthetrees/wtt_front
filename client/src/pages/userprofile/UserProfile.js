@@ -17,13 +17,17 @@ import {
 } from 'reactstrap';
 import cx from 'classnames';
 import './UserProfile.scss';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function UserProfile({}) {
   const [statusSelected, setStatusSelected] = useState();
+  const { user } = useAuth0();
 
   const UserProfile = {
-    UserImageURL: 'assets/images/users/painivert.jpg',
-    UserName: 'Billy Eilish',
+    UserEmail: user && user.email,
+    UserImageURL: user && user.picture,
+    UserName: user && user.name,
+    UserNickname: user && user.nickname,
     TreeList: [{ CommonName: 'Red Maple' }, { CommonName: 'Eureka Lemon' }],
     TreesCheckedSum: 10,
     TreesPlantedSum: 12,
@@ -33,8 +37,10 @@ function UserProfile({}) {
   const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
 
   const {
+    UserEmail,
     UserImageURL,
     UserName,
+    UserNickname,
     TreeList,
     TreesCheckedSum,
     TreesPlantedSum,
