@@ -1,6 +1,6 @@
 {
-  "name": "Widget",
+  "name": "City",
   "version": "0.0.0",
   "private": true,
-  "main": "./Widget.js"
+  "main": "./City.js"
 }

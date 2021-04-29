@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import {
   Modal,
   ModalHeader,
-  ModalBody,
   ModalFooter,
 } from 'reactstrap';
 import mapboxgl from 'mapbox-gl';
@@ -29,12 +28,14 @@ let renderCount = 0;
 const currentMarkers = [];
 
 function AddTree(props) {
-  const componentName = 'AddTree';
+  // const componentName = 'AddTree';
   renderCount += 1;
   const {
     map, setZoom,
     coordinatesNewTree,
     setCoordinatesNewTree,
+    setNewTreeAdded,
+    newTreeAdded,
   } = Object(props);
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
   const [addTreeSelected, setAddTreeSelected] = useState(null);
@@ -50,13 +51,13 @@ function AddTree(props) {
   };
 
   // REMOVE THIS FOR PURELY DOM MARKER
-  // useEffect(() => {
-  //   if (!addTreeSelected) {
-  //     if (currentMarkers !== null) {
-  //       currentMarkers.map((currentMarker) => currentMarker.remove());
-  //     }
-  //   }
-  // }, [addTreeSelected]);
+  useEffect(() => {
+    if (!addTreeSelected) {
+      if (currentMarkers !== null) {
+        currentMarkers.map((currentMarker) => currentMarker.remove());
+      }
+    }
+  }, [addTreeSelected]);
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -82,6 +83,8 @@ function AddTree(props) {
         setZoom={setZoom}
         coordinatesNewTree={coordinatesNewTree}
         setCoordinatesNewTree={setCoordinatesNewTree}
+        setNewTreeAdded={setNewTreeAdded}
+        newTreeAdded={newTreeAdded}
       />
 
     </div>
@@ -91,6 +94,7 @@ function AddTree(props) {
 const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
   setZoom, coordinatesNewTree, setCoordinatesNewTree,
+  setNewTreeAdded, newTreeAdded,
 }) => {
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
   const handleMarkerClick = () => {
@@ -155,6 +159,8 @@ const TreeMarker = ({
             renderCount={renderCount}
             coordinatesNewTree={coordinatesNewTree}
             setAddTreeSelected={setAddTreeSelected}
+            setNewTreeAdded={setNewTreeAdded}
+            newTreeAdded={newTreeAdded}
           />
         )}
     </div>
@@ -166,9 +172,11 @@ const AddTreeModal = ({
   setShowAddTreeModal,
   coordinatesNewTree,
   setAddTreeSelected,
+  setNewTreeAdded,
+  newTreeAdded,
 }) => {
   const {
-    user, isAuthenticated, error,
+    user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
 
@@ -198,7 +206,7 @@ const AddTreeModal = ({
   const {
     handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
-  const [data, setData] = useState(null);
+  const [data] = useState(null);
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
@@ -207,20 +215,21 @@ const AddTreeModal = ({
     },
   });
 
-  const onSubmit = (dataIn, event) => {
-    console.log('dataIn', dataIn, data, event);
+  const onSubmit = (dataIn) => {
+    setNewTreeAdded(true);
     const sendData = {
       ...defaultValues,
       ...dataIn,
       ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
     };
-    console.log('\n\n\n\n\nsendData', sendData);
+    // console.log('newTreeAdded', newTreeAdded);
     mutateTreeData.mutate(['tree', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
+    setNewTreeAdded(true);
   };
 
-  const onError = (errors, e) => console.log('errors, e', errors, e);
+  const onError = (err, e) => console.error('errors, e', err, e);
   return (
     <Modal isOpen={showAddTreeModal}>
       <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)} />
