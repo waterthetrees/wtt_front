@@ -1,11 +1,6 @@
 import React from 'react';
 import './TreeData.scss';
 
-// const filteredObj = (obj) => Object.entries(obj)
-//   // eslint-disable-next-line no-unused-vars
-//   .filter(([_, value]) => !!value)
-//   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-
 export default function TreeAdoptionDirections({ common }) {
   return (
     <div className="flex-grid  border-top text-left">

@@ -2,7 +2,6 @@ import React from 'react';
 import './Privacy.scss';
 
 function Privacy(props) {
-  console.log('privacy', props);
   return (
     <div className="privacy">
 

@@ -12,7 +12,6 @@ import ErrorMessageAll from '../error/ErrorPage';
 
 export default function TreeAddress({ control, coordinates, errors }) {
   const { lng, lat } = Object(coordinates);
-  console.log('lng, lat', lng, lat);
   return (
     <Widget title="Tree Location" classes="treelocation">
 

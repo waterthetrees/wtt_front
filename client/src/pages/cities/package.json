@@ -1,6 +1,6 @@
 {
-  "name": "Icon",
+  "name": "Cities",
   "version": "0.0.0",
   "private": true,
-  "main": "./Icon.js"
+  "main": "./Cities.js"
 }
