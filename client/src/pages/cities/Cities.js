@@ -19,7 +19,7 @@ function getFeatures(citiesData) {
     properties: {
       'image-name': `${city.city}image`,
       name: city.city,
-      count: `${city.count} trees`,
+      cityCountTrees: `${city.cityCountTrees} trees`,
       id: `${city.city}Id`,
     },
   }));
@@ -36,11 +36,12 @@ function Cities(props) {
   const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
   const citiesData = cities.data || null;
   // CITIES
-
+  const [countryClicked, setCountry] = useState('United States');
   const [cityClicked, setCityClicked] = useState(null);
   useEffect(() => {
     if (!map) return;
     if (!citiesData) return;
+    // console.log('citiesData', citiesData);
     map.on('load', () => {
       if (map.hasImage('cityImage')) return;
       const cityFeaturesArray = getFeatures(citiesData);
@@ -62,7 +63,7 @@ function Cities(props) {
             id: 'cities',
             type: 'symbol',
             source: 'cityFeatures',
-            //minzoom: 5,
+            // minzoom: 5,
             maxzoom: 11,
             layout: {
               visibility: 'visible',
@@ -77,7 +78,7 @@ function Cities(props) {
                 { 'font-scale': 1.5 },
                 '\n',
                 {},
-                ['get', 'count'],
+                ['get', 'cityCountTrees'],
                 {
                   'font-scale': 0.8,
                   'text-font': [
@@ -135,11 +136,14 @@ function Cities(props) {
       map.getCanvas().style.cursor = '';
     });
   }, [map, citiesData]);
-  
-  map.on('zoom', function() {
-   if (!cityClicked) setCityClicked('%');	  
+
+  map.on('zoom', (e) => {
+    if (!cityClicked) setCityClicked('%');
+    const zoomLevel = map.getZoom();
+    // beginning of country, need to get country from city record
+    if (zoomLevel <= 9) setCountry('United States');
   });
- 
+
   return (
     <div className="TreeData">
       {map && cityClicked && (

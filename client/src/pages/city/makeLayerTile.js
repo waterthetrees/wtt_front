@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import mapboxgl from 'mapbox-gl';
-import { env, url, port } from '../../api/apiEndpoints';
+import { tilesServerEndpoints } from '../../api/apiEndpoints';
 import mouseMoveMap from './mapboxUtilities';
 
 function setHoverState(hoveredStateId, hover, sourceLayer) {
@@ -13,7 +13,8 @@ function setHoverState(hoveredStateId, hover, sourceLayer) {
 }
 
 export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
-  const URLTILES = `${url}${port('tilesprod')}/public.treedata/{z}/{x}/{y}.pbf`;
+  const URLTILES = `${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`;
+  // console.log('URLTILES', URLTILES);
   map.addLayer({
     id: 'public.treedata',
     type: 'circle',

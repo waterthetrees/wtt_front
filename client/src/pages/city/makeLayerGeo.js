@@ -8,10 +8,11 @@ export default function makeLayerGeo(
   sourceId, layerId, mapData,
 ) {
   if (!map.getSource(sourceId) && mapData) {
+    // console.log('mapData', mapData);
     map.addSource(sourceId, {
       type: 'geojson',
       data: mapData,
-      cluster: false,
+      cluster: true,
       clusterMaxZoom: 14, // Max zoom to cluster points on
       clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
     });
@@ -29,7 +30,7 @@ export default function makeLayerGeo(
       type: 'circle',
       minzoom: 11,
       maxzoom: 22,
-      //filter: ['!', ['has', 'point_count']],
+      // filter: ['!', ['has', 'point_count']],
       paint: {
       // 'circle-radius': 1,
         'circle-opacity': 0.8,
