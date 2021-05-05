@@ -49,53 +49,29 @@ function UserProfile({}) {
   const { UserCity, UserState, UserZip } = UserLocation;
 
   return (
-    <div className="UserProfile text-left">
-      <img className="userprofile__image" src={UserImageURL} alt="userprofile" />
+    <section className="UserProfile">
 
-      <div className="flex-grid-one">
-        <h3>{UserProfile.UserName}</h3>
-      </div>
-
-      <div className="flex-grid-two tree__status">
-        <div className="text-left">
-          <h3>Achievements</h3>
-        </div>
-        <div className="flex-grid-one text-center">
-          <div className="text-center">
-            <Button className="btn rounded" color="danger">
-              {TreesPlantedSum}
-            </Button>
-            <p>Planted</p>
+      <div className="userprofile__flex">
+        {UserImageURL && <img className="userprofile__image" src={UserImageURL} alt="userprofile" />}
+        <div>
+          <div className="userprofile__section">
+            <h3>{UserProfile.UserName}</h3>
+            <p className="userprofile__p">{UserProfile.UserEmail}</p>
           </div>
-
-          <div className="text-center">
-            <Button className="btn rounded" color="danger">
-              {TreesCheckedSum}
-            </Button>
-            <p>Checked</p>
+          <div className="userprofile__section">
+            <h5>Tree History</h5>
+            <p className="userprofile__p">{TreesPlantedSum} planted / {TreesCheckedSum} checked / {TreesIdentifiedSum} identified</p>
           </div>
-
-          <div className="text-center">
-            <Button className="btn rounded" color="danger">
-              {TreesIdentifiedSum}
-            </Button>
+          <div className="userprofile__section">
+            <h5>Tree List</h5>
+            <ul>
+              {TreeList.map( tree => <li key={tree.CommonName}>{ tree.CommonName }</li> )}
+            </ul>
           </div>
         </div>
       </div>
-      <div className="flex-grid-two">
-        <div className="text-left">
-          <h3>History</h3>
-        </div>
-        <div className="flex-grid tree__indent tree_history-list">
-          <h4>
-            {UserName}
-            {' '}
-            watered a tree
-          </h4>
-          <h5>dateWatered</h5>
-        </div>
-      </div>
-    </div>
+
+    </section>
   );
 }
 
