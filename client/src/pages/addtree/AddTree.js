@@ -8,7 +8,8 @@ import {
 } from 'reactstrap';
 import mapboxgl from 'mapbox-gl';
 import format from 'date-fns/format';
-import cx from 'classnames';
+// import cx from 'classnames';
+import cx from 'clsx';
 import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
@@ -73,7 +74,7 @@ function AddTree(props) {
     <div>
       <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
         <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
-        <div className="addree__plus-centeredtxt">Add a Tree</div>
+        <div className="addree__plus-centeredtxt">PLANT</div>
       </button>
 
       <TreeMarker

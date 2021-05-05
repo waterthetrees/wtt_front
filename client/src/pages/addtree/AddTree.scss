@@ -53,7 +53,7 @@
   background-color: white;
   border-radius: 13%;
   position: absolute;
-  right:10px;
+  left:10px;
   bottom:50px;
   padding: 1px 1px;
   border-width: 0;
@@ -66,6 +66,7 @@
 
 .addtree__btn-selected{
   background-color: #147d16;
+  cursor: url("../../assets/images/addtree/tree12.svg"), pointer;
 }
 
 .addtree__btn:focus {

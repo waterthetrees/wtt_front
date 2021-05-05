@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useQuery } from 'react-query';
 import { getData } from '../../api/queries';
