@@ -22,7 +22,6 @@ import TreeHeader from './TreeHeader';
 import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
-import Cursor from '../../components/Cursor';
 import ButtonsResult from './ButtonsResult';
 import { randomInteger } from './utilities';
 
