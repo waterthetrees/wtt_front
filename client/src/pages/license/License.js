@@ -1,8 +1,7 @@
 import React from 'react';
 import './License.scss';
 
-function License(props) {
-  console.log('license', props);
+function License() {
   return (
     <div className="license">
       <div>

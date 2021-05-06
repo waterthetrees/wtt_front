@@ -5,19 +5,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 // const CompressionPlugin = require('compression-webpack-plugin'); // gzip
 // const BrotliPlugin = require('brotli-webpack-plugin'); // brotli
-const env = process.argv[2] || 'dev';
-const mode = {
-  dev: 'development',
-  prod: 'production',
-  blue: 'development',
-  localserver: 'development',
-}[env] || 'development';
 
 module.exports = {
-  watch: true,
+  watch: false,
   // publicPath: '/',
   // historyApiFallback: true,
-  mode,
+  // mode: 'production',
+  mode: 'development',
   // https://webpack.js.org/concepts/mode/
   entry: { main: './client/src/client.js' },
   output: {

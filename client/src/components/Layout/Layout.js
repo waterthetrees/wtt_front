@@ -2,21 +2,20 @@ import React, { lazy } from 'react';
 import { Switch, Route, withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Layout.scss';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Header from '../Header';
 import Mapper from '../../pages/mapper/Mapper';
 import About from '../../pages/about/About';
-// import About from '../../pages/about/About';
 import Privacy from '../../pages/privacy/Privacy';
 import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
-import Contact from '../../pages/contact/Contact';
-// const Header = lazy(() => import('../Header'));
-// const Terms = lazy(() => import('../../pages/terms/Terms'));
-// const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
+ import Contact from '../../pages/contact/Contact';
+
+//const Contact = lazy(() => import('../../pages/contact/Contact'));
+//const About = lazy(() => import('../../pages/about/About'));
+//const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
+//const License = lazy(() => import('../../pages/license/License'));
+//const UserProfile = lazy(() => import('../../pages/userprofile/UserProfile'));
 const NotFound = lazy(() => import('../../pages/notFound/NotFound'));
 
 const queryClient = new QueryClient();
@@ -30,7 +29,6 @@ function Layout() {
         <Switch>
           <Route path="/" exact component={Mapper} />
           <Route path="/treemap" exact component={Mapper} />
-
           <Route path="/userprofile" exact component={UserProfile} />
           <Route path="/about" exact component={About} />
           <Route path="/privacy" exact component={Privacy} />
@@ -38,7 +36,6 @@ function Layout() {
           <Route path="/contact" exact component={Contact} />
           <Route component={NotFound} />
         </Switch>
-
       </QueryClientProvider>
 
     </div>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Controller } from 'react-hook-form';
-import { useAuth0 } from '@auth0/auth0-react';
 import {
   TextField,
   RadioGroup,
@@ -11,7 +10,6 @@ import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
 export default function TreePlanter({ control, errors }) {
-  const { user } = useAuth0();
   return (
     <Widget title="Tree Planter" classes="treeplanter">
       <span>

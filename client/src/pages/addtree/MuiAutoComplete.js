@@ -9,15 +9,12 @@ import { getData } from '../../api/queries';
 export default function TreeName({
   control, keyName, coordinates,
 }) {
-  // console.log('coordinates', coordinates);
   const treelist = useQuery(['treelist', { coordinates }], getData);
-  console.log('treelist', treelist);
 
   let topTrees = treelist.data || [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
   topTrees = topTrees.length > 1
     ? [...[{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }], ...topTrees]
     : topTrees;
-  // console.log('topTrees', topTrees);
 
   const handleInputChange = (e, data) => data;
 
