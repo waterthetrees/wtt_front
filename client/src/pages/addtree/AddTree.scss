@@ -50,47 +50,68 @@
  }
 
 .addtree__btn {
-  background-color: white;
+  background-color: #147d16;
   border-radius: 13%;
   position: absolute;
   left:10px;
   bottom:50px;
-  padding: 1px 1px;
   border-width: 0;
-  border-style: solid;
-  border-color: 0 0 0 2px rgba(0,0,0,.1);
-  -moz-box-shadow: 0 0 2px rgba(0,0,0,.1);
-  -webkit-box-shadow: 0 0 2px rgba(0,0,0,.1);
-  box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-style: outset;
+  border-top-style: outset;
+  border-right-style: outset;
+  border-bottom-style: outset;
+  border-left-style: outset;
+  border-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-image: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  width:6rem;
+  height:6rem;
 }
 
 .addtree__btn-selected{
-  background-color: #147d16;
-  cursor: url("../../assets/images/addtree/tree12.svg"), pointer;
+  background-color: white;
+  border-radius: 13%;
+  // width:6rem;
+  // height:6rem;
+  // cursor:url(assets/images/addtree/tree12.svg), auto;
 }
 
-.addtree__btn:focus {
- outline: none;
- background-color: #147d16;
- -webkit-background-color: #147d16;
--moz-background-color: #147d16;
--o-background-color: #147d16;
-}
+// .addtree__btn:focus {
+//  outline: none;
+//  background-color: white;
+//  -webkit-background-color: white;
+// -moz-background-color: white;
+// -o-background-color: white;
+// border-radius: 13%;
+// }
 
-.addtree__btn:active {
- background-color: #147d16;
- -webkit-background-color: #147d16;
- -moz-background-color: #147d16;
- -o-background-color: #147d16;
-}
+// .addtree__btn:active {
+  // width:200px;
+  // height:200px;
+  // cursor:url("../../assets/images/addtree/tree12.svg"), auto;
+// }
 
-.addtree__btn:hover {
-  background-color: #147d16;
- }
+// .addtree__btn:hover {
+//   background-color: white;
+//   border-radius: 13%;
+//  }
 
-.addtree__btn:visited {
-background-color: #147d16;
-}
+// .addtree__btn:visited {
+// background-color: white;
+// border-radius: 13%;
+// }
 
  .addree__plus {
   height: 8vh;
@@ -110,15 +131,9 @@ background-color: #147d16;
   bottom: 0;
   font-family: 'Roboto Mono', monospace;
   color: black;
-      font-size: 1.5rem;
-    line-height: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
-
-.addree__plus-centeredtxt:active {
-  color: white;
-  background-color: #147d16;
-}
-
 
 .addtree__icon {
  height: 9vh;
