@@ -15,7 +15,7 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import cx from 'classnames';
+import cx from 'clsx';
 import './UserProfile.scss';
 
 function UserProfile({}) {
