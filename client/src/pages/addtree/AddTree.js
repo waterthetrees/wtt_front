@@ -38,18 +38,22 @@ function AddTree(props) {
     setNewTreeAdded,
     newTreeAdded,
   } = Object(props);
-  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const {user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const mutateUser = useMutation(postData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+  });
   const [addTreeSelected, setAddTreeSelected] = useState(false);
 
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
-    console.log('addTreeSelected', addTreeSelected);
-    console.log('newTreeAdded', newTreeAdded);
-    // if (!addTreeSelected) {
-    setAddTreeSelected(!addTreeSelected);
-    // } else {
-    //   setAddTreeSelected(false);
-    // }
+    if (isAuthenticated) mutateUser.mutate(['user', user]);
+    if (!addTreeSelected) {
+      setAddTreeSelected(true);
+    } else {
+      setAddTreeSelected(false);
+    }
   };
 
   // REMOVE THIS FOR PURELY DOM MARKER
