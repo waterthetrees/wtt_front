@@ -1,7 +1,6 @@
 import React, {
   Component, useState, useRef, useEffect,
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   ButtonToggle,
@@ -18,10 +17,32 @@ import {
 import cx from 'classnames';
 import './UserProfile.scss';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { getData, putData, postData } from '../../api/queries';
 
 function UserProfile({}) {
-  const [statusSelected, setStatusSelected] = useState();
   const { user } = useAuth0();
+  const nickname = user?.nickname;
+  const email = user?.email;
+  console.log(email, 'email');
+  // const [statusSelected, setStatusSelected] = useState();
+
+  const treeuserhistory = useQuery(['usertreehistory',
+    { request: 'treeuserhistory', volunteer: nickname }], getData, { enabled: !!nickname });
+  console.log(treeuserhistory, 'treeuserhistory');
+  const treeHistory = treeuserhistory?.data;
+
+  const treeadoption = useQuery(['user',
+    { request: 'treeadoption', email }], getData, { enabled: !!email });
+  const treeadoptionCount = treeadoption?.data?.treeadoptionCount;
+  const treelikes = useQuery(['user',
+    { request: 'treelikes', email }], getData, { enabled: !!email });
+  const treelikesCount = treelikes?.data?.treelikesCount;
+  const treedata = useQuery(['user',
+    { request: 'treedata', email }], getData, { enabled: !!email });
+  const treesplantedCount = treedata?.data?.treedataCount;
+
+  const queryClient = useQueryClient();
 
   const UserProfile = {
     UserEmail: user && user.email,
@@ -29,9 +50,9 @@ function UserProfile({}) {
     UserName: user && user.name,
     UserNickname: user && user.nickname,
     TreeList: [{ CommonName: 'Red Maple' }, { CommonName: 'Eureka Lemon' }],
-    TreesCheckedSum: 10,
-    TreesPlantedSum: 12,
-    TreesIdentifiedSum: 2,
+    // treesLikedCount: 10,
+    // treeadoptionCount: 12,
+    treesPlantedCount: 2,
   };
 
   const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
@@ -42,9 +63,9 @@ function UserProfile({}) {
     UserName,
     UserNickname,
     TreeList,
-    TreesCheckedSum,
-    TreesPlantedSum,
-    TreesIdentifiedSum,
+    // treesLikedCount,
+    // treeadoptionCount,
+    treesPlantedCount,
   } = UserProfile;
   const { UserCity, UserState, UserZip } = UserLocation;
 
@@ -60,14 +81,41 @@ function UserProfile({}) {
           </div>
           <div className="userprofile__section">
             <h5>Tree History</h5>
-            <p className="userprofile__p">{TreesPlantedSum} planted / {TreesCheckedSum} checked / {TreesIdentifiedSum} identified</p>
+            <p className="userprofile__p">
+              {treesplantedCount}
+              {' '}
+              planted /
+              {' '}
+              {treeadoptionCount}
+              {' '}
+              adopted /
+              {' '}
+              {treelikesCount}
+              {' '}
+              liked
+            </p>
           </div>
-          <div className="userprofile__section">
-            <h5>Tree List</h5>
-            <ul>
-              {TreeList.map( tree => <li key={tree.CommonName}>{ tree.CommonName }</li> )}
-            </ul>
-          </div>
+          {treeHistory && (
+            <div className="userprofile__section">
+              <h5>Tree List</h5>
+              <ol>
+                {treeHistory.map((tree) => (
+                  <li key={tree.id_tree}>
+                    { tree.id_tree }
+                    {' '}
+                    <b>{ tree.common }</b>
+                    {' '}
+                    { tree.scientific }
+                    ,
+                    {' '}
+                    { tree.health }
+                    {' '}
+                    health
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </div>
       </div>
 
