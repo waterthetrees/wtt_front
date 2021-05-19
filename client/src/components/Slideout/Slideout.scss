@@ -8,19 +8,10 @@
 
 
 .slideout__btn {
- // background-image: url("../../assets/images/map/waterdroplet.svg");
- //background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzVEQURFQyIgZD0iTTI4LjM0NCAxNy43NjhMMTguMTQ4IDEuMDkgOC43IDE3LjY1NGMtMi4yIDMuNTEtMi4zOTIgOC4wNzQtLjA4MSAxMS44NTQgMy4yODUgNS4zNzMgMTAuMzYzIDcuMDk4IDE1LjgxMSAzLjg1NyA1LjQ0Ni0zLjI0IDcuMTk5LTEwLjIyIDMuOTE0LTE1LjU5N3oiLz48L3N2Zz4=);
- // -webkit-background-size: cover;
- // -moz-background-size: cover;
- // -o-background-size: cover;
- // background-size: cover;
  background-color: transparent;
  position: absolute;
- left: 10px;
  bottom: 117px;
  border-width: 0;
- height: 7rem;
- width: 7rem;
 }
 
 .shape{
@@ -73,3 +64,6 @@
   background-color: transparent;
  }
 
+
+
+ 
