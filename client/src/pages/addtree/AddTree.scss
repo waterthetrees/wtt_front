@@ -78,7 +78,6 @@
   border-image-repeat: initial;
   width:5rem;
   height:5rem;
-  //background-image: url(assets/images/addtree/plus2.svg);
   background-image: url(../../assets/images/addtree/plus2.svg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -92,18 +91,10 @@
 .addtree__btn-selected{
   background-color: white;
   border-radius: 13%;
-  // width:6rem;
-  // height:6rem;
-  // cursor:url(assets/images/addtree/tree12.svg), auto;
 }
 
 .addtree__btn:focus {
   outline: none;
-//  background-color: white;
-//  -webkit-background-color: white;
-// -moz-background-color: white;
-// -o-background-color: white;
-// border-radius: 13%;
 }
 
 // .addtree__btn:active {
