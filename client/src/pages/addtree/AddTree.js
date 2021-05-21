@@ -78,7 +78,6 @@ function AddTree(props) {
         className={cx('addtree__btn', (addTreeSelected) ? 'addtree__btn-selected' : '')}
         onClick={handleOnClick}
       >
-        <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
         <div className="addree__plus-centeredtxt">
           PLANT
         </div>
