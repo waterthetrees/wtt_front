@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { useQueryClient } from 'react-query';
-
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import {
@@ -9,13 +7,6 @@ import {
 } from 'reactstrap';
 import format from 'date-fns/format';
 import './TreeData.scss';
-// import { putData, postData } from '../../api/queries';
-
-// import TreeInfo from '../addtree/TreeInfo';
-// import ButtonsResult from '../addtree/ButtonsResult';
-// const TreeInfo = React.lazy(() => import('../addtree/TreeInfo'));
-// const ButtonsResult = React.lazy(() => import('../addtree/ButtonsResult'));
-
 import MuiAutoComplete from '../addtree/MuiAutoComplete';
 import ErrorMessageAll from '../error/ErrorPage';
 

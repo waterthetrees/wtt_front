@@ -8,7 +8,9 @@ import {
 } from 'reactstrap';
 import mapboxgl from 'mapbox-gl';
 import format from 'date-fns/format';
-import cx from 'classnames';
+// import Tooltip from '@material-ui/core/Tooltip';
+import ReactTooltip from 'react-tooltip';
+import cx from 'clsx';
 import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
@@ -20,7 +22,6 @@ import TreeHeader from './TreeHeader';
 import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
-
 import ButtonsResult from './ButtonsResult';
 import { randomInteger } from './utilities';
 
@@ -37,12 +38,17 @@ function AddTree(props) {
     setNewTreeAdded,
     newTreeAdded,
   } = Object(props);
-  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
-  const [addTreeSelected, setAddTreeSelected] = useState(null);
+  const {user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const mutateUser = useMutation(postData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+  });
+  const [addTreeSelected, setAddTreeSelected] = useState(false);
 
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
-
+    if (isAuthenticated) mutateUser.mutate(['user', user]);
     if (!addTreeSelected) {
       setAddTreeSelected(true);
     } else {
@@ -59,23 +65,27 @@ function AddTree(props) {
     }
   }, [addTreeSelected]);
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-  const ADDATREEPLUS = (addTreeSelected)
-    ? 'assets/images/addtree/plus1.svg'
-    : 'assets/images/addtree/plus2.svg';
+  // if (isLoading) {
+  //   return <div>Loading ...</div>;
+  // }
+  const ADDATREEPLUS = 'assets/images/addtree/plus2.svg';
 
-  const ADDTREEPLUSCLASS = (addTreeSelected)
-    ? 'addtree__btn-selected'
-    : '';
+  // const ADDTREEPLUSCLASS = (addTreeSelected)
+  //   ? 'addtree__btn-selected'
+  //   : '';
   return (
     <div>
-      <button type="button" className={cx('addtree__btn', ADDTREEPLUSCLASS)} onClick={handleOnClick}>
-        <img className="addree__plus" src={ADDATREEPLUS} alt="ADD A TREE" />
-        <div className="addree__plus-centeredtxt">Add a Tree</div>
-      </button>
 
+      <button
+        data-tip="Click on map to add a tree"
+        type="button"
+        className={cx('addtree__btn', (addTreeSelected) ? 'addtree__btn-selected' : '')}
+        onClick={handleOnClick}
+      >
+        <div className="addree__plus-centeredtxt">
+          PLANT
+        </div>
+      </button>
       <TreeMarker
         map={map}
         setAddTreeSelected={setAddTreeSelected}
@@ -85,6 +95,12 @@ function AddTree(props) {
         setCoordinatesNewTree={setCoordinatesNewTree}
         setNewTreeAdded={setNewTreeAdded}
         newTreeAdded={newTreeAdded}
+      />
+      <ReactTooltip
+        type="info"
+        place="right"
+        disable={!!(addTreeSelected)}
+        delayShow={500}
       />
 
     </div>
@@ -173,7 +189,7 @@ const AddTreeModal = ({
   coordinatesNewTree,
   setAddTreeSelected,
   setNewTreeAdded,
-  newTreeAdded,
+  // newTreeAdded,
 }) => {
   const {
     user,

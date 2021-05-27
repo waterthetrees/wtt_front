@@ -691,6 +691,11 @@ label.adopt {
 
 /*mobile*/
 @media (max-width: 400px) {
+  .treehistory-list {
+    margin: 5px;
+    font-size: 1rem;
+  }
+
   .flex-grid,
   .flex-grid-thirds {
     .col {
@@ -774,4 +779,9 @@ label.adopt {
   height: 25px;
   background: #4caf50;
   cursor: pointer;
+}
+
+ol {
+  margin: 0 15px;
+  padding-inline-start: 0;
 }

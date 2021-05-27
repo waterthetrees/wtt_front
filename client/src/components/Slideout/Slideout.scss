@@ -1,0 +1,70 @@
+.adopttree__btn {
+
+ padding: 1.3rem;
+
+ font-family: 'Roboto Mono', monospace;
+ color: black;
+}
+
+
+.slideout__btn {
+ background-color: transparent;
+ position: absolute;
+ border-width: 0;
+ left: 2px;
+ bottom: 117px;
+}
+
+.shape{
+  height: 5rem;
+  width: 5rem;
+  background-color: #337AB7;
+  border-radius: 50%;
+  border-top-right-radius: 0;
+  transform: rotate(-45deg);
+}
+
+.shape:active{
+  background-color: white;
+}
+.shape:focus{
+  background-color: white;
+  outline: none;
+}
+
+.shape__txt{
+ font-size: 1rem;
+ line-height: 1rem;
+ height: 5rem;
+ width: 5rem;
+ transform: rotate(+45deg);
+ padding: 25px 20px 0 10px;
+}
+
+.slideout__btn-selected{
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.slideout__btn:focus {
+ outline: none;
+ background-color: transparent;
+ -webkit-background-color: transparent;
+-moz-background-color: transparent;
+-o-background-color: transparent;
+}
+
+.slideout__btn:active {
+ background-color: transparent;
+ -webkit-background-color: transparent;
+ -moz-background-color: transparent;
+ -o-background-color: transparent;
+}
+
+.slideout__btn:hover {
+  background-color: transparent;
+ }
+
+
+
+ 
