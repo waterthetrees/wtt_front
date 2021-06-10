@@ -14,7 +14,7 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import cx from 'classnames';
+import cx from 'clsx';
 import './UserProfile.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';

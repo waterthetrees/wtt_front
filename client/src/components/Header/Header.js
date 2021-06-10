@@ -1,15 +1,9 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import DehazeIcon from '@material-ui/icons/Dehaze';
 import AuthenticationButton from '../Auth/auth-button';
-// import About from '../../pages/about/About';
-
-const WATER_THE_TREES = 'assets/images/logos/waterthetrees-fatgraff.svg';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
-import cx from 'classnames';
+import cx from 'clsx';
 import {
   useQuery, useMutation, useQueryClient,
 } from 'react-query';

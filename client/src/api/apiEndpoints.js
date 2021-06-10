@@ -27,11 +27,12 @@ export const port = {
 export const tilesServerEndpoints = {
   localserver: `${url}:3001`,
   docker: `${url}:3001`,
-  dev: `${url}:3001/tiles`,
+  dev: `${url}/tiles`,
   local: `${url}:3001`,
   blue: `${url}/tiles`,
   prod: `${url}/tiles`,
 }[env];
+console.log('env', env, 'tilesServerEndpoints', tilesServerEndpoints);
 // console.log('env', env, 'url', url);
 
 const apiEndpoints = {

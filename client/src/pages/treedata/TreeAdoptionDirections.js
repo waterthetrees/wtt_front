@@ -1,14 +1,22 @@
 import React from 'react';
 import './TreeData.scss';
 
-export default function TreeAdoptionDirections({ common }) {
+export default function TreeAdoptionDirections({ common, onmap }) {
   return (
     <div className="flex-grid  border-top text-left">
-      <div className="treehistory-list__header  text-center">
-        <h4>
-          ADOPT a TREE!
-        </h4>
-      </div>
+      <h3>
+        ADOPT a TREE!
+      </h3>
+      {onmap && (
+        <div className="treehistory-list">
+          <h4>How to</h4>
+          <ol>
+            <li>Login on the main menu.</li>
+            <li>Select a tree on the map.</li>
+            <li>Check the adopt checkbox in the tree info window.</li>
+          </ol>
+        </div>
+      )}
       <div className="treehistory-list">
         <h4>Location</h4>
         It will be easiest to do watering if you live closer
@@ -17,11 +25,8 @@ export default function TreeAdoptionDirections({ common }) {
 
       <div className="treehistory-list">
         <h4>Water Needs</h4>
-        The
-        {' '}
-        {common}
-        {' '}
-        needs 10-20 gallons of water every 2-3 weeks in the summer for the first 2-3 years.
+        Young street trees usually need 10-20 gallons of water
+        every 2-3 weeks in the summer for the first 2-3 years.
         If it gets really hot, please water more!
       </div>
       <div className="treehistory-list">
