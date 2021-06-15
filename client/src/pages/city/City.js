@@ -7,6 +7,7 @@ import config from '../../config';
 // eslint-disable-next-line no-unused-vars
 import makeLayerTile from './makeLayerTile';
 import makeLayerGeo from './makeLayerGeo';
+import makeFunctionLayer from './makeFunctionTile';
 
 mapboxgl.accessToken = config.mapbox.key;
 
@@ -16,6 +17,7 @@ function City(props) {
     map,
     cityName,
     newTreeAdded,
+    filterCityName,
   } = Object(props);
 
   const treemap = useQuery(['treemap', { city: cityName }], getData);
@@ -24,14 +26,24 @@ function City(props) {
   const [showTree, setShowTree] = useState(false);
   const [health, setHealth] = useState(null);
 
-  useEffect(() => {
-    makeLayerTile(map, setCurrentTreeId, setShowTree);
-  }, [map, health, newTreeAdded]);
+  // useEffect(() => {
+  //   makeLayerTile(map, setCurrentTreeId, setShowTree);
+  // }, [map, health, newTreeAdded]);
+
+  // useEffect(() => {
+  //   makeLayerGeo(map, setCurrentTreeId, setShowTree,
+  //     'treedata', cityName, mapData);
+  // }, [mapData, newTreeAdded]);
 
   useEffect(() => {
-    makeLayerGeo(map, setCurrentTreeId, setShowTree,
-      'treedata', cityName, mapData);
-  }, [mapData, newTreeAdded]);
+    makeFunctionLayer(map, setCurrentTreeId, setShowTree,
+      'treedata', cityName, mapData, filterCityName);
+  }, [mapData, newTreeAdded, filterCityName]);
+
+  useEffect(() => {
+    makeFunctionLayer(map, setCurrentTreeId, setShowTree,
+      'treedata', cityName, mapData, 'Alameda');
+  }, [map, health, newTreeAdded]);
 
   return (
     <div className="TreeData">

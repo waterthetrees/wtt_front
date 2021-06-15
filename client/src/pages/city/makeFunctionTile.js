@@ -12,7 +12,7 @@ function setHoverState(hoveredStateId, hover, sourceLayer) {
   };
 }
 
-export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
+export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree) {
   const URLTILES = `${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`;
   // console.log('URLTILES', URLTILES);
   map.addLayer({
@@ -32,12 +32,12 @@ export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
 
     minzoom: 11,
     maxzoom: 22,
-    // filter: ['!', ['has', 'point_count']],
+    filter: ['==', 'city', 'Alameda'],
     paint: {
       // 'circle-color':'#309000',
       'circle-color': [
         'match',
-        ['get', 'city'],
+        ['get', 'health'],
         'good', '#309000',
         'fair', '#889944',
         'poor', '#be9b7b',
@@ -56,7 +56,7 @@ export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
           [17, 480],
         ],
       },
-      'circle-opacity': 0.8,
+      // 'circle-opacity': 0.8,
       // 'circle-stroke-color': [
       // 'match',
       // ['get', 'health'],
@@ -71,7 +71,7 @@ export default function makeTileLayer(map, setCurrentTreeId, setShowTree) {
       /* other */ // '#309000',
       // ],
       // 'circle-stroke-width': 1,
-      // 'circle-stroke-color': 'black'
+      // 'circle-stroke-color': 'black',
     },
   });
 

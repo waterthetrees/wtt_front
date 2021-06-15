@@ -29,7 +29,7 @@ function getFeatures(citiesData) {
 function Cities(props) {
   // const componentName = 'Cities';
   const {
-    map,
+    map, filterCityName,
   } = Object(props);
 
   // CITIES
@@ -150,6 +150,7 @@ function Cities(props) {
         <City
           map={map}
           cityName={cityClicked}
+          filterCityName={filterCityName}
         />
       )}
     </div>
