@@ -1,6 +1,5 @@
 import React from 'react';
 import { convertToRaw } from 'draft-js';
-// import { Button } from '@material-ui/core';
 
 const EARTH = 'assets/images/addtree/earth2.svg';
 export default ({

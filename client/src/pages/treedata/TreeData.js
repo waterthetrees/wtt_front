@@ -7,7 +7,7 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import format from 'date-fns/format';
-import cx from 'classnames';
+import cx from 'clsx';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getData, putData, postData } from '../../api/queries';
