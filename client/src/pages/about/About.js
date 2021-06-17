@@ -7,17 +7,14 @@ function About() {
   return (
     <div className="about">
       <div className="about__p">
-        <h3>
           Water The Trees is a platform that crowd
           sources tree planting and maintenance. We believe in the power of
           trees to restore natural habitat for animals, insects, and fauna.
-          We are interesting in continuous massive tree planting events
+          We are interested in continuous massive tree planting events
           to help sequester carbon
           and stabilize climate change extremes.
-        </h3>
       </div>
       <div className="about__p">
-        <h4>
           <a
             name="onboarding"
             target="blank"
@@ -26,12 +23,21 @@ function About() {
           >
             Join Us!
           </a>
-        </h4>
-        <h5>
-          Water the Trees is an open source project
-          run by tree planting volunteers at Sierra Club,
-          Public Works, and developers at Code for America.
-        </h5>
+      </div>
+      <div className="about__p">
+        We are an open source project
+        run by tree planting volunteers.
+      </div>
+      <div className="about__body">
+        <div className="about__volunteers">
+          Sierra Club
+        </div>
+        <div className="about__volunteers">
+          Public Works
+        </div>
+        <div className="about__volunteers">
+          Code for America
+        </div>
       </div>
       <Footer />
     </div>
