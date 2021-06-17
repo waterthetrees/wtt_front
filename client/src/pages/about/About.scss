@@ -1,19 +1,33 @@
-.about{
+.about {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin:10rem 8rem;
+  text-align: center;
+  margin: 5rem 5rem;
+  font-size: 1.5rem;
+
+  &__p {
+    margin: 0 0 2rem 0;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  &__volunteers {
+    background-color: green;
+    color: white;
+    border-radius: 3rem;
+    padding: 1rem;
+  }
 }
-
-
-
-.about__p{
-  margin: 0 0 3rem 0;
-}
-
 
 @media only screen and (max-width: 768px) {
   .about {
-    margin:5rem 2rem;
+    margin: 0 2rem;
+  }
+
+  &__body {
+    margin: 0 1rem;
   }
 }
