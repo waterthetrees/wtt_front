@@ -19,7 +19,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer({ buttonText, children }) {
+export default function TemporaryDrawer({
+  buttonText, children, listItems,
+  classNameButton,
+  classNameButtonText,
+}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -46,7 +50,7 @@ export default function TemporaryDrawer({ buttonText, children }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['AdoptaTree'].map((text) => (
+        {listItems.map((text) => (
           <ListItem button key={text}>
             {children}
           </ListItem>
@@ -56,15 +60,12 @@ export default function TemporaryDrawer({ buttonText, children }) {
   );
 
   return (
-    <div>
+    <div className="slideout__item">
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           {!state[anchor] && (
-            <button type="button" className="slideout__btn" onClick={toggleDrawer(anchor, true)}>
-              <div className="shape">
-                <div className="shape__txt">{buttonText[anchor]}</div>
-
-              </div>
+            <button type="button" className={classNameButton} onClick={toggleDrawer(anchor, true)}>
+              <div className={classNameButtonText}>{buttonText[anchor]}</div>
             </button>
           )}
 

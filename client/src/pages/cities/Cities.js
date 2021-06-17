@@ -150,7 +150,7 @@ function Cities(props) {
         <City
           map={map}
           cityName={cityClicked}
-          filterCityName={filterCityName}
+          filterName={filterName}
         />
       )}
     </div>

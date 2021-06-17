@@ -35,14 +35,14 @@ function City(props) {
   //     'treedata', cityName, mapData);
   // }, [mapData, newTreeAdded]);
 
-  useEffect(() => {
-    makeFunctionLayer(map, setCurrentTreeId, setShowTree,
-      'treedata', cityName, mapData, filterCityName);
-  }, [mapData, newTreeAdded, filterCityName]);
+  // useEffect(() => {
+  //   makeFunctionLayer(map, setCurrentTreeId, setShowTree,
+  //     'treedata', cityName, mapData, filterCityName);
+  // }, [mapData, newTreeAdded, filterCityName]);
 
   useEffect(() => {
     makeFunctionLayer(map, setCurrentTreeId, setShowTree,
-      'treedata', cityName, mapData, 'Alameda');
+      'treedata', cityName, mapData, cityName);
   }, [map, health, newTreeAdded]);
 
   return (

@@ -52,9 +52,9 @@
 .addtree__btn {
   background-color: #147d16;
   border-radius: 13%;
-  position: absolute;
-  left:10px;
-  bottom:50px;
+  // position: absolute;
+  // left:10px;
+  // bottom:50px;
   border-width: 0;
   border-top-width: 0;
   border-right-width: 0;
@@ -124,11 +124,6 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   font-family: 'Roboto Mono', monospace;
   color: black;
   font-size: 1.5rem;

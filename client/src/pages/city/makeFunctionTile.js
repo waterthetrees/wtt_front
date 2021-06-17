@@ -12,7 +12,8 @@ function setHoverState(hoveredStateId, hover, sourceLayer) {
   };
 }
 
-export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree) {
+export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree,
+  layerName, cityName, mapData, cityNameFiltered) {
   const URLTILES = `${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`;
   // console.log('URLTILES', URLTILES);
   map.addLayer({
@@ -32,7 +33,7 @@ export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree) {
 
     minzoom: 11,
     maxzoom: 22,
-    filter: ['==', 'city', 'Alameda'],
+    filter: ['==', 'city', cityName],
     paint: {
       // 'circle-color':'#309000',
       'circle-color': [

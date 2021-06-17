@@ -7,8 +7,10 @@ import { postData } from '../../api/queries';
 import Cities from '../cities/Cities';
 import AddTree from '../addtree/AddTree';
 import config from '../../config';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
+import MapperFilter from './MapperFilter';
 
 mapboxgl.accessToken = config.mapbox;
 
@@ -85,21 +87,37 @@ function Mapper() {
       {/* userProfileOpen && (
         <UserProfile toggle={toggle} modal={userProfileOpen} />
       ) */}
+      <Sidebar>
 
-      <Slideout
-        buttonText={{ left: 'ADOPT' }}
-      >
-        <TreeAdoptionDirections onmap />
-      </Slideout>
+        <Slideout
+          buttonText={{ left: 'ADOPT' }}
+          listItems={['AdoptaTree']}
+          buttonName="adopt"
+          classNameButton="slideout__btn slideout__btn__shape"
+          classNameButtonText="slideout__btn-txt slideout__btn-txt__shape"
+        >
+          <TreeAdoptionDirections onmap />
+        </Slideout>
 
-      <AddTree
-        map={mapContainer}
-        setZoom={setZoom}
-        coordinatesNewTree={coordinatesNewTree}
-        setCoordinatesNewTree={setCoordinatesNewTree}
-        newTreeAdded={newTreeAdded}
-        setNewTreeAdded={setNewTreeAdded}
-      />
+        <Slideout
+          buttonText={{ left: 'FILTER' }}
+          listItems={['Filter']}
+          buttonName="filter"
+          classNameButton="slideout__btn"
+          classNameButtonText="slideout__btn__txt"
+        >
+          <MapperFilter onmap />
+        </Slideout>
+
+        <AddTree
+          map={mapContainer}
+          setZoom={setZoom}
+          coordinatesNewTree={coordinatesNewTree}
+          setCoordinatesNewTree={setCoordinatesNewTree}
+          newTreeAdded={newTreeAdded}
+          setNewTreeAdded={setNewTreeAdded}
+        />
+      </Sidebar>
 
     </div>
   );
