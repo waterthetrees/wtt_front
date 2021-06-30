@@ -11,12 +11,13 @@
   }
 
   &__links {
-    padding: 2rem;
+    padding: 1rem;
   }
 
   &__body {
     display: flex;
     justify-content: space-evenly;
+    padding: 1rem;
   }
 
   &__volunteers {
@@ -24,6 +25,7 @@
     color: white;
     border-radius: 3rem;
     padding: 2rem;
+    box-sizing: border-box;
   }
 
   &__logo {
@@ -36,8 +38,17 @@
   .about {
     margin: 0 2rem;
 
+    &__links {
+      padding: 0 0 1rem 0;
+    }
+
     &__body {
       margin: 0 1rem;
+    }
+
+    &__volunteers {
+      margin: 1rem;
+      padding: 0.5rem;
     }
   }
 

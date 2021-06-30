@@ -9,7 +9,7 @@ import Footer from '../../components/Footer';
 function About() {
   return (
     <div className="about">
-      <div className="about__text">
+      <div>
         <div className="about__text">
           Water The Trees is a platform that crowd
           sources tree planting and maintenance.
