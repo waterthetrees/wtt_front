@@ -50,11 +50,10 @@
  }
 
 .addtree__btn {
+  font-weight: 900;
+  font-size: 1.2rem;
   background-color: #147d16;
   border-radius: 13%;
-  // position: absolute;
-  // left:10px;
-  // bottom:50px;
   border-width: 0;
   border-top-width: 0;
   border-right-width: 0;
@@ -97,22 +96,6 @@
   outline: none;
 }
 
-// .addtree__btn:active {
-  // width:200px;
-  // height:200px;
-  // cursor:url("../../assets/images/addtree/tree12.svg"), auto;
-// }
-
-// .addtree__btn:hover {
-//   background-color: white;
-//   border-radius: 13%;
-//  }
-
-// .addtree__btn:visited {
-// background-color: white;
-// border-radius: 13%;
-// }
-
  .addree__plus {
   height: 8vh;
   min-width: 50px;
@@ -124,10 +107,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  font-family: 'Roboto Mono', monospace;
   color: black;
-  font-size: 1.5rem;
-  line-height: 1.5rem;
 }
 
 .addtree__icon {
@@ -301,10 +281,7 @@
  .addtree {
   justify-content: flex-end;
  }
- .addree__plus-centeredtxt {
-    font-size: 1.1rem;
-    line-height: .9rem;
-  }
+
  .addtree__btn {
   height: 5rem;
   width: 5rem;
@@ -312,12 +289,7 @@
 }
 
 @media only screen and (max-width: 414px) {
-
   .addtree {
    justify-content: flex-end;
   }
-  .addree__plus-centeredtxt {
-     font-size: 1.2rem;
-     line-height: 1rem;
-   }
  }

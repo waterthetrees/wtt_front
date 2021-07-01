@@ -29,7 +29,7 @@ function getFeatures(citiesData) {
 function Cities(props) {
   // const componentName = 'Cities';
   const {
-    map, filterCityName,
+    map, filterName,
   } = Object(props);
 
   // CITIES

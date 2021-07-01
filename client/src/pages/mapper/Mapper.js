@@ -104,7 +104,7 @@ function Mapper() {
           listItems={['Filter']}
           buttonName="filter"
           classNameButton="slideout__btn"
-          classNameButtonText="slideout__btn__txt"
+          classNameButtonText="slideout__btn-txt"
         >
           <MapperFilter onmap />
         </Slideout>
