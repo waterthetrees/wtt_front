@@ -1,9 +1,7 @@
 import React from 'react';
 import './About.scss';
 
-import slackLogo from '../../assets/images/logos/Slack_RGB.svg';
-import googleDocsLogo from '../../assets/images/logos/google-docs.svg';
-
+import Contacts from '../../components/Contacts/Contacts';
 import Footer from '../../components/Footer';
 
 function About() {
@@ -26,23 +24,11 @@ function About() {
           We are interested in continuous massive tree planting events
           to help sequester carbon and stabilize climate change extremes.
         </div>
+        <div className="about__text">
+          Interested in joining our dev team? Reach out below:
+        </div>
       </div>
-      <div className="about__links">
-        <a
-          name="onboarding"
-          target="blank"
-          href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
-        >
-          <img alt="google docs" src={googleDocsLogo} className="about__logo" />
-        </a>
-        <a
-          href="https://join.slack.com/share/zt-ouzg0084-34S7_J9UZlcJSe9~qV7jbQ"
-          rel="noreferrer"
-          target="_blank"
-        >
-          <img alt="slack" src={slackLogo} className="about__logo" />
-        </a>
-      </div>
+      <Contacts />
       <div className="about__body">
         <div className="about__volunteers">
           Sierra Club
