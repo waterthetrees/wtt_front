@@ -25,7 +25,7 @@ const GreenCheckbox = withStyles({
     },
   },
   checked: {},
-// eslint-disable-next-line react/jsx-props-no-spreading
+  // eslint-disable-next-line react/jsx-props-no-spreading
 })((props) => <Checkbox color="default" {...props} />);
 
 export default function AdoptLikeCheckboxes({
@@ -36,12 +36,14 @@ export default function AdoptLikeCheckboxes({
   const queryClient = useQueryClient();
   const mutateTreeLikes = useMutation(postData, {
     onSuccess: () => {
+      queryClient.invalidateQueries('treecount');
       queryClient.invalidateQueries('treelikes');
       queryClient.invalidateQueries('treehistory');
     },
   });
   const mutateTreeAdoption = useMutation(postData, {
     onSuccess: () => {
+      queryClient.invalidateQueries('treecount');
       queryClient.invalidateQueries('treeadoption');
       queryClient.invalidateQueries('treehistory');
     },
@@ -116,8 +118,10 @@ export default function AdoptLikeCheckboxes({
 
 function Liked({ handleChange, idTree, user }) {
   const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
-  const { data } = treeLikes;
-  const liked = (data) ? data.liked : false;
+  const liked = treeLikes.data?.liked ?? false;
+  const treeCount = useQuery(['treecount', { idTree, email: user.email, request: 'likes' }], getData);
+  const likesCount = treeCount.data?.likesCount;
+
   return (
     <div className="text-center heart">
       <FormControlLabel
@@ -125,6 +129,7 @@ function Liked({ handleChange, idTree, user }) {
         control={(<Checkbox checked={liked} icon={<FavoriteBorder fontSize="large" />} onChange={handleChange} checkedIcon={<Favorite fontSize="large" />} name="liked" />)}
         label=""
       />
+      {likesCount}
     </div>
   );
 }
@@ -133,8 +138,10 @@ function Adopted({
   handleChange, user, idTree, adoptionDirections, showAdoptionDirections,
 }) {
   const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
-  const { data } = treeAdoption;
-  const adopted = (data) ? data.adopted : false;
+  const adopted = treeAdoption.data?.adopted ?? false;
+  const treeCount = useQuery(['treecount', { idTree, email: user.email, request: 'adoption' }], getData);
+  const adoptionCount = treeCount.data?.adoptionCount;
+
   return (
     <div>
       <label
@@ -151,6 +158,7 @@ function Adopted({
             name="adopted"
             className="adopt"
           />
+          {adoptionCount}
         </span>
       </label>
 

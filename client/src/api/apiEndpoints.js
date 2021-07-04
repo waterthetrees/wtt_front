@@ -2,11 +2,8 @@ export const env = {
   'waterthetrees.com': 'prod',
   'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
-  // localhost: 'localserver',
   localhost: 'docker',
 }[window.location.hostname];
-
-// const port = { localserver: 3002 }[env];
 
 export const url = {
   prod: 'https://waterthetrees.com',
@@ -32,8 +29,6 @@ export const tilesServerEndpoints = {
   blue: `${url}/tiles`,
   prod: `${url}/tiles`,
 }[env];
-console.log('env', env, 'tilesServerEndpoints', tilesServerEndpoints);
-// console.log('env', env, 'url', url);
 
 const apiEndpoints = {
   user: `${url}${port}/api/user`,
@@ -45,9 +40,9 @@ const apiEndpoints = {
   treelist: `${url}${port}/api/treelist`,
   treeadoption: `${url}${port}/api/treeuser`,
   treelikes: `${url}${port}/api/treeuser`,
+  treecount: `${url}${port}/api/treecount`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
 };
 
-// console.log('apiEndpoints', apiEndpoints);
 export default apiEndpoints;
