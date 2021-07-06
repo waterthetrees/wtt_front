@@ -2,9 +2,30 @@ import React from 'react';
 import './About.scss';
 
 import Contacts from '../../components/Contacts/Contacts';
+import Affiliates from '../../components/Contacts/Affiliates';
 import Footer from '../../components/Footer';
 
 function About() {
+  const affiliates = [{
+    city: 'Alameda',
+    links: {
+      'Sierra Club San Francisco': 'placeholder',
+      'Public Works': 'placeholder',
+    },
+  }, {
+    city: 'Oakland',
+    links: {
+      'Sierra Club San Francisco': 'test',
+      'Public Works': 'test1',
+    },
+  }, {
+    city: 'San Francisco',
+    links: {
+      'Sierra Club San Francisco': 'https://www.sierraclub.org/san-francisco-bay',
+      'Public Works': '',
+    },
+  }];
+
   return (
     <div className="about">
       <div>
@@ -25,21 +46,12 @@ function About() {
           to help sequester carbon and stabilize climate change extremes.
         </div>
         <div className="about__text">
-          Interested in joining our dev team? Reach out below:
+          To join our dev team, reach out below:
         </div>
       </div>
       <Contacts />
-      <div className="about__body">
-        <div className="about__volunteers">
-          Sierra Club
-        </div>
-        <div className="about__volunteers">
-          Public Works
-        </div>
-        <div className="about__volunteers">
-          Code for America
-        </div>
-      </div>
+      To water trees in your local community, reach out to the below:
+      <Affiliates affiliates={affiliates} />
       <Footer />
     </div>
   );
