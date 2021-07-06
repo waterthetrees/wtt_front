@@ -9,20 +9,18 @@ function About() {
   const affiliates = [{
     city: 'Alameda',
     links: {
-      'Sierra Club San Francisco': 'placeholder',
-      'Public Works': 'placeholder',
+      'Alameda Public Works': 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees',
     },
   }, {
     city: 'Oakland',
     links: {
-      'Sierra Club San Francisco': 'test',
-      'Public Works': 'test1',
+      'Oakland Public Works': 'https://www.oaklandca.gov/services/oak311',
     },
   }, {
     city: 'San Francisco',
     links: {
-      'Sierra Club San Francisco': 'https://www.sierraclub.org/san-francisco-bay',
-      'Public Works': '',
+      'Friends of the Urban Forest': 'https://friendsoftheurbanforest.formtitan.com/f0a646a51519754097160#/',
+      'San Francisco Public Works': 'https://sf311.org/services/tree-maintenance',
     },
   }];
 
@@ -50,7 +48,7 @@ function About() {
         </div>
       </div>
       <Contacts />
-      To water trees in your local community, reach out to the below:
+      To contribute to trees in your local community, reach out through the forms below:
       <Affiliates affiliates={affiliates} />
       <Footer />
     </div>

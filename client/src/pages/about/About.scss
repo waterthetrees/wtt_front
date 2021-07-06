@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 5rem 5rem;
+  margin: 5rem;
   font-size: 1.5rem;
-  overflow: scroll;
   box-sizing: border-box;
 
   &__text {
@@ -35,7 +34,9 @@
 
 @media only screen and (max-width: 768px) {
   .about {
-    margin: 0 2rem;
+    overflow: scroll;
+    margin: 0;
+    padding: 3rem 2rem;
 
     &__links {
       padding: 0 0 1rem 0;
