@@ -1,0 +1,44 @@
+@import '../../styles/app';
+
+.adoption-like {
+  display: flex;
+  justify-content: space-between;
+
+  .MuiFormControlLabel-label {
+    font-size: 1.125rem;
+  }
+
+  &__count {
+    font-size: 1.25rem;
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+
+    .MuiFormControlLabel-root {
+      margin: 0;
+    }
+
+    &--left {
+      margin: 0 1em 0 -1em;
+    }
+  }
+
+  &__info-btn {
+    background-color: #cccbca;
+    border-radius: 50%;
+    border: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 1.6em;
+    margin-left: 1em;
+    width: 1.6em;
+
+    &:hover:active,
+    &--selected {
+      background-color: #4caf50;
+      color: white;
+    }
+  }
+}

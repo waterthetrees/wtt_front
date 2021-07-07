@@ -3,6 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
@@ -15,6 +17,7 @@ import format from 'date-fns/format';
 import './TreeData.scss';
 import { postData, getData } from '../../api/queries';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
+import './TreeAdoptionLike.scss';
 
 const treeImagesPath = 'assets/images/trees/';
 const GreenCheckbox = withStyles({
@@ -88,16 +91,12 @@ export default function AdoptLikeCheckboxes({
     }
   };
 
+  if (!user) return null;
+
   return (
-    <div>
-      <div className="adoption">
-
-        <div>
-          {user && (<Liked user={user} idTree={idTree} handleChange={handleChange} />)}
-        </div>
-
-        <div>
-          {user && (
+    <React.Fragment>
+      <div className="adoption-like">
+        <Liked user={user} idTree={idTree} handleChange={handleChange} />
             <Adopted
               handleChange={handleChange}
               user={user}
@@ -105,14 +104,9 @@ export default function AdoptLikeCheckboxes({
               adoptionDirections={adoptionDirections}
               showAdoptionDirections={showAdoptionDirections}
             />
-          )}
         </div>
-      </div>
-      <div>
         {adoptionDirections && <TreeAdoptionDirections common={common} />}
-      </div>
-
-    </div>
+    </React.Fragment>
   );
 }
 
@@ -123,13 +117,19 @@ function Liked({ handleChange, idTree, user }) {
   const likesCount = treeCount.data?.likesCount;
 
   return (
-    <div className="text-center heart">
+    <div className="adoption-like__item adoption-like__item--left">
       <FormControlLabel
-        className="adopt"
-        control={(<Checkbox checked={liked} icon={<FavoriteBorder fontSize="large" />} onChange={handleChange} checkedIcon={<Favorite fontSize="large" />} name="liked" />)}
-        label=""
+        control={
+          <Checkbox
+            icon={<FavoriteBorder fontSize="large" />}
+            checkedIcon={<Favorite fontSize="large" />}
+            checked={liked}
+            onChange={handleChange}
+            name="liked"
       />
-      {likesCount}
+        }
+      />
+      <span className="adoption-like__count">{likesCount}</span>
     </div>
   );
 }
@@ -143,27 +143,25 @@ function Adopted({
   const adoptionCount = treeCount.data?.adoptionCount;
 
   return (
-    <div>
-      <label
-        className="adopt"
-        htmlFor="adopted"
-      >
-        <span>
-          Adopt
-          <input
-            type="checkbox"
-            id="adopted"
-            onChange={handleChange}
+    <div className="adoption-like__item">
+      <FormControlLabel
+        control={
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
+            checkedIcon={<CheckBoxIcon fontSize="large" />}
             checked={adopted}
+            onChange={handleChange}
             name="adopted"
-            className="adopt"
           />
-          {adoptionCount}
-        </span>
-      </label>
-
+        }
+        label="Adopt"
+        labelPlacement="start"
+      />
+      <span className="adoption-like__count">{adoptionCount}</span>
       <button
-        className={cx('infobutton', (adoptionDirections) ? 'infobutton-selected' : '')}
+        className={cx('adoption-like__info-btn', {
+          'adoption-like__info-btn--selected': adoptionDirections,
+        })}
         type="button"
         onClick={() => showAdoptionDirections(!adoptionDirections)}
       >
