@@ -1,40 +1,19 @@
-import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useAuth0 } from '@auth0/auth0-react';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-
 import cx from 'clsx';
-import {
-  useQuery, useMutation, useQueryClient,
-} from 'react-query';
-import { useAuth0 } from '@auth0/auth0-react';
 import format from 'date-fns/format';
-import './TreeData.scss';
+import React, { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { postData, getData } from '../../api/queries';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 import './TreeAdoptionLike.scss';
 
-const treeImagesPath = 'assets/images/trees/';
-const GreenCheckbox = withStyles({
-  root: {
-    color: green[400],
-    '&$checked': {
-      color: green[600],
-    },
-  },
-  checked: {},
-  // eslint-disable-next-line react/jsx-props-no-spreading
-})((props) => <Checkbox color="default" {...props} />);
-
-export default function AdoptLikeCheckboxes({
-  idTree, common,
-  mutateHistory,
-}) {
+export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const queryClient = useQueryClient();
   const mutateTreeLikes = useMutation(postData, {
@@ -75,7 +54,7 @@ export default function AdoptLikeCheckboxes({
         request: {
           [event.target.name]: event.target.checked,
           name: event.target.name,
-          type: (event.target.checked) ? 'POST' : 'DELETE',
+          type: event.target.checked ? 'POST' : 'DELETE',
         },
       };
 
@@ -94,40 +73,47 @@ export default function AdoptLikeCheckboxes({
   if (!user) return null;
 
   return (
-    <React.Fragment>
+    <>
       <div className="adoption-like">
         <Liked user={user} idTree={idTree} handleChange={handleChange} />
-            <Adopted
-              handleChange={handleChange}
-              user={user}
-              idTree={idTree}
-              adoptionDirections={adoptionDirections}
-              showAdoptionDirections={showAdoptionDirections}
-            />
-        </div>
-        {adoptionDirections && <TreeAdoptionDirections common={common} />}
-    </React.Fragment>
+        <Adopted
+          handleChange={handleChange}
+          user={user}
+          idTree={idTree}
+          adoptionDirections={adoptionDirections}
+          showAdoptionDirections={showAdoptionDirections}
+        />
+      </div>
+      {adoptionDirections && <TreeAdoptionDirections common={common} />}
+    </>
   );
 }
 
 function Liked({ handleChange, idTree, user }) {
-  const treeLikes = useQuery(['treelikes', { idTree, email: user.email, request: 'liked' }], getData);
+  const treeLikes = useQuery(
+    ['treelikes', { idTree, email: user.email, request: 'liked' }],
+    getData,
+  );
   const liked = treeLikes.data?.liked ?? false;
-  const treeCount = useQuery(['treecount', { idTree, email: user.email, request: 'likes' }], getData);
+  const treeCount = useQuery(
+    ['treecount', { idTree, email: user.email, request: 'likes' }],
+    getData,
+  );
   const likesCount = treeCount.data?.likesCount;
 
   return (
     <div className="adoption-like__item adoption-like__item--left">
       <FormControlLabel
-        control={
+        control={(
           <Checkbox
             icon={<FavoriteBorder fontSize="large" />}
             checkedIcon={<Favorite fontSize="large" />}
             checked={liked}
             onChange={handleChange}
             name="liked"
-      />
-        }
+          />
+        )}
+        label=""
       />
       <span className="adoption-like__count">{likesCount}</span>
     </div>
@@ -137,15 +123,21 @@ function Liked({ handleChange, idTree, user }) {
 function Adopted({
   handleChange, user, idTree, adoptionDirections, showAdoptionDirections,
 }) {
-  const treeAdoption = useQuery(['treeadoption', { idTree, email: user.email, request: 'adopted' }], getData);
+  const treeAdoption = useQuery(
+    ['treeadoption', { idTree, email: user.email, request: 'adopted' }],
+    getData,
+  );
   const adopted = treeAdoption.data?.adopted ?? false;
-  const treeCount = useQuery(['treecount', { idTree, email: user.email, request: 'adoption' }], getData);
+  const treeCount = useQuery(
+    ['treecount', { idTree, email: user.email, request: 'adoption' }],
+    getData,
+  );
   const adoptionCount = treeCount.data?.adoptionCount;
 
   return (
     <div className="adoption-like__item">
       <FormControlLabel
-        control={
+        control={(
           <Checkbox
             icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
             checkedIcon={<CheckBoxIcon fontSize="large" />}
@@ -153,7 +145,7 @@ function Adopted({
             onChange={handleChange}
             name="adopted"
           />
-        }
+        )}
         label="Adopt"
         labelPlacement="start"
       />
