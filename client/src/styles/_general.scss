@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: 'Roboto Mono', monospace, Arial, sans-serif, "PT Sans";
+  font-family: 'Roboto Mono', monospace, Arial, sans-serif, 'PT Sans';
 }
 
 body {
@@ -10,7 +10,11 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: Arial, sans-serif, "PT Sans";
+  font-family: Arial, sans-serif, 'PT Sans';
+}
+
+label {
+  margin: 0;
 }
 
 #root,
@@ -56,9 +60,9 @@ body {
     height: fit-content;
     padding: 1px 4px;
     margin: 0;
-  
+
     .btn {
-      padding: 0 .75rem;
+      padding: 0 0.75rem;
     }
   }
 
@@ -67,10 +71,9 @@ body {
   }
 
   .authbutton .btn {
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
   }
 }
-
 
 @media only screen and (max-width: 413px) {
   .authbutton {
@@ -78,14 +81,14 @@ body {
     height: fit-content;
     padding: 1px 4px;
     margin: 0;
-  
+
     .btn {
-      padding: 0 .75rem;
+      padding: 0 0.75rem;
     }
   }
 
   .authbutton .btn {
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
   }
 }
 
@@ -94,13 +97,8 @@ body {
   margin: 0 0 0 3px;
 }
 
-
-
-
-
-
 @media only screen and (max-width: 414px) {
   .authbutton {
     font-size: 1.1rem;
   }
- }
+}
