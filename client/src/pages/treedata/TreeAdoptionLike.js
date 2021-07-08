@@ -35,8 +35,6 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
   const [adoptionDirections, showAdoptionDirections] = useState(false);
 
   const handleChange = async (event) => {
-    const functionName = 'handleadoptTree';
-
     try {
       if (!isAuthenticated) loginWithRedirect();
 
@@ -68,6 +66,8 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
         mutateTreeLikes.mutate(['treelikes', sendTreeUser]);
       }
     } catch (err) {
+      const functionName = 'handleadoptTree';
+
       console.error('CATCH', functionName, 'err', err);
     }
   };
@@ -141,9 +141,9 @@ function Adopted({
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked': {
       color: '#28a745',
-    },
-    '&.MuiCheckbox-colorSecondary.Mui-checked:hover': {
-      backgroundColor: 'rgba(40, 167, 69, 0.06)',
+      '&:hover': {
+        backgroundColor: 'rgba(40, 167, 69, 0.06)',
+      },
     },
   });
   const AdoptionIconButton = styled(IconButton)({
