@@ -34,21 +34,13 @@
 
 @media only screen and (max-width: 768px) {
   .about {
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 0;
     padding: 3rem 2rem;
-
-    &__links {
-      padding: 0 0 1rem 0;
-    }
+    height: 100vh;
 
     &__body {
       margin: 0 1rem;
-    }
-
-    &__volunteers {
-      margin: 1rem;
-      padding: 0.5rem;
     }
   }
 
