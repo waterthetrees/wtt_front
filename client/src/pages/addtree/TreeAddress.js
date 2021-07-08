@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import {
   TextField,
@@ -10,8 +10,21 @@ import {
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
-export default function TreeAddress({ control, coordinates, errors }) {
+export default function TreeAddress({
+  control, coordinates, errors, geocoder,
+}) {
   const { lng, lat } = Object(coordinates);
+
+  // useEffect(() => {
+  //   geocoder.mapboxClient
+  //     .geocodeReverse({
+  //       latitude: lat,
+  //       longitude: lng,
+  //     }, (err, res) => {
+  //       console.log(err, res);
+  //     });
+  // }, [lng, lat]);
+
   return (
     <Widget title="Tree Location" classes="treelocation">
 
