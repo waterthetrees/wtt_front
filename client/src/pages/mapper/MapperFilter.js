@@ -9,7 +9,16 @@ export default function MapperFilter({ common, onmap }) {
   const [value, setValue] = React.useState('all');
   const handleChange = (event) => {
     setValue(event.target.value);
+    console.log('event.target.value', event.target.value);
   };
+
+  // 1. TODO we need state from the radio click to filter up to Mapper,
+  // then down to cities -> City -> City -> makeLayerTile OR makeFunctionTile
+  //  a. custom hook
+  //  b. useReducer
+
+  // 2. TODO - dont close the filter drawer when someone clicks the filter
+  // up to the drawer
 
   return (
     <FormControl component="fieldset">

@@ -38,7 +38,10 @@ function AddTree(props) {
     setNewTreeAdded,
     newTreeAdded,
   } = Object(props);
-  const {user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const {
+    user, isAuthenticated, loginWithRedirect,
+  } = useAuth0();
+  const queryClient = useQueryClient();
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('user');

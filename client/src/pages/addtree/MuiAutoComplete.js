@@ -15,7 +15,7 @@ export default function TreeName({
   topTrees = topTrees.length > 1
     ? [...[{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }], ...topTrees]
     : topTrees;
-
+  console.log(topTrees);
   const handleInputChange = (e, data) => data;
 
   return (
