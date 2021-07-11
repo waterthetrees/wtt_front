@@ -1,125 +1,96 @@
-import React, {
-  Component, useState, useRef, useEffect,
-} from 'react';
-import {
-  Button,
-  ButtonToggle,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Progress,
-  ButtonGroup,
-  Label,
-  Col,
-  Row,
-} from 'reactstrap';
-import cx from 'classnames';
+import React from 'react';
 import './UserProfile.scss';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { getData, putData, postData } from '../../api/queries';
+import { useQuery } from 'react-query';
+import { getData } from '../../api/queries';
 
 function UserProfile({}) {
   const { user } = useAuth0();
-  const nickname = user?.nickname;
+  // const nickname = user?.nickname;
   const email = user?.email;
-  console.log(email, 'email');
-  // const [statusSelected, setStatusSelected] = useState();
 
-  const treeuserhistory = useQuery(['usertreehistory',
-    { request: 'treeuserhistory', volunteer: nickname }], getData, { enabled: !!nickname });
-  console.log(treeuserhistory, 'treeuserhistory');
-  const treeHistory = treeuserhistory?.data;
+  const userAdoptedTrees = useQuery(
+    ['usertreehistory', { request: 'adopted', email: email ?? "" }],
+    getData
+  );
 
-  const treeadoption = useQuery(['user',
-    { request: 'treeadoption', email }], getData, { enabled: !!email });
-  const treeadoptionCount = treeadoption?.data?.treeadoptionCount;
-  const treelikes = useQuery(['user',
-    { request: 'treelikes', email }], getData, { enabled: !!email });
-  const treelikesCount = treelikes?.data?.treelikesCount;
-  const treedata = useQuery(['user',
-    { request: 'treedata', email }], getData, { enabled: !!email });
-  const treesplantedCount = treedata?.data?.treedataCount;
+  const userAdoptedTreesHistory = userAdoptedTrees?.data;
 
-  const queryClient = useQueryClient();
+  const userLikedTrees = useQuery(
+    ['usertreehistory', { request: 'liked', email: email ?? "" }],
+    getData
+  );
+
+  const userLikedTreesHistory = userLikedTrees?.data;
+
+  // const userPlantedTrees = useQuery(
+  //   ['usertreehistory', { request: 'planted', email: nickname ?? "nickname_doesnt_exist" }],
+  //   getData
+  // );
+
+  // const userPlantedTreesHistory = userPlantedTrees?.data;
+  // console.log(JSON.stringify(userPlantedTreesHistory));
+
+  // const treeuserhistory = useQuery(['usertreehistory',
+  //   { request: 'treeuserhistory', volunteer: nickname }], getData, { enabled: !!nickname });
+  // const treeHistory = treeuserhistory?.data;
+  // // console.log(JSON.stringify(treeHistory))
 
   const UserProfile = {
     UserEmail: user && user.email,
     UserImageURL: user && user.picture,
     UserName: user && user.name,
     UserNickname: user && user.nickname,
-    TreeList: [{ CommonName: 'Red Maple' }, { CommonName: 'Eureka Lemon' }],
-    // treesLikedCount: 10,
-    // treeadoptionCount: 12,
-    treesPlantedCount: 2,
+    treesLikedCount: 10,
+    treeadoptionCount: 12,
+    treesPlantedCount: 10,
+    treeListAdopted: userAdoptedTreesHistory ? Object.keys(userAdoptedTreesHistory).map((index) => userAdoptedTreesHistory[index]) : [],
+    treeListLiked: userLikedTreesHistory ? Object.keys(userLikedTreesHistory).map((index) => userLikedTreesHistory[index]) : [],
+    // treeListPlanted: userPlantedTreesHistory ? Object.keys(userPlantedTreesHistory).map((index) => userPlantedTreesHistory[index]) : [],
   };
 
   const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
 
-  const {
-    UserEmail,
-    UserImageURL,
-    UserName,
-    UserNickname,
-    TreeList,
-    // treesLikedCount,
-    // treeadoptionCount,
-    treesPlantedCount,
-  } = UserProfile;
-  const { UserCity, UserState, UserZip } = UserLocation;
+   return (
+    <ul>
+      <li>{UserProfile.UserEmail}</li>
+      <li>{UserProfile.UserImageURL}</li>
+      <li>{UserProfile.UserName}</li>
+      <li>{UserProfile.UserNickname}</li>
+      <li>{UserProfile.treesLikedCount}</li>
+      <li>{UserProfile.treeadoptionCount}</li>
+      <li>{UserProfile.treesPlantedCount}</li>
+      <li>{UserLocation.UserCity}</li>
+      <li>{UserLocation.UserState}</li>
+      <li>{UserLocation.UserZip}</li>
 
-  return (
-    <section className="UserProfile">
+      <li>treeListAdopted</li>
+      <ol>
+        {UserProfile.treeListAdopted.map((tree) => (
+          <li key={tree.idAdopted}>
+            { tree.idTree }
+          </li>
+        ))}
+      </ol>
 
-      <div className="userprofile__flex">
-        {UserImageURL && <img className="userprofile__image" src={UserImageURL} alt="userprofile" />}
-        <div>
-          <div className="userprofile__section">
-            <h3>{UserProfile.UserName}</h3>
-            <p className="userprofile__p">{UserProfile.UserEmail}</p>
-          </div>
-          <div className="userprofile__section">
-            <h5>Tree History</h5>
-            <p className="userprofile__p">
-              {treesplantedCount}
-              {' '}
-              planted /
-              {' '}
-              {treeadoptionCount}
-              {' '}
-              adopted /
-              {' '}
-              {treelikesCount}
-              {' '}
-              liked
-            </p>
-          </div>
-          {treeHistory && (
-            <div className="userprofile__section">
-              <h5>Tree List</h5>
-              <ol>
-                {treeHistory.map((tree) => (
-                  <li key={tree.id_tree}>
-                    { tree.id_tree }
-                    {' '}
-                    <b>{ tree.common }</b>
-                    {' '}
-                    { tree.scientific }
-                    ,
-                    {' '}
-                    { tree.health }
-                    {' '}
-                    health
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
-        </div>
-      </div>
+      <li>treeListLiked</li>
+      <ol>
+        {UserProfile.treeListLiked.map((tree) => (
+          <li key={tree.idLiked}>
+            { tree.idTree }
+          </li>
+        ))}
+      </ol>
 
-    </section>
+      {/* <li>treeListPlanted</li>
+      <ol>
+        {UserProfile.treeListPlanted.map((tree) => (
+          <li key={tree.idPlanted}>
+            { tree.idTree }
+          </li>
+        ))}
+      </ol> */}
+    </ul>
   );
 }
 
