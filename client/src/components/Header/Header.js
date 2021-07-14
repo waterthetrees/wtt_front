@@ -47,6 +47,11 @@ const Header = () => {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose}>
+            <Link to="/userprofile" className="header__link">
+              <HeaderButton menuItem="User Profile" />
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
             <Link to="/" className="header__link">
               <HeaderButton menuItem="Map" />
             </Link>
