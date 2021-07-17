@@ -55,6 +55,11 @@ const Header = () => {
               <HeaderButton menuItem="Contact" />
             </Link>
           </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/Data" className="header__link">
+              <HeaderButton menuItem="Data" />
+            </Link>
+          </MenuItem>
 
           <MenuItem onClick={handleClose}><AuthenticationButton /></MenuItem>
         </Menu>

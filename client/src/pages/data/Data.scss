@@ -1,0 +1,51 @@
+@import '../../styles/app';
+body {
+ overflow: scroll;
+}
+.data {
+ position: fixed;
+ top: 3rem;
+ left: 0;
+ margin: 20px;
+ overflow: scroll;
+}
+
+.data__treelist {
+ overflow: scroll;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
+  background-color: #2196F3;
+  padding: 10px; 
+}
+
+.data__treelist-tree:nth-child(odd){
+ background-color: #adb5bd;
+}
+
+.data__treelist-tree{
+ display: grid;
+ justify-content: right;
+ grid-template-columns: repeat(3, 1fr);
+ background-color: rgba(255, 255, 255, 0.8);
+}
+.data__treelist-tree-header-item {
+ cursor: select;
+}
+
+.data__treelist-tree-item{
+ padding: 1px 2px;
+ border: 1px solid black;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
