@@ -68,10 +68,12 @@ function Data(props) {
 }
 
 function TreeList({ treeType }) {
+  console.log('treeType', treeType);
   const [topTreesSorted, setTreesSorted] = useState(treeType);
 
   const clickHandler = (event) => {
     const sortby = event.target.value;
+    console.log('sortby', sortby);
     const sortedData = [...topTreesSorted].sort((a, b) => {
       const aa = a[sortby].toLowerCase();
       const bb = b[sortby].toLowerCase();
@@ -83,11 +85,12 @@ function TreeList({ treeType }) {
       }
       return 0;
     });
+    console.log('sortedData', sortedData);
+    setTreesSorted(sortedData);
   };
 
   console.log('topTreesSorted', topTreesSorted);
   return (
-
     <div className="data__treelist">
       {topTreesSorted
       && topTreesSorted.map((tree, index) => ((index === 0)
