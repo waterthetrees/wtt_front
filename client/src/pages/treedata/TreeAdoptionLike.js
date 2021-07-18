@@ -11,65 +11,85 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import InfoIcon from '@material-ui/icons/Info';
 import format from 'date-fns/format';
 import React, { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { postData, getData } from '../../api/queries';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getData, postData } from '../../api/queries';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 
-export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+export const useLikesQuery = (obj) => useQuery(['treelikes', obj], getData, {
+  placeholderData: {
+    liked: false,
+    likedCount: 0,
+  },
+});
+
+export const useAdoptionQuery = (obj) => useQuery(['treeadoption', obj], getData, {
+  placeholderData: {
+    adopted: false,
+    adoptedCount: 0,
+  },
+});
+
+export const useLikesMutation = () => {
   const queryClient = useQueryClient();
-  const mutateTreeLikes = useMutation(postData, {
+
+  return useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('treecount');
       queryClient.invalidateQueries('treelikes');
       queryClient.invalidateQueries('treehistory');
     },
+    onError: (err) => {
+      console.error(err);
+    },
   });
-  const mutateTreeAdoption = useMutation(postData, {
+};
+
+export const useAdoptionMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('treecount');
       queryClient.invalidateQueries('treeadoption');
       queryClient.invalidateQueries('treehistory');
     },
+    onError: (err) => {
+      console.error(err);
+    },
   });
+};
+
+export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
+  const { user } = useAuth0();
+  const mutateTreeLikes = useLikesMutation();
+  const mutateTreeAdoption = useAdoptionMutation();
   const [adoptionDirections, showAdoptionDirections] = useState(false);
 
-  const handleChange = async (event) => {
-    try {
-      if (!isAuthenticated) loginWithRedirect();
+  const handleChange = (event) => {
+    const sendTreeHistory = {
+      idTree,
+      dateVisit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+      [event.target.name]: event.target.checked,
+      volunteer: user.nickname,
+    };
+    const sendTreeUser = {
+      idTree,
+      common,
+      nickname: user.nickname,
+      email: user.email,
+      request: {
+        // [event.target.name]: event.target.checked,
+        name: event.target.name,
+        type: event.target.checked ? 'POST' : 'DELETE',
+      },
+    };
 
-      const sendTreeHistory = {
-        idTree,
-        dateVisit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
-        [event.target.name]: event.target.checked,
-        volunteer: user.nickname,
-      };
-      const sendTreeUser = {
-        idTree,
-        common,
-        nickname: user.nickname,
-        volunteer: user.volunteer,
-        email: user.email,
-        request: {
-          [event.target.name]: event.target.checked,
-          name: event.target.name,
-          type: event.target.checked ? 'POST' : 'DELETE',
-        },
-      };
-
-      mutateHistory.mutate(['treehistory', sendTreeHistory]);
-
-      if (event.target.name === 'adopted') {
-        mutateTreeAdoption.mutate(['treeadoption', sendTreeUser]);
-        showAdoptionDirections(event.target.checked);
-      } else {
-        mutateTreeLikes.mutate(['treelikes', sendTreeUser]);
-      }
-    } catch (err) {
-      const functionName = 'handleadoptTree';
-
-      console.error('CATCH', functionName, 'err', err);
+    if (event.target.name === 'adopted') {
+      mutateTreeAdoption.mutate(['treeadoption', sendTreeUser]);
+      showAdoptionDirections(event.target.checked);
+    } else {
+      mutateTreeLikes.mutate(['treelikes', sendTreeUser]);
     }
+
+    mutateHistory.mutate(['treehistory', sendTreeHistory]);
   };
 
   if (!user) return null;
@@ -92,16 +112,8 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
 }
 
 function Liked({ handleChange, idTree, user }) {
-  const treeLikes = useQuery(
-    ['treelikes', { idTree, email: user.email, request: 'liked' }],
-    getData,
-  );
-  const liked = treeLikes.data?.liked ?? false;
-  const treeCount = useQuery(
-    ['treecount', { idTree, email: user.email, request: 'likes' }],
-    getData,
-  );
-  const likesCount = treeCount.data?.likesCount;
+  const { data } = useLikesQuery({ idTree, email: user.email, request: 'liked' });
+  const { liked, likedCount } = data;
 
   return (
     <Grid item>
@@ -116,7 +128,7 @@ function Liked({ handleChange, idTree, user }) {
             name="liked"
           />
         </Grid>
-        <Box fontSize="1.125rem">{likesCount}</Box>
+        <Box fontSize="1.125rem">{likedCount}</Box>
       </Grid>
     </Grid>
   );
@@ -125,16 +137,8 @@ function Liked({ handleChange, idTree, user }) {
 function Adopted({
   handleChange, user, idTree, adoptionDirections, showAdoptionDirections,
 }) {
-  const treeAdoption = useQuery(
-    ['treeadoption', { idTree, email: user.email, request: 'adopted' }],
-    getData,
-  );
-  const adopted = treeAdoption.data?.adopted ?? false;
-  const treeCount = useQuery(
-    ['treecount', { idTree, email: user.email, request: 'adoption' }],
-    getData,
-  );
-  const adoptionCount = treeCount.data?.adoptionCount;
+  const { data } = useAdoptionQuery({ idTree, email: user.email, request: 'adopted' });
+  const { adopted, adoptedCount } = data;
   const AdoptionCheckbox = styled(Checkbox)({
     '&:hover': {
       backgroundColor: 'rgba(40, 167, 69, 0.06)',
@@ -174,7 +178,7 @@ function Adopted({
         </Grid>
         <Grid item>
           <Box fontSize="1.125rem" marginLeft="1em">
-            {adoptionCount}
+            {adoptedCount}
           </Box>
         </Grid>
         <Grid item>
