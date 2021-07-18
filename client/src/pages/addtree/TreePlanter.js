@@ -17,14 +17,14 @@ export default function TreePlanter({ control, errors }) {
           as={(
             <RadioGroup aria-label="owner" name="position" row>
               <FormControlLabel
-                value="private"
-                control={<Radio color="secondary" value="private" />}
-                label="Private Land"
-              />
-              <FormControlLabel
                 value="public"
                 control={<Radio color="primary" value="public" />}
                 label="Public Land"
+              />
+              <FormControlLabel
+                value="private"
+                control={<Radio color="secondary" value="private" />}
+                label="Private Land"
               />
             </RadioGroup>
           )}
