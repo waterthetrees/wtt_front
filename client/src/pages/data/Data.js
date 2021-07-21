@@ -157,4 +157,8 @@ function Tree({
     </div>
   );
 }
-export default Data;
+export {
+  Data,
+  topCaliforniaNativeTrees,
+  topFoodTrees,
+};
