@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Controller } from 'react-hook-form';
 
 import {
@@ -11,18 +11,22 @@ import {
 import MuiAutoComplete from './MuiAutoComplete';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
+import { topFoodTrees } from '../data';
 
 export default function TreeInfo({ control, coordinates, errors }) {
+  const [treeList, setTreeList] = useState([{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}, ...topFoodTrees]);
+  console.log('TREES', treeList);
+
   return (
     <Widget title="Tree Info" classes="treeinfo">
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" options={treeList} />
       {errors.common && <ErrorMessageAll errors={errors} name="common" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" options={treeList} />
       {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" options={treeList} />
       {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
 
       <Controller

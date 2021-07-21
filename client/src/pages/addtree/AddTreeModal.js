@@ -20,6 +20,7 @@ import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
 import ButtonsResult from './ButtonsResult';
+import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
 
 const renderCount = 0;
@@ -36,9 +37,12 @@ const AddTreeModal = ({
     user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
+  const typeArray = ['California Natives', 'Food Trees', 'By City'];
 
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const defaultValues = {
+    treeType: typeArray[0],
+    city: '',
     common: '',
     scientific: '',
     genus: '',
@@ -65,6 +69,7 @@ const AddTreeModal = ({
   } = useForm({ defaultValues });
   const [data] = useState(null);
   const queryClient = useQueryClient();
+  console.log(queryClient);
   const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('tree');
@@ -97,6 +102,11 @@ const AddTreeModal = ({
         <hr className="divider-solid" />
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
+            <MuiRadioSelector
+              label='Tree Type Options'
+              options={typeArray}
+              control={control}
+            />
             <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
             <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
             <TreePlanter control={control} errors={errors} />

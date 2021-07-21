@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   RadioGroup,
@@ -9,13 +10,14 @@ import {
   InputLabel,
   Radio,
 } from '@material-ui/core';
+import Widget from '../../components/Widget';
 
-export default function MuiRadioSelector ({
+export default function MuiRadioSelector({
   label,
   options,
-  setValue,
+  control,
   value,
-  }) {
+}) {
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -30,19 +32,26 @@ export default function MuiRadioSelector ({
   const handleChange = (event) => setValue(event.target.value);
 
   return (
-    <div className="data">
+    <Widget title={label}>
+
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-        <RadioGroup
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          onChange={handleChange}
-        >
-          {options.map((t) =>
-            <FormControlLabel id={t} value={t} control={<Radio />} label={t} />)}
-        </RadioGroup>
+        <Controller
+          as={(
+            <RadioGroup
+              row
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={value}
+              onChange={handleChange}
+            >
+              {options.map((t) =>
+                <FormControlLabel id={t} value={t} control={<Radio />} label={t} />)}
+            </RadioGroup>
+          )}
+          name="treeType"
+          control={control}
+        />
       </FormControl>
-    </div>
+    </Widget>
   );
 }
