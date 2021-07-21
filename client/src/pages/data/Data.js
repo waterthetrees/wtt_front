@@ -132,15 +132,15 @@ function TreeHeader({
   clickHandler,
 }) {
   return (
-    <div className="data__treelist-tree">
+    <div className="data__treelist-tree-header">
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="common" onClick={clickHandler}>Common</button>
+        <button type="button" className="data__treeheader-btn" value="common" onClick={clickHandler}>Common</button>
       </div>
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="scientific" onClick={clickHandler}>Scientific</button>
+        <button type="button" className="data__treeheader-btn" value="scientific" onClick={clickHandler}>Scientific</button>
       </div>
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="genus" onClick={clickHandler}>Genus</button>
+        <button type="button" className="data__treeheader-btn" value="genus" onClick={clickHandler}>Genus</button>
       </div>
     </div>
   );
