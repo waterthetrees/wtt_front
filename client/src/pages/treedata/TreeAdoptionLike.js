@@ -1,18 +1,17 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Grid } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import { styled } from '@material-ui/core/styles';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Tooltip from '@material-ui/core/Tooltip';
 import InfoIcon from '@material-ui/icons/Info';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import format from 'date-fns/format';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getData, postData } from '../../api/queries';
+import StarCheckbox from '../../components/Checkbox/StarCheckbox/StarCheckbox';
+import AdoptionInfoIconButton from '../../components/IconButtons/AdoptionInfoIconButton/AdoptionInfoIconButton';
+import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 
 export const useLikesQuery = (obj) => useQuery(['treelikes', obj], getData, {
@@ -106,7 +105,7 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
           showAdoptionDirections={showAdoptionDirections}
         />
       </Grid>
-      {adoptionDirections && <TreeAdoptionDirections common={common} />}
+      {adoptionDirections && <TreeAdoptionDirections />}
     </>
   );
 }
@@ -119,14 +118,16 @@ function Liked({ handleChange, idTree, user }) {
     <Grid item>
       <Grid container alignItems="center">
         <Grid item>
-          <Checkbox
-            edge="start"
-            icon={<FavoriteBorder fontSize="large" />}
-            checkedIcon={<Favorite fontSize="large" />}
-            checked={liked}
-            onChange={handleChange}
-            name="liked"
-          />
+          <Tooltip title="Like" placement="top" arrow>
+            <StarCheckbox
+              edge="start"
+              icon={<StarBorderIcon fontSize="large" />}
+              checkedIcon={<StarIcon fontSize="large" />}
+              checked={liked}
+              onChange={handleChange}
+              name="liked"
+            />
+          </Tooltip>
         </Grid>
         <Box fontSize="1.125rem">{likedCount}</Box>
       </Grid>
@@ -139,55 +140,32 @@ function Adopted({
 }) {
   const { data } = useAdoptionQuery({ idTree, email: user.email, request: 'adopted' });
   const { adopted, adoptedCount } = data;
-  const AdoptionCheckbox = styled(Checkbox)({
-    '&:hover': {
-      backgroundColor: 'rgba(40, 167, 69, 0.06)',
-    },
-    '&.MuiCheckbox-colorSecondary.Mui-checked': {
-      color: '#28a745',
-      '&:hover': {
-        backgroundColor: 'rgba(40, 167, 69, 0.06)',
-      },
-    },
-  });
-  const AdoptionIconButton = styled(IconButton)({
-    padding: '9px',
-    '&:hover': {
-      backgroundColor: 'rgba(40, 167, 69, 0.06)',
-    },
-    color: adoptionDirections ? '#28a745' : '',
-  });
 
   return (
     <Grid item>
       <Grid container alignItems="center">
         <Grid item>
-          <FormControlLabel
-            control={(
-              <AdoptionCheckbox
-                checked={adopted}
-                onChange={handleChange}
-                name="adopted"
-                icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
-                checkedIcon={<CheckBoxIcon fontSize="large" />}
-              />
-            )}
-            label="Adopt"
-            labelPlacement="start"
-          />
+          <Tooltip title="Adopt" placement="top" arrow>
+            <Checkbox
+              icon={<AdoptionIcon fontSize="large" />}
+              checkedIcon={<AdoptionIcon fontSize="large" primary />}
+              checked={adopted}
+              onChange={handleChange}
+              name="adopted"
+            />
+          </Tooltip>
         </Grid>
         <Grid item>
-          <Box fontSize="1.125rem" marginLeft="1em">
-            {adoptedCount}
-          </Box>
+          <Box fontSize="1.125rem">{adoptedCount}</Box>
         </Grid>
         <Grid item>
-          <AdoptionIconButton
+          <AdoptionInfoIconButton
+            adoptionDirections={adoptionDirections}
             edge="end"
             onClick={() => showAdoptionDirections(!adoptionDirections)}
           >
             <InfoIcon fontSize="large" />
-          </AdoptionIconButton>
+          </AdoptionInfoIconButton>
         </Grid>
       </Grid>
     </Grid>
