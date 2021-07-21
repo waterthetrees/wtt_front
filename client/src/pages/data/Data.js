@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 // import TopTrees from './topTrees';
 import { topCaliforniaNativeTrees } from './topCaliforniaNativeTrees';
 // import { testNatives } from './testNatives';
-import { topFoodTrees } from './topFoodTrees';
+import { topUSFoodTrees } from './topUSFoodTrees';
 // import TopTreesAlameda from './topTreesAlameda';
 // import TopTreesSanFrancisco from './topTreesSanFrancisco';
 import './Data.scss';
@@ -16,7 +16,7 @@ import './Data.scss';
 function chooseData(treeList) {
   return {
     'California Natives': topCaliforniaNativeTrees,
-    'Food Trees': topFoodTrees,
+    'US Food Trees': topUSFoodTrees,
   }[treeList];
 }
 
@@ -35,9 +35,9 @@ function Data(props) {
   }));
   const classes = useStyles();
   const [treeType, setTreeType] = useState(topCaliforniaNativeTrees);
-  console.log('treeType', treeType);
+  console.log('treeType[0].common', treeType[0].common);
   const [treeDropdownLabel, setDropdownLabel] = useState(dataArray[0]);
-  console.log('treeDropdownLabel', treeDropdownLabel);
+  console.log('treeDropdownLabel[0]', treeDropdownLabel);
 
   const handleChange = (event) => {
     console.log('event', event.target.value);
@@ -57,7 +57,7 @@ function Data(props) {
           value={treeDropdownLabel}
           onChange={handleChange}
         >
-          <MenuItem value="Food Trees">Food Trees</MenuItem>
+          <MenuItem value="US Food Trees">US Food Trees</MenuItem>
           <MenuItem value="California Natives">California Natives</MenuItem>
           )
         </Select>
@@ -68,8 +68,10 @@ function Data(props) {
 }
 
 function TreeList({ treeType }) {
-  console.log('treeType', treeType);
+  const componentName = 'TreeList';
+  console.log(componentName, 'treeType[0].common', treeType[0].common);
   const [topTreesSorted, setTreesSorted] = useState(treeType);
+  const [sortOrderAsc, setSortOrderAsc] = useState(true);
 
   const clickHandler = (event) => {
     const sortby = event.target.value;
@@ -77,19 +79,26 @@ function TreeList({ treeType }) {
     const sortedData = [...topTreesSorted].sort((a, b) => {
       const aa = a[sortby].toLowerCase();
       const bb = b[sortby].toLowerCase();
-      if (aa > bb) {
-        return 1;
+      if (sortOrderAsc) {
+        if (aa > bb) return 1;
+        if (bb > aa) return -1;
       }
-      if (bb > aa) {
-        return -1;
+      if (!sortOrderAsc) {
+        if (aa < bb) return 1;
+        if (bb < aa) return -1;
       }
       return 0;
     });
-    console.log('sortedData', sortedData);
+    console.log('sortedData[0]', sortedData[0]);
     setTreesSorted(sortedData);
+    setSortOrderAsc(!sortOrderAsc);
   };
 
-  console.log('topTreesSorted', topTreesSorted);
+  useEffect(() => {
+    setTreesSorted(treeType);
+  }, [treeType]);
+
+  console.log('topTreesSorted[0].common', topTreesSorted[0].common);
   return (
     <div className="data__treelist">
       {topTreesSorted
@@ -123,15 +132,15 @@ function TreeHeader({
   clickHandler,
 }) {
   return (
-    <div className="data__treelist-tree">
+    <div className="data__treelist-tree-header">
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="common" onClick={clickHandler}>Common</button>
+        <button type="button" className="data__treeheader-btn" value="common" onClick={clickHandler}>Common</button>
       </div>
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="scientific" onClick={clickHandler}>Scientific</button>
+        <button type="button" className="data__treeheader-btn" value="scientific" onClick={clickHandler}>Scientific</button>
       </div>
       <div className="data__treelist-tree-header-item">
-        <button type="button" value="genus" onClick={clickHandler}>Genus</button>
+        <button type="button" className="data__treeheader-btn" value="genus" onClick={clickHandler}>Genus</button>
       </div>
     </div>
   );
