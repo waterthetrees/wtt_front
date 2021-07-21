@@ -15,18 +15,19 @@ import { topFoodTrees } from '../data';
 
 export default function TreeInfo({ control, coordinates, errors }) {
   const [treeList, setTreeList] = useState([{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}, ...topFoodTrees]);
-  console.log('TREES', treeList);
+  const list = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}, ...topFoodTrees];
+  console.log('TREES list', list);
 
   return (
     <Widget title="Tree Info" classes="treeinfo">
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" options={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" optionValues={treeList} />
       {errors.common && <ErrorMessageAll errors={errors} name="common" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" options={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" optionValues={treeList} />
       {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" options={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" optionValues={treeList} />
       {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
 
       <Controller
