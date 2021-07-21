@@ -3,24 +3,23 @@ body {
  overflow: scroll;
 }
 .data {
- position: fixed;
- top: 3rem;
- left: 0;
- margin: 20px;
- overflow: scroll;
+  position: relative;
+  top: 3rem;
+  left: 0;
+  margin: 20px;
 }
 
 .data__treelist {
- overflow: scroll;
+  // overflow: scroll;
   display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr;
-  margin-block-end: 1em;
+  /* justify-content: center; */
+  /* grid-template-columns: 1fr; */
+  /* margin-block-end: 1em; */
   margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 0;
+  /* margin-inline-end: 0px; */
+  /* padding-inline-start: 0; */
   background-color: #006400;
-  padding: 10px; 
+  padding: 5px 0;
 }
 
 .data__treelist-tree:nth-child(odd){
@@ -41,7 +40,7 @@ body {
 .data__treelist-tree-item{
  padding: 1px 2px;
 //  border: 1px solid #2196F3;
-  border: 1px solid #006400;
+  border: 1px solid rgba(255, 255, 255, 0.7);;
 }
 
 .data__treelist-tree-header{
