@@ -11,13 +11,14 @@ import Privacy from '../../pages/privacy/Privacy';
 import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
 import Contact from '../../pages/contact/Contact';
+import NotFound from '../../pages/notFound/NotFound';
 
 // const Contact = lazy(() => import('../../pages/contact/Contact'));
 // const About = lazy(() => import('../../pages/about/About'));
 // const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
 // const License = lazy(() => import('../../pages/license/License'));
 // const UserProfile = lazy(() => import('../../pages/userprofile/UserProfile'));
-const NotFound = lazy(() => import('../../pages/notFound/NotFound'));
+// const NotFound = lazy(() => import('../../pages/notFound/NotFound'));
 
 const queryClient = new QueryClient();
 
