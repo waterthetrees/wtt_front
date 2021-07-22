@@ -46,7 +46,7 @@ const apiEndpoints = {
   treelikes: `${url}${port}/api/treeuser`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
-  treeuser: `${url}${port}/api/treeuser`,
+  usercounts: `${url}${port}/api/usercounts`,
   usertreehistory: `${url}${port}/api/usertreehistory`,
 };
 
