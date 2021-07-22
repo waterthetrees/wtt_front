@@ -118,7 +118,7 @@ function Liked({ handleChange, idTree, user }) {
     <Grid item>
       <Grid container alignItems="center">
         <Grid item>
-          <Tooltip title="Like" placement="top" arrow>
+          <Tooltip title={<div style={{ fontSize: '1.125rem' }}>Like</div>} placement="top" arrow>
             <StarCheckbox
               edge="start"
               icon={<StarBorderIcon fontSize="large" />}
@@ -145,7 +145,7 @@ function Adopted({
     <Grid item>
       <Grid container alignItems="center">
         <Grid item>
-          <Tooltip title="Adopt" placement="top" arrow>
+          <Tooltip title={<div style={{ fontSize: '1.125rem' }}>Adopt</div>} placement="top" arrow>
             <Checkbox
               icon={<AdoptionIcon fontSize="large" />}
               checkedIcon={<AdoptionIcon fontSize="large" primary />}
