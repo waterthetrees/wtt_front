@@ -8,6 +8,10 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { getData } from '../../api/queries';
 import UserTreeHistoryTable from '../../components/UserTreeHistoryTable/UserTreeHistoryTable';
+import StarIcon from '@material-ui/icons/Star';
+import Tooltip from '@material-ui/core/Tooltip';
+import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
+import TreeIcon from '../../assets/images/addtree/tree12.svg';
 import './UserProfile.scss';
 
 function UserProfile() {
@@ -20,27 +24,21 @@ function UserProfile() {
 
   const email = user?.email;
 
-  const userAdoptedTrees = useQuery(
-    ['usercounts', { request: 'adopted', email }],
-    getData,
-    { enabled: !!email },
-  );
+  const userAdoptedTrees = useQuery(['usercounts', { request: 'adopted', email }], getData, {
+    enabled: !!email,
+  });
 
   const userAdoptedTreesHistory = userAdoptedTrees?.data;
 
-  const userLikedTrees = useQuery(
-    ['usercounts', { request: 'liked', email }],
-    getData,
-    { enabled: !!email },
-  );
+  const userLikedTrees = useQuery(['usercounts', { request: 'liked', email }], getData, {
+    enabled: !!email,
+  });
 
   const userLikedTreesHistory = userLikedTrees?.data;
 
-  const userPlantedTrees = useQuery(
-    ['usercounts', { request: 'planted', email }],
-    getData,
-    { enabled: !!email },
-  );
+  const userPlantedTrees = useQuery(['usercounts', { request: 'planted', email }], getData, {
+    enabled: !!email,
+  });
 
   const userPlantedTreesHistory = userPlantedTrees?.data;
 
@@ -49,9 +47,15 @@ function UserProfile() {
     UserImageURL: user?.picture,
     UserName: user?.name,
     UserNickname: user?.nickname,
-    treeListAdopted: userAdoptedTreesHistory ? Object.keys(userAdoptedTreesHistory).map((index) => userAdoptedTreesHistory[index]) : [],
-    treeListLiked: userLikedTreesHistory ? Object.keys(userLikedTreesHistory).map((index) => userLikedTreesHistory[index]) : [],
-    treeListPlanted: userPlantedTreesHistory ? Object.keys(userPlantedTreesHistory).map((index) => userPlantedTreesHistory[index]) : [],
+    treeListAdopted: userAdoptedTreesHistory
+      ? Object.keys(userAdoptedTreesHistory).map((index) => userAdoptedTreesHistory[index])
+      : [],
+    treeListLiked: userLikedTreesHistory
+      ? Object.keys(userLikedTreesHistory).map((index) => userLikedTreesHistory[index])
+      : [],
+    treeListPlanted: userPlantedTreesHistory
+      ? Object.keys(userPlantedTreesHistory).map((index) => userPlantedTreesHistory[index])
+      : [],
   };
 
   const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
@@ -71,34 +75,26 @@ function UserProfile() {
           <StyledAvatar alt="Avatar" src={UserProfile.UserImageURL} />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <Typography variant="body1">{UserProfile.UserName}</Typography>
+          <Typography variant="body1">{UserProfile.UserNickname}</Typography>
+          <Typography variant="body1">{UserProfile.UserEmail}</Typography>
           <Typography variant="body1">
-            {UserProfile.UserName}
+            {UserLocation.UserCity}, {UserLocation.UserState} {UserLocation.UserZip}
           </Typography>
           <Typography variant="body1">
-            {UserProfile.UserNickname}
-          </Typography>
-          <Typography variant="body1">
-            {UserProfile.UserEmail}
-          </Typography>
-          <Typography variant="body1">
-            {UserLocation.UserCity}
-            ,
-            {' '}
-            {UserLocation.UserState}
-            {' '}
-            {UserLocation.UserZip}
-          </Typography>
-          <Typography variant="body1">
-            Adopted:
-            {' '}
-            {UserProfile.treeListAdopted.length}
-            {' '}
-            Liked:
-            {' '}
-            {UserProfile.treeListLiked.length}
-            {' '}
-            Planted:
-            {' '}
+            <Tooltip title="Adopted">
+              <span>
+                <AdoptionIcon />
+              </span>
+            </Tooltip>{' '}
+            {UserProfile.treeListAdopted.length}{' '}
+            <Tooltip title="Liked">
+              <StarIcon />
+            </Tooltip>{' '}
+            {UserProfile.treeListLiked.length}{' '}
+            <Tooltip title="Planted">
+              <img src={TreeIcon} alt="TreeIcon" style={{ height: 24, width: 24 }} />
+            </Tooltip>{' '}
             {UserProfile.treeListPlanted.length}
           </Typography>
         </Grid>

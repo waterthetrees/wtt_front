@@ -10,6 +10,9 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import format from 'date-fns/format';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -71,11 +74,21 @@ const TableHeader = () => (
 const TableColumns = ({ row }) => {
   return (
     <>
-      {Object.keys(row).map((key, index2) => (
-        <TableCell key={`col-${index2}`}>
-          <>{row[key] ?? 'no'}</>
-        </TableCell>
-      ))}
+      {Object.keys(row).map((key, index2) => {
+        if (index2 === 0) {
+          return (
+            <TableCell key={`col-${index2}`}>
+              <>{format(new Date(row[key]), 'MMMM dd yyyy')}</>
+            </TableCell>
+          );
+        } else {
+          return (
+            <TableCell key={`col-${index2}`}>
+              <>{row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</>
+            </TableCell>
+          );
+        }
+      })}
     </>
   );
 };
@@ -96,6 +109,32 @@ const UserTreeHistoryTable = ({ rows }) => {
     setOrderBy(property);
   };
 
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -110,7 +149,7 @@ const UserTreeHistoryTable = ({ rows }) => {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {rows
+              {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={index}>
