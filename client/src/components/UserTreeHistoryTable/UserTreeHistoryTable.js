@@ -1,4 +1,3 @@
-import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,59 +6,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-
-function createData({
-  idTree,
-  dateVisit,
-  watered,
-  mulched,
-  weeded,
-  staked,
-  braced,
-  pruned,
-  liked,
-  adopted,
-}) {
-  return {
-    idTree,
-    dateVisit,
-    watered,
-    mulched,
-    weeded,
-    staked,
-    braced,
-    pruned,
-    liked,
-    adopted,
-  };
-}
-
-function TableColumnNames({ headCells }) {
-  return (
-    <TableHead>
-      <TableRow>
-        {headCells.map((headCell, index) => (
-          <TableCell key={headCell.id}>
-            {headCell.label}
-            {index > 0 && <Checkbox />}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-const TableHeader = () => (
-  <Toolbar>
-    <Typography variant="h6" id="tableTitle" component="div">
-      Tree History
-    </Typography>
-  </Toolbar>
-);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,16 +36,65 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserTreeHistoryTable = ({ data }) => {
+function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {columnNames.map((columnName) => (
+          <TableCell key={columnName} sortDirection={orderBy === columnName ? order : false}>
+            <TableSortLabel
+              active={orderBy === columnName}
+              direction={orderBy === columnName ? order : 'asc'}
+              onClick={createSortHandler(columnName)}
+            >
+              {columnName}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+const TableHeader = () => (
+  <Toolbar>
+    <Typography variant="h6" id="tableTitle" component="div">
+      Tree History
+    </Typography>
+  </Toolbar>
+);
+
+const TableColumns = ({ row }) => {
+  return (
+    <>
+      {Object.keys(row).map((key, index2) => (
+        <TableCell key={`col-${index2}`}>
+          <>{row[key] ?? 'no'}</>
+        </TableCell>
+      ))}
+    </>
+  );
+};
+
+const UserTreeHistoryTable = ({ rows }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const rows = data.map((obj) => createData(obj));
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('dateVisit');
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-  const headCells = Object.keys(rows[0] ?? {}).map((key) => ({ id: key, label: key }));
+  const columnNames = Object.keys(rows[0] ?? {});
+  const handleChangePage = (event, newPage) => setPage(newPage);
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
 
   return (
     <div className={classes.root}>
@@ -102,26 +102,23 @@ const UserTreeHistoryTable = ({ data }) => {
         <TableHeader />
         <TableContainer>
           <Table className={classes.table}>
-            <TableColumnNames headCells={headCells} classes={classes} rowCount={rows.length} />
+            <TableColumnNames
+              classes={classes}
+              columnNames={columnNames}
+              orderBy={orderBy}
+              order={order}
+              onRequestSort={handleRequestSort}
+            />
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={index}
-                  >
-                    {Object.keys(row).map((key, index2) => (
-                      <TableCell key={`${index}-${index2}`}>
-                        <>{row[key] ?? 'false'}</>
-                      </TableCell>
-                    ))}
+                  <TableRow key={index}>
+                    <TableColumns row={row} />
                   </TableRow>
                 ))}
               {emptyRows > 0 && (
-                <TableRow>
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -129,7 +126,7 @@ const UserTreeHistoryTable = ({ data }) => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10]}
+          rowsPerPageOptions={[5]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

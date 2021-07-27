@@ -103,7 +103,7 @@ function UserProfile() {
           </Typography>
         </Grid>
       </Grid>
-      <UserTreeHistoryTable data={userTreeHistoryData} />
+      <UserTreeHistoryTable rows={userTreeHistoryData} />
     </Box>
   );
 }
