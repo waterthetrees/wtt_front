@@ -7,6 +7,8 @@ import { postData } from '../../api/queries';
 import Cities from '../cities/Cities';
 import AddTree from '../addtree/AddTree';
 import config from '../../config';
+import Slideout from '../../components/Slideout/Slideout';
+import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 
 mapboxgl.accessToken = config.mapbox;
 
@@ -83,6 +85,12 @@ function Mapper() {
       {/* userProfileOpen && (
         <UserProfile toggle={toggle} modal={userProfileOpen} />
       ) */}
+
+      <Slideout
+        buttonText={{ left: 'ADOPT' }}
+      >
+        <TreeAdoptionDirections onmap />
+      </Slideout>
 
       <AddTree
         map={mapContainer}

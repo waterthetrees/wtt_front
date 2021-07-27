@@ -1,94 +1,91 @@
-@import "../../styles/app";
-@font-face {
-  font-family: 'wtt-thin';
-  src: local('wtt-thin'), url(../../assets/fonts/WTT-THIN.ttf) format('truetype');
-}
+@import '../../styles/app';
+// @font-face {
+//   font-family: 'wtt-thin';
+//   src: local('wtt-thin'), url(../../assets/fonts/WTT-THIN.ttf) format('truetype');
+// }
 
 .header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #147d16;
-  opacity: .8;
-  border-color: transparent;
-  z-index: 200 !important;
+ position: fixed;
+ top: 0;
+ width: 100%;
+ background-color: #147d16;
+ opacity: 0.8;
+ border-color: transparent;
+ z-index: 200 !important;
 }
 
-.header__font{
-  font-family: 'wtt-thin', Arial, sans-serif, "PT Sans";
-  color: white;
-  white-space: nowrap;
-  letter-spacing: -3px;
-  font-size: 1.8rem;
-  word-spacing: .6rem;
+.header__font {
+ // font-family: 'wtt-thin', 'Roboto Mono', monospace;
+ font-family: 'Roboto Mono', monospace;
+ color: white;
+ white-space: nowrap;
+ letter-spacing: -3px;
+ font-size: 1.8rem;
+ word-spacing: 0.6rem;
 }
 
 .header__font::first-letter {
-  letter-spacing: 0;
+ letter-spacing: 0;
 }
 
 .header__content {
-  display: flex;
-  flex-direction: row;
-  padding: 0 10px;
-  justify-content: space-between;
-  align-items: center;
+ display: flex;
+ flex-direction: row;
+ padding: 0 10px;
+ justify-content: space-between;
+ align-items: center;
 }
 
-.header:focus{
-  outline: none;
+.header:focus {
+ outline: none;
 }
 
 .header__icon {
-  height: 5vh;
+ height: 5vh;
 }
 
 .header__icon:hover {
-  cursor: pointer;
+ cursor: pointer;
 }
 
 .header__icon:focus {
-  box-shadow: none;
-  outline: none;
+ box-shadow: none;
+ outline: none;
 }
 
 .header__link {
-  width:100%;
+ width: 100%;
 }
 
 .MuiListItem-gutters {
-    padding-left: 5px;
-    padding-right: 5px;
+ padding-left: 5px;
+ padding-right: 5px;
 }
 
 .MuiButton-label {
-  background: white;
-  border-radius: 5px;
-  padding: .1rem 0;
+ background: white;
+ border-radius: 5px;
+ padding: 0.1rem 0;
 }
 
-.header__btn-menu{
-  background-color: transparent;
-  margin: 0em;
-  padding: 0;
-  border-width: 0;
-  color:white;
-  background: none;
-  border: none;
-  outline:none;
-  font-size: 2.3rem;
+.header__btn-menu {
+ background-color: transparent;
+ margin: 0em;
+ padding: 0;
+ border-width: 0;
+ color: white;
+ background: none;
+ border: none;
+ outline: none;
+ font-size: 2.3rem;
 }
-
 
 @media only screen and (max-width: 768px) {
-  .header__icon {
-    // height: 1.85rem;
-    width: 70vw;
-  }
+ .header__icon {
+  // height: 1.85rem;
+  width: 70vw;
+ }
 }
 
-
-
 @media only screen and (max-width: 768px) {
-
 }

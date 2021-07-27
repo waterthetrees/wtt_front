@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import React from 'react';
 import './ErrorPage.scss';
-import cx from 'classnames';
+import cx from 'clsx';
 
 export default function ErrorMessageAll({
   errors, name, error, variant, message,

@@ -1,21 +1,22 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, Route, withRouter } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Layout.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Header from '../Header';
 import Mapper from '../../pages/mapper/Mapper';
+// import Loading from './Loading';
 import About from '../../pages/about/About';
 import Privacy from '../../pages/privacy/Privacy';
 import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
- import Contact from '../../pages/contact/Contact';
+import Contact from '../../pages/contact/Contact';
 
-//const Contact = lazy(() => import('../../pages/contact/Contact'));
-//const About = lazy(() => import('../../pages/about/About'));
-//const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
-//const License = lazy(() => import('../../pages/license/License'));
-//const UserProfile = lazy(() => import('../../pages/userprofile/UserProfile'));
+// const Contact = lazy(() => import('../../pages/contact/Contact'));
+// const About = lazy(() => import('../../pages/about/About'));
+// const Privacy = lazy(() => import('../../pages/privacy/Privacy'));
+// const License = lazy(() => import('../../pages/license/License'));
+// const UserProfile = lazy(() => import('../../pages/userprofile/UserProfile'));
 const NotFound = lazy(() => import('../../pages/notFound/NotFound'));
 
 const queryClient = new QueryClient();
@@ -24,7 +25,6 @@ function Layout() {
   return (
     <div className="layout">
       <Header />
-
       <QueryClientProvider client={queryClient}>
         <Switch>
           <Route path="/" exact component={Mapper} />
@@ -37,7 +37,6 @@ function Layout() {
           <Route component={NotFound} />
         </Switch>
       </QueryClientProvider>
-
     </div>
   );
 }
