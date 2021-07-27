@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react';
-// import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
-// import cx from 'classnames';
 import { convertSliderValuesToHealth, saveTimer } from './treedata_utilities';
 import { addNewMarker } from './mapbox_utilities';
 
