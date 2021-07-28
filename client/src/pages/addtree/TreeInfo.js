@@ -11,23 +11,19 @@ import {
 import MuiAutoComplete from './MuiAutoComplete';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
-import { topFoodTrees } from '../data';
 
-export default function TreeInfo({ control, coordinates, errors }) {
-  const [treeList, setTreeList] = useState([{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}, ...topFoodTrees]);
-  const list = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}, ...topFoodTrees];
-  console.log('TREES list', list);
 
+export default function TreeInfo({ treeList, register, control, coordinates, errors }) {
   return (
     <Widget title="Tree Info" classes="treeinfo">
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" optionValues={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" optionValues={treeList} register={register} />
       {errors.common && <ErrorMessageAll errors={errors} name="common" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" optionValues={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" optionValues={treeList} register={register} />
       {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" optionValues={treeList} />
+      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" optionValues={treeList} register={register} />
       {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
 
       <Controller

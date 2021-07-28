@@ -22,6 +22,7 @@ import TreePlanter from './TreePlanter';
 import ButtonsResult from './ButtonsResult';
 import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
+import { topCaliforniaNativeTrees, topUSFoodTrees } from '../data';
 
 const renderCount = 0;
 
@@ -38,6 +39,11 @@ const AddTreeModal = ({
   } = useAuth0();
   const { nickname, email, name } = Object(user);
   const typeArray = ['California Natives', 'Food Trees', 'By City'];
+  const typeMapping= {
+    'California Natives': topCaliforniaNativeTrees,
+    'Food Trees': topUSFoodTrees,
+    'By City': null
+  };
 
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const defaultValues = {
@@ -65,11 +71,18 @@ const AddTreeModal = ({
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
   const {
-    handleSubmit, reset, control, errors,
+    register, watch, handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
   const [data] = useState(null);
+  const treeFields = watch('treeType');
+  const treeInfoFields = watch(['common', 'scientific', 'genus']);
+
+  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}]
+  console.log(treeInfoFields)
+  let treeList = [...defaultTreeOption, ...typeMapping[treeFields]];
+
   const queryClient = useQueryClient();
-  console.log(queryClient);
+
   const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('tree');
@@ -103,11 +116,12 @@ const AddTreeModal = ({
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <MuiRadioSelector
+              register={register}
               label='Tree Type Options'
               options={typeArray}
               control={control}
             />
-            <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreeInfo register={register} control={control} coordinates={coordinatesNewTree} errors={errors} treeList={treeList} />
             <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
             <TreePlanter control={control} errors={errors} />
             <ButtonsResult {...{

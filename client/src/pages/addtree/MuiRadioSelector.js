@@ -13,6 +13,7 @@ import {
 import Widget from '../../components/Widget';
 
 export default function MuiRadioSelector({
+  register,
   label,
   options,
   control,
@@ -29,8 +30,6 @@ export default function MuiRadioSelector({
   }));
   const classes = useStyles();
 
-  const handleChange = (event) => setValue(event.target.value);
-
   return (
     <Widget title={label}>
 
@@ -38,11 +37,10 @@ export default function MuiRadioSelector({
         <Controller
           as={(
             <RadioGroup
+              {...register('treeType')}
               row
-              labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={value}
-              onChange={handleChange}
             >
               {options.map((t) =>
                 <FormControlLabel id={t} value={t} control={<Radio />} label={t} />)}
