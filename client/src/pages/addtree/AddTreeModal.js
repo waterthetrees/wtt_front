@@ -80,14 +80,11 @@ const AddTreeModal = ({
   const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
 
   const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}]
-  console.log('tree info fields', treeInfoFields)
 
   if (JSON.stringify(treeInfoFields) !== JSON.stringify(mostRecentFields)) {
     let newTreeList = [...defaultTreeOption, ...typeMapping[treeFields]];
     Object.keys(treeInfoFields).forEach((field) => {
       if (mostRecentFields[field] !== treeInfoFields[field]) {
-        console.log(mostRecentFields[field], treeInfoFields[field]);
-        console.log(treeInfoFields[field] !== null);
         if (treeInfoFields[field] !== null) {
           newTreeList = newTreeList.filter((el) => el[field] === treeInfoFields[field]);
         }

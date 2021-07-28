@@ -15,7 +15,7 @@ export default function TreeName({
 }) {
 
   const handleInputChange = (e, data) => {data};
-  console.log('autocomplete options', optionValues, control);
+
   return (
     <div>
       {!optionValues && (<div>test</div>)}
