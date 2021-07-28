@@ -22,6 +22,7 @@ import TreePlanter from './TreePlanter';
 import ButtonsResult from './ButtonsResult';
 import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
+import { topCaliforniaNativeTrees, topUSFoodTrees } from '../data';
 
 const renderCount = 0;
 
@@ -37,9 +38,15 @@ const AddTreeModal = ({
     user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
-  const typeArray = ['California Natives', 'Food Trees', 'By City'];
 
-  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
+  const typeArray = ['California Natives', 'Food Trees'];
+  const typeMapping= {
+    'California Natives': topCaliforniaNativeTrees,
+    'Food Trees': topUSFoodTrees,
+    'By City': null
+  };
+  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}];
+
   const defaultValues = {
     treeType: typeArray[0],
     city: '',
@@ -65,11 +72,35 @@ const AddTreeModal = ({
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
   const {
-    handleSubmit, reset, control, errors,
+    register, watch, handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
+  const treeFields = watch('treeType');
+  const treeInfoFields = watch(['common', 'scientific', 'genus']);
+
   const [data] = useState(null);
+  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
+  const [mostRecentFields, setMostRecentFields] = useState({});
+  const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
+
+  if (JSON.stringify(treeInfoFields) !== JSON.stringify(mostRecentFields)) {
+    let newTreeList = [...defaultTreeOption, ...typeMapping[treeFields]];
+    Object.keys(treeInfoFields).forEach((field) => {
+      if (mostRecentFields[field] !== treeInfoFields[field]) {
+        if (treeInfoFields[field] !== null) {
+          newTreeList = newTreeList.filter((el) => el[field] === treeInfoFields[field]);
+        }
+      }
+    });
+    setTreeList(newTreeList);
+    setMostRecentFields(treeInfoFields);
+  }
+
+  useEffect(() => {
+    setTreeList([...defaultTreeOption, ...typeMapping[treeFields]]);
+  }, [treeFields]);
+
   const queryClient = useQueryClient();
-  console.log(queryClient);
+
   const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('tree');
@@ -103,11 +134,12 @@ const AddTreeModal = ({
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <MuiRadioSelector
+              register={register}
               label='Tree Type Options'
               options={typeArray}
               control={control}
             />
-            <TreeInfo control={control} coordinates={coordinatesNewTree} errors={errors} />
+            <TreeInfo register={register} control={control} coordinates={coordinatesNewTree} errors={errors} treeList={treeList} />
             <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
             <TreePlanter control={control} errors={errors} />
             <ButtonsResult {...{
