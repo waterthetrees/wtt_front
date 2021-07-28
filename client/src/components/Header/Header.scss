@@ -1,4 +1,5 @@
 @import '../../styles/app';
+
 @font-face {
   font-family: 'wtt-thin';
   src: local('wtt-thin'), url(../../assets/fonts/WTT-THIN.ttf) format('truetype');
@@ -9,7 +10,7 @@
   top: 0;
   width: 100%;
   background-color: #147d16;
-  opacity: .8;
+  opacity: 0.8;
   border-color: transparent;
   z-index: 200 !important;
 }
@@ -20,7 +21,7 @@
   white-space: nowrap;
   letter-spacing: -3px;
   font-size: 1.8rem;
-  word-spacing: .6rem;
+  word-spacing: 0.6rem;
 }
 
 .header__font::first-letter {
