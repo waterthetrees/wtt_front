@@ -1,9 +1,8 @@
-// https://www.fuf.net/resources-reference/urban-tree-species-directory/
-
+// www.fuf.netresources - referenceurban - tree - species - directory;
 export const topTreesSanFrancisco = [
   {
     common: 'American Sweet Gum',
-    scientific: 'Liquidambar styraciflua ‘Rotundiloba’/ ‘Palo Alto’/ ‘Burgundy’/ ‘Festival’',
+    scientific: 'Liquidambar styraciflua "Rotundiloba" "Palo Alto" "Burgundy" "Festival"',
     genus: 'Liquidambar',
   },
   {
@@ -18,11 +17,11 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Autumn Blaze',
-    scientific: 'Acer x freemanii ‘Autumn Blaze‘',
+    scientific: 'Acer x freemanii "Autumn Blaze"',
     genus: 'Acer',
   },
   {
-    common: 'Bailey’s Acacia',
+    common: 'Bailey"s Acacia',
     scientific: 'Acacia baileyana',
     genus: 'Acacia',
   },
@@ -58,7 +57,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'California Lilac',
-    scientific: 'Ceanothus ‘Ray Hartman’',
+    scientific: 'Ceanothus "Ray Hartman"',
     genus: 'Ceanothus',
   },
   {
@@ -88,7 +87,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Chinese Elm Ulmus',
-    scientific: 'parvifolia ‘Drake’ / ‘Sempervirens’ / ‘True Green’',
+    scientific: 'parvifolia "Drake"  "Sempervirens"  "True Green"',
     genus: 'parvifolia',
   },
   {
@@ -109,12 +108,12 @@ export const topTreesSanFrancisco = [
   { common: 'Cork Oak', scientific: 'Quercus suber', genus: 'Quercus' },
   {
     common: 'Crepe Myrtle',
-    scientific: 'Lagerstroemia ‘Tuscarora’/ ‘Natchez’',
+    scientific: 'Lagerstroemia "Tuscarora" "Natchez"',
     genus: 'Lagerstroemia',
   },
   {
     common: 'Daybreak Cherry',
-    scientific: 'Prunus x yedoensis ‘Akebono’',
+    scientific: 'Prunus x yedoensis "Akebono"',
     genus: 'Prunus',
   },
   {
@@ -159,12 +158,12 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Flowering Cherry',
-    scientific: 'Prunus serrulata ‘Kwanzan’',
+    scientific: 'Prunus serrulata "Kwanzan"',
     genus: 'Prunus',
   },
   {
     common: 'Flowering Pear',
-    scientific: 'Pyrus calleryana ‘Chanticleer’/ ‘New Bradford’/ ‘Aristocrat’',
+    scientific: 'Pyrus calleryana "Chanticleer" "New Bradford" "Aristocrat"',
     genus: 'Pyrus',
   },
   {
@@ -199,7 +198,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Honeylocust',
-    scientific: 'Gleditsia triacanthos var. inermis ‘Shademaster’',
+    scientific: 'Gleditsia triacanthos var. inermis "Shademaster"',
     genus: 'Gleditsia',
   },
   {
@@ -219,7 +218,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Japanese Flowering Crabapple',
-    scientific: 'Malus floribunda ‘Prarie Fire’',
+    scientific: 'Malus floribunda "Prarie Fire"',
     genus: 'Malus',
   },
   {
@@ -250,7 +249,7 @@ export const topTreesSanFrancisco = [
   { common: 'Linden', scientific: 'Tilia cordata', genus: 'Tilia' },
   {
     common: 'London Plane Tree',
-    scientific: 'Platanus x hispanica ‘Columbia’/ ‘Yarwood’/ ‘Bloodgood’',
+    scientific: 'Platanus x hispanica "Columbia" "Yarwood" "Bloodgood"',
     genus: 'Platanus',
   },
   {
@@ -260,7 +259,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Mayten',
-    scientific: 'Maytenus boaria ‘Green Showers’',
+    scientific: 'Maytenus boaria "Green Showers"',
     genus: 'Maytenus',
   },
   {
@@ -290,7 +289,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Olive Tree',
-    scientific: 'Olea europaea ‘Majestic Beauty’/ ‘Fruitless’/ ‘Swan Hill’',
+    scientific: 'Olea europaea "Majestic Beauty" "Fruitless" "Swan Hill"',
     genus: 'Olea',
   },
   {
@@ -325,7 +324,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Purple-Leaf Plum',
-    scientific: 'Prunus cerasifera ‘Krauter Vesuvius’',
+    scientific: 'Prunus cerasifera "Krauter Vesuvius"',
     genus: 'Prunus',
   },
   {
@@ -345,7 +344,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'Red Ironbark',
-    scientific: 'Eucalyptus sideroxylon ‘Rosea’',
+    scientific: 'Eucalyptus sideroxylon "Rosea"',
     genus: 'Eucalyptus',
   },
   { common: 'Red Maple', scientific: 'Acer rubrum', genus: 'Acer' },
@@ -451,7 +450,7 @@ export const topTreesSanFrancisco = [
   },
   {
     common: 'White Mulberry',
-    scientific: 'Morus alba “fruitless”',
+    scientific: 'Morus alba "fruitless"',
     genus: 'Morus',
   },
   {
