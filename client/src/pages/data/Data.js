@@ -2,27 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-// import TopTrees from './topTrees';
-import { topCaliforniaNativeTrees } from './topCaliforniaNativeTrees';
-// import { testNatives } from './testNatives';
-import { topUSFoodTrees } from './topUSFoodTrees';
-// import TopTreesAlameda from './topTreesAlameda';
-// import TopTreesSanFrancisco from './topTreesSanFrancisco';
+import { topTreesCaliforniaNative } from './topTreesCaliforniaNative';
+import { topTreesUSFood } from './topTreesUSFood';
+import { topTreesAlameda } from './topTreesAlameda';
+import { topTreesSanFrancisco } from './topTreesSanFrancisco';
 import './Data.scss';
 
 function chooseData(treeList) {
   return {
-    'California Natives': topCaliforniaNativeTrees,
-    'Food Trees': topUSFoodTrees,
+    'California Natives': topTreesCaliforniaNative,
+    'Food Trees': topTreesUSFood,
+    'San Francisco': topTreesSanFrancisco,
   }[treeList];
 }
 
-function Data(props) {
-  // const componentName = 'City';
-  // const {} = Object(props);
+export default function Data() {
+  // const componentName = 'Data';
   const dataArray = ['California Natives', 'Food Trees'];
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -34,15 +31,11 @@ function Data(props) {
     },
   }));
   const classes = useStyles();
-  const [treeType, setTreeType] = useState(topCaliforniaNativeTrees);
-  console.log('treeType[0].common', treeType[0].common);
+  const [treeType, setTreeType] = useState(topTreesCaliforniaNative);
   const [treeDropdownLabel, setDropdownLabel] = useState(dataArray[0]);
-  console.log('treeDropdownLabel[0]', treeDropdownLabel);
 
   const handleChange = (event) => {
-    console.log('event', event.target.value);
     const newDataChoice = chooseData(event.target.value);
-    console.log('newDataChoice', newDataChoice);
     setDropdownLabel(event.target.value);
     setTreeType(newDataChoice);
   };
@@ -59,6 +52,7 @@ function Data(props) {
         >
           <MenuItem value="Food Trees">US Food Trees</MenuItem>
           <MenuItem value="California Natives">California Natives</MenuItem>
+          <MenuItem value="San Francisco">San Francisco Street Trees</MenuItem>
           )
         </Select>
       </FormControl>
@@ -68,14 +62,12 @@ function Data(props) {
 }
 
 function TreeList({ treeType }) {
-  const componentName = 'TreeList';
-  console.log(componentName, 'treeType[0].common', treeType[0].common);
+  // const componentName = 'TreeList';
   const [topTreesSorted, setTreesSorted] = useState(treeType);
   const [sortOrderAsc, setSortOrderAsc] = useState(true);
 
   const clickHandler = (event) => {
     const sortby = event.target.value;
-    console.log('sortby', sortby);
     const sortedData = [...topTreesSorted].sort((a, b) => {
       const aa = a[sortby].toLowerCase();
       const bb = b[sortby].toLowerCase();
@@ -89,7 +81,6 @@ function TreeList({ treeType }) {
       }
       return 0;
     });
-    console.log('sortedData[0]', sortedData[0]);
     setTreesSorted(sortedData);
     setSortOrderAsc(!sortOrderAsc);
   };
@@ -98,7 +89,6 @@ function TreeList({ treeType }) {
     setTreesSorted(treeType);
   }, [treeType]);
 
-  console.log('topTreesSorted[0].common', topTreesSorted[0].common);
   return (
     <div className="data__treelist">
       {topTreesSorted
@@ -157,8 +147,10 @@ function Tree({
     </div>
   );
 }
+
 export {
-  Data,
-  topCaliforniaNativeTrees,
-  topUSFoodTrees,
+  topTreesCaliforniaNative,
+  topTreesUSFood,
+  topTreesAlameda,
+  topTreesSanFrancisco,
 };

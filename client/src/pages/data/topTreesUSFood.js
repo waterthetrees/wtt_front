@@ -1,4 +1,4 @@
-export const topUSFoodTrees = [
+export const topTreesUSFood = [
   {
     common: 'Abelmoschus',
     scientific: 'Abelmoschus',

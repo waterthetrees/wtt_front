@@ -1,4 +1,4 @@
-export const topCaliforniaNativeTrees = [
+export const topTreesCaliforniaNative = [
   {
     common: 'Wild Almond',
     scientific: 'Prunus fasciculata var. fasciculata',

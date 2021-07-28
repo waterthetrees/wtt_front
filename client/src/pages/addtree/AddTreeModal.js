@@ -22,7 +22,7 @@ import TreePlanter from './TreePlanter';
 import ButtonsResult from './ButtonsResult';
 import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
-import { topCaliforniaNativeTrees, topUSFoodTrees } from '../data';
+import { topTreesCaliforniaNative, topTreesUSFood } from '../data';
 
 const renderCount = 0;
 
@@ -40,12 +40,12 @@ const AddTreeModal = ({
   const { nickname, email, name } = Object(user);
 
   const typeArray = ['California Natives', 'Food Trees'];
-  const typeMapping= {
-    'California Natives': topCaliforniaNativeTrees,
-    'Food Trees': topUSFoodTrees,
-    'By City': null
+  const typeMapping = {
+    'California Natives': topTreesCaliforniaNative,
+    'Food Trees': topTreesUSFood,
+    'By City': null,
   };
-  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}];
+  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
 
   const defaultValues = {
     treeType: typeArray[0],
@@ -135,7 +135,7 @@ const AddTreeModal = ({
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <MuiRadioSelector
               register={register}
-              label='Tree Type Options'
+              label="Tree Type Options"
               options={typeArray}
               control={control}
             />
