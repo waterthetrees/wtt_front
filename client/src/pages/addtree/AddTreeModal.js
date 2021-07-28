@@ -38,14 +38,15 @@ const AddTreeModal = ({
     user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
+
   const typeArray = ['California Natives', 'Food Trees'];
   const typeMapping= {
     'California Natives': topCaliforniaNativeTrees,
     'Food Trees': topUSFoodTrees,
     'By City': null
   };
+  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}];
 
-  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const defaultValues = {
     treeType: typeArray[0],
     city: '',
@@ -73,13 +74,13 @@ const AddTreeModal = ({
   const {
     register, watch, handleSubmit, reset, control, errors,
   } = useForm({ defaultValues });
-  const [data] = useState(null);
   const treeFields = watch('treeType');
   const treeInfoFields = watch(['common', 'scientific', 'genus']);
-  const [mostRecentFields, setMostRecentFields] = useState({})
-  const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
 
-  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}]
+  const [data] = useState(null);
+  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
+  const [mostRecentFields, setMostRecentFields] = useState({});
+  const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
 
   if (JSON.stringify(treeInfoFields) !== JSON.stringify(mostRecentFields)) {
     let newTreeList = [...defaultTreeOption, ...typeMapping[treeFields]];
@@ -96,7 +97,7 @@ const AddTreeModal = ({
 
   useEffect(() => {
     setTreeList([...defaultTreeOption, ...typeMapping[treeFields]]);
-  }, [treeFields])
+  }, [treeFields]);
 
   const queryClient = useQueryClient();
 
