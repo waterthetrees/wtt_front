@@ -38,7 +38,7 @@ const AddTreeModal = ({
     user,
   } = useAuth0();
   const { nickname, email, name } = Object(user);
-  const typeArray = ['California Natives', 'Food Trees', 'By City'];
+  const typeArray = ['California Natives', 'Food Trees'];
   const typeMapping= {
     'California Natives': topCaliforniaNativeTrees,
     'Food Trees': topUSFoodTrees,
