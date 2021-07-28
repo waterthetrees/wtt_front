@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ADDATREE = 'assets/images/logos/addatree.svg';
+const ADDATREE = 'assets/images/addtree/addatree.svg';
 const TREETITLEIMAGE = 'assets/images/addtree/tree16.svg';
 
 export default () => (

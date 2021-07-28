@@ -1,0 +1,67 @@
+@import '../../styles/app';
+
+body {
+  overflow: unset !important;
+}
+
+.data {
+  position: relative;
+  top: 3rem;
+  left: 0;
+  margin: 20px;
+}
+
+.data__treelist {
+  overflow: scroll;
+  display: grid;
+  margin-inline-start: 0px;
+  background-color: #006400;
+  padding: 5px 0;
+}
+
+.data__treelist-tree:nth-child(odd){
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.data__treelist-tree{
+  display: grid;
+  justify-content: right;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.data__treelist-tree-header-item {
+  cursor: select;
+}
+
+.data__treelist-tree-item{
+  padding: 1px 2px;
+  border: 1px solid rgba(255, 255, 255, 0.7);;
+}
+
+.data__treelist-tree-header{
+  display: grid;
+  justify-content: left;
+  grid-template-columns:1fr 1fr 1fr;
+  border: 1px solid #006400;
+  
+}
+
+.data__treelist-tree-header-item{
+  cursor: pointer;
+  border: 1px solid #006400;
+}
+
+.data__treeheader-btn{
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  text-align: left;
+}
+
+.data__treeheader-btn:active{
+  background-color: lightslategrey;
+}
+
+.data__treeheader-btn:hover{
+  background-color: #2196F3;
+}
