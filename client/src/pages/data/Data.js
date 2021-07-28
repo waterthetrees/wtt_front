@@ -160,5 +160,5 @@ function Tree({
 export {
   Data,
   topCaliforniaNativeTrees,
-  topFoodTrees,
+  topUSFoodTrees,
 };
