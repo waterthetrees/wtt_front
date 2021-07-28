@@ -11,6 +11,7 @@ import Privacy from '../../pages/privacy/Privacy';
 import License from '../../pages/license/License';
 import UserProfile from '../../pages/userprofile/UserProfile';
 import Contact from '../../pages/contact/Contact';
+import Data from '../../pages/data/Data';
 import NotFound from '../../pages/notFound/NotFound';
 
 // const Contact = lazy(() => import('../../pages/contact/Contact'));
@@ -35,6 +36,7 @@ function Layout() {
           <Route path="/privacy" exact component={Privacy} />
           <Route path="/license" exact component={License} />
           <Route path="/contact" exact component={Contact} />
+          <Route path="/data" exact component={Data} />
           <Route component={NotFound} />
         </Switch>
       </QueryClientProvider>
