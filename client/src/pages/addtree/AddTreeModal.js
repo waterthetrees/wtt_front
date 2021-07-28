@@ -76,10 +76,30 @@ const AddTreeModal = ({
   const [data] = useState(null);
   const treeFields = watch('treeType');
   const treeInfoFields = watch(['common', 'scientific', 'genus']);
+  const [mostRecentFields, setMostRecentFields] = useState({})
+  const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
 
   const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site'}]
-  console.log(treeInfoFields)
-  let treeList = [...defaultTreeOption, ...typeMapping[treeFields]];
+  console.log('tree info fields', treeInfoFields)
+
+  if (JSON.stringify(treeInfoFields) !== JSON.stringify(mostRecentFields)) {
+    let newTreeList = [...defaultTreeOption, ...typeMapping[treeFields]];
+    Object.keys(treeInfoFields).forEach((field) => {
+      if (mostRecentFields[field] !== treeInfoFields[field]) {
+        console.log(mostRecentFields[field], treeInfoFields[field]);
+        console.log(treeInfoFields[field] !== null);
+        if (treeInfoFields[field] !== null) {
+          newTreeList = newTreeList.filter((el) => el[field] === treeInfoFields[field]);
+        }
+      }
+    });
+    setTreeList(newTreeList);
+    setMostRecentFields(treeInfoFields);
+  }
+
+  useEffect(() => {
+    setTreeList([...defaultTreeOption, ...typeMapping[treeFields]]);
+  }, [treeFields])
 
   const queryClient = useQueryClient();
 

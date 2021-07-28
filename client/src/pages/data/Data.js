@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 // import TopTrees from './topTrees';
 import { topCaliforniaNativeTrees } from './topCaliforniaNativeTrees';
 // import { testNatives } from './testNatives';
-import { topFoodTrees } from './topUSFoodTrees';
+import { topUSFoodTrees } from './topUSFoodTrees';
 // import TopTreesAlameda from './topTreesAlameda';
 // import TopTreesSanFrancisco from './topTreesSanFrancisco';
 import './Data.scss';
@@ -16,7 +16,7 @@ import './Data.scss';
 function chooseData(treeList) {
   return {
     'California Natives': topCaliforniaNativeTrees,
-    'Food Trees': topFoodTrees,
+    'Food Trees': topUSFoodTrees,
   }[treeList];
 }
 

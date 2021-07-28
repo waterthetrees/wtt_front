@@ -13,6 +13,8 @@ import { getData } from '../../api/queries';
 export default function TreeName({
   register, control, keyName, coordinates, optionValues,
 }) {
+
+  const handleInputChange = (e, data) => {data};
   console.log('autocomplete options', optionValues, control);
   return (
     <div>
@@ -25,17 +27,11 @@ export default function TreeName({
             render={(props) => (
               <Autocomplete
                 {...register(keyName)} {...props}
-                options={optionValues}
+                options={optionValues.map((option) => option[keyName])}
                 id={keyName}
                 freeSolo
                 autoSelect
                 handleHomeEndKeys
-                getOptionLabel={(option) => option[keyName]}
-                renderOption={(option) => (
-                  <span>
-                    {option[keyName]}
-                  </span>
-                )}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -46,6 +42,8 @@ export default function TreeName({
                     name={keyName}
                   />
                 )}
+                onInputChange={handleInputChange}
+                onChange={(_, data) => props.onChange(data)}
               />
             )}
             name={keyName}
