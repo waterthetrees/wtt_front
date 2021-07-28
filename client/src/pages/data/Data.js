@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 // import TopTrees from './topTrees';
 import { topCaliforniaNativeTrees } from './topCaliforniaNativeTrees';
 // import { testNatives } from './testNatives';
-import { topUSFoodTrees } from './topUSFoodTrees';
+import { topFoodTrees } from './topUSFoodTrees';
 // import TopTreesAlameda from './topTreesAlameda';
 // import TopTreesSanFrancisco from './topTreesSanFrancisco';
 import './Data.scss';
@@ -16,7 +16,7 @@ import './Data.scss';
 function chooseData(treeList) {
   return {
     'California Natives': topCaliforniaNativeTrees,
-    'US Food Trees': topUSFoodTrees,
+    'Food Trees': topFoodTrees,
   }[treeList];
 }
 
@@ -57,7 +57,7 @@ function Data(props) {
           value={treeDropdownLabel}
           onChange={handleChange}
         >
-          <MenuItem value="US Food Trees">US Food Trees</MenuItem>
+          <MenuItem value="Food Trees">US Food Trees</MenuItem>
           <MenuItem value="California Natives">California Natives</MenuItem>
           )
         </Select>
