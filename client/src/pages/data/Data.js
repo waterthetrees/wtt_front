@@ -42,24 +42,61 @@ export default function Data() {
 
   return (
     <div className="data">
-      <FormControl className={classes.formControl}>
-        <InputLabel id="data__select-label">Tree Type</InputLabel>
-        <Select
-          labelId="data__select-label"
-          id="data__select"
-          value={treeDropdownLabel}
-          onChange={handleChange}
-        >
-          {dataArray.map((treeSelect) => (
-            <MenuItem
-              key={treeSelect}
-              value={treeSelect}
+      <div className="data__menus">
+        <div className="data__menus-item">
+          <FormControl className={classes.formControl}>
+            <InputLabel id="data__select-label">Tree Type</InputLabel>
+            <Select
+              labelId="data__select-label"
+              id="data__select"
+              value={treeDropdownLabel}
+              onChange={handleChange}
             >
-              {treeSelect}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {dataArray.map((treeSelect) => (
+                <MenuItem
+                  key={treeSelect}
+                  value={treeSelect}
+                >
+                  {treeSelect}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="data__menus-item">
+          {treeDropdownLabel === 'Food Trees' && (
+            <a href="http://fallingfruit.org" target="_blank" rel="noreferrer">
+              Thanks FallingFruit.org for the top US Food Tree Data!
+            </a>
+          )}
+          {treeDropdownLabel === 'San Francisco Street Trees' && (
+            <a href="https://www.fuf.net/" target="_blank" rel="noreferrer">
+              Thanks fuf.net for the top San Francisco Street Tree Data!
+            </a>
+          )}
+          {treeDropdownLabel === 'California Natives' && (
+            <a href="https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949" target="_blank" rel="noreferrer">
+              Thanks calscape.org for the California Natives Tree Data!
+            </a>
+          )}
+        </div>
+        <div className="data__menus-item">
+          Unless otherwise specified, data are licensed as
+          {' '}
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            CC BY-NC-SA
+          </a>
+          {' '}
+          (Creative Commons – Attribution, Non-commercial, Share-alike).
+          This means that you are free to use and distribute the data so long as you
+          preserve the original author/source attributions and
+          do not use it (without permission) for commercial applications.
+        </div>
+      </div>
       {treeType && <TreeList treeType={treeType} />}
     </div>
   );
