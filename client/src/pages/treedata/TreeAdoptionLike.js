@@ -95,7 +95,7 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between">
+      <Grid container alignItems="center" justify="space-between">
         <Liked user={user} idTree={idTree} handleChange={handleChange} />
         <Adopted
           handleChange={handleChange}
