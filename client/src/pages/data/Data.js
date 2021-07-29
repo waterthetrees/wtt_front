@@ -10,17 +10,17 @@ import { topTreesAlameda } from './topTreesAlameda';
 import { topTreesSanFrancisco } from './topTreesSanFrancisco';
 import './Data.scss';
 
-function chooseData(treeList) {
+function chooseData() {
   return {
     'California Natives': topTreesCaliforniaNative,
     'Food Trees': topTreesUSFood,
-    'San Francisco': topTreesSanFrancisco,
-  }[treeList];
+    'San Francisco Street Trees': topTreesSanFrancisco,
+  };
 }
 
 export default function Data() {
   // const componentName = 'Data';
-  const dataArray = ['California Natives', 'Food Trees'];
+  const dataArray = Object.keys(chooseData());
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -35,7 +35,7 @@ export default function Data() {
   const [treeDropdownLabel, setDropdownLabel] = useState(dataArray[0]);
 
   const handleChange = (event) => {
-    const newDataChoice = chooseData(event.target.value);
+    const newDataChoice = chooseData()[event.target.value];
     setDropdownLabel(event.target.value);
     setTreeType(newDataChoice);
   };
@@ -43,17 +43,21 @@ export default function Data() {
   return (
     <div className="data">
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Tree Type</InputLabel>
+        <InputLabel id="data__select-label">Tree Type</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="data__select-label"
+          id="data__select"
           value={treeDropdownLabel}
           onChange={handleChange}
         >
-          <MenuItem value="Food Trees">US Food Trees</MenuItem>
-          <MenuItem value="California Natives">California Natives</MenuItem>
-          <MenuItem value="San Francisco">San Francisco Street Trees</MenuItem>
-          )
+          {dataArray.map((treeSelect) => (
+            <MenuItem
+              key={treeSelect}
+              value={treeSelect}
+            >
+              {treeSelect}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       {treeType && <TreeList treeType={treeType} />}
@@ -90,28 +94,38 @@ function TreeList({ treeType }) {
   }, [treeType]);
 
   return (
-    <div className="data__treelist">
+    <div className="data__treelist" key={treeType}>
       {topTreesSorted
       && topTreesSorted.map((tree, index) => ((index === 0)
         ? (
-          <>
+          <React.Fragment key={`${tree.common}${tree.scientific}0`}>
             <TreeHeader
               clickHandler={clickHandler}
+              height={tree.height}
+              notes={tree.notes}
+              deciduousEvergreen={tree.deciduousEvergreen}
             />
             <Tree
               common={tree.common}
               genus={tree.genus}
               scientific={tree.scientific}
+              height={tree.height}
+              notes={tree.notes}
+              deciduousEvergreen={tree.deciduousEvergreen}
               index={index}
             />
-          </>
+          </React.Fragment>
         )
         : (
           <Tree
             common={tree.common}
             genus={tree.genus}
             scientific={tree.scientific}
+            height={tree.height}
+            notes={tree.notes}
+            deciduousEvergreen={tree.deciduousEvergreen}
             index={index}
+            key={`${tree.common}${tree.scientific}`}
           />
         )))}
     </div>
@@ -119,7 +133,7 @@ function TreeList({ treeType }) {
 }
 
 function TreeHeader({
-  clickHandler,
+  clickHandler, notes, height, deciduousEvergreen,
 }) {
   return (
     <div className="data__treelist-tree-header">
@@ -132,18 +146,40 @@ function TreeHeader({
       <div className="data__treelist-tree-header-item">
         <button type="button" className="data__treeheader-btn" value="genus" onClick={clickHandler}>Genus</button>
       </div>
+
+      {height && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="height" onClick={clickHandler}>height</button>
+        </div>
+      )}
+
+      {deciduousEvergreen && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="deciduousEvergreen" onClick={clickHandler}>Evergreen or Deciduous</button>
+        </div>
+      )}
+
+      {notes && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="notes" onClick={clickHandler}>notes</button>
+        </div>
+      )}
+
     </div>
   );
 }
 
 function Tree({
-  common, scientific, genus, index,
+  common, scientific, genus, index, height, notes, deciduousEvergreen,
 }) {
   return (
     <div className="data__treelist-tree" key={`${common}${index}`}>
       <div className="data__treelist-tree-item" id="common">{common}</div>
       <div className="data__treelist-tree-item" id="scientific">{scientific}</div>
       <div className="data__treelist-tree-item" id="genus">{genus}</div>
+      {height && <div className="data__treelist-tree-item" id="scientific">{height}</div>}
+      {deciduousEvergreen && <div className="data__treelist-tree-item" id="genus">{deciduousEvergreen}</div>}
+      {notes && <div className="data__treelist-tree-item" id="genus">{notes}</div>}
     </div>
   );
 }
