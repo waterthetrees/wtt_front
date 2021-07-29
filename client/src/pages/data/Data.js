@@ -97,11 +97,17 @@ function TreeList({ treeType }) {
           <>
             <TreeHeader
               clickHandler={clickHandler}
+              height={tree.height}
+              notes={tree.notes}
+              deciduousEvergreen={tree.deciduousEvergreen}
             />
             <Tree
               common={tree.common}
               genus={tree.genus}
               scientific={tree.scientific}
+              height={tree.height}
+              notes={tree.notes}
+              deciduousEvergreen={tree.deciduousEvergreen}
               index={index}
             />
           </>
@@ -111,6 +117,9 @@ function TreeList({ treeType }) {
             common={tree.common}
             genus={tree.genus}
             scientific={tree.scientific}
+            height={tree.height}
+            notes={tree.notes}
+            deciduousEvergreen={tree.deciduousEvergreen}
             index={index}
           />
         )))}
@@ -119,7 +128,7 @@ function TreeList({ treeType }) {
 }
 
 function TreeHeader({
-  clickHandler,
+  clickHandler, notes, height, deciduousEvergreen,
 }) {
   return (
     <div className="data__treelist-tree-header">
@@ -132,18 +141,40 @@ function TreeHeader({
       <div className="data__treelist-tree-header-item">
         <button type="button" className="data__treeheader-btn" value="genus" onClick={clickHandler}>Genus</button>
       </div>
+
+      {height && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="height" onClick={clickHandler}>height</button>
+        </div>
+      )}
+
+      {deciduousEvergreen && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="deciduousEvergreen" onClick={clickHandler}>Evergreen or Deciduous</button>
+        </div>
+      )}
+
+      {notes && (
+        <div className="data__treelist-tree-header-item">
+          <button type="button" className="data__treeheader-btn" value="notes" onClick={clickHandler}>notes</button>
+        </div>
+      )}
+
     </div>
   );
 }
 
 function Tree({
-  common, scientific, genus, index,
+  common, scientific, genus, index, height, notes, deciduousEvergreen,
 }) {
   return (
     <div className="data__treelist-tree" key={`${common}${index}`}>
       <div className="data__treelist-tree-item" id="common">{common}</div>
       <div className="data__treelist-tree-item" id="scientific">{scientific}</div>
       <div className="data__treelist-tree-item" id="genus">{genus}</div>
+      {height && <div className="data__treelist-tree-item" id="scientific">{height}</div>}
+      {deciduousEvergreen && <div className="data__treelist-tree-item" id="genus">{deciduousEvergreen}</div>}
+      {notes && <div className="data__treelist-tree-item" id="genus">{notes}</div>}
     </div>
   );
 }
