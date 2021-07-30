@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import { CSVLink, CSVDownload } from 'react-csv';
 import { topTreesCaliforniaNative } from './topTreesCaliforniaNative';
 import { topTreesUSFood } from './topTreesUSFood';
 import { topTreesAlameda } from './topTreesAlameda';
@@ -17,6 +20,12 @@ function chooseData() {
     'San Francisco Street Trees': topTreesSanFrancisco,
   };
 }
+
+// headers = [
+//   { label: "First Name", key: "firstname" },
+//   { label: "Last Name", key: "lastname" },
+//   { label: "Email", key: "email" }
+// ];
 
 export default function Data() {
   // const componentName = 'Data';
@@ -62,6 +71,18 @@ export default function Data() {
               ))}
             </Select>
           </FormControl>
+        </div>
+        <div className="data__menus-item">
+          <CSVLink
+            data={topTreesCaliforniaNative}
+            filename={`${treeDropdownLabel}.csv`}
+          >
+            <Button variant="outlined">
+              Download CSV
+              {' '}
+              <GetAppIcon color="primary" fontSize="large" aria-label="Download CSV" />
+            </Button>
+          </CSVLink>
         </div>
         <div className="data__menus-item">
           {treeDropdownLabel === 'Food Trees' && (
