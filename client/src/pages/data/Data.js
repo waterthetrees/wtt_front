@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import { CSVLink, CSVDownload } from 'react-csv';
+import { CSVLink } from 'react-csv';
 import { topTreesCaliforniaNative } from './topTreesCaliforniaNative';
 import { topTreesUSFood } from './topTreesUSFood';
 import { topTreesAlameda } from './topTreesAlameda';
@@ -74,8 +74,8 @@ export default function Data() {
         </div>
         <div className="data__menus-item">
           <CSVLink
-            data={topTreesCaliforniaNative}
-            filename={`${treeDropdownLabel}.csv`}
+            data={treeType}
+            filename={`${treeDropdownLabel.replaceAll(' ', '-')}.csv`}
           >
             <Button variant="outlined">
               Download CSV
