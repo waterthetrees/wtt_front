@@ -10,9 +10,25 @@ body {
   left: 0;
   margin: 20px;
 }
+.data__menus{
+  // display: flex;
+  // flex-direction: row;
+  display: grid;
+  // justify-content: right;
+  // grid-template-columns: repeat( auto, minmax(0, 1fr) );
+  grid-template-columns: auto 1fr;
+}
 
 .data__menus-item {
   padding: 5px 0;
+}
+
+.data__menus-item:nth-child(2) {
+  text-align: right;
+}
+
+.data__menus-item:nth-last-of-type(-n+2) {
+  grid-column: span 2;
 }
 
 .data__treelist {
