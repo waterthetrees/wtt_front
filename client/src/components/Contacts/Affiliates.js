@@ -8,7 +8,7 @@ const Affiliates = ({ affiliates }) => (
         {a.city}
         {' '}
         {Object.keys(a.links).map((l) => (
-          <a href={a.links[l]} target="_blank" rel="noreferrer">
+          <a key={l} href={a.links[l]} target="_blank" rel="noreferrer">
             {l}
           </a>
         ))}
