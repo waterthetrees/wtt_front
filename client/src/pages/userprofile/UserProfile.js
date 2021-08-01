@@ -12,6 +12,7 @@ import StarIcon from '@material-ui/icons/Star';
 import Tooltip from '@material-ui/core/Tooltip';
 import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import TreeIcon from '../../assets/images/addtree/tree12.svg';
+import Footer from '../../components/Footer/Footer';
 import './UserProfile.scss';
 
 function UserProfile() {
@@ -100,6 +101,7 @@ function UserProfile() {
         </Grid>
       </Grid>
       <UserTreeHistoryTable rows={userTreeHistoryData} />
+      <Footer/>
     </Box>
   );
 }
