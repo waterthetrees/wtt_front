@@ -26,17 +26,9 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 750,
   },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
+  tableContainer: {
+    width: "100vw",
+  }
 }));
 
 function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
@@ -47,12 +39,17 @@ function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
   return (
     <TableHead>
       <TableRow>
-        {columnNames.map((columnName) => (
-          <TableCell key={columnName} sortDirection={orderBy === columnName ? order : false}>
+        {columnNames.map((columnName, index) => (
+          <TableCell
+          key={columnName}
+          sortDirection={orderBy === columnName ? order : false}
+          align={index <= 2 ? 'left' : 'center'}
+          >
             <TableSortLabel
               active={orderBy === columnName}
               direction={orderBy === columnName ? order : 'asc'}
               onClick={createSortHandler(columnName)}
+              style={orderBy === columnName ? {} : {marginRight: "-24px"}}
             >
               {columnName}
             </TableSortLabel>
@@ -81,9 +78,15 @@ const TableColumns = ({ row }) => {
               <>{format(new Date(row[key]), 'MMMM dd yyyy')}</>
             </TableCell>
           );
-        } else {
+        } else if (index2 <= 2) {
           return (
             <TableCell key={`col-${index2}`}>
+              <>{row[key]}</>
+            </TableCell>
+          );
+        } else {
+          return (
+            <TableCell key={`col-${index2}`} align={'center'}>
               <>{row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</>
             </TableCell>
           );
@@ -139,7 +142,7 @@ const UserTreeHistoryTable = ({ rows }) => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <TableHeader />
-        <TableContainer>
+        <TableContainer className={classes.tableContainer}>
           <Table className={classes.table}>
             <TableColumnNames
               classes={classes}
@@ -158,7 +161,7 @@ const UserTreeHistoryTable = ({ rows }) => {
                 ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={12} />
                 </TableRow>
               )}
             </TableBody>
