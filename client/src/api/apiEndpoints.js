@@ -30,6 +30,7 @@ export const tilesServerEndpoints = {
   prod: `${url}/tiles`,
 }[env];
 
+//should line 46 be city: `${url}${port}/api/cities`, or city: `${url}${port}/api/city`,
 const apiEndpoints = {
   user: `${url}${port}/api/user`,
   userhistory: `${url}${port}/api/userhistory`,
@@ -43,6 +44,7 @@ const apiEndpoints = {
   treecount: `${url}${port}/api/treecount`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
+  register: `${url}${port}/api/register`
 };
 
 export default apiEndpoints;
