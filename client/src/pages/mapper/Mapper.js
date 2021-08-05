@@ -9,6 +9,9 @@ import AddTree from '../addtree/AddTree';
 import config from '../../config';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
+import axios from 'axios';
+import apiEndpoints from '../../api/apiEndpoints';
+
 
 mapboxgl.accessToken = config.mapbox;
 
@@ -16,6 +19,43 @@ function Mapper() {
   // const componentName = 'Mapper';
   const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
+
+  //if the user is authenticated, attempt to push user data into sql database by hitting /api/register api in backend
+  if (isAuthenticated) {
+    const {
+      volunteer,
+      nickname,
+      name,
+      picture,
+      email,
+      zipcode,
+      created,
+      modified,
+      id_user,
+      phone,
+      url
+    } = user;
+
+    axios({
+      method: 'post', 
+      url: apiEndpoints.register, 
+      data: {
+        volunteer: volunteer, 
+        nickname: nickname, 
+        name: name, 
+        picture: picture, 
+        email: email, 
+        zipcode: zipcode, 
+        created: new Date().toJSON(), 
+        modified: new Date().toJSON(), 
+        id_user: id_user, 
+        phone: phone, 
+        url: url, 
+      }
+
+    })
+
+  }
 
   // getData from DB
   // const treemap = (!featureFlag.vector)
