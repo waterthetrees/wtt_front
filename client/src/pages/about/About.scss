@@ -1,19 +1,47 @@
-.about{
+.about {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin:10rem 8rem;
+  text-align: center;
+  margin: 5rem;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+
+  &__text {
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  &__links {
+    padding: 1rem;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+
+  &__volunteers {
+    background-color: green;
+    color: white;
+    border-radius: 3rem;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+
 }
-
-
-
-.about__p{
-  margin: 0 0 3rem 0;
-}
-
 
 @media only screen and (max-width: 768px) {
   .about {
-    margin:5rem 2rem;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 3rem 2rem;
+    height: 100vh;
+
+    &__body {
+      margin: 0 1rem;
+    }
   }
+
 }

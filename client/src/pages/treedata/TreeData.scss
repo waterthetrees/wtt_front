@@ -15,7 +15,6 @@
   margin: -.2rem -.2rem -1rem auto;
 }
 .treeremoval__reason{
-  // margin:0 5px;
   padding: 0 5px;
   width:100%;
 }
@@ -86,7 +85,6 @@ hr.divider-solid {
   border-radius: 50%;
   display: inline-block;
   background-color: transparent;
-  // border: 5px solid #000000;
 }
 
 .tree__nav {
@@ -123,54 +121,6 @@ hr.divider-solid {
     text-decoration: none;
   }
 }
-/*
-.treeadd {
-  width: 3em;
-  height: 3em;
-  .btn {
-    border: 0px solid #000;
-    padding: 0;
-    font-size: 2rem;
-  }
-  .btn-success {
-     color: #fff;
-     background-color: black;
-     border-color: black;
-  }
-  .btn-success:active {
-     color: #fff;
-     background-color: #006400;
-  }
-}
-.treeadd:not(:disabled):not(.disabled).active, .treeadd:not(:disabled):not(.disabled):active, .show > .treeadd.dropdown-toggle {
-    color: #fff;
-    background-color: #006400;
-    border-color: white;
- }
-.treeadd .active {
-  color: #fff;
-  background-color: #006400 !important;
-  border-color: white;
- }
-
- .treeadd:active {
-  color: #fff;
-  background-color: #006400;
-  border-color: white;
- }
-
- .treeadd .active:hover {
-  color: #fff;
-  background-color: #006400;
-  border-color: white;
- }
-
- .treeadd:hover {
-   color: #006400;
-   background-color: white;
-   border-color: white;
-  }
- */
 
 .tree {
   z-index: 2000;
@@ -276,57 +226,6 @@ element.style {
   break-after: always; /* New syntax */
   font-size: 1.5rem;
 }
-.adoption{
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-.infobutton {
-  border-radius: 50%;
-  background-color: #cccbca;
-  border: 0;
-  color: black;
-  padding: 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-.infobutton-selected {
-  background-color: #4CAF50;
-  color: white;
-  border: 0;
-}
-.infobutton:hover:active {
-  background-color: #4CAF50;
-  color: white;
-  border: 0;
-}
-
-.heart {
-  content: '&#9829';
-}
-.MuiCheckbox-colorSecondary.Mui-checked {
-  color: #28a745;
-}
-
-.MuiSvgIcon-root {
-  width: 7em;
-  height: 1em;
-  font-size: 2.5rem;
-}
-.MuiSvgIcon-root .adopt {
-  width: 7em;
-  height: 1em;
-  font-size: 2.5rem;
-}
-
-.MuiTypography-body1 .adopt {
-  font-size: 2rem;
-}
 
 .tree__status__textarea {
   border: 1px solid #f9f6f2;
@@ -377,10 +276,6 @@ element.style {
 
 .tree__indent {
   padding: 0 0 0 10px;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .tree__imagelocation .col {
@@ -490,49 +385,7 @@ element.style {
   width: 100vw;
   height: 100%;
 }
-.adopt {
-  margin-bottom: 0 !important;
-  border: 1px;
-}
 
-input[type="radio"], input[type="checkbox"].adopt {
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(1.6);; /* IE */
-  -moz-transform: scale(1.6);; /* FF */
-  -webkit-transform: scale(1.6);; /* Safari and Chrome */
-  -o-transform: scale(1.6);; /* Opera */
-  transform: scale(1.6);;
-  margin: 10px;
-  cursor: pointer;
-}
-
-input[type="checkbox"].adopt:hover {
-    background-color: yellow;
-}
-
-/* Specify the background color to be
-shown when checkbox is active */
-input[type="checkbox"].adopt:active {
-    background-color: red;
-}
-
-adopt[type="checkbox"]:checked {
-  background-color: green;
-}
-
-label.adopt {
-  font-size: 1.25rem;
-  margin:0 10px 0 5px;
-  color:rgba(0, 0, 0, 0.54);;
-}
-
-.MuiButton-root {
-  padding: 0;
-  text-transform: none;
-}
-.MuiFormGroup-root {
-  align-items: center;
-}
 
 .progressbar {
   height: 20px;
@@ -621,11 +474,6 @@ label.adopt {
   font-size: $font-size-index;
 }
 
-.makeStyles-formControl-181 {
-  margin: 0;
-  min-width: 0;
-}
-
 .tree__type {
   padding: 5px 5px;
 
@@ -684,9 +532,6 @@ label.adopt {
   border-color: transparent;
   z-index: 200 !important;
   width: 100%;
-}
-
-@media screen and (max-width: 790px) {
 }
 
 /*mobile*/
