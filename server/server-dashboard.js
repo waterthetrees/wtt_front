@@ -5,7 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
-const { info } = require('../logger.js');
+const { logger.info } = require('../logger.js');
 const env = process.argv[2] || 'local';
 const host = {
   dev: 'http://localhost',
@@ -35,4 +35,4 @@ app.get('/*', (req, res) => {
 });
 
 const httpServer = http.createServer(app);
-httpServer.listen(port, () => info(`${host}:${port}`));
+httpServer.listen(port, () => logger.info(`${host}:${port}`));
