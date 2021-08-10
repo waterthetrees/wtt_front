@@ -13,13 +13,13 @@ const { logger } = require('../logger.js');
 const env = process.argv[2] || 'local';
 const host = {
   dev: 'http://localhost',
-  prod: 'http://localhost',
+  production: 'http://localhost',
   blue: 'http://localhost',
   localserver: 'http://localhost',
   docker: 'http://localhost',
 }[env];
 const port = {
-  prod: 3001, blue: 3000, dev: 3001, local: 3001, localserver: 3000, docker: 3000,
+  production: 3001, blue: 3000, dev: 3001, local: 3001, localserver: 3000, docker: 3000,
 }[env];
 
 app.use(compression());
