@@ -38,11 +38,11 @@ function Mapper() {
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [zoomUserSet, setZoom] = useState();
   const [newTreeAdded, setNewTreeAdded] = useState();
-  const [filterValue, setFilterValue] = useState('all');
+  const [filterType, setFilterType] = useState('all');
 
   const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log('handle filter change', filterValue);
+    setFilterType(event.target.value);
+    console.log('handle filter change', filterType);
     console.log('event.target.value', event.target.value);
   };
 
@@ -88,6 +88,7 @@ function Mapper() {
       </div>
       {mapContainer && (
         <Cities
+          filter={filterType}
           map={mapContainer}
         />
       )}
@@ -110,7 +111,7 @@ function Mapper() {
           buttonText={{ left: 'FILTER' }}
           listItems={['all', 'health', 'age']}
           handleChange={handleChange}
-          value={filterValue}
+          value={filterType}
           buttonName="filter"
           classNameButton="slideout__btn"
           classNameButtonText="slideout__btn-txt"
