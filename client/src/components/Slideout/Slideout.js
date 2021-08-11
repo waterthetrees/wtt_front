@@ -21,6 +21,7 @@ export default function TemporaryDrawer({
   buttonText, children, listItems,
   classNameButton,
   classNameButtonText,
+  handleChange
 }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -47,13 +48,10 @@ export default function TemporaryDrawer({
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {listItems.map((text) => (
-          <ListItem button key={text}>
-            {children}
-          </ListItem>
-        ))}
-      </List>
+      <MapperFilter
+        handleChange={handleChange}
+        listItems={listItems}
+      />
     </div>
   );
 

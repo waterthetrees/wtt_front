@@ -39,6 +39,13 @@ function Mapper() {
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [zoomUserSet, setZoom] = useState();
   const [newTreeAdded, setNewTreeAdded] = useState();
+  const [value, setValue] = useState('all');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    console.log('event.target.value', event.target.value);
+  };
+
   // -------------------------
   // Add search
   // -------------------------
@@ -101,13 +108,12 @@ function Mapper() {
 
         <Slideout
           buttonText={{ left: 'FILTER' }}
-          listItems={['Filter']}
+          listItems={['all', 'health', 'age']}
+          handleChange={handleChange}
           buttonName="filter"
           classNameButton="slideout__btn"
           classNameButtonText="slideout__btn-txt"
-        >
-          <MapperFilter onmap />
-        </Slideout>
+        />
 
         <AddTree
           map={mapContainer}
