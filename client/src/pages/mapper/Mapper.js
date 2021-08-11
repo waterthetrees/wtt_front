@@ -10,7 +10,6 @@ import config from '../../config';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
-import MapperFilter from './MapperFilter';
 
 mapboxgl.accessToken = config.mapbox;
 
@@ -39,10 +38,11 @@ function Mapper() {
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [zoomUserSet, setZoom] = useState();
   const [newTreeAdded, setNewTreeAdded] = useState();
-  const [value, setValue] = useState('all');
+  const [filterValue, setFilterValue] = useState('all');
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    console.log('handle filter change', filterValue);
     console.log('event.target.value', event.target.value);
   };
 
@@ -110,6 +110,7 @@ function Mapper() {
           buttonText={{ left: 'FILTER' }}
           listItems={['all', 'health', 'age']}
           handleChange={handleChange}
+          value={filterValue}
           buttonName="filter"
           classNameButton="slideout__btn"
           classNameButtonText="slideout__btn-txt"

@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import MapperFilter from './MapperFilter';
 import './Slideout.scss';
 
 const WATERDROPLET = 'assets/images/map/waterdroplet.svg';
@@ -21,7 +22,8 @@ export default function TemporaryDrawer({
   buttonText, children, listItems,
   classNameButton,
   classNameButtonText,
-  handleChange
+  handleChange,
+  value
 }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -39,22 +41,6 @@ export default function TemporaryDrawer({
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <MapperFilter
-        handleChange={handleChange}
-        listItems={listItems}
-      />
-    </div>
-  );
-
   return (
     <div className="slideout__item">
       {['left'].map((anchor) => (
@@ -66,7 +52,20 @@ export default function TemporaryDrawer({
           )}
 
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
+          <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+        <MapperFilter
+          value={value}
+          handleChange={handleChange}
+         listItems={listItems}
+         />
+    </div>
           </Drawer>
         </React.Fragment>
       ))}
