@@ -10,9 +10,9 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import format from 'date-fns/format';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import format from 'date-fns/format';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,11 +27,13 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 750,
   },
   tableContainer: {
-    width: "100vw",
-  }
+    width: '100vw',
+  },
 }));
 
-function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
+function TableColumnNames({
+  columnNames, orderBy, order, onRequestSort,
+}) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -41,15 +43,15 @@ function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
       <TableRow>
         {columnNames.map((columnName, index) => (
           <TableCell
-          key={columnName}
-          sortDirection={orderBy === columnName ? order : false}
-          align={index <= 2 ? 'left' : 'center'}
+            key={columnName}
+            sortDirection={orderBy === columnName ? order : false}
+            align={index <= 2 ? 'left' : 'center'}
           >
             <TableSortLabel
               active={orderBy === columnName}
               direction={orderBy === columnName ? order : 'asc'}
               onClick={createSortHandler(columnName)}
-              style={orderBy === columnName ? {} : {marginRight: "-24px"}}
+              style={orderBy === columnName ? {} : { marginRight: '-24px' }}
             >
               {columnName}
             </TableSortLabel>
@@ -61,45 +63,43 @@ function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
 }
 
 const TableHeader = () => (
-  <Toolbar>
-    <Typography variant="h6" id="tableTitle" component="div">
+  <Toolbar variant="dense">
+    <Typography variant="h5" id="tableTitle" component="div">
       Tree History
     </Typography>
   </Toolbar>
 );
 
-const TableColumns = ({ row }) => {
-  return (
-    <>
-      {Object.keys(row).map((key, index2) => {
-        if (index2 === 0) {
-          return (
-            <TableCell key={`col-${index2}`}>
-              <>{format(new Date(row[key]), 'MMMM dd yyyy')}</>
-            </TableCell>
-          );
-        } else if (index2 <= 2) {
-          return (
-            <TableCell key={`col-${index2}`}>
-              <>{row[key]}</>
-            </TableCell>
-          );
-        } else {
-          return (
-            <TableCell key={`col-${index2}`} align={'center'}>
-              <>{row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</>
-            </TableCell>
-          );
-        }
-      })}
-    </>
-  );
-};
+const TableColumns = ({ row }) => (
+  <>
+    {Object.keys(row).map((key, index2) => {
+      if (index2 === 0) {
+        return (
+          <TableCell key={`col-${index2}`}>
+            <>{format(new Date(row[key]), 'MMMM dd yyyy')}</>
+          </TableCell>
+        );
+      }
+      if (index2 <= 2) {
+        return (
+          <TableCell key={`col-${index2}`}>
+            <>{row[key]}</>
+          </TableCell>
+        );
+      }
+      return (
+        <TableCell key={`col-${index2}`} align="center">
+          <>{row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</>
+        </TableCell>
+      );
+    })}
+  </>
+);
 
 const UserTreeHistoryTable = ({ rows }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('dateVisit');
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -140,7 +140,7 @@ const UserTreeHistoryTable = ({ rows }) => {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={4}>
         <TableHeader />
         <TableContainer className={classes.tableContainer}>
           <Table className={classes.table}>
