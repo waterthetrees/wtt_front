@@ -12,9 +12,21 @@ function setHoverState(hoveredStateId, hover, sourceLayer) {
   };
 }
 
+function createFilter(city, filter) {
+  const defaultFilter = [
+    'all',
+    ['==', 'city', city],
+  ];
+  if (filter === 'all') return defaultFilter;
+  // placeholder filters for health or age
+  if (filter === 'health') return [...defaultFilter, ['==', 'health', 'poor']];
+  return [...defaultFilter, ['<=', 'dbh', '5']];
+}
+
 export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree,
-  layerName, cityName, mapData, cityNameFiltered) {
+  layerName, cityName, mapData, cityNameFiltered, filter) {
   const URLTILES = `${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`;
+  const constructedFilter = createFilter(cityName, filter);
   // console.log('URLTILES', URLTILES);
   map.addLayer({
     id: 'public.treedata',
@@ -33,7 +45,7 @@ export default function makeFunctionLayer(map, setCurrentTreeId, setShowTree,
 
     minzoom: 11,
     maxzoom: 22,
-    filter: ['==', 'city', cityName],
+    filter: constructedFilter,
     paint: {
       // 'circle-color':'#309000',
       'circle-color': [

@@ -42,8 +42,6 @@ function Mapper() {
 
   const handleChange = (event) => {
     setFilterType(event.target.value);
-    console.log('handle filter change', filterType);
-    console.log('event.target.value', event.target.value);
   };
 
   // -------------------------

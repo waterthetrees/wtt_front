@@ -17,6 +17,7 @@ function City(props) {
     map,
     cityName,
     newTreeAdded,
+    filter,
     filterCityName,
   } = Object(props);
 
@@ -42,8 +43,8 @@ function City(props) {
 
   useEffect(() => {
     makeFunctionLayer(map, setCurrentTreeId, setShowTree,
-      'treedata', cityName, mapData, cityName);
-  }, [map, health, newTreeAdded]);
+      'treedata', cityName, mapData, cityName, filter);
+  }, [map, health, newTreeAdded, filter]);
 
   return (
     <div className="TreeData">
