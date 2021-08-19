@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { Controller } from 'react-hook-form';
+import * as React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
 import {
   TextField,
   Select,
