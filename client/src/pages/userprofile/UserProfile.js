@@ -12,7 +12,6 @@ import TreeIcon from '../../assets/images/addtree/tree12.svg';
 import Footer from '../../components/Footer/Footer';
 import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import UserTreeHistoryTable from '../../components/UserTreeHistoryTable/UserTreeHistoryTable';
-import './UserProfile.scss';
 
 function UserProfile() {
   const StyledAvatar = styled(Avatar)({

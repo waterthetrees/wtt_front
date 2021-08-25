@@ -75,21 +75,15 @@ const TableColumns = ({ row }) => (
     {Object.keys(row).map((key, index2) => {
       if (index2 === 0) {
         return (
-          <TableCell key={`col-${index2}`}>
-            <>{format(new Date(row[key]), 'MMMM dd yyyy')}</>
-          </TableCell>
+          <TableCell key={`col-${index2}`}>{format(new Date(row[key]), 'MMMM dd yyyy')}</TableCell>
         );
       }
       if (index2 <= 2) {
-        return (
-          <TableCell key={`col-${index2}`}>
-            <>{row[key]}</>
-          </TableCell>
-        );
+        return <TableCell key={`col-${index2}`}>{row[key]}</TableCell>;
       }
       return (
         <TableCell key={`col-${index2}`} align="center">
-          <>{row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</>
+          {row[key] ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
         </TableCell>
       );
     })}
