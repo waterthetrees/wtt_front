@@ -21,7 +21,7 @@ export const useLikesQuery = (obj) => useQuery(['treelikes', obj], getData, {
   },
 });
 
-export const useAdoptionQuery = (obj) => useQuery(['treeadoption', obj], getData, {
+export const useAdoptionQuery = (obj) => useQuery(['treeadoptions', obj], getData, {
   placeholderData: {
     adopted: false,
     adoptedCount: 0,
@@ -47,7 +47,7 @@ export const useAdoptionMutation = () => {
 
   return useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('treeadoption');
+      queryClient.invalidateQueries('treeadoptions');
       queryClient.invalidateQueries('treehistory');
     },
     onError: (err) => {
@@ -82,7 +82,7 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
     };
 
     if (event.target.name === 'adopted') {
-      mutateTreeAdoption.mutate(['treeadoption', sendTreeUser]);
+      mutateTreeAdoption.mutate(['treeadoptions', sendTreeUser]);
       showAdoptionDirections(event.target.checked);
     } else {
       mutateTreeLikes.mutate(['treelikes', sendTreeUser]);
@@ -111,7 +111,7 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
 }
 
 function Liked({ handleChange, idTree, user }) {
-  const { data } = useLikesQuery({ idTree, email: user.email, request: 'liked' });
+  const { data } = useLikesQuery({ idTree, email: user.email });
   const { liked, likedCount } = data;
 
   return (
@@ -138,7 +138,7 @@ function Liked({ handleChange, idTree, user }) {
 function Adopted({
   handleChange, user, idTree, adoptionDirections, showAdoptionDirections,
 }) {
-  const { data } = useAdoptionQuery({ idTree, email: user.email, request: 'adopted' });
+  const { data } = useAdoptionQuery({ idTree, email: user.email });
   const { adopted, adoptedCount } = data;
 
   return (
