@@ -87,16 +87,6 @@ function UserProfile() {
     avatarContainer: {
       margin: '0 3em 0 2em',
     },
-    adoptedTitle: {
-      fontSize: '1.125rem',
-    },
-    adoptedIconContainer: {
-      display: 'inline-block',
-    },
-    adoptedIcon: {
-      height: '2em',
-      width: '2em',
-    },
   });
 
   const classes = useStyles();
@@ -128,7 +118,7 @@ function UserProfile() {
 
   const userPlantedTreesHistory = userPlantedTrees?.data;
 
-  const UserProfile = {
+  const userProfile = {
     UserEmail: user?.email,
     UserImageURL: user?.picture,
     UserName: user?.name,
@@ -147,9 +137,9 @@ function UserProfile() {
   const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
 
   const userTreeHistory = useQuery(
-    ['usertreehistory', { volunteer: UserProfile.UserNickname }],
+    ['usertreehistory', { volunteer: userProfile.UserNickname }],
     getData,
-    { enabled: !!UserProfile.UserNickname },
+    { enabled: !!userProfile.UserNickname },
   );
 
   const userTreeHistoryData = userTreeHistory?.data ?? [];
@@ -158,17 +148,17 @@ function UserProfile() {
     <Box>
       <div className={classes.container}>
         <div className={classes.avatarContainer}>
-          <StyledAvatar alt="Avatar" src={UserProfile.UserImageURL} />
+          <StyledAvatar alt="Avatar" src={userProfile.UserImageURL} />
         </div>
         <div>
           <IconContainer
-            treeListAdopted={UserProfile.treeListAdopted}
-            treeListLiked={UserProfile.treeListLiked}
-            treeListPlanted={UserProfile.treeListPlanted}
+            treeListAdopted={userProfile.treeListAdopted}
+            treeListLiked={userProfile.treeListLiked}
+            treeListPlanted={userProfile.treeListPlanted}
           />
-          <Typography variant="body1">{UserProfile.UserName}</Typography>
-          <Typography variant="body1">{UserProfile.UserNickname}</Typography>
-          <Typography variant="body1">{UserProfile.UserEmail}</Typography>
+          <Typography variant="body1">{userProfile.UserName}</Typography>
+          <Typography variant="body1">{userProfile.UserNickname}</Typography>
+          <Typography variant="body1">{userProfile.UserEmail}</Typography>
           <Typography variant="body1">
             {UserLocation.UserCity}
             ,
