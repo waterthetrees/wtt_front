@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import { styled } from '@material-ui/core/styles';
+import { styled, makeStyles, withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import React from 'react';
 import { useQuery } from 'react-query';
@@ -13,7 +13,94 @@ import Footer from '../../components/Footer/Footer';
 import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import UserTreeHistoryTable from '../../components/UserTreeHistoryTable/UserTreeHistoryTable';
 
+const IconContainer = ({ treeListAdopted, treeListLiked, treeListPlanted }) => {
+  const useStyles = makeStyles({
+    box: {
+      marginBottom: '2rem',
+    },
+    adoptedIconContainer: {
+      display: 'inline-block',
+    },
+    adoptedIcon: {
+      height: '2em',
+      width: '2em',
+    },
+    adoptedCount: {
+      fontSize: '1.25rem',
+      margin: '0 1em 0 0.25em',
+    },
+    likedIcon: {
+      height: '2em',
+      width: '2em',
+    },
+    likedCount: {
+      fontSize: '1.25rem',
+      margin: '0 1em 0 0.25em',
+    },
+    plantedIcon: {
+      height: '2.5em',
+      width: '2.5em',
+    },
+    plantedCount: {
+      fontSize: '1.25rem',
+      marginLeft: '0.35em',
+    },
+  });
+
+  const IconTooltip = withStyles({
+    tooltip: {
+      fontSize: '1.125rem',
+    },
+  })(Tooltip);
+
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.box}>
+      <IconTooltip title="Adopted" placement="bottom" arrow>
+        <span className={classes.adoptedIconContainer}>
+          <AdoptionIcon className={classes.adoptedIcon} />
+        </span>
+      </IconTooltip>
+      <span className={classes.adoptedCount}>{treeListAdopted.length}</span>
+
+      <IconTooltip title="Liked" placement="bottom" arrow>
+        <StarIcon className={classes.likedIcon} />
+      </IconTooltip>
+      <span className={classes.likedCount}>{treeListLiked.length}</span>
+
+      <IconTooltip title="Planted" placement="bottom" arrow>
+        <img src={TreeIcon} alt="TreeIcon" className={classes.plantedIcon} />
+      </IconTooltip>
+      <span className={classes.plantedCount}>{treeListPlanted.length}</span>
+    </Box>
+  );
+};
+
 function UserProfile() {
+  const useStyles = makeStyles({
+    container: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      marginBottom: '2em',
+    },
+    avatarContainer: {
+      margin: '0 3em 0 2em',
+    },
+    adoptedTitle: {
+      fontSize: '1.125rem',
+    },
+    adoptedIconContainer: {
+      display: 'inline-block',
+    },
+    adoptedIcon: {
+      height: '2em',
+      width: '2em',
+    },
+  });
+
+  const classes = useStyles();
+
   const StyledAvatar = styled(Avatar)({
     height: '8em',
     width: '8em',
@@ -69,47 +156,16 @@ function UserProfile() {
 
   return (
     <Box>
-      <div style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '2em' }}>
-        <div style={{ margin: '0 3em 0 2em' }}>
+      <div className={classes.container}>
+        <div className={classes.avatarContainer}>
           <StyledAvatar alt="Avatar" src={UserProfile.UserImageURL} />
         </div>
         <div>
-          <Box mb="2rem">
-            <Tooltip
-              title={<div style={{ fontSize: '1.125rem' }}>Adopted</div>}
-              placement="bottom"
-              arrow
-            >
-              <span style={{ display: 'inline-block' }}>
-                <AdoptionIcon style={{ height: '2em', width: '2em' }} />
-              </span>
-            </Tooltip>
-            <span style={{ fontSize: '1.25rem', margin: '0 1em 0 0.25em' }}>
-              {UserProfile.treeListAdopted.length}
-            </span>
-
-            <Tooltip
-              title={<div style={{ fontSize: '1.125rem' }}>Liked</div>}
-              placement="bottom"
-              arrow
-            >
-              <StarIcon style={{ height: '2em', width: '2em' }} />
-            </Tooltip>
-            <span style={{ fontSize: '1.25rem', margin: '0 1em 0 0.25em' }}>
-              {UserProfile.treeListLiked.length}
-            </span>
-
-            <Tooltip
-              title={<div style={{ fontSize: '1.125rem' }}>Planted</div>}
-              placement="bottom"
-              arrow
-            >
-              <img src={TreeIcon} alt="TreeIcon" style={{ height: '2.5em', width: '2.5em' }} />
-            </Tooltip>
-            <span style={{ fontSize: '1.25rem', marginLeft: '0.35em' }}>
-              {UserProfile.treeListPlanted.length}
-            </span>
-          </Box>
+          <IconContainer
+            treeListAdopted={UserProfile.treeListAdopted}
+            treeListLiked={UserProfile.treeListLiked}
+            treeListPlanted={UserProfile.treeListPlanted}
+          />
           <Typography variant="body1">{UserProfile.UserName}</Typography>
           <Typography variant="body1">{UserProfile.UserNickname}</Typography>
           <Typography variant="body1">{UserProfile.UserEmail}</Typography>
