@@ -29,7 +29,6 @@ export default function TreeRemoval({
     setReallyDelete(true);
   };
 
-  // console.log('user', user);
   const handleYesRemoveTree = async () => {
     const functionName = 'handleRemoveTree';
 
@@ -46,7 +45,6 @@ export default function TreeRemoval({
         comment: `${common} was removed - ${comment}`,
         volunteer: user.nickname,
       };
-      // console.log(functionName, 'sendTreeHistory', sendTreeHistory);
       const sendTreeData = {
         idTree,
         common: 'VACANT SITE',

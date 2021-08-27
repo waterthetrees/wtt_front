@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import mapboxgl from 'mapbox-gl';
-// import Tooltip from '@material-ui/core/Tooltip';
 import ReactTooltip from 'react-tooltip';
 import cx from 'clsx';
 import './AddTree.scss';
@@ -16,7 +15,6 @@ let renderCount = 0;
 const currentMarkers = [];
 
 function AddTree(props) {
-  // const componentName = 'AddTree';
   renderCount += 1;
   const {
     map, setZoom,
@@ -25,19 +23,19 @@ function AddTree(props) {
     setNewTreeAdded,
     newTreeAdded,
   } = Object(props);
-  const {user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
   const queryClient = useQueryClient();
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('user');
+      queryClient.invalidateQueries('users');
     },
   });
   const [addTreeSelected, setAddTreeSelected] = useState(false);
 
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
-    if (isAuthenticated) mutateUser.mutate(['user', user]);
+    if (isAuthenticated) mutateUser.mutate(['users', user]);
     if (!addTreeSelected) {
       setAddTreeSelected(true);
     } else {
@@ -54,13 +52,6 @@ function AddTree(props) {
     }
   }, [addTreeSelected]);
 
-  // if (isLoading) {
-  //   return <div>Loading ...</div>;
-  // }
-
-  // const ADDTREEPLUSCLASS = (addTreeSelected)
-  //   ? 'addtree__btn-selected'
-  //   : '';
   return (
     <div>
 

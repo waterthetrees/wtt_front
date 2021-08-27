@@ -31,7 +31,7 @@ export const tilesServerEndpoints = {
 }[env];
 
 const apiEndpoints = {
-  user: `${url}${port}/api/user`,
+  users: `${url}${port}/api/users`,
   userhistory: `${url}${port}/api/userhistory`,
   userprofile: `${url}${port}/api/userprofile`,
   treemap: `${url}${port}/api/treemap`,
