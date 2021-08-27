@@ -20,7 +20,6 @@ export default function TreeHeaderForm({
   mutateTreeData, mutateHistory,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  // const treeHistoryObj = useQuery(['treehistory', { currentTreeId: idTree }], getData);
   const defaultValues = {
     idTree,
     common: common || '',
@@ -35,9 +34,6 @@ export default function TreeHeaderForm({
   const {
     handleSubmit, control, errors,
   } = useForm({ defaultValues });
-  // const [data, setData] = useState(null);
-
-  // const queryClient = useQueryClient();
 
   const [newTree, setNewTree] = useState(null);
   const onSubmit = async (data) => {
@@ -58,8 +54,7 @@ export default function TreeHeaderForm({
     if (sendDataFiltered.common !== common
        || sendDataFiltered.scientific !== scientific
        || sendDataFiltered.genus !== genus) {
-      // console.log('mutateTreeData sendDataFiltered', sendDataFiltered);
-      mutateTreeData.mutate(['tree', sendDataFiltered]);
+      mutateTreeData.mutate(['trees', sendDataFiltered]);
     }
 
     // new history

@@ -35,7 +35,7 @@ const apiEndpoints = {
   userhistory: `${url}${port}/api/userhistory`,
   userprofile: `${url}${port}/api/userprofile`,
   treemap: `${url}${port}/api/treemap`,
-  tree: `${url}${port}/api/tree`,
+  trees: `${url}${port}/api/trees`,
   treehistory: `${url}${port}/api/treehistory`,
   treelist: `${url}${port}/api/treelist`,
   treeadoptions: `${url}${port}/api/treeadoptions`,

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import {
@@ -7,7 +6,6 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import format from 'date-fns/format';
-// import Tooltip from '@material-ui/core/Tooltip';
 import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
@@ -32,7 +30,6 @@ const AddTreeModal = ({
   coordinatesNewTree,
   setAddTreeSelected,
   setNewTreeAdded,
-  // newTreeAdded,
 }) => {
   const {
     user,
@@ -57,7 +54,6 @@ const AddTreeModal = ({
     dbh: '',
     height: '',
     address: '',
-    city: '',
     state: '',
     zip: '',
     neighborhood: '',
@@ -103,7 +99,7 @@ const AddTreeModal = ({
 
   const mutateTreeData = useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('trees');
       queryClient.invalidateQueries('treemap');
     },
   });
@@ -115,8 +111,7 @@ const AddTreeModal = ({
       ...dataIn,
       ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
     };
-    // console.log('newTreeAdded', newTreeAdded);
-    mutateTreeData.mutate(['tree', sendData]);
+    mutateTreeData.mutate(['trees', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
     setNewTreeAdded(true);
