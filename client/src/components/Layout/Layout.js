@@ -13,6 +13,7 @@ import UserProfile from '../../pages/userprofile/UserProfile';
 import Contact from '../../pages/contact/Contact';
 import Data from '../../pages/data/Data';
 import NotFound from '../../pages/notFound/NotFound';
+import ProtectedRoute from '../../auth/protected-route'
 
 // const Contact = lazy(() => import('../../pages/contact/Contact'));
 // const About = lazy(() => import('../../pages/about/About'));
@@ -31,7 +32,7 @@ function Layout() {
         <Switch>
           <Route path="/" exact component={Mapper} />
           <Route path="/treemap" exact component={Mapper} />
-          <Route path="/userprofile" exact component={UserProfile} />
+          <ProtectedRoute path="/userprofile" exact component={UserProfile} />
           <Route path="/about" exact component={About} />
           <Route path="/privacy" exact component={Privacy} />
           <Route path="/license" exact component={License} />
