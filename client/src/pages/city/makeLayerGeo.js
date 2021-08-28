@@ -8,7 +8,6 @@ export default function makeLayerGeo(
   sourceId, layerId, mapData,
 ) {
   if (!map.getSource(sourceId) && mapData) {
-    // console.log('mapData', mapData);
     map.addSource(sourceId, {
       type: 'geojson',
       data: mapData,

@@ -43,6 +43,8 @@ const apiEndpoints = {
   treecount: `${url}${port}/api/treecount`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
+  usercounts: `${url}${port}/api/usercounts`,
+  usertreehistory: `${url}${port}/api/usertreehistory`,
 };
 
 export default apiEndpoints;

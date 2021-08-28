@@ -4,14 +4,12 @@ import { useQuery } from 'react-query';
 import { getData } from '../../api/queries';
 import TreeData from '../treedata/TreeData';
 import config from '../../config';
-// eslint-disable-next-line no-unused-vars
 import makeLayerTile from './makeLayerTile';
 import makeLayerGeo from './makeLayerGeo';
 
 mapboxgl.accessToken = config.mapbox.key;
 
 function City(props) {
-  // const componentName = 'City';
   const {
     map,
     cityName,

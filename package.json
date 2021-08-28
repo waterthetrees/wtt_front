@@ -63,6 +63,8 @@
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-burger-menu": "^3.0.3",
+    "react-csv": "^2.0.3",
+    "react-csv-downloader": "^2.7.0",
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.1",
     "react-hook-form": "^6.5.0",
