@@ -1,10 +1,9 @@
 import React from 'react';
 import Footer from '../../components/Footer';
-import './Contact.scss';
-
 import Contacts from '../../components/Contacts/Contacts';
 import CodeLogo from '../../assets/images/logos/c4sf-logo.jpg';
 import SierrClubLogo from '../../assets/images/logos/san-francisco-bay.png';
+import './Contact.scss';
 
 export default function Contact() {
   return (

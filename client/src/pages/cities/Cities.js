@@ -33,7 +33,7 @@ function Cities(props) {
   } = Object(props);
 
   // CITIES
-  const cities = useQuery(['cities', { city: 'All', fetchPolicy: 'cache-first' }], getData);
+  const cities = useQuery(['cities', { fetchPolicy: 'cache-first' }], getData);
   const citiesData = cities.data || null;
   // CITIES
   const [countryClicked, setCountry] = useState('United States');

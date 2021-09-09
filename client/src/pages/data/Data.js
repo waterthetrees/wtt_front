@@ -21,14 +21,7 @@ function chooseData() {
   };
 }
 
-// headers = [
-//   { label: "First Name", key: "firstname" },
-//   { label: "Last Name", key: "lastname" },
-//   { label: "Email", key: "email" }
-// ];
-
 export default function Data() {
-  // const componentName = 'Data';
   const dataArray = Object.keys(chooseData());
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -86,12 +79,10 @@ export default function Data() {
         </div>
         <div className="data__menus-item">
           {treeDropdownLabel === 'Food Trees' && (
-            <a href="http://fallingfruit.org" target="_blank" rel="noreferrer">
               Thanks FallingFruit.org for the top US Food Tree Data!
             </a>
           )}
           {treeDropdownLabel === 'San Francisco Street Trees' && (
-            <a href="https://www.fuf.net/" target="_blank" rel="noreferrer">
               Thanks fuf.net for the top San Francisco Street Tree Data!
             </a>
           )}
@@ -124,7 +115,6 @@ export default function Data() {
 }
 
 function TreeList({ treeType }) {
-  // const componentName = 'TreeList';
   const [topTreesSorted, setTreesSorted] = useState(treeType);
   const [sortOrderAsc, setSortOrderAsc] = useState(true);
 

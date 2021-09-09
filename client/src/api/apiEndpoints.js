@@ -31,15 +31,15 @@ export const tilesServerEndpoints = {
 }[env];
 
 const apiEndpoints = {
-  user: `${url}${port}/api/user`,
+  users: `${url}${port}/api/users`,
   userhistory: `${url}${port}/api/userhistory`,
   userprofile: `${url}${port}/api/userprofile`,
   treemap: `${url}${port}/api/treemap`,
-  tree: `${url}${port}/api/tree`,
+  trees: `${url}${port}/api/trees`,
   treehistory: `${url}${port}/api/treehistory`,
   treelist: `${url}${port}/api/treelist`,
-  treeadoption: `${url}${port}/api/treeuser`,
-  treelikes: `${url}${port}/api/treeuser`,
+  treeadoptions: `${url}${port}/api/treeadoptions`,
+  treelikes: `${url}${port}/api/treelikes`,
   treecount: `${url}${port}/api/treecount`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,

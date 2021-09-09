@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.scss';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import AuthenticationButton from '../Auth/auth-button';
 import { useAuth0 } from '@auth0/auth0-react';
+import AuthenticationButton from '../Auth/auth-button';
+import './Header.scss';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,13 +42,14 @@ const Header = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {isAuthenticated &&
-          <MenuItem onClick={handleClose}>
-            <Link to="/userprofile" className="header__link">
-              <HeaderButton menuItem="User Profile" />
-            </Link>
-          </MenuItem>
-          }
+          {isAuthenticated
+          && (
+            <MenuItem onClick={handleClose}>
+              <Link to="/userprofile" className="header__link">
+                <HeaderButton menuItem="User Profile" />
+              </Link>
+            </MenuItem>
+          )}
           <MenuItem onClick={handleClose}>
             <Link to="/" className="header__link">
               <HeaderButton menuItem="Map" />
