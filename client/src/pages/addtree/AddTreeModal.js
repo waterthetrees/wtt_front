@@ -112,7 +112,7 @@ const AddTreeModal = ({
       ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
     };
     delete sendData.treeType;
-    mutateTreeData.mutate(['tree', sendData]);
+    mutateTreeData.mutate(['trees', sendData]);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
     setNewTreeAdded(true);
