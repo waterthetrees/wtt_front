@@ -79,10 +79,12 @@ export default function Data() {
         </div>
         <div className="data__menus-item">
           {treeDropdownLabel === 'Food Trees' && (
+            <a href="http://fallingfruit.org" target="_blank" rel="noreferrer">
               Thanks FallingFruit.org for the top US Food Tree Data!
             </a>
           )}
           {treeDropdownLabel === 'San Francisco Street Trees' && (
+            <a href="https://www.fuf.net/" target="_blank" rel="noreferrer">
               Thanks fuf.net for the top San Francisco Street Tree Data!
             </a>
           )}
