@@ -3,70 +3,70 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { getData } from '../../api/queries';
 import config from '../../config';
-import City from '../city/City';
+import Cities from '../cities/Cities';
 
-const CITYIMAGE = 'assets/images/map/mapface.png';
+const COUNTRYIMAGE = 'assets/images/map/mapface.png';
 mapboxgl.accessToken = config.mapbox.key;
 
-function getFeatures(citiesData) {
-  const cities = citiesData.map((city) => ({
+function getFeatures(countriesData) {
+  const countries = countriesData.map((country) => ({
     type: 'Feature',
 
     geometry: {
       type: 'Point',
-      coordinates: [city.lng, city.lat],
+      // need coordinates for each country
+      coordinates: [country.lng, country.lat],
     },
     properties: {
-      'image-name': `${city.city}image`,
-      name: city.city,
-      cityCountTrees: `${city.cityCountTrees} trees`,
-      id: `${city.city}Id`,
+      'image-name': `${country.country}image`,
+      name: country.country,
+      countryCountTrees: `${country.countryCountTrees} trees`,
+      id: `${country.country}Id`,
     },
   }));
-  return cities;
+  return countries;
 }
 
-function Cities(props) {
-  // const componentName = 'Cities';
+function Countries(props) {
   const {
     map,
   } = Object(props);
 
-  // CITIES
-  const cities = useQuery(['cities', { fetchPolicy: 'cache-first' }], getData);
-  const citiesData = cities.data || null;
-  // CITIES
-  const [cityClicked, setCityClicked] = useState(null);
+  // COUNTRIES
+  const countries = useQuery(['countries', { country: 'All', fetchPolicy: 'cache-first' }], getData);
+  const countriesData = countries.data || null;
+  // console.log(countriesData);
+  // states
+  const [countryClicked, setCountryClicked] = useState(null);
   useEffect(() => {
     if (!map) return;
-    if (!citiesData) return;
-    // console.log('citiesData', citiesData);
+    if (!countriesData) return;
     map.on('load', () => {
-      if (map.hasImage('cityImage')) return;
-      const cityFeaturesArray = getFeatures(citiesData);
+      if (map.hasImage('countryImage')) return;
+      const countryFeaturesArray = getFeatures(countriesData);
       const randNum = Math.floor(Math.random() * 100) + 1;
-      const cityImage = `cityImage${randNum}`;
+      const countryImage = `countryImage${randNum}`;
       map.loadImage(
-        CITYIMAGE,
+        COUNTRYIMAGE,
         (error, image) => {
           if (error) throw error;
-          map.addImage(cityImage, image);
-          map.addSource('cityFeatures', {
+          map.addImage(countryImage, image);
+          map.addSource('countryFeatures', {
             type: 'geojson',
             data: {
               type: 'FeatureCollection',
-              features: cityFeaturesArray,
+              features: countryFeaturesArray,
             },
           });
           map.addLayer({
-            id: 'cities',
+            id: 'countries',
             type: 'symbol',
-            source: 'cityFeatures',
+            source: 'countryFeatures',
             // minzoom: 5,
             maxzoom: 11,
             layout: {
-              visibility: 'visible',
-              'icon-image': cityImage,
+              visibility: 'none',
+              'icon-image': countryImage,
               'icon-size': 0.5,
               'icon-text-fit': 'none',
               'icon-allow-overlap': true,
@@ -77,7 +77,7 @@ function Cities(props) {
                 { 'font-scale': 1.5 },
                 '\n',
                 {},
-                ['get', 'cityCountTrees'],
+                ['get', 'countryCountTrees'],
                 {
                   'font-scale': 0.8,
                   'text-font': [
@@ -104,10 +104,10 @@ function Cities(props) {
       );
     });
 
-    map.on('click', 'cities', (e) => {
+    map.on('click', 'countries', (e) => {
       e.preventDefault();
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const cityCurrent = e.features[0].properties.name;
+      const countryCurrent = e.features[0].properties.name;
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -115,49 +115,49 @@ function Cities(props) {
 
       map.setCenter(coordinates);
       map.flyTo({
+        // default coordinates for on load map
         center: coordinates,
-        zoom: [12],
+        zoom: [10],
       });
       map.setFeatureState({
-        source: 'cityFeatures',
-        id: cityCurrent,
+        source: 'countryFeatures',
+        id: countryCurrent,
       }, {
         hover: true,
       });
 
-      setCityClicked(cityCurrent);
+      setCountryClicked(countryCurrent);
     });
 
-    map.on('mouseenter', 'cities', () => {
+    map.on('mouseenter', 'countries', () => {
       map.getCanvas().style.cursor = 'pointer';
     });
-    map.on('mouseleave', 'cities', () => {
+    map.on('mouseleave', 'countries', () => {
       map.getCanvas().style.cursor = '';
     });
-  }, [map, citiesData]);
+  }, [map, countriesData]);
 
   map.on('zoom', (e) => {
-    if (!cityClicked) setCityClicked('%');
+    if (!countryClicked) setCountryClicked('%');
     const zoomLevel = map.getZoom();
     // beginning of country, need to get country from city record
-    if (zoomLevel <= 7) {
-      map.setLayoutProperty('cities', 'visibility', 'none');
+    if (zoomLevel <= 4) {
+      map.setLayoutProperty('countries', 'visibility', 'visible');
       // setCountry('United States');
     } else {
-      map.setLayoutProperty('cities', 'visibility', 'visible');
+      map.setLayoutProperty('countries', 'visibility', 'none');
     }
   });
 
   return (
-    <div className="TreeData">
-      {map && cityClicked && (
-        <City
+    <div>
+      {map && (
+        <Cities
           map={map}
-          cityName={cityClicked}
         />
       )}
     </div>
   );
 }
 
-export default Cities;
+export default Countries;

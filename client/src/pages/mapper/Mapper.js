@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
-import mapboxgl from 'mapbox-gl';
-import { useMutation, useQueryClient } from 'react-query';
+/* eslint-disable guard-for-in */
 import { useAuth0 } from '@auth0/auth0-react';
+import mapboxgl from 'mapbox-gl';
+import React, { useState, useRef, useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { postData } from '../../api/queries';
-import Cities from '../cities/Cities';
-import AddTree from '../addtree/AddTree';
-import config from '../../config';
 import Slideout from '../../components/Slideout/Slideout';
+import config from '../../config';
+import AddTree from '../addtree/AddTree';
+import Countries from '../countries/Countries';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 
 mapboxgl.accessToken = config.mapbox;
@@ -56,7 +57,7 @@ function Mapper() {
         <div className="mapBox" ref={mapboxElRef} />
       </div>
       {mapContainer && (
-        <Cities
+        <Countries
           map={mapContainer}
         />
       )}
