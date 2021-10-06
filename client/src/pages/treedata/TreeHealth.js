@@ -8,13 +8,11 @@ export default function TreeHealthSlider({
   mutateTreeData,
   lat, lng, map,
 }) {
-  // const componentName = 'TreeHealthSlider';
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const sliderRef = useRef(healthNum);
 
   const handleOnChange = () => {
-    // const functionName = 'handleOnChange';
     if (!isAuthenticated) loginWithRedirect();
     const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
     if (newHealth !== health) {
@@ -26,7 +24,7 @@ export default function TreeHealthSlider({
         // purely DOM marker so vectortiles don't need to rewrite until browser reload
       addNewMarker(newHealth, lng, lat, map);
 
-      mutateTreeData.mutate(['tree', sendTreeData]);
+      mutateTreeData.mutate(['trees', sendTreeData]);
       setTimeout(() => setHealthSaveAlert(''), saveTimer);
     }
     return newHealth;

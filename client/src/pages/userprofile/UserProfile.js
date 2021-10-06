@@ -134,8 +134,6 @@ function UserProfile() {
       : [],
   };
 
-  const UserLocation = { UserCity: 'Alameda', UserState: 'CA', UserZip: 94501 };
-
   const userTreeHistory = useQuery(
     ['usertreehistory', { volunteer: userProfile.UserNickname }],
     getData,
@@ -159,14 +157,6 @@ function UserProfile() {
           <Typography variant="body1">{userProfile.UserName}</Typography>
           <Typography variant="body1">{userProfile.UserNickname}</Typography>
           <Typography variant="body1">{userProfile.UserEmail}</Typography>
-          <Typography variant="body1">
-            {UserLocation.UserCity}
-            ,
-            {' '}
-            {UserLocation.UserState}
-            {' '}
-            {UserLocation.UserZip}
-          </Typography>
         </div>
       </div>
       <UserTreeHistoryTable rows={userTreeHistoryData} />

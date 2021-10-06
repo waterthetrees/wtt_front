@@ -13,38 +13,24 @@ import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
-  // const componentName = 'Mapper';
   const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
 
-  // getData from DB
-  // const treemap = (!featureFlag.vector)
-  //   ? useQuery(['treemap', { city: 'All' }], getData)
-  //   : null;
-  // const error = treemap.error || null;
-  // const mapData = (!featureFlag.vector) ? treemap.data : null;
-
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('user');
+      queryClient.invalidateQueries('users');
     },
   });
 
   const mapboxElRef = useRef(null); // DOM element to render map
   const [mapContainer, setMap] = useState();
-  // const [zoom, setZoom] = useState(15);
 
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [zoomUserSet, setZoom] = useState();
   const [newTreeAdded, setNewTreeAdded] = useState();
-  // -------------------------
-  // Add search
-  // -------------------------
-  // const windowWidth = window.innerWidth;
-  // Initialize our map
-  // let map;
+
   useEffect(() => {
-    if (isAuthenticated) mutateUser.mutate(['user', user]);
+    if (isAuthenticated) mutateUser.mutate(['users', user]);
 
     const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: { enableHighAccuracy: true },
@@ -65,16 +51,9 @@ function Mapper() {
     setMap(map);
   }, []);
 
-  // USER PROFILE
-  // --------------------------
-  // const [userProfileOpen, setUserProfileOpen] = useState(false);
-  // const [modal, setModal] = useState(false);
-  // const toggle = () => setModal(!userProfileOpen);
-  // if (error) return (<div>Failed to load trees</div>);
   return (
     <div className="App">
       <div className="map__container">
-        {/* Mapbox container */}
         <div className="mapBox" ref={mapboxElRef} />
       </div>
       {mapContainer && (
@@ -82,9 +61,6 @@ function Mapper() {
           map={mapContainer}
         />
       )}
-      {/* userProfileOpen && (
-        <UserProfile toggle={toggle} modal={userProfileOpen} />
-      ) */}
 
       <Slideout
         buttonText={{ left: 'ADOPT' }}
