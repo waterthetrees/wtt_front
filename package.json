@@ -121,7 +121,8 @@
     "svg-url-loader": "^2.3.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^3.11.2",
     "webpack-hot-middleware": "^2.25.1",
     "webpack-node-externals": "^1.7.2"
   },
@@ -163,6 +164,7 @@
     "start-dev": "nodemon server/server-dashboard.js localserver",
     "ngrok": "ngrok start --all -config ./ngrok.yml",
     "start": "node server/server-dashboard.js localserver",
+    "start:webpack": "webpack serve",
     "test": "mocha --timeout=90000 ./test/react-tests.js",
     "test:jest": "jest",
     "jest-test": "jest --watch"
