@@ -9,46 +9,46 @@ import config from '../../config';
 import AddTree from '../addtree/AddTree';
 import Countries from '../countries/Countries';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
+import './Mapper.scss';
 
 mapboxgl.accessToken = config.mapbox;
 
 function Mapper() {
-  const queryClient = useQueryClient();
   const { isAuthenticated, user } = useAuth0();
-
+  const queryClient = useQueryClient();
   const mutateUser = useMutation(postData, {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
     },
   });
-
   const mapboxElRef = useRef(null); // DOM element to render map
-  const [mapContainer, setMap] = useState();
-
+  const [map, setMap] = useState(null);
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
-  const [zoomUserSet, setZoom] = useState();
+  const [zoom, setZoom] = useState();
   const [newTreeAdded, setNewTreeAdded] = useState();
 
   useEffect(() => {
     if (isAuthenticated) mutateUser.mutate(['users', user]);
 
-    const geolocate = new mapboxgl.GeolocateControl({
-      positionOptions: { enableHighAccuracy: true },
-      trackUserLocation: true,
-    });
+    if (!map && mapboxgl.supported()) {
+      const mapboxMap = new mapboxgl.Map({
+        container: mapboxElRef.current,
+        style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
+        center: coordinatesNewTree || [-122.34725, 37.7343787],
+        zoom: zoom || 10,
+      });
+      const geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: true,
+      });
 
-    const map = new mapboxgl.Map({
-      container: mapboxElRef.current,
-      style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-      center: coordinatesNewTree || [-122.34725, 37.7343787],
-      zoom: zoomUserSet || 10,
-    });
-    // Add the control to the map.
-    map.addControl(geolocate);
-    geolocate.on('geolocate');
-    // Add navigation controls to the top right of the canvas
-    map.addControl(new mapboxgl.NavigationControl());
-    setMap(map);
+      // Add the geolocate and navigation controls to the map.
+      mapboxMap.addControl(geolocate);
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
+      geolocate.on('geolocate');
+
+      setMap(mapboxMap);
+    }
   }, []);
 
   return (
@@ -56,27 +56,33 @@ function Mapper() {
       <div className="map__container">
         <div className="mapBox" ref={mapboxElRef} />
       </div>
-      {mapContainer && (
-        <Countries
-          map={mapContainer}
-        />
-      )}
 
-      <Slideout
-        buttonText={{ left: 'ADOPT' }}
-      >
-        <TreeAdoptionDirections onmap />
-      </Slideout>
+      {map
+        ? <>
+            <Countries
+              map={map}
+            />
 
-      <AddTree
-        map={mapContainer}
-        setZoom={setZoom}
-        coordinatesNewTree={coordinatesNewTree}
-        setCoordinatesNewTree={setCoordinatesNewTree}
-        newTreeAdded={newTreeAdded}
-        setNewTreeAdded={setNewTreeAdded}
-      />
+            <Slideout
+              buttonText={{ left: 'ADOPT' }}
+            >
+              <TreeAdoptionDirections onmap />
+            </Slideout>
 
+            <AddTree
+              map={map}
+              setZoom={setZoom}
+              coordinatesNewTree={coordinatesNewTree}
+              setCoordinatesNewTree={setCoordinatesNewTree}
+              newTreeAdded={newTreeAdded}
+              setNewTreeAdded={setNewTreeAdded}
+            />
+          </>
+        : <div className="map__error">
+            <p>An error occurred while loading the tree map.</p>
+            <p>Please make sure your computer and browser support WebGL.</p>
+          </div>
+      }
     </div>
   );
 }
