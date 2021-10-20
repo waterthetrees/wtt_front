@@ -83,6 +83,7 @@ function UserProfile() {
       display: 'inline-flex',
       alignItems: 'center',
       marginBottom: '2em',
+      marginTop: '4em',
     },
     avatarContainer: {
       margin: '0 3em 0 2em',
