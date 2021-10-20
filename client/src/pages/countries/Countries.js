@@ -35,8 +35,6 @@ function Countries(props) {
   // COUNTRIES
   const countries = useQuery(['countries', { country: 'All', fetchPolicy: 'cache-first' }], getData);
   const countriesData = countries.data || null;
-  // console.log(countriesData);
-  // states
   const [countryClicked, setCountryClicked] = useState(null);
   useEffect(() => {
     if (!map) return;
@@ -117,7 +115,7 @@ function Countries(props) {
       map.flyTo({
         // default coordinates for on load map
         center: coordinates,
-        zoom: [10],
+        zoom: [8],
       });
       map.setFeatureState({
         source: 'countryFeatures',
@@ -141,7 +139,8 @@ function Countries(props) {
     if (!countryClicked) setCountryClicked('%');
     const zoomLevel = map.getZoom();
     // beginning of country, need to get country from city record
-    if (zoomLevel <= 4) {
+	  console.log('zoomeLevel',zoomLevel)
+    if (zoomLevel < 8) {
       map.setLayoutProperty('countries', 'visibility', 'visible');
       // setCountry('United States');
     } else {
