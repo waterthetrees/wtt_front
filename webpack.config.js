@@ -24,6 +24,9 @@ module.exports = (env) => {
       sourceMapFilename: '[name].js.map',
     },
     devServer: {
+      // Port 3000 is baked into the configuration for the mapbox API, so the
+      // dev-server needs to use it so that we can hit the API
+      port: 3000,
       historyApiFallback: true,
       contentBase: './',
       hot: true,
