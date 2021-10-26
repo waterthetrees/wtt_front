@@ -3,25 +3,22 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
-const {getIfUtils, removeEmpty} = require("webpack-config-utils");
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
-  const {ifProduction, ifNotProduction, ifAnalyze} =
-      getIfUtils(env, ['production', 'analyze']);
+  const { ifProduction, ifNotProduction, ifAnalyze } = getIfUtils(env, ['production', 'analyze']);
   // Save the config into a variable so we can wrap it with SpeedMeasurePlugin
   // below if env.analyze is true
   const config = {
     mode: ifProduction() ? 'production' : 'development',
     watch: false,
-    entry: {main: './client/src/client.js'},
+    entry: './client/src/client.js',
     output: {
       path: path.resolve(__dirname, 'client/public'),
-      filename: 'bundle.js',
       publicPath: '/',
-      sourceMapFilename: '[name].js.map',
     },
     devServer: {
       // Port 3000 is baked into the configuration for the mapbox API, so the
@@ -37,16 +34,7 @@ module.exports = (env) => {
         {
           test: /\.js$/,
           exclude: [/node_modules/, /\.scss$/],
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/react', '@babel/preset-env'],
-              plugins: [
-                '@babel/plugin-transform-runtime',
-                '@babel/plugin-proposal-class-properties',
-              ],
-            },
-          },
+          use: ['babel-loader'],
         },
         ifNotProduction({
           test: /\.js$/,
@@ -65,7 +53,7 @@ module.exports = (env) => {
       ]),
     },
     plugins: removeEmpty([
-       new HtmlWebPackPlugin({
+      new HtmlWebPackPlugin({
         template: './client/src/index.html',
         filename: './index.html',
       }),
@@ -85,8 +73,8 @@ module.exports = (env) => {
           },
         ],
       }),
-      ifAnalyze(new BundleAnalyzerPlugin())
-    ])
+      ifAnalyze(new BundleAnalyzerPlugin()),
+    ]),
   };
 
   // To measure the plugin times, we need to return a wrapped config.  but wrap()
