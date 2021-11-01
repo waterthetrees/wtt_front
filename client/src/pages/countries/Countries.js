@@ -1,17 +1,12 @@
-import mapboxgl from 'mapbox-gl';
-import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { getData } from '../../api/queries';
-import config from '../../config';
+import React, { useEffect, useState } from 'react';
+import { useCountriesQuery } from '../../api/queries';
 import Cities from '../cities/Cities';
 
 const COUNTRYIMAGE = 'assets/images/map/mapface.png';
-mapboxgl.accessToken = config.mapbox.key;
 
 function getFeatures(countriesData) {
-  const countries = countriesData.map((country) => ({
+  return countriesData.map((country) => ({
     type: 'Feature',
-
     geometry: {
       type: 'Point',
       // need coordinates for each country
@@ -24,7 +19,6 @@ function getFeatures(countriesData) {
       id: `${country.country}Id`,
     },
   }));
-  return countries;
 }
 
 function Countries(props) {
@@ -33,17 +27,19 @@ function Countries(props) {
   } = Object(props);
 
   // COUNTRIES
-  const countries = useQuery(['countries', { country: 'All', fetchPolicy: 'cache-first' }], getData);
-  const countriesData = countries.data || null;
+  const { data: countriesData } = useCountriesQuery();
   const [countryClicked, setCountryClicked] = useState(null);
+
   useEffect(() => {
-    if (!map) return;
-    if (!countriesData) return;
+    if (!map || !countriesData) return;
+
     map.on('load', () => {
       if (map.hasImage('countryImage')) return;
+
       const countryFeaturesArray = getFeatures(countriesData);
       const randNum = Math.floor(Math.random() * 100) + 1;
       const countryImage = `countryImage${randNum}`;
+
       map.loadImage(
         COUNTRYIMAGE,
         (error, image) => {
@@ -103,9 +99,10 @@ function Countries(props) {
     });
 
     map.on('click', 'countries', (e) => {
-      e.preventDefault();
       const coordinates = e.features[0].geometry.coordinates.slice();
       const countryCurrent = e.features[0].properties.name;
+
+      e.preventDefault();
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -130,23 +127,26 @@ function Countries(props) {
     map.on('mouseenter', 'countries', () => {
       map.getCanvas().style.cursor = 'pointer';
     });
+
     map.on('mouseleave', 'countries', () => {
       map.getCanvas().style.cursor = '';
     });
-  }, [map, countriesData]);
 
-  map.on('zoom', (e) => {
-    if (!countryClicked) setCountryClicked('%');
-    const zoomLevel = map.getZoom();
-    // beginning of country, need to get country from city record
-	  console.log('zoomeLevel',zoomLevel)
-    if (zoomLevel < 8) {
-      map.setLayoutProperty('countries', 'visibility', 'visible');
-      // setCountry('United States');
-    } else {
-      map.setLayoutProperty('countries', 'visibility', 'none');
-    }
-  });
+    map.on('zoom', () => {
+      const zoomLevel = map.getZoom();
+
+      if (!countryClicked) setCountryClicked('%');
+
+      // beginning of country, need to get country from city record
+      console.log('zoomeLevel', zoomLevel);
+
+      if (zoomLevel < 8) {
+        map.setLayoutProperty('countries', 'visibility', 'visible');
+      } else {
+        map.setLayoutProperty('countries', 'visibility', 'none');
+      }
+    });
+  }, [map, countriesData]);
 
   return (
     <div>
