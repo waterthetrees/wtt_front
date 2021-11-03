@@ -5,7 +5,8 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
-const { logger } = require('../logger.js');
+const { logger } = require('../logger');
+
 const env = process.argv[2] || 'local';
 const host = {
   dev: 'http://localhost',
@@ -15,11 +16,11 @@ const host = {
   docker: 'http://localhost',
 }[env];
 const port = {
-  production: 3001, 
-  blue: 3000, 
-  dev: 3001, 
-  local: 3001, 
-  localserver: 3000, 
+  production: 3001,
+  blue: 3000,
+  dev: 3001,
+  local: 3001,
+  localserver: 3000,
   docker: 3000,
 }[env];
 

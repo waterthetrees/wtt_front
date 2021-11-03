@@ -10,7 +10,6 @@ import makeLayerGeo from './makeLayerGeo';
 mapboxgl.accessToken = config.mapbox.key;
 
 function City(props) {
-  // const componentName = 'City';
   const {
     map,
     cityName,

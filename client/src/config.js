@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
 const env = {
+  'www.waterthetrees.com': 'prod',
   'waterthetrees.com': 'prod',
   'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',

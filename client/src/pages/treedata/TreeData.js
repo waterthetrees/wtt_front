@@ -24,9 +24,8 @@ const saveTimer = 800;
 export default function TreeData({
   currentTreeId, showTree, setShowTree, map,
 }) {
-  // const componentName = 'TreeData';
-
   const toggle = () => setShowTree(!showTree);
+
   return (
     <Modal isOpen={showTree} className="tree__modal">
       <ModalHeader toggle={toggle} />
@@ -43,11 +42,11 @@ const TreeContent = ({
   currentTreeId, map,
 }) => {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  const treeData = useQuery(['tree', { currentTreeId }], getData);
+  const treeData = useQuery(['trees', { currentTreeId }], getData);
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('trees');
       queryClient.invalidateQueries('treemap');
     },
   });
@@ -185,12 +184,11 @@ const TreeContent = ({
 };
 
 const TreeNotes = ({ notes, currentTreeId }) => {
-  // const componentName = 'TreeNotes';
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
   const mutateTreeData = useMutation(putData, {
     onSuccess: () => {
-      queryClient.invalidateQueries('tree');
+      queryClient.invalidateQueries('trees');
     },
   });
   const [showSave, setShowSave] = useState(false);
@@ -208,14 +206,13 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   };
 
   const handleNotesSubmit = async (event) => {
-    // const functionName = 'handleSubmit';
     event.preventDefault();
     try {
       if (notesRef.current.value) {
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
         const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-        await mutateTreeData.mutate(['tree', sendData]);
+        await mutateTreeData.mutate(['trees', sendData]);
 
         setTimeout(() => handleNotesSave(), saveTimer);
       }
@@ -260,7 +257,6 @@ const TreeNotes = ({ notes, currentTreeId }) => {
 };
 
 const TreeCare = ({ currentTreeId, common, health }) => {
-  // const componentName = 'TreeCare';
   const treeHistoryObj = useQuery(['treehistory', { currentTreeId }], getData);
   const treeHistory = treeHistoryObj.data;
   const queryClient = useQueryClient();
@@ -388,7 +384,7 @@ const TreeMoreInfo = ({ who, idReference, owner }) => (
 const hasMaintenanceFields = (obj) => {
   const maintenanceArray = ['watered', 'weeded', 'mulched', 'staked', 'braced', 'pruned', 'comment'];
   const hasAny = maintenanceArray.some((item) => Object.prototype.hasOwnProperty.call(obj, item));
-  // console.log('obj',obj,'hasAny',hasAny);
+
   return hasAny;
 };
 
@@ -412,7 +408,6 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
   };
 
   const handleSubmit = async (event) => {
-    // const functionName = 'handleSubmit';
     event.preventDefault();
     try {
       const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
@@ -540,7 +535,6 @@ const changeYesNo = (historybutton, statusSelected) => {
 };
 
 const changeImageText = (historybutton, statusSelected) => {
-  // console.log('changeImageText', historybutton, 'statusSelected', statusSelected)
   const no = {
     watered: 'water', weeded: 'weed', mulched: 'mulch', staked: 'stake', braced: 'brace', pruned: 'prune',
   };

@@ -21,14 +21,7 @@ function chooseData() {
   };
 }
 
-// headers = [
-//   { label: "First Name", key: "firstname" },
-//   { label: "Last Name", key: "lastname" },
-//   { label: "Email", key: "email" }
-// ];
-
 export default function Data() {
-  // const componentName = 'Data';
   const dataArray = Object.keys(chooseData());
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -124,7 +117,6 @@ export default function Data() {
 }
 
 function TreeList({ treeType }) {
-  // const componentName = 'TreeList';
   const [topTreesSorted, setTreesSorted] = useState(treeType);
   const [sortOrderAsc, setSortOrderAsc] = useState(true);
 
