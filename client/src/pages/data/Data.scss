@@ -11,11 +11,7 @@ body {
   margin: 20px;
 }
 .data__menus{
-  // display: flex;
-  // flex-direction: row;
   display: grid;
-  // justify-content: right;
-  // grid-template-columns: repeat( auto, minmax(0, 1fr) );
   grid-template-columns: auto 1fr;
 }
 
@@ -49,18 +45,13 @@ body {
 }
 
 .data__treelist-tree-header-item {
-  // cursor: select;
   cursor: pointer;
   border: .5px solid rgba(0, 0, 0, 0.5);
-  // min-width: 30px;
-  // word-break: break-word;
 }
 
 .data__treelist-tree-item{
   padding: 0 2px;
   border: .5px solid rgba(0, 0, 0, 0.3);
-  // min-width: 30px;
-  // word-break: break-word;
   overflow: hidden;
 }
 
