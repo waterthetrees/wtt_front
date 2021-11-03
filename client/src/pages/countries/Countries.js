@@ -139,7 +139,6 @@ function Countries(props) {
     if (!countryClicked) setCountryClicked('%');
     const zoomLevel = map.getZoom();
     // beginning of country, need to get country from city record
-	  console.log('zoomeLevel',zoomLevel)
     if (zoomLevel < 8) {
       map.setLayoutProperty('countries', 'visibility', 'visible');
       // setCountry('United States');
