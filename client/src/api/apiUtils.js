@@ -1,4 +1,4 @@
-import apiEndpoints from "./apiEndpoints";
+import apiEndpoints from './apiEndpoints';
 
 const defaultOptions = {
   mode: 'cors',
@@ -20,11 +20,13 @@ function createAPIFetch(method) {
 
     if (method === 'GET') {
       const { queryKey: [api, params] } = query;
+      // Cast all non-objects to {} so that the paramString will be empty.
+      const paramString = String(new URLSearchParams(Object(params)));
 
       url = apiEndpoints[api];
 
-      if (params) {
-        url += `?${new URLSearchParams(params)}`;
+      if (paramString) {
+        url += `?${paramString}`;
       }
     } else {
       url = apiEndpoints[query];
@@ -36,6 +38,11 @@ function createAPIFetch(method) {
     }
 
     const response = await fetch(url, options);
+
+    if (response && !response.ok) {
+      // Throw an error so react-query knows to retry the request.
+      throw new Error(`${response.status} (${response.statusText}) ${url}`);
+    }
 
     return response && response.json();
   };

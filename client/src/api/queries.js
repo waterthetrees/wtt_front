@@ -20,10 +20,11 @@ function createUseMutation(...apis) {
   };
 }
 
-export const useCitiesQuery = createUseQuery('cities', { fetchPolicy: 'cache-first' });
-export const useCountriesQuery = createUseQuery('countries', { country: 'All', fetchPolicy: 'cache-first' });
+export const useCitiesQuery = createUseQuery('cities');
+export const useCountriesQuery = createUseQuery('countries', { country: 'All' });
 
 //const useLikesMutation = createUseMutation('treelikes', 'treehistory');
 //const useAdoptionMutation = createUseMutation('treeadoptions', 'treehistory');
 
+// TODO: remove this export when everything is using a custom hook
 export { getData, postData, putData };
