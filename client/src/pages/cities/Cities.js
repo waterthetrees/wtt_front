@@ -1,15 +1,11 @@
-import mapboxgl from 'mapbox-gl';
-import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { getData } from '../../api/queries';
-import config from '../../config';
+import React, { useEffect, useState } from 'react';
+import { useCitiesQuery } from '../../api/queries';
 import City from '../city/City';
 
 const CITYIMAGE = 'assets/images/map/mapface.png';
-mapboxgl.accessToken = config.mapbox.key;
 
 function getFeatures(citiesData) {
-  const cities = citiesData.map((city) => ({
+  return citiesData.map((city) => ({
     type: 'Feature',
 
     geometry: {
@@ -23,29 +19,27 @@ function getFeatures(citiesData) {
       id: `${city.city}Id`,
     },
   }));
-  return cities;
 }
 
 function Cities(props) {
-  // const componentName = 'Cities';
   const {
     map,
   } = Object(props);
 
   // CITIES
-  const cities = useQuery(['cities', { fetchPolicy: 'cache-first' }], getData);
-  const citiesData = cities.data || null;
-  // CITIES
+  const { data: citiesData } = useCitiesQuery();
   const [cityClicked, setCityClicked] = useState(null);
+
   useEffect(() => {
-    if (!map) return;
-    if (!citiesData) return;
-    // console.log('citiesData', citiesData);
+    if (!map || !citiesData) return;
+
     map.on('load', () => {
       if (map.hasImage('cityImage')) return;
+
       const cityFeaturesArray = getFeatures(citiesData);
       const randNum = Math.floor(Math.random() * 100) + 1;
       const cityImage = `cityImage${randNum}`;
+
       map.loadImage(
         CITYIMAGE,
         (error, image) => {
@@ -105,9 +99,10 @@ function Cities(props) {
     });
 
     map.on('click', 'cities', (e) => {
-      e.preventDefault();
       const coordinates = e.features[0].geometry.coordinates.slice();
       const cityCurrent = e.features[0].properties.name;
+
+      e.preventDefault();
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -131,22 +126,24 @@ function Cities(props) {
     map.on('mouseenter', 'cities', () => {
       map.getCanvas().style.cursor = 'pointer';
     });
+
     map.on('mouseleave', 'cities', () => {
       map.getCanvas().style.cursor = '';
     });
-  }, [map, citiesData]);
 
-  map.on('zoom', (e) => {
-    if (!cityClicked) setCityClicked('%');
-    const zoomLevel = map.getZoom();
-    // beginning of country, need to get country from city record
-    if (zoomLevel <= 7) {
-      map.setLayoutProperty('cities', 'visibility', 'none');
-      // setCountry('United States');
-    } else {
-      map.setLayoutProperty('cities', 'visibility', 'visible');
-    }
-  });
+    map.on('zoom', () => {
+      const zoomLevel = map.getZoom();
+
+      if (!cityClicked) setCityClicked('%');
+
+      // beginning of country, need to get country from city record
+      if (zoomLevel <= 7) {
+        map.setLayoutProperty('cities', 'visibility', 'none');
+      } else {
+        map.setLayoutProperty('cities', 'visibility', 'visible');
+      }
+    });
+  }, [map, citiesData]);
 
   return (
     <div className="TreeData">
