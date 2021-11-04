@@ -9,22 +9,33 @@ function createUseQuery(api, defaultData = {}) {
   };
 }
 
-function createUseMutation(...apis) {
+function createUseMutation(apiList, method = 'POST') {
+  const apis = Array.isArray(apiList)
+    ? apiList
+    : [apiList];
+  const apiCaller = method === 'POST'
+    ? postData
+    : putData;
+
   return function() {
     const queryClient = useQueryClient();
 
-    return useMutation(([data]) => postData(apis[0], data), {
+    return useMutation(data => apiCaller(apis[0], data), {
       onSuccess: () => apis.forEach(api => queryClient.invalidateQueries(api)),
-      onError: console.error,
+      onError: error => console.error(`useMutation: ${method} ${apis} ${error}`),
     });
   };
 }
 
 export const useCitiesQuery = createUseQuery('cities');
 export const useCountriesQuery = createUseQuery('countries', { country: 'All' });
+export const useTreeQuery = createUseQuery('trees');
+export const useTreeHistoryQuery = createUseQuery('treehistory');
 
-//const useLikesMutation = createUseMutation('treelikes', 'treehistory');
-//const useAdoptionMutation = createUseMutation('treeadoptions', 'treehistory');
+export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
+export const useTreeHistoryMutation = createUseMutation('treehistory');
+//const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);
+//const useTreeAdoptionsMutation = createUseMutation(['treeadoptions', 'treehistory']);
 
 // TODO: remove this export when everything is using a custom hook
 export { getData, postData, putData };

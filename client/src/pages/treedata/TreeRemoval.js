@@ -63,8 +63,8 @@ export default function TreeRemoval({
 
       setMessage(`Removing ${common}.`);
 
-      mutateHistory.mutate(['treehistory', sendTreeHistory]);
-      mutateTreeData.mutate(['trees', sendTreeData]);
+      mutateHistory.mutate(sendTreeHistory);
+      mutateTreeData.mutate(sendTreeData);
       setReallyDelete(false);
       setShowDelete(false);
       setMessage('');

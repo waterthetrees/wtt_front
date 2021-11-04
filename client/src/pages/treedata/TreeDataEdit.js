@@ -54,7 +54,7 @@ export default function TreeHeaderForm({
     if (sendDataFiltered.common !== common
        || sendDataFiltered.scientific !== scientific
        || sendDataFiltered.genus !== genus) {
-      mutateTreeData.mutate(['trees', sendDataFiltered]);
+      mutateTreeData.mutate(sendDataFiltered);
     }
 
     // new history
@@ -70,7 +70,7 @@ export default function TreeHeaderForm({
     };
 
     if (!lowercaseCommon.includes('vacant')) {
-      mutateHistory.mutate(['treehistory', sendTreeHistory]);
+      mutateHistory.mutate(sendTreeHistory);
     }
 
     setEditTree(false);

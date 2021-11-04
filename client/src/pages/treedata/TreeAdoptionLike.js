@@ -88,7 +88,7 @@ export default function AdoptLikeCheckboxes({ idTree, common, mutateHistory }) {
       mutateTreeLikes.mutate(['treelikes', sendTreeUser]);
     }
 
-    mutateHistory.mutate(['treehistory', sendTreeHistory]);
+    mutateHistory.mutate(sendTreeHistory);
   };
 
   if (!user) return null;

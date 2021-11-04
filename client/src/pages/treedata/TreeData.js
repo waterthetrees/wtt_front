@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
 import {
   Button,
   Modal,
@@ -10,7 +9,9 @@ import format from 'date-fns/format';
 import cx from 'clsx';
 import './TreeData.scss';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getData, putData, postData } from '../../api/queries';
+import {
+  useTreeQuery, useTreeHistoryQuery, useTreeDataMutation, useTreeHistoryMutation,
+} from '../../api/queries';
 import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
@@ -41,22 +42,20 @@ export default function TreeData({
 const TreeContent = ({
   currentTreeId, map,
 }) => {
+  const [editTree, setEditTree] = useState(false);
+  const mutateTreeData = useTreeDataMutation();
+  const mutateHistory = useTreeHistoryMutation();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  const treeData = useQuery(['trees', { currentTreeId }], getData);
-  const queryClient = useQueryClient();
-  const mutateTreeData = useMutation(putData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('trees');
-      queryClient.invalidateQueries('treemap');
-    },
-  });
+  const { data: treeData } = useTreeQuery({ currentTreeId });
 
-  const mutateHistory = useMutation(postData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('treehistory');
-    },
-  });
+  if (!treeData) {
+    return null;
+  }
 
+  const edit = () => {
+    if (!isAuthenticated) loginWithRedirect();
+    setEditTree(!editTree);
+  };
   const {
     idTree,
     common,
@@ -78,119 +77,103 @@ const TreeContent = ({
     country,
     zip,
     notes,
-  } = treeData.data || {};
+  } = treeData;
 
-  const [editTree, setEditTree] = useState(false);
-  const edit = () => {
-    if (!isAuthenticated) loginWithRedirect();
-    setEditTree(!editTree);
-  };
-
+  // TODO: pass idTree or currentTreeId to children?  should be consistent.
   return (
-    <>
-      {idTree && (
-        <div className="tree text-center">
+    <div className="tree text-center">
+      <div className="tree__header">
+        {!editTree && (
+          <TreeHeader
+            idTree={idTree}
+            common={common}
+            scientific={scientific}
+            genus={genus}
+            datePlanted={datePlanted}
+            dbh={dbh}
+            height={height}
+            edit={edit}
+            mutateHistory={mutateHistory}
+          />
+        )}
 
-          <div className="tree__header">
-            {!editTree && (
-              <TreeHeader
-                common={common}
-                scientific={scientific}
-                genus={genus}
-                datePlanted={datePlanted}
-                dbh={dbh}
-                height={height}
-                edit={edit}
-                idTree={idTree}
-                mutateHistory={mutateHistory}
+        {editTree && (
+          <TreeHeaderForm
+            idTree={idTree}
+            common={common}
+            scientific={scientific}
+            genus={genus}
+            treeData={treeData}
+            datePlanted={datePlanted}
+            setEditTree={setEditTree}
+            mutateTreeData={mutateTreeData}
+            mutateHistory={mutateHistory}
+          />
+        )}
 
-              />
-            )}
-            {editTree && (
-              <TreeHeaderForm
-                idTree={idTree}
-                common={common}
-                scientific={scientific}
-                genus={genus}
-                treeData={treeData.data}
-                datePlanted={datePlanted}
-                mutateTreeData={mutateTreeData}
-                mutateHistory={mutateHistory}
-                setEditTree={setEditTree}
-              />
-            )}
-            <AdoptLikeCheckboxes
-              idTree={idTree}
-              mutateHistory={mutateHistory}
-              common={common}
-            />
-          </div>
+        <AdoptLikeCheckboxes
+          idTree={idTree}
+          common={common}
+          mutateHistory={mutateHistory}
+        />
+      </div>
 
-          <hr className="divider-solid" />
+      <hr className="divider-solid" />
 
-          <div className="tree__body">
-            <TreeHealthSlider
-              health={health}
-              healthNum={healthNum}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-              common={common}
-              lng={lng}
-              lat={lat}
-              map={map}
-            />
+      <div className="tree__body">
+        <TreeHealthSlider
+          currentTreeId={currentTreeId}
+          common={common}
+          health={health}
+          healthNum={healthNum}
+          lng={lng}
+          lat={lat}
+          map={map}
+          mutateTreeData={mutateTreeData}
+        />
 
-            <TreeNotes
-              notes={notes}
-              currentTreeId={currentTreeId}
-              mutateTreeData={mutateTreeData}
-            />
+        <TreeNotes
+          currentTreeId={currentTreeId}
+          notes={notes}
+          mutateTreeData={mutateTreeData}
+        />
 
-            <TreeCare
-              currentTreeId={currentTreeId}
-              common={common}
-              health={health}
-            />
+        <TreeCare
+          currentTreeId={currentTreeId}
+          common={common}
+          health={health}
+          mutateHistory={mutateHistory}
+        />
 
-            <TreeLocation
-              address={address}
-              city={city}
-              zip={zip}
-              country={country}
-              neighborhood={neighborhood}
-              lng={lng}
-              lat={lat}
-              owner={owner}
-            />
+        <TreeLocation
+          address={address}
+          city={city}
+          zip={zip}
+          country={country}
+          neighborhood={neighborhood}
+          lng={lng}
+          lat={lat}
+          owner={owner}
+        />
 
-            <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
+        <TreeMoreInfo owner={owner} idReference={idReference} who={who} />
 
-            {!common.includes('VACANT') && (
-              <TreeRemoval
-                idTree={idTree}
-                common={common}
-                notes={notes}
-                mutateTreeData={mutateTreeData}
-                mutateHistory={mutateHistory}
-              />
-            )}
-
-          </div>
-
-        </div>
-      )}
-    </>
+        {!common.includes('VACANT') && (
+          <TreeRemoval
+            idTree={idTree}
+            common={common}
+            notes={notes}
+            mutateTreeData={mutateTreeData}
+            mutateHistory={mutateHistory}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 
-const TreeNotes = ({ notes, currentTreeId }) => {
+const TreeNotes = ({ notes, currentTreeId, mutateTreeData }) => {
   const { isAuthenticated } = useAuth0();
-  const queryClient = useQueryClient();
-  const mutateTreeData = useMutation(putData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('trees');
-    },
-  });
   const [showSave, setShowSave] = useState(false);
   const [notesButtonStyle, setNotesButtonStyle] = useState('btn-light');
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
@@ -207,16 +190,17 @@ const TreeNotes = ({ notes, currentTreeId }) => {
 
   const handleNotesSubmit = async (event) => {
     event.preventDefault();
+
     try {
       if (notesRef.current.value) {
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
         const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-        await mutateTreeData.mutate(['trees', sendData]);
+        await mutateTreeData.mutate(sendData);
 
+        // TODO: shouldn't this be before the awaited mutate() call, which will block?
         setTimeout(() => handleNotesSave(), saveTimer);
       }
-      return;
     } catch (err) {
       console.error('\n CATCH', err);
     }
@@ -256,15 +240,10 @@ const TreeNotes = ({ notes, currentTreeId }) => {
   );
 };
 
-const TreeCare = ({ currentTreeId, common, health }) => {
-  const treeHistoryObj = useQuery(['treehistory', { currentTreeId }], getData);
-  const treeHistory = treeHistoryObj.data;
-  const queryClient = useQueryClient();
-  const mutateHistory = useMutation(postData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('treehistory');
-    },
-  });
+const TreeCare = ({
+  currentTreeId, common, health, mutateHistory,
+}) => {
+  const { data: treeHistory } = useTreeHistoryQuery({ currentTreeId });
 
   return (
     <div className="treecare">
@@ -283,8 +262,8 @@ const TreeCare = ({ currentTreeId, common, health }) => {
 
       {treeHistory && treeHistory.length > 0 && (
         <TreeHistory
-          treeHistory={treeHistory}
           currentTreeId={currentTreeId}
+          treeHistory={treeHistory}
         />
       )}
     </div>
@@ -392,11 +371,11 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [statusSelected, setStatusSelected] = useState({});
+  const [maintenanceButtonStyle, setMaintenanceButtonStyle] = useState('btn-light');
+  const [maintenanceSaveButton, setMaintenanceSaveButton] = useState('SAVE');
   const commentRef = useRef('');
   const volunteerRef = useRef(isAuthenticated ? user.name : 'Volunteer');
 
-  const [maintenanceButtonStyle, setMaintenanceButtonStyle] = useState('btn-light');
-  const [maintenanceSaveButton, setMaintenanceSaveButton] = useState('SAVE');
   const handleMaintenanceSave = () => {
     setMaintenanceSaveButton('SAVE');
     setMaintenanceButtonStyle('btn-outline-success');
@@ -409,6 +388,7 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
       const sendData = { idTree: currentTreeId, date_visit: dateVisit, ...statusSelected };
@@ -416,20 +396,23 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
       if (commentRef.current && commentRef.current.value) {
         sendData.comment = commentRef.current.value;
       }
+
       if (volunteerRef.current && volunteerRef.current.value) {
         sendData.volunteer = volunteerRef.current.value;
       }
+
       if (hasMaintenanceFields(sendData)) {
         handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
-        await mutateHistory.mutate(['treehistory', sendData]);
+        await mutateHistory.mutate(sendData);
+
+        // TODO: shouldn't this be before the awaited mutate() call, which will block?
         setTimeout(() => handleMaintenanceSave(), saveTimer);
       }
-
-      return;
     } catch (err) {
       console.error('CATCH err', err);
     }
   };
+
   const handleClickArrow = () => {
     if (!isAuthenticated) loginWithRedirect();
     setShowDoMaintenance(!showDoMaintenance);
@@ -439,7 +422,6 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
     : `${treeImagesPath}angle-arrow-down-black.svg`;
 
   return (
-
     <div className="flex-grid border-top treemaintenance">
       <form id="treemaintenance" onSubmit={handleSubmit}>
         <div className="treemaintenance-header text-center">
@@ -455,7 +437,6 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
               src={arrowDirection}
             />
           </button>
-
         </div>
 
         {showDoMaintenance && (
@@ -502,6 +483,7 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
                 </div>
               )}
             </div>
+
             <div className="tree__status text-right">
               <Button
                 className={cx('btn-lg', maintenanceButtonStyle)}
@@ -514,7 +496,6 @@ const TreeMaintenance = ({ currentTreeId, mutateHistory }) => {
         )}
       </form>
     </div>
-
   );
 };
 
