@@ -6,5 +6,5 @@ RUN apk add --update python make g++\
 RUN yarn install
 COPY . .
 EXPOSE 3000
-CMD npm run watch & npm run start-dev
 
+CMD npm run start:docker
