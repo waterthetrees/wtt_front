@@ -4,26 +4,25 @@ import TreeMaintenance from './TreeMaintenance';
 import TreeHistory from './TreeHistory';
 
 export default function TreeCare({
-  currentTreeId, common, health,
+  idTree, common, health,
 }) {
-  const { data: treeHistory } = useTreeHistoryQuery({ currentTreeId });
+  const { data: treeHistory } = useTreeHistoryQuery({ currentTreeId: idTree });
 
   return (
     <div className="treecare">
-      {currentTreeId
+      {idTree
         && health !== 'dead'
         && health !== 'vacant'
         && health !== 'missing'
         && (
           <TreeMaintenance
-            currentTreeId={currentTreeId}
+            idTree={idTree}
             common={common}
           />
         )}
 
       {treeHistory && treeHistory.length > 0 && (
         <TreeHistory
-          currentTreeId={currentTreeId}
           treeHistory={treeHistory}
         />
       )}

@@ -167,7 +167,7 @@ const UserTreeHistoryTable = ({ rows }) => {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onChangePage={handleChangePage}
+          onPageChange={handleChangePage}
         />
       </Paper>
     </div>

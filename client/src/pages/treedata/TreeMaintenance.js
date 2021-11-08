@@ -131,7 +131,7 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
   );
 };
 
-export default function TreeMaintenance({ currentTreeId }) {
+export default function TreeMaintenance({ idTree }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [statusSelected, setStatusSelected] = useState({});
@@ -157,9 +157,9 @@ export default function TreeMaintenance({ currentTreeId }) {
     event.preventDefault();
 
     try {
-      const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
+      const dateVisit = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
       const sendData = {
-        idTree: currentTreeId,
+        idTree,
         date_visit: dateVisit,
         ...statusSelected,
       };

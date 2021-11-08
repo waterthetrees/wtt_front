@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import {
   Modal,
   ModalHeader,
@@ -10,7 +9,7 @@ import './AddTree.scss';
 
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
-import { postData } from '../../api/queries';
+import { useCreateTreeDataMutation } from '../../api/queries';
 
 import Footer from '../../components/Footer';
 import TreeHeader from './TreeHeader';
@@ -95,14 +94,7 @@ const AddTreeModal = ({
     setTreeList([...defaultTreeOption, ...typeMapping[treeFields]]);
   }, [treeFields]);
 
-  const queryClient = useQueryClient();
-
-  const mutateTreeData = useMutation(postData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('trees');
-      queryClient.invalidateQueries('treemap');
-    },
-  });
+  const mutateTreeData = useCreateTreeDataMutation();
 
   const onSubmit = (dataIn) => {
     setNewTreeAdded(true);
@@ -112,16 +104,19 @@ const AddTreeModal = ({
       ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
     };
     delete sendData.treeType;
-    mutateTreeData.mutate(['trees', sendData]);
+    mutateTreeData.mutate(sendData);
     setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
     setNewTreeAdded(true);
   };
 
   const onError = (err, e) => console.error('errors, e', err, e);
+
+  const toggle = () => setShowAddTreeModal(!showAddTreeModal);
+
   return (
-    <Modal isOpen={showAddTreeModal}>
-      <ModalHeader toggle={() => setShowAddTreeModal(!showAddTreeModal)} />
+    <Modal isOpen={showAddTreeModal} toggle={toggle}>
+      <ModalHeader toggle={toggle} />
       <div className="addtree">
         <div className="addtree__header">
           <TreeHeader renderCount={renderCount} />

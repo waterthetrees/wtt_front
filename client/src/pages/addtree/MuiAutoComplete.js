@@ -7,8 +7,6 @@ import {
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Controller } from 'react-hook-form';
-import { useQuery } from 'react-query';
-import { getData } from '../../api/queries';
 
 export default function TreeName({
   register, control, keyName, coordinates, optionValues,

@@ -88,7 +88,7 @@ const TreeContent = ({ currentTreeId, map }) => {
 
       <div className="tree__body">
         <TreeHealthSlider
-          currentTreeId={currentTreeId}
+          idTree={idTree}
           common={common}
           health={health}
           healthNum={healthNum}
@@ -98,12 +98,12 @@ const TreeContent = ({ currentTreeId, map }) => {
         />
 
         <TreeNotes
-          currentTreeId={currentTreeId}
+          idTree={idTree}
           notes={notes}
         />
 
         <TreeCare
-          currentTreeId={currentTreeId}
+          idTree={idTree}
           common={common}
           health={health}
         />

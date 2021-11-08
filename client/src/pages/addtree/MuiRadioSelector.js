@@ -43,7 +43,7 @@ export default function MuiRadioSelector({
               value={value}
             >
               {options.map((t) =>
-                <FormControlLabel id={t} value={t} control={<Radio />} label={t} />)}
+                <FormControlLabel key={t} id={t} value={t} control={<Radio />} label={t} />)}
             </RadioGroup>
           )}
           name="treeType"

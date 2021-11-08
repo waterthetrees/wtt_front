@@ -5,7 +5,7 @@ import { addNewMarker } from './mapbox_utilities';
 import { useTreeDataMutation } from '../../api/queries';
 
 export default function TreeHealthSlider({
-  currentTreeId, healthNum, health, lat, lng, map,
+  idTree, healthNum, health, lat, lng, map,
 }) {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
@@ -19,7 +19,7 @@ export default function TreeHealthSlider({
 
     if (newHealth !== health) {
       const sendTreeData = {
-        idTree: currentTreeId,
+        idTree,
         health: newHealth,
       };
 
