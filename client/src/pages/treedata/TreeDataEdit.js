@@ -9,6 +9,7 @@ import format from 'date-fns/format';
 import './TreeData.scss';
 import MuiAutoComplete from '../addtree/MuiAutoComplete';
 import ErrorMessageAll from '../error/ErrorPage';
+import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
 
 const filteredObj = (obj) => Object.entries(obj)
   // eslint-disable-next-line no-unused-vars
@@ -17,9 +18,12 @@ const filteredObj = (obj) => Object.entries(obj)
 
 export default function TreeHeaderForm({
   idTree, common, scientific, genus, treeData, setEditTree,
-  mutateTreeData, mutateHistory,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const [newTree, setNewTree] = useState(null);
+  const mutateTreeData = useTreeDataMutation();
+  const mutateHistory = useTreeHistoryMutation();
+
   const defaultValues = {
     idTree,
     common: common || '',
@@ -35,7 +39,6 @@ export default function TreeHeaderForm({
     handleSubmit, control, errors,
   } = useForm({ defaultValues });
 
-  const [newTree, setNewTree] = useState(null);
   const onSubmit = async (data) => {
     if (!isAuthenticated) loginWithRedirect();
 
@@ -45,7 +48,7 @@ export default function TreeHeaderForm({
       : treeData.health;
 
     sendData.datePlanted = (newTree === 'yes')
-      ? format(new Date(), 'yyyy/MM/dd')
+      ? format(new Date(), 'yyyy-MM-dd')
       : treeData.datePlanted;
 
     const sendDataFiltered = filteredObj(sendData);
@@ -60,11 +63,11 @@ export default function TreeHeaderForm({
     // new history
     const comment = (newTree === 'yes')
       ? `${sendData.common} was planted`
-      : `${sendData.common} name was editted`;
+      : `${sendData.common} name was edited`;
 
     const sendTreeHistory = {
       idTree,
-      date_visit: format(new Date(), 'yyyy/MM/dd HH:mm:ss'),
+      date_visit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       comment,
       volunteer: user.nickname,
     };
@@ -75,8 +78,11 @@ export default function TreeHeaderForm({
 
     setEditTree(false);
   };
+
   const onError = (errorLog, e) => console.error('errors, e', errorLog, e);
+
   const coordinates = { lng: treeData.lng, lat: treeData.lat };
+
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
       <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" />

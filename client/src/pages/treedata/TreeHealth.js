@@ -1,32 +1,35 @@
 import React, { useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { convertSliderValuesToHealth, saveTimer } from './treedata_utilities';
+import { convertSliderValuesToHealth, saveTimer } from './treeDataUtils';
 import { addNewMarker } from './mapbox_utilities';
+import { useTreeDataMutation } from '../../api/queries';
 
 export default function TreeHealthSlider({
-  currentTreeId, healthNum, health,
-  mutateTreeData,
-  lat, lng, map,
+  currentTreeId, healthNum, health, lat, lng, map,
 }) {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
+  const mutateTreeData = useTreeDataMutation();
   const sliderRef = useRef(healthNum);
 
   const handleOnChange = () => {
-    if (!isAuthenticated) loginWithRedirect();
     const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
+
+    if (!isAuthenticated) loginWithRedirect();
+
     if (newHealth !== health) {
-      setHealthSaveAlert('SAVING');
       const sendTreeData = {
         idTree: currentTreeId,
         health: newHealth,
       };
-        // purely DOM marker so vectortiles don't need to rewrite until browser reload
-      addNewMarker(newHealth, lng, lat, map);
 
+      // Add DOM marker so vectortiles doesn't need to update until browser reload.
+      addNewMarker(newHealth, lng, lat, map);
+      setHealthSaveAlert('SAVING');
       mutateTreeData.mutate(sendTreeData);
       setTimeout(() => setHealthSaveAlert(''), saveTimer);
     }
+
     return newHealth;
   };
 

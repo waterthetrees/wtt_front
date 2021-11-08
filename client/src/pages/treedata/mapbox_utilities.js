@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-import { getHealthColor } from './treedata_utilities';
+import { getHealthColor } from './treeDataUtils';
 
 export const addNewMarker = (newHealth, lng, lat, map) => {
   const newDot = document.createElement('div');
