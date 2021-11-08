@@ -29,11 +29,15 @@ function createAPIFetch(method) {
         url += `?${paramString}`;
       }
     } else {
-      url = apiEndpoints[query];
+      const [api, body] = Array.isArray(query)
+        ? query
+        : [query, data];
+
+      url = apiEndpoints[api];
       Object.assign(options, defaultPostOptions);
 
-      if (data) {
-        options.body = JSON.stringify(data);
+      if (body) {
+        options.body = JSON.stringify(body);
       }
     }
 

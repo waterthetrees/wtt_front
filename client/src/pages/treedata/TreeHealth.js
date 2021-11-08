@@ -24,7 +24,7 @@ export default function TreeHealthSlider({
         // purely DOM marker so vectortiles don't need to rewrite until browser reload
       addNewMarker(newHealth, lng, lat, map);
 
-      mutateTreeData.mutate(['trees', sendTreeData]);
+      mutateTreeData.mutate(sendTreeData);
       setTimeout(() => setHealthSaveAlert(''), saveTimer);
     }
     return newHealth;
