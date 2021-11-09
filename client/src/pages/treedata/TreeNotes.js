@@ -5,7 +5,7 @@ import cx from 'clsx';
 import { saveTimer } from './treeDataUtils';
 import { useTreeDataMutation } from '../../api/queries';
 
-export default function TreeNotes({ idTree, notes }) {
+export default function TreeNotes({ currentTreeId, notes }) {
   const { isAuthenticated } = useAuth0();
   const [showSave, setShowSave] = useState(false);
   const [notesButtonStyle, setNotesButtonStyle] = useState('btn-light');
@@ -30,7 +30,7 @@ export default function TreeNotes({ idTree, notes }) {
 
     try {
       if (notesRef.current.value) {
-        const sendData = { idTree, notes: notesRef.current.value };
+        const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
 
         setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
