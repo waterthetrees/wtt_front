@@ -137,15 +137,13 @@ const TreeContent = ({ currentTreeId, map }) => {
   );
 };
 
-export default function TreeData({
-  currentTreeId, showTree, setShowTree, map,
-}) {
-  const toggle = () => setShowTree(!showTree);
+export default function TreeData({ map, currentTreeId, setCurrentTreeId }) {
+  const toggle = () => setCurrentTreeId(null);
 
   return (
     <Modal
       className="tree__modal"
-      isOpen={showTree}
+      isOpen={!!currentTreeId}
       toggle={toggle}
     >
       <ModalHeader toggle={toggle} />

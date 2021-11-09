@@ -13,15 +13,7 @@ import AddTreeModal from './AddTreeModal';
 let renderCount = 0;
 const currentMarkers = [];
 
-function AddTree(props) {
-  renderCount += 1;
-  const {
-    map, setZoom,
-    coordinatesNewTree,
-    setCoordinatesNewTree,
-    setNewTreeAdded,
-    newTreeAdded,
-  } = Object(props);
+function AddTree({ map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdded }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [addTreeSelected, setAddTreeSelected] = useState(false);
   const mutateUser = useUserMutation();
@@ -45,6 +37,8 @@ function AddTree(props) {
     }
   }, [addTreeSelected]);
 
+  renderCount += 1;
+
   return (
     <div>
 
@@ -63,8 +57,8 @@ function AddTree(props) {
         setAddTreeSelected={setAddTreeSelected}
         addTreeSelected={addTreeSelected}
         setZoom={setZoom}
-        coordinatesNewTree={coordinatesNewTree}
-        setCoordinatesNewTree={setCoordinatesNewTree}
+        coordinatesNewTree={center}
+        setCoordinatesNewTree={setCenter}
         setNewTreeAdded={setNewTreeAdded}
         newTreeAdded={newTreeAdded}
       />

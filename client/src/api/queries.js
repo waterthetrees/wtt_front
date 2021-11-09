@@ -1,12 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getData, postData, putData } from './apiUtils';
 
-function createUseQuery(api, defaultData = {}, defaultOptions = {}) {
+function createUseQuery(api, defaultData = {}, defaultOptions = {}, processor) {
+  const getter = typeof processor === 'function'
+    ? (...args) => getData(...args).then(processor)
+    : getData;
+
   return function(queryData = {}, queryOptions = {}) {
     const data = { ...defaultData, ...queryData };
     const options = { ...defaultOptions, ...queryOptions };
 
-    return useQuery([api, data], getData, options);
+    return useQuery([api, data], getter, options);
   };
 }
 
@@ -28,14 +32,34 @@ function createUseMutation(apiList, method) {
   };
 }
 
+function processTreeCounts(treeCounts) {
+  return treeCounts.map(({ city, country, count, countryCountTrees, lat, lng }) => {
+    const name = city || country;
+    const countString = Number(count || countryCountTrees).toLocaleString();
+
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [lng, lat],
+      },
+      properties: {
+        name: name,
+        cityCountTrees: `${countString} trees`,
+        count: `${countString} trees`,
+      },
+    };
+  });
+}
+
 // Create custom useQuery() hooks for the API.
 export const useUserAdoptedQuery = createUseQuery('usercounts', { request: 'adopted' });
 export const useUserLikedQuery = createUseQuery('usercounts', { request: 'liked' });
 export const useUserPlantedQuery = createUseQuery('usercounts', { request: 'planted' });
 export const useUserTreeHistoryQuery = createUseQuery('usertreehistory');
-export const useCitiesQuery = createUseQuery('cities');
-export const useCountriesQuery = createUseQuery('countries', { country: 'All' });
-export const useTreemapQuery = createUseQuery('treemap');
+export const useCitiesQuery = createUseQuery('cities', null, null, processTreeCounts);
+export const useCountriesQuery = createUseQuery('countries', { country: 'All' }, null, processTreeCounts);
+export const useTreemapQuery = createUseQuery('treemap', { city: '%' });
 export const useTreeQuery = createUseQuery('trees');
 export const useTreeHistoryQuery = createUseQuery('treehistory');
 export const useTreeLikesQuery = createUseQuery('treelikes', null, {
