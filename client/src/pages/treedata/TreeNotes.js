@@ -5,7 +5,7 @@ import cx from 'clsx';
 import { saveTimer } from './treeDataUtils';
 import { useTreeDataMutation } from '../../api/queries';
 
-export default function TreeNotes({ notes, currentTreeId }) {
+export default function TreeNotes({ currentTreeId, notes }) {
   const { isAuthenticated } = useAuth0();
   const [showSave, setShowSave] = useState(false);
   const [notesButtonStyle, setNotesButtonStyle] = useState('btn-light');

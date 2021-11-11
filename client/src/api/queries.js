@@ -10,13 +10,13 @@ function createUseQuery(api, defaultData = {}, defaultOptions = {}) {
   };
 }
 
-function createUseMutation(apiList, method = 'POST') {
+function createUseMutation(apiList, method) {
   const apis = Array.isArray(apiList)
     ? apiList
     : [apiList];
-  const apiCaller = method === 'POST'
-    ? postData
-    : putData;
+  const apiCaller = method === 'PUT'
+    ? putData
+    : postData;
 
   return function() {
     const queryClient = useQueryClient();
@@ -28,8 +28,14 @@ function createUseMutation(apiList, method = 'POST') {
   };
 }
 
+// Create custom useQuery() hooks for the API.
+export const useUserAdoptedQuery = createUseQuery('usercounts', { request: 'adopted' });
+export const useUserLikedQuery = createUseQuery('usercounts', { request: 'liked' });
+export const useUserPlantedQuery = createUseQuery('usercounts', { request: 'planted' });
+export const useUserTreeHistoryQuery = createUseQuery('usertreehistory');
 export const useCitiesQuery = createUseQuery('cities');
 export const useCountriesQuery = createUseQuery('countries', { country: 'All' });
+export const useTreemapQuery = createUseQuery('treemap');
 export const useTreeQuery = createUseQuery('trees');
 export const useTreeHistoryQuery = createUseQuery('treehistory');
 export const useTreeLikesQuery = createUseQuery('treelikes', null, {
@@ -45,10 +51,10 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', null, {
   },
 });
 
+// Create custom useMutation() hooks for the API.
+export const useUserMutation = createUseMutation('users');
 export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
+export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap']);
 export const useTreeHistoryMutation = createUseMutation('treehistory');
 export const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);
 export const useTreeAdoptionsMutation = createUseMutation(['treeadoptions', 'treehistory']);
-
-// TODO: remove this export when everything is using a custom hook
-export { getData, postData };

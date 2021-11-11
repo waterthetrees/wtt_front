@@ -23,7 +23,6 @@ export default function TreeCare({
 
       {treeHistory && treeHistory.length > 0 && (
         <TreeHistory
-          currentTreeId={currentTreeId}
           treeHistory={treeHistory}
         />
       )}

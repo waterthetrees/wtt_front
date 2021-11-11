@@ -157,7 +157,7 @@ export default function TreeMaintenance({ currentTreeId }) {
     event.preventDefault();
 
     try {
-      const dateVisit = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
+      const dateVisit = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
       const sendData = {
         idTree: currentTreeId,
         date_visit: dateVisit,

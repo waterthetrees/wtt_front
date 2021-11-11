@@ -1,13 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import mapboxgl from 'mapbox-gl';
 import ReactTooltip from 'react-tooltip';
 import cx from 'clsx';
 import './AddTree.scss';
 
 import { useAuth0 } from '@auth0/auth0-react';
-import { postData } from '../../api/queries';
+import { useUserMutation } from '../../api/queries';
 
 import AddTreeModal from './AddTreeModal';
 
@@ -24,18 +23,12 @@ function AddTree(props) {
     newTreeAdded,
   } = Object(props);
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-
-  const queryClient = useQueryClient();
-  const mutateUser = useMutation(postData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('users');
-    },
-  });
   const [addTreeSelected, setAddTreeSelected] = useState(false);
+  const mutateUser = useUserMutation();
 
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
-    if (isAuthenticated) mutateUser.mutate(['users', user]);
+    if (isAuthenticated) mutateUser.mutate(user);
     if (!addTreeSelected) {
       setAddTreeSelected(true);
     } else {
