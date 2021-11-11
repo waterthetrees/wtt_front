@@ -1,45 +1,47 @@
-/* eslint-disable guard-for-in */
-import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import React, { useState, useRef, useEffect } from 'react';
-import { useUserMutation } from '../../api/queries';
-import Slideout from '../../components/Slideout/Slideout';
 import config from '../../config';
 import AddTree from '../addtree/AddTree';
-import Countries from '../countries/Countries';
+import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
+import TreeData from '../treedata';
+import MapLayers from './MapLayers';
 import './Mapper.scss';
 
 mapboxgl.accessToken = config.mapbox;
 
+const isMapboxSupported = mapboxgl.supported();
+
 function Mapper() {
-  const { isAuthenticated, user } = useAuth0();
   const [map, setMap] = useState(null);
-  const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
-  const [zoom, setZoom] = useState();
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [zoom, setZoom] = useState(10);
+  const [center, setCenter] = useState([-122.34725, 37.7343787]);
+  const [currentTreeId, setCurrentTreeId] = useState(null);
   const [newTreeAdded, setNewTreeAdded] = useState();
-  const mutateUser = useUserMutation();
   const mapboxElRef = useRef(null); // DOM element to render map
 
   useEffect(() => {
-    if (isAuthenticated) mutateUser.mutate(user);
-
-    if (!map && mapboxgl.supported()) {
+    if (!map && isMapboxSupported) {
       const mapboxMap = new mapboxgl.Map({
         container: mapboxElRef.current,
         style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-        center: coordinatesNewTree || [-122.34725, 37.7343787],
-        zoom: zoom || 10,
-      });
-      const geolocate = new mapboxgl.GeolocateControl({
-        positionOptions: { enableHighAccuracy: true },
-        trackUserLocation: true,
+        center,
+        zoom,
+        // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
+        hash: true,
       });
 
       // Add the geolocate and navigation controls to the map.
-      mapboxMap.addControl(geolocate);
+      mapboxMap.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: true,
+      }));
       mapboxMap.addControl(new mapboxgl.NavigationControl());
-      geolocate.on('geolocate');
+
+      mapboxMap.on('load', () => {
+        setIsMapLoaded(true)
+      });
 
       setMap(mapboxMap);
     }
@@ -51,13 +53,9 @@ function Mapper() {
         <div className="mapBox" ref={mapboxElRef} />
       </div>
 
-      {map
-        ? (
+      {isMapboxSupported
+        ? isMapLoaded && (
           <>
-            <Countries
-              map={map}
-            />
-
             <Slideout
               buttonText={{ left: 'ADOPT' }}
             >
@@ -67,10 +65,23 @@ function Mapper() {
             <AddTree
               map={map}
               setZoom={setZoom}
-              coordinatesNewTree={coordinatesNewTree}
-              setCoordinatesNewTree={setCoordinatesNewTree}
+              center={center}
+              setCenter={setCenter}
               newTreeAdded={newTreeAdded}
               setNewTreeAdded={setNewTreeAdded}
+            />
+
+            {currentTreeId && (
+              <TreeData
+                map={map}
+                currentTreeId={currentTreeId}
+                setCurrentTreeId={setCurrentTreeId}
+              />
+            )}
+
+            <MapLayers
+              map={map}
+              setCurrentTreeId={setCurrentTreeId}
             />
           </>
         )

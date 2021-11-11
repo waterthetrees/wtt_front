@@ -183,11 +183,15 @@ export default function TreeMaintenance({ currentTreeId }) {
   };
 
   const handleClickArrow = () => {
-    if (!isAuthenticated) {
+    // Make sure user is authenticated before opening the maintenance drawer, since it expects to be
+    // able to access user.nickname.
+    if (isAuthenticated) {
+      setShowDoMaintenance(!showDoMaintenance);
+    } else {
       loginWithRedirect();
     }
-    setShowDoMaintenance(!showDoMaintenance);
   };
+
   const arrowDirection = showDoMaintenance
     ? `${treeImagesPath}angle-arrow-up-black.svg`
     : `${treeImagesPath}angle-arrow-down-black.svg`;
