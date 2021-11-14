@@ -579,19 +579,12 @@ element.style {
 
 .slider {
   -webkit-appearance: none;
-  height: 25px;
+  height: 20px;
   width: 100%;
   border-radius: 1px;
   margin: 0;
   background-color: #008c00; /* For browsers that do not support gradients */
-  background-image: linear-gradient(
-    to right,
-    black,
-    #8b6742,
-    #8c8c00,
-    #00b200,
-    #008c00
-  ); /* Standard syntax (must be last) */
+  border: 1px solid #ddd;
   outline: none;
   opacity: 0.7;
   -webkit-transition: 0.2s;
@@ -602,20 +595,22 @@ element.style {
   opacity: 1;
 }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: black;
+@mixin thumb() {
+  width: 28px;
+  height: 28px;
+  border: 5px solid #666;
+  background: #ddd;
   cursor: pointer;
 }
 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  @include thumb();
+}
+
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4caf50;
-  cursor: pointer;
+  @include thumb();
 }
 
 ol {

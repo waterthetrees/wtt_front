@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import React, { useState, useRef, useEffect } from 'react';
-import config from '../../config';
+import { mapboxAccessToken } from '../../util/config';
 import AddTree from '../addtree/AddTree';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
@@ -8,7 +8,7 @@ import TreeData from '../treedata';
 import MapLayers from './MapLayers';
 import './Mapper.scss';
 
-mapboxgl.accessToken = config.mapbox;
+mapboxgl.accessToken = mapboxAccessToken;
 
 const isMapboxSupported = mapboxgl.supported();
 

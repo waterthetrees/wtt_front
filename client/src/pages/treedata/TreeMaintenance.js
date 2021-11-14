@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import format from 'date-fns/format';
 import { Button } from 'reactstrap';
 import cx from 'clsx';
-import { saveTimer } from './treeDataUtils';
+import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
 
 const treeImagesPath = 'assets/images/trees/';

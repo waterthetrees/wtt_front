@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
-import config from '../config';
+import { auth0 } from '../util/config';
 
-const { domain, clientId } = config.auth0;
+const { domain, clientId } = auth0;
 
 const Auth0ProviderWithHistory = ({ children }) => {
   const redirectUri = window.location.origin;
