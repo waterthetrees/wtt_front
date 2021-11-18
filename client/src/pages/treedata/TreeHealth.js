@@ -1,8 +1,47 @@
 import React, { useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { convertSliderValuesToHealth, saveTimer } from './treeDataUtils';
-import { addNewMarker } from './mapbox_utilities';
+import mapboxgl from 'mapbox-gl';
 import { useTreeDataMutation } from '../../api/queries';
+import { treeHealth } from '../../util/treeHealth';
+import { saveTimer } from '../../util/constants';
+
+function addTreeMarker(newHealth, lng, lat, map) {
+  const newDot = document.createElement('div');
+
+  // The dot's fill and stroke are picked up from the colors specified on the treemap layer.
+  newDot.className = 'dot';
+
+  new mapboxgl.Marker(newDot)
+    .setLngLat([lng, lat])
+    .addTo(map);
+}
+
+const HealthDatalist = () => (
+  <datalist id="healthSlider" aria-label="healthSlider">
+    { treeHealth.getNameValuePairs().map(([name, value]) => (
+      <option key={name} value={value} name={name} aria-label={name} />
+    ))}
+  </datalist>
+);
+
+// Generate a style object with a linear gradient of solid colors for the health slider.
+const healthSliderStyle = (() => {
+  const healthPairs = treeHealth.getNameValuePairs();
+  const count = healthPairs.length;
+  const step = 100 / count;
+  // To create a gradient with no blending, the same color has to be specified twice, with the same
+  // end percentage as the next color.  So if there were 10 colors, this array would look like:
+  // ['gray 0%, gray 10%', 'black 10%, black 20%', 'green 20%, green 30%', ...]
+  const colors = healthPairs.map(([name, value]) => {
+    const color = treeHealth.getColorByName(name, 'fill');
+
+    return `${color} ${value * step}%, ${color} ${(value + 1) * step}%`;
+  });
+
+  return {
+    backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
+  };
+})();
 
 export default function TreeHealthSlider({
   currentTreeId, healthNum, health, lat, lng, map,
@@ -10,10 +49,10 @@ export default function TreeHealthSlider({
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const mutateTreeData = useTreeDataMutation();
-  const sliderRef = useRef(healthNum);
+  const sliderRef = useRef(null);
 
   const handleOnChange = () => {
-    const newHealth = convertSliderValuesToHealth(sliderRef.current.value);
+    const newHealth = treeHealth.getNameByValue(sliderRef.current.value);
 
     if (!isAuthenticated) loginWithRedirect();
 
@@ -24,7 +63,7 @@ export default function TreeHealthSlider({
       };
 
       // Add DOM marker so vectortiles doesn't need to update until browser reload.
-      addNewMarker(newHealth, lng, lat, map);
+      addTreeMarker(newHealth, lng, lat, map);
       setHealthSaveAlert('SAVING');
       mutateTreeData.mutate(sendTreeData);
       setTimeout(() => setHealthSaveAlert(''), saveTimer);
@@ -48,23 +87,17 @@ export default function TreeHealthSlider({
           className="slider"
           list="healthSlider"
           id="healthSlider"
+// TODO: use the solid color gradient when the colors have been decided
+//          style={healthSliderStyle}
           defaultValue={healthNum}
           onChange={handleOnChange}
         />
-        <datalist id="healthSlider" aria-label="healthSlider">
-          <option value="0" name="vacant" aria-label="vacant" />
-          <option value="1" name="dead" aria-label="dead" />
-          <option value="2" name="missing" aria-label="missing" />
-          <option value="3" name="stump" aria-label="stump" />
-          <option value="4" name="poor" aria-label="poor" />
-          <option value="5" name="fair" aria-label="fair" />
-          <option value="6" name="good" aria-label="good" />
-        </datalist>
+        <HealthDatalist />
         <h3>
           {health && (
             <span id={health}>
               {sliderRef.current
-                ? convertSliderValuesToHealth(sliderRef.current.value)
+                ? treeHealth.getNameByValue(sliderRef.current.value)
                 : health}
             </span>
           )}

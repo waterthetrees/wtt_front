@@ -8,7 +8,7 @@ const env = {
   localhost: 'localserver',
 }[window.location.hostname];
 
-const mapbox = {
+const mapboxAccessToken = {
   // key: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w'
   prod: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrY3lmcWVqcDA5ZDYyenFpdG13bWdrOHYifQ.6er3tXeahhVUtgiu_pqWFw',
   dev: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
@@ -35,6 +35,4 @@ const auth0 = {
   },
 }[env];
 
-const config = { mapbox, auth0 };
-// console.log('config', config);
-export default config;
+export { env, mapboxAccessToken, auth0 };
