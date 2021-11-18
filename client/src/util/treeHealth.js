@@ -5,14 +5,24 @@
 //  - optional stroke color string for the circle, which defaults to the fill color
 // The state's value (returned as healthNum by the API) is defined by its index in this array.
 const healthInfo = [
-  ['vacant', false, '#808080'],
-  ['dead', false, 'black', 'black'],
+  ['vacant', false, 'white', '#8d5524'],
+  ['dead', false, 'white', 'black'],
   ['missing', false, 'white', '#c68642'],
-  ['stump', false, '#f1c27d'],
+  ['stump', false, 'white', '#f1c27d'],
   ['poor', true, '#be9b7b'],
   ['fair', true, '#889944'],
   ['good', true, '#309000'],
 ];
+// TODO: decide on colors to distinguish the bad health values
+//const healthInfo = [
+//  ['vacant', false, '#808080'],
+//  ['dead', false, 'black', 'black'],
+//  ['missing', false, 'white', '#c68642'],
+//  ['stump', false, '#f1c27d'],
+//  ['poor', true, '#be9b7b'],
+//  ['fair', true, '#889944'],
+//  ['good', true, '#309000'],
+//];
 const maxValue = healthInfo.length - 1;
 
 const healthByName = healthInfo.reduce((result, [name, maintainable, fill, stroke = fill], i) => {
