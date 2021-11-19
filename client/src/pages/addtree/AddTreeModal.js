@@ -30,9 +30,7 @@ const AddTreeModal = ({
   setAddTreeSelected,
   setNewTreeAdded,
 }) => {
-  const {
-    user,
-  } = useAuth0();
+  const { user } = useAuth0();
   const { nickname, email, name } = Object(user);
 
   const typeArray = ['California Natives', 'Food Trees'];
@@ -72,8 +70,6 @@ const AddTreeModal = ({
   const treeFields = watch('treeType');
   const treeInfoFields = watch(['common', 'scientific', 'genus']);
 
-  const [data] = useState(null);
-  const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const [mostRecentFields, setMostRecentFields] = useState({});
   const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
 
@@ -105,7 +101,6 @@ const AddTreeModal = ({
     };
     delete sendData.treeType;
     mutateTreeData.mutate(sendData);
-    setNotesSaveButton('SAVING');
     setShowAddTreeModal(!showAddTreeModal);
     setNewTreeAdded(true);
   };
@@ -134,7 +129,7 @@ const AddTreeModal = ({
             <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
             <TreePlanter control={control} errors={errors} />
             <ButtonsResult {...{
-              data, reset, defaultValues, notesSaveButton, setAddTreeSelected,
+              reset, defaultValues, setAddTreeSelected,
             }}
             />
           </form>
