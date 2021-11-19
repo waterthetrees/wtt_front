@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-export default function TreeCountLayer({ name, useQuery, map, minzoom, maxzoom, flyToZoom }) {
+export default function TreeCountLayer({
+  name, useQuery, map, minzoom, maxzoom, flyToZoom,
+}) {
   const { data } = useQuery();
   const imageName = `image-${name}`;
 
@@ -52,7 +54,7 @@ export default function TreeCountLayer({ name, useQuery, map, minzoom, maxzoom, 
             'text-color': '#000000',
           },
         });
-      }
+      },
     );
 
     map.on('click', name, ({ features: [feature], lngLat: lng }) => {

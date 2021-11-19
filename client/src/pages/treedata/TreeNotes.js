@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import { Button } from 'reactstrap';
 import cx from 'clsx';
-import { saveTimer } from './treeDataUtils';
+import { saveTimer } from '../../util/constants';
 import { useTreeDataMutation } from '../../api/queries';
 
 export default function TreeNotes({ currentTreeId, notes }) {

@@ -6,6 +6,10 @@ const popup = new mapboxgl.Popup({
   closeOnClick: false,
 });
 
+// For TreeLayers that don't specify a query, use a noop function that returns an empty object so
+// that destructuring data below will get an undefined.
+const noopQuery = () => ({});
+
 function createPopupHTML({ common, scientific }) {
   const commonString = common
     ? `<h4>${common}</h4>`
@@ -18,7 +22,7 @@ function createPopupHTML({ common, scientific }) {
 }
 
 export default function TreeLayer({
-  name, useQuery = () => ({}), layer, map, setCurrentTreeId, setShowTree
+  name, useQuery = noopQuery, layer, map, setCurrentTreeId,
 }) {
   const { data } = useQuery();
 
@@ -27,7 +31,7 @@ export default function TreeLayer({
 
     map.addLayer({
       id: name,
-      ...layer
+      ...layer,
     });
 
     map.on('click', name, ({ features: [{ properties: { id, id_tree } }] }) => {
@@ -67,5 +71,6 @@ export default function TreeLayer({
     }
   }, [map, data]);
 
+  // The map renders this layer, so there are no DOM elements to return.
   return null;
 }

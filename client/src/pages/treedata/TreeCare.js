@@ -2,6 +2,7 @@ import React from 'react';
 import { useTreeHistoryQuery } from '../../api/queries';
 import TreeMaintenance from './TreeMaintenance';
 import TreeHistory from './TreeHistory';
+import { treeHealth } from '../../util/treeHealth';
 
 export default function TreeCare({
   currentTreeId, common, health,
@@ -11,9 +12,7 @@ export default function TreeCare({
   return (
     <div className="treecare">
       {currentTreeId
-        && health !== 'dead'
-        && health !== 'vacant'
-        && health !== 'missing'
+        && treeHealth.isMaintainable(health)
         && (
           <TreeMaintenance
             currentTreeId={currentTreeId}

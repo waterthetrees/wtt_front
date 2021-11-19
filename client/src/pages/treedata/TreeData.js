@@ -10,6 +10,7 @@ import TreeHealthSlider from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeCare from './TreeCare';
 import { TreeLocation, TreeMoreInfo } from './TreeInfo';
+import { treeHealth } from '../../util/treeHealth';
 import './TreeData.scss';
 
 const TreeContent = ({ currentTreeId, map }) => {
@@ -32,7 +33,6 @@ const TreeContent = ({ currentTreeId, map }) => {
     scientific,
     genus,
     datePlanted,
-    health,
     healthNum,
     address,
     city,
@@ -48,6 +48,10 @@ const TreeContent = ({ currentTreeId, map }) => {
     zip,
     notes,
   } = treeData;
+  // If the tree has a healthNum value but no health, look up the corresponding string.
+  const health = typeof treeData.health === 'string'
+    ? treeData.health
+    : treeHealth.getNameByValue(healthNum);
 
   // TODO: pass idTree or currentTreeId to children?  should be consistent.
   return (

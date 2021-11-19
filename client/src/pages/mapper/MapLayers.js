@@ -3,35 +3,27 @@ import { tilesServerEndpoints } from '../../api/apiEndpoints';
 import { useCitiesQuery, useCountriesQuery, useTreemapQuery } from '../../api/queries';
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
+import { treeHealth } from '../../util/treeHealth';
 
-const treeFillColors = [
+const colorMatch = [
   'match',
   ['get', 'health'],
-  'good', '#309000',
-  'fair', '#889944',
-  'poor', '#be9b7b',
-  'dead', 'white',
-  'vacant', 'white',
-  'missing', 'white',
-  'concrete', '#808080',
-  'stump', 'white',
-  '#309000',
 ];
-const treeStrokeColors = [
-  'match',
-  ['get', 'health'],
-  'good', '#309000',
-  'fair', '#889944',
-  'poor', '#be9b7b',
-  'dead', 'black',
-  'vacant', '#8d5524',
-  'missing', '#c68642',
-  'concrete', '#808080',
-  'stump', '#f1c27d',
-  '#309000',
-];
+const treeFillColors = colorMatch.concat(treeHealth.getPaintColors('fill'));
+const treeStrokeColors = colorMatch.concat(treeHealth.getPaintColors('stroke'));
+const circlePaint = {
+  'circle-opacity': 0.8,
+  'circle-color': treeFillColors,
+  'circle-radius': {
+    base: 0.75,
+    stops: [
+      [12, 1],
+      [18, 6],
+    ],
+  },
+};
 
-export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
+export default function MapLayers({ map, setCurrentTreeId }) {
   return (
     <>
       <TreeCountLayer
@@ -64,21 +56,11 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
           minzoom: 11,
           maxzoom: 22,
           paint: {
-            'circle-opacity': 0.8,
-            'circle-color': treeFillColors,
-            'circle-radius': {
-              property: 'dbh',
-              base: 1,
-              stops: [
-                [12, 1],
-                [17, 480],
-              ],
-            },
+            ...circlePaint,
           },
         }}
         map={map}
         setCurrentTreeId={setCurrentTreeId}
-        setShowTree={setShowTree}
       />
 
       <TreeLayer
@@ -96,23 +78,13 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
           minzoom: 11,
           maxzoom: 22,
           paint: {
-            'circle-opacity': 0.8,
-            'circle-color': treeFillColors,
-            'circle-radius': {
-              property: 'health',
-              base: 1,
-              stops: [
-                [12, 8],
-                [18, 280],
-              ],
-            },
+            ...circlePaint,
             'circle-stroke-color': treeStrokeColors,
             'circle-stroke-width': 3,
           },
         }}
         map={map}
         setCurrentTreeId={setCurrentTreeId}
-        setShowTree={setShowTree}
       />
     </>
   );
