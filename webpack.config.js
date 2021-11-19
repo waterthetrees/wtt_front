@@ -1,4 +1,3 @@
-// webpack v4
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -19,13 +18,14 @@ module.exports = (env) => {
     output: {
       path: path.resolve(__dirname, 'client/public'),
       publicPath: '/',
+      clean: true,
     },
     devServer: {
       // Port 3000 is baked into the configuration for the mapbox API, so the
       // dev-server needs to use it so that we can hit the API
       port: 3000,
       historyApiFallback: true,
-      contentBase: './',
+      static: './',
       hot: true,
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
@@ -33,7 +33,7 @@ module.exports = (env) => {
       rules: removeEmpty([
         {
           test: /\.js$/,
-          exclude: [/node_modules/, /\.scss$/],
+          include: path.resolve(__dirname, 'client/src'),
           use: ['babel-loader'],
         },
         ifNotProduction({
@@ -43,12 +43,15 @@ module.exports = (env) => {
         }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
-          loader: 'url-loader?limit=100000',
+          type: 'asset/resource',
         },
         {
           test: /\.(scss|css)?$/,
-          include: path.appSrc,
-          loaders: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'sass-loader' },
+          ]
         },
       ]),
     },
@@ -61,10 +64,12 @@ module.exports = (env) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
-      new MiniCssExtractPlugin({
-        filename: '[name].scss',
-        chunkFilename: '[id].scss',
-      }),
+// TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
+//  instances breaks SpeedMeasurePlugin in webpack 5
+//      new MiniCssExtractPlugin({
+//        filename: '[name].scss',
+//        chunkFilename: '[id].scss',
+//      }),
       new CopyPlugin({
         patterns: [
           {
