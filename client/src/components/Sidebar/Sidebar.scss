@@ -1,0 +1,22 @@
+@import '../../styles/app';
+
+.sidebar {
+ background-color: transparent;
+//  opacity: 0.8;
+ position: absolute;
+ bottom: 33px;
+ left: 0;
+//  border-radius: 0 15px 15px 0;
+}
+
+.sidebar__content {
+ padding: 10px;
+//  display: flex;
+//  justify-content: space-between;
+//  flex-direction: row;
+//  flex-basis: auto;
+//  align-items: center;
+//  font-size: 1.1rem;
+ font-weight: 900;
+ font-family: 'Roboto Mono', monospace;
+}

@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import React, { useState, useRef, useEffect } from 'react';
 import config from '../../config';
 import AddTree from '../addtree/AddTree';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 import TreeData from '../treedata';
@@ -40,7 +41,7 @@ function Mapper() {
       mapboxMap.addControl(new mapboxgl.NavigationControl());
 
       mapboxMap.on('load', () => {
-        setIsMapLoaded(true)
+        setIsMapLoaded(true);
       });
 
       setMap(mapboxMap);
@@ -56,20 +57,24 @@ function Mapper() {
       {isMapboxSupported
         ? isMapLoaded && (
           <>
-            <Slideout
-              buttonText={{ left: 'ADOPT' }}
-            >
-              <TreeAdoptionDirections onmap />
-            </Slideout>
+            <Sidebar>
+              <Slideout
+                buttonText={{ left: 'ADOPT' }}
+                classNameButton="slideout__btn  slideout__btn__shape"
+                classNameButtonText="slideout__btn-txt slideout__btn-txt__shape"
+              >
+                <TreeAdoptionDirections onmap />
+              </Slideout>
 
-            <AddTree
-              map={map}
-              setZoom={setZoom}
-              center={center}
-              setCenter={setCenter}
-              newTreeAdded={newTreeAdded}
-              setNewTreeAdded={setNewTreeAdded}
-            />
+              <AddTree
+                map={map}
+                setZoom={setZoom}
+                center={center}
+                setCenter={setCenter}
+                newTreeAdded={newTreeAdded}
+                setNewTreeAdded={setNewTreeAdded}
+              />
+            </Sidebar>
 
             {currentTreeId && (
               <TreeData

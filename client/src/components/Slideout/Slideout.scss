@@ -1,35 +1,6 @@
-.adopttree__btn {
-
- padding: 1.3rem;
-
- font-family: 'Roboto Mono', monospace;
- color: black;
-}
-
-
-.slideout__btn {
- background-color: transparent;
- position: absolute;
- border-width: 0;
- left: 2px;
- bottom: 117px;
-}
-
-.shape{
-  height: 5rem;
-  width: 5rem;
-  background-color: #337AB7;
-  border-radius: 50%;
-  border-top-right-radius: 0;
-  transform: rotate(-45deg);
-}
-
-.shape:active{
-  background-color: white;
-}
-.shape:focus{
-  background-color: white;
-  outline: none;
+.slideout {
+  width:250px;
+  padding: 0 0 .9rem 0;
 }
 
 .shape__txt{
@@ -40,6 +11,57 @@
  transform: rotate(+45deg);
  padding: 25px 20px 0 10px;
 }
+
+.slideout__btn:hover {
+  opacity:.8;
+}
+
+.slideout__item{
+  padding:10px 0;
+}
+
+.slideout__btn {
+  background-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+  border: 0;
+  height: 5rem;
+  width: 5rem;
+  background-color: green;
+  border-radius: 15%;
+  font: 1.1rem 900 Arial;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 1px 0;
+}
+
+.slideout__btn__shape {
+  background-color: #337AB7;
+  border-radius: 50%;
+  border-top-right-radius: 0;
+  transform: rotate(-45deg);
+}
+
+.slideout__btn:active{
+  background-color: white;
+}
+.shape:focus{
+  background-color: white;
+  outline: none;
+}
+
+.slideout__btn-txt{
+ font-size: 1.2rem;
+ line-height: 1rem;
+ font-weight: 900;
+}
+
+.slideout__btn-txt__shape{
+  height: 5rem;
+  width: 5rem;
+  transform: rotate(+45deg);
+  padding: 25px 20px 0 8px;
+ }
 
 .slideout__btn-selected{
   background-color: transparent;
@@ -61,10 +83,14 @@
  -o-background-color: transparent;
 }
 
-.slideout__btn:hover {
-  background-color: transparent;
+ @media only screen and (max-width: 767px) {
+  .sidebar__content {
+   font-size: 1.1rem;
+  }
  }
-
-
-
  
+ @media only screen and (max-width: 414px) {
+  .sidebar__content {
+   font-size: 1rem;
+  }
+ }

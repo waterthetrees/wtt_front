@@ -32,10 +32,10 @@ const treeStrokeColors = [
 ];
 
 export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
-	return (
+  return (
     <>
       <TreeCountLayer
-        name='countries'
+        name="countries"
         useQuery={useCountriesQuery}
         map={map}
         minzoom={2}
@@ -44,7 +44,7 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
       />
 
       <TreeCountLayer
-        name='cities'
+        name="cities"
         useQuery={useCitiesQuery}
         map={map}
         minzoom={9}
@@ -53,7 +53,7 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
       />
 
       <TreeLayer
-        name='public.treedata'
+        name="public.treedata"
         layer={{
           'source-layer': 'public.treedata',
           source: {
@@ -67,11 +67,11 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
             'circle-opacity': 0.8,
             'circle-color': treeFillColors,
             'circle-radius': {
-                property: 'dbh',
-                base: 1,
-                stops: [
-                  [12, 1],
-                  [17, 480],
+              property: 'dbh',
+              base: 1,
+              stops: [
+                [12, 1],
+                [17, 480],
               ],
             },
           },
@@ -82,14 +82,14 @@ export default function MapLayers({ map, setCurrentTreeId, setShowTree }) {
       />
 
       <TreeLayer
-        name='treedata'
+        name="treedata"
         useQuery={useTreemapQuery}
         layer={{
           source: {
             type: 'geojson',
             data: {
               features: [],
-              type: 'FeatureCollection'
+              type: 'FeatureCollection',
             },
           },
           type: 'circle',
