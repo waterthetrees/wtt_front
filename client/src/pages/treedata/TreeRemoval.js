@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import { Button } from '@material-ui/core';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
@@ -11,7 +12,7 @@ export default function TreeRemoval({ idTree, common, notes }) {
   const [reallyDelete, setReallyDelete] = useState(false);
   const [showDelete, setShowDelete] = useState(true);
   const [reasonForRemoval, setReasonForRemoval] = useState(false);
-  const [reason, setReason] = useState(false);
+  const [reason, setReason] = useState(null);
   const [message, setMessage] = useState('Are you sure you want to remove this tree?');
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
@@ -21,10 +22,10 @@ export default function TreeRemoval({ idTree, common, notes }) {
     setReasonForRemoval(!reasonForRemoval);
   };
 
-  const handleRemoveTree = (event) => {
+  const handleRemoveTree = (event, value) => {
     event.preventDefault();
     if (!isAuthenticated) loginWithRedirect();
-    setReason(event.target.name);
+    setReason(value);
     setReallyDelete(true);
   };
 
@@ -84,9 +85,8 @@ export default function TreeRemoval({ idTree, common, notes }) {
     <div className="treeremoval">
       {showDelete && (
         <Button
-          className="treeremoval-btn"
-          size="small"
-          color="warning"
+          variant="contained"
+          color="secondary"
           id="removeTree"
           name="removeTree"
           onClick={handleReason}
@@ -100,29 +100,22 @@ export default function TreeRemoval({ idTree, common, notes }) {
         <div className="treeremoval__reason">
           <div><h4>Reason For Removal?</h4></div>
           <span>
-            <ButtonGroup className="treeremoval__reason-btngrp">
-              <Button
-                name="NoWater"
-                className="treeremoval__reason-btn btn-md"
-                onClick={handleRemoveTree}
-              >
-                No Water
-              </Button>
-              <Button
-                name="Dead"
-                className="treeremoval__reason-btn btn-dark btn-md"
-                onClick={handleRemoveTree}
-              >
-                Dead
-              </Button>
-              <Button
-                name="Insects/Disease"
-                className="treeremoval__reason-btn btn-md"
-                onClick={handleRemoveTree}
-              >
-                Insects/Disease
-              </Button>
-            </ButtonGroup>
+            <ToggleButtonGroup
+              value={reason}
+              exclusive
+              onChange={handleRemoveTree}
+              className="treeremoval__reason-btngrp"
+            >
+              {['No Water', 'Dead', 'Insects/Disease'].map((label) => (
+                <ToggleButton
+                  key={label}
+                  value={label.replaceAll(' ', '')}
+                  style={{ color: 'black' }}
+                >
+                  {label}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
 
             <input
               ref={commentRef}
@@ -141,8 +134,8 @@ export default function TreeRemoval({ idTree, common, notes }) {
           <div><h3>{message}</h3></div>
           <Button
             className="treeremoval-btn"
-            size="small"
-            color="danger"
+            variant="contained"
+            color="secondary"
             id="yesRemoveTree"
             name="yesRemoveTree"
             onClick={handleYesRemoveTree}
@@ -151,8 +144,7 @@ export default function TreeRemoval({ idTree, common, notes }) {
           </Button>
           <Button
             className="treeremoval-btn"
-            size="small"
-            color="secondary"
+            variant="contained"
             id="noRemoveTree"
             name="noRemoveTree"
             onClick={() => setReallyDelete(false)}

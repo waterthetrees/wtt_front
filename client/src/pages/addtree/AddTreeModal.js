@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  ModalHeader,
-  ModalFooter,
-} from 'reactstrap';
 import format from 'date-fns/format';
-import './AddTree.scss';
-
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCreateTreeDataMutation } from '../../api/queries';
-
-import Footer from '../../components/Footer';
+import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
 import TreeHeader from './TreeHeader';
 import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
@@ -20,6 +12,7 @@ import ButtonsResult from './ButtonsResult';
 import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
 import { topTreesCaliforniaNative, topTreesUSFood } from '../data';
+import './AddTree.scss';
 
 const renderCount = 0;
 
@@ -110,13 +103,12 @@ const AddTreeModal = ({
   const toggle = () => setShowAddTreeModal(!showAddTreeModal);
 
   return (
-    <Modal isOpen={showAddTreeModal} toggle={toggle}>
-      <ModalHeader toggle={toggle} />
+    <ScrollableDialog
+      open={showAddTreeModal}
+      title={<TreeHeader renderCount={renderCount} />}
+      onClose={toggle}
+    >
       <div className="addtree">
-        <div className="addtree__header">
-          <TreeHeader renderCount={renderCount} />
-        </div>
-        <hr className="divider-solid" />
         <div className="addtree__body">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
             <MuiRadioSelector
@@ -135,11 +127,7 @@ const AddTreeModal = ({
           </form>
         </div>
       </div>
-
-      <ModalFooter>
-        <Footer />
-      </ModalFooter>
-    </Modal>
+    </ScrollableDialog>
   );
 };
 

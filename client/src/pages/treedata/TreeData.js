@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, ModalFooter, ModalHeader } from 'reactstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeQuery } from '../../api/queries';
+import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
 import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
@@ -88,8 +88,6 @@ const TreeContent = ({ currentTreeId, map }) => {
         />
       </div>
 
-      <hr className="divider-solid" />
-
       <div className="tree__body">
         <TreeHealthSlider
           currentTreeId={currentTreeId}
@@ -142,20 +140,18 @@ const TreeContent = ({ currentTreeId, map }) => {
 };
 
 export default function TreeData({ map, currentTreeId, setCurrentTreeId }) {
-  const toggle = () => setCurrentTreeId(null);
+  const handleClose = () => setCurrentTreeId(null);
 
   return (
-    <Modal
-      className="tree__modal"
-      isOpen={!!currentTreeId}
-      toggle={toggle}
+    <ScrollableDialog
+      title={`Tree #${currentTreeId}`}
+      open={!!currentTreeId}
+      onClose={handleClose}
     >
-      <ModalHeader toggle={toggle} />
       <TreeContent
         currentTreeId={currentTreeId}
         map={map}
       />
-      <ModalFooter />
-    </Modal>
+    </ScrollableDialog>
   );
 }

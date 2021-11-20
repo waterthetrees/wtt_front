@@ -11,8 +11,6 @@ import Contact from '../../pages/contact/Contact';
 import Data from '../../pages/data/Data';
 import NotFound from '../../pages/notFound/NotFound';
 import ProtectedRoute from '../../auth/protected-route';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Layout.scss';
 
 const queryClient = new QueryClient();
 

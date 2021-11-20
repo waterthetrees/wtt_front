@@ -3,6 +3,7 @@ import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import NotFound from '../pages/notFound/NotFound';
+import '../styles/app.scss';
 
 // const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 

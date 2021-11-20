@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import { Button } from '@material-ui/core';
 import format from 'date-fns/format';
 import DataTable from './DataTable';
+import { env } from '../../util/config';
 
 const headerKeys = [
   ['common', '', 'h3'],
@@ -18,15 +19,18 @@ const headerKeys = [
 
 export default function TreeHeader(props) {
   return (
-    <div className="flex-grid-three text-left">
+    <div className="text-left">
       <DataTable
         data={props}
         keys={headerKeys}
       />
 
-      <div className="treedata__edit-btn text-right">
-        <Button color="link" className="btn-sm" onClick={props.edit}>Edit</Button>
-      </div>
+      {env !== 'prod'
+        && (
+          <div className="text-right">
+            <Button color="primary" onClick={props.edit}>Edit</Button>
+          </div>
+        )}
     </div>
   );
 }

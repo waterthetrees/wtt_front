@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import format from 'date-fns/format';
-import { Button } from 'reactstrap';
+import { Button } from '@material-ui/core';
 import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
@@ -78,7 +78,7 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
 
   const onCheckboxBtnClick = (event) => {
     event.preventDefault();
-    const selected = event.target.name;
+    const selected = event.currentTarget.name;
 
     const newImageText = changeImageText(selected, statusSelected);
     if (selected === 'watered') {
@@ -113,11 +113,11 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
       {maintenanceButtonsArray.map((maintenanceButton, index) => (
         <Button
           key={maintenanceButton}
-          type="button"
           name={maintenanceButton}
-          className="treemaintenance-btn btn-sm success text-center"
+          variant="contained"
+          color="default"
+          className="treemaintenance-btn"
           onClick={onCheckboxBtnClick}
-          active={statusSelected[maintenanceButton] === 'yes'}
         >
           <img
             alt={maintenanceButton}
@@ -263,6 +263,7 @@ export default function TreeMaintenance({ currentTreeId }) {
               <Button
                 className={cx('btn-lg', maintenanceButtonStyle)}
                 type="submit"
+                variant="outlined"
               >
                 {maintenanceSaveButton}
               </Button>
