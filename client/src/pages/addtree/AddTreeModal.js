@@ -117,11 +117,26 @@ const AddTreeModal = ({
               options={typeArray}
               control={control}
             />
-            <TreeInfo register={register} control={control} coordinates={coordinatesNewTree} errors={errors} treeList={treeList} />
-            <TreeAddress control={control} coordinates={coordinatesNewTree} errors={errors} />
-            <TreePlanter control={control} errors={errors} />
+            <TreeInfo
+              register={register}
+              control={control}
+              coordinates={coordinatesNewTree}
+              errors={errors}
+              treeList={treeList}
+            />
+            <TreeAddress
+              control={control}
+              coordinates={coordinatesNewTree}
+              errors={errors}
+            />
+            <TreePlanter
+              control={control}
+              errors={errors}
+            />
             <ButtonsResult {...{
-              reset, defaultValues, setAddTreeSelected,
+              reset,
+              defaultValues,
+              setAddTreeSelected,
             }}
             />
           </form>

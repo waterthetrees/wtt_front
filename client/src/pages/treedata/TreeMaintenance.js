@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import format from 'date-fns/format';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
@@ -115,7 +115,6 @@ const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
           key={maintenanceButton}
           name={maintenanceButton}
           variant="contained"
-          color="default"
           className="treemaintenance-btn"
           onClick={onCheckboxBtnClick}
         >

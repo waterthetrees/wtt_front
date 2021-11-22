@@ -1,12 +1,12 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Grid } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import Tooltip from '@material-ui/core/Tooltip';
-import InfoIcon from '@material-ui/icons/Info';
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import format from 'date-fns/format';
 import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Grid, Checkbox, Tooltip } from '@mui/material';
+import {
+  Info as InfoIcon,
+  Star as StarIcon,
+  StarBorder as StarBorderIcon,
+} from '@mui/icons-material';
+import format from 'date-fns/format';
 import {
   useTreeAdoptionsQuery, useTreeLikesQuery, useTreeAdoptionsMutation,
   useTreeHistoryMutation, useTreeLikesMutation,

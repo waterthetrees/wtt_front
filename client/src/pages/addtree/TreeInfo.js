@@ -7,7 +7,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import MuiAutoComplete from './MuiAutoComplete';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
@@ -38,11 +38,15 @@ export default function TreeInfo({ treeList, register, control, coordinates, err
       />
       {errors.datePlanted && <ErrorMessageAll errors={errors} name="datePlanted" />}
 
-      <FormControl>
-        <InputLabel id="dbh">DBH</InputLabel>
+      <FormControl
+        variant="standard"
+      >
+        <InputLabel id="dbh">Diameter</InputLabel>
         <Controller
           as={(
-            <Select>
+            <Select
+              labelId="dbh"
+            >
               <MenuItem value="<1 inch">less than 1 inch</MenuItem>
               <MenuItem value="1">1 Inch</MenuItem>
               <MenuItem value="2">2 inch</MenuItem>
@@ -83,11 +87,15 @@ export default function TreeInfo({ treeList, register, control, coordinates, err
       </FormControl>
       {errors.dbh && <ErrorMessageAll errors={errors} name="dbh" />}
 
-      <FormControl>
+      <FormControl
+        variant="standard"
+      >
         <InputLabel id="health">Health</InputLabel>
         <Controller
           as={(
-            <Select>
+            <Select
+              labelId="health"
+            >
               <MenuItem value="missing">missing</MenuItem>
               <MenuItem value="stump">stump</MenuItem>
               <MenuItem value="poor">poor</MenuItem>
