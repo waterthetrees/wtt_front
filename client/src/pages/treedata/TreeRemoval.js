@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { Button } from '@material-ui/core';
+import { ToggleButton, ToggleButtonGroup, Button } from '@mui/material';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';

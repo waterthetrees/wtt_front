@@ -1,5 +1,5 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import { styled } from '@material-ui/core/styles';
+import Checkbox from '@mui/material/Checkbox';
+import { styled } from '@mui/material/styles';
 
 const StarCheckbox = styled(Checkbox)({
   '&:hover': {

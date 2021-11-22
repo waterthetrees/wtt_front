@@ -1,29 +1,44 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, IconButton, Box } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+  Box,
+  DialogActions,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function ScrollableDialog({ children, title, open, onClose, }) {
+export default function ScrollableDialog({
+  children, title, open, onClose, actions,
+}) {
   return (
     <Dialog
       open={open}
       onClose={onClose}
       scroll="paper"
-      maxWidth={'sm'}
-      fullWidth={true}
+      maxWidth="sm"
+      fullWidth
     >
       <DialogTitle id="scroll-dialog-title">
         <Box display="flex" alignItems="center">
           <Box flexGrow={1}>{title}</Box>
           <Box>
-            <IconButton onClick={onClose}>
+            <IconButton onClick={onClose} size="large">
               <CloseIcon />
             </IconButton>
           </Box>
         </Box>
       </DialogTitle>
-      <DialogContent dividers={true}>
+      <DialogContent dividers>
         {children}
       </DialogContent>
+      {actions
+        && (
+          <DialogActions>
+            {actions}
+          </DialogActions>
+        )}
     </Dialog>
   );
 }
