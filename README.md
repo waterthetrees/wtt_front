@@ -1,92 +1,40 @@
-# waterthetrees
+# Water the Trees - Frontend
 
-Water The Trees is a platform that crowd sources tree planting and maintenance. We believe in the power of trees to restore natural habitat for animals, insects, and fauna. We are interesting in continuous massive tree planting events to help sequester carbon and stabilize climate change extremes.
+Water the Trees (WTT) is a platform for crowd-sourced tree-planting and maintenance. We believe in the power of trees to restore natural habitats for wildlife and sequester carbon to stabilize the effects of climate change. 
 
-## Join Us!
+WTT is an open-source project run by volunteers at [Sierra Club San Francisco Bay Chapter](https://www.sierraclub.org/san-francisco-bay), [San Francisco Public Works](https://www.sfpublicworks.org/), and [Code for San Francisco](https://www.sfpublicworks.org/), part of the [Code for America](https://www.codeforamerica.org/) Brigade Network.
 
-https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit
-Water the Trees is an open source project run by tree planting volunteers at Sierra Club, Public Works, and developers at Code for America.
+## Want to contribute?
 
-### INSTALL GIT
+First, check out the [WTT Onboarding Guide](https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit?usp=sharing). Then, follow the instructions below.
 
-1. install git https://git-scm.com/downloads
+### Setup
 
-### INSTALL DOCKER
+New to coding? Before proceeding, be sure to install [Xcode command line tools](https://www.freecodecamp.org/news/install-xcode-command-line-tools/), [Node](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install), and [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-1. install docker https://www.docker.com/get-started
-2. install docker-compose (only on linux, on osx this installs with docker)
-
-### CLONE REPO
-
-1. Open terminal and run this
-
+1. Install docker https://www.docker.com/get-started. Using Linux? Install [Docker Compose](https://docs.docker.com/compose/install/) as well.
+2. Open Terminal and clone down the main repo:
 ```shell
 $ git clone https://github.com/waterthetrees/waterthetrees.git
+```
+3. Change to the main directory:
+```shell
 $ cd waterthetrees
 ```
-
-### BUILD AND START THE DOCKER
-
-1. run shell script to clone all repos and do docker-compose:
-
+4. Run these shell scripts to clone down all repos and run docker-compose:
 ```shell
-$ ./install_and_build.sh
+$ ./clone_repos.sh
+$ ./install.sh
 ```
-
-### OPEN TABS and start the servers
-
-1. Command T (on osx)
-
+5. Change to the frontend directory:
 ```shell
-$ cd wtt_front;npm start;
+$ cd wtt_front
 ```
-
-2. Command T (on osx)
-
+6. Install dependencies:
 ```shell
-$ cd wtt_server;npm start;
+$ yarn install
 ```
-
-# OTHER STUFF TO INSTALL IF YOU ARE NEW TO NODE DEVELOPMENT
-
-## Install Node.js 14.x and npm
-
-1. On linux
-
+7. Launch the Webpack server and have it watch for changes:
+```shell
+$ npm run start:dev
 ```
-$ sudo apt-get install -y nodejs
-```
-
-1. On OSX
-   https://nodejs.org/en/download/
-   https://github.com/tj/n
-
-```
-$ npm install -g n
-```
-
-## You may also need development tools to build native addons:
-
-1. On linux
-
-```
-$ sudo apt-get install gcc g++ make
-```
-
-1. On OSX
-
-```
-$ xcode-select --install
-```
-
-## To install the Yarn package manager, run:
-
-1. On linux
-
-```
-$ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-$ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-$ sudo apt-get update && sudo apt-get install yarn
-```
- 
-
