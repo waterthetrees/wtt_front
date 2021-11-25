@@ -85,14 +85,16 @@ export default function TreeRemoval({ idTree, common, notes }) {
       {showDelete && (
         <Button
           variant="contained"
-          color="secondary"
           id="removeTree"
           name="removeTree"
           onClick={handleReason}
+          sx={{
+            '&, &:hover': {
+              backgroundColor: 'darkorange',
+            }
+          }}
         >
-          Remove this
-          {' '}
-          {common}
+          Remove this {common}
         </Button>
       )}
       {reasonForRemoval && (

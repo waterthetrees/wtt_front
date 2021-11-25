@@ -4,6 +4,10 @@ function defaultGetValue(data, key) {
   return data[key];
 }
 
+function capitalize(string) {
+	return string[0].toUpperCase() + string.slice(1)
+}
+
 function Row({ label, value, Container }) {
   return (
     <Container>
@@ -18,10 +22,10 @@ export default function DataTable({ data, keys }) {
   return (
     <>
       {keys.map((item) => {
-        const [key, label, Container = 'div', getValue = defaultGetValue] = Array.isArray(item)
+        const [key, label = capitalize(key), Container = 'div', getValue = defaultGetValue] = Array.isArray(item)
           ? item
           // If item's not an array containing a custom label, use the capitalized key string.
-          : [item, item[0].toUpperCase() + item.slice(1)];
+          : [item, capitalize(item)]
         const value = getValue(data, key);
 
         return value

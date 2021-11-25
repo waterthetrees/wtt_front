@@ -108,40 +108,35 @@ const AddTreeModal = ({
       title={<TreeHeader renderCount={renderCount} />}
       onClose={toggle}
     >
-      <div className="addtree">
-        <div className="addtree__body">
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-            <MuiRadioSelector
-              register={register}
-              label="Tree Type Options"
-              options={typeArray}
-              control={control}
-            />
-            <TreeInfo
-              register={register}
-              control={control}
-              coordinates={coordinatesNewTree}
-              errors={errors}
-              treeList={treeList}
-            />
-            <TreeAddress
-              control={control}
-              coordinates={coordinatesNewTree}
-              errors={errors}
-            />
-            <TreePlanter
-              control={control}
-              errors={errors}
-            />
-            <ButtonsResult {...{
-              reset,
-              defaultValues,
-              setAddTreeSelected,
-            }}
-            />
-          </form>
-        </div>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="addtree">
+        <MuiRadioSelector
+          register={register}
+          label="Tree Type Options"
+          options={typeArray}
+          control={control}
+        />
+        <TreeInfo
+          register={register}
+          control={control}
+          errors={errors}
+          treeList={treeList}
+        />
+        <TreeAddress
+          control={control}
+          coordinates={coordinatesNewTree}
+          errors={errors}
+        />
+        <TreePlanter
+          control={control}
+          errors={errors}
+        />
+        <ButtonsResult {...{
+          reset,
+          defaultValues,
+          setAddTreeSelected,
+        }}
+        />
+      </form>
     </ScrollableDialog>
   );
 };

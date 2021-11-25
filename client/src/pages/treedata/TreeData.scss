@@ -1,17 +1,3 @@
-.modal-header {
-  border: 0;
-  padding: 0;
-}
-.modal-footer {
-  border: 0;
-  padding: 0;
-  justify-content: center;
-}
-
-.modal-header .close {
-  padding: 1rem 1rem;
-  margin: -.2rem -.2rem -1rem auto;
-}
 .treeremoval__reason{
   padding: 0 5px;
   width:100%;
@@ -40,25 +26,10 @@
   display: inline-flex;
 }
 
-.tree__header {
-  margin: 0 1.2rem;
-  border-bottom-right-radius: calc(.3rem - 1px);
-  border-bottom-left-radius: calc(.3rem - 1px);
-}
-
 hr.divider-solid {
   border-top: 3px solid #dee2e6;
   margin: 0;
   width: 100%;
-}
-
-.tree__body{
-  margin: 0 1.2rem;
-  overflow: scroll;
-}
-
-.tree__body::-webkit-scrollbar {
-  display: none;
 }
 
 .tree__label {
@@ -101,6 +72,7 @@ hr.divider-solid {
     background-color: #006400;
   }
 }
+
 .tree__status-btn-more {
   width: 0.9em;
   height: 0.9em;
@@ -236,28 +208,6 @@ element.style {
 }
 .tree__status__input:focus {
   border: 1px solid #dee2e6;
-}
-
-.modal.fade {
-  transition: none;
-}
-
-.modal {
-  position: relative;
-}
-
-.modal.fade .modal-dialog {
-  transition: none;
-  transition: none;
-  transition: none;
-  -webkit-transform: none;
-  transform: none;
-}
-
-.tree__modal {
-  max-height: 90vh;
-  width: 100vw;
-  color: white;
 }
 
 .tree__col {
@@ -471,9 +421,6 @@ element.style {
 
   textarea.form-control {
     height: auto;
-  }
-  .tree__modal {
-    margin: 0 auto;
   }
 
   .tree {

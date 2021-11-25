@@ -6,12 +6,18 @@ import {
   IconButton,
   Box,
   DialogActions,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function ScrollableDialog({
   children, title, open, onClose, actions,
 }) {
+  const theme = useTheme();
+  // Use a full-screen dialog on smaller screens.
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Dialog
       open={open}
@@ -19,12 +25,13 @@ export default function ScrollableDialog({
       scroll="paper"
       maxWidth="sm"
       fullWidth
+      fullScreen={fullScreen}
     >
-      <DialogTitle id="scroll-dialog-title">
+      <DialogTitle id="scroll-dialog-title" sx={{ py: 1 }}>
         <Box display="flex" alignItems="center">
           <Box flexGrow={1}>{title}</Box>
           <Box>
-            <IconButton onClick={onClose} size="large">
+            <IconButton onClick={onClose} size="small">
               <CloseIcon />
             </IconButton>
           </Box>

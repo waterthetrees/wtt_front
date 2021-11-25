@@ -130,23 +130,19 @@ const TreeMarker = ({
     }
   }, [addTreeSelected]);
 
-  return (
-    <div>
-      {coordinatesNewTree
-        && showAddTreeModal
-        && (
-          <AddTreeModal
-            showAddTreeModal={showAddTreeModal}
-            setShowAddTreeModal={setShowAddTreeModal}
-            renderCount={renderCount}
-            coordinatesNewTree={coordinatesNewTree}
-            setAddTreeSelected={setAddTreeSelected}
-            setNewTreeAdded={setNewTreeAdded}
-            newTreeAdded={newTreeAdded}
-          />
-        )}
-    </div>
-  );
+  return coordinatesNewTree
+    && showAddTreeModal
+    && (
+      <AddTreeModal
+        showAddTreeModal={showAddTreeModal}
+        setShowAddTreeModal={setShowAddTreeModal}
+        renderCount={renderCount}
+        coordinatesNewTree={coordinatesNewTree}
+        setAddTreeSelected={setAddTreeSelected}
+        setNewTreeAdded={setNewTreeAdded}
+        newTreeAdded={newTreeAdded}
+      />
+    );
 };
 
 export default AddTree;
