@@ -5,7 +5,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-} from '@material-ui/core';
+} from '@mui/material';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 

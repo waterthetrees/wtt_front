@@ -1,7 +1,11 @@
 import React from 'react';
 import DataTable from './DataTable';
 
-const locationKeys = ['address', 'city', 'zip', 'country', 'neighborhood', ['lng', 'Long'], 'lat'];
+const toFixed = (data, key) => data[key].toFixed(3);
+const locationKeys = ['address', 'city', 'zip', 'country', 'neighborhood',
+  ['lng', 'Long', undefined, toFixed],
+  ['lat', undefined, undefined, toFixed]
+];
 const moreInfoKeys = [['owner', 'Organization'], 'who', ['idReference', 'Reference #']];
 
 export const TreeLocation = (props) => (

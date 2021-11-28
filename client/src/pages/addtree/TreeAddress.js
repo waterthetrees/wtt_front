@@ -6,7 +6,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
@@ -37,11 +37,15 @@ export default function TreeAddress({ control, coordinates, errors }) {
       />
       {errors.city && <ErrorMessageAll errors={errors} name="city" />}
 
-      <FormControl>
+      <FormControl
+        variant="standard"
+      >
         <InputLabel id="state">State</InputLabel>
         <Controller
           as={(
-            <Select name="input" label="State">
+            <Select
+              labelId="state"
+            >
               <MenuItem value="AK">Alaska</MenuItem>
               <MenuItem value="AL">Alabama</MenuItem>
               <MenuItem value="AR">Arkansas</MenuItem>
@@ -153,6 +157,5 @@ export default function TreeAddress({ control, coordinates, errors }) {
       />
 
     </Widget>
-
   );
 }

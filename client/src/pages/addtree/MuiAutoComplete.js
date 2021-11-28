@@ -4,8 +4,8 @@ import {
   TextField,
   FormControl,
   InputLabel,
-} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+} from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Controller } from 'react-hook-form';
 
 export default function TreeName({

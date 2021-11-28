@@ -1,10 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import { styled, makeStyles, withStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/Star';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import { makeStyles, withStyles }from '@mui/styles';
+import StarIcon from '@mui/icons-material/Star';
 import React from 'react';
 import {
   useUserAdoptedQuery,
