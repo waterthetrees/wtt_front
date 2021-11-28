@@ -9,6 +9,7 @@ const { logger } = require('../logger');
 
 const env = process.argv[2] || 'local';
 const host = {
+  local: 'http://localhost',
   development: 'http://localhost',
   production: 'http://localhost',
   blue: 'http://localhost',

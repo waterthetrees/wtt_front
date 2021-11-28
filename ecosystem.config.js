@@ -4,13 +4,8 @@ module.exports = {
     name: 'wtt_front',
     instances: 'max',
     exec_mode: 'fork',
-    node_args: '--require dotenv/config',
     env: {
       NODE_ENV: 'development',
-    },
-    env_development: {
-      DOTENV_CONFIG_DEBUG: true,
-      DOTENV_CONFIG_PATH: '/var/www/html/dev.waterthetrees.com/wtt_front/.env',
     }
   }],
   deploy : {
@@ -27,7 +22,7 @@ module.exports = {
       host : 'localhost',
       ref  : 'origin/development',
       'pre-deploy-local': '',
-      'post-deploy' : 'pm2 reload ecosystem.config.js --env development',
+      'post-deploy' : 'yarn install && pm2 start ecosystem.config.js --env development',
       'pre-setup': ''
     },
   }
