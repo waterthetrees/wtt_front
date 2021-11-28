@@ -29,6 +29,9 @@ module.exports = (env) => {
       hot: true,
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
+    // The MapboxLegendControl library triggers this warning when trying to load its source map,
+    // which we can safely ignore.
+    ignoreWarnings: [/Failed to parse source map/],
     module: {
       rules: removeEmpty([
         {
@@ -38,6 +41,7 @@ module.exports = (env) => {
         },
         ifNotProduction({
           test: /\.js$/,
+          exclude: /mapbox-gl-legend/,
           enforce: 'pre',
           use: ['source-map-loader'],
         }),

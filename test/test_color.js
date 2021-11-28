@@ -10,6 +10,7 @@ const statusColor = (status, error) => {
       past_due: 'Payment__grid-label__showred',
       unpaid: 'Payment__grid-label__showred',
     }[status];
-}
+  }
+};
 
 // console.log(statusColor('aca', 'error'))

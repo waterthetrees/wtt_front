@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
-import {
-  Button,
-  ButtonGroup,
-} from 'reactstrap';
+import { Button } from '@mui/material';
 import format from 'date-fns/format';
-import './TreeData.scss';
 import MuiAutoComplete from '../addtree/MuiAutoComplete';
 import ErrorMessageAll from '../error/ErrorPage';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
@@ -95,28 +91,23 @@ export default function TreeHeaderForm({
       {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
 
       <div className="treedata__edit text-right">
-        <span>
-          <div className="treedata__edit-txt">
-            <h5>Planting a new tree here?</h5>
-          </div>
-          <ButtonGroup className="treedata__edit-btngrp">
-            <Button color="primary" className="btn-md" onClick={() => setNewTree('no')} active={newTree === 'no'}>no</Button>
-            <Button color="success" className="btn-md" onClick={() => setNewTree('yes')} active={newTree === 'yes'}>yes</Button>
-          </ButtonGroup>
-
-        </span>
+        <div className="treedata__edit-txt">
+          <h5>Planting a new tree here?</h5>
+        </div>
+        <Button variant="outlined" onClick={() => setNewTree('no')} active={newTree === 'no'}>no</Button>
+        <Button variant="outlined" onClick={() => setNewTree('yes')} active={newTree === 'yes'}>yes</Button>
       </div>
       <div className="treedata__edit-btn text-right">
         <Button
-          type="button"
-          color="link"
+          variant="outlined"
           onClick={() => setEditTree(false)}
         >
           cancel
         </Button>
         <Button
+          variant="outlined"
           type="submit"
-          color="success"
+          color="primary"
           className="btn btn-dark btn-md"
         >
           SAVE

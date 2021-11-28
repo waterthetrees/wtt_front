@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   RadioGroup,
   FormControlLabel,
@@ -9,7 +9,7 @@ import {
   FormHelperText,
   InputLabel,
   Radio,
-} from '@material-ui/core';
+} from '@mui/material';
 import Widget from '../../components/Widget';
 
 export default function MuiRadioSelector({

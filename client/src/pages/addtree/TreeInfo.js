@@ -1,29 +1,42 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Controller } from 'react-hook-form';
-
 import {
   TextField,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import MuiAutoComplete from './MuiAutoComplete';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
+import { treeHealth } from '../../util/treeHealth';
 
+// Create an array of DBH menu items: <1, 1 - 24, 30, 36, 42, 48, 56 inches.
+const dbhItems = [
+  <MenuItem key="<1 inch" value="<1 inch">less than 1"</MenuItem>
+].concat(
+  [...Array(25).keys()]
+    .slice(1)
+    .concat(30, 36, 42, 48, 56)
+    .map(value => <MenuItem key={value} value={value}>{value}"</MenuItem>)
+);
 
-export default function TreeInfo({ treeList, register, control, coordinates, errors }) {
+// Create an array of tree health items, reversed so that "good" comes first.
+const healthItems = treeHealth.getNameValuePairs().reverse()
+  .map(([name]) => <MenuItem key={name} value={name}>{name}</MenuItem>);
+
+export default function TreeInfo({ treeList, register, control, errors }) {
   return (
     <Widget title="Tree Info" classes="treeinfo">
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" optionValues={treeList} register={register} />
+      <MuiAutoComplete control={control} keyName="common" optionValues={treeList} register={register} />
       {errors.common && <ErrorMessageAll errors={errors} name="common" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" optionValues={treeList} register={register} />
+      <MuiAutoComplete control={control} keyName="scientific" optionValues={treeList} register={register} />
       {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
 
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" optionValues={treeList} register={register} />
+      <MuiAutoComplete control={control} keyName="genus" optionValues={treeList} register={register} />
       {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
 
       <Controller
@@ -38,43 +51,12 @@ export default function TreeInfo({ treeList, register, control, coordinates, err
       />
       {errors.datePlanted && <ErrorMessageAll errors={errors} name="datePlanted" />}
 
-      <FormControl>
-        <InputLabel id="dbh">DBH</InputLabel>
+      <FormControl
+        variant="standard"
+      >
+        <InputLabel id="dbh">Diameter</InputLabel>
         <Controller
-          as={(
-            <Select>
-              <MenuItem value="<1 inch">less than 1 inch</MenuItem>
-              <MenuItem value="1">1 Inch</MenuItem>
-              <MenuItem value="2">2 inch</MenuItem>
-              <MenuItem value="3">3 inch</MenuItem>
-              <MenuItem value="4">4 inch</MenuItem>
-              <MenuItem value="5">5 inch</MenuItem>
-              <MenuItem value="6">6 inch</MenuItem>
-              <MenuItem value="7">7 inch</MenuItem>
-              <MenuItem value="8">8 inch</MenuItem>
-              <MenuItem value="9">9 inch</MenuItem>
-              <MenuItem value="10">10 inch</MenuItem>
-              <MenuItem value="11">11 inch</MenuItem>
-              <MenuItem value="1">12 inch</MenuItem>
-              <MenuItem value="13">13 inch</MenuItem>
-              <MenuItem value="14">14 inch</MenuItem>
-              <MenuItem value="15">15 inch</MenuItem>
-              <MenuItem value="16">16 inch</MenuItem>
-              <MenuItem value="17">17 inch</MenuItem>
-              <MenuItem value="18">18 inch</MenuItem>
-              <MenuItem value="19">19 inch</MenuItem>
-              <MenuItem value="20">20 inch</MenuItem>
-              <MenuItem value="21">21 inch</MenuItem>
-              <MenuItem value="22">22 inch</MenuItem>
-              <MenuItem value="23">23 inch</MenuItem>
-              <MenuItem value="24">24 inch</MenuItem>
-              <MenuItem value="30">30 inch</MenuItem>
-              <MenuItem value="36">36 inch</MenuItem>
-              <MenuItem value="42">42 inch</MenuItem>
-              <MenuItem value="48">48 inch</MenuItem>
-              <MenuItem value="56">56 inch</MenuItem>
-            </Select>
-          )}
+          as={<Select labelId="dbh">{dbhItems}</Select>}
           name="dbh"
           control={control}
           variant="standard"
@@ -83,18 +65,12 @@ export default function TreeInfo({ treeList, register, control, coordinates, err
       </FormControl>
       {errors.dbh && <ErrorMessageAll errors={errors} name="dbh" />}
 
-      <FormControl>
+      <FormControl
+        variant="standard"
+      >
         <InputLabel id="health">Health</InputLabel>
         <Controller
-          as={(
-            <Select>
-              <MenuItem value="missing">missing</MenuItem>
-              <MenuItem value="stump">stump</MenuItem>
-              <MenuItem value="poor">poor</MenuItem>
-              <MenuItem value="fair">fair</MenuItem>
-              <MenuItem value="good">good</MenuItem>
-            </Select>
-          )}
+          as={<Select labelId="health">{healthItems}</Select>}
           name="health"
           control={control}
           variant="standard"
@@ -115,6 +91,5 @@ export default function TreeInfo({ treeList, register, control, coordinates, err
       {errors.notes && <ErrorMessageAll errors={errors} name="notes" />}
 
     </Widget>
-
   );
 }

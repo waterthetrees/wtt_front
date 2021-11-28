@@ -1,5 +1,4 @@
 import React from 'react';
-import './TreeData.scss';
 
 export default function TreeAdoptionDirections({ common, onmap }) {
   return (

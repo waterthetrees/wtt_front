@@ -1,140 +1,80 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import format from 'date-fns/format';
-import { Button } from 'reactstrap';
+import { Button, ToggleButton, ToggleButtonGroup, styled } from '@mui/material';
 import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
 
 const treeImagesPath = 'assets/images/trees/';
 
-const hasMaintenanceFields = (obj) => {
-  const maintenanceArray = ['watered', 'weeded', 'mulched', 'staked', 'braced',
-    'pruned', 'comment'];
-  const hasAny = maintenanceArray.some(
-    (item) => Object.prototype.hasOwnProperty.call(obj, item));
+const maintenanceActions = [
+  ['water', 'watered'],
+  ['weed', 'weeded'],
+  ['mulch', 'mulched'],
+  ['stake', 'staked'],
+  ['brace', 'braced'],
+  ['prune', 'pruned'],
+];
 
-  return hasAny;
-};
+const ActionGroup = styled(ToggleButtonGroup)`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 5px auto;
+`;
 
-const isEmpty = (obj) => {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const prop in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-      return false;
-    }
+const ActionButton = styled(ToggleButton)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 25%;
+  padding: 5px;
+  margin: 5px !important;
+  border-radius: 4px !important;
+  color: #fff !important;
+  &, &:hover {
+    background-color: #6c757d;
   }
-  return true;
-};
-
-const changeYesNo = (historybutton, statusSelected) => {
-  if (isEmpty(statusSelected)) {
-    return 'yes';
+  &.Mui-selected, &.Mui-selected:hover {
+    background-color: #545b62;
   }
-  if (!Object.prototype.hasOwnProperty.call(statusSelected,
-    historybutton)) {
-    return 'yes';
+`;
+
+const MaintenanceButtons = ({ actions, setActions }) => {
+  function handleChange(event, newActions) {
+    setActions(newActions);
   }
-  return (statusSelected[historybutton] === 'no')
-    ? 'yes'
-    : 'no';
-};
-
-const changeImageText = (historybutton, statusSelected) => {
-  const no = {
-    watered: 'water',
-    weeded: 'weed',
-    mulched: 'mulch',
-    staked: 'stake',
-    braced: 'brace',
-    pruned: 'prune',
-  };
-  const yes = {
-    watered: 'watered',
-    weeded: 'weeded',
-    mulched: 'mulched',
-    staked: 'staked',
-    braced: 'braced',
-    pruned: 'pruned',
-  };
-  if (isEmpty(statusSelected)) {
-    return yes[historybutton];
-  }
-  if (!Object.prototype.hasOwnProperty.call(statusSelected, historybutton)) {
-    return yes[historybutton];
-  }
-  return (statusSelected[historybutton] === 'no')
-    ? yes[historybutton]
-    : no[historybutton];
-};
-
-const MaintenanceButtons = ({ statusSelected, setStatusSelected }) => {
-  const [watered, setWater] = useState('water');
-  const [weeded, setWeed] = useState('weed');
-  const [mulched, setMulch] = useState('mulch');
-  const [staked, setStake] = useState('stake');
-  const [braced, setBrace] = useState('brace');
-  const [pruned, setPrune] = useState('prune');
-
-  const onCheckboxBtnClick = (event) => {
-    event.preventDefault();
-    const selected = event.target.name;
-
-    const newImageText = changeImageText(selected, statusSelected);
-    if (selected === 'watered') {
-      setWater(newImageText);
-    }
-    if (selected === 'weeded') {
-      setWeed(newImageText);
-    }
-    if (selected === 'mulched') {
-      setMulch(newImageText);
-    }
-    if (selected === 'staked') {
-      setStake(newImageText);
-    }
-    if (selected === 'braced') {
-      setBrace(newImageText);
-    }
-    if (selected === 'pruned') {
-      setPrune(newImageText);
-    }
-
-    const selectedValue = changeYesNo(selected, statusSelected);
-    setStatusSelected({ ...statusSelected, ...{ [selected]: selectedValue } });
-  };
-  const maintenanceImgTextArray = [watered, weeded, mulched, staked, braced,
-    pruned];
-  const maintenanceButtonsArray = ['watered', 'weeded', 'mulched', 'staked',
-    'braced', 'pruned'];
 
   return (
-    <div className="treemaintenance-buttons">
-      {maintenanceButtonsArray.map((maintenanceButton, index) => (
-        <Button
-          key={maintenanceButton}
-          type="button"
-          name={maintenanceButton}
-          className="treemaintenance-btn btn-sm success text-center"
-          onClick={onCheckboxBtnClick}
-          active={statusSelected[maintenanceButton] === 'yes'}
-        >
-          <img
-            alt={maintenanceButton}
-            name={maintenanceButton}
-            src={`assets/images/trees/${maintenanceImgTextArray[index]}.svg`}
-          />
-          {maintenanceImgTextArray[index]}
-        </Button>
-      ))}
-    </div>
+    <ActionGroup
+      value={actions}
+      onChange={handleChange}
+    >
+      {maintenanceActions.map(([action, pastAction]) => {
+        const selected = actions.includes(pastAction);
+        const label = selected ? pastAction : action;
+
+        return (
+          <ActionButton
+            key={pastAction}
+            value={pastAction}
+          >
+            <img src={`${treeImagesPath}${label}.svg`} />
+            {label}
+          </ActionButton>
+        );
+      })}
+    </ActionGroup>
   );
 };
 
 export default function TreeMaintenance({ currentTreeId }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
-  const [statusSelected, setStatusSelected] = useState({});
+  const [actions, setActions] = useState([]);
   const [maintenanceButtonStyle, setMaintenanceButtonStyle] = useState('btn-light');
   const [maintenanceSaveButton, setMaintenanceSaveButton] = useState('SAVE');
   const mutateHistory = useTreeHistoryMutation();
@@ -157,22 +97,22 @@ export default function TreeMaintenance({ currentTreeId }) {
     event.preventDefault();
 
     try {
-      const dateVisit = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-      const sendData = {
-        idTree: currentTreeId,
-        date_visit: dateVisit,
-        ...statusSelected,
-      };
+      const comment = commentRef.current.value;
+      const volunteer = volunteerRef.current.value;
 
-      if (commentRef.current && commentRef.current.value) {
-        sendData.comment = commentRef.current.value;
-      }
+      if (actions.length || comment) {
+        const actionsPayload = actions.reduce((result, action) => ({ ...result, [action]: 'yes' }), {});
+        const sendData = {
+          idTree: currentTreeId,
+          date_visit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+          volunteer,
+          ...actionsPayload
+        };
 
-      if (volunteerRef.current && volunteerRef.current.value) {
-        sendData.volunteer = volunteerRef.current.value;
-      }
+        if (comment) {
+          sendData.comment = comment;
+        }
 
-      if (hasMaintenanceFields(sendData)) {
         handleButtonChanges('btn-info', 'SAVING', 'btn-info', 'THANK YOU!');
         mutateHistory.mutate(sendData);
         setTimeout(() => handleMaintenanceSave(), saveTimer);
@@ -230,8 +170,8 @@ export default function TreeMaintenance({ currentTreeId }) {
             </div>
 
             <MaintenanceButtons
-              statusSelected={statusSelected}
-              setStatusSelected={setStatusSelected}
+              actions={actions}
+              setActions={setActions}
             />
 
             <div className="flex-grid tree__status">
@@ -246,15 +186,9 @@ export default function TreeMaintenance({ currentTreeId }) {
                 />
               </div>
 
-              {statusSelected.length > 0 && (
+              {actions.length > 0 && (
                 <div className="flex-grid text-center">
-                  <span>
-                    Maintenance Done:
-                    {' '}
-                    {statusSelected.length > 0
-                      ? statusSelected.join(', ')
-                      : 'None Yet'}
-                  </span>
+                  <span>Maintenance Done: {actions.join(', ')}</span>
                 </div>
               )}
             </div>
@@ -263,6 +197,7 @@ export default function TreeMaintenance({ currentTreeId }) {
               <Button
                 className={cx('btn-lg', maintenanceButtonStyle)}
                 type="submit"
+                variant="outlined"
               >
                 {maintenanceSaveButton}
               </Button>

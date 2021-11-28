@@ -59,22 +59,14 @@ export default function TreeCountLayer({
 
     map.on('click', name, ({ features: [feature], lngLat: lng }) => {
       const coordinates = feature.geometry.coordinates.slice();
-      const featureName = feature.properties.name;
 
       while (Math.abs(lng - coordinates[0]) > 180) {
         coordinates[0] += lng > coordinates[0] ? 360 : -360;
       }
 
-      map.setCenter(coordinates);
       map.flyTo({
         center: coordinates,
         zoom: [flyToZoom],
-      });
-      map.setFeatureState({
-        source: name,
-        id: featureName,
-      }, {
-        hover: true,
       });
     });
 

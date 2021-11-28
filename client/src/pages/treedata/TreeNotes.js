@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
-import { Button } from 'reactstrap';
+import { Button } from '@mui/material';
 import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeDataMutation } from '../../api/queries';
@@ -63,6 +63,7 @@ export default function TreeNotes({ currentTreeId, notes }) {
               <div className="tree__status text-right">
                 <Button
                   type="submit"
+                  variant="outlined"
                   className={cx('btn-lg', notesButtonStyle)}
                 >
                   {notesSaveButton}

@@ -1,7 +1,7 @@
 import React from 'react';
 import format from 'date-fns/format';
-import Favorite from '@material-ui/icons/Favorite';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Favorite from '@mui/icons-material/Favorite';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const makeMaintenanceString = (history) => {
   const historyArray = Object.entries(history)
