@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({
+export default  ({
   reset, defaultValues, setAddTreeSelected,
 }) => (
   <div className="addtree_btngroup">

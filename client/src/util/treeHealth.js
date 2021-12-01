@@ -5,33 +5,20 @@
 //  - optional stroke color string for the circle, which defaults to the fill color
 // The state's value (returned as healthNum by the API) is defined by its index in this array.
 const healthInfo = [
-  ['vacant', false, 'white', '#8d5524'],
-  ['dead', false, 'white', 'black'],
-  ['missing', false, 'white', '#c68642'],
-  ['stump', false, 'white', '#f1c27d'],
+  ['vacant', false, '#c0c0c0'],
+  ['dead', false, '#bb0000'],
+  ['missing', false, 'black'],
+  ['stump', false, '#f1c27d'],
   ['poor', true, '#be9b7b'],
-  ['fair', true, '#889944'],
+  ['fair', true, '#96b347'],
   ['good', true, '#309000'],
 ];
-// TODO: decide on colors to distinguish the bad health values
-//const healthInfo = [
-//  ['vacant', false, '#808080'],
-//  ['dead', false, 'black', 'black'],
-//  ['missing', false, 'white', '#c68642'],
-//  ['stump', false, '#f1c27d'],
-//  ['poor', true, '#be9b7b'],
-//  ['fair', true, '#889944'],
-//  ['good', true, '#309000'],
-//];
 const maxValue = healthInfo.length - 1;
 
-const healthByName = healthInfo.reduce((result, [name, maintainable, fill, stroke = fill], i) => {
-  result[name] = {
-    key: name, value: i, maintainable, fill, stroke,
-  };
-
-  return result;
-}, {});
+const healthByName = healthInfo.reduce((result, [name, maintainable, fill, stroke = fill], i) => ({
+  ...result,
+  [name]: { key: name, value: i, maintainable, fill, stroke }
+}), {});
 
 // If the health isn't between 0 and 6, default to the good color.
 healthByName.default = healthByName.good;

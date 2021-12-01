@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, ModalFooter, ModalHeader } from 'reactstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeQuery } from '../../api/queries';
+import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
 import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeHeaderForm from './TreeDataEdit';
 import TreeRemoval from './TreeRemoval';
@@ -56,106 +56,98 @@ const TreeContent = ({ currentTreeId, map }) => {
   // TODO: pass idTree or currentTreeId to children?  should be consistent.
   return (
     <div className="tree text-center">
-      <div className="tree__header">
-        {!editTree && (
-          <TreeHeader
-            idTree={idTree}
-            common={common}
-            scientific={scientific}
-            genus={genus}
-            datePlanted={datePlanted}
-            dbh={dbh}
-            height={height}
-            edit={edit}
-          />
-        )}
-
-        {editTree && (
-          <TreeHeaderForm
-            idTree={idTree}
-            common={common}
-            scientific={scientific}
-            genus={genus}
-            treeData={treeData}
-            datePlanted={datePlanted}
-            setEditTree={setEditTree}
-          />
-        )}
-
-        <AdoptLikeCheckboxes
+      {!editTree && (
+        <TreeHeader
           idTree={idTree}
           common={common}
+          scientific={scientific}
+          genus={genus}
+          datePlanted={datePlanted}
+          dbh={dbh}
+          height={height}
+          edit={edit}
         />
-      </div>
+      )}
 
-      <hr className="divider-solid" />
-
-      <div className="tree__body">
-        <TreeHealthSlider
-          currentTreeId={currentTreeId}
+      {editTree && (
+        <TreeHeaderForm
+          idTree={idTree}
           common={common}
-          health={health}
-          healthNum={healthNum}
-          lng={lng}
-          lat={lat}
-          map={map}
+          scientific={scientific}
+          genus={genus}
+          treeData={treeData}
+          datePlanted={datePlanted}
+          setEditTree={setEditTree}
         />
+      )}
 
-        <TreeNotes
-          currentTreeId={currentTreeId}
+      <AdoptLikeCheckboxes
+        idTree={idTree}
+        common={common}
+      />
+
+      <TreeHealthSlider
+        currentTreeId={currentTreeId}
+        common={common}
+        health={health}
+        healthNum={healthNum}
+        lng={lng}
+        lat={lat}
+        map={map}
+      />
+
+      <TreeNotes
+        currentTreeId={currentTreeId}
+        notes={notes}
+      />
+
+      <TreeCare
+        currentTreeId={currentTreeId}
+        common={common}
+        health={health}
+      />
+
+      <TreeLocation
+        address={address}
+        city={city}
+        zip={zip}
+        country={country}
+        neighborhood={neighborhood}
+        lng={lng}
+        lat={lat}
+        owner={owner}
+      />
+
+      <TreeMoreInfo
+        owner={owner}
+        idReference={idReference}
+        who={who}
+      />
+
+      {!common.includes('VACANT') && (
+        <TreeRemoval
+          idTree={idTree}
+          common={common}
           notes={notes}
         />
-
-        <TreeCare
-          currentTreeId={currentTreeId}
-          common={common}
-          health={health}
-        />
-
-        <TreeLocation
-          address={address}
-          city={city}
-          zip={zip}
-          country={country}
-          neighborhood={neighborhood}
-          lng={lng}
-          lat={lat}
-          owner={owner}
-        />
-
-        <TreeMoreInfo
-          owner={owner}
-          idReference={idReference}
-          who={who}
-        />
-
-        {!common.includes('VACANT') && (
-          <TreeRemoval
-            idTree={idTree}
-            common={common}
-            notes={notes}
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 };
 
 export default function TreeData({ map, currentTreeId, setCurrentTreeId }) {
-  const toggle = () => setCurrentTreeId(null);
+  const handleClose = () => setCurrentTreeId(null);
 
   return (
-    <Modal
-      className="tree__modal"
-      isOpen={!!currentTreeId}
-      toggle={toggle}
+    <ScrollableDialog
+      title="Tree Inspector"
+      open={!!currentTreeId}
+      onClose={handleClose}
     >
-      <ModalHeader toggle={toggle} />
       <TreeContent
         currentTreeId={currentTreeId}
         map={map}
       />
-      <ModalFooter />
-    </Modal>
+    </ScrollableDialog>
   );
 }

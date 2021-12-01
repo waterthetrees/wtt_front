@@ -1,28 +1,29 @@
 import React from 'react';
-import { tilesServerEndpoints } from '../../api/apiEndpoints';
 import { useCitiesQuery, useCountriesQuery, useTreemapQuery } from '../../api/queries';
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
 import { treeHealth } from '../../util/treeHealth';
 
-const colorMatch = [
-  'match',
-  ['get', 'health'],
-];
-const treeFillColors = colorMatch.concat(treeHealth.getPaintColors('fill'));
-const treeStrokeColors = colorMatch.concat(treeHealth.getPaintColors('stroke'));
-const circlePaint = {
-  'circle-opacity': 0.8,
-  'circle-color': treeFillColors,
-  'circle-radius': {
-    base: 0.75,
-    stops: [
-      [12, 1],
-      [18, 6],
-    ],
-  },
+const circleRadius = {
+  'circle-radius': [
+    'interpolate', ['linear'], ['zoom'],
+    12, 1,
+    18, 6,
+  ],
+};
+const circleLayerZoomRange = {
+  type: 'circle',
+  minzoom: 11,
+  maxzoom: 22,
+};
+const circleVectorLayer = {
+  'source-layer': 'public.treedata',
+  source: 'public.treedata',
+  ...circleLayerZoomRange,
 };
 
+// The noData TreeLayer needs to be created first, so that when the legend reverses the order, it
+// appears at the bottom of the list.
 export default function MapLayers({ map, setCurrentTreeId }) {
   return (
     <>
@@ -45,23 +46,40 @@ export default function MapLayers({ map, setCurrentTreeId }) {
       />
 
       <TreeLayer
-        name="public.treedata"
+        key="noData"
+        name="noData"
         layer={{
-          'source-layer': 'public.treedata',
-          source: {
-            type: 'vector',
-            tiles: [`${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`],
-          },
-          type: 'circle',
-          minzoom: 11,
-          maxzoom: 22,
+          filter: ['!has', 'health'],
+          ...circleVectorLayer,
           paint: {
-            ...circlePaint,
+            'circle-color': treeHealth.getColorByName('default', 'fill'),
+            ...circleRadius,
           },
         }}
         map={map}
         setCurrentTreeId={setCurrentTreeId}
       />
+
+      {treeHealth.getNameValuePairs().map(([name]) => (
+        <TreeLayer
+          key={name}
+          name={name}
+          layer={{
+            filter: [
+              'match',
+              ['get', 'health'],
+              `${name}`, true, false,
+            ],
+            ...circleVectorLayer,
+            paint: {
+              'circle-color': treeHealth.getColorByName(name, 'fill'),
+              ...circleRadius,
+            },
+          }}
+          map={map}
+          setCurrentTreeId={setCurrentTreeId}
+        />
+      ))}
 
       <TreeLayer
         name="treedata"
@@ -74,13 +92,14 @@ export default function MapLayers({ map, setCurrentTreeId }) {
               type: 'FeatureCollection',
             },
           },
-          type: 'circle',
-          minzoom: 11,
-          maxzoom: 22,
+          ...circleLayerZoomRange,
           paint: {
-            ...circlePaint,
-            'circle-stroke-color': treeStrokeColors,
-            'circle-stroke-width': 3,
+            'circle-color': [
+              'match',
+              ['get', 'health'],
+              ...treeHealth.getPaintColors('fill'),
+            ],
+            ...circleRadius,
           },
         }}
         map={map}

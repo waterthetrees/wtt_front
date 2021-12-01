@@ -87,8 +87,7 @@ export default function TreeHealthSlider({
           className="slider"
           list="healthSlider"
           id="healthSlider"
-// TODO: use the solid color gradient when the colors have been decided
-//          style={healthSliderStyle}
+          style={healthSliderStyle}
           defaultValue={healthNum}
           onChange={handleOnChange}
         />

@@ -24,7 +24,7 @@
   width:100%;
 }
 .treeremoval__reason-btngrp{
-  width:100%;
+  justify-content: center;
 }
 .treeremoval__reason-btn{
   padding: 3px;
@@ -47,25 +47,10 @@
   display: inline-flex;
 }
 
-.tree__header {
-  margin: 0 1.2rem;
-  border-bottom-right-radius: calc(.3rem - 1px);
-  border-bottom-left-radius: calc(.3rem - 1px);
-}
-
 hr.divider-solid {
   border-top: 3px solid #dee2e6;
   margin: 0;
   width: 100%;
-}
-
-.tree__body{
-  margin: 0 1.2rem;
-  overflow: scroll;
-}
-
-.tree__body::-webkit-scrollbar {
-  display: none;
 }
 
 .tree__label {
@@ -108,6 +93,7 @@ hr.divider-solid {
     background-color: #006400;
   }
 }
+
 .tree__status-btn-more {
   width: 0.9em;
   height: 0.9em;
@@ -121,8 +107,8 @@ hr.divider-solid {
 
 .tree {
   z-index: 2000;
-  font: Normal $font-size-sm $font-family-base;
-  font-weight: $font-weight-base;
+  font-size: .875rem;
+  font-weight: 400;
   letter-spacing: 0;
   color: #000000;
   opacity: 1;
@@ -218,7 +204,7 @@ element.style {
   align-items: center;
   flex: 1 0 25%;
   padding: 5px;
-  margin: 5px;
+  margin: 5px !important;
   page-break-after: always; /* CSS 2.1 syntax */
   break-after: always; /* New syntax */
   font-size: 1.5rem;
@@ -243,28 +229,6 @@ element.style {
 }
 .tree__status__input:focus {
   border: 1px solid #dee2e6;
-}
-
-.modal.fade {
-  transition: none;
-}
-
-.modal {
-  position: relative;
-}
-
-.modal.fade .modal-dialog {
-  transition: none;
-  transition: none;
-  transition: none;
-  -webkit-transform: none;
-  transform: none;
-}
-
-.tree__modal {
-  max-height: 90vh;
-  width: 100vw;
-  color: white;
 }
 
 .tree__col {
@@ -383,76 +347,6 @@ element.style {
   height: 100%;
 }
 
-
-.progressbar {
-  height: 20px;
-  width: 100%;
-  border-radius: 10px;
-  margin: 5px;
-
-  background: -moz-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 0, 0, 1) 25%,
-    rgba(255, 184, 41, 1) 50%,
-    rgba(97, 156, 58, 1) 75%,
-    rgba(84, 219, 22, 1) 100%
-  ); /* ff3.6+ */
-
-  background: -webkit-gradient(
-    linear,
-    left bottom,
-    right top,
-    color-stop(0%, rgba(0, 0, 0, 1)),
-    color-stop(25%, rgba(255, 0, 0, 1)),
-    color-stop(50%, rgba(255, 184, 41, 1)),
-    color-stop(75%, rgba(97, 156, 58, 1)),
-    color-stop(100%, rgba(84, 219, 22, 1))
-  ); /* safari4+,chrome */
-
-  background: -webkit-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 0, 0, 1) 25%,
-    rgba(255, 184, 41, 1) 50%,
-    rgba(97, 156, 58, 1) 75%,
-    rgba(84, 219, 22, 1) 100%
-  ); /* safari5.1+,chrome10+ */
-
-  background: -o-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 0, 0, 1) 25%,
-    rgba(255, 184, 41, 1) 50%,
-    rgba(97, 156, 58, 1) 75%,
-    rgba(84, 219, 22, 1) 100%
-  ); /* opera 11.10+ */
-
-  background: -ms-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 0, 0, 1) 25%,
-    rgba(255, 184, 41, 1) 50%,
-    rgba(97, 156, 58, 1) 75%,
-    rgba(84, 219, 22, 1) 100%
-  ); /* ie10+ */
-
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 0, 0, 1) 25%,
-    rgba(255, 184, 41, 1) 50%,
-    rgba(97, 156, 58, 1) 75%,
-    rgba(84, 219, 22, 1) 100%
-  ); /* w3c */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(
-    startColorstr='#54DB16',
-    endColorstr='#000000',
-    GradientType=1
-  ); /* ie6-9 */
-}
-
 .container_popup {
   width: 500px;
   height: 500px;
@@ -468,7 +362,7 @@ element.style {
 }
 
 .tree__add-label {
-  font-size: $font-size-index;
+  font-size: .7rem;
 }
 
 .tree__type {
@@ -549,9 +443,6 @@ element.style {
   textarea.form-control {
     height: auto;
   }
-  .tree__modal {
-    margin: 0 auto;
-  }
 
   .tree {
     .form-control {
@@ -589,14 +480,6 @@ element.style {
   border-radius: 1px;
   margin: 0;
   background-color: #008c00; /* For browsers that do not support gradients */
-  background-image: linear-gradient(
-    to right,
-    black,
-    #8b6742,
-    #8c8c00,
-    #00b200,
-    #008c00
-  );
   border: 1px solid #ddd;
   outline: none;
   opacity: 0.7;

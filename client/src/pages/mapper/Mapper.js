@@ -1,17 +1,28 @@
-import mapboxgl from 'mapbox-gl';
 import React, { useState, useRef, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import { MapboxLegendControl } from '@watergis/mapbox-gl-legend';
 import { mapboxAccessToken } from '../../util/config';
+import { treeHealth } from '../../util/treeHealth';
 import AddTree from '../addtree/AddTree';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 import TreeData from '../treedata';
 import MapLayers from './MapLayers';
+import '@watergis/mapbox-gl-legend/css/styles.css';
 import './Mapper.scss';
+import { tilesServerEndpoints } from '../../api/apiEndpoints';
 
 mapboxgl.accessToken = mapboxAccessToken;
 
 const isMapboxSupported = mapboxgl.supported();
+const legendTargets = [['noData', 'No Data']].concat(treeHealth.getNameValuePairs())
+  .reduce((result, [name, label]) => ({
+    ...result,
+    [name]: typeof label === 'string'
+      ? label
+      : name.replace(/(^\w)/g, (m) => m.toUpperCase()),
+  }), {});
 
 function Mapper() {
   const [map, setMap] = useState(null);
@@ -39,9 +50,25 @@ function Mapper() {
         trackUserLocation: true,
       }));
       mapboxMap.addControl(new mapboxgl.NavigationControl());
+      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
+        {
+          showDefault: true,
+          showCheckbox: true,
+          onlyRendered: false,
+          reverseOrder: true,
+        },
+        // TODO: specifying a location doesn't work for some reason.
+        'bottom-right'));
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
+
+        // Now that the style has loaded, add the vector tile source, which will be used by the
+        // TreeLayer components to generate a layer for each health type.
+        mapboxMap.addSource('public.treedata', {
+          type: 'vector',
+          tiles: [`${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`],
+        });
       });
 
       setMap(mapboxMap);
