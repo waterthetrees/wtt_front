@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function TreeAdoptionDirections({ common, onmap }) {
+export default function TreeAdoptionDirections({ onmap }) {
   return (
-    <div className="flex-grid  border-top text-left">
+    <div className="treeadoption_directions">
       <h3>
         ADOPT a TREE!
       </h3>

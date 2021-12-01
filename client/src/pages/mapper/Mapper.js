@@ -4,6 +4,7 @@ import { MapboxLegendControl } from '@watergis/mapbox-gl-legend';
 import { mapboxAccessToken } from '../../util/config';
 import { treeHealth } from '../../util/treeHealth';
 import AddTree from '../addtree/AddTree';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 import TreeData from '../treedata';
@@ -20,7 +21,7 @@ const legendTargets = [['noData', 'No Data']].concat(treeHealth.getNameValuePair
     ...result,
     [name]: typeof label === 'string'
       ? label
-      : name.replace(/(^\w)/g, (m) => m.toUpperCase())
+      : name.replace(/(^\w)/g, (m) => m.toUpperCase()),
   }), {});
 
 function Mapper() {
@@ -83,20 +84,24 @@ function Mapper() {
       {isMapboxSupported
         ? isMapLoaded && (
           <>
-            <Slideout
-              buttonText={{ left: 'ADOPT' }}
-            >
-              <TreeAdoptionDirections onmap />
-            </Slideout>
+            <Sidebar>
+              <Slideout
+                buttonText={{ left: 'ADOPT' }}
+                classNameButton="slideout__btn  slideout__btn__shape"
+                classNameButtonText="slideout__btn-txt slideout__btn-txt__shape"
+              >
+                <TreeAdoptionDirections onmap />
+              </Slideout>
 
-            <AddTree
-              map={map}
-              setZoom={setZoom}
-              center={center}
-              setCenter={setCenter}
-              newTreeAdded={newTreeAdded}
-              setNewTreeAdded={setNewTreeAdded}
-            />
+              <AddTree
+                map={map}
+                setZoom={setZoom}
+                center={center}
+                setCenter={setCenter}
+                newTreeAdded={newTreeAdded}
+                setNewTreeAdded={setNewTreeAdded}
+              />
+            </Sidebar>
 
             {currentTreeId && (
               <TreeData

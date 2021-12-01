@@ -97,7 +97,7 @@ export default function MapLayers({ map, setCurrentTreeId }) {
             'circle-color': [
               'match',
               ['get', 'health'],
-              ...treeHealth.getPaintColors('fill')
+              ...treeHealth.getPaintColors('fill'),
             ],
             ...circleRadius,
           },

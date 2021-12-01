@@ -1,3 +1,20 @@
+@import "../../styles/app";
+
+.modal-header {
+  border: 0;
+  padding: 0;
+}
+.modal-footer {
+  border: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -.2rem -.2rem -1rem auto;
+}
+
 .treeremoval__reason{
   padding: 0 5px;
   width:100%;
