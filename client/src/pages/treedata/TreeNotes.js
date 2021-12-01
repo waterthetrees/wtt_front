@@ -61,10 +61,13 @@ export default function TreeNotes({ currentTreeId, notes }) {
             />
             {showSave && (
               <div className="tree__status text-right">
+
                 <Button
                   type="submit"
-                  variant="outlined"
-                  className={cx('btn-lg', notesButtonStyle)}
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  disableElevation
                 >
                   {notesSaveButton}
                 </Button>
@@ -75,4 +78,4 @@ export default function TreeNotes({ currentTreeId, notes }) {
       </div>
     </div>
   );
-};
+}
