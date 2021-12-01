@@ -42,8 +42,6 @@ const TreeContent = ({ currentTreeId, map }) => {
     owner,
     idReference,
     who,
-    dbh,
-    height,
     country,
     zip,
     notes,
@@ -58,13 +56,7 @@ const TreeContent = ({ currentTreeId, map }) => {
     <div className="tree text-center">
       {!editTree && (
         <TreeHeader
-          idTree={idTree}
-          common={common}
-          scientific={scientific}
-          genus={genus}
-          datePlanted={datePlanted}
-          dbh={dbh}
-          height={height}
+          treeData={treeData}
           edit={edit}
         />
       )}
@@ -115,7 +107,6 @@ const TreeContent = ({ currentTreeId, map }) => {
         neighborhood={neighborhood}
         lng={lng}
         lat={lat}
-        owner={owner}
       />
 
       <TreeMoreInfo

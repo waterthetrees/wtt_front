@@ -15,6 +15,12 @@
   margin: -.2rem -.2rem -1rem auto;
 }
 
+.treeremoval-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .treeremoval__reason{
   padding: 0 5px;
   width:100%;
@@ -419,6 +425,23 @@ element.style {
   border-color: transparent;
   z-index: 200 !important;
   width: 100%;
+}
+.datatable{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.datatable__row {
+  border-color: #e9ecef;
+  padding: 0 9px;
+}
+.datatable__row:nth-child(odd) {
+  background-color: #e9ecef;
+}
+
+.datatable__span {
+  width: 8em;
+  display: inline-block;
 }
 
 /*mobile*/

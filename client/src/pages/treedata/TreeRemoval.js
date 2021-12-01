@@ -90,11 +90,13 @@ export default function TreeRemoval({ idTree, common, notes }) {
           onClick={handleReason}
           sx={{
             '&, &:hover': {
-              backgroundColor: 'darkorange',
-            }
+              backgroundColor: '#666666',
+            },
           }}
         >
-          Remove this {common}
+          Remove this
+          {' '}
+          {common}
         </Button>
       )}
       {reasonForRemoval && (
@@ -131,28 +133,30 @@ export default function TreeRemoval({ idTree, common, notes }) {
       )}
 
       {reallyDelete && (
-        <span>
+        <div>
           <div><h3>{message}</h3></div>
-          <Button
-            className="treeremoval-btn"
-            variant="contained"
-            color="secondary"
-            id="yesRemoveTree"
-            name="yesRemoveTree"
-            onClick={handleYesRemoveTree}
-          >
-            Yes
-          </Button>
-          <Button
-            className="treeremoval-btn"
-            variant="contained"
-            id="noRemoveTree"
-            name="noRemoveTree"
-            onClick={() => setReallyDelete(false)}
-          >
-            No
-          </Button>
-        </span>
+          <div className="treeremoval-btn">
+            <Button
+              variant="outlined"
+              color="error"
+              size="large"
+              id="yesRemoveTree"
+              name="yesRemoveTree"
+              onClick={handleYesRemoveTree}
+            >
+              Yes
+            </Button>
+            <Button
+              variant="contained"
+              id="noRemoveTree"
+              name="noRemoveTree"
+              size="large"
+              onClick={() => setReallyDelete(false)}
+            >
+              No
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

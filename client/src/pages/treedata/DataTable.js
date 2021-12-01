@@ -1,41 +1,21 @@
 import React from 'react';
 
-function defaultGetValue(data, key) {
-  return data[key];
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
 }
 
-function capitalize(string) {
-	return string[0].toUpperCase() + string.slice(1)
-}
-
-function Row({ label, value, Container }) {
+export default function DataTable({ data }) {
   return (
-    <Container>
-      { label
-        && <span style={{ width: '7em', display: 'inline-block' }}>{label}:</span>}
-      <span>{value}</span>
-    </Container>
-  );
-}
-
-export default function DataTable({ data, keys }) {
-  return (
-    <>
-      {keys.map((item) => {
-        const [key, label = capitalize(key), Container = 'div', getValue = defaultGetValue] = Array.isArray(item)
-          ? item
-          // If item's not an array containing a custom label, use the capitalized key string.
-          : [item, capitalize(item)]
-        const value = getValue(data, key);
-
-        return value
-          && <Row
-            key={key}
-            label={label}
-            value={value}
-            Container={Container}
-          />;
-      })}
-    </>
+    <div className="datatable">
+      {Object.entries(data).map(([key, value]) => (
+        <div key={key} className="datatable__row">
+          <span className="datatable__span">
+            {capitalizeFirstLetter(key)}
+            :
+          </span>
+          <span>{value}</span>
+        </div>
+      ))}
+    </div>
   );
 }
