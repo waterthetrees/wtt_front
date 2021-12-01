@@ -1,12 +1,12 @@
 name: Send Watering Notification
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: 00 09 * * * # Every day at 9:00 GMT => 1:00am Pacific
+  push:
+    branches:
+      - development
 
 jobs:
-  send-watering-notification:
+  deploy-dev:
     runs-on: ubuntu-20.04
     steps:
       - name: Hit the Webhook
