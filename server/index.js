@@ -9,7 +9,8 @@ const { logger } = require('../logger');
 
 const env = process.argv[2] || 'local';
 const host = {
-  dev: 'http://localhost',
+  local: 'http://localhost',
+  development: 'http://localhost',
   production: 'http://localhost',
   blue: 'http://localhost',
   localserver: 'http://localhost',
@@ -18,7 +19,7 @@ const host = {
 const port = {
   production: 3001,
   blue: 3000,
-  dev: 3001,
+  development: 3001,
   local: 3001,
   localserver: 3000,
   docker: 3000,
