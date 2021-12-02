@@ -1,4 +1,4 @@
-name: Send Watering Notification
+name: deploy_development_to_dev.waterthetrees.com
 
 on:
   push:
