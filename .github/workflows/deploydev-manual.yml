@@ -21,4 +21,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Hit the Webhook
-        run: "curl -H 'WTT-SECRET-DEPLOY: ${{ secrets.WTT_SECRET_DEPLOY }}' -d '' https://dev.waterthetrees.com/deploydev/wttfront"
+        run: "curl -H 'WTT-SECRET-DEPLOY: ${{ secrets.WTT_SECRET_DEPLOY }}' -d '' https://dev.waterthetrees.com/deploydev/wtt_front_deploy"
