@@ -14,7 +14,7 @@ export default function TreeHeader({
   return (
     <div className="text-left">
       <h1>{common}</h1>
-      {!['vacant', 'vacant site', 'asphalted well'].includes(common.toLowerCase()) && (
+      {!['vacant', 'vacant site', 'unsuitable site', 'asphalted well'].includes(common.toLowerCase()) && (
         <div>
           <h2>{scientific}</h2>
           {(scientific !== genus) && <h2>{genus}</h2>}
