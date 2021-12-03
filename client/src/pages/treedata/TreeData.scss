@@ -432,6 +432,15 @@ element.style {
   justify-content: flex-start;
 }
 .datatable__row {
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: flex-start;
+  /* flex-basis: 15%; */
+  // flex-grow: 0;
+  // flex-shrink: 0;
+  // flex-basis: 25% 75%;
+  // border-color: #e9ecef;
+  // padding: 0 9px;
   border-color: #e9ecef;
   padding: 0 9px;
 }
@@ -439,13 +448,22 @@ element.style {
   background-color: #e9ecef;
 }
 
-.datatable__span {
+.datatable__span-key {
+  // flex-basis: 50%;
   width: 8em;
   display: inline-block;
 }
 
+.datatable__span-value {
+  white-space: nowrap;
+}
+
 /*mobile*/
 @media (max-width: 400px) {
+  .treemaintenance-btn-header {
+    font-size: 1.9rem;
+  }
+
   .treehistory-list {
     margin: 5px;
     font-size: 1rem;

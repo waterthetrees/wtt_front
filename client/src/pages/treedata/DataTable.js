@@ -9,11 +9,11 @@ export default function DataTable({ data }) {
     <div className="datatable">
       {Object.entries(data).map(([key, value]) => (
         <div key={key} className="datatable__row">
-          <span className="datatable__span">
+          <span className="datatable__span-key">
             {capitalizeFirstLetter(key)}
             :
           </span>
-          <span>{value}</span>
+          <span className="datatable__span-value">{value}</span>
         </div>
       ))}
     </div>

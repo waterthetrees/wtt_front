@@ -1,31 +1,19 @@
 import React from 'react';
 import DataTable from './DataTable';
 
-export const TreeLocation = (props) => (
+export const TreeInfo = (props) => (
   <div className="flex-grid border-top">
     <div className="treehistory-list text-left">
-      <h4 className="text-center">Location</h4>
+      <h4 className="text-center">Tree Info</h4>
       <DataTable
         data={props}
         keys={Object.keys(props)}
       />
     </div>
-  </div>
-);
-
-export const TreeMoreInfo = (props) => (
-  <div className="flex-grid border-top">
-    <div className="treehistory-list text-left">
-      <h4 className="text-center">More info</h4>
-      <DataTable
-        data={props}
-        keys={Object.keys(props)}
-      />
-      <div>
-        <a href="https://standards.opencouncildata.org/#/trees" name="opencouncildata.org trees">
-          Open Tree Standards
-        </a>
-      </div>
+    <div className="treehistory-list text-center">
+      <a href="https://standards.opencouncildata.org/#/trees" name="opencouncildata.org trees">
+        Open Tree Standards
+      </a>
     </div>
   </div>
 );

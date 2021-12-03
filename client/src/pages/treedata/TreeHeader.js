@@ -6,17 +6,20 @@ import { env } from '../../util/config';
 
 // TODO: when edit mode is fixed, remove the env check below
 export default function TreeHeader({
-  treeData, edit,
+  treeData, edit, vacant,
 }) {
   const {
     common, scientific, genus, datePlanted, dbh, height,
   } = treeData;
+  const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   return (
     <div className="text-left">
-      <h1>{common}</h1>
-      {!['vacant', 'asphalted well'].includes(common.toLowerCase()) && (
+      <h1>
+        {common}
+      </h1>
+      {!vacant && (
         <div>
-          <h2>{scientific}</h2>
+          <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>
           {(scientific !== genus) && <h2>{genus}</h2>}
           <h5>Planted: {format(new Date(datePlanted), 'MMMM d, yyyy')}</h5>
           <h5>Height: {height}</h5>
