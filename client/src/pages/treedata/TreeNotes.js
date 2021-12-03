@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import cx from 'clsx';
+import { Notes } from '@mui/icons-material';
 import { saveTimer } from '../../util/constants';
 import { useTreeDataMutation } from '../../api/queries';
 
@@ -41,15 +42,14 @@ export default function TreeNotes({ currentTreeId, notes }) {
       console.error('\n CATCH', err);
     }
   };
-
-  return (
-    <div className="flex-grid border-top">
-      <div className="text-center treehistory-list">
-        <h4>Tree Notes</h4>
-      </div>
-      <div className="flex-grid tree__status__note">
-        {!isAuthenticated && (<h5>{notes}</h5>)}
-        {isAuthenticated && (
+  console.log(isAuthenticated, notes);
+  if (isAuthenticated) {
+    return (
+      <div className="flex-grid border-top">
+        <div className="text-center treehistory-list">
+          <h4>Tree Notes</h4>
+        </div>
+        <div className="flex-grid tree__status__note">
           <form id="treenote" onSubmit={handleNotesSubmit}>
             <textarea
               className="form-control tree__status__textarea"
@@ -61,7 +61,6 @@ export default function TreeNotes({ currentTreeId, notes }) {
             />
             {showSave && (
               <div className="tree__status text-right">
-
                 <Button
                   type="submit"
                   variant="contained"
@@ -74,8 +73,20 @@ export default function TreeNotes({ currentTreeId, notes }) {
               </div>
             )}
           </form>
-        )}
+        </div>
       </div>
-    </div>
+    );
+  }
+  return (
+    <>
+      {notes && (
+        <div className="flex-grid border-top">
+          <div className="text-center treehistory-list">
+            <h4>Tree Notes</h4>
+            <h5>{notes}</h5>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

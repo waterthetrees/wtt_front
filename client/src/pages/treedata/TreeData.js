@@ -9,7 +9,7 @@ import TreeHeader from './TreeHeader';
 import TreeHealthSlider from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeCare from './TreeCare';
-import { TreeLocation, TreeMoreInfo } from './TreeInfo';
+import { TreeInfo } from './TreeInfo';
 import { treeHealth } from '../../util/treeHealth';
 import './TreeData.scss';
 
@@ -50,13 +50,14 @@ const TreeContent = ({ currentTreeId, map }) => {
   const health = typeof treeData.health === 'string'
     ? treeData.health
     : treeHealth.getNameByValue(healthNum);
-
+  const vacant = ['vacant', 'vacant site', 'unsuitable site', 'asphalted well'].includes(common.toLowerCase());
   // TODO: pass idTree or currentTreeId to children?  should be consistent.
   return (
     <div className="tree text-center">
       {!editTree && (
         <TreeHeader
           treeData={treeData}
+          vacant={vacant}
           edit={edit}
         />
       )}
@@ -78,28 +79,32 @@ const TreeContent = ({ currentTreeId, map }) => {
         common={common}
       />
 
-      <TreeHealthSlider
-        currentTreeId={currentTreeId}
-        common={common}
-        health={health}
-        healthNum={healthNum}
-        lng={lng}
-        lat={lat}
-        map={map}
-      />
+      {!vacant && (
+        <TreeHealthSlider
+          currentTreeId={currentTreeId}
+          common={common}
+          health={health}
+          healthNum={healthNum}
+          lng={lng}
+          lat={lat}
+          map={map}
+        />
+      )}
 
       <TreeNotes
         currentTreeId={currentTreeId}
         notes={notes}
       />
 
-      <TreeCare
-        currentTreeId={currentTreeId}
-        common={common}
-        health={health}
-      />
+      {!vacant && (
+        <TreeCare
+          currentTreeId={currentTreeId}
+          common={common}
+          health={health}
+        />
+      )}
 
-      <TreeLocation
+      <TreeInfo
         address={address}
         city={city}
         zip={zip}
@@ -107,15 +112,12 @@ const TreeContent = ({ currentTreeId, map }) => {
         neighborhood={neighborhood}
         lng={lng}
         lat={lat}
-      />
-
-      <TreeMoreInfo
-        owner={owner}
         idReference={idReference}
+        owner={owner}
         who={who}
       />
 
-      {!common.includes('VACANT') && (
+      {!vacant && (
         <TreeRemoval
           idTree={idTree}
           common={common}
