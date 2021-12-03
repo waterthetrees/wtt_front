@@ -1,7 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import format from 'date-fns/format';
-import { Button, ToggleButton, ToggleButtonGroup, styled } from '@mui/material';
+import {
+  Button, ToggleButton, ToggleButtonGroup, styled,
+} from '@mui/material';
 import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
@@ -106,7 +108,7 @@ export default function TreeMaintenance({ currentTreeId }) {
           idTree: currentTreeId,
           date_visit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
           volunteer,
-          ...actionsPayload
+          ...actionsPayload,
         };
 
         if (comment) {
@@ -185,19 +187,15 @@ export default function TreeMaintenance({ currentTreeId }) {
                   aria-label="Tree Notes"
                 />
               </div>
-
-              {actions.length > 0 && (
-                <div className="flex-grid text-center">
-                  <span>Maintenance Done: {actions.join(', ')}</span>
-                </div>
-              )}
             </div>
 
             <div className="tree__status text-right">
               <Button
-                className={cx('btn-lg', maintenanceButtonStyle)}
                 type="submit"
-                variant="outlined"
+                variant="contained"
+                size="large"
+                color="primary"
+                disableElevation
               >
                 {maintenanceSaveButton}
               </Button>
