@@ -12,6 +12,7 @@ export default function TreeHeader({
     common, scientific, genus, datePlanted, dbh, height,
   } = treeData;
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
+  const planted = format(new Date(datePlanted), 'MMMM d, yyyy');
   return (
     <div className="text-left">
       <h1>
@@ -21,13 +22,13 @@ export default function TreeHeader({
         <div>
           <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>
           {(scientific !== genus) && <h2>{genus}</h2>}
-          <h5>Planted: {format(new Date(datePlanted), 'MMMM d, yyyy')}</h5>
-          <h5>Height: {height}</h5>
-          <h5>DBH: {dbh}</h5>
+          {datePlanted && <h5>Planted: {planted}</h5>}
+          {height && <h5>Height: {height}</h5>}
+          {dbh && <h5>DBH: {dbh}</h5>}
         </div>
       )}
 
-      {env !== 'prod'
+      {env !== 'production'
         && (
           <div className="text-right">
             <Button color="primary" onClick={edit}>Edit</Button>
