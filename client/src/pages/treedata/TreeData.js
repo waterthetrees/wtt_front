@@ -10,6 +10,7 @@ import TreeHealthSlider from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeCare from './TreeCare';
 import { TreeInfo } from './TreeInfo';
+import { CarbonCalculator } from './CarbonCalculator';
 import { treeHealth } from '../../util/treeHealth';
 import './TreeData.scss';
 
@@ -116,6 +117,8 @@ const TreeContent = ({ currentTreeId, map }) => {
         owner={owner}
         who={who}
       />
+
+      {!vacant && (<CarbonCalculator treeData={treeData} />)}
 
       {!vacant && (
         <TreeRemoval

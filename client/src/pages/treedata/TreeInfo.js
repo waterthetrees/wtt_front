@@ -11,6 +11,7 @@ export const TreeInfo = (props) => (
       />
     </div>
     <div className="treehistory-list text-center">
+      <h4 className="text-center">Tree Info Links</h4>
       <a href="https://standards.opencouncildata.org/#/trees" name="opencouncildata.org trees">
         Open Tree Standards
       </a>
