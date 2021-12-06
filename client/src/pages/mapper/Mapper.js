@@ -32,6 +32,7 @@ function Mapper() {
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const [newTreeAdded, setNewTreeAdded] = useState();
   const mapboxElRef = useRef(null); // DOM element to render map
+  const [geolocater, setGeolocater] = useState(false);
 
   useEffect(() => {
     if (!map && isMapboxSupported) {
@@ -43,22 +44,13 @@ function Mapper() {
         // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
         hash: true,
       });
-
-      // Add the geolocate and navigation controls to the map.
-      mapboxMap.addControl(new mapboxgl.GeolocateControl({
+      const geolocate = new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         trackUserLocation: true,
-      }));
-      mapboxMap.addControl(new mapboxgl.NavigationControl());
-      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
-        {
-          showDefault: true,
-          showCheckbox: true,
-          onlyRendered: false,
-          reverseOrder: true,
-        },
-        // TODO: specifying a location doesn't work for some reason.
-        'bottom-right'));
+        showUserHeading: true,
+      });
+
+      // Add the geolocate and navigation controls to the map.
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
@@ -70,8 +62,20 @@ function Mapper() {
           tiles: [`${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`],
         });
       });
+      mapboxMap.addControl(new mapboxgl.GeolocateControl(geolocate));
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
+      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
+        {
+          showDefault: true,
+          showCheckbox: true,
+          onlyRendered: false,
+          reverseOrder: true,
+        },
+        // TODO: specifying a location doesn't work for some reason.
+        'bottom-right'));
 
       setMap(mapboxMap);
+      setGeolocater(geolocate);
     }
   }, []);
 
@@ -100,6 +104,7 @@ function Mapper() {
                 setCenter={setCenter}
                 newTreeAdded={newTreeAdded}
                 setNewTreeAdded={setNewTreeAdded}
+                geolocater={geolocater}
               />
             </Sidebar>
 
