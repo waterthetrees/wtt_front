@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import {
@@ -12,21 +13,24 @@ import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 import { treeHealth } from '../../util/treeHealth';
 
-// Create an array of DBH menu items: <1, 1 - 24, 30, 36, 42, 48, 56 inches.
-const dbhItems = [
-  <MenuItem key="<1 inch" value="<1 inch">less than 1"</MenuItem>
-].concat(
-  [...Array(25).keys()]
-    .slice(1)
-    .concat(30, 36, 42, 48, 56)
-    .map(value => <MenuItem key={value} value={value}>{value}"</MenuItem>)
-);
+// Create an array of DBH/height menu items: [.25,.5,.75,1,2,3,4] inches.
+const treeSmallValues = [0.25, 0.50, 0.75];
+const treeLargeValues = [...Array(452).keys()];
+treeLargeValues.shift();
+const treeCharacteristics = [...treeSmallValues, ...treeLargeValues];
+
+const dbhItems = treeCharacteristics.map((value) => (
+  <MenuItem key={value} value={value}>{value} {value === 1 ? 'inch' : 'inches'}</MenuItem>));
+const heightItems = treeCharacteristics.map((value) => (
+  <MenuItem key={value} value={value}>{value} {value === 1 ? 'foot' : 'feet'}</MenuItem>));
 
 // Create an array of tree health items, reversed so that "good" comes first.
 const healthItems = treeHealth.getNameValuePairs().reverse()
   .map(([name]) => <MenuItem key={name} value={name}>{name}</MenuItem>);
 
-export default function TreeInfo({ treeList, register, control, errors }) {
+export default function TreeInfo({
+  treeList, register, control, errors,
+}) {
   return (
     <Widget title="Tree Info" classes="treeinfo">
 
@@ -54,7 +58,21 @@ export default function TreeInfo({ treeList, register, control, errors }) {
       <FormControl
         variant="standard"
       >
-        <InputLabel id="dbh">Diameter</InputLabel>
+        <InputLabel id="height">Height in feet</InputLabel>
+        <Controller
+          as={<Select labelId="height">{heightItems}</Select>}
+          name="height"
+          control={control}
+          variant="standard"
+          size="small"
+        />
+      </FormControl>
+      {errors.height && <ErrorMessageAll errors={errors} name="height" />}
+
+      <FormControl
+        variant="standard"
+      >
+        <InputLabel id="dbh">Diameter in Inches</InputLabel>
         <Controller
           as={<Select labelId="dbh">{dbhItems}</Select>}
           name="dbh"

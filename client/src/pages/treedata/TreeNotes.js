@@ -1,15 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import { Button } from '@mui/material';
-import cx from 'clsx';
-import { Notes } from '@mui/icons-material';
 import { saveTimer } from '../../util/constants';
 import { useTreeDataMutation } from '../../api/queries';
 
 export default function TreeNotes({ currentTreeId, notes }) {
   const { isAuthenticated } = useAuth0();
   const [showSave, setShowSave] = useState(false);
-  const [notesButtonStyle, setNotesButtonStyle] = useState('btn-light');
   const [notesSaveButton, setNotesSaveButton] = useState('SAVE');
   const mutateTreeData = useTreeDataMutation();
   const notesRef = useRef();
@@ -22,7 +19,6 @@ export default function TreeNotes({ currentTreeId, notes }) {
 
   const handleNotesSave = () => {
     setNotesSaveButton('SAVE');
-    setNotesButtonStyle('btn-light');
     setShowSave(false);
   };
 
@@ -32,8 +28,6 @@ export default function TreeNotes({ currentTreeId, notes }) {
     try {
       if (notesRef.current.value) {
         const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
-
-        setNotesButtonStyle('btn-info');
         setNotesSaveButton('SAVING');
         mutateTreeData.mutate(sendData);
         setTimeout(() => handleNotesSave(), saveTimer);
@@ -42,7 +36,6 @@ export default function TreeNotes({ currentTreeId, notes }) {
       console.error('\n CATCH', err);
     }
   };
-  console.log(isAuthenticated, notes);
   if (isAuthenticated) {
     return (
       <div className="flex-grid border-top">
