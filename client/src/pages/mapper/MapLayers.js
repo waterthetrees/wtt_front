@@ -7,10 +7,18 @@ import { treeHealth } from '../../util/treeHealth';
 const circleRadius = {
   'circle-radius': [
     'interpolate', ['linear'], ['zoom'],
-    12, 1,
-    18, 6,
+    12, 3,
+    18, 12,
   ],
 };
+// 'circle-radius': {
+//   property: 'health',
+//   base: 1,
+//   stops: [
+//     [12, 8],
+//     [18, 280],
+//   ],
+// },
 const circleLayerZoomRange = {
   type: 'circle',
   minzoom: 11,
@@ -32,7 +40,7 @@ export default function MapLayers({ map, setCurrentTreeId }) {
         useQuery={useCountriesQuery}
         map={map}
         minzoom={2}
-        maxzoom={8.75}
+        maxzoom={9}
         flyToZoom={10}
       />
 
