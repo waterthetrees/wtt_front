@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import format from 'date-fns/format';
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCreateTreeDataMutation } from '../../api/queries';
 import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
+import Form from '../../components/Form/Form';
 import TreeHeader from './TreeHeader';
 import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
 import ButtonsResult from './ButtonsResult';
-import MuiRadioSelector from './MuiRadioSelector';
 import { randomInteger } from './utilities';
-import { topTreesCaliforniaNative, topTreesUSFood } from '../data';
 import './AddTree.scss';
-
-const renderCount = 0;
 
 const AddTreeModal = ({
   showAddTreeModal,
@@ -23,19 +20,9 @@ const AddTreeModal = ({
   setAddTreeSelected,
   setNewTreeAdded,
 }) => {
-  const { user } = useAuth0();
-  const { nickname, email, name } = Object(user);
-
-  const typeArray = ['California Natives', 'Food Trees'];
-  const typeMapping = {
-    'California Natives': topTreesCaliforniaNative,
-    'Food Trees': topTreesUSFood,
-    'By City': null,
-  };
-  const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
-
+  const { user: { nickname, email, name }} = useAuth0();
+  const mutateTreeData = useCreateTreeDataMutation();
   const defaultValues = {
-    treeType: typeArray[0],
     city: '',
     common: '',
     scientific: '',
@@ -57,42 +44,16 @@ const AddTreeModal = ({
     email: email || '',
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
-  const {
-    register, watch, handleSubmit, reset, control, errors,
-  } = useForm({ defaultValues });
-  const treeFields = watch('treeType');
-  const treeInfoFields = watch(['common', 'scientific', 'genus']);
-
-  const [mostRecentFields, setMostRecentFields] = useState({});
-  const [treeList, setTreeList] = useState([...defaultTreeOption, ...typeMapping[treeFields]]);
-
-  if (JSON.stringify(treeInfoFields) !== JSON.stringify(mostRecentFields)) {
-    let newTreeList = [...defaultTreeOption, ...typeMapping[treeFields]];
-    Object.keys(treeInfoFields).forEach((field) => {
-      if (mostRecentFields[field] !== treeInfoFields[field]) {
-        if (treeInfoFields[field] !== null) {
-          newTreeList = newTreeList.filter((el) => el[field] === treeInfoFields[field]);
-        }
-      }
-    });
-    setTreeList(newTreeList);
-    setMostRecentFields(treeInfoFields);
-  }
-
-  useEffect(() => {
-    setTreeList([...defaultTreeOption, ...typeMapping[treeFields]]);
-  }, [treeFields]);
-
-  const mutateTreeData = useCreateTreeDataMutation();
+  const formMethods = useForm({ defaultValues });
+  const { reset, handleSubmit } = formMethods;
 
   const onSubmit = (dataIn) => {
-    setNewTreeAdded(true);
     const sendData = {
       ...defaultValues,
       ...dataIn,
       ...{ lat: coordinatesNewTree.lat, lng: coordinatesNewTree.lng },
     };
-    delete sendData.treeType;
+
     mutateTreeData.mutate(sendData);
     setShowAddTreeModal(!showAddTreeModal);
     setNewTreeAdded(true);
@@ -105,38 +66,28 @@ const AddTreeModal = ({
   return (
     <ScrollableDialog
       open={showAddTreeModal}
-      title={<TreeHeader renderCount={renderCount} />}
+      title={<TreeHeader />}
       onClose={toggle}
     >
-      <form onSubmit={handleSubmit(onSubmit, onError)} className="addtree">
-        <MuiRadioSelector
-          register={register}
-          label="Tree Type Options"
-          options={typeArray}
-          control={control}
-        />
-        <TreeInfo
-          register={register}
-          control={control}
-          errors={errors}
-          treeList={treeList}
-        />
+      <Form
+        {...formMethods}
+        onSubmit={handleSubmit(onSubmit, onError)}
+      >
+        <TreeInfo />
+
         <TreeAddress
-          control={control}
           coordinates={coordinatesNewTree}
-          errors={errors}
         />
-        <TreePlanter
-          control={control}
-          errors={errors}
-        />
+
+        <TreePlanter />
+
         <ButtonsResult {...{
           reset,
           defaultValues,
           setAddTreeSelected,
         }}
         />
-      </form>
+      </Form>
     </ScrollableDialog>
   );
 };

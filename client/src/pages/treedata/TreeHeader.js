@@ -4,7 +4,6 @@ import { Button } from '@mui/material';
 import format from 'date-fns/format';
 import { env } from '../../util/config';
 
-// TODO: when edit mode is fixed, remove the env check below
 export default function TreeHeader({
   treeData, edit, vacant,
 }) {
@@ -28,12 +27,9 @@ export default function TreeHeader({
         </div>
       )}
 
-      {env !== 'production'
-        && (
-          <div className="text-right">
-            <Button color="primary" onClick={edit}>Edit</Button>
-          </div>
-        )}
+      <div className="text-right">
+        <Button color="primary" onClick={edit}>Edit</Button>
+      </div>
     </div>
   );
 }

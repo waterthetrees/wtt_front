@@ -7,10 +7,9 @@ import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { CSVLink } from 'react-csv';
-import { topTreesCaliforniaNative } from './topTreesCaliforniaNative';
-import { topTreesUSFood } from './topTreesUSFood';
-import { topTreesAlameda } from './topTreesAlameda';
-import { topTreesSanFrancisco } from './topTreesSanFrancisco';
+import { topTreesCaliforniaNative } from '../../data/dist/topTreesCaliforniaNative';
+import { topTreesUSFood } from '../../data/dist/topTreesUSFood';
+import { topTreesSanFrancisco } from '../../data/dist/topTreesSanFrancisco';
 import './Data.scss';
 
 function chooseData() {
@@ -233,10 +232,3 @@ function Tree({
     </div>
   );
 }
-
-export {
-  topTreesCaliforniaNative,
-  topTreesUSFood,
-  topTreesAlameda,
-  topTreesSanFrancisco,
-};
