@@ -7,22 +7,14 @@ import { treeHealth } from '../../util/treeHealth';
 const circleRadius = {
   'circle-radius': [
     'interpolate', ['linear'], ['zoom'],
-    12, 3,
-    18, 12,
+    12, 1,
+    24, 16,
   ],
 };
-// 'circle-radius': {
-//   property: 'health',
-//   base: 1,
-//   stops: [
-//     [12, 8],
-//     [18, 280],
-//   ],
-// },
 const circleLayerZoomRange = {
   type: 'circle',
   minzoom: 11,
-  maxzoom: 22,
+  maxzoom: 24,
 };
 const circleVectorLayer = {
   'source-layer': 'public.treedata',
