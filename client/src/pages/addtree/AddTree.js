@@ -13,7 +13,9 @@ import AddTreeModal from './AddTreeModal';
 let renderCount = 0;
 const currentMarkers = [];
 
-function AddTree({ map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdded }) {
+function AddTree({
+  map, setZoom, center, setCenter,
+}) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [addTreeSelected, setAddTreeSelected] = useState(false);
   const mutateUser = useUserMutation();
@@ -21,11 +23,8 @@ function AddTree({ map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdde
   const handleOnClick = () => {
     if (!isAuthenticated) loginWithRedirect();
     if (isAuthenticated) mutateUser.mutate(user);
-    if (!addTreeSelected) {
-      setAddTreeSelected(true);
-    } else {
-      setAddTreeSelected(false);
-    }
+
+    setAddTreeSelected(!addTreeSelected);
   };
 
   // REMOVE THIS FOR PURELY DOM MARKER
@@ -59,8 +58,6 @@ function AddTree({ map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdde
         setZoom={setZoom}
         coordinatesNewTree={center}
         setCoordinatesNewTree={setCenter}
-        setNewTreeAdded={setNewTreeAdded}
-        newTreeAdded={newTreeAdded}
       />
       <ReactTooltip
         type="info"
@@ -76,7 +73,6 @@ function AddTree({ map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdde
 const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
   setZoom, coordinatesNewTree, setCoordinatesNewTree,
-  setNewTreeAdded, newTreeAdded,
 }) => {
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
   const handleMarkerClick = () => {
@@ -139,8 +135,6 @@ const TreeMarker = ({
         renderCount={renderCount}
         coordinatesNewTree={coordinatesNewTree}
         setAddTreeSelected={setAddTreeSelected}
-        setNewTreeAdded={setNewTreeAdded}
-        newTreeAdded={newTreeAdded}
       />
     );
 };

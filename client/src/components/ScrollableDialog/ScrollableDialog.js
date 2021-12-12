@@ -12,7 +12,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function ScrollableDialog({
-  children, title, open, onClose, actions,
+  children, title, open, onClose, actions, ...restProps
 }) {
   const theme = useTheme();
   // Use a full-screen dialog on smaller screens.
@@ -26,6 +26,7 @@ export default function ScrollableDialog({
       maxWidth="sm"
       fullWidth
       fullScreen={fullScreen}
+      {...restProps}
     >
       <DialogTitle id="scroll-dialog-title" sx={{ py: 1 }}>
         <Box display="flex" alignItems="center">

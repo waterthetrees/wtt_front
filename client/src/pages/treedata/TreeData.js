@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeQuery } from '../../api/queries';
 import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
 import AdoptLikeCheckboxes from './TreeAdoptionLike';
-import TreeHeaderForm from './TreeDataEdit';
+import TreeEditDialog from './TreeEditDialog';
 import TreeRemoval from './TreeRemoval';
 import TreeHeader from './TreeHeader';
 import TreeHealthSlider from './TreeHealth';
@@ -14,7 +14,7 @@ import { treeHealth } from '../../util/treeHealth';
 import './TreeData.scss';
 
 const TreeContent = ({ currentTreeId, map }) => {
-  const [editTree, setEditTree] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const { data: treeData } = useTreeQuery({ currentTreeId });
 
@@ -24,15 +24,13 @@ const TreeContent = ({ currentTreeId, map }) => {
 
   const edit = () => {
     if (!isAuthenticated) loginWithRedirect();
-    setEditTree(!editTree);
+
+    setShowEditDialog(!showEditDialog);
   };
 
   const {
     idTree,
     common,
-    scientific,
-    genus,
-    datePlanted,
     healthNum,
     address,
     city,
@@ -51,22 +49,22 @@ const TreeContent = ({ currentTreeId, map }) => {
     ? treeData.health
     : treeHealth.getNameByValue(healthNum);
   const vacant = ['vacant', 'vacant site', 'unsuitable site', 'asphalted well'].includes(common.toLowerCase());
+
   // TODO: pass idTree or currentTreeId to children?  should be consistent.
   return (
     <div className="tree text-center">
-      {!editTree && (
-        <TreeHeader
-          treeData={treeData}
-          vacant={vacant}
-          edit={edit}
-        />
-      )}
+      <TreeHeader
+        treeData={treeData}
+        vacant={vacant}
+        edit={edit}
+      />
 
-      {editTree && (
-        <TreeHeaderForm
+      {showEditDialog && (
+        <TreeEditDialog
           idTree={idTree}
           treeData={treeData}
-          setEditTree={setEditTree}
+          showEditDialog={showEditDialog}
+          setShowEditDialog={setShowEditDialog}
         />
       )}
 
