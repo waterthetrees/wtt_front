@@ -30,7 +30,6 @@ function Mapper() {
   const [zoom, setZoom] = useState(10);
   const [center, setCenter] = useState([-122.34725, 37.7343787]);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  const [newTreeAdded, setNewTreeAdded] = useState();
   const mapboxElRef = useRef(null); // DOM element to render map
 
   useEffect(() => {
@@ -98,8 +97,6 @@ function Mapper() {
                 setZoom={setZoom}
                 center={center}
                 setCenter={setCenter}
-                newTreeAdded={newTreeAdded}
-                setNewTreeAdded={setNewTreeAdded}
               />
             </Sidebar>
 

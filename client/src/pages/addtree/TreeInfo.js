@@ -1,104 +1,39 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import {
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from '@mui/material';
-import Widget from '../../components/Widget';
-import ErrorMessageAll from '../error/ErrorPage';
+import { MenuItem } from '@mui/material';
 import { treeHealth } from '../../util/treeHealth';
-import TreeSelector from '../../components/TreeSelector/TreeSelector';
-
-// Create an array of DBH/height menu items: [.25,.5,.75,1,2,3,4] inches.
-const treeSmallValues = [0.25, 0.50, 0.75];
-const treeLargeValues = [...Array(452).keys()];
-treeLargeValues.shift();
-const treeCharacteristics = [...treeSmallValues, ...treeLargeValues];
-
-const dbhItems = treeCharacteristics.map((value) => (
-  <MenuItem key={value} value={value}>{value} {value === 1 ? 'inch' : 'inches'}</MenuItem>));
-const heightItems = treeCharacteristics.map((value) => (
-  <MenuItem key={value} value={value}>{value} {value === 1 ? 'foot' : 'feet'}</MenuItem>));
+import {
+  FormTextField,
+  FormSelect,
+  FormTreeGroup,
+} from '../../components/Form';
+import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
 
 // Create an array of tree health items, reversed so that "good" comes first.
-const healthItems = treeHealth.getNameValuePairs().reverse()
+const healthOptions = treeHealth.getNameValuePairs().reverse()
   .map(([name]) => <MenuItem key={name} value={name}>{name}</MenuItem>);
 
 export default function TreeInfo() {
-  const { control, errors } = useFormContext();
-
   return (
-    <Widget title="Info" classes="treeinfo">
-      <TreeSelector />
+    <FormTreeGroup title="Info">
+      <TreeNameAndSize />
 
-      <Controller
-        as={TextField}
+      <FormTextField
         type="date"
         name="datePlanted"
-        control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
         label="Date Planted"
-        variant="standard"
-        size="small"
+        rules={{ required: true, minLength: 1, maxLength: 100 }}
       />
-      {errors.datePlanted && <ErrorMessageAll errors={errors} name="datePlanted" />}
 
-      <FormControl
-        variant="standard"
-      >
-        <InputLabel id="height">Height in feet</InputLabel>
-        <Controller
-          as={<Select labelId="height">{heightItems}</Select>}
-          name="height"
-          control={control}
-          variant="standard"
-          size="small"
-        />
-      </FormControl>
-      {errors.height && <ErrorMessageAll errors={errors} name="height" />}
+      <FormSelect
+        name="health"
+        label="Health"
+        options={healthOptions}
+      />
 
-      <FormControl
-        variant="standard"
-      >
-        <InputLabel id="dbh">Diameter in Inches</InputLabel>
-        <Controller
-          as={<Select labelId="dbh">{dbhItems}</Select>}
-          name="dbh"
-          control={control}
-          variant="standard"
-          size="small"
-        />
-      </FormControl>
-      {errors.dbh && <ErrorMessageAll errors={errors} name="dbh" />}
-
-      <FormControl
-        variant="standard"
-      >
-        <InputLabel id="health">Health</InputLabel>
-        <Controller
-          as={<Select labelId="health">{healthItems}</Select>}
-          name="health"
-          control={control}
-          variant="standard"
-          size="small"
-        />
-      </FormControl>
-      {errors.health && <ErrorMessageAll errors={errors} name="health" />}
-
-      <Controller
-        as={TextField}
+      <FormTextField
         name="notes"
         label="Notes"
-        control={control}
-        rules={{ required: false }}
-        variant="standard"
-        size="small"
       />
-      {errors.notes && <ErrorMessageAll errors={errors} name="notes" />}
-    </Widget>
+    </FormTreeGroup>
   );
 }

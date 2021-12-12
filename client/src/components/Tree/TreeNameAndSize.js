@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import FormAutocomplete from '../Form/FormAutocomplete';
-import ErrorMessageAll from '../../pages/error/ErrorPage';
+import { InputAdornment } from '@mui/material';
+import { FormAutocomplete, FormDecimalField } from '../Form';
 import { trees } from '../../data/dist/trees';
 import sortTreesBy from '../../data/sortTreesBy';
 
@@ -10,13 +10,18 @@ function getNames(treeList, name, firstItem) {
   // Otherwise, React will complain about duplicate keys in the menu.  Sort the trees by the
   // different fields before extracting the strings, so that the sort function can access the
   // per-tree lowercase sort fields.
-	return firstItem.concat([...new Set(treeList.sort(sortTreesBy[name]).map((tree) => tree[name]))]);
+  return firstItem.concat([...new Set(treeList.sort(sortTreesBy[name]).map((tree) => tree[name]))]);
 }
+
+// Adjust the adornment label so it aligns with the input placeholder.
+const unit = (label) => ({
+  endAdornment: <InputAdornment position="end" sx={{ marginBottom: '2px' }}>{label}</InputAdornment>,
+});
 
 const vacantLabel = 'Vacant Site';
 
-export default function TreeSelector() {
-  const { watch, setValue, control, errors } = useFormContext();
+export default function TreeNameAndSize() {
+  const { watch, setValue } = useFormContext();
   // Get the value of common that was specified by our parent's defaultValues, so that we can
   // default the lastCommon state to it.
   let { common, scientific, genus } = watch(['common', 'scientific', 'genus']);
@@ -49,7 +54,7 @@ export default function TreeSelector() {
     : [];
   const treeList = allFieldsEmpty
     ? trees
-    // Find the union of trees that match one ore more of the names.
+    // Find the union of trees that match one or more of the names.
     : trees.filter((tree) =>
       (tree.common === common || tree.scientific === scientific || tree.genus === genus));
   const commonNames = getNames(treeList, 'common', firstItem);
@@ -63,27 +68,34 @@ export default function TreeSelector() {
         label="Common name"
         options={commonNames}
         rules={{ required: true, minLength: 1, maxLength: 100 }}
-        control={control}
       />
-      {errors.common && <ErrorMessageAll errors={errors} name="common" />}
 
       <FormAutocomplete
         name="scientific"
         label="Scientific name"
         options={scientificNames}
-        rules={{ required: false, minLength: 1, maxLength: 100 }}
-        control={control}
+        rules={{ minLength: 1, maxLength: 100 }}
       />
-      {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
 
       <FormAutocomplete
         name="genus"
         label="Genus"
         options={genusNames}
-        rules={{ required: false, minLength: 1, maxLength: 100 }}
-        control={control}
+        rules={{ minLength: 1, maxLength: 100 }}
       />
-      {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
+
+      <FormDecimalField
+        name="height"
+        label="Height"
+        InputProps={unit('feet')}
+      />
+
+      <FormDecimalField
+        name="dbh"
+        label="Diameter"
+        title="Diameter at breast height"
+        InputProps={unit('inches')}
+      />
     </>
   );
 }
