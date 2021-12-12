@@ -8,166 +8,118 @@ import './AddTree.scss';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useUserMutation } from '../../api/queries';
 
+// import AddTreeModal from './AddTreeModal';
+// import { TreeMarker } from './TreeMarker';
+import { isMobile } from './utilities';
 import AddTreeModal from './AddTreeModal';
 
-let renderCount = 0;
-const currentMarkers = [];
+function onDragEndd(marker) {
+  const lngLat = marker.getLngLat();
+  return lngLat;
+}
 
-function AddTree({
-  map, setZoom, center, setCenter, setNewTreeAdded, newTreeAdded, geolocater,
+export const currentMarkers = [];
+let renderCount = 0;
+
+const createImageForMarker = () => {
+  const sproutImg = document.createElement('img');
+  sproutImg.src = 'assets/images/addtree/tree12.svg';
+  const imageForMarker = {
+    element: sproutImg,
+    draggable: !isMobile,
+    scale: 0.003,
+  };
+  return imageForMarker;
+};
+
+export default function AddTree({
+  map, center, setCenter, geolocater,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const [addTreeSelected, setAddTreeSelected] = useState(false);
   const mutateUser = useUserMutation();
-
+  const [plantMarkerOnMap, setPlantMarkerOnMap] = useState(false);
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
+  const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
 
-  const handleGeolocation = () => {
-    geolocater.on('geolocate', (position) => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      console.log('lat, lng', lat, lng);
-      // setCenter([lng, lat]);
-      // setZoom(19);
-      // map.flyTo({
-      //   center: [lng, lat],
-      //   zoom: [19],
-      // });
-
-      setShowAddTreeModal(true);
-    });
-  };
-
-  const handleOnClick = () => {
+  const handleOnPlant = () => {
     if (!isAuthenticated) loginWithRedirect();
     if (isAuthenticated) mutateUser.mutate(user);
-    if (!addTreeSelected) {
-      setAddTreeSelected(true);
-
-      handleGeolocation();
+    if (isMobile && !plantMarkerOnMap) {
+      console.log('is mobile');
       geolocater.trigger();
-    } else {
-      setAddTreeSelected(false);
     }
+    setPlantMarkerOnMap(!plantMarkerOnMap);
+    console.log('handleOnPlant event', plantMarkerOnMap);
   };
+
+  const handlePlantClick = () => setPlantMarkerOnMap(!plantMarkerOnMap);
 
   // REMOVE THIS FOR PURELY DOM MARKER
   useEffect(() => {
-    if (!addTreeSelected) {
-      if (currentMarkers !== null) {
-        currentMarkers.map((currentMarker) => currentMarker.remove());
-      }
+    if (!plantMarkerOnMap && currentMarkers.length >= 1) {
+      currentMarkers.map((currentMarker) => currentMarker.remove());
     }
-  }, [addTreeSelected]);
+  }, [plantMarkerOnMap]);
+
+  useEffect(() => {
+    if (!plantMarkerOnMap && (currentMarkers.length === 0 || currentMarkers === null)) return;
+    const marker = new mapboxgl.Marker(createImageForMarker()).setLngLat(center).addTo(map);
+    map.jumpTo({ center, zoom: [20] });
+    marker.getElement().addEventListener('click', () => setShowAddTreeModal(true));
+    currentMarkers.push(marker);
+    if (isMobile) setShowAddTreeModal(true);
+
+    if (!isMobile) {
+      marker.on('dragend', () => {
+        const lngLat = onDragEndd(marker);
+        setCenter(lngLat);
+      });
+      const lngLat = onDragEndd(marker);
+      marker.on('dragend', lngLat);
+      setCenter(lngLat);
+      marker.on('click', () => setShowAddTreeModal(true));
+    }
+  }, [plantMarkerOnMap]);
+
+  geolocater.on('geolocate', (position) => {
+    const coordinates = [position.coords.longitude, position.coords.latitude];
+    setCoordinatesNewTree(coordinates);
+    map.setCenter(coordinates);
+    setPlantMarkerOnMap(true);
+    map.off('click', handlePlantClick);
+  });
 
   renderCount += 1;
-
+  // console.log(renderCount, 'renderCount');
   return (
     <div>
-
       <button
         data-tip="Click on map to add a tree"
         type="button"
-        className={cx('addtree__btn', (addTreeSelected) ? 'addtree__btn-selected' : '')}
-        onClick={handleOnClick}
+        className={cx('addtree__btn', (plantMarkerOnMap) ? 'addtree__btn-selected' : '')}
+        onClick={handleOnPlant}
       >
         <div className="addree__plus-centeredtxt">
-          PLANT
+          {plantMarkerOnMap ? 'PLANTING' : 'PLANT'}
         </div>
       </button>
-      <TreeMarker
-        map={map}
-        setAddTreeSelected={setAddTreeSelected}
-        addTreeSelected={addTreeSelected}
-        setZoom={setZoom}
-        coordinatesNewTree={center}
-        setCoordinatesNewTree={setCenter}
-        setNewTreeAdded={setNewTreeAdded}
-        newTreeAdded={newTreeAdded}
-        showAddTreeModal={showAddTreeModal}
-        setShowAddTreeModal={setShowAddTreeModal}
-      />
+
+      {coordinatesNewTree && showAddTreeModal && (
+        <AddTreeModal
+          showAddTreeModal={showAddTreeModal}
+          setShowAddTreeModal={setShowAddTreeModal}
+          plantMarkerOnMap={plantMarkerOnMap}
+          setPlantMarkerOnMap={setPlantMarkerOnMap}
+          coordinatesNewTree={coordinatesNewTree}
+        />
+      )}
       <ReactTooltip
         type="info"
         place="right"
-        disable={!!(addTreeSelected)}
+        disable={!!(plantMarkerOnMap)}
         delayShow={500}
       />
 
     </div>
   );
 }
-
-const TreeMarker = ({
-  map, addTreeSelected, setAddTreeSelected,
-  setZoom, coordinatesNewTree, setCoordinatesNewTree,
-  setNewTreeAdded, newTreeAdded,
-  showAddTreeModal, setShowAddTreeModal,
-}) => {
-  const handleMarkerClick = () => {
-    setShowAddTreeModal(true);
-  };
-
-  const loadNewMarker = (coordinates) => {
-    const SPROUT = 'assets/images/addtree/tree12.svg';
-    const sproutImg = document.createElement('img');
-    sproutImg.src = SPROUT;
-    const marker = new mapboxgl.Marker({
-      draggable: true,
-      color: '#000000',
-      scale: 0.05,
-      element: sproutImg,
-    })
-      .setLngLat(coordinates)
-      .addTo(map);
-
-    setCoordinatesNewTree(coordinates);
-    function onDragEndd() {
-      const lngLat = marker.getLngLat();
-      setCoordinatesNewTree(lngLat);
-    }
-
-    marker.on('dragend', onDragEndd);
-    currentMarkers.push(marker);
-    marker.getElement().addEventListener('click', handleMarkerClick);
-    return marker;
-  };
-
-  const handleMapClick = (event) => {
-    const coordinates = event.lngLat;
-    loadNewMarker(coordinates);
-
-    map.off('click', handleMapClick);
-    setZoom(19);
-    map.flyTo({
-      center: coordinates,
-      zoom: [19],
-    });
-  };
-
-  useEffect(() => {
-    if (!addTreeSelected) return;
-
-    if (addTreeSelected) {
-      map.on('click', handleMapClick);
-    } else {
-      map.off('click', handleMapClick);
-    }
-  }, [addTreeSelected]);
-
-  return coordinatesNewTree
-    && showAddTreeModal
-    && (
-      <AddTreeModal
-        showAddTreeModal={showAddTreeModal}
-        setShowAddTreeModal={setShowAddTreeModal}
-        renderCount={renderCount}
-        coordinatesNewTree={coordinatesNewTree}
-        setAddTreeSelected={setAddTreeSelected}
-        setNewTreeAdded={setNewTreeAdded}
-        newTreeAdded={newTreeAdded}
-      />
-    );
-};
-
-export default AddTree;

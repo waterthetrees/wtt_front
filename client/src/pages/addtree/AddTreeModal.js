@@ -20,8 +20,9 @@ const AddTreeModal = ({
   showAddTreeModal,
   setShowAddTreeModal,
   coordinatesNewTree,
-  setAddTreeSelected,
-  setNewTreeAdded,
+  setPlantMarkerOnMap,
+  // setNewTreeAdded,
+  // map,
 }) => {
   const { user } = useAuth0();
   const { nickname, email, name } = Object(user);
@@ -33,7 +34,8 @@ const AddTreeModal = ({
     'By City': null,
   };
   const defaultTreeOption = [{ common: 'Vacant Site', scientific: 'Vacant Site', genus: 'Vacant Site' }];
-
+  console.log(coordinatesNewTree, 'coordinatesNewTree kkakak');
+  // console.log(map.getLntLat, 'map.getLntLat');
   const defaultValues = {
     treeType: typeArray[0],
     city: '',
@@ -47,8 +49,8 @@ const AddTreeModal = ({
     state: '',
     zip: '',
     neighborhood: '',
-    lat: (coordinatesNewTree) ? coordinatesNewTree.lat : '',
-    lng: (coordinatesNewTree) ? coordinatesNewTree.lng : '',
+    lat: coordinatesNewTree[0],
+    lng: coordinatesNewTree[1],
     owner: 'public',
     who: '',
     volunteer: nickname || name || email || 'volunteer',
@@ -86,7 +88,7 @@ const AddTreeModal = ({
   const mutateTreeData = useCreateTreeDataMutation();
 
   const onSubmit = (dataIn) => {
-    setNewTreeAdded(true);
+    // setNewTreeAdded(true);
     const sendData = {
       ...defaultValues,
       ...dataIn,
@@ -95,7 +97,7 @@ const AddTreeModal = ({
     delete sendData.treeType;
     mutateTreeData.mutate(sendData);
     setShowAddTreeModal(!showAddTreeModal);
-    setNewTreeAdded(true);
+    // setNewTreeAdded(true);
   };
 
   const onError = (err, e) => console.error('errors, e', err, e);
@@ -133,7 +135,7 @@ const AddTreeModal = ({
         <ButtonsResult {...{
           reset,
           defaultValues,
-          setAddTreeSelected,
+          setPlantMarkerOnMap,
         }}
         />
       </form>

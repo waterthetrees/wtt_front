@@ -30,7 +30,7 @@ function Mapper() {
   const [zoom, setZoom] = useState(10);
   const [center, setCenter] = useState([-122.34725, 37.7343787]);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  const [newTreeAdded, setNewTreeAdded] = useState();
+  // const [newTreeAdded, setNewTreeAdded] = useState();
   const mapboxElRef = useRef(null); // DOM element to render map
   const [geolocater, setGeolocater] = useState(false);
 
@@ -46,11 +46,26 @@ function Mapper() {
       });
       const geolocate = new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
+        // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
+        auto: true,
+        fitBoundsOptions: { zoom: 20 },
       });
 
       // Add the geolocate and navigation controls to the map.
+      mapboxMap.addControl(geolocate);
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
+      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
+        {
+          showDefault: true,
+          showCheckbox: true,
+          onlyRendered: false,
+          reverseOrder: true,
+        },
+        // TODO: specifying a location doesn't work for some reason.
+        'bottom-right'));
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
@@ -62,17 +77,6 @@ function Mapper() {
           tiles: [`${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`],
         });
       });
-      mapboxMap.addControl(new mapboxgl.GeolocateControl(geolocate));
-      mapboxMap.addControl(new mapboxgl.NavigationControl());
-      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
-        {
-          showDefault: true,
-          showCheckbox: true,
-          onlyRendered: false,
-          reverseOrder: true,
-        },
-        // TODO: specifying a location doesn't work for some reason.
-        'bottom-right'));
 
       setMap(mapboxMap);
       setGeolocater(geolocate);
@@ -89,6 +93,13 @@ function Mapper() {
         ? isMapLoaded && (
           <>
             <Sidebar>
+              <AddTree
+                map={map}
+                setZoom={setZoom}
+                center={center}
+                setCenter={setCenter}
+                geolocater={geolocater}
+              />
               <Slideout
                 buttonText={{ left: 'ADOPT' }}
                 classNameButton="slideout__btn  slideout__btn__shape"
@@ -96,16 +107,6 @@ function Mapper() {
               >
                 <TreeAdoptionDirections onmap />
               </Slideout>
-
-              <AddTree
-                map={map}
-                setZoom={setZoom}
-                center={center}
-                setCenter={setCenter}
-                newTreeAdded={newTreeAdded}
-                setNewTreeAdded={setNewTreeAdded}
-                geolocater={geolocater}
-              />
             </Sidebar>
 
             {currentTreeId && (

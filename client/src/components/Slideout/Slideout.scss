@@ -1,6 +1,7 @@
 .slideout {
-  width:250px;
-  padding: 0 0 .9rem 0;
+  // width:50%;
+  opacity: 0.8;
+  // padding: 0 0 .9rem 0;
 }
 
 .shape__txt{
@@ -36,6 +37,7 @@
 }
 
 .slideout__btn__shape {
+  margin-top: 22px;
   background-color: #337AB7;
   border-radius: 50%;
   border-top-right-radius: 0;
