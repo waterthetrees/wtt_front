@@ -44,12 +44,8 @@ export default function AddTree({
   const handleOnPlant = () => {
     if (!isAuthenticated) loginWithRedirect();
     if (isAuthenticated) mutateUser.mutate(user);
-    if (isMobile && !plantMarkerOnMap) {
-      console.log('is mobile');
-      geolocater.trigger();
-    }
-    setPlantMarkerOnMap(!plantMarkerOnMap);
-    console.log('handleOnPlant event', plantMarkerOnMap);
+
+    setAddTreeSelected(!addTreeSelected);
   };
 
   const handlePlantClick = () => setPlantMarkerOnMap(!plantMarkerOnMap);

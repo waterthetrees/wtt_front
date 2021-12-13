@@ -2,16 +2,18 @@
 import React from 'react';
 import {
   TextField,
-  FormControl,
   Autocomplete,
 } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
+import FormErrorMessage from './FormErrorMessage';
 
 export default function FormAutocomplete({
-  name, label, options = [], rules, control,
+  name, label, options = [], rules,
 }) {
+  const { control } = useFormContext();
+
   return (
-    <FormControl fullWidth>
+    <>
       <Controller
         name={name}
         control={control}
@@ -20,7 +22,6 @@ export default function FormAutocomplete({
           <Autocomplete
             {...props}
             options={options}
-            id={name}
             freeSolo
             autoSelect
             handleHomeEndKeys
@@ -30,12 +31,12 @@ export default function FormAutocomplete({
                 {...params}
                 label={label}
                 variant="standard"
-                size="small"
               />
             )}
           />
         )}
       />
-    </FormControl>
+      <FormErrorMessage name={name} label={label} />
+    </>
   );
 }

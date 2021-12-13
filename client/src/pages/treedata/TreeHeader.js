@@ -21,9 +21,9 @@ export default function TreeHeader({
         <div>
           <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>
           {(scientific !== genus) && <h2>{genus}</h2>}
-          {datePlanted && <h5>Planted: {planted}</h5>}
           {height && <h5>Height: {height}</h5>}
           {dbh && <h5>DBH: {dbh}</h5>}
+          {datePlanted && <h5>Planted: {planted}</h5>}
         </div>
       )}
 

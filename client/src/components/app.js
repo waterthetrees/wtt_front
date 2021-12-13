@@ -8,7 +8,7 @@ import '../styles/app.scss';
 
 // const NotFound = React.lazy(() => import('../pages/notFound/NotFound'));
 
-// Create a default theme.
+// Create a default MUI theme.
 const theme = createTheme();
 
 const App = () => (

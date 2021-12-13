@@ -1,19 +1,20 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import {
-  TextField,
+  Radio,
   RadioGroup,
   FormControlLabel,
-  Radio,
 } from '@mui/material';
-import Widget from '../../components/Widget';
-import ErrorMessageAll from '../error/ErrorPage';
+import {
+  FormTextField,
+  FormTreeGroup,
+} from '../../components/Form';
 
 export default function TreePlanter() {
-  const { control, errors } = useFormContext();
+  const { control } = useFormContext();
 
   return (
-    <Widget title="Planter" classes="treeplanter">
+    <FormTreeGroup title="Planter">
       <Controller
         as={(
           <RadioGroup aria-label="owner" name="position" row>
@@ -33,51 +34,30 @@ export default function TreePlanter() {
         control={control}
         size="medium"
       />
-      {errors.owner && <ErrorMessageAll errors={errors} name="owner" />}
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="who"
         label="Organization"
-        control={control}
-        rules={{ required: false, minLength: 1, maxLength: 100 }}
-        variant="standard"
-        size="small"
+        rules={{ minLength: 1, maxLength: 100 }}
       />
-      {errors.who && <ErrorMessageAll errors={errors} name="who" />}
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="volunteer"
         label="Volunteer Name"
-        control={control}
-        rules={{ required: true }}
-        variant="standard"
-        size="small"
         disabled
       />
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="email"
         label="Volunteer Email"
-        control={control}
-        rules={{ required: true }}
-        variant="standard"
-        size="small"
         disabled
       />
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="idReference"
         label="Reference Number"
-        control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
-        variant="standard"
-        size="small"
+        disabled
       />
-      {errors.idReference && <ErrorMessageAll errors={errors} name="idReference" />}
-    </Widget>
+    </FormTreeGroup>
   );
 }

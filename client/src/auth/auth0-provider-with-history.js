@@ -11,7 +11,9 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const history = useHistory();
 
   const onRedirectCallback = (appState) => {
-    history.push(appState?.returnTo || window.location.pathname);
+    // Include the hash with the pathname so that the user will return to the current zoom and
+    // position after logging in.
+    history.push(appState?.returnTo || location.pathname + location.hash);
   };
 
   return (

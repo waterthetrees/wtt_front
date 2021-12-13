@@ -7,7 +7,6 @@ import AddTree from '../addtree/AddTree';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
-import TreeData from '../treedata';
 import MapLayers from './MapLayers';
 import '@watergis/mapbox-gl-legend/css/styles.css';
 import './Mapper.scss';
@@ -30,7 +29,6 @@ function Mapper() {
   const [zoom, setZoom] = useState(10);
   const [center, setCenter] = useState([-122.34725, 37.7343787]);
   const [currentTreeId, setCurrentTreeId] = useState(null);
-  // const [newTreeAdded, setNewTreeAdded] = useState();
   const mapboxElRef = useRef(null); // DOM element to render map
   const [geolocater, setGeolocater] = useState(false);
 
@@ -108,14 +106,7 @@ function Mapper() {
                 <TreeAdoptionDirections onmap />
               </Slideout>
             </Sidebar>
-
-            {currentTreeId && (
-              <TreeData
-                map={map}
-                currentTreeId={currentTreeId}
-                setCurrentTreeId={setCurrentTreeId}
-              />
-            )}
+            )
 
             <MapLayers
               map={map}
