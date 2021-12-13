@@ -56,7 +56,7 @@ const AddTreeModal = ({
     };
 
     mutateTreeData.mutate(sendData);
-    setShowAddTreeModal(!showAddTreeModal);
+    setShowAddTreeModal(false);
     setPlantMarkerOnMap(false);
   };
 
