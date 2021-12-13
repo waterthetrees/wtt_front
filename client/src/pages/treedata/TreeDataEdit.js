@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@mui/material';
 import format from 'date-fns/format';
-import MuiAutoComplete from '../addtree/MuiAutoComplete';
-import ErrorMessageAll from '../error/ErrorPage';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
+import Form from '../../components/Form/Form';
+import TreeSelector from '../../components/TreeSelector/TreeSelector';
 
 const filteredObj = (obj) => Object.entries(obj)
   // eslint-disable-next-line no-unused-vars
@@ -13,32 +13,28 @@ const filteredObj = (obj) => Object.entries(obj)
   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 export default function TreeHeaderForm({
-  idTree, common, scientific, genus, treeData, setEditTree,
+  idTree, treeData, setEditTree,
 }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const [newTree, setNewTree] = useState(null);
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
-
   const defaultValues = {
-    idTree,
-    common: common || '',
-    scientific: scientific || '',
-    genus: genus || '',
-    datePlanted: treeData.datePlanted || format(new Date(), 'yyyy-MM-dd'),
-    dbh: treeData.dbh || '',
-    height: treeData.height || '',
-    health: treeData.health || 'good',
+    common: treeData.common || '',
+    scientific: treeData.scientific || '',
+    genus: treeData.genus || '',
   };
-
-  const {
-    handleSubmit, control, errors,
-  } = useForm({ defaultValues });
+  const formMethods = useForm({ defaultValues });
+  const { handleSubmit } = formMethods;
 
   const onSubmit = async (data) => {
     if (!isAuthenticated) loginWithRedirect();
 
-    const sendData = { ...defaultValues, ...data };
+    const sendData = {
+      idTree,
+      ...defaultValues,
+      ...data
+    };
     sendData.health = (!treeData.health || treeData.health === 'vacant')
       ? 'good'
       : treeData.health;
@@ -50,9 +46,9 @@ export default function TreeHeaderForm({
     const sendDataFiltered = filteredObj(sendData);
     const lowercaseCommon = sendDataFiltered.common.toLowerCase();
 
-    if (sendDataFiltered.common !== common
-       || sendDataFiltered.scientific !== scientific
-       || sendDataFiltered.genus !== genus) {
+    if (sendDataFiltered.common !== treeData.common
+       || sendDataFiltered.scientific !== treeData.scientific
+       || sendDataFiltered.genus !== treeData.genus) {
       mutateTreeData.mutate(sendDataFiltered);
     }
 
@@ -77,26 +73,21 @@ export default function TreeHeaderForm({
 
   const onError = (errorLog, e) => console.error('errors, e', errorLog, e);
 
-  const coordinates = { lng: treeData.lng, lat: treeData.lat };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="common" />
-      {errors.common && <ErrorMessageAll errors={errors} name="common" />}
-
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="scientific" />
-      {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
-
-      <MuiAutoComplete control={control} coordinates={coordinates} keyName="genus" />
-      {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
+    <Form
+      {...formMethods}
+      onSubmit={handleSubmit(onSubmit, onError)}
+    >
+      <TreeSelector />
 
       <div className="treedata__edit text-right">
         <div className="treedata__edit-txt">
           <h5>Planting a new tree here?</h5>
         </div>
-        <Button variant="outlined" onClick={() => setNewTree('no')} active={newTree === 'no'}>no</Button>
-        <Button variant="outlined" onClick={() => setNewTree('yes')} active={newTree === 'yes'}>yes</Button>
+        <Button variant="outlined" onClick={() => setNewTree('no')}>no</Button>
+        <Button variant="outlined" onClick={() => setNewTree('yes')}>yes</Button>
       </div>
+
       <div className="treedata__edit-btn text-right">
         <Button
           variant="outlined"
@@ -107,12 +98,11 @@ export default function TreeHeaderForm({
         <Button
           variant="outlined"
           type="submit"
-          color="primary"
           className="btn btn-dark btn-md"
         >
           SAVE
         </Button>
       </div>
-    </form>
+    </Form>
   );
 }

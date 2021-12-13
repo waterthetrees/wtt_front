@@ -19,7 +19,7 @@ function onDragEndd(marker) {
 }
 
 export const currentMarkers = [];
-let renderCount = 0;
+// let renderCount = 0;
 
 const createImageForMarker = () => {
   const sproutImg = document.createElement('img');
@@ -89,7 +89,7 @@ export default function AddTree({
     map.off('click', handlePlantClick);
   });
 
-  renderCount += 1;
+  // renderCount += 1;
   // console.log(renderCount, 'renderCount');
   return (
     <div>

@@ -65,11 +65,7 @@ const TreeContent = ({ currentTreeId, map }) => {
       {editTree && (
         <TreeHeaderForm
           idTree={idTree}
-          common={common}
-          scientific={scientific}
-          genus={genus}
           treeData={treeData}
-          datePlanted={datePlanted}
           setEditTree={setEditTree}
         />
       )}

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import {
   TextField,
   Select,
@@ -8,10 +8,10 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
-import MuiAutoComplete from './MuiAutoComplete';
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 import { treeHealth } from '../../util/treeHealth';
+import TreeSelector from '../../components/TreeSelector/TreeSelector';
 
 // Create an array of DBH/height menu items: [.25,.5,.75,1,2,3,4] inches.
 const treeSmallValues = [0.25, 0.50, 0.75];
@@ -28,20 +28,12 @@ const heightItems = treeCharacteristics.map((value) => (
 const healthItems = treeHealth.getNameValuePairs().reverse()
   .map(([name]) => <MenuItem key={name} value={name}>{name}</MenuItem>);
 
-export default function TreeInfo({
-  treeList, register, control, errors,
-}) {
+export default function TreeInfo() {
+  const { control, errors } = useFormContext();
+
   return (
-    <Widget title="Tree Info" classes="treeinfo">
-
-      <MuiAutoComplete control={control} keyName="common" optionValues={treeList} register={register} />
-      {errors.common && <ErrorMessageAll errors={errors} name="common" />}
-
-      <MuiAutoComplete control={control} keyName="scientific" optionValues={treeList} register={register} />
-      {errors.scientific && <ErrorMessageAll errors={errors} name="scientific" />}
-
-      <MuiAutoComplete control={control} keyName="genus" optionValues={treeList} register={register} />
-      {errors.genus && <ErrorMessageAll errors={errors} name="genus" />}
+    <Widget title="Info" classes="treeinfo">
+      <TreeSelector />
 
       <Controller
         as={TextField}
@@ -107,7 +99,6 @@ export default function TreeInfo({
         size="small"
       />
       {errors.notes && <ErrorMessageAll errors={errors} name="notes" />}
-
     </Widget>
   );
 }

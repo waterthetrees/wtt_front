@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import {
   TextField,
   Select,
@@ -10,11 +10,11 @@ import {
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
-export default function TreeAddress({ control, coordinates, errors }) {
-  const { lng, lat } = Object(coordinates);
-  return (
-    <Widget title="Tree Location" classes="treelocation">
+export default function TreeAddress({ coordinates: { lng, lat } }) {
+  const { control, errors } = useFormContext();
 
+  return (
+    <Widget title="Location" classes="treelocation">
       <Controller
         as={TextField}
         name="address"
@@ -42,6 +42,10 @@ export default function TreeAddress({ control, coordinates, errors }) {
       >
         <InputLabel id="state">State</InputLabel>
         <Controller
+          name="state"
+          control={control}
+          variant="standard"
+          size="small"
           as={(
             <Select
               labelId="state"
@@ -103,10 +107,6 @@ export default function TreeAddress({ control, coordinates, errors }) {
               <MenuItem value="WY">Wyoming</MenuItem>
             </Select>
           )}
-          name="state"
-          control={control}
-          variant="standard"
-          size="small"
         />
       </FormControl>
       {errors.state && <ErrorMessageAll errors={errors} name="state" />}
@@ -155,7 +155,6 @@ export default function TreeAddress({ control, coordinates, errors }) {
         defaultValue={lng}
         disabled
       />
-
     </Widget>
   );
 }

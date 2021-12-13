@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import {
   TextField,
   RadioGroup,
@@ -9,30 +9,30 @@ import {
 import Widget from '../../components/Widget';
 import ErrorMessageAll from '../error/ErrorPage';
 
-export default function TreePlanter({ control, errors }) {
+export default function TreePlanter() {
+  const { control, errors } = useFormContext();
+
   return (
-    <Widget title="Tree Planter" classes="treeplanter">
-      <span>
-        <Controller
-          as={(
-            <RadioGroup aria-label="owner" name="position" row>
-              <FormControlLabel
-                value="public"
-                control={<Radio color="primary" value="public" />}
-                label="Public Land"
-              />
-              <FormControlLabel
-                value="private"
-                control={<Radio color="secondary" value="private" />}
-                label="Private Land"
-              />
-            </RadioGroup>
-          )}
-          name="owner"
-          control={control}
-          size="medium"
-        />
-      </span>
+    <Widget title="Planter" classes="treeplanter">
+      <Controller
+        as={(
+          <RadioGroup aria-label="owner" name="position" row>
+            <FormControlLabel
+              value="public"
+              control={<Radio color="primary" value="public" />}
+              label="Public Land"
+            />
+            <FormControlLabel
+              value="private"
+              control={<Radio color="secondary" value="private" />}
+              label="Private Land"
+            />
+          </RadioGroup>
+        )}
+        name="owner"
+        control={control}
+        size="medium"
+      />
       {errors.owner && <ErrorMessageAll errors={errors} name="owner" />}
 
       <Controller
@@ -78,7 +78,6 @@ export default function TreePlanter({ control, errors }) {
         size="small"
       />
       {errors.idReference && <ErrorMessageAll errors={errors} name="idReference" />}
-
     </Widget>
   );
 }
