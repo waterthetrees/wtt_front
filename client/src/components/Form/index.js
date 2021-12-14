@@ -3,6 +3,7 @@ export { default as FormAutocomplete } from "./FormAutocomplete";
 export { default as FormCheckbox } from "./FormCheckbox";
 export { default as FormDecimalField } from "./FormDecimalField";
 export { default as FormErrorMessage } from "./FormErrorMessage";
+export { default as FormRadio } from "./FormRadio";
 export { default as FormRadioGroup } from "./FormRadioGroup";
 export { default as FormScrollableDialog } from "./FormScrollableDialog";
 export { default as FormSelect } from "./FormSelect";

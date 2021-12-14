@@ -41,7 +41,8 @@ module.exports = (env) => {
         },
         ifNotProduction({
           test: /\.js$/,
-          exclude: /mapbox-gl-legend/,
+          // These modules seem to cause errors with this loader.
+          exclude: /mapbox-gl-legend|react-hook-form/,
           enforce: 'pre',
           use: ['source-map-loader'],
         }),

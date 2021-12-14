@@ -24,7 +24,7 @@ export default function TreeNameAndSize() {
   const { watch, setValue } = useFormContext();
   // Get the value of common that was specified by our parent's defaultValues, so that we can
   // default the lastCommon state to it.
-  let { common, scientific, genus } = watch(['common', 'scientific', 'genus']);
+  let [common, scientific, genus] = watch(['common', 'scientific', 'genus']);
   const [lastCommon, setLastCommon] = useState(common);
 
   useEffect(() => {

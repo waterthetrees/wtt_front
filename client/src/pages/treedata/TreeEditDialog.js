@@ -34,7 +34,8 @@ export default function TreeEditDialog({
     ...initialValues,
     newTree: false
   };
-  const formMethods = useForm({ defaultValues });
+  // Set mode to "all" to check for errors when fields change or lose focus.
+  const formMethods = useForm({ defaultValues, mode: 'all' });
 
   const handleConfirm = (formData, event) => {
     // Try to prevent the form submission from reloading the page if there's an error.
@@ -94,7 +95,10 @@ export default function TreeEditDialog({
       fullScreen={false}
       maxWidth="xs"
       formMethods={formMethods}
-      actions={[{ cancel: 'Cancel' }, { confirm: 'Save Changes' }]}
+      actions={[
+        { cancel: 'Cancel' },
+        { confirm: 'Save Changes' }
+      ]}
     >
       <TreeNameAndSize />
 

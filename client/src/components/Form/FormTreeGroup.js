@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 
 const Group = styled('div')`
   margin-bottom: 15px;
-  border-radius: 0 0 25px 25px;
+  border-radius: 0 0 20px 25px;
   background-color: #658e52;
   background-image: url(../../assets/images/addtree/all_leaf.svg);
   background-repeat: no-repeat;
@@ -11,6 +11,10 @@ const Group = styled('div')`
   background-size: cover;
   display: flex;
   flex-direction: column;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 const Header = styled('div')`

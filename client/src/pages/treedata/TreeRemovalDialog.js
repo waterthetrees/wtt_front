@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import {
   FormControlLabel,
   Radio,
-  TextField,
 } from '@mui/material';
 import { FormRadioGroup, FormTextField } from '../../components/Form';
 import FormScrollableDialog from '../../components/Form/FormScrollableDialog';
@@ -38,14 +37,16 @@ const removalReasons = [
 export default function TreeRemoveDialog({
   open, setOpen, onConfirm,
 }) {
+  // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({
     defaultValues: {
       reason: removalReasons[0].value,
       otherReason: '',
     },
+    mode: 'all'
   });
   const { setValue } = formMethods;
-  const radioButtons = [
+  const reasonRadioButtons = [
     ...removalReasons,
     {
       value: 'other',
@@ -56,7 +57,7 @@ export default function TreeRemoveDialog({
         name="otherReason"
         label="Other reason"
         sx={{ mt: -1 }}
-        as={<TextField onFocus={() => setValue('reason', 'other')} />}
+        onFocus={() => setValue('reason', 'other')}
       />,
     },
   ].map(({ value, label }) => (
@@ -110,13 +111,17 @@ export default function TreeRemoveDialog({
       fullScreen={false}
       maxWidth="xs"
       formMethods={formMethods}
-      actions={[{ cancel: 'Cancel' }, { confirm: 'Remove Tree' }]}
+      actions={[
+        { cancel: 'Cancel' },
+        { confirm: 'Remove Tree' }
+      ]}
     >
       <FormRadioGroup
         name="reason"
         label="Reason for removal"
-        options={radioButtons}
-      />
+      >
+        {reasonRadioButtons}
+      </FormRadioGroup>
     </FormScrollableDialog>
   );
 }
