@@ -7,6 +7,7 @@ import AddTree from '../addtree/AddTree';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
+import TreeData from '../treedata';
 import MapLayers from './MapLayers';
 import '@watergis/mapbox-gl-legend/css/styles.css';
 import './Mapper.scss';
@@ -111,6 +112,14 @@ function Mapper() {
               </Slideout>
             </Sidebar>
             )
+
+            {currentTreeId && (
+              <TreeData
+                map={map}
+                currentTreeId={currentTreeId}
+                setCurrentTreeId={setCurrentTreeId}
+              />
+            )}
 
             <MapLayers
               map={map}

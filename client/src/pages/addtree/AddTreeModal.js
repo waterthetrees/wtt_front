@@ -19,6 +19,7 @@ const AddTreeModal = ({
   setShowAddTreeModal,
   coordinatesNewTree,
   setPlantMarkerOnMap,
+  removeMarkers,
 }) => {
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
@@ -56,7 +57,6 @@ const AddTreeModal = ({
     };
 
     mutateTreeData.mutate(sendData);
-    setShowAddTreeModal(false);
     setPlantMarkerOnMap(false);
   };
 

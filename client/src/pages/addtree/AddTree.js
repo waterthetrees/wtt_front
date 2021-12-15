@@ -37,6 +37,14 @@ export default function AddTree({
 
   const removeMarkers = () => { currentMarkers[0].remove(); currentMarkers = []; };
 
+  useEffect(() => {
+    if (plantMarkerOnMap) return;
+    setPlantButtonText('PLANT');
+    setCoordinatesNewTree(null);
+    setShowAddTreeModal(false);
+    if (currentMarkers.length) removeMarkers();
+  }, [plantMarkerOnMap]);
+
   const handleOnPlantClick = (event) => {
     event.preventDefault();
     if (!isAuthenticated) loginWithRedirect();
@@ -55,11 +63,12 @@ export default function AddTree({
   };
 
   const handleAddMarker = (event, coordinates) => {
-    if (!plantMarkerOnMap) return;
     if (event) event.preventDefault();
+    if (!plantMarkerOnMap) return;
     const coords = coordinatesNewTree || coordinates;
     // if theres already a marker on the map, don't add more!
     if (isMobile && currentMarkers.length >= 1) return;
+
     if (coords && plantMarkerOnMap) {
       map.jumpTo({ coords, zoom: (isMobile) ? [20] : [18] });
 
@@ -91,7 +100,7 @@ export default function AddTree({
     map.setCenter(coordinates);
     map.jumpTo({ coordinates, zoom: [20] });
     setCoordinatesNewTree(coordinates);
-
+    if (!plantMarkerOnMap) return;
     if (isMobile) handleAddMarker(null, coordinates);
     if (plantMarkerOnMap) {
       map.off('click', handleOnPlantClick);
@@ -99,8 +108,10 @@ export default function AddTree({
   });
 
   map.on('click', (e) => {
+    if (!plantMarkerOnMap) return;
     if (isMobile) return;
     const coordinates = e.lngLat;
+    // map.jumpTo({ coordinates, zoom: [18] });
     map.setCenter([coordinates.lng, coordinates.lat]);
     if (currentMarkers.length >= 1) removeMarkers();
     handleAddMarker(e, [coordinates.lng, coordinates.lat]);
@@ -108,6 +119,7 @@ export default function AddTree({
 
   // renderCount += 1;
   // console.log(renderCount, 'renderCount');
+  console.log('plantMarkerOnMap', plantMarkerOnMap);
   return (
     <div>
       <button
@@ -128,6 +140,7 @@ export default function AddTree({
           plantMarkerOnMap={plantMarkerOnMap}
           setPlantMarkerOnMap={setPlantMarkerOnMap}
           coordinatesNewTree={coordinatesNewTree}
+          setPlantButtonText={setPlantButtonText}
         />
       )}
       <ReactTooltip
