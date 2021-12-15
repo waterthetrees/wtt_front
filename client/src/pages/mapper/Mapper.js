@@ -55,7 +55,7 @@ function Mapper() {
       });
 
       // Add the geolocate and navigation controls to the map.
-      mapboxMap.addControl(geolocate);
+
       mapboxMap.addControl(new mapboxgl.NavigationControl());
       mapboxMap.addControl(new MapboxLegendControl(legendTargets,
         {
@@ -66,6 +66,8 @@ function Mapper() {
         },
         // TODO: specifying a location doesn't work for some reason.
         'bottom-right'));
+
+      mapboxMap.addControl(geolocate);
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
