@@ -23,7 +23,7 @@ const vacantPattern = /vacant/i;
 export default function TreeEditDialog({
   idTree, treeData, showEditDialog, setShowEditDialog,
 }) {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { user = {} } = useAuth0();
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
   const { common, scientific, genus, height, dbh } = treeData;
@@ -40,8 +40,6 @@ export default function TreeEditDialog({
   const handleConfirm = (formData, event) => {
     // Try to prevent the form submission from reloading the page if there's an error.
     event.preventDefault();
-
-    if (!isAuthenticated) loginWithRedirect();
 
     // Extract the newTree boolean, since we don't want to send it to the backend.
     const { newTree, ...data } = formData;

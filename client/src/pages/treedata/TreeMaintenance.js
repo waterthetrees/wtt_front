@@ -4,9 +4,9 @@ import format from 'date-fns/format';
 import {
   Button, ToggleButton, ToggleButtonGroup, styled,
 } from '@mui/material';
-import cx from 'clsx';
 import { saveTimer } from '../../util/constants';
 import { useTreeHistoryMutation } from '../../api/queries';
+import useAuthUtils from '../../components/Auth/useAuthUtils';
 
 const treeImagesPath = 'assets/images/trees/';
 
@@ -74,24 +74,22 @@ const MaintenanceButtons = ({ actions, setActions }) => {
 };
 
 export default function TreeMaintenance({ currentTreeId }) {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [showDoMaintenance, setShowDoMaintenance] = useState(false);
   const [actions, setActions] = useState([]);
-  const [maintenanceButtonStyle, setMaintenanceButtonStyle] = useState('btn-light');
   const [maintenanceSaveButton, setMaintenanceSaveButton] = useState('SAVE');
   const mutateHistory = useTreeHistoryMutation();
   const commentRef = useRef('');
   const volunteerRef = useRef(isAuthenticated
     ? user.name
     : 'Volunteer');
+  const { loginToCurrentPage } = useAuthUtils();
 
   const handleMaintenanceSave = () => {
     setMaintenanceSaveButton('SAVE');
-    setMaintenanceButtonStyle('btn-outline-success');
   };
 
   const handleButtonChanges = (mBtnStyle, mBtnSave) => {
-    setMaintenanceButtonStyle(mBtnStyle);
     setMaintenanceSaveButton(mBtnSave);
   };
 
@@ -130,7 +128,7 @@ export default function TreeMaintenance({ currentTreeId }) {
     if (isAuthenticated) {
       setShowDoMaintenance(!showDoMaintenance);
     } else {
-      loginWithRedirect();
+      loginToCurrentPage();
     }
   };
 

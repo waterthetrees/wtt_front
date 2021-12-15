@@ -28,3 +28,11 @@
 .map__error > p:last-of-type {
   margin: 0;
 }
+
+.mapboxgl-legend-list{
+  overflow-y: auto;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  display: none;
+}

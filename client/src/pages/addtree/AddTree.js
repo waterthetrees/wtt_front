@@ -1,28 +1,30 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import ReactTooltip from 'react-tooltip';
+import { useUserMutation } from '../../api/queries';
+import AddTreeModal from './AddTreeModal';
+import useAuthUtils from '../../components/Auth/useAuthUtils';
 import cx from 'clsx';
 import './AddTree.scss';
-
-import { useAuth0 } from '@auth0/auth0-react';
-import { useUserMutation } from '../../api/queries';
-
-import AddTreeModal from './AddTreeModal';
 
 let renderCount = 0;
 const currentMarkers = [];
 
 function AddTree({
-  map, setZoom, center, setCenter,
+  map, center, setCenter,
 }) {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [addTreeSelected, setAddTreeSelected] = useState(false);
   const mutateUser = useUserMutation();
+  const { loginToCurrentPage } = useAuthUtils();
 
   const handleOnClick = () => {
-    if (!isAuthenticated) loginWithRedirect();
-    if (isAuthenticated) mutateUser.mutate(user);
+    if (!isAuthenticated) {
+      loginToCurrentPage();
+    } else {
+      mutateUser.mutate(user);
+    }
 
     setAddTreeSelected(!addTreeSelected);
   };
@@ -55,7 +57,6 @@ function AddTree({
         map={map}
         setAddTreeSelected={setAddTreeSelected}
         addTreeSelected={addTreeSelected}
-        setZoom={setZoom}
         coordinatesNewTree={center}
         setCoordinatesNewTree={setCenter}
       />
@@ -72,7 +73,7 @@ function AddTree({
 
 const TreeMarker = ({
   map, addTreeSelected, setAddTreeSelected,
-  setZoom, coordinatesNewTree, setCoordinatesNewTree,
+  coordinatesNewTree, setCoordinatesNewTree,
 }) => {
   const [showAddTreeModal, setShowAddTreeModal] = useState(false);
   const handleMarkerClick = () => {
@@ -109,7 +110,6 @@ const TreeMarker = ({
     loadNewMarker(coordinates);
 
     map.off('click', handleMapClick);
-    setZoom(19);
     map.flyTo({
       center: coordinates,
       zoom: [19],

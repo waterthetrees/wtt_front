@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import { useTreeDataMutation } from '../../api/queries';
+import useAuthUtils from '../../components/Auth/useAuthUtils';
 import { treeHealth } from '../../util/treeHealth';
 import { saveTimer } from '../../util/constants';
 
@@ -46,15 +47,20 @@ const healthSliderStyle = (() => {
 export default function TreeHealthSlider({
   currentTreeId, healthNum, health, lat, lng, map,
 }) {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const mutateTreeData = useTreeDataMutation();
   const sliderRef = useRef(null);
+  const { loginToCurrentPage } = useAuthUtils();
 
   const handleOnChange = () => {
     const newHealth = treeHealth.getNameByValue(sliderRef.current.value);
 
-    if (!isAuthenticated) loginWithRedirect();
+    if (!isAuthenticated) {
+      loginToCurrentPage();
+
+      return health;
+    }
 
     if (newHealth !== health) {
       const sendTreeData = {
