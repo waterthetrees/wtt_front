@@ -1,13 +1,11 @@
 import React from 'react';
 import { FormControl, InputLabel, Select } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormSelect({
-  name, label, options = [], rules, ...restProps
+  children, name, label, rules, ...restProps
 }) {
-  const { control } = useFormContext();
-
   return (
     <>
       <FormControl
@@ -18,10 +16,15 @@ export default function FormSelect({
         <Controller
           name={name}
           rules={rules}
-          variant="standard"
-          control={control}
-          as={<Select>{options}</Select>}
-          {...restProps}
+          render={({ field }) => (
+            <Select
+              {...field}
+              variant="standard"
+              {...restProps}
+            >
+              {children}
+            </Select>
+          )}
         />
       </FormControl>
       <FormErrorMessage name={name} label={label} />

@@ -24,7 +24,7 @@ const messagesByType = {
 };
 
 export default function FormErrorMessage({ name, label = name }) {
-  const { errors } = useFormContext();
+  const { formState: { errors } } = useFormContext();
   const error = errors[name];
 
   if (error) {

@@ -4,14 +4,12 @@ import {
   FormLabel,
   RadioGroup,
 } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormRadioGroup({
-  name, label, options = [], rules, sx, ...restProps
+  children, name, label, rules, ...restProps
 }) {
-  const { control } = useFormContext();
-
   // We have to wrap the Controller around the RadioGroup, not the FormControl, since the
   // RadioGroup is what is updating the actual value.
   return (
@@ -23,17 +21,16 @@ export default function FormRadioGroup({
         <FormLabel component="legend">{label}</FormLabel>
         <Controller
           name={name}
-          control={control}
           rules={rules}
-          as={
+          render={({ field }) => (
             <RadioGroup
+              {...field}
               aria-label={label}
-              sx={sx}
+              {...restProps}
             >
-              {options}
+              {children}
             </RadioGroup>
-          }
-          {...restProps}
+          )}
         />
       </FormControl>
       <FormErrorMessage name={name} label={label} />

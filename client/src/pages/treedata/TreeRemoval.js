@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
-import TreeRemoveDialog from './TreeRemoveDialog';
+import TreeRemovalDialog from './TreeRemovalDialog';
 
 export default function TreeRemoval({ idTree, common, notes }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -74,7 +74,7 @@ export default function TreeRemoval({ idTree, common, notes }) {
         </Button>
       )}
       {showRemovalDialog && (
-        <TreeRemoveDialog
+        <TreeRemovalDialog
           open={showRemovalDialog}
           setOpen={setShowRemovalDialog}
           onConfirm={handleConfirm}
