@@ -8,29 +8,45 @@ import {
 import { FormRadioGroup, FormTextField } from '../../components/Form';
 import FormScrollableDialog from '../../components/Form/FormScrollableDialog';
 
+const removalReasons = [
+  {
+    value: 'diedFromUnderWatering',
+    label: 'Died from under-watering',
+  },
+  {
+    value: 'diedFromInsects',
+    label: 'Died from insects or disease',
+  },
+  {
+    value: 'diedFromUnknown',
+    label: 'Died from unknown causes',
+  },
+  {
+    value: 'sickOrDamaged',
+    label: 'Sickened or damaged',
+  },
+  {
+    value: 'badSpecies',
+    label: 'Invasive or non-native species',
+  },
+  {
+    value: 'ugly',
+    label: 'Aesthetically unappealing',
+  },
+];
+
 export default function TreeRemoveDialog({
   open, setOpen, onConfirm,
 }) {
   const formMethods = useForm({
     defaultValues: {
-      reason: 'dead',
-      otherReason: ''
-    }
+      reason: removalReasons[0].value,
+      otherReason: '',
+    },
   });
   const { setValue } = formMethods;
-  const options = [
-    {
-      value: 'dead',
-      label: 'Dead'
-    },
-    {
-      value: 'noWater',
-      label: 'No water'
-    },
-    {
-      value: 'insects',
-      label: 'Insects or disease'
-    },
+  const radioButtons = [
+    ...removalReasons,
     {
       value: 'other',
       // For this option, use a custom label containing a text field, so the user can specify a
@@ -59,11 +75,25 @@ export default function TreeRemoveDialog({
     />
   ));
 
-  const handleConfirm = (data, event) => {
+  const handleConfirm = ({ reason, otherReason }, event) => {
     // Try to prevent the form submission from reloading the page if there's an error.
     event.preventDefault();
     setOpen(false);
-    onConfirm(data);
+
+    let comment;
+
+    if (reason === 'other') {
+      comment = otherReason;
+    } else {
+      // Use the label of the selected reason as the comment.
+      const option = removalReasons.find(({ value }) => value === reason);
+
+      comment = option
+        ? option.label
+        : reason;
+    }
+
+    onConfirm({ reason, comment });
   };
 
   const handleCancel = () => setOpen(false);
@@ -85,7 +115,7 @@ export default function TreeRemoveDialog({
       <FormRadioGroup
         name="reason"
         label="Reason for removal"
-        options={options}
+        options={radioButtons}
       />
     </FormScrollableDialog>
   );

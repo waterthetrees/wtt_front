@@ -7,7 +7,7 @@ import TreeRemoveDialog from './TreeRemoveDialog';
 
 export default function TreeRemoval({ idTree, common, notes }) {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const [showDelete, setShowDelete] = useState(true);
+  const [showRemoveButton, setShowRemoveButton] = useState(true);
   const [showRemovalDialog, setShowRemovalDialog] = useState(false);
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
@@ -17,16 +17,13 @@ export default function TreeRemoval({ idTree, common, notes }) {
     setShowRemovalDialog(true);
   };
 
-  const handleConfirm = ({ reason, otherReason }) => {
+  const handleConfirm = ({ comment }) => {
     const functionName = 'handleRemoveTree';
 
     try {
       const now = Date.now();
       const today = format(now, 'yyyy-MM-dd');
       const dateVisit = format(now, 'yyyy-MM-dd HH:mm:ss');
-      const comment = reason === 'other'
-        ? otherReason || 'Other'
-        : reason;
       const sendTreeHistory = {
         idTree,
         date_visit: dateVisit,
@@ -42,18 +39,17 @@ export default function TreeRemoval({ idTree, common, notes }) {
         health: 'vacant',
         notes,
         datePlanted: dateVisit,
-        // TODO: SHOULD NOTES OF PREVIOUS TREE BE DELETED or concated
       };
       const newNote = `${common} was removed by ${user.nickname} ${today} - "${comment}"`;
 
       sendTreeData.notes = (notes && notes !== newNote)
-        ? `${newNote}, ${notes}`
+        ? `${notes ? notes + '\n' : ''}${newNote}`
         : newNote;
 
       mutateHistory.mutate(sendTreeHistory);
       mutateTreeData.mutate(sendTreeData);
 
-      setShowDelete(false);
+      setShowRemoveButton(false);
     } catch (err) {
       console.error('CATCH', functionName, 'err', err);
     }
@@ -61,7 +57,7 @@ export default function TreeRemoval({ idTree, common, notes }) {
 
   return (
     <div>
-      {showDelete && (
+      {showRemoveButton && (
         <Button
           variant="contained"
           onClick={handleRemoveClick}

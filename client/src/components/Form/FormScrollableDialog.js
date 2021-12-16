@@ -3,17 +3,13 @@ import ScrollableDialog from '../ScrollableDialog/ScrollableDialog';
 import { Form } from './index';
 import { Button } from '@mui/material';
 
-const isFunction = (value) => typeof value === 'function';
-
 export default function FormScrollableDialog({
   children, actions, formMethods, onConfirm, onCancel, onError, ...restProps
 }) {
   const handleSubmit = formMethods.handleSubmit(
-    (data, event) => isFunction(onConfirm) && onConfirm(data, event),
-    (data, event) => isFunction(onError) && onError(data, event)
+    (data, event) => onConfirm(data, event),
+    (data, event) => typeof onError === 'function' && onError(data, event)
   );
-
-  const handleCancel = () => isFunction(onCancel) && onCancel();
 
   const actionButtons = actions.map((action, i) => {
     const { confirm, cancel } = action;
@@ -32,7 +28,7 @@ export default function FormScrollableDialog({
       return (
         <Button
           key={i}
-          onClick={handleCancel}
+          onClick={onCancel}
         >
           {cancel}
         </Button>
@@ -42,7 +38,7 @@ export default function FormScrollableDialog({
 
   return (
     <ScrollableDialog
-      onClose={handleCancel}
+      onClose={onCancel}
       actions={actionButtons}
       {...restProps}
     >
