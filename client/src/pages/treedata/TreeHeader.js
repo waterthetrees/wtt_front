@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import format from 'date-fns/format';
-import { env } from '../../util/config';
 
 export default function TreeHeader({
   treeData, edit, vacant,

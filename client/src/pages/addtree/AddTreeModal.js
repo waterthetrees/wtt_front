@@ -44,7 +44,7 @@ const AddTreeModal = ({
     email: email || '',
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
-  // Set mode: all to check for errors when fields change or lose focus.
+  // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
   const { handleSubmit } = formMethods;
 

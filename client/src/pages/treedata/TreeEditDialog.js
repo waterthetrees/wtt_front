@@ -1,12 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button } from '@mui/material';
 import format from 'date-fns/format';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
-import { Form, FormCheckbox } from '../../components/Form';
+import { FormCheckbox, FormScrollableDialog } from '../../components/Form';
 import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
-import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
 
 function noNulls(object) {
 	return Object.keys(object).reduce((result, key) => {
@@ -37,9 +35,8 @@ export default function TreeEditDialog({
     newTree: false
   };
   const formMethods = useForm({ defaultValues });
-  const { handleSubmit } = formMethods;
 
-  const onSubmit = async (formData, event) => {
+  const handleConfirm = (formData, event) => {
     // Try to prevent the form submission from reloading the page if there's an error.
     event.preventDefault();
 
@@ -48,8 +45,9 @@ export default function TreeEditDialog({
     // Extract the newTree boolean, since we don't want to send it to the backend.
     const { newTree, ...data } = formData;
 
-    // Only update the backend if the values have actually changed.
-    if (JSON.stringify(data) !== JSON.stringify(initialValues)) {
+    // Only update the backend if the values have actually changed.  If the new tree checkbox is on
+    // and the names haven't changed, that just means tree's been replaced with the same type.
+    if (JSON.stringify(data) !== JSON.stringify(initialValues) || newTree) {
       const sendData = {
         idTree,
         ...data,
@@ -82,46 +80,29 @@ export default function TreeEditDialog({
     setShowEditDialog(false);
   };
 
-  const onError = (errorLog, e) => console.error('errors, e', errorLog, e);
+  const handleCancel = () => setShowEditDialog(false);
 
-  const handleClose = () => setShowEditDialog(false);
-
-  const handleFormSubmit = handleSubmit(onSubmit, onError);
+  const handleError = (errorLog, e) => console.error('errors, e', errorLog, e);
 
   return (
-    <ScrollableDialog
+    <FormScrollableDialog
       title="Edit Tree"
       open={showEditDialog}
-      onClose={handleClose}
+      onConfirm={handleConfirm}
+      onCancel={handleCancel}
+      onError={handleError}
       fullScreen={false}
-      actions={
-        <>
-          <Button
-            onClick={handleClose}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            onClick={handleFormSubmit}
-          >
-            Save Changes
-          </Button>
-        </>
-      }
+      maxWidth="xs"
+      formMethods={formMethods}
+      actions={[{ cancel: 'Cancel' }, { confirm: 'Save Changes' }]}
     >
-      <Form
-        {...formMethods}
-        onSubmit={handleSubmit(onSubmit, onError)}
-      >
-        <TreeNameAndSize />
+      <TreeNameAndSize />
 
-        <FormCheckbox
-          name="newTree"
-          label="Replace existing tree"
-          sx={{ mt: 2 }}
-        />
-      </Form>
-    </ScrollableDialog>
+      <FormCheckbox
+        name="newTree"
+        label="Replace existing tree"
+        sx={{ mt: 2 }}
+      />
+    </FormScrollableDialog>
   );
 }
