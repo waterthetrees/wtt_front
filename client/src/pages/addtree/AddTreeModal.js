@@ -18,8 +18,11 @@ const AddTreeModal = ({
   showAddTreeModal,
   setShowAddTreeModal,
   coordinatesNewTree,
+  setCoordinatesNewTree,
   setPlantMarkerOnMap,
   removeMarkers,
+  setPlantButtonText,
+  currentMarkers,
 }) => {
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
@@ -58,6 +61,10 @@ const AddTreeModal = ({
 
     mutateTreeData.mutate(sendData);
     setPlantMarkerOnMap(false);
+    setPlantButtonText('PLANT');
+    setCoordinatesNewTree(null);
+    setShowAddTreeModal(false);
+    if (currentMarkers.length) removeMarkers();
   };
 
   const onError = (err, e) => console.error('Form errors:', err, 'Event:', e);

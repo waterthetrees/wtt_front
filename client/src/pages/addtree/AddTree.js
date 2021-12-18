@@ -36,13 +36,21 @@ export default function AddTree({
   const plantTooltip = isMobile ? 'PLANTING' : 'You can now drag the tree marker around to your location';
 
   const removeMarkers = () => { currentMarkers[0].remove(); currentMarkers = []; };
+  // 1. click button to plant tree - plantMarkerOnMap = true
+  // 2. add tree marker to map
 
   useEffect(() => {
     if (plantMarkerOnMap) return;
-    setPlantButtonText('PLANT');
-    setCoordinatesNewTree(null);
-    setShowAddTreeModal(false);
+    // setPlantButtonText('PLANT');
+    // setCoordinatesNewTree(null);
+    // setShowAddTreeModal(false);
+    // if (currentMarkers.length) removeMarkers();
+
     if (currentMarkers.length) removeMarkers();
+    // remove geolocator so it doesnt go to watch mode
+    // geolocater.onRemove();
+    // // add geolocator back
+    // map.addControl(geolocater);
   }, [plantMarkerOnMap]);
 
   const handleOnPlantClick = (event) => {
@@ -53,8 +61,9 @@ export default function AddTree({
     if (isMobile && event.target.innerText === 'PLANT') geolocater.trigger();
     setPlantMarkerOnMap(!plantMarkerOnMap);
     setPlantButtonText(plantMarkerOnMap ? 'PLANT' : 'PLANTING');
-    if (plantMarkerOnMap && currentMarkers.length >= 1) {
-      removeMarkers();
+    if (event.target.innerText === 'PLANTING') {
+    // && currentMarkers.length >= 1) {
+      // removeMarkers();
       // remove geolocator so it doesnt go to watch mode
       geolocater.onRemove();
       // add geolocator back
@@ -95,27 +104,43 @@ export default function AddTree({
     }
   };
 
-  geolocater.on('geolocate', (position) => {
-    const coordinates = [position.coords.longitude, position.coords.latitude];
-    map.setCenter(coordinates);
-    map.jumpTo({ coordinates, zoom: [20] });
-    setCoordinatesNewTree(coordinates);
-    if (!plantMarkerOnMap) return;
-    if (isMobile) handleAddMarker(null, coordinates);
-    if (plantMarkerOnMap) {
-      map.off('click', handleOnPlantClick);
-    }
-  });
+  // geolocater.on('geolocate', (position) => {
+  //   const coordinates = [position.coords.longitude, position.coords.latitude];
+  //   map.setCenter(coordinates);
+  //   map.jumpTo({ coordinates, zoom: [20] });
+  //   setCoordinatesNewTree(coordinates);
+  //   if (!plantMarkerOnMap) return;
+  //   if (isMobile) handleAddMarker(null, coordinates);
+  //   if (plantMarkerOnMap) {
+  //     map.off('click', handleOnPlantClick);
+  //   }
+  // });
 
-  map.on('click', (e) => {
+  useEffect(() => {
+    geolocater.on('geolocate', (position) => {
+      const coordinates = [position.coords.longitude, position.coords.latitude];
+      map.setCenter(coordinates);
+      map.jumpTo({ coordinates, zoom: [20] });
+      if (!plantMarkerOnMap) return;
+      setCoordinatesNewTree(coordinates);
+      if (isMobile) handleAddMarker(null, coordinates);
+      if (plantMarkerOnMap) {
+        map.off('click', handleOnPlantClick);
+      }
+    });
+  }, [plantMarkerOnMap]);
+
+  useEffect(() => {
     if (!plantMarkerOnMap) return;
     if (isMobile) return;
-    const coordinates = e.lngLat;
-    // map.jumpTo({ coordinates, zoom: [18] });
-    map.setCenter([coordinates.lng, coordinates.lat]);
-    if (currentMarkers.length >= 1) removeMarkers();
-    handleAddMarker(e, [coordinates.lng, coordinates.lat]);
-  });
+    map.on('click', (e) => {
+      const coordinates = e.lngLat;
+      // map.jumpTo({ coordinates, zoom: [18] });
+      map.setCenter([coordinates.lng, coordinates.lat]);
+      if (currentMarkers.length >= 1) removeMarkers();
+      handleAddMarker(e, [coordinates.lng, coordinates.lat]);
+    });
+  }, [plantMarkerOnMap]);
 
   // renderCount += 1;
   // console.log(renderCount, 'renderCount');
@@ -141,6 +166,9 @@ export default function AddTree({
           setPlantMarkerOnMap={setPlantMarkerOnMap}
           coordinatesNewTree={coordinatesNewTree}
           setPlantButtonText={setPlantButtonText}
+          setCoordinatesNewTree={setCoordinatesNewTree}
+          currentMarkers={currentMarkers}
+          removeMarkers={removeMarkers}
         />
       )}
       <ReactTooltip
@@ -153,3 +181,104 @@ export default function AddTree({
     </div>
   );
 }
+
+// function AddTreeMobile() {
+//   const removeMarkers = () => { currentMarkers[0].remove(); currentMarkers = []; };
+//   // 1. click button to plant tree - plantMarkerOnMap = true
+//   // 2. add tree marker to map
+
+//   useEffect(() => {
+//     if (plantMarkerOnMap) return;
+//     setPlantButtonText('PLANT');
+//     setCoordinatesNewTree(null);
+//     setShowAddTreeModal(false);
+//     if (currentMarkers.length) removeMarkers();
+//   }, [plantMarkerOnMap]);
+
+//   const handleOnPlantClick = (event) => {
+//     event.preventDefault();
+//     if (!isAuthenticated) loginWithRedirect();
+//     if (isAuthenticated) mutateUser.mutate(user);
+
+//     if (isMobile && event.target.innerText === 'PLANT') geolocater.trigger();
+//     setPlantMarkerOnMap(!plantMarkerOnMap);
+//     setPlantButtonText(plantMarkerOnMap ? 'PLANT' : 'PLANTING');
+//     if (plantMarkerOnMap && currentMarkers.length >= 1) {
+//       removeMarkers();
+//       // remove geolocator so it doesnt go to watch mode
+//       geolocater.onRemove();
+//       // add geolocator back
+//       map.addControl(geolocater);
+//     }
+//   };
+
+//   const handleAddMarker = (event, coordinates) => {
+//     if (event) event.preventDefault();
+//     if (!plantMarkerOnMap) return;
+//     const coords = coordinatesNewTree || coordinates;
+//     // if theres already a marker on the map, don't add more!
+//     if (isMobile && currentMarkers.length >= 1) return;
+
+//     if (coords && plantMarkerOnMap) {
+//       map.jumpTo({ coords, zoom: (isMobile) ? [20] : [18] });
+
+//       const marker = new mapboxgl.Marker(createImageForMarker())
+//         .setLngLat(coords)
+//         .addTo(map);
+
+//       if (isMobile) setShowAddTreeModal(!showAddTreeModal);
+//       currentMarkers.push(marker);
+//       marker.getElement().addEventListener('click',
+//         () => setShowAddTreeModal(!showAddTreeModal));
+
+//       if (!isMobile) {
+//         marker.on('dragend', () => {
+//           const lngLat = marker.getLngLat();
+//           setCoordinatesNewTree([lngLat.lng, lngLat.lat]);
+//         });
+//         const lngLat = marker.getLngLat();
+//         marker.on('dragend', lngLat);
+
+//         setCoordinatesNewTree([lngLat.lng, lngLat.lat]);
+//         marker.on('click', () => setShowAddTreeModal(!showAddTreeModal));
+//       }
+//     }
+//   };
+
+//   geolocater.on('geolocate', (position) => {
+//     const coordinates = [position.coords.longitude, position.coords.latitude];
+//     map.setCenter(coordinates);
+//     map.jumpTo({ coordinates, zoom: [20] });
+//     setCoordinatesNewTree(coordinates);
+//     if (!plantMarkerOnMap) return;
+//     if (isMobile) handleAddMarker(null, coordinates);
+//     if (plantMarkerOnMap) {
+//       map.off('click', handleOnPlantClick);
+//     }
+//   });
+
+//   map.on('click', (e) => {
+//     if (!plantMarkerOnMap) return;
+//     if (isMobile) return;
+//     const coordinates = e.lngLat;
+//     // map.jumpTo({ coordinates, zoom: [18] });
+//     map.setCenter([coordinates.lng, coordinates.lat]);
+//     if (currentMarkers.length >= 1) removeMarkers();
+//     handleAddMarker(e, [coordinates.lng, coordinates.lat]);
+//   });
+
+//   return (
+//     <>
+//       {showAddTreeModal && (
+//         <AddTreeModal
+//           showAddTreeModal={showAddTreeModal}
+//           setShowAddTreeModal={setShowAddTreeModal}
+//           plantMarkerOnMap={plantMarkerOnMap}
+//           setPlantMarkerOnMap={setPlantMarkerOnMap}
+//           coordinatesNewTree={coordinatesNewTree}
+//           setPlantButtonText={setPlantButtonText}
+//         />
+//       )}
+//     </>
+//   );
+// }
