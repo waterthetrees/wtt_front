@@ -14,7 +14,7 @@ module.exports = (env) => {
   const config = {
     mode: ifProduction() ? 'production' : 'development',
     watch: false,
-    entry: './client/src/client.js',
+    entry: './client/src/index.js',
     output: {
       path: path.resolve(__dirname, 'client/public'),
       publicPath: '/',
@@ -39,13 +39,14 @@ module.exports = (env) => {
           include: path.resolve(__dirname, 'client/src'),
           use: ['babel-loader'],
         },
-        ifNotProduction({
-          test: /\.js$/,
-          // These modules seem to cause errors with this loader.
-          exclude: /mapbox-gl-legend|react-hook-form/,
-          enforce: 'pre',
-          use: ['source-map-loader'],
-        }),
+// TODO: for now, comment out source-map-loader, which is complaining about more modules.
+//        ifNotProduction({
+//          test: /\.js$/,
+//          // These modules seem to cause errors with this loader.
+//          exclude: /mapbox-gl-legend|react-hook-form/,
+//          enforce: 'pre',
+//          use: ['source-map-loader'],
+//        }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
           type: 'asset/resource',

@@ -4,17 +4,22 @@ import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
 import TreeRemovalDialog from './TreeRemovalDialog';
+import useAuthUtils from '../../components/Auth/useAuthUtils';
 
 export default function TreeRemoval({ idTree, common, notes }) {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { user = {}, isAuthenticated } = useAuth0();
   const [showRemoveButton, setShowRemoveButton] = useState(true);
   const [showRemovalDialog, setShowRemovalDialog] = useState(false);
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
+  const { loginToCurrentPage } = useAuthUtils();
 
   const handleRemoveClick = () => {
-    if (!isAuthenticated) loginWithRedirect();
-    setShowRemovalDialog(true);
+    if (!isAuthenticated) {
+      loginToCurrentPage();
+    } else {
+      setShowRemovalDialog(true);
+    }
   };
 
   const handleConfirm = ({ comment }) => {
