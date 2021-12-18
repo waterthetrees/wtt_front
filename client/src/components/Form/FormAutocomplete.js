@@ -4,28 +4,25 @@ import {
   TextField,
   Autocomplete,
 } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormAutocomplete({
-  name, label, options = [], rules,
+  name, label, options = [], rules, ...restProps
 }) {
-  const { control } = useFormContext();
-
   return (
     <>
       <Controller
         name={name}
-        control={control}
         rules={rules}
-        render={(props) => (
+        render={({ field }) => (
           <Autocomplete
-            {...props}
+            {...field}
             options={options}
             freeSolo
             autoSelect
             handleHomeEndKeys
-            onChange={(_, value) => props.onChange(value)}
+            onChange={(_, value) => field.onChange(value)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -33,6 +30,7 @@ export default function FormAutocomplete({
                 variant="standard"
               />
             )}
+            {...restProps}
           />
         )}
       />

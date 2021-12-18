@@ -5,6 +5,8 @@ import {
   FormTextField,
   FormSelect,
   FormTreeGroup,
+  FormRadio,
+  FormRadioGroup,
 } from '../../components/Form';
 
 // Add keys to each item in the map() call below.
@@ -84,8 +86,9 @@ export default function TreeAddress() {
       <FormSelect
         name="state"
         label="State"
-        options={stateMenuItems}
-      />
+      >
+        {stateMenuItems}
+      </FormSelect>
 
       <FormDecimalField
         name="zip"
@@ -104,6 +107,22 @@ export default function TreeAddress() {
         label="Longitude"
         disabled
       />
+
+      <FormRadioGroup
+        name="owner"
+        label="Type of land"
+        aria-label="owner"
+        row
+      >
+        <FormRadio
+          value="public"
+          label="Public"
+        />
+        <FormRadio
+          value="private"
+          label="Private"
+        />
+      </FormRadioGroup>
     </FormTreeGroup>
   );
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormCheckbox({
   name, label, rules, sx, ...restProps
 }) {
-  const { control } = useFormContext();
-
   // We have to wrap the Controller around the Checkbox, not the FormControlLabel, since the
   // Checkbox is what changes the actual value.
   return (
@@ -18,16 +16,14 @@ export default function FormCheckbox({
         control={
           <Controller
             name={name}
-            control={control}
             rules={rules}
-            render={(props) => (
+            render={({ field }) => (
               <Checkbox
-                {...props}
-                checked={props.value}
-                onChange={(e) => props.onChange(e.target.checked)}
+                {...field}
+                checked={field.value}
+                {...restProps}
               />
             )}
-            {...restProps}
           />
         }
       />

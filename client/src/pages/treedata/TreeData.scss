@@ -13,31 +13,6 @@
   margin: -.2rem -.2rem -1rem auto;
 }
 
-.treeremoval-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.treeremoval__reason{
-  padding: 0 5px;
-  width:100%;
-}
-.treeremoval__reason-btngrp{
-  justify-content: center;
-}
-.treeremoval__reason-btn{
-  padding: 3px;
-}
-.treeremoval__reason-input {
-  border: 1px solid gray;
-  background-color: #f9f6f2;
-  margin: 3px 0;
-  padding: 0.375rem 0.75rem;
-  font-size: 1.2rem;
-  width:100%;
-}
-
 .treedata__edit {
   padding: 5px 0;
 }
@@ -410,10 +385,6 @@ element.style {
   }
 }
 
-.treeremoval {
-  padding: 20px 0;
-}
-
 .addtreepage {
   display: inline-block;
   position: absolute;
@@ -430,15 +401,6 @@ element.style {
   justify-content: flex-start;
 }
 .datatable__row {
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: flex-start;
-  /* flex-basis: 15%; */
-  // flex-grow: 0;
-  // flex-shrink: 0;
-  // flex-basis: 25% 75%;
-  // border-color: #e9ecef;
-  // padding: 0 9px;
   border-color: #e9ecef;
   padding: 0 9px;
 }
@@ -447,7 +409,6 @@ element.style {
 }
 
 .datatable__span-key {
-  // flex-basis: 50%;
   width: 8em;
   display: inline-block;
 }

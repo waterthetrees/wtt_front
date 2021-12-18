@@ -52,6 +52,21 @@
   line-height: 1.5rem;
 }
 
+.addtree-popup{
+  top: -30px;
+}
+
+.mapboxgl-popup-content {
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: black;
+}
+
 .addree__plus-centeredtxt-planting {
   font-size: 1rem;
 }

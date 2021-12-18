@@ -11,21 +11,25 @@ import TreeNotes from './TreeNotes';
 import TreeCare from './TreeCare';
 import { TreeInfo } from './TreeInfo';
 import { treeHealth } from '../../util/treeHealth';
+import useAuthUtils from '../../components/Auth/useAuthUtils';
 import './TreeData.scss';
 
 const TreeContent = ({ currentTreeId, map }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const { data: treeData } = useTreeQuery({ currentTreeId });
+  const { loginToCurrentPage } = useAuthUtils();
 
   if (!treeData) {
     return null;
   }
 
   const edit = () => {
-    if (!isAuthenticated) loginWithRedirect();
-
-    setShowEditDialog(!showEditDialog);
+    if (!isAuthenticated) {
+      loginToCurrentPage();
+    } else {
+      setShowEditDialog(!showEditDialog);
+    }
   };
 
   const {

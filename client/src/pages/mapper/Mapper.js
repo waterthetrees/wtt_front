@@ -84,6 +84,12 @@ function Mapper() {
       setMap(mapboxMap);
       setGeolocater(geolocate);
     }
+
+    // Somewhat mysteriously, returning this noop avoids the React warning about not being able to
+    // call setState() in an unmounted component, which can happen when the user logs in and is
+    // redirected back to /, and is then redirected to /go#<hash value>, which then redirects back
+    // to the map with that hash value.
+    return () => {};
   }, []);
 
   return (

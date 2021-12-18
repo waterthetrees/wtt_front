@@ -20,9 +20,7 @@ const AddTreeModal = ({
   coordinatesNewTree,
   setCoordinatesNewTree,
   setPlantMarkerOnMap,
-  removeMarkers,
   setPlantButtonText,
-  currentMarkers,
 }) => {
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
@@ -49,7 +47,7 @@ const AddTreeModal = ({
     email: email || '',
     idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
   };
-  // Set mode: all to check for errors when fields change or lose focus.
+  // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
   const { handleSubmit } = formMethods;
 
@@ -64,7 +62,6 @@ const AddTreeModal = ({
     setPlantButtonText('PLANT');
     setCoordinatesNewTree(null);
     setShowAddTreeModal(false);
-    if (currentMarkers.length) removeMarkers();
   };
 
   const onError = (err, e) => console.error('Form errors:', err, 'Event:', e);

@@ -9,7 +9,7 @@ import {
 import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
 
 // Create an array of tree health items, reversed so that "good" comes first.
-const healthOptions = treeHealth.getNameValuePairs().reverse()
+const healthMenuItems = treeHealth.getNameValuePairs().reverse()
   .map(([name]) => <MenuItem key={name} value={name}>{name}</MenuItem>);
 
 export default function TreeInfo() {
@@ -21,14 +21,15 @@ export default function TreeInfo() {
         type="date"
         name="datePlanted"
         label="Date Planted"
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
+        rules={{ required: true, minLength: 1, maxLength: 10 }}
       />
 
       <FormSelect
         name="health"
         label="Health"
-        options={healthOptions}
-      />
+      >
+        {healthMenuItems}
+      </FormSelect>
 
       <FormTextField
         name="notes"

@@ -1,29 +1,35 @@
 import React from 'react';
-import { FormControl, InputLabel, Select } from '@mui/material';
+import {
+  FormControl,
+  FormLabel,
+  RadioGroup,
+} from '@mui/material';
 import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
-export default function FormSelect({
+export default function FormRadioGroup({
   children, name, label, rules, ...restProps
 }) {
+  // We have to wrap the Controller around the RadioGroup, not the FormControl, since the
+  // RadioGroup is what is updating the actual value.
   return (
     <>
       <FormControl
-        variant="standard"
+        component="fieldset"
         fullWidth
       >
-        <InputLabel id="state">{label}</InputLabel>
+        <FormLabel component="legend">{label}</FormLabel>
         <Controller
           name={name}
           rules={rules}
           render={({ field }) => (
-            <Select
+            <RadioGroup
               {...field}
-              variant="standard"
+              aria-label={label}
               {...restProps}
             >
               {children}
-            </Select>
+            </RadioGroup>
           )}
         />
       </FormControl>
