@@ -27,8 +27,6 @@ const legendTargets = [['noData', 'No Data']].concat(treeHealth.getNameValuePair
 function Mapper() {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  // const [zoom, setZoom] = useState(10);
-  // const [center, setCenter] = useState([-122.34725, 37.7343787]);
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const mapboxElRef = useRef(null); // DOM element to render map
   const [geolocater, setGeolocater] = useState(false);
@@ -38,8 +36,6 @@ function Mapper() {
       const mapboxMap = new mapboxgl.Map({
         container: mapboxElRef.current,
         style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-        // center,
-        // zoom,
         center: [-122.34725, 37.7343787],
         zoom: 10,
         // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
@@ -104,9 +100,6 @@ function Mapper() {
             <Sidebar>
               <AddTree
                 map={map}
-                // setZoom={setZoom}
-                // center={center}
-                // setCenter={setCenter}
                 geolocater={geolocater}
               />
               <Slideout

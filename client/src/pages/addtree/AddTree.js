@@ -9,8 +9,7 @@ import useAuthUtils from '../../components/Auth/useAuthUtils';
 import './AddTree.scss';
 import { isMobile } from './utilities';
 
-let currentMarkers = [];
-// let renderCount = 0;
+let currentMarker = null;
 
 const createImageForMarker = () => {
   const sproutImg = document.createElement('img');
@@ -18,7 +17,6 @@ const createImageForMarker = () => {
   sproutImg.alt = 'sprout-marker';
   const imageForMarker = {
     element: sproutImg,
-    // draggable: !isMobile,
     draggable: true,
     scale: 0.003,
   };
@@ -36,7 +34,7 @@ export default function AddTree({
   const [coordinatesNewTree, setCoordinatesNewTree] = useState(null);
   const [plantButtonText, setPlantButtonText] = useState('PLANT');
 
-  const removeMarkers = () => { currentMarkers[0].remove(); currentMarkers = []; };
+  const removeMarker = () => { currentMarker.remove(); currentMarker = null; };
 
   const removeAddGeolocater = () => {
     // remove geolocator so it doesnt go to watch mode
@@ -48,7 +46,7 @@ export default function AddTree({
 
   useEffect(() => {
     if (plantMarkerOnMap) return;
-    if (currentMarkers.length) removeMarkers();
+    if (currentMarker) removeMarker();
     if (geolocater._watchState !== 'OFF') removeAddGeolocater();
   }, [plantMarkerOnMap]);
 
@@ -78,7 +76,7 @@ export default function AddTree({
     if (!plantMarkerOnMap) return;
     const coords = coordinatesNewTree || coordinates;
     // if theres already a marker on the map, don't add more!
-    if (currentMarkers.length >= 1) return;
+    if (currentMarker) return;
 
     if (coords && plantMarkerOnMap) {
       map.jumpTo({ coords, zoom: (isMobile) ? [20] : [map.getZoom()] });
@@ -95,7 +93,7 @@ export default function AddTree({
         .addTo(map)
         .setPopup(popup);
 
-      currentMarkers.push(marker);
+      currentMarker = marker;
       marker.getElement().addEventListener('click',
         () => setShowAddTreeModal(!showAddTreeModal));
 
@@ -149,8 +147,6 @@ export default function AddTree({
     }
   }, [plantMarkerOnMap]);
 
-  // renderCount += 1;
-  // console.log(renderCount, 'renderCount');
   return (
     <div>
       <button
@@ -173,8 +169,8 @@ export default function AddTree({
           coordinatesNewTree={coordinatesNewTree}
           setPlantButtonText={setPlantButtonText}
           setCoordinatesNewTree={setCoordinatesNewTree}
-          currentMarkers={currentMarkers}
-          removeMarkers={removeMarkers}
+          currentMarker={currentMarker}
+          removeMarker={removeMarker}
         />
       )}
 
