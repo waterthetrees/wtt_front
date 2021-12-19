@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import format from 'date-fns/format';
 import { useForm } from 'react-hook-form';
@@ -17,7 +18,9 @@ const AddTreeModal = ({
   showAddTreeModal,
   setShowAddTreeModal,
   coordinatesNewTree,
-  setAddTreeSelected,
+  setCoordinatesNewTree,
+  setPlantMarkerOnMap,
+  setPlantButtonText,
 }) => {
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
@@ -34,8 +37,8 @@ const AddTreeModal = ({
     state: '',
     zip: '',
     neighborhood: '',
-    lat: (coordinatesNewTree) ? coordinatesNewTree.lat : '',
-    lng: (coordinatesNewTree) ? coordinatesNewTree.lng : '',
+    lng: coordinatesNewTree[0],
+    lat: coordinatesNewTree[1],
     owner: 'public',
     who: '',
     volunteer: nickname || name || email || 'volunteer',
@@ -55,8 +58,10 @@ const AddTreeModal = ({
     };
 
     mutateTreeData.mutate(sendData);
-    setShowAddTreeModal(!showAddTreeModal);
-    setAddTreeSelected(false);
+    setPlantMarkerOnMap(false);
+    setPlantButtonText('PLANT');
+    setCoordinatesNewTree(null);
+    setShowAddTreeModal(false);
   };
 
   const onError = (err, e) => console.error('Form errors:', err, 'Event:', e);
@@ -70,7 +75,7 @@ const AddTreeModal = ({
       open={showAddTreeModal}
       title={<TreeHeader />}
       onClose={handleClose}
-      actions={
+      actions={(
         <>
           <Button
             onClick={handleClose}
@@ -84,7 +89,7 @@ const AddTreeModal = ({
             Add Tree
           </Button>
         </>
-      }
+      )}
     >
       <Form
         {...formMethods}

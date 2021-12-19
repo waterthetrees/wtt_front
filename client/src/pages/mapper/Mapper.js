@@ -27,26 +27,32 @@ const legendTargets = [['noData', 'No Data']].concat(treeHealth.getNameValuePair
 function Mapper() {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const [center, setCenter] = useState([-122.34725, 37.7343787]);
   const [currentTreeId, setCurrentTreeId] = useState(null);
   const mapboxElRef = useRef(null); // DOM element to render map
+  const [geolocater, setGeolocater] = useState(false);
 
   useEffect(() => {
     if (!map && isMapboxSupported) {
       const mapboxMap = new mapboxgl.Map({
         container: mapboxElRef.current,
         style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
-        center,
+        center: [-122.34725, 37.7343787],
         zoom: 10,
         // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
         hash: true,
       });
+      const geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true,
+        auto: true,
+        fitBoundsOptions: { zoom: 20 },
+      });
 
       // Add the geolocate and navigation controls to the map.
-      mapboxMap.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: { enableHighAccuracy: true },
-        trackUserLocation: true,
-      }));
+
       mapboxMap.addControl(new mapboxgl.NavigationControl());
       mapboxMap.addControl(new MapboxLegendControl(legendTargets,
         {
@@ -57,6 +63,8 @@ function Mapper() {
         },
         // TODO: specifying a location doesn't work for some reason.
         'bottom-right'));
+
+      mapboxMap.addControl(geolocate);
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
@@ -70,6 +78,7 @@ function Mapper() {
       });
 
       setMap(mapboxMap);
+      setGeolocater(geolocate);
     }
 
     // Somewhat mysteriously, returning this noop avoids the React warning about not being able to
@@ -89,6 +98,10 @@ function Mapper() {
         ? isMapLoaded && (
           <>
             <Sidebar>
+              <AddTree
+                map={map}
+                geolocater={geolocater}
+              />
               <Slideout
                 buttonText={{ left: 'ADOPT' }}
                 classNameButton="slideout__btn  slideout__btn__shape"
@@ -96,13 +109,8 @@ function Mapper() {
               >
                 <TreeAdoptionDirections onmap />
               </Slideout>
-
-              <AddTree
-                map={map}
-                center={center}
-                setCenter={setCenter}
-              />
             </Sidebar>
+            )
 
             {currentTreeId && (
               <TreeData
