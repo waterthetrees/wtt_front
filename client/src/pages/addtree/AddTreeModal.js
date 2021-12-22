@@ -11,7 +11,6 @@ import TreeHeader from './TreeHeader';
 import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
-import { randomInteger } from './utilities';
 import './AddTree.scss';
 
 const AddTreeModal = ({
@@ -25,8 +24,8 @@ const AddTreeModal = ({
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
   const mutateTreeData = useCreateTreeDataMutation();
+
   const defaultValues = {
-    city: '',
     common: '',
     scientific: '',
     genus: '',
@@ -34,6 +33,7 @@ const AddTreeModal = ({
     dbh: '',
     height: '',
     address: '',
+    city: '',
     state: '',
     zip: '',
     neighborhood: '',
@@ -41,16 +41,17 @@ const AddTreeModal = ({
     lat: coordinatesNewTree[1],
     owner: 'public',
     who: '',
+    idReference: '',
     volunteer: nickname || name || email || 'volunteer',
     notes: '',
     health: 'good',
     email: email || '',
-    idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
+    id: '',
   };
   // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
-  const { handleSubmit } = formMethods;
 
+  const { handleSubmit } = formMethods;
   const onSubmit = (dataIn) => {
     const sendData = {
       ...defaultValues,
