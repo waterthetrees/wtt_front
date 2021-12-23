@@ -20,6 +20,11 @@ module.exports = (env) => {
       publicPath: '/',
       clean: true,
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
     devServer: {
       // Port 3000 is baked into the configuration for the mapbox API, so the
       // dev-server needs to use it so that we can hit the API
@@ -39,14 +44,13 @@ module.exports = (env) => {
           include: path.resolve(__dirname, 'client/src'),
           use: ['babel-loader'],
         },
-// TODO: for now, comment out source-map-loader, which is complaining about more modules.
-//        ifNotProduction({
-//          test: /\.js$/,
-//          // These modules seem to cause errors with this loader.
-//          exclude: /mapbox-gl-legend|react-hook-form/,
-//          enforce: 'pre',
-//          use: ['source-map-loader'],
-//        }),
+        ifNotProduction({
+          test: /\.js$/,
+          // These modules seem to cause errors with this loader.
+          exclude: /mapbox-gl-legend|react-hook-form|react-router/,
+          enforce: 'pre',
+          use: ['source-map-loader'],
+        }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
           type: 'asset/resource',
