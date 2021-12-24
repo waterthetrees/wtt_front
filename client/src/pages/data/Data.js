@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
+import React, { useState } from 'react';
+import { MenuItem, FormControl, Button, Select } from '@mui/material';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { CSVLink } from 'react-csv';
 import { topTreesCaliforniaNative } from '../../data/dist/topTreesCaliforniaNative';
@@ -12,62 +7,93 @@ import { topTreesUSFood } from '../../data/dist/topTreesUSFood';
 import { topTreesSanFrancisco } from '../../data/dist/topTreesSanFrancisco';
 import './Data.scss';
 
-function chooseData() {
-  return {
-    'California Natives': topTreesCaliforniaNative,
-    'Food Trees': topTreesUSFood,
-    'San Francisco Street Trees': topTreesSanFrancisco,
-  };
-}
+const dataColumns = [
+  {
+    key: 'common',
+    label: 'Common',
+  },
+  {
+    key: 'scientific',
+    label: 'Scientific',
+  },
+  {
+    key: 'genus',
+    label: 'Genus',
+  },
+  {
+    key: 'height',
+    label: 'Height',
+  },
+  {
+    key: 'deciduousEvergreen',
+    label: 'Deciduous or Evergreen',
+  },
+  {
+    key: 'notes',
+    label: 'Notes',
+  },
+];
+const dataSources = [
+  {
+    name: 'Native California Trees',
+    data: topTreesCaliforniaNative,
+    columns: dataColumns.slice(0, 5),
+    url: 'https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949',
+    thanks: 'Thanks to calscape.org for the California native tree data!',
+  },
+  {
+    name: 'Food Trees',
+    data: topTreesUSFood,
+    columns: dataColumns.slice(0, 3),
+    url: 'https://fallingfruit.org',
+    thanks: 'Thanks to FallingFruit.org for the top US food tree data!',
+  }, {
+    name: 'San Francisco Street Trees',
+    data: topTreesSanFrancisco,
+    columns: dataColumns.slice(0, 6),
+    url: 'https://www.fuf.net/',
+    thanks: 'Thanks to fuf.net for the top San Francisco street tree data!',
+  },
+];
+const dataSourceMenuItems = dataSources.map(({ name }, value) => (
+  <MenuItem
+    key={name}
+    value={value}
+  >
+    {name}
+  </MenuItem>
+));
 
 export default function Data() {
-  const dataArray = Object.keys(chooseData());
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
-  const classes = useStyles();
-  const [treeType, setTreeType] = useState(topTreesCaliforniaNative);
-  const [treeDropdownLabel, setDropdownLabel] = useState(dataArray[0]);
+  const [selectedSourceIndex, setSelectedSourceIndex] = useState(0);
+  const {
+    name, data, columns, url, thanks,
+  } = dataSources[selectedSourceIndex];
 
   const handleChange = (event) => {
-    const newDataChoice = chooseData()[event.target.value];
-    setDropdownLabel(event.target.value);
-    setTreeType(newDataChoice);
+    setSelectedSourceIndex(event.target.value);
   };
 
   return (
     <div className="data">
       <div className="data__menus">
         <div className="data__menus-item">
-          <FormControl className={classes.formControl}>
-            <InputLabel id="data__select-label">Tree Type</InputLabel>
+          <FormControl sx={{ minWidth: 200, my: 1 }}>
             <Select
               labelId="data__select-label"
               id="data__select"
-              value={treeDropdownLabel}
+              size="small"
+              value={selectedSourceIndex}
               onChange={handleChange}
             >
-              {dataArray.map((treeSelect) => (
-                <MenuItem
-                  key={treeSelect}
-                  value={treeSelect}
-                >
-                  {treeSelect}
-                </MenuItem>
-              ))}
+              {dataSourceMenuItems}
             </Select>
           </FormControl>
         </div>
         <div className="data__menus-item">
           <CSVLink
-            data={treeType}
-            filename={`${treeDropdownLabel.replaceAll(' ', '-')}.csv`}
+            data={data}
+            filename={`${name.replaceAll(' ', '-')}.csv`}
           >
             <Button variant="outlined">
               Download CSV
@@ -77,21 +103,9 @@ export default function Data() {
           </CSVLink>
         </div>
         <div className="data__menus-item">
-          {treeDropdownLabel === 'Food Trees' && (
-            <a href="http://fallingfruit.org" target="_blank" rel="noreferrer">
-              Thanks FallingFruit.org for the top US Food Tree Data!
-            </a>
-          )}
-          {treeDropdownLabel === 'San Francisco Street Trees' && (
-            <a href="https://www.fuf.net/" target="_blank" rel="noreferrer">
-              Thanks fuf.net for the top San Francisco Street Tree Data!
-            </a>
-          )}
-          {treeDropdownLabel === 'California Natives' && (
-            <a href="https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949" target="_blank" rel="noreferrer">
-              Thanks calscape.org for the California Natives Tree Data!
-            </a>
-          )}
+          <a href={url} target="_blank" rel="noreferrer">
+            {thanks}
+          </a>
         </div>
         <div className="data__menus-item">
           Unless otherwise specified, data are licensed as
@@ -110,125 +124,83 @@ export default function Data() {
           do not use it (without permission) for commercial applications.
         </div>
       </div>
-      {treeType && <TreeList treeType={treeType} />}
+      <TreeList data={data} columns={columns} />
     </div>
   );
 }
 
-function TreeList({ treeType }) {
-  const [topTreesSorted, setTreesSorted] = useState(treeType);
+function TreeList({ data, columns }) {
   const [sortOrderAsc, setSortOrderAsc] = useState(true);
+  const [sortColumn, setSortColumn] = useState('common');
+  const sortedTrees = sortTrees(data);
 
-  const clickHandler = (event) => {
-    const sortby = event.target.value;
-    const sortedData = [...topTreesSorted].sort((a, b) => {
-      const aa = a[sortby].toLowerCase();
-      const bb = b[sortby].toLowerCase();
-      if (sortOrderAsc) {
-        if (aa > bb) return 1;
-        if (bb > aa) return -1;
-      }
-      if (!sortOrderAsc) {
-        if (aa < bb) return 1;
-        if (bb < aa) return -1;
-      }
+  function sortTrees(trees) {
+    return [...trees].sort((a, b) => {
+      const aa = a[sortColumn].toLowerCase();
+      const bb = b[sortColumn].toLowerCase();
+
+      if (aa > bb) return sortOrderAsc ? 1 : -1;
+      if (bb > aa) return sortOrderAsc ? -1 : 1;
+
       return 0;
     });
-    setTreesSorted(sortedData);
-    setSortOrderAsc(!sortOrderAsc);
+  }
+
+  const clickHandler = (event) => {
+    const newColumn = event.target.value;
+    let newOrder = !sortOrderAsc;
+
+    if (newColumn !== sortColumn) {
+      // Reset the sort order to ascending when the sort column changes.
+      newOrder = true;
+    }
+
+    setSortOrderAsc(newOrder);
+    setSortColumn(newColumn);
   };
 
-  useEffect(() => {
-    setTreesSorted(treeType);
-  }, [treeType]);
-
   return (
-    <div className="data__treelist" key={treeType}>
-      {topTreesSorted
-      && topTreesSorted.map((tree, index) => ((index === 0)
-        ? (
-          <React.Fragment key={`${tree.common}${tree.scientific}0`}>
-            <TreeHeader
-              clickHandler={clickHandler}
-              height={tree.height}
-              notes={tree.notes}
-              deciduousEvergreen={tree.deciduousEvergreen}
-            />
-            <Tree
-              common={tree.common}
-              genus={tree.genus}
-              scientific={tree.scientific}
-              height={tree.height}
-              notes={tree.notes}
-              deciduousEvergreen={tree.deciduousEvergreen}
-              index={index}
-            />
-          </React.Fragment>
-        )
-        : (
-          <Tree
-            common={tree.common}
-            genus={tree.genus}
-            scientific={tree.scientific}
-            height={tree.height}
-            notes={tree.notes}
-            deciduousEvergreen={tree.deciduousEvergreen}
-            index={index}
-            key={`${tree.common}${tree.scientific}`}
-          />
-        )))}
+    <div className="data__treelist">
+      <TreeHeader
+        clickHandler={clickHandler}
+        columns={columns}
+      />
+      {sortedTrees.map((tree) => (
+        <Tree
+          tree={tree}
+          columns={columns}
+          key={`${tree.common}${tree.scientific}`}
+        />
+      ))}
     </div>
   );
 }
 
-function TreeHeader({
-  clickHandler, notes, height, deciduousEvergreen,
-}) {
+function TreeHeader({ clickHandler, columns }) {
   return (
     <div className="data__treelist-tree-header">
-      <div className="data__treelist-tree-header-item">
-        <button type="button" className="data__treeheader-btn" value="common" onClick={clickHandler}>Common</button>
-      </div>
-      <div className="data__treelist-tree-header-item">
-        <button type="button" className="data__treeheader-btn" value="scientific" onClick={clickHandler}>Scientific</button>
-      </div>
-      <div className="data__treelist-tree-header-item">
-        <button type="button" className="data__treeheader-btn" value="genus" onClick={clickHandler}>Genus</button>
-      </div>
-
-      {height && (
-        <div className="data__treelist-tree-header-item">
-          <button type="button" className="data__treeheader-btn" value="height" onClick={clickHandler}>height</button>
+      {columns.map(({ key, label }) => (
+        <div className="data__treelist-tree-header-item" key={key}>
+          <button
+            type="button"
+            className="data__treeheader-btn"
+            value={key}
+            onClick={clickHandler}
+          >
+            {label}
+          </button>
         </div>
-      )}
-
-      {deciduousEvergreen && (
-        <div className="data__treelist-tree-header-item">
-          <button type="button" className="data__treeheader-btn" value="deciduousEvergreen" onClick={clickHandler}>Evergreen or Deciduous</button>
-        </div>
-      )}
-
-      {notes && (
-        <div className="data__treelist-tree-header-item">
-          <button type="button" className="data__treeheader-btn" value="notes" onClick={clickHandler}>notes</button>
-        </div>
-      )}
-
+      ))}
     </div>
   );
 }
 
-function Tree({
-  common, scientific, genus, index, height, notes, deciduousEvergreen,
-}) {
+function Tree({ tree, columns }) {
   return (
-    <div className="data__treelist-tree" key={`${common}${index}`}>
-      <div className="data__treelist-tree-item" id="common">{common}</div>
-      <div className="data__treelist-tree-item" id="scientific">{scientific}</div>
-      <div className="data__treelist-tree-item" id="genus">{genus}</div>
-      {height && <div className="data__treelist-tree-item" id="scientific">{height}</div>}
-      {deciduousEvergreen && <div className="data__treelist-tree-item" id="genus">{deciduousEvergreen}</div>}
-      {notes && <div className="data__treelist-tree-item" id="genus">{notes}</div>}
+    <div className="data__treelist-tree" key={tree.common}>
+      {columns.map(({ key }) => (
+        <div className="data__treelist-tree-item" key={key}>{tree[key]}</div>
+      ))}
     </div>
   );
 }

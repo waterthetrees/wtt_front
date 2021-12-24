@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import cx from 'clsx';
-import { useUserMutation } from '../../api/queries';
 import AddTreeModal from './AddTreeModal';
+import { useUserMutation } from '../../api/queries';
 import useAuthUtils from '../../components/Auth/useAuthUtils';
-import './AddTree.scss';
 import { isMobile } from './utilities';
+import './AddTree.scss';
 
 let currentMarker = null;
 

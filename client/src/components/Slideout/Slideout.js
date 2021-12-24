@@ -1,63 +1,37 @@
-import React from 'react';
-import clsx from 'clsx';
+import React, { useState } from 'react';
 import { Drawer } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import './Slideout.scss';
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  slideout: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-});
-
-export default function TemporaryDrawer({
-  buttonText, children, classNameButtonText, classNameButton,
+export default function Slideout({
+  anchor = 'left', button, children,
 }) {
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+  const openSlideout = () => setOpen(true);
 
-    setState({ ...state, [anchor]: open });
-  };
+  const closeSlideout = () => setOpen(false);
 
   return (
     <div className="slideout">
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          {!state[anchor] && (
-            <button type="button" className={classNameButton} onClick={toggleDrawer(anchor, true)}>
-              <div className={classNameButtonText}>{buttonText[anchor]}</div>
-            </button>
-          )}
-          <div
-            className={clsx(classes.list, classes.slideout, {
-              [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-          >
-            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-              {children}
-            </Drawer>
-          </div>
-        </React.Fragment>
-      ))}
+      {!open && React.cloneElement(button, { onClick: openSlideout })}
+      <div
+        style={{
+          width: anchor === 'top' || anchor === 'bottom'
+            ? 'auto'
+            : 250,
+        }}
+        role="presentation"
+        onClick={closeSlideout}
+        onKeyDown={closeSlideout}
+      >
+        <Drawer
+          anchor={anchor}
+          open={open}
+          onClose={closeSlideout}
+        >
+          {children}
+        </Drawer>
+      </div>
     </div>
   );
 }

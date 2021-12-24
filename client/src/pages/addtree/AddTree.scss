@@ -47,7 +47,7 @@
   right: 0;
   bottom: 0;
   font-family: 'Roboto Mono', monospace;
-  color: black;
+  color: white;
   font-size: 1.5rem;
   line-height: 1.5rem;
 }
@@ -59,8 +59,9 @@
 .mapboxgl-popup-content {
   background-color: black;
   color: white;
-  border-radius: 25px;
+  border-radius: 10px;
   text-align: center;
+  padding: 1.25em 1.5em 1em 1.5em;
 }
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
@@ -69,31 +70,12 @@
 
 .addree__plus-centeredtxt-planting {
   font-size: 1rem;
+  opacity: 1;
 }
 
 .addtree__icon {
  height: 9vh;
  min-width: 50px;
-}
-
-.addtree__volunteer{
-  font-size: 1rem;
-  text-decoration: underline;
-  padding: 3px 0 7px;
-}
-
-.coordinates {
- background: rgba(0, 0, 0, 0.5);
- color: #fff;
- position: absolute;
- bottom: 40px;
- left: 10px;
- padding: 5px 10px;
- margin: 0;
- font-size: 11px;
- line-height: 18px;
- border-radius: 3px;
- display: none;
 }
 
 .marker {
@@ -149,62 +131,4 @@
 .addtreemodal__header-image {
  width: 32px;
  margin: 0 10px 3px;
-}
-
-.treecharacteristics {
- display: flex;
- flex-direction: row;
- justify-content: space-around;
-}
-
-.left {
- .makeStyles-formControl-8 {
-  margin: 0;
-  min-width: 120px;
-  width: 100%;
- }
- .makeStyles-formControl-1 {
-  margin: 0;
-  min-width: 120px;
-  width: 100%;
- }
-}
-
-.treecharacteristics-image {
- width: 100px;
- padding: 5px;
-}
-
-.treeaddress__address {
- .makeStyles-formControl-8 {
-  margin: 0;
-  min-width: 120px;
-  width: 100%;
- }
- .makeStyles-formControl-1 {
-  margin: 0;
-  min-width: 120px;
-  width: 100%;
- }
-}
-
-.treeaddress-item {
- padding: 10px;
- display: flex;
- justify-content: flex-start;
- flex-direction: column;
- font-size: 1.2rem;
-}
-
-.treeaddress-item__entry {
- padding: 10px;
- display: flex;
- justify-content: flex-start;
- flex-direction: column;
- font-size: 1.2rem;
-}
-
-.treeaddress-item-label {
- display: inline-block;
- font-weight: 600;
 }
