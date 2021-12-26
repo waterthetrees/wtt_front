@@ -2,12 +2,37 @@ const fs = require('fs');
 const path = require('path');
 
 const jsonPattern = /(.+)\.json$/;
-const ignorePattern = /alameda/i;
 const dataPath = path.resolve(__dirname, 'json');
 const outputPath = path.resolve(__dirname, '../client/src/data/dist');
 const jsTemplate = (name, data) => `export const ${name} = ${toSource(data)};\n`;
-const writeJSTemplate = (name, data) =>
-  fs.writeFileSync(path.resolve(outputPath, `${name}.js`), jsTemplate(name, data), 'utf8');
+const ignoreFilePattern = /alameda/i;
+const ignoreCommonPattern = new RegExp([
+  'fungus',
+  'mushroom',
+  'turtle',
+  'rainbow trout',
+  'waterfowl',
+  'chanterelle',
+  'crayfish',
+  'squirrel',
+  'moss',
+  'red-eared slider',
+  '-cap',
+].join('|'), 'i');
+// We need to ignore 'fish' by matching the full scientific name, as some actual trees have 'fish'
+// in their common names.
+const ignoreScientificPattern = new RegExp(`^(${[
+  'chordata',
+].join('|')})$`, 'i');
+
+function writeJSTemplate(name, data) {
+  const filename = `${name}.js`;
+  const filePath = path.resolve(outputPath, filename);
+
+  console.log(`[build:data] Writing ${filename}.`);
+
+  return fs.writeFileSync(filePath, jsTemplate(name, data), 'utf8');
+}
 
 function ignoreError(func, code) {
   // Ignore non-fatal errors.
@@ -53,7 +78,7 @@ const processedTrees = {};
 
 // Ignore the Alameda file, since it doesn't include trees.
 const jsonFiles = fs.readdirSync(dataPath)
-  .filter(filename => jsonPattern.test(filename) && !ignorePattern.test(filename));
+  .filter(filename => jsonPattern.test(filename) && !ignoreFilePattern.test(filename));
 
 ignoreError(() => fs.rmSync(outputPath, { recursive: true }), 'ENOENT');
 ignoreError(() => fs.mkdirSync(outputPath), 'EEXIST');
@@ -72,7 +97,12 @@ jsonFiles.forEach(filename => {
       .map(name => name.toLowerCase().replace(/[^\w\s]/g, ''));
     const key = lcNames.join('');
 
-    if (!processedTrees[key]) {
+    // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
+    if (
+      !processedTrees[key]
+      && !ignoreCommonPattern.test(commonTitleCase)
+      && !ignoreScientificPattern.test(scientific)
+    ) {
       trees.push({
         common: commonTitleCase,
         scientific,
