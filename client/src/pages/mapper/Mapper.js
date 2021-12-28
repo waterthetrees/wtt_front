@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { MapboxLegendControl } from '@watergis/mapbox-gl-legend';
 import { mapboxAccessToken } from '../../util/config';
+import { tilesServerEndpoints } from '../../api/apiEndpoints';
 import { treeHealth } from '../../util/treeHealth';
 import AddTree from '../addtree/AddTree';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -9,20 +9,25 @@ import Slideout from '../../components/Slideout/Slideout';
 import TreeAdoptionDirections from '../treedata/TreeAdoptionDirections';
 import TreeData from '../treedata';
 import MapLayers from './MapLayers';
-import '@watergis/mapbox-gl-legend/css/styles.css';
+import { MapboxLegend } from './MapboxLegend';
+import TreeLayerLegend from './TreeLayerLegend';
 import './Mapper.scss';
-import { tilesServerEndpoints } from '../../api/apiEndpoints';
 
 mapboxgl.accessToken = mapboxAccessToken;
 
 const isMapboxSupported = mapboxgl.supported();
-const legendTargets = [['noData', 'No Data']].concat(treeHealth.getNameValuePairs())
-  .reduce((result, [name, label]) => ({
-    ...result,
-    [name]: typeof label === 'string'
+const targets = [
+  // Reverse the tree health names, so they go from good to vacant.
+  ...treeHealth.getNameValuePairs().reverse(),
+  ['noData', 'No Data']
+]
+  .map(([name, label]) => ({
+    layer: name,
+    label: typeof label === 'string'
       ? label
       : name.replace(/(^\w)/g, (m) => m.toUpperCase()),
-  }), {});
+    color: treeHealth.getColorByName(name, 'fill')
+  }));
 
 function Mapper() {
   const [map, setMap] = useState(null);
@@ -53,16 +58,19 @@ function Mapper() {
 
       // Add the geolocate and navigation controls to the map.
       mapboxMap.addControl(new mapboxgl.NavigationControl());
-      mapboxMap.addControl(new MapboxLegendControl(legendTargets,
-        {
-          showDefault: true,
-          showCheckbox: true,
-          onlyRendered: false,
-          reverseOrder: true,
-        },
-        // TODO: specifying a location doesn't work for some reason.
-        'bottom-right'));
       mapboxMap.addControl(geolocate);
+      mapboxMap.addControl(
+        new MapboxLegend({
+          type: TreeLayerLegend,
+          props: {
+            title: 'Tree layers:',
+            targets,
+            expanded: true
+          }
+        }),
+        // Add the legend at the bottom right of the map.
+        'bottom-right'
+      );
 
       mapboxMap.on('load', () => {
         setIsMapLoaded(true);
