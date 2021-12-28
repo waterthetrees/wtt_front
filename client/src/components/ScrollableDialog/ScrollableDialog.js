@@ -9,7 +9,7 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Close } from '@mui/icons-material';
 
 export default function ScrollableDialog({
   children, title, open, onClose, actions, ...restProps
@@ -33,7 +33,7 @@ export default function ScrollableDialog({
           <Box flexGrow={1}>{title}</Box>
           <Box>
             <IconButton onClick={onClose} size="small">
-              <CloseIcon />
+              <Close />
             </IconButton>
           </Box>
         </Box>

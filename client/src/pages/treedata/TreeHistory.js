@@ -1,7 +1,6 @@
 import React from 'react';
 import format from 'date-fns/format';
-import Favorite from '@mui/icons-material/Favorite';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { Favorite, CheckBox } from '@mui/icons-material';
 
 const makeMaintenanceString = (history) => {
   const historyArray = Object.entries(history)
@@ -74,7 +73,7 @@ export default function TreeHistory({ treeHistory }) {
                {adopted && (
                  <div className="treehistory-item-label">
                    {' '}
-                   <CheckBoxIcon fontSize="large" />
+                   <CheckBox fontSize="large" />
                    {' '}
                    Adopted!
                  </div>
