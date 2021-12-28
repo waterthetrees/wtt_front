@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MenuItem, FormControl, Button, Select } from '@mui/material';
-import GetAppIcon from '@mui/icons-material/GetApp';
+import { GetApp } from '@mui/icons-material';
 import { CSVLink } from 'react-csv';
 import { topTreesCaliforniaNative } from '../../data/dist/topTreesCaliforniaNative';
 import { topTreesUSFood } from '../../data/dist/topTreesUSFood';
@@ -99,7 +99,7 @@ export default function Data() {
             <Button variant="outlined">
               Download CSV
               {' '}
-              <GetAppIcon color="primary" fontSize="large" aria-label="Download CSV" />
+              <GetApp color="primary" fontSize="large" aria-label="Download CSV" />
             </Button>
           </CSVLink>
         </div>
