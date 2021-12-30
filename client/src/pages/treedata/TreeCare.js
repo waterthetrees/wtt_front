@@ -7,7 +7,7 @@ import { treeHealth } from '../../util/treeHealth';
 export default function TreeCare({
   currentTreeId, common, health,
 }) {
-  const { data: treeHistory } = useTreeHistoryQuery({ currentTreeId });
+  const { data: treeHistory } = useTreeHistoryQuery({ id: currentTreeId });
 
   return (
     <div className="treecare">

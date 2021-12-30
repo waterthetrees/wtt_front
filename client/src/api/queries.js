@@ -6,7 +6,7 @@ function createUseQuery(api, defaultData = {}, defaultOptions = {}, processor) {
     ? (...args) => getData(...args).then(processor)
     : getData;
 
-  return function(queryData = {}, queryOptions = {}) {
+  return function (queryData = {}, queryOptions = {}) {
     const data = { ...defaultData, ...queryData };
     const options = { ...defaultOptions, ...queryOptions };
 
@@ -22,7 +22,7 @@ function createUseMutation(apiList, method) {
     ? putData
     : postData;
 
-  return function() {
+  return function () {
     const queryClient = useQueryClient();
 
     return useMutation((data) => apiCaller(apis[0], data), {
@@ -33,7 +33,9 @@ function createUseMutation(apiList, method) {
 }
 
 function processTreeCounts(treeCounts) {
-  return treeCounts.map(({ city, country, count, countryCountTrees, lat, lng }) => {
+  return treeCounts.map(({
+    city, country, count, countryCountTrees, lat, lng,
+  }) => {
     const name = city || country;
     const countString = Number(count || countryCountTrees).toLocaleString();
 
@@ -44,7 +46,7 @@ function processTreeCounts(treeCounts) {
         coordinates: [lng, lat],
       },
       properties: {
-        name: name,
+        name,
         cityCountTrees: `${countString} trees`,
         count: `${countString} trees`,
       },

@@ -27,7 +27,7 @@ export default function TreeNotes({ currentTreeId, notes }) {
 
     try {
       if (notesRef.current.value) {
-        const sendData = { idTree: currentTreeId, notes: notesRef.current.value };
+        const sendData = { id: currentTreeId, notes: notesRef.current.value };
         setNotesSaveButton('SAVING');
         mutateTreeData.mutate(sendData);
         setTimeout(() => handleNotesSave(), saveTimer);

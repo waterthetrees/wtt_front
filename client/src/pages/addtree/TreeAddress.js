@@ -73,13 +73,15 @@ const stateMenuItems = [
 export default function TreeAddress() {
   const { watch, setValue } = useFormContext();
   const hashWatcher = watch(['common', 'scientific', 'city', 'lng', 'lat']);
+  let geohash;
   if (hashWatcher.filter(Boolean).length === 5) {
-    const geohash = IDForTree(hashWatcher);
-    setValue('id', geohash, { shouldValidate: true });
+    geohash = IDForTree(hashWatcher);
+    console.log(geohash);
   }
 
   return (
     <FormTreeGroup title="Location">
+      <div>{geohash && <p>{geohash}</p>}</div>
       <FormTextField
         name="address"
         label="Address"
@@ -114,13 +116,6 @@ export default function TreeAddress() {
       <FormTextField
         name="lng"
         label="Longitude"
-        disabled
-      />
-
-      <FormDecimalField
-        name="id"
-        label="Id"
-        title="Id"
         disabled
       />
 

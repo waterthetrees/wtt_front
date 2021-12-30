@@ -17,7 +17,7 @@ import './TreeData.scss';
 const TreeContent = ({ currentTreeId, map }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const { isAuthenticated } = useAuth0();
-  const { data: treeData } = useTreeQuery({ currentTreeId });
+  const { data: treeData } = useTreeQuery({ id: currentTreeId });
   const { loginToCurrentPage } = useAuthUtils();
 
   if (!treeData) {
@@ -33,7 +33,7 @@ const TreeContent = ({ currentTreeId, map }) => {
   };
 
   const {
-    idTree,
+    id,
     common,
     healthNum,
     address,
@@ -54,7 +54,7 @@ const TreeContent = ({ currentTreeId, map }) => {
     : treeHealth.getNameByValue(healthNum);
   const vacant = ['vacant', 'vacant site', 'unsuitable site', 'asphalted well'].includes(common.toLowerCase());
 
-  // TODO: pass idTree or currentTreeId to children?  should be consistent.
+  // TODO: pass id or currentTreeId to children?  should be consistent.
   return (
     <div className="tree text-center">
       <TreeHeader
@@ -65,7 +65,7 @@ const TreeContent = ({ currentTreeId, map }) => {
 
       {showEditDialog && (
         <TreeEditDialog
-          idTree={idTree}
+          currentTreeId={currentTreeId}
           treeData={treeData}
           showEditDialog={showEditDialog}
           setShowEditDialog={setShowEditDialog}
@@ -73,7 +73,7 @@ const TreeContent = ({ currentTreeId, map }) => {
       )}
 
       <AdoptLikeCheckboxes
-        idTree={idTree}
+        currentTreeId={currentTreeId}
         common={common}
       />
 
@@ -117,7 +117,7 @@ const TreeContent = ({ currentTreeId, map }) => {
 
       {!vacant && (
         <TreeRemoval
-          idTree={idTree}
+          currentTreeId={currentTreeId}
           common={common}
           notes={notes}
         />
@@ -136,7 +136,6 @@ export default function TreeData({ map, currentTreeId, setCurrentTreeId }) {
       onClose={handleClose}
     >
       <TreeContent
-        currentTreeId={currentTreeId}
         map={map}
       />
     </ScrollableDialog>

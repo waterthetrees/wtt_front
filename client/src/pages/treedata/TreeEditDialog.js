@@ -7,8 +7,8 @@ import { FormCheckbox, FormScrollableDialog } from '../../components/Form';
 import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
 
 function noNulls(object) {
-	return Object.keys(object).reduce((result, key) => {
-    let value = object[key]
+  return Object.keys(object).reduce((result, key) => {
+    const value = object[key];
 
     result[key] = value === null || value === undefined
       ? ''
@@ -21,18 +21,22 @@ function noNulls(object) {
 const vacantPattern = /vacant/i;
 
 export default function TreeEditDialog({
-  idTree, treeData, showEditDialog, setShowEditDialog,
+  currentTreeId, treeData, showEditDialog, setShowEditDialog,
 }) {
   const { user = {} } = useAuth0();
   const mutateTreeData = useTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
-  const { common, scientific, genus, height, dbh } = treeData;
+  const {
+    common, scientific, genus, height, dbh,
+  } = treeData;
   // React will complain about defaulting value on an input to null (which may be returned by the
   // backend), so convert any nulls or undefineds to ''.
-  const initialValues = noNulls({ common, scientific, genus, height, dbh });
+  const initialValues = noNulls({
+    common, scientific, genus, height, dbh,
+  });
   const defaultValues = {
     ...initialValues,
-    newTree: false
+    newTree: false,
   };
   // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
@@ -48,7 +52,7 @@ export default function TreeEditDialog({
     // and the names haven't changed, that just means tree's been replaced with the same type.
     if (JSON.stringify(data) !== JSON.stringify(initialValues) || newTree) {
       const sendData = {
-        idTree,
+        id: currentTreeId,
         ...data,
       };
 
@@ -66,7 +70,7 @@ export default function TreeEditDialog({
             : `The attributes of this ${common} were changed.`;
 
         const sendTreeHistory = {
-          idTree,
+          id: currentTreeId,
           date_visit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
           comment,
           volunteer: user.nickname,
@@ -95,7 +99,7 @@ export default function TreeEditDialog({
       formMethods={formMethods}
       actions={[
         { cancel: 'Cancel' },
-        { confirm: 'Save Changes' }
+        { confirm: 'Save Changes' },
       ]}
     >
       <TreeNameAndSize />

@@ -103,7 +103,7 @@ export default function TreeMaintenance({ currentTreeId }) {
       if (actions.length || comment) {
         const actionsPayload = actions.reduce((result, action) => ({ ...result, [action]: 'yes' }), {});
         const sendData = {
-          idTree: currentTreeId,
+          id: currentTreeId,
           date_visit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
           volunteer,
           ...actionsPayload,

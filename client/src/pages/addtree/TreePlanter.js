@@ -28,7 +28,6 @@ export default function TreePlanter() {
       <FormTextField
         name="idReference"
         label="Reference Number"
-        disabled
       />
     </FormTreeGroup>
   );

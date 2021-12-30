@@ -64,7 +64,7 @@ export default function TreeHealthSlider({
 
     if (newHealth !== health) {
       const sendTreeData = {
-        idTree: currentTreeId,
+        id: currentTreeId,
         health: newHealth,
       };
 

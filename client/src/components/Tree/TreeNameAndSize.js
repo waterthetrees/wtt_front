@@ -55,8 +55,9 @@ export default function TreeNameAndSize() {
   const treeList = allFieldsEmpty
     ? trees
     // Find the union of trees that match one or more of the names.
-    : trees.filter((tree) =>
-      (tree.common === common || tree.scientific === scientific || tree.genus === genus));
+    : trees.filter((tree) => (tree.common === common
+      || tree.scientific === scientific
+      || tree.genus === genus));
   const commonNames = getNames(treeList, 'common', firstItem);
   const scientificNames = getNames(treeList, 'scientific', firstItem);
   const genusNames = getNames(treeList, 'genus', firstItem);
