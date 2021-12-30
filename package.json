@@ -42,10 +42,7 @@
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
-    "@testing-library/dom": "^7.31.2",
-    "@testing-library/react": "^11.2.7",
     "babel-loader": "^8.2.3",
-    "chai": "^4.3.4",
     "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.5.1",
     "eslint": "^7.32.0",
@@ -55,15 +52,12 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.3",
     "mini-css-extract-plugin": "^2.4.4",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.14",
     "open-cli": "^7.0.1",
     "postcss": "^8.3.11",
     "postcss-scss": "^4.0.2",
-    "puppeteer": "^2.1.1",
     "sass-loader": "^12.3.0",
     "source-map-loader": "^3.0.0",
     "speed-measure-webpack-plugin": "^1.5.0",
@@ -92,8 +86,8 @@
     "start:docker": "npm run watch & npm run start:nodemon",
     "start:nodemon": "nodemon server/index.js localserver",
     "start:dev": "webpack serve --env development",
-    "test": "jest",
-    "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
-    "test:watch": "jest --watch"
+    "test": "echo \"No test specified\"",
+    "test:coverage": "echo \"No test specified\" && exit 0 && jest --coverage && open-cli coverage/lcov-report/index.html",
+    "test:watch": "echo \"No test specified\""
   }
 }
