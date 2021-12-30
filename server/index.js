@@ -5,7 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const compression = require('compression');
-const { logger } = require('../logger');
+const { logger } = require('./logger');
 
 const env = process.argv[2] || 'local';
 const host = {

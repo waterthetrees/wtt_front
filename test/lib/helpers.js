@@ -1,4 +1,4 @@
-const { logger } = require("./../../logger.js");
+const { logger } = require("../../server/logger.js");
 util = require("util");
 const config = require("./config");
 const puppeteer = require("puppeteer");
