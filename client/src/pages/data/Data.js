@@ -33,6 +33,7 @@ const dataColumns = [
     label: 'Notes',
   },
 ];
+const defaultSortColumn = dataColumns[0].key;
 const dataSources = [
   {
     name: 'Native California Trees',
@@ -131,7 +132,17 @@ export default function Data() {
 
 function TreeList({ data, columns }) {
   const [sortOrderAsc, setSortOrderAsc] = useState(true);
-  const [sortColumn, setSortColumn] = useState('common');
+  const [lastSortColumn, setLastSortColumn] = useState(defaultSortColumn);
+  let sortColumn = lastSortColumn;
+
+  if (!columns.find(({ key }) => key === sortColumn)) {
+    // The new data doesn't include the last column we sorted on, so default to common/asc and
+    // update the state for the next render.
+    sortColumn = defaultSortColumn;
+    setLastSortColumn(sortColumn);
+    setSortOrderAsc(true);
+  }
+
   const sortedTrees = sortTrees(data);
 
   function sortTrees(trees) {
@@ -156,7 +167,7 @@ function TreeList({ data, columns }) {
     }
 
     setSortOrderAsc(newOrder);
-    setSortColumn(newColumn);
+    setLastSortColumn(newColumn);
   };
 
   return (
