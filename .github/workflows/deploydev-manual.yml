@@ -1,0 +1,24 @@
+# This is a basic workflow that is manually triggered
+
+name: manual_deploy_to_dev.waterthetrees.com
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Are you sure you want to deploy development to dev.waterthetrees.com'
+        # Default value if no value is explicitly provided
+        default: 'no'
+        # Input has to be provided for the workflow to run
+        required: true
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Hit the Webhook
+        run: "curl -H 'WTT-SECRET-DEPLOY: ${{ secrets.WTT_SECRET_DEPLOY }}' -d '' https://dev.waterthetrees.com/deploydev/wtt_front_deploy"

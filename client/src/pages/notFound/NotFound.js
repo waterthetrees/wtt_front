@@ -1,13 +1,19 @@
-import { Grid } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { Grid, Typography } from '@mui/material';
 import Footer from '../../components/Footer/Footer';
 
 export default function NotFound() {
   return (
-    <Grid container spacing={2} justify="center" alignItems="center" direction="column">
+    <Grid container
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      sx={{ height: '100vh' }}
+    >
       <Grid item>
-        <Typography variant="h1">
+        <Typography variant="h1"
+          sx={{ my: 2 }}
+        >
           404
         </Typography>
       </Grid>

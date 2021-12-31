@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import makeStyles from '@mui/styles/makeStyles';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import GetAppIcon from '@mui/icons-material/GetApp';
 import { CSVLink } from 'react-csv';
-import { topTreesCaliforniaNative } from './topTreesCaliforniaNative';
-import { topTreesUSFood } from './topTreesUSFood';
-import { topTreesAlameda } from './topTreesAlameda';
-import { topTreesSanFrancisco } from './topTreesSanFrancisco';
+import { topTreesCaliforniaNative } from '../../data/dist/topTreesCaliforniaNative';
+import { topTreesUSFood } from '../../data/dist/topTreesUSFood';
+import { topTreesSanFrancisco } from '../../data/dist/topTreesSanFrancisco';
 import './Data.scss';
 
 function chooseData() {
@@ -233,10 +232,3 @@ function Tree({
     </div>
   );
 }
-
-export {
-  topTreesCaliforniaNative,
-  topTreesUSFood,
-  topTreesAlameda,
-  topTreesSanFrancisco,
-};

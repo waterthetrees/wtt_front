@@ -1,68 +1,72 @@
-// webpack v4
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
-const {getIfUtils, removeEmpty} = require("webpack-config-utils");
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
-  const {ifProduction, ifNotProduction, ifAnalyze} =
-      getIfUtils(env, ['production', 'analyze']);
+  const { ifProduction, ifNotProduction, ifAnalyze } = getIfUtils(env, ['production', 'analyze']);
   // Save the config into a variable so we can wrap it with SpeedMeasurePlugin
   // below if env.analyze is true
   const config = {
     mode: ifProduction() ? 'production' : 'development',
     watch: false,
-    entry: {main: './client/src/client.js'},
+    entry: './client/src/index.js',
     output: {
       path: path.resolve(__dirname, 'client/public'),
-      filename: 'bundle.js',
       publicPath: '/',
-      sourceMapFilename: '[name].js.map',
+      clean: true,
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
     },
     devServer: {
+      // Port 3000 is baked into the configuration for the mapbox API, so the
+      // dev-server needs to use it so that we can hit the API
+      port: 3000,
       historyApiFallback: true,
-      contentBase: './',
+      static: './',
       hot: true,
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
+    // The MapboxLegendControl library triggers this warning when trying to load its source map,
+    // which we can safely ignore.
+    ignoreWarnings: [/Failed to parse source map/],
     module: {
       rules: removeEmpty([
         {
           test: /\.js$/,
-          exclude: [/node_modules/, /\.scss$/],
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/react', '@babel/preset-env'],
-              plugins: [
-                '@babel/plugin-transform-runtime',
-                '@babel/plugin-proposal-class-properties',
-              ],
-            },
-          },
+          include: path.resolve(__dirname, 'client/src'),
+          use: ['babel-loader'],
         },
         ifNotProduction({
           test: /\.js$/,
+          // These modules seem to cause errors with this loader.
+          exclude: /mapbox-gl-legend|react-hook-form|react-router/,
           enforce: 'pre',
           use: ['source-map-loader'],
         }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
-          loader: 'url-loader?limit=100000',
+          type: 'asset/resource',
         },
         {
           test: /\.(scss|css)?$/,
-          include: path.appSrc,
-          loaders: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'sass-loader' },
+          ]
         },
       ]),
     },
     plugins: removeEmpty([
-       new HtmlWebPackPlugin({
+      new HtmlWebPackPlugin({
         template: './client/src/index.html',
         filename: './index.html',
       }),
@@ -70,10 +74,12 @@ module.exports = (env) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
-      new MiniCssExtractPlugin({
-        filename: '[name].scss',
-        chunkFilename: '[id].scss',
-      }),
+// TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
+//  instances breaks SpeedMeasurePlugin in webpack 5
+//      new MiniCssExtractPlugin({
+//        filename: '[name].scss',
+//        chunkFilename: '[id].scss',
+//      }),
       new CopyPlugin({
         patterns: [
           {
@@ -82,8 +88,8 @@ module.exports = (env) => {
           },
         ],
       }),
-      ifAnalyze(new BundleAnalyzerPlugin())
-    ])
+      ifAnalyze(new BundleAnalyzerPlugin()),
+    ]),
   };
 
   // To measure the plugin times, we need to return a wrapped config.  but wrap()

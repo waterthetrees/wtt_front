@@ -1,0 +1,14 @@
+.sidebar {
+ background-color: transparent;
+ position: fixed;
+ top: 85px;
+ left: 0;
+ padding-left: 10px;
+ width: fit-content;
+ block-size: fit-content;
+}
+
+.sidebar__content {
+ font-weight: 900;
+ font-family: 'Roboto Mono', monospace;
+}

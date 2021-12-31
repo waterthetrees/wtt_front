@@ -1,5 +1,3 @@
-@import "../../styles/app";
-
 .map__container {
   position: absolute;
   top: 0;
@@ -29,4 +27,12 @@
 
 .map__error > p:last-of-type {
   margin: 0;
+}
+
+.mapboxgl-legend-list{
+  overflow-y: auto;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  display: none;
 }

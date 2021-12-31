@@ -1,17 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Drawer } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import './Slideout.scss';
-
-const WATERDROPLET = 'assets/images/map/waterdroplet.svg';
 
 const useStyles = makeStyles({
   list: {
+    width: 250,
+  },
+  slideout: {
     width: 250,
   },
   fullList: {
@@ -19,7 +16,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer({ buttonText, children }) {
+export default function TemporaryDrawer({
+  buttonText, children, classNameButtonText, classNameButton,
+}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -36,41 +35,27 @@ export default function TemporaryDrawer({ buttonText, children }) {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['AdoptaTree'].map((text) => (
-          <ListItem button key={text}>
-            {children}
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
-    <div>
+    <div className="slideout">
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           {!state[anchor] && (
-            <button type="button" className="slideout__btn" onClick={toggleDrawer(anchor, true)}>
-              <div className="shape">
-                <div className="shape__txt">{buttonText[anchor]}</div>
-
-              </div>
+            <button type="button" className={classNameButton} onClick={toggleDrawer(anchor, true)}>
+              <div className={classNameButtonText}>{buttonText[anchor]}</div>
             </button>
           )}
-
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
-          </Drawer>
+          <div
+            className={clsx(classes.list, classes.slideout, {
+              [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            })}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+          >
+            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+              {children}
+            </Drawer>
+          </div>
         </React.Fragment>
       ))}
     </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { Menu, MenuItem } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import AuthenticationButton from '../Auth/auth-button';
+import AuthButton from '../Auth/AuthButton';
 import './Header.scss';
 
 const Header = () => {
@@ -21,7 +20,6 @@ const Header = () => {
   return (
     <div id="header" className="header">
       <div className="header__content">
-
         <Link to="/">
           <div className="header__font">WATER THE TREES</div>
         </Link>
@@ -35,6 +33,7 @@ const Header = () => {
         >
           &#9776;
         </button>
+
         <Menu
           id="wtt-menu"
           anchorEl={anchorEl}
@@ -43,39 +42,43 @@ const Header = () => {
           onClose={handleClose}
         >
           {isAuthenticated
-          && (
-            <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header__link">
-                <HeaderButton menuItem="User Profile" />
-              </Link>
-            </MenuItem>
-          )}
+            && (
+              <MenuItem onClick={handleClose}>
+                <Link to="/userprofile" className="header__link">
+                  <HeaderButton menuItem="User Profile" />
+                </Link>
+              </MenuItem>
+            )}
+
           <MenuItem onClick={handleClose}>
             <Link to="/" className="header__link">
               <HeaderButton menuItem="Map" />
             </Link>
           </MenuItem>
+
           <MenuItem onClick={handleClose}>
             <Link to="/about" className="header__link">
               <HeaderButton menuItem="About" />
             </Link>
           </MenuItem>
+
           <MenuItem onClick={handleClose}>
             <Link to="/contact" className="header__link">
               <HeaderButton menuItem="Contact" />
             </Link>
           </MenuItem>
+
           <MenuItem onClick={handleClose}>
             <Link to="/Data" className="header__link">
               <HeaderButton menuItem="Data" />
             </Link>
           </MenuItem>
 
-          <MenuItem onClick={handleClose}><AuthenticationButton /></MenuItem>
+          <MenuItem onClick={handleClose}>
+            <AuthButton />
+          </MenuItem>
         </Menu>
-
       </div>
-
     </div>
   );
 };

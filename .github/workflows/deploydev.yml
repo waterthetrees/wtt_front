@@ -1,0 +1,13 @@
+name: deploy_development_to_dev.waterthetrees.com
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Hit the Webhook
+        run: "curl -H 'WTT-SECRET-DEPLOY: ${{ secrets.WTT_SECRET_DEPLOY }}' -d '' https://dev.waterthetrees.com/deploydev/wtt_front_deploy"

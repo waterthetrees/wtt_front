@@ -1,7 +1,7 @@
+// for some reason, adding these html and body rules to global.css causes the tex to be too large
 html {
   box-sizing: border-box;
   font-size: 12px;
-  font-family: 'Roboto Mono', monospace, Arial, sans-serif, 'PT Sans';
 }
 
 body {
@@ -10,7 +10,6 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: Arial, sans-serif, 'PT Sans';
 }
 
 label {
@@ -25,33 +24,16 @@ label {
   height: 100%;
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #000000;
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
 .mapboxgl-ctrl-top-right {
   top: 80px;
   right: 0;
 }
 
 .authbutton {
-  width: fit-content;
   max-width: 200px;
   height: fit-content;
   max-height: 50px;
-  font-size: 2.5rem;
   padding: 1px 4px;
-  font-family: 'Roboto Mono', monospace;
 }
 
 @media only screen and (max-width: 768px) {

@@ -1,84 +1,35 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
 import {
-  TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@material-ui/core';
-import Widget from '../../components/Widget';
-import ErrorMessageAll from '../error/ErrorPage';
+  FormTextField,
+  FormTreeGroup,
+} from '../../components/Form';
 
-export default function TreePlanter({ control, errors }) {
+export default function TreePlanter() {
   return (
-    <Widget title="Tree Planter" classes="treeplanter">
-      <span>
-        <Controller
-          as={(
-            <RadioGroup aria-label="owner" name="position" row>
-              <FormControlLabel
-                value="public"
-                control={<Radio color="primary" value="public" />}
-                label="Public Land"
-              />
-              <FormControlLabel
-                value="private"
-                control={<Radio color="secondary" value="private" />}
-                label="Private Land"
-              />
-            </RadioGroup>
-          )}
-          name="owner"
-          control={control}
-          size="medium"
-        />
-      </span>
-      {errors.owner && <ErrorMessageAll errors={errors} name="owner" />}
-
-      <Controller
-        as={TextField}
+    <FormTreeGroup title="Planter">
+      <FormTextField
         name="who"
         label="Organization"
-        control={control}
-        rules={{ required: false, minLength: 1, maxLength: 100 }}
-        variant="standard"
-        size="small"
+        rules={{ minLength: 1, maxLength: 100 }}
       />
-      {errors.who && <ErrorMessageAll errors={errors} name="who" />}
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="volunteer"
         label="Volunteer Name"
-        control={control}
-        rules={{ required: true }}
-        variant="standard"
-        size="small"
         disabled
       />
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="email"
         label="Volunteer Email"
-        control={control}
-        rules={{ required: true }}
-        variant="standard"
-        size="small"
         disabled
       />
 
-      <Controller
-        as={TextField}
+      <FormTextField
         name="idReference"
         label="Reference Number"
-        control={control}
-        rules={{ required: true, minLength: 1, maxLength: 100 }}
-        variant="standard"
-        size="small"
+        disabled
       />
-      {errors.idReference && <ErrorMessageAll errors={errors} name="idReference" />}
-
-    </Widget>
+    </FormTreeGroup>
   );
 }
