@@ -8,12 +8,12 @@ import {
   useUserLikedQuery,
   useUserPlantedQuery,
   useUserTreeHistoryQuery,
-} from '../../api/queries';
-import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
-import TreeIcon from '../../assets/images/addtree/tree12.svg';
-import UserTreeHistoryTable from '../../components/UserTreeHistoryTable/UserTreeHistoryTable';
-import Footer from '../../components/Footer/Footer';
-import { TooltipBottom } from '../../components/Tooltip';
+} from '@/api/queries';
+import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
+import TreeIcon from '@/assets/images/addtree/tree12.svg';
+import UserTreeHistoryTable from '@/components/UserTreeHistoryTable/UserTreeHistoryTable';
+import Footer from '@/components/Footer/Footer';
+import { TooltipBottom } from '@/components/Tooltip';
 
 const ProfileContainer = styled(Box)`
   margin-top: 6em;

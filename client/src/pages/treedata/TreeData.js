@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useTreeQuery } from '../../api/queries';
-import ScrollableDialog from '../../components/ScrollableDialog/ScrollableDialog';
+import { useTreeQuery } from '@/api/queries';
+import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import AdoptLikeCheckboxes from './TreeAdoptionLike';
 import TreeEditDialog from './TreeEditDialog';
 import TreeRemoval from './TreeRemoval';
@@ -10,8 +10,8 @@ import TreeHealthSlider from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeCare from './TreeCare';
 import { TreeInfo } from './TreeInfo';
-import { treeHealth } from '../../util/treeHealth';
-import useAuthUtils from '../../components/Auth/useAuthUtils';
+import { treeHealth } from '@/util/treeHealth';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 import './TreeData.scss';
 
 const TreeContent = ({ currentTreeId, map }) => {

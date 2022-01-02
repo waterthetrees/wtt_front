@@ -1,8 +1,8 @@
 import React from 'react';
-import { useCitiesQuery, useCountriesQuery, useTreemapQuery } from '../../api/queries';
+import { useCitiesQuery, useCountriesQuery, useTreemapQuery } from '@/api/queries';
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
-import { treeHealth } from '../../util/treeHealth';
+import { treeHealth } from '@/util/treeHealth';
 
 const circleRadius = {
   'circle-radius': [

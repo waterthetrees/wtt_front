@@ -1,9 +1,9 @@
 import React from 'react';
 import './About.scss';
 
-import Contacts from '../../components/Contacts/Contacts';
-import Affiliates from '../../components/Contacts/Affiliates';
-import Footer from '../../components/Footer';
+import Contacts from '@/components/Contacts/Contacts';
+import Affiliates from '@/components/Contacts/Affiliates';
+import Footer from '@/components/Footer';
 
 function About() {
   const affiliates = [{

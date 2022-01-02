@@ -7,7 +7,7 @@ import {
   FormTreeGroup,
   FormRadio,
   FormRadioGroup,
-} from '../../components/Form';
+} from '@/components/Form';
 
 // Add keys to each item in the map() call below.
 const stateMenuItems = [

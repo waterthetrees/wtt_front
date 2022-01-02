@@ -1,12 +1,12 @@
 import React from 'react';
 import { MenuItem } from '@mui/material';
-import { treeHealth } from '../../util/treeHealth';
+import { treeHealth } from '@/util/treeHealth';
 import {
   FormTextField,
   FormSelect,
   FormTreeGroup,
-} from '../../components/Form';
-import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
+} from '@/components/Form';
+import TreeNameAndSize from '@/components/Tree/TreeNameAndSize';
 
 // Create an array of tree health items, reversed so that "good" comes first.
 const healthMenuItems = treeHealth.getNameValuePairs().reverse()

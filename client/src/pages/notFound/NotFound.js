@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-import Footer from '../../components/Footer/Footer';
+import Footer from '@/components/Footer/Footer';
 
 export default function NotFound() {
   return (

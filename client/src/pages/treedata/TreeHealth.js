@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
-import { useTreeDataMutation } from '../../api/queries';
-import useAuthUtils from '../../components/Auth/useAuthUtils';
-import { treeHealth } from '../../util/treeHealth';
-import { saveTimer } from '../../util/constants';
+import { useTreeDataMutation } from '@/api/queries';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
+import { treeHealth } from '@/util/treeHealth';
+import { saveTimer } from '@/util/constants';
 
 function addTreeMarker(newHealth, lng, lat, map) {
   const newDot = document.createElement('div');
