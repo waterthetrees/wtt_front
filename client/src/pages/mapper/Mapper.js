@@ -52,7 +52,6 @@ function Mapper() {
       });
 
       // Add the geolocate and navigation controls to the map.
-
       mapboxMap.addControl(new mapboxgl.NavigationControl());
       mapboxMap.addControl(new MapboxLegendControl(legendTargets,
         {
@@ -63,7 +62,6 @@ function Mapper() {
         },
         // TODO: specifying a location doesn't work for some reason.
         'bottom-right'));
-
       mapboxMap.addControl(geolocate);
 
       mapboxMap.on('load', () => {
@@ -103,14 +101,15 @@ function Mapper() {
                 geolocater={geolocater}
               />
               <Slideout
-                buttonText={{ left: 'ADOPT' }}
-                classNameButton="slideout__btn  slideout__btn__shape"
-                classNameButtonText="slideout__btn-txt slideout__btn-txt__shape"
+                button={
+                  <button className="slideout__btn slideout__btn__shape">
+                    <div className="slideout__btn-txt slideout__btn-txt__shape">ADOPT</div>
+                  </button>
+                }
               >
                 <TreeAdoptionDirections onmap />
               </Slideout>
             </Sidebar>
-            )
 
             {currentTreeId && (
               <TreeData

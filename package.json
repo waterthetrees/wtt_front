@@ -20,7 +20,6 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.1.1",
     "@mui/material": "^5.1.1",
-    "@mui/styles": "^5.1.1",
     "@watergis/mapbox-gl-legend": "^1.2.1",
     "clsx": "^1.1.1",
     "date-fns": "2.25.0",

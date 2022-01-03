@@ -44,42 +44,6 @@ hr.divider-solid {
   background-color: transparent;
 }
 
-.tree__nav {
-  z-index: 1040;
-  position: absolute;
-  bottom: 25px;
-  left: 5px;
-  z-index: 1049;
-  display: flex;
-  width: 90%;
-  justify-content: flex-start;
-}
-
-.treenav__button {
-  width: 2.5em;
-  height: 2.5em;
-  margin: 0 5px;
-  padding: 0;
-  font-size: 1.5rem;
-  border-color: black;
-  background-color: black;
-  .btn-success:active {
-    color: #fff;
-    background-color: #006400;
-  }
-}
-
-.tree__status-btn-more {
-  width: 0.9em;
-  height: 0.9em;
-  font-size: 0.5rem;
-  .btn-link {
-    font-weight: 200;
-    color: #007bff;
-    text-decoration: none;
-  }
-}
-
 .tree {
   z-index: 2000;
   font-size: .875rem;
@@ -94,14 +58,6 @@ hr.divider-solid {
 
 .container {
   width: 100vw !important;
-}
-
-element.style {
-  opacity: 1;
-  transform: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 }
 
 .tree__status {
@@ -147,7 +103,7 @@ element.style {
 
 .treemaintenance-btn-header:focus {
   border: none;
-  border-radius: none;
+  border-radius: 0;
   outline: none;
   background-color: transparent;
 }
@@ -158,10 +114,6 @@ element.style {
 
 .treecare {
   margin-top: 10px;
-}
-
-.volunteer__name {
-  border-color: #619c3a;
 }
 
 .treemaintenance-buttons {
@@ -235,15 +187,6 @@ element.style {
   background-size: cover;
 }
 
-.modal-dialog {
-  max-width: 600px;
-  margin: auto;
-}
-
-.modal-content {
-  max-height: 90vh;
-}
-
 .flex-grid {
   margin: 4px 0;
   display: flex;
@@ -290,12 +233,6 @@ element.style {
   font-size: 1.2rem;
 }
 
-.treehistory-list__header{
-  margin: 15px 0 0 0;
-  padding: 5px;
-  background-color: #e9ecef;
-}
-
 .treehistory-item {
   border: 2px solid #e9ecef;
   padding: 10px;
@@ -304,6 +241,7 @@ element.style {
   flex-direction: column;
   font-size: 1.2rem;
 }
+
 .treehistory-item:nth-child(even) {
   background-color: #e9ecef;
 }
@@ -417,53 +355,6 @@ element.style {
   white-space: nowrap;
 }
 
-/*mobile*/
-@media (max-width: 400px) {
-  .treemaintenance-btn-header {
-    font-size: 1.9rem;
-  }
-
-  .treehistory-list {
-    margin: 5px;
-    font-size: 1rem;
-  }
-
-  .flex-grid,
-  .flex-grid-thirds {
-    .col {
-      width: 100%;
-      margin: 0 0 2px 0;
-    }
-  }
-
-  textarea.form-control {
-    height: auto;
-  }
-
-  .tree {
-    .form-control {
-      font-size: 1rem;
-    }
-  }
-
-  .tree__type {
-    padding: 2px 2px;
-    .tree__type-btn {
-      width: 3em;
-      height: 3em;
-      padding: 3px;
-      margin: 2px;
-      border: 2px solid #ff0;
-    }
-    input {
-      width: 100%;
-      background-color: transparent;
-      border: 0;
-      border-bottom: 1px solid lightgray;
-    }
-  }
-}
-
 .slidecontainer {
   width: 100%;
   margin: 1px;
@@ -508,4 +399,64 @@ element.style {
 ol {
   margin: 0 15px;
   padding-inline-start: 0;
+}
+
+.treeadoption_directions {
+  font-size: 1.25rem;
+  padding: 2rem;
+}
+
+.treeadoption_directions h4 {
+  margin: 1.5rem 0 .25rem 0;
+}
+
+/*mobile*/
+@media (max-width: 400px) {
+  .treeadoption_directions {
+    font-size: 1rem;
+  }
+
+  .treemaintenance-btn-header {
+    font-size: 1.9rem;
+  }
+
+  .treehistory-list {
+    margin: 5px;
+    font-size: 1rem;
+  }
+
+  .flex-grid,
+  .flex-grid-thirds {
+    .col {
+      width: 100%;
+      margin: 0 0 2px 0;
+    }
+  }
+
+  textarea.form-control {
+    height: auto;
+  }
+
+  .tree {
+    .form-control {
+      font-size: 1rem;
+    }
+  }
+
+  .tree__type {
+    padding: 2px 2px;
+    .tree__type-btn {
+      width: 3em;
+      height: 3em;
+      padding: 3px;
+      margin: 2px;
+      border: 2px solid #ff0;
+    }
+    input {
+      width: 100%;
+      background-color: transparent;
+      border: 0;
+      border-bottom: 1px solid lightgray;
+    }
+  }
 }
