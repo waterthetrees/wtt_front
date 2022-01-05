@@ -74,7 +74,7 @@ const LayerControl = ({ layer, label, color, checked, onChange }) => (
 );
 
 export default function TreeLayerLegend({
-  map, title, targets, expanded = false
+  map, title = "Legend", targets = [], expanded = false
 }) {
   const defaultVisibility = targets.reduce((result, target) => ({ ...result, [target.layer]: true }), {});
   const [layerVisibility, setLayerVisibility] = useState(defaultVisibility);
