@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
+import { useTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
 import TreeRemovalDialog from './TreeRemovalDialog';
-import useAuthUtils from '../../components/Auth/useAuthUtils';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 
 export default function TreeRemoval({ idTree, common, notes }) {
   const { user = {}, isAuthenticated } = useAuth0();

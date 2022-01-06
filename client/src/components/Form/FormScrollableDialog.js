@@ -1,10 +1,10 @@
 import React from 'react';
-import ScrollableDialog from '../ScrollableDialog/ScrollableDialog';
+import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import { Form } from './index';
 import { Button } from '@mui/material';
 
 export default function FormScrollableDialog({
-  children, actions, formMethods, onConfirm, onCancel, onError, ...restProps
+  children, actions, formMethods, onConfirm, onCancel, onError, ...props
 }) {
   const handleSubmit = formMethods.handleSubmit(
     (data, event) => onConfirm(data, event),
@@ -40,7 +40,7 @@ export default function FormScrollableDialog({
     <ScrollableDialog
       onClose={onCancel}
       actions={actionButtons}
-      {...restProps}
+      {...props}
     >
       <Form
         {...formMethods}

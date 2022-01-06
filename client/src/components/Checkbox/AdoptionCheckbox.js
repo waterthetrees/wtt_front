@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
-import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
+import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
 
 const Icon = <AdoptionIcon fontSize="large" />;
 const CheckedIcon = <AdoptionIcon primary fontSize="large" />;

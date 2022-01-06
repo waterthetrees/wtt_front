@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormCheckbox({
-  name, label, rules, sx, ...restProps
+  name, label, rules, sx, ...props
 }) {
   // We have to wrap the Controller around the Checkbox, not the FormControlLabel, since the
   // Checkbox is what changes the actual value.
@@ -21,7 +21,7 @@ export default function FormCheckbox({
               <Checkbox
                 {...field}
                 checked={field.value}
-                {...restProps}
+                {...props}
               />
             )}
           />

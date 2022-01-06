@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormSelect({
-  children, name, label, rules, ...restProps
+  children, name, label, rules, ...props
 }) {
   return (
     <>
@@ -20,7 +20,7 @@ export default function FormSelect({
             <Select
               {...field}
               variant="standard"
-              {...restProps}
+              {...props}
             >
               {children}
             </Select>

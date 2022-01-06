@@ -8,7 +8,7 @@ import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormRadioGroup({
-  children, name, label, rules, ...restProps
+  children, name, label, rules, ...props
 }) {
   // We have to wrap the Controller around the RadioGroup, not the FormControl, since the
   // RadioGroup is what is updating the actual value.
@@ -26,7 +26,7 @@ export default function FormRadioGroup({
             <RadioGroup
               {...field}
               aria-label={label}
-              {...restProps}
+              {...props}
             >
               {children}
             </RadioGroup>

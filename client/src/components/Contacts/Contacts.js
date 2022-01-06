@@ -1,8 +1,8 @@
 import React from 'react';
 import './Contacts.scss';
 
-import slackLogo from '../../assets/images/logos/Slack_RGB.svg';
-import googleDocsLogo from '../../assets/images/logos/google-docs.svg';
+import slackLogo from '@/assets/images/logos/Slack_RGB.svg';
+import googleDocsLogo from '@/assets/images/logos/google-docs.svg';
 
 const Contacts = () => (
   <div className="contacts">

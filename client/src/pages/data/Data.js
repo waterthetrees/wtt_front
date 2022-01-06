@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { MenuItem, FormControl, Button, Select } from '@mui/material';
 import { GetApp } from '@mui/icons-material';
 import { CSVLink } from 'react-csv';
-import { topTreesCaliforniaNative } from '../../data/dist/topTreesCaliforniaNative';
-import { topTreesUSFood } from '../../data/dist/topTreesUSFood';
-import { topTreesSanFrancisco } from '../../data/dist/topTreesSanFrancisco';
+import { topTreesCaliforniaNative } from '@/data/dist/topTreesCaliforniaNative';
+import { topTreesUSFood } from '@/data/dist/topTreesUSFood';
+import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import './Data.scss';
 
 const dataColumns = [

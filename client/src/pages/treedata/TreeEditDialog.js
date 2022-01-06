@@ -2,9 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import format from 'date-fns/format';
-import { useTreeDataMutation, useTreeHistoryMutation } from '../../api/queries';
-import { FormCheckbox, FormScrollableDialog } from '../../components/Form';
-import TreeNameAndSize from '../../components/Tree/TreeNameAndSize';
+import { useTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
+import { FormCheckbox, FormScrollableDialog } from '@/components/Form';
+import TreeNameAndSize from '@/components/Tree/TreeNameAndSize';
 
 function noNulls(object) {
 	return Object.keys(object).reduce((result, key) => {

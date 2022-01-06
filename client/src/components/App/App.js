@@ -2,22 +2,22 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Auth0ProviderWithRedirect from '../Auth/Auth0ProviderWithRedirect';
-import Header from '../Header';
-import Mapper from '../../pages/mapper/Mapper';
-import About from '../../pages/about/About';
-import Privacy from '../../pages/privacy/Privacy';
-import License from '../../pages/license/License';
-import UserProfile from '../../pages/userprofile/UserProfile';
-import Contact from '../../pages/contact/Contact';
-import NotFound from '../../pages/notFound/NotFound';
-import RequireAuth from '../Auth/RequireAuth';
-import RedirectWithHash from '../Auth/RedirectWithHash';
-import Loading from '../Auth/Loading';
-import "../../styles/app.scss";
+import Auth0ProviderWithRedirect from '@/components/Auth/Auth0ProviderWithRedirect';
+import Header from '@/components/Header';
+import Mapper from '@/pages/mapper/Mapper';
+import About from '@/pages/about/About';
+import Privacy from '@/pages/privacy/Privacy';
+import License from '@/pages/license/License';
+import UserProfile from '@/pages/userprofile/UserProfile';
+import Contact from '@/pages/contact/Contact';
+import NotFound from '@/pages/notFound/NotFound';
+import RequireAuth from '@/components/Auth/RequireAuth';
+import RedirectWithHash from '@/components/Auth/RedirectWithHash';
+import Loading from '@/components/Auth/Loading';
+import "@/styles/app.scss";
 
 // Lazy-load the data page, so that we only load the large JSON files it uses if needed.
-const Data = React.lazy(() => import(/* webpackChunkName: "Data" */ '../../pages/data/Data'));
+const Data = React.lazy(() => import(/* webpackChunkName: "Data" */ '@/pages/data/Data'));
 
 // Create a client for react-query calls.
 const queryClient = new QueryClient();

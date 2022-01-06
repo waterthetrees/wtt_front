@@ -5,8 +5,8 @@ import format from 'date-fns/format';
 import {
   useTreeAdoptionsQuery, useTreeLikesQuery, useTreeAdoptionsMutation,
   useTreeHistoryMutation, useTreeLikesMutation,
-} from '../../api/queries';
-import { AdoptionCheckbox, InfoCheckbox, StarCheckbox } from '../../components/Checkbox';
+} from '@/api/queries';
+import { AdoptionCheckbox, InfoCheckbox, StarCheckbox } from '@/components/Checkbox';
 import { TooltipTop } from "../../components/Tooltip";
 
 import TreeAdoptionDirections from './TreeAdoptionDirections';
