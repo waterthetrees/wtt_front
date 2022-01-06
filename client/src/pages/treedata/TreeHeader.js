@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Button } from '@mui/material';
+import { Link } from '@mui/material';
 import format from 'date-fns/format';
 
 export default function TreeHeader({
@@ -27,7 +27,20 @@ export default function TreeHeader({
       )}
 
       <div className="text-right">
-        <Button color="primary" onClick={edit}>Edit</Button>
+        <Link
+          component="button"
+          onClick={edit}
+          sx={{
+            m: 1,
+            textDecoration: 'none',
+            fontSize: '1em',
+            '&:hover': {
+              textDecoration: 'underline'
+            },
+          }}
+        >
+          EDIT
+        </Link>
       </div>
     </div>
   );

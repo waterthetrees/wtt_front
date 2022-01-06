@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Avatar, Box, Tooltip, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import StarIcon from '@mui/icons-material/Star';
+import { Star } from '@mui/icons-material';
 import {
   useUserAdoptedQuery,
   useUserLikedQuery,
@@ -13,6 +13,7 @@ import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import TreeIcon from '../../assets/images/addtree/tree12.svg';
 import UserTreeHistoryTable from '../../components/UserTreeHistoryTable/UserTreeHistoryTable';
 import Footer from '../../components/Footer/Footer';
+import { TooltipBottom } from '../../components/Tooltip';
 
 const ProfileContainer = styled(Box)`
   margin-top: 6em;
@@ -30,26 +31,8 @@ const UserAvatar = styled(Avatar)`
   margin: 0 3em 0 2em;
 `;
 
-const IconTooltip = ({ children, title, ...restProps }) => (
-  <Tooltip
-    title={title}
-    placement="bottom"
-    arrow
-    componentsProps={{
-      tooltip: {
-        sx: {
-          fontSize: '1.125rem',
-        },
-      },
-    }}
-    {...restProps}
-  >
-    {children}
-  </Tooltip>
-);
-
 const UserActionIcon = ({ title, icon, count }) => (
-  <IconTooltip title={title}>
+  <TooltipBottom title={title}>
     <div
       style={{
         marginRight: '1em',
@@ -60,7 +43,7 @@ const UserActionIcon = ({ title, icon, count }) => (
       {icon}
       <span style={{ marginLeft: '0.35rem' }}>{count}</span>
     </div>
-  </IconTooltip>
+  </TooltipBottom>
 );
 
 const iconStyle = {
@@ -78,7 +61,7 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
     <UserActionIcon
       title="Liked"
       count={likedCount}
-      icon={<StarIcon style={iconStyle} />}
+      icon={<Star style={iconStyle} />}
     />
     <UserActionIcon
       title="Planted"
