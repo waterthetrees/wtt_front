@@ -35,7 +35,7 @@ export const treeHealth = {
     return healthInfo.map(([name], value) => [name, value]);
   },
   getColorByName(name, colorType) {
-    return healthByName[name][colorType];
+    return (healthByName[name] || healthByName.default)[colorType];
   },
   getPaintColors(colorType) {
     const colors = healthInfo.reduce((result, [name]) =>
