@@ -1,4 +1,4 @@
-const { logger } = require("./../logger.js");
+const { logger } = require("../server/logger.js");
 util = require("util");
 const puppeteer = require("puppeteer");
 const expect = require("chai").expect;
