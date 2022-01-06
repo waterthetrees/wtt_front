@@ -65,7 +65,7 @@ function Mapper() {
           props: {
             title: 'Tree layers:',
             targets,
-            expanded: true
+            defaultExpanded: true
           }
         }),
         // Add the legend at the bottom right of the map.

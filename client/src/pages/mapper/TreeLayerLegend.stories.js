@@ -2,7 +2,7 @@ import { default as TreeLayerLegend } from './TreeLayerLegend';
 import { treeHealth } from '../../util/treeHealth';
 
 export default {
-  title: 'TreeLayerLegend',
+  title: 'Map/TreeLayerLegend',
   component: TreeLayerLegend,
 };
 
@@ -30,7 +30,9 @@ class Map {
 const Template = (args) => <TreeLayerLegend map={new Map()} {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
+
+export const RGB = Template.bind({});
+RGB.args = {
   targets: [
     {
       layer: 'good',
@@ -49,7 +51,7 @@ Default.args = {
     },
   ],
   title: 'Layers',
-  expanded: true
+  defaultExpanded: true
 };
 
 export const TreeHealth = Template.bind({});
@@ -66,5 +68,5 @@ TreeHealth.args = {
       color: treeHealth.getColorByName(name, 'fill'),
     })),
   title: 'Tree Layers',
-  expanded: true
+  defaultExpanded: true
 };

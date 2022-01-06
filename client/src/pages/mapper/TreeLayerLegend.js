@@ -73,13 +73,23 @@ const LayerControl = ({ layer, label, color, checked, onChange }) => (
   />
 );
 
+/**
+ * Legend for listing and controlling the display of tree data layers in the Mapbox map.
+ * @param {mapboxgl.Map} map - Map to which the legend will be added.
+ * @param {string} title - String to display at the top of the control.
+ * @param {Array<{ layer, label, color }>} targets - Array of objects describing the layers to be
+ * listed in the legend.
+ * @param {boolean} defaultExpanded - Boolean controlling whether the legend is expanded when it's first
+ * added to the map.
+ * @returns {JSX.Element}
+ */
 export default function TreeLayerLegend({
-  map, title = "Legend", targets = [], expanded = false
+  map, title = "Legend", targets = [], defaultExpanded = false
 }) {
   const defaultVisibility = targets.reduce((result, target) => ({ ...result, [target.layer]: true }), {});
   const [layerVisibility, setLayerVisibility] = useState(defaultVisibility);
   const [isMapLoaded, setIsMapLoaded] = useState(map.loaded());
-  const [isExpanded, setIsExpanded] = useState(expanded);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   useEffect(() => {
     if (!isMapLoaded) {

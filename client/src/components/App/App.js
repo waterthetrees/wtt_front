@@ -14,7 +14,7 @@ import NotFound from '../../pages/notFound/NotFound';
 import RequireAuth from '../Auth/RequireAuth';
 import RedirectWithHash from '../Auth/RedirectWithHash';
 import Loading from '../Auth/Loading';
-import "../../styles/app.scss";
+import "../../styles/app.css";
 
 // Lazy-load the data page, so that we only load the large JSON files it uses if needed.
 const Data = React.lazy(() => import(/* webpackChunkName: "Data" */ '../../pages/data/Data'));
