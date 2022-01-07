@@ -1,4 +1,3 @@
-// for some reason, adding these html and body rules to global.css causes the tex to be too large
 html {
   box-sizing: border-box;
   font-size: 12px;
