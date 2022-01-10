@@ -15,7 +15,6 @@ import useAuthUtils from '@/components/Auth/useAuthUtils';
 import './TreeData.scss';
 
 const TreeContent = ({ currentTreeId, map }) => {
-  console.log('TreeContent currentTreeId', currentTreeId);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const { isAuthenticated } = useAuth0();
   const { data: treeData } = useTreeQuery({ id: currentTreeId });

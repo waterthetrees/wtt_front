@@ -35,7 +35,6 @@ export default function TreeLayer({
     });
 
     map.on('click', name, ({ features: [{ properties: { id } }] }) => {
-      console.log('TreeLayer map on click id', id);
       map.getCanvas().style.cursor = 'pointer';
       setCurrentTreeId(id);
     });
@@ -68,7 +67,6 @@ export default function TreeLayer({
   // Update the source layer when the data changes.
   useEffect(() => {
     if (data?.features?.length) {
-      console.log(data.feature, name);
       map.getSource(name).setData(data);
     }
   }, [map, data]);
