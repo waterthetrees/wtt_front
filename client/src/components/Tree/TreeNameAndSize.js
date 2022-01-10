@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { InputAdornment } from '@mui/material';
-import { FormAutocomplete, FormDecimalField } from '../Form';
-import { trees } from '../../data/dist/trees';
-import sortTreesBy from '../../data/sortTreesBy';
+import { FormAutocomplete, FormDecimalField } from '@/components/Form';
+import { trees } from '@/data/dist/trees';
+import sortTreesBy from '@/data/sortTreesBy';
 
 function getNames(treeList, name, firstItem) {
   // Add the names to a Set and then expand it to an array to ensure the lists of names are unique.

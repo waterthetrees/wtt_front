@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
-import { auth0 } from '../../util/config';
+import { auth0 } from '@/util/config';
 
 const { domain, clientId } = auth0;
 

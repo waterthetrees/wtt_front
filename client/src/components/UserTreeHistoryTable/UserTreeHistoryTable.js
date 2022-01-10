@@ -13,8 +13,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 
 function TableColumnNames({
   columnNames, orderBy, order, onRequestSort,
@@ -77,8 +76,8 @@ const TableColumns = ({ row }) => (
       return (
         <TableCell key={`col-${index2}`} align="center">
           {row[key]
-            ? <CheckBoxIcon />
-            : <CheckBoxOutlineBlankIcon />}
+            ? <CheckBox />
+            : <CheckBoxOutlineBlank />}
         </TableCell>
       );
     })}

@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useRef, useState } from 'react';
 import { Button } from '@mui/material';
-import { saveTimer } from '../../util/constants';
-import { useTreeDataMutation } from '../../api/queries';
+import { saveTimer } from '@/util/constants';
+import { useTreeDataMutation } from '@/api/queries';
 
 export default function TreeNotes({ currentTreeId, notes }) {
   const { isAuthenticated } = useAuth0();

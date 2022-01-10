@@ -2,7 +2,7 @@ import React from 'react';
 import {
   FormTextField,
   FormTreeGroup,
-} from '../../components/Form';
+} from '@/components/Form';
 
 export default function TreePlanter() {
   return (

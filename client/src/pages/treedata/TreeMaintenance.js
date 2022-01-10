@@ -4,9 +4,9 @@ import format from 'date-fns/format';
 import {
   Button, ToggleButton, ToggleButtonGroup, styled,
 } from '@mui/material';
-import { saveTimer } from '../../util/constants';
-import { useTreeHistoryMutation } from '../../api/queries';
-import useAuthUtils from '../../components/Auth/useAuthUtils';
+import { saveTimer } from '@/util/constants';
+import { useTreeHistoryMutation } from '@/api/queries';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 
 const treeImagesPath = 'assets/images/trees/';
 

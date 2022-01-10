@@ -4,8 +4,8 @@ import {
   FormControlLabel,
   Radio,
 } from '@mui/material';
-import { FormRadioGroup, FormTextField } from '../../components/Form';
-import FormScrollableDialog from '../../components/Form/FormScrollableDialog';
+import { FormRadioGroup, FormTextField } from '@/components/Form';
+import FormScrollableDialog from '@/components/Form/FormScrollableDialog';
 
 const removalReasons = [
   {

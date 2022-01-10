@@ -20,10 +20,12 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.1.1",
     "@mui/material": "^5.1.1",
-    "@watergis/mapbox-gl-legend": "^1.2.1",
     "clsx": "^1.1.1",
+    "compression": "^1.7.4",
     "date-fns": "2.25.0",
+    "express": "^4.17.1",
     "mapbox-gl": "^1.13.2",
+    "morgan": "^1.10.0",
     "react": "^17.0.2",
     "react-csv": "^2.0.3",
     "react-dom": "^17.0.2",
@@ -31,20 +33,16 @@
     "react-query": "^3.33.2",
     "react-router": "^6.1.1",
     "react-router-dom": "^6.1.1",
-    "react-tooltip": "^4.2.21"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
-    "@testing-library/dom": "^7.31.2",
-    "@testing-library/react": "^11.2.7",
     "babel-loader": "^8.2.3",
-    "chai": "^4.3.4",
-    "compression": "^1.7.4",
+    "babel-plugin-direct-import": "^1.0.0",
     "copy-webpack-plugin": "^9.1.0",
-    "cors": "^2.8.5",
     "css-loader": "^6.5.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -52,18 +50,13 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "express": "^4.17.1",
     "html-webpack-plugin": "^5.5.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.3",
     "mini-css-extract-plugin": "^2.4.4",
-    "morgan": "^1.10.0",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.14",
     "open-cli": "^7.0.1",
     "postcss": "^8.3.11",
     "postcss-scss": "^4.0.2",
-    "puppeteer": "^2.1.1",
     "sass-loader": "^12.3.0",
     "source-map-loader": "^3.0.0",
     "speed-measure-webpack-plugin": "^1.5.0",
@@ -74,8 +67,7 @@
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
     "webpack-config-utils": "^2.3.1",
-    "webpack-dev-server": "^4.5.0",
-    "winston": "^3.3.3"
+    "webpack-dev-server": "^4.5.0"
   },
   "scripts": {
     "lint": "npm run lint:js || npm run lint:css",
@@ -93,8 +85,8 @@
     "start:docker": "npm run watch & npm run start:nodemon",
     "start:nodemon": "nodemon server/index.js localserver",
     "start:dev": "webpack serve --env development",
-    "test": "jest",
-    "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
-    "test:watch": "jest --watch"
+    "test": "echo \"No test specified\"",
+    "test:coverage": "echo \"No test specified\" && exit 0 && jest --coverage && open-cli coverage/lcov-report/index.html",
+    "test:watch": "echo \"No test specified\""
   }
 }

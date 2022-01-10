@@ -9,12 +9,19 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
   const { ifProduction, ifNotProduction, ifAnalyze } = getIfUtils(env, ['production', 'analyze']);
-  // Save the config into a variable so we can wrap it with SpeedMeasurePlugin
+  // Save the config into a variable so that we can wrap it with SpeedMeasurePlugin
   // below if env.analyze is true
   const config = {
     mode: ifProduction() ? 'production' : 'development',
     watch: false,
     entry: './client/src/index.js',
+    resolve: {
+      alias: {
+        // Provide an alias to the root source directory, so everything can be imported with
+        // absolute paths, making it easier to move files around.
+        '@': path.resolve(__dirname, 'client/src'),
+      },
+    },
     output: {
       path: path.resolve(__dirname, 'client/public'),
       publicPath: '/',
@@ -61,7 +68,7 @@ module.exports = (env) => {
             { loader: 'style-loader' },
             { loader: 'css-loader' },
             { loader: 'sass-loader' },
-          ]
+          ],
         },
       ]),
     },
@@ -74,12 +81,12 @@ module.exports = (env) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
-// TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
-//  instances breaks SpeedMeasurePlugin in webpack 5
-//      new MiniCssExtractPlugin({
-//        filename: '[name].scss',
-//        chunkFilename: '[id].scss',
-//      }),
+      // TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
+      //  instances breaks SpeedMeasurePlugin in webpack 5
+      //      new MiniCssExtractPlugin({
+      //        filename: '[name].scss',
+      //        chunkFilename: '[id].scss',
+      //      }),
       new CopyPlugin({
         patterns: [
           {

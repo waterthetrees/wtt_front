@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTreeHistoryQuery } from '../../api/queries';
+import { useTreeHistoryQuery } from '@/api/queries';
 import TreeMaintenance from './TreeMaintenance';
 import TreeHistory from './TreeHistory';
-import { treeHealth } from '../../util/treeHealth';
+import { treeHealth } from '@/util/treeHealth';
 
 export default function TreeCare({
   currentTreeId, common, health,

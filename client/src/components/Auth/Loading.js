@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-import Footer from '../Footer';
-import treeIcon from '../../assets/images/addtree/tree16.svg';
+import Footer from '@/components/Footer';
+import treeIcon from '@/assets/images/addtree/tree16.svg';
 
 const Loading = () => (
   <Grid container

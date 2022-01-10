@@ -4,8 +4,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import cx from 'clsx';
 import AddTreeModal from './AddTreeModal';
-import { useUserMutation } from '../../api/queries';
-import useAuthUtils from '../../components/Auth/useAuthUtils';
+import { useUserMutation } from '@/api/queries';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { isMobile } from './utilities';
 import './AddTree.scss';
 
