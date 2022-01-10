@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import mapboxgl from 'mapbox-gl';
 import { useTreeDataMutation } from '../../api/queries';
@@ -6,13 +6,19 @@ import useAuthUtils from '../../components/Auth/useAuthUtils';
 import { treeHealth } from '../../util/treeHealth';
 import { saveTimer } from '../../util/constants';
 
-function addTreeMarker(newHealth, lng, lat, map) {
-  const newDot = document.createElement('div');
+function addTreeMarker(newHealth, lng, lat, color, map) {
+  // const newDot = document.createElement('div');
 
-  // The dot's fill and stroke are picked up from the colors specified on the treemap layer.
-  newDot.className = 'dot';
+  // // The dot's fill and stroke are picked up from the colors specified on the treemap layer.
+  // newDot.className = 'dot';
 
-  new mapboxgl.Marker(newDot)
+  // new mapboxgl.Marker(newDot, { "color": "#b40219" })
+  //   .setLngLat([lng, lat])
+  //   .addTo(map);
+  // console.log(newDot, lng, lat);
+  // return newDot;
+
+  return new mapboxgl.Marker({ color })
     .setLngLat([lng, lat])
     .addTo(map);
 }
@@ -26,7 +32,7 @@ const HealthDatalist = () => (
 );
 
 // Generate a style object with a linear gradient of solid colors for the health slider.
-const healthSliderStyle = (() => {
+const healthSliderStyle = () => {
   const healthPairs = treeHealth.getNameValuePairs();
   const count = healthPairs.length;
   const step = 100 / count;
@@ -35,14 +41,11 @@ const healthSliderStyle = (() => {
   // ['gray 0%, gray 10%', 'black 10%, black 20%', 'green 20%, green 30%', ...]
   const colors = healthPairs.map(([name, value]) => {
     const color = treeHealth.getColorByName(name, 'fill');
-
     return `${color} ${value * step}%, ${color} ${(value + 1) * step}%`;
   });
 
-  return {
-    backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
-  };
-})();
+  return colors;
+};
 
 export default function TreeHealthSlider({
   currentTreeId, healthNum, health, lat, lng, map,
@@ -55,7 +58,9 @@ export default function TreeHealthSlider({
 
   const handleOnChange = () => {
     const newHealth = treeHealth.getNameByValue(sliderRef.current.value);
-
+    console.log('newHealth, sliderRef.current.value', newHealth, sliderRef.current.value);
+    const colors = healthSliderStyle();
+    console.log('colors', colors);
     if (!isAuthenticated) {
       loginToCurrentPage();
 
@@ -64,12 +69,14 @@ export default function TreeHealthSlider({
 
     if (newHealth !== health) {
       const sendTreeData = {
-        idTree: currentTreeId,
+        id: currentTreeId,
         health: newHealth,
       };
 
       // Add DOM marker so vectortiles doesn't need to update until browser reload.
+
       addTreeMarker(newHealth, lng, lat, map);
+
       setHealthSaveAlert('SAVING');
       mutateTreeData.mutate(sendTreeData);
       setTimeout(() => setHealthSaveAlert(''), saveTimer);
@@ -93,7 +100,7 @@ export default function TreeHealthSlider({
           className="slider"
           list="healthSlider"
           id="healthSlider"
-          style={healthSliderStyle}
+          style={{ backgroundImage: `linear-gradient(to right, ${healthSliderStyle().join(', ')})` }}
           defaultValue={healthNum}
           onChange={handleOnChange}
         />

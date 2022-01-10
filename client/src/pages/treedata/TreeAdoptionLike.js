@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Grid, Checkbox, Tooltip } from '@mui/material';
+import {
+  Box, Grid, Checkbox, Tooltip,
+} from '@mui/material';
 import {
   Info as InfoIcon,
   Star as StarIcon,
@@ -16,8 +18,11 @@ import AdoptionInfoIconButton from '../../components/IconButtons/AdoptionInfoIco
 import AdoptionIcon from '../../components/Icons/AdoptionIcon/AdoptionIcon';
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 
-function Liked({ handleChange, idTree, user }) {
-  const { data: { liked, likedCount } } = useTreeLikesQuery({ idTree, email: user.email });
+function Liked({ handleChange, currentTreeId, user }) {
+  const { data: { liked, likedCount } } = useTreeLikesQuery({
+    id: currentTreeId,
+    email: user.email,
+  });
 
   return (
     <Grid item>
@@ -41,9 +46,12 @@ function Liked({ handleChange, idTree, user }) {
 }
 
 function Adopted({
-  handleChange, user, idTree, adoptionDirections, showAdoptionDirections,
+  handleChange, user, currentTreeId, adoptionDirections, showAdoptionDirections,
 }) {
-  const { data: { adopted, adoptedCount } } = useTreeAdoptionsQuery({ idTree, email: user.email });
+  const { data: { adopted, adoptedCount } } = useTreeAdoptionsQuery({
+    id: currentTreeId,
+    email: user.email,
+  });
 
   return (
     <Grid item>
@@ -76,7 +84,7 @@ function Adopted({
   );
 }
 
-export default function AdoptLikeCheckboxes({ idTree, common }) {
+export default function AdoptLikeCheckboxes({ currentTreeId, common }) {
   const { user } = useAuth0();
   const mutateTreeLikes = useTreeLikesMutation();
   const mutateTreeAdoptions = useTreeAdoptionsMutation();
@@ -85,13 +93,13 @@ export default function AdoptLikeCheckboxes({ idTree, common }) {
 
   const handleChange = (event) => {
     const sendTreeHistory = {
-      idTree,
+      id: currentTreeId,
       dateVisit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       [event.target.name]: event.target.checked,
       volunteer: user.nickname,
     };
     const sendTreeUser = {
-      idTree,
+      id: currentTreeId,
       common,
       nickname: user.nickname,
       email: user.email,
@@ -117,12 +125,12 @@ export default function AdoptLikeCheckboxes({ idTree, common }) {
     <>
       <Grid container alignItems="center" justifyContent="space-between">
         <Liked
-          idTree={idTree}
+          currentTreeId={currentTreeId}
           user={user}
           handleChange={handleChange}
         />
         <Adopted
-          idTree={idTree}
+          currentTreeId={currentTreeId}
           user={user}
           adoptionDirections={adoptionDirections}
           showAdoptionDirections={showAdoptionDirections}

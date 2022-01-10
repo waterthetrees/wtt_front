@@ -34,14 +34,15 @@ export default function TreeLayer({
       ...layer,
     });
 
-    map.on('click', name, ({ features: [{ properties: { id, id_tree } }] }) => {
+    map.on('click', name, ({ features: [{ properties: { id } }] }) => {
+      console.log('TreeLayer map on click id', id);
       map.getCanvas().style.cursor = 'pointer';
-      setCurrentTreeId(id || id_tree);
+      setCurrentTreeId(id);
     });
 
     map.on('mousemove', name, ({ features: [feature], lngLat: { lng } }) => {
       // The treemap call returns an id, while public.treedata has id_tree
-      const id = feature?.properties?.id || feature?.properties?.id_tree;
+      const id = feature?.properties?.id;
 
       if (id) {
         const coordinates = feature.geometry.coordinates.slice();
@@ -67,6 +68,7 @@ export default function TreeLayer({
   // Update the source layer when the data changes.
   useEffect(() => {
     if (data?.features?.length) {
+      console.log(data.feature, name);
       map.getSource(name).setData(data);
     }
   }, [map, data]);
