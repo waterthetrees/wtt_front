@@ -15,6 +15,13 @@ module.exports = {
   plugins: [
     'react',
   ],
+  settings: {
+    'import/resolver': {
+      alias: [
+        ['@', './client/src']
+      ]
+    }
+  },
   rules: {
     // we only want single quotes
     quotes: ['error', 'single'],
