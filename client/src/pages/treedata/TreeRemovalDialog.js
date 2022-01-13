@@ -43,7 +43,7 @@ export default function TreeRemoveDialog({
       reason: removalReasons[0].value,
       otherReason: '',
     },
-    mode: 'all'
+    mode: 'all',
   });
   const { setValue } = formMethods;
   const reasonRadioButtons = [
@@ -113,7 +113,7 @@ export default function TreeRemoveDialog({
       formMethods={formMethods}
       actions={[
         { cancel: 'Cancel' },
-        { confirm: 'Remove Tree' }
+        { confirm: 'Remove Tree' },
       ]}
     >
       <FormRadioGroup

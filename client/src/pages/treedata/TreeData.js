@@ -17,7 +17,7 @@ import './TreeData.scss';
 const TreeContent = ({ currentTreeId, map }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const { isAuthenticated } = useAuth0();
-  const { data: treeData } = useTreeQuery({ currentTreeId });
+  const { data: treeData } = useTreeQuery({ id: currentTreeId });
   const { loginToCurrentPage } = useAuthUtils();
 
   if (!treeData) {
@@ -33,7 +33,7 @@ const TreeContent = ({ currentTreeId, map }) => {
   };
 
   const {
-    idTree,
+    id,
     common,
     healthNum,
     address,
@@ -65,7 +65,7 @@ const TreeContent = ({ currentTreeId, map }) => {
 
       {showEditDialog && (
         <TreeEditDialog
-          idTree={idTree}
+          currentTreeId={id}
           treeData={treeData}
           showEditDialog={showEditDialog}
           setShowEditDialog={setShowEditDialog}
@@ -73,7 +73,7 @@ const TreeContent = ({ currentTreeId, map }) => {
       )}
 
       <AdoptLikeCheckboxes
-        idTree={idTree}
+        currentTreeId={id}
         common={common}
       />
 
@@ -90,13 +90,13 @@ const TreeContent = ({ currentTreeId, map }) => {
       )}
 
       <TreeNotes
-        currentTreeId={currentTreeId}
+        currentTreeId={id}
         notes={notes}
       />
 
       {!vacant && (
         <TreeCare
-          currentTreeId={currentTreeId}
+          currentTreeId={id}
           common={common}
           health={health}
         />
@@ -117,7 +117,7 @@ const TreeContent = ({ currentTreeId, map }) => {
 
       {!vacant && (
         <TreeRemoval
-          idTree={idTree}
+          currentTreeId={id}
           common={common}
           notes={notes}
         />

@@ -109,11 +109,11 @@ function Mapper() {
                 geolocater={geolocater}
               />
               <Slideout
-                button={
-                  <button className="slideout__btn slideout__btn__shape">
+                button={(
+                  <button type="button" className="slideout__btn slideout__btn__shape">
                     <div className="slideout__btn-txt slideout__btn-txt__shape">ADOPT</div>
                   </button>
-                }
+                )}
               >
                 <TreeAdoptionDirections onmap />
               </Slideout>

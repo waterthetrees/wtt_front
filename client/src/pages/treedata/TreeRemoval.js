@@ -6,7 +6,7 @@ import { useTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
 import TreeRemovalDialog from './TreeRemovalDialog';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 
-export default function TreeRemoval({ idTree, common, notes }) {
+export default function TreeRemoval({ currentTreeId, common, notes }) {
   const { user = {}, isAuthenticated } = useAuth0();
   const [showRemoveButton, setShowRemoveButton] = useState(true);
   const [showRemovalDialog, setShowRemovalDialog] = useState(false);
@@ -30,13 +30,13 @@ export default function TreeRemoval({ idTree, common, notes }) {
       const today = format(now, 'yyyy-MM-dd');
       const dateVisit = format(now, 'yyyy-MM-dd HH:mm:ss');
       const sendTreeHistory = {
-        idTree,
+        id: currentTreeId,
         date_visit: dateVisit,
         comment: `${common} was removed - ${comment}`,
         volunteer: user.nickname,
       };
       const sendTreeData = {
-        idTree,
+        id: currentTreeId,
         common: 'Vacant Site',
         scientific: '',
         genus: '',
@@ -48,7 +48,7 @@ export default function TreeRemoval({ idTree, common, notes }) {
       const newNote = `${common} was removed by ${user.nickname} ${today} - "${comment}"`;
 
       sendTreeData.notes = (notes && notes !== newNote)
-        ? `${notes ? notes + '\n' : ''}${newNote}`
+        ? `${notes ? `${notes}\n` : ''}${newNote}`
         : newNote;
 
       mutateHistory.mutate(sendTreeHistory);

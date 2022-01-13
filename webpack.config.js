@@ -20,7 +20,7 @@ module.exports = (env) => {
         // Provide an alias to the root source directory, so everything can be imported with
         // absolute paths, making it easier to move files around.
         '@': path.resolve(__dirname, 'client/src'),
-      }
+      },
     },
     output: {
       path: path.resolve(__dirname, 'client/public'),
@@ -68,7 +68,7 @@ module.exports = (env) => {
             { loader: 'style-loader' },
             { loader: 'css-loader' },
             { loader: 'sass-loader' },
-          ]
+          ],
         },
       ]),
     },
@@ -81,12 +81,12 @@ module.exports = (env) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
-// TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
-//  instances breaks SpeedMeasurePlugin in webpack 5
-//      new MiniCssExtractPlugin({
-//        filename: '[name].scss',
-//        chunkFilename: '[id].scss',
-//      }),
+      // TODO: commenting this out for now, as it doesn't extract anything and having 2 of these plugin
+      //  instances breaks SpeedMeasurePlugin in webpack 5
+      //      new MiniCssExtractPlugin({
+      //        filename: '[name].scss',
+      //        chunkFilename: '[id].scss',
+      //      }),
       new CopyPlugin({
         patterns: [
           {
