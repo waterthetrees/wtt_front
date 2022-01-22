@@ -28,6 +28,7 @@ export default function Slideout({
           anchor={anchor}
           open={open}
           onClose={closeSlideout}
+          sx={{ '& .MuiDrawer-paper': { py: 5 } }}
         >
           {children}
         </Drawer>

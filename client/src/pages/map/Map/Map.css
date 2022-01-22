@@ -1,0 +1,41 @@
+/* don't show an outline when the map is clicked on and gets focus */
+.mapboxgl-canvas:focus-visible {
+  outline: none;
+}
+
+/* shift the top map control areas down to account for the header, using rem in case the overall
+   font size changes */
+.mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-right {
+  top: 3.7rem
+}
+
+/* an empty button gets inserted in the attribution element for some reason, so hide it */
+.mapboxgl-ctrl-attrib-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1.25em 1.5em 1em 1.5em;
+}
+
+/* annoyingly, the color of the popup tip has to be set separately for each side.  the tip can also
+   appear at the top-right, bottom=left, etc., which are handled by the first two selectors. */
+[class*="mapboxgl-popup-anchor-top"] .mapboxgl-popup-tip {
+  border-bottom-color: black;
+}
+
+[class*="mapboxgl-popup-anchor-bottom"] .mapboxgl-popup-tip {
+  border-top-color: black;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: black;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: black;
+}
