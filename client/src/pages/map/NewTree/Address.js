@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MenuItem } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
 import {
   FormDecimalField,
   FormTextField,
   FormSelect,
-  FormTreeGroup,
   FormRadio,
   FormRadioGroup,
 } from '@/components/Form';
+import Section from '../Section';
+import { useNewTree } from './useNewTree';
 
 // Add keys to each item in the map() call below.
 const stateMenuItems = [
@@ -68,9 +70,17 @@ const stateMenuItems = [
   <MenuItem value="WY">Wyoming</MenuItem>,
 ].map((element) => React.cloneElement(element, { key: element.props.value }));
 
-export default function TreeAddress() {
+export default function Address() {
+  const { newTreeState } = useNewTree();
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    setValue('lng', newTreeState.coords[0]);
+    setValue('lat', newTreeState.coords[1]);
+  }, [newTreeState.coords, setValue]);
+
   return (
-    <FormTreeGroup title="Location">
+    <Section title="Location">
       <FormTextField
         name="address"
         label="Address"
@@ -123,6 +133,6 @@ export default function TreeAddress() {
           label="Private"
         />
       </FormRadioGroup>
-    </FormTreeGroup>
+    </Section>
   );
 }

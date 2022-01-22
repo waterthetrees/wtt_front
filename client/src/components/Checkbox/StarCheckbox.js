@@ -1,9 +1,9 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
-import { Star, StarBorder } from '@mui/icons-material';
+import { Like, Liked } from '@/components/Icons';
 
-const Icon = <StarBorder fontSize="large" />;
-const CheckedIcon = <Star fontSize="large" />;
+const Icon = <Like fontSize="large" />;
+const CheckedIcon = <Liked fontSize="large" />;
 
 // The Tooltip that wraps this will need a ref to the component.
 export default React.forwardRef((props, ref) => (
@@ -14,12 +14,6 @@ export default React.forwardRef((props, ref) => (
     sx={{
       '&:hover': {
         backgroundColor: 'rgba(255, 255, 0, 0.06)',
-      },
-      '&.Mui-checked': {
-        color: '#f7c631',
-        '&:hover': {
-          backgroundColor: 'rgba(255, 255, 0, 0.06)',
-        },
       },
     }}
     {...props}
