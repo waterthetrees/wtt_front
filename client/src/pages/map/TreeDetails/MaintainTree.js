@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Park } from '@mui/icons-material';
 import format from 'date-fns/format';
 import { useTreeHistoryMutation } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import MaintainTreeDialog from './MaintainTreeDialog';
+
+const Container = (props) => (
+  <Box
+    sx={{
+      pt: 3,
+      mt: 1,
+      mb: 3,
+      borderTop: 1,
+      borderTopColor: 'divider',
+      display: 'flex',
+      justifyContent: 'space-between',
+    }}
+    {...props}
+  />
+);
 
 export default function MaintainTree({ currentTreeId }) {
   const { user = {}, isAuthenticated } = useAuth0();
@@ -47,7 +62,7 @@ export default function MaintainTree({ currentTreeId }) {
   };
 
   return (
-    <>
+    <Container>
       <Button
         variant="outlined"
         color="success"
@@ -64,6 +79,6 @@ export default function MaintainTree({ currentTreeId }) {
           onCancel={closeDialog}
         />
       )}
-    </>
+    </Container>
   );
 }

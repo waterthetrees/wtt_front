@@ -7,9 +7,9 @@ export default function Section({ children, title }) {
       sx={{
         mt: 2,
         mb: 4,
-        '&:last-of-type': {
+        '&:last-child': {
           mb: 2,
-        }
+        },
       }}
     >
       <h3>{title}</h3>

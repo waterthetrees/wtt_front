@@ -30,8 +30,12 @@ const queryClient = new QueryClient({
   },
 });
 
-// Create a default MUI theme so that any child can access it for styling.
-const theme = createTheme();
+// Create an MUI theme so that any child can access it for styling via the hooks.
+const theme = createTheme({
+  typography: {
+    fontFamily: 'inherit',
+  },
+});
 
 function App() {
   return (

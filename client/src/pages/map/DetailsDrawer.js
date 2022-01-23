@@ -23,12 +23,14 @@ export default function DetailsDrawer({
         width: width,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
+          // Add padding at the top to account for the header.
+          paddingTop: '3.5rem',
           width: width,
           boxShadow: '-5px 0px 15px -3px rgba(0, 0, 0, 0.15)',
         },
       }}
     >
-      <DialogTitle sx={{ py: 1, mt: 5 }}>
+      <DialogTitle sx={{ py: 1 }}>
         <Box display="flex" alignItems="center">
           <Box flexGrow={1}>{title}</Box>
           <IconButton

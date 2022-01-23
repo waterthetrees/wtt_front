@@ -1,6 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getData, postData, putData } from './apiUtils';
 
+/**
+ * Create a custom `useQuery` hook to call a given WTT server API method.
+ *
+ * @param {string} api - The key that the fetching function uses to look up an API's URL in the
+ * `apiEndpoints` constant.
+ * @param {object} [options] - An optional config object.
+ * @param {object} [options.defaultData] - An optional object that supplies defaults for the API
+ * call.  Any data supplied to the hook will be merged on top of these defaults.
+ * @param {object} [options.defaultOptions] - An optional config object that is passed to the
+ * `useQuery` function with each call to the hook.
+ * @param {function(string, object, function, object)} [options.preProcessor] - An optional function
+ * that can modify the custom hook's parameters before they're passed to `useQuery`.
+ * @param {function(*)} [options.postProcessor] - An optional function that can modify the results of the
+ * API call before they're returned by the hook.
+ * @returns {object} - See the [`useQuery`](https://react-query.tanstack.com/reference/useQuery)
+ * documentation for details.
+ */
 function createUseQuery(api, options = {}) {
   const { defaultData = {}, defaultOptions = {}, preProcessor, postProcessor } = options;
   const getter = typeof postProcessor === 'function'
@@ -19,6 +36,16 @@ function createUseQuery(api, options = {}) {
   };
 }
 
+/**
+ * Create a custom `useMutation` hook to send data to a WTT API method.  By default, the hook will
+ * invalidate any queries that are pending for the API on success, and log any errors.
+ *
+ * @param {string|[string]} apiList - One or more APIs whose in-flight queries should be invalidated
+ * by this mutation.  The first API listed is the one that will be called by the hook.
+ * @param {string} [method] - The HTTP method to use for the call.  Defaults to `'POST'`.
+ * @returns {object} - See the [`useMutation`](https://react-query.tanstack.com/reference/useMutation)
+ * documentation for details.
+ */
 function createUseMutation(apiList, method) {
   const apis = Array.isArray(apiList)
     ? apiList
@@ -37,6 +64,8 @@ function createUseMutation(apiList, method) {
   };
 }
 
+// Custom postProcessor to convert the response from calls to `/cities` and `/countries` into arrays
+// of GeoJSON features.
 function processTreeCounts(treeCounts) {
   return treeCounts.map(({ city, country, count, countryCountTrees, lat, lng }) => {
     const name = city || country;
@@ -57,7 +86,8 @@ function processTreeCounts(treeCounts) {
   });
 }
 
-// Create custom useQuery() hooks for the API.
+// Create custom `useQuery` hooks for GET calls to the WTT API.  These wrap the API method names and
+// default parameters so they don't have to be repeated with each use of a hook.
 export const useUserAdoptedQuery = createUseQuery('usercounts', { defaultData: { request: 'adopted' }});
 export const useUserLikedQuery = createUseQuery('usercounts', { defaultData: { request: 'liked' } });
 export const useUserPlantedQuery = createUseQuery('usercounts', { defaultData: { request: 'planted' } });
@@ -103,7 +133,9 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
   }
 });
 
-// Create custom useMutation() hooks for the API.
+// Create custom `useMutation` hooks for the POST/PUT calls to the WTT API.  These will
+// automatically invalidate related in-flight queries, so that they'll be retried after the mutation
+// to get the latest data.
 export const useUserMutation = createUseMutation('users');
 export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
 export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap']);

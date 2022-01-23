@@ -77,24 +77,9 @@ export default function TreeDetailsPanel({
             />
 
             {!vacant && (
-              <Box
-                sx={{
-                  pt: 3,
-                  mt: 1,
-                  mb: 3,
-                  borderTop: '1px solid #ddd',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <MaintainTree
-                  currentTreeId={currentTreeId}
-                />
-                <RemoveTree
-                  currentTreeData={currentTreeData}
-                  currentTreeId={currentTreeId}
-                />
-              </Box>
+              <MaintainTree
+                currentTreeId={currentTreeId}
+              />
             )}
 
             {!vacant && (
@@ -115,6 +100,13 @@ export default function TreeDetailsPanel({
             <Info
               currentTreeData={currentTreeData}
             />
+
+            {!vacant && (
+              <RemoveTree
+                currentTreeData={currentTreeData}
+                currentTreeId={currentTreeId}
+              />
+            )}
           </>
         )
         : noDataChild}

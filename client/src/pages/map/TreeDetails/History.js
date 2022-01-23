@@ -1,24 +1,11 @@
 import React from 'react';
-import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import format from 'date-fns/format';
 import { useTreeHistoryQuery } from '@/api/queries';
 import { maintenanceActions } from '@/util/constants';
 import { Liked, Adopted } from '@/components/Icons';
 import Section from '../Section';
-
-const HistoryTable = ({ rows }) => (
-  <TableContainer>
-    <Table size="small">
-      <TableBody>
-        {rows.map((cells, i) => (
-          <TableRow key={i}>
-            {cells}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
+import DetailsTable from './DetailsTable';
 
 const HistoryItem = ({ item }) => {
   const {
@@ -34,31 +21,33 @@ const HistoryItem = ({ item }) => {
   }, []);
 
   return (
-    <TableCell>
-      <p>
-        <strong>{isoDate}: {volunteer}</strong>
-      </p>
-      {actions.length > 0
-        && (
-          <p>
-            <strong>Maintenance:&nbsp;</strong>
-            {actions.join(', ')}
-          </p>
-        )}
-      {comment
-        && (
-          <p>"{comment}"</p>
-        )}
-      {(liked || adopted)
-        && (
-          <p>
-            {liked
-              && <span><Liked /> liked &nbsp;</span>}
-            {adopted
-              && <span><Adopted /> adopted</span>}
-          </p>
-        )}
-    </TableCell>
+    <TableRow>
+      <TableCell>
+        <p>
+          <strong>{isoDate}: {volunteer}</strong>
+        </p>
+        {actions.length > 0
+          && (
+            <p>
+              <strong>Maintenance:&nbsp;</strong>
+              {actions.join(', ')}
+            </p>
+          )}
+        {comment
+          && (
+            <p>"{comment}"</p>
+          )}
+        {(liked || adopted)
+          && (
+            <p>
+              {liked
+                && <span><Liked /> liked &nbsp;</span>}
+              {adopted
+                && <span><Adopted /> adopted</span>}
+            </p>
+          )}
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -73,14 +62,14 @@ export default function History({ currentTreeId }) {
     <Section
       title="History"
     >
-      <HistoryTable
-        rows={history.map((item, i) => (
+      <DetailsTable>
+        {history.map((item) => (
           <HistoryItem
-            key={i}
+            key={item.dateVisit}
             item={item}
           />
         ))}
-      />
+      </DetailsTable>
     </Section>
   );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  Table, TableBody, TableRow, TableCell, TableContainer, Link, Box,
+  TableRow, TableCell, Link, Box,
 } from '@mui/material';
 import Section from '../Section';
+import DetailsTable from './DetailsTable';
 
 const infoKeys = [
   'address',
@@ -24,7 +25,7 @@ export default function Info({ currentTreeData }) {
     const value = currentTreeData[key];
 
     if (value) {
-      result.push([label, value]);
+      result.push([label, value, key]);
     }
 
     return result;
@@ -34,18 +35,14 @@ export default function Info({ currentTreeData }) {
     <Section
       title="Info"
     >
-      <TableContainer>
-        <Table size="small">
-          <TableBody>
-            {labelValues.map(([label, value]) => (
-              <TableRow key={label}>
-                <TableCell sx={{ fontWeight: 'bold' }}>{label}</TableCell>
-                <TableCell>{value}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DetailsTable>
+        {labelValues.map(([label, value, key]) => (
+          <TableRow key={key}>
+            <TableCell sx={{ fontWeight: 'bold' }}>{label}</TableCell>
+            <TableCell>{value}</TableCell>
+          </TableRow>
+        ))}
+      </DetailsTable>
       <Box sx={{ my: 1, textAlign: 'right' }}>
         <Link
           href="https://standards.opencouncildata.org/#/trees"

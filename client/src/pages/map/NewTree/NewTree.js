@@ -31,7 +31,7 @@ export default function NewTree({ map, geolocater }) {
   const [plantButtonText, setPlantButtonText] = useState('PLANT');
   const mutateTreeData = useCreateTreeDataMutation();
   const {
-    newTreeState, setCoords: setNewTreeCoords, openPanel, reset,
+    newTreeState, setCoords: setNewTreeCoords, openPanel, cancel, reset,
   } = useNewTree();
 
   const openNewTreePanel = () => openPanel();
@@ -69,6 +69,7 @@ export default function NewTree({ map, geolocater }) {
       }
     } else {
       setPlantButtonText('PLANT');
+      cancel();
     }
 
     setPlantMarkerOnMap(!plantMarkerOnMap);
@@ -129,7 +130,6 @@ export default function NewTree({ map, geolocater }) {
       if (!plantMarkerOnMap) return;
       setCoords(coordinates);
       handleAddMarker(null, coordinates);
-      map.off('click', handleOnPlantClick);
     });
   }, [plantMarkerOnMap]);
 

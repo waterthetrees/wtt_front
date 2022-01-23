@@ -3,9 +3,10 @@
   outline: none;
 }
 
-/* shift the top map control areas down to account for the header */
+/* shift the top map control areas down to account for the header, using rem in case the overall
+   font size changes */
 .mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-right {
-  top: 41px;
+  top: 3.7rem
 }
 
 /* an empty button gets inserted in the attribution element for some reason, so hide it */

@@ -63,7 +63,7 @@ export default function RemoveTree({ currentTreeId, currentTreeData: { common, n
         startIcon={<RemoveCircle />}
         onClick={handleClick}
       >
-        Remove
+        Remove Tree
       </Button>
       {isDialogOpen && (
         <RemoveTreeDialog
