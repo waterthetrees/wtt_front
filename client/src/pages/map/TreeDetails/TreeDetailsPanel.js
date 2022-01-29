@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Box } from '@mui/material';
+import { Alert } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import CoreData from './CoreData';

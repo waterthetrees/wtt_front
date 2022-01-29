@@ -5,6 +5,7 @@ import TreeAdoptionDirections from './AdoptionDirections';
 
 const Label = styled('div')`
   color: white;
+  font-size: .9rem;
   font-weight: bold;
   width: 100%;
   left: 0;

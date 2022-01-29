@@ -20,3 +20,5 @@ const StyledTooltip = ({ children, title, ...props }) => (
 
 export const TooltipTop = (props) => (<StyledTooltip placement="top" {...props} />);
 export const TooltipBottom = (props) => (<StyledTooltip placement="bottom" {...props} />);
+export const TooltipLeft = (props) => (<StyledTooltip placement="left" {...props} />);
+export const TooltipRight = (props) => (<StyledTooltip placement="left" {...props} />);

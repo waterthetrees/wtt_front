@@ -75,8 +75,8 @@ export default function Address() {
   const { setValue } = useFormContext();
 
   useEffect(() => {
-    setValue('lng', newTreeState.coords[0]);
-    setValue('lat', newTreeState.coords[1]);
+    setValue('lng', newTreeState.coords.lng);
+    setValue('lat', newTreeState.coords.lat);
   }, [newTreeState.coords, setValue]);
 
   return (

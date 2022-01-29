@@ -70,7 +70,6 @@ export default function Map({
 }) {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const [geolocater, setGeolocater] = useState(false);
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
 
@@ -79,6 +78,12 @@ export default function Map({
 
   useEffect(() => {
     selectionEnabledRef.current = selectionEnabled;
+
+    if (!selectionEnabled) {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+      currentFeature.current = null;
+    }
   }, [selectionEnabled]);
 
   useEffect(() => {
@@ -91,7 +96,10 @@ export default function Map({
         // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
         hash: true,
       });
-      const geolocate = new mapboxgl.GeolocateControl({
+
+      // Add the navigation and geolocate controls to the map.
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
+      mapboxMap.addControl(new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
@@ -99,11 +107,7 @@ export default function Map({
         showUserHeading: true,
         auto: true,
         fitBoundsOptions: { zoom: 20 },
-      });
-
-      // Add the geolocate and navigation controls to the map.
-      mapboxMap.addControl(new mapboxgl.NavigationControl());
-      mapboxMap.addControl(geolocate);
+      }));
 
       mapboxMap.on('load', () => {
         // For some reason, calling setIsMapLoaded() before onLoad() will cause errors, so keep them
@@ -183,7 +187,6 @@ export default function Map({
       });
 
       setMap(mapboxMap);
-      setGeolocater(geolocate);
     }
 
     // Somewhat mysteriously, returning this noop avoids the React warning about not being able to
@@ -206,7 +209,6 @@ export default function Map({
       >
         <NewTree
           map={map}
-          geolocater={geolocater}
         />
       </MapboxControlPortal>
       <MapboxControlPortal
