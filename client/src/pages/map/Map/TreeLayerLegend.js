@@ -36,7 +36,9 @@ const Dot = styled('div')(({ color, filled }) => `
   display: inline-block;
 `);
 
-const DotCheckbox = ({ name, color, checked, onChange }) => (
+const DotCheckbox = ({
+  name, color, checked, onChange,
+}) => (
   <Checkbox
     name={name}
     checked={checked}
@@ -46,20 +48,22 @@ const DotCheckbox = ({ name, color, checked, onChange }) => (
     // https://github.com/emotion-js/emotion/issues/2193
     checkedIcon={<Dot color={color} filled={1} />}
     onChange={onChange}
-    sx={{ py: .5, pr: .5 }}
+    sx={{ py: 0.5, pr: 0.5 }}
   />
 );
 
-const LayerControl = ({ layer, label, color, checked, onChange }) => (
+const LayerControl = ({
+  layer, label, color, checked, onChange,
+}) => (
   <FormControlLabel
-    control={
+    control={(
       <DotCheckbox
         name={layer}
         checked={checked}
         color={color}
         onChange={onChange}
       />
-    }
+    )}
     label={label}
     sx={{
       mx: 0,
@@ -67,14 +71,14 @@ const LayerControl = ({ layer, label, color, checked, onChange }) => (
       pr: 1,
       userSelect: 'none',
       '&:hover': {
-        backgroundColor: '#eee'
-      }
+        backgroundColor: '#eee',
+      },
     }}
   />
 );
 
 export default function TreeLayerLegend({
-  map, title, layers, expanded = false
+  map, title, layers, expanded = false,
 }) {
   const defaultVisibility = layers.reduce((result, { id }) => ({ ...result, [id]: true }), {});
   const [layerVisibility, setLayerVisibility] = useState(defaultVisibility);
@@ -91,7 +95,7 @@ export default function TreeLayerLegend({
         // is added, even though the layer is visible by default.  So once the map is loaded, go
         // through all the layers and change undefined to visible.
         // https://github.com/mapbox/mapbox-gl-js/issues/8733
-        for (let { id } of layers) {
+        for (const { id } of layers) {
           if (map.getLayoutProperty(id, 'visibility') === undefined) {
             map.setLayoutProperty(id, 'visibility', 'visible');
           }
@@ -103,7 +107,7 @@ export default function TreeLayerLegend({
   }, [map, isMapLoaded]);
 
   useEffect(() => {
-    for (let { id } of layers) {
+    for (const { id } of layers) {
       if (map.getLayer(id)) {
         const currentVisible = map.getLayoutProperty(id, 'visibility') === 'visible';
         const nextVisible = layerVisibility[id];
@@ -134,7 +138,7 @@ export default function TreeLayerLegend({
           >
             <FormLabel
               component="legend"
-              sx={{ mb: .25 }}
+              sx={{ mb: 0.25 }}
             >
               {title}
               <CloseButton onClick={handleExpandClick} />
@@ -148,17 +152,19 @@ export default function TreeLayerLegend({
                   color={color}
                   checked={layerVisibility[id]}
                   onChange={handleChange}
-                />))}
+                />
+              ))}
             </FormGroup>
           </FormControl>
         </Box>
       ) : (
         <button
+          type="button"
           title="Show map legend"
           onClick={handleExpandClick}
         >
           <FormatListBulleted />
         </button>
       )
-  )
+  );
 }

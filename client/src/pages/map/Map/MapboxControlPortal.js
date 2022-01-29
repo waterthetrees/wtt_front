@@ -37,7 +37,7 @@ export class MapboxControlPortal extends Component {
     this.container = document.createElement('div');
     this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
 
-    return this.container
+    return this.container;
   }
 
   onRemove() {

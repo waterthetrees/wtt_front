@@ -31,8 +31,8 @@ export default function NewTreePanel({ Container, drawerWidth }) {
     state: '',
     zip: '',
     neighborhood: '',
-    lng: newTreeState.coords[0],
-    lat: newTreeState.coords[1],
+    lng: newTreeState.coords.lng,
+    lat: newTreeState.coords.lat,
     owner: 'public',
     who: '',
     volunteer: nickname || name || email || 'volunteer',
@@ -64,7 +64,7 @@ export default function NewTreePanel({ Container, drawerWidth }) {
             Cancel
           </Button>
           <Button onClick={handleFormSubmit}>
-            Add New Tree
+            Plant New Tree
           </Button>
         </>
       )}

@@ -4,17 +4,19 @@ import {
 } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import DetailsDrawer from './DetailsDrawer';
 import Map from './Map/Map';
 import TreeDetailsPanel from './TreeDetails/TreeDetailsPanel';
 import NewTreePanel from './NewTree/NewTreePanel';
 import { useNewTree, NewTreeProvider } from './NewTree/useNewTree';
-import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 
 const drawerWidth = 350;
 
 const Container = styled('main', { shouldForwardProp: (prop) => prop.indexOf('drawer') !== 0 })(
-  ({ theme, drawerEnabled, drawerOpen, drawerWidth }) => ({
+  ({
+    theme, drawerEnabled, drawerOpen, drawerWidth, // eslint-disable-line no-shadow
+  }) => ({
     flexGrow: 1,
     // We need to use vh here, as height: 100% leaves the map at 0 height.
     height: '100vh',
@@ -35,8 +37,6 @@ const Container = styled('main', { shouldForwardProp: (prop) => prop.indexOf('dr
     }),
   }),
 );
-
-// TODO: fix AddTree, which seems to be trying to remove the geolocater before it's added, and adds two geolocaters
 
 function MapLayout() {
   const [map, setMap] = useState(null);
@@ -61,22 +61,25 @@ function MapLayout() {
     if (event.target === mapContainerRef.current && map) {
       // If the transition has ended and the right margin is < 0, then the drawer just opened.
       const drawerOpened = parseInt(getComputedStyle(event.target).marginRight, 10) < 0;
+      // Get the location of the selected tree or the new tree to plant, if any.
+      const { lng, lat } = (currentTreeData || newTreeState.coords || {});
       // Resizing the map will cause it to shift horizontally by half the drawerWidth.  We need to
-      // shift it back by that amount so the user doesn't see the map move at all.
+      // shift it back by that amount so the user doesn't see the map move at all.  This delta is
+      // not a const, as we'll adjust it below to keep a selected location in view, if necessary.
       let deltaX = (drawerWidth / 2) * (drawerOpened ? 1 : -1);
 
-      if (currentTreeData) {
-        const { lng, lat } = currentTreeData;
-        // Figure out where the selected tree is in screen space.
+      if (Number.isFinite(lng)) {
+        // Figure out where the selected location is in screen space.
         const treePoint = map.project([lng, lat]);
-        // If the tree is closer to the drawer than this, we'll shift the map so it's farther away.
-        const minDrawerOffset = 50;
+        // If the location is closer to the drawer than this, we'll shift the map so it stays
+        // visible.
+        const minDrawerOffset = 60;
         const newMapWidth = mapContainerRef.current.offsetWidth;
         const adjustment = Math.round((treePoint.x + minDrawerOffset) - newMapWidth);
 
-        // Ignore negative adjustments, as those trees are > 50px away from the drawer.  Positive
-        // adjustments will pan the map to the right, moving the selected tree out from under the
-        // newly opened drawer.
+        // Ignore negative adjustments, as those locations are > than the offset away from the
+        // drawer. Positive adjustments will pan the map to the right, moving the selected location
+        // out from under the newly opened drawer.
         deltaX += Math.max(0, adjustment);
       }
 
@@ -98,6 +101,10 @@ function MapLayout() {
       setMapSelectionEnabled(true);
     }
   }, [newTreeState.isPanelOpen]);
+
+  useEffect(() => {
+    setMapSelectionEnabled(!newTreeState.isDragging);
+  }, [newTreeState.isDragging]);
 
   return (
     <Box sx={{ display: 'flex' }}>
