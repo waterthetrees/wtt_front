@@ -17,6 +17,7 @@ const ignoreCommonPattern = new RegExp([
   'squirrel',
   'moss',
   'red-eared slider',
+  'American black bear',
   '-cap',
 ].join('|'), 'i');
 // We need to ignore 'fish' by matching the full scientific name, as some actual trees have 'fish'
@@ -48,18 +49,18 @@ function ignoreError(func, code) {
 function toSource(obj) {
   // Strip the quotes off stringified object keys.
   return JSON.stringify(obj, null, 2)
-    .replace(/^[\t ]*"[^:\n\r]+(?<!\\)":/gm, match => match.replace(/"/g, ""));
+    .replace(/^[\t ]*"[^:\n\r]+(?<!\\)":/gm, (match) => match.replace(/"/g, ''));
 }
 
 function toTitleCase(string) {
-  return string.replace(/([^\W_]+[^\s-]*) */g, word => word.charAt(0).toUpperCase() +
-    word.slice(1));
+  return string.replace(/([^\W_]+[^\s-]*) */g, (word) => word.charAt(0).toUpperCase()
+    + word.slice(1));
 }
 
 function createTreeSorter(name) {
   const index = { common: 0, scientific: 1, genus: 2 }[name];
 
-  return function(a, b) {
+  return (a, b) => {
     const aName = a.sort[index];
     const bName = b.sort[index];
 
@@ -70,7 +71,7 @@ function createTreeSorter(name) {
     } else {
       return 1;
     }
-  }
+  };
 }
 
 const trees = [];
@@ -78,12 +79,12 @@ const processedTrees = {};
 
 // Ignore the Alameda file, since it doesn't include trees.
 const jsonFiles = fs.readdirSync(dataPath)
-  .filter(filename => jsonPattern.test(filename) && !ignoreFilePattern.test(filename));
+  .filter((filename) => jsonPattern.test(filename) && !ignoreFilePattern.test(filename));
 
 ignoreError(() => fs.rmSync(outputPath, { recursive: true }), 'ENOENT');
 ignoreError(() => fs.mkdirSync(outputPath), 'EEXIST');
 
-jsonFiles.forEach(filename => {
+jsonFiles.forEach((filename) => {
   const { data } = require(path.resolve(dataPath, filename));
   const name = filename.match(jsonPattern)[1];
 
@@ -94,7 +95,7 @@ jsonFiles.forEach(filename => {
   data.forEach(({ common, scientific, genus }) => {
     const commonTitleCase = toTitleCase(common);
     const lcNames = [common, scientific, genus]
-      .map(name => name.toLowerCase().replace(/[^\w\s]/g, ''));
+      .map((name) => name.toLowerCase().replace(/[^\w\s]/g, ''));
     const key = lcNames.join('');
 
     // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
