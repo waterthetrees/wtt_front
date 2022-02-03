@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useDebouncedCallback } from 'use-debounce';
 import { useTreeDataMutation } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { treeHealth } from '@/util/treeHealth';
 import Section from '../Section';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
 
 const HealthDatalist = () => (
   <datalist id="healthSlider" aria-label="healthSlider">
@@ -37,23 +37,31 @@ const healthSliderStyle = (() => {
 })();
 
 export default function Health({ currentTreeData: { id, healthNum } }) {
-  const [value, setValue] = useState(healthNum);
-  const [health, setHealth] = useState(treeHealth.getNameByValue(value));
+  // Default the value to a normalized healthNum value, since many trees have bad healthNum data in
+  // the vector tiles.
+  const [value, setValue] = useState(treeHealth.getNormalizedValue(healthNum));
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const mutateTreeData = useTreeDataMutation();
 
-  const saveHealth = useDebouncedCallback(() => mutateTreeData.mutate({ id, health }), 750);
+  const saveHealth = useDebouncedCallback(() => {
+    mutateTreeData.mutate({ id, health: treeHealth.getNameByValue(value) });
+  }, 750);
+
+  useEffect(() => {
+    if (Number.isInteger(healthNum) && healthNum !== value) {
+      // The healthNum prop is valid and different from our state, so update the value state to it.
+      setValue(healthNum);
+    }
+  }, [healthNum]);
 
   const handleOnChange = (event) => {
     if (!isAuthenticated) {
       loginToCurrentPage();
     } else {
-      const newValue = event.target.value;
-      const newHealth = treeHealth.getNameByValue(newValue);
-
-      setHealth(newHealth);
-      setValue(newValue);
+      // Set the local numeric health value in state immediately, but wait 750ms before sending the
+      // change to the backend, in case the user is in the middle of dragging the slider.
+      setValue(event.target.value);
       saveHealth();
     }
   };
@@ -79,7 +87,7 @@ export default function Health({ currentTreeData: { id, healthNum } }) {
       />
       <HealthDatalist />
       <Box sx={{ textAlign: 'center' }}>
-        <h4>{health}</h4>
+        <h4>{treeHealth.getNameByValue(value)}</h4>
       </Box>
     </Section>
   );

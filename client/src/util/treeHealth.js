@@ -25,11 +25,20 @@ healthByName.default = healthByName.good;
 
 export const treeHealth = {
   getNameByValue(value) {
+    const index = this.getNormalizedValue(value);
+
+    return healthInfo[index][0];
+  },
+  getNormalizedValue(value) {
     const index = parseInt(value, 10);
 
+    // If value is out of bounds for health, return the default value.
     return (index >= 0 && index <= maxValue)
-      ? healthInfo[index][0]
-      : 'good';
+      ? index
+      : healthByName.default.value;
+  },
+  getValueByName(name) {
+    return (healthByName[name] || healthByName.default).value;
   },
   getNameValuePairs() {
     return healthInfo.map(([name], value) => [name, value]);
