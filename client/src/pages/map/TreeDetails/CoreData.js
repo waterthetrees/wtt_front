@@ -3,14 +3,16 @@ import React from 'react';
 import { Link } from '@mui/material';
 import format from 'date-fns/format';
 
-export default function TreeHeader({
+export default function CoreData({
   treeData, vacant,
 }) {
   const {
     common, scientific, genus, datePlanted, dbh, height,
   } = treeData;
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
-  const planted = format(new Date(datePlanted), 'MMMM d, yyyy');
+  // format() will throw an exception if datePlanted is undefined, so check it first.
+  const planted = datePlanted && format(new Date(datePlanted), 'MMMM d, yyyy');
+
   return (
     <div className="text-left">
       <h1>

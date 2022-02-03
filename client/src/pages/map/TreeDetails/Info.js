@@ -31,7 +31,11 @@ export default function Info({ currentTreeData }) {
     return result;
   }, []);
 
-  return labelValues.length && (
+  if (!labelValues.length) {
+    return null;
+  }
+
+  return (
     <Section
       title="Info"
     >
