@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MenuItem } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import {
@@ -8,76 +8,125 @@ import {
   FormRadio,
   FormRadioGroup,
 } from '@/components/Form';
-import Section from '../Section';
+import { useQuery } from 'react-query';
 import { useNewTree } from './useNewTree';
+import Section from '../Section';
 
-// Add keys to each item in the map() call below.
-const stateMenuItems = [
-  <MenuItem value="AK">Alaska</MenuItem>,
-  <MenuItem value="AL">Alabama</MenuItem>,
-  <MenuItem value="AR">Arkansas</MenuItem>,
-  <MenuItem value="AZ">Arizona</MenuItem>,
-  <MenuItem value="AA">Armed Forces Americas</MenuItem>,
-  <MenuItem value="AE">Armed Forces Europe</MenuItem>,
-  <MenuItem value="AP">Armed Forces Pacific</MenuItem>,
-  <MenuItem value="CA">California</MenuItem>,
-  <MenuItem value="CO">Colorado</MenuItem>,
-  <MenuItem value="CT">Connecticut</MenuItem>,
-  <MenuItem value="DC">District of Columbia</MenuItem>,
-  <MenuItem value="DE">Delaware</MenuItem>,
-  <MenuItem value="FL">Florida</MenuItem>,
-  <MenuItem value="GA">Georgia</MenuItem>,
-  <MenuItem value="HI">Hawaii</MenuItem>,
-  <MenuItem value="IA">Iowa</MenuItem>,
-  <MenuItem value="ID">Idaho</MenuItem>,
-  <MenuItem value="IL">Illinois</MenuItem>,
-  <MenuItem value="IN">Indiana</MenuItem>,
-  <MenuItem value="KS">Kansas</MenuItem>,
-  <MenuItem value="KY">Kentucky</MenuItem>,
-  <MenuItem value="LA">Louisiana</MenuItem>,
-  <MenuItem value="MA">Massachusetts</MenuItem>,
-  <MenuItem value="MD">Maryland</MenuItem>,
-  <MenuItem value="ME">Maine</MenuItem>,
-  <MenuItem value="MI">Michigan</MenuItem>,
-  <MenuItem value="MN">Minnesota</MenuItem>,
-  <MenuItem value="MO">Missouri</MenuItem>,
-  <MenuItem value="MS">Mississippi</MenuItem>,
-  <MenuItem value="MT">Montana</MenuItem>,
-  <MenuItem value="NC">North Carolina</MenuItem>,
-  <MenuItem value="ND">North Dakota</MenuItem>,
-  <MenuItem value="NE">Nebraska</MenuItem>,
-  <MenuItem value="NH">New Hampshire</MenuItem>,
-  <MenuItem value="NJ">New Jersey</MenuItem>,
-  <MenuItem value="NM">New Mexico</MenuItem>,
-  <MenuItem value="NV">Nevada</MenuItem>,
-  <MenuItem value="NY">New York</MenuItem>,
-  <MenuItem value="OH">Ohio</MenuItem>,
-  <MenuItem value="OK">Oklahoma</MenuItem>,
-  <MenuItem value="OR">Oregon</MenuItem>,
-  <MenuItem value="PA">Pennsylvania</MenuItem>,
-  <MenuItem value="PR">Puerto Rico</MenuItem>,
-  <MenuItem value="RI">Rhode Island</MenuItem>,
-  <MenuItem value="SC">South Carolina</MenuItem>,
-  <MenuItem value="SD">South Dakota</MenuItem>,
-  <MenuItem value="TN">Tennessee</MenuItem>,
-  <MenuItem value="TX">Texas</MenuItem>,
-  <MenuItem value="UT">Utah</MenuItem>,
-  <MenuItem value="VA">Virginia</MenuItem>,
-  <MenuItem value="VT">Vermont</MenuItem>,
-  <MenuItem value="WA">Washington</MenuItem>,
-  <MenuItem value="WI">Wisconsin</MenuItem>,
-  <MenuItem value="WV">West Virginia</MenuItem>,
-  <MenuItem value="WY">Wyoming</MenuItem>,
-].map((element) => React.cloneElement(element, { key: element.props.value }));
+const states = [
+  ['AK', 'Alaska'],
+  ['AL', 'Alabama'],
+  ['AR', 'Arkansas'],
+  ['AZ', 'Arizona'],
+  ['AA', 'Armed Forces Americas'],
+  ['AE', 'Armed Forces Europe'],
+  ['AP', 'Armed Forces Pacific'],
+  ['CA', 'California'],
+  ['CO', 'Colorado'],
+  ['CT', 'Connecticut'],
+  ['DC', 'District of Columbia'],
+  ['DE', 'Delaware'],
+  ['FL', 'Florida'],
+  ['GA', 'Georgia'],
+  ['HI', 'Hawaii'],
+  ['IA', 'Iowa'],
+  ['ID', 'Idaho'],
+  ['IL', 'Illinois'],
+  ['IN', 'Indiana'],
+  ['KS', 'Kansas'],
+  ['KY', 'Kentucky'],
+  ['LA', 'Louisiana'],
+  ['MA', 'Massachusetts'],
+  ['MD', 'Maryland'],
+  ['ME', 'Maine'],
+  ['MI', 'Michigan'],
+  ['MN', 'Minnesota'],
+  ['MO', 'Missouri'],
+  ['MS', 'Mississippi'],
+  ['MT', 'Montana'],
+  ['NC', 'North Carolina'],
+  ['ND', 'North Dakota'],
+  ['NE', 'Nebraska'],
+  ['NH', 'New Hampshire'],
+  ['NJ', 'New Jersey'],
+  ['NM', 'New Mexico'],
+  ['NV', 'Nevada'],
+  ['NY', 'New York'],
+  ['OH', 'Ohio'],
+  ['OK', 'Oklahoma'],
+  ['OR', 'Oregon'],
+  ['PA', 'Pennsylvania'],
+  ['PR', 'Puerto Rico'],
+  ['RI', 'Rhode Island'],
+  ['SC', 'South Carolina'],
+  ['SD', 'South Dakota'],
+  ['TN', 'Tennessee'],
+  ['TX', 'Texas'],
+  ['UT', 'Utah'],
+  ['VA', 'Virginia'],
+  ['VT', 'Vermont'],
+  ['WA', 'Washington'],
+  ['WI', 'Wisconsin'],
+  ['WV', 'West Virginia'],
+  ['WY', 'Wyoming'],
+];
+const stateCodesByName =
+  states.reduce((result, [code, name]) => ({ ...result, [name]: code }), {});
+const stateMenuItems = states.map(([code, name] ) => (
+  <MenuItem key={code} value={code}>{name}</MenuItem>
+));
+const addressFieldNames = [
+  'address',
+  'city',
+  'state',
+  'zip',
+];
+
+async function fetchAddress({ queryKey: [api, params] }) {
+  const paramString = String(new URLSearchParams({ ...params, format: 'jsonv2' }));
+  const url = `https://nominatim.openstreetmap.org/${api}.php?${paramString}`;
+
+  const response = await fetch(url);
+
+  if (response && !response.ok) {
+    // Throw an error so react-query knows to retry the request.
+    throw new Error(`${response.status} (${response.statusText}) ${url}`);
+  }
+
+  return response && response.json();
+}
 
 export default function Address() {
+  const [locationQuery, setLocationQuery] = useState('');
   const { newTreeState } = useNewTree();
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext();
+  // Don't make this query until we have the lat/lng from the planting marker.
+  const { data: nearestAddress } = useQuery(locationQuery, fetchAddress,
+    { enabled: !!locationQuery });
 
   useEffect(() => {
-    setValue('lng', newTreeState.coords.lng);
-    setValue('lat', newTreeState.coords.lat);
-  }, [newTreeState.coords, setValue]);
+    const { lng, lat } = newTreeState.coords;
+    const addressFields = getValues(addressFieldNames);
+
+    setValue('lng', lng);
+    setValue('lat', lat);
+
+    // Only query if the address fields are blank, so we don't overwrite what the user entered.
+//    if (addressFields.join('').length === 0) {
+      setLocationQuery(['reverse', { lat, lon: lng }]);
+//    }
+  }, [newTreeState.coords, setValue, setLocationQuery]);
+
+  useEffect(() => {
+    if (nearestAddress) {
+      const { address: { house_number, road, city, state, postcode, } } = nearestAddress;
+
+      setValue('address', `${house_number} ${road}`.trim());
+      setValue('city', city);
+      setValue('state', stateCodesByName[state]);
+      setValue('zip', postcode);
+    }
+  }, [nearestAddress]);
+
 
   return (
     <Section title="Location">
