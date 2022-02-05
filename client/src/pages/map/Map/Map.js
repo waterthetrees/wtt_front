@@ -112,17 +112,18 @@ export default function Map({
       }));
 
       mapboxMap.on('load', () => {
-        // For some reason, calling setIsMapLoaded() before onLoad() will cause errors, so keep them
-        // in this order.
-        onLoad(mapboxMap);
-        setIsMapLoaded(true);
-
         // Now that the style has loaded, add the vector tile source, which will be used by the
-        // TreeLayer components to generate a layer for each health type.
+        // TreeLayer components to generate a layer for each health type.  We have to do this before
+        // setting isMapLoaded to true below, as seems to cause an immediate re-render (because it's
+        // coming from a handler outside the React context?), which will render MapLayers, which in
+        // turn expects the public.treedata source to have already been added.
         mapboxMap.addSource('public.treedata', {
           type: 'vector',
           tiles: [`${tilesServerEndpoints}/public.treedata/{z}/{x}/{y}.pbf`],
         });
+
+        onLoad(mapboxMap);
+        setIsMapLoaded(true);
 
         // Wait until the map is loaded to add mouse event handlers so that we don't try to query
         // layers when the mouse moves before they've been added and loaded.
@@ -150,26 +151,25 @@ export default function Map({
             setCurrentTreeId(id);
             mapboxMap.getCanvas().style.cursor = 'pointer';
           } else {
+            // This click was on a blank part of the map, so clear the selection.
             setCurrentTreeId(null);
           }
         });
 
-        mapboxMap.on('mousemove', ({ point: { x, y }, lngLat: { lng } }) => {
+        // Unlike the click handler above, we want to get mousemove/leave events only for features
+        // on the tree layers, not the entire map, so pass an array of layer IDs.
+        mapboxMap.on('mousemove', layerIDs, ({ features: [feature], lngLat: { lng } }) => {
           if (!selectionEnabledRef.current) {
             return;
           }
 
-          const [feature] = mapboxMap.queryRenderedFeatures([x, y], { layers: layerIDs });
+          const id = feature?.properties?.id;
 
-          if (!feature) {
-            mapboxMap.getCanvas().style.cursor = '';
-            popup.remove();
-            currentFeature.current = null;
-          } else if (feature.properties.id !== currentFeature.current?.properties?.id
+          // If the tree circles are big enough, we'll get lots of mousemove events for a single
+          // tree, so make sure it's a different one than what the popup is currently showing, to
+          // avoid moving and re-adding the popup.
+          if (id && feature.properties.id !== currentFeature.current?.properties?.id
               || !popup.isOpen()) {
-            // We have to get the coordinates from the feature's geometry rather than its properties
-            // because newly-edited or -added trees don't return the lng/lat in properties, though
-            // it is returned in vector tiles.
             const coordinates = [...feature.geometry.coordinates];
             const html = createPopupHTML(feature.properties);
 
@@ -190,8 +190,7 @@ export default function Map({
           }
         });
 
-// TODO: don't let mouse move quickly off a dot and onto the popup.  maybe because moving over popup doesn't trigger mouseleave?
-        mapboxMap.on('mouseleave', () => {
+        mapboxMap.on('mouseleave', layerIDs, () => {
           mapboxMap.getCanvas().style.cursor = '';
           popup.remove();
           currentFeature.current = null;
@@ -200,21 +199,19 @@ export default function Map({
 
       setMap(mapboxMap);
     }
-
-    // Somewhat mysteriously, returning this noop avoids the React warning about not being able to
-    // call setState() in an unmounted component, which can happen when the user logs in and is
-    // redirected back to /, and is then redirected to /go#<hash value>, which then redirects back
-    // to the map with that hash value.
-// TODO: remove this?
-    return () => {};
   }, [map, containerRef]);
 
   if (!isMapboxSupported) {
     return unsupportedError;
   }
 
-  return (
+  return isMapLoaded && (
     <>
+      <MapLayers
+        map={map}
+        layers={layers}
+        currentTreeData={currentTreeData}
+      />
       <MapboxControlPortal
         map={map}
         position="top-left"
@@ -240,13 +237,6 @@ export default function Map({
           expanded
         />
       </MapboxControlPortal>
-      {isMapLoaded && (
-        <MapLayers
-          map={map}
-          layers={layers}
-          currentTreeData={currentTreeData}
-        />
-      )}
     </>
   );
 }

@@ -9,18 +9,22 @@ const events = [
 ];
 
 export class MapboxMarkerPortal extends PureComponent {
-  container = null;
   marker = null;
   addedToMap = false;
+  state = {
+    container: null
+  };
 
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.container = document.createElement('div');
+    const container = document.createElement('div');
+
+    this.setState({ container });
     this.marker = new mapboxgl.Marker({
-      element: this.container,
+      element: container,
       ...this.props.options
     });
 
@@ -41,7 +45,7 @@ export class MapboxMarkerPortal extends PureComponent {
     if (map && this.marker) {
       this.marker.remove();
       this.marker = null;
-      this.container = null;
+      this.setState({ container: null });
     }
   }
 
@@ -77,10 +81,13 @@ export class MapboxMarkerPortal extends PureComponent {
   }
 
   render() {
-    return this.container && this.props.visible
+    const { container } = this.state;
+    const { visible, children } = this.props;
+
+    return container && visible
       ? ReactDOM.createPortal(
-        this.props.children,
-        this.container
+        children,
+        container
       )
       : null;
   }
