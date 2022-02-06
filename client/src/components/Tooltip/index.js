@@ -1,15 +1,22 @@
 import React from 'react';
 import { Tooltip } from '@mui/material';
 
-const StyledTooltip = ({ children, title, ...props }) => (
+const defaultTooltipSx = {
+  fontSize: '1.125rem',
+  maxWidth: 150,
+};
+
+const StyledTooltip = ({ children, title, tooltipSx = {}, ...props }) => (
   <Tooltip
     title={title}
     arrow
+    disableInteractive
+    enterDelay={500}
     componentsProps={{
       tooltip: {
-        sx: {
-          fontSize: '1.125rem',
-        },
+        // Allow callers to apply additional styling to the tooltip component, which is otherwise
+        // fairly inconvenient.
+        sx: Object.assign({}, defaultTooltipSx, tooltipSx)
       },
     }}
     {...props}

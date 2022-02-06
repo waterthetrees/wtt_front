@@ -17,6 +17,7 @@ const MapContainer = styled('main', { shouldForwardProp: (prop) => prop.indexOf(
   ({
     theme, drawerEnabled, drawerOpen, drawerWidth, // eslint-disable-line no-shadow
   }) => ({
+    background: '#c5def6',
     flexGrow: 1,
     // We need to use vh here, as height: 100% leaves the map at 0 height.
     height: '100vh',
