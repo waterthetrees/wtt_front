@@ -44,6 +44,10 @@ module.exports = (env) => {
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
     // which we can safely ignore.
     ignoreWarnings: [/Failed to parse source map/],
+		stats: {
+      // Log a build timestamp in the console.
+			builtAt: true
+		},
     module: {
       rules: removeEmpty([
         {
