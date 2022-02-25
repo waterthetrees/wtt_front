@@ -39,7 +39,7 @@ export const treeHealth = {
   },
   getPaintColors(colorType) {
     const colors = healthInfo.reduce((result, [name]) =>
-      result.push(name, healthByName[name][colorType]) && result, []);
+      [...result, name, healthByName[name][colorType]], []);
 
     colors.push(healthByName.default[colorType]);
 

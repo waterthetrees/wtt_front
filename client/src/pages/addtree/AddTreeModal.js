@@ -12,7 +12,6 @@ import TreeInfo from './TreeInfo';
 import TreeAddress from './TreeAddress';
 import TreePlanter from './TreePlanter';
 import { randomInteger } from './utilities';
-import './AddTree.scss';
 
 const AddTreeModal = ({
   showAddTreeModal,

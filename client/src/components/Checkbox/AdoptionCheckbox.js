@@ -1,9 +1,9 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
-import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
+import { Adopt, Adopted } from '@/components/Icons';
 
-const Icon = <AdoptionIcon fontSize="large" />;
-const CheckedIcon = <AdoptionIcon primary fontSize="large" />;
+const Icon = <Adopt fontSize="large" />;
+const CheckedIcon = <Adopted fontSize="large" />;
 
 // The Tooltip that wraps this will need a ref to the component.
 export default React.forwardRef((props, ref) => (

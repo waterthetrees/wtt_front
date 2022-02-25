@@ -10,7 +10,8 @@
   background-color: #147d16;
   opacity: 0.8;
   border-color: transparent;
-  z-index: 200 !important;
+  /* put this above the map drawer but below modal dialogs */
+  z-index: 1250 !important;
 }
 
 .header__font{
