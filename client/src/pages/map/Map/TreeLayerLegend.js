@@ -89,7 +89,6 @@ export default function TreeLayerLegend({
     if (!isMapLoaded) {
       const handleMapLoaded = () => {
         setIsMapLoaded(true);
-        map.off('load', handleMapLoaded);
 
         // Annoyingly, the visibility property defaults to undefined if it's not set when the layer
         // is added, even though the layer is visible by default.  So once the map is loaded, go
@@ -102,7 +101,7 @@ export default function TreeLayerLegend({
         }
       };
 
-      map.on('load', handleMapLoaded);
+      map.once('load', handleMapLoaded);
     }
   }, [map, isMapLoaded]);
 
