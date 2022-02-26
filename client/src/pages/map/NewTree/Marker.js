@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Button, styled } from '@mui/material';
-import TrackingToggle from './TrackingToggle';
-import { PlantTarget } from './PlantTarget';
+import { Box, styled } from '@mui/material';
+import { Crosshairs } from './Crosshairs';
+import { AddButton, TrackingToggle } from './MarkerButtons';
+import { TooltipBottom, TooltipTop } from '@/components/Tooltip';
 
 const circleSize = 70;
 
 const Container = styled(Box)`
   text-align: center;
-  position: relative;
 `;
 
 const OuterCircle = styled('div')(({ theme }) => `
@@ -17,6 +17,7 @@ const OuterCircle = styled('div')(({ theme }) => `
   border-radius: 50%;
 
   // As soon as the cursor hits the OuterCircle border, we want the InnerCircle color to change.
+  // The 44 at the end is a hex alpha value to make the color translucent.
   &:hover > div {
     border-color: ${theme.palette.primary.main}44;
   }
@@ -33,35 +34,51 @@ const InnerCircle = styled('div')(({ theme }) => `
   border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `);
 
-const Target = styled(PlantTarget)(({ theme }) => `
-  width: 24px;
-  height: 24px;
+const Target = styled(Crosshairs)(({ theme }) => `
+  width: 35px;
+  height: 35px;
   color: ${theme.palette.primary.main};
 `);
+
+const Toolbar = styled(Box)`
+  width: 100%;
+  margin-top: .5rem;
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default function Marker({ tracking, onPlantClick, onTrackingChange }) {
   return (
     <Container>
-      <OuterCircle>
-        <InnerCircle>
-          <Target />
-        </InnerCircle>
-      </OuterCircle>
-      <TrackingToggle
-        checked={tracking}
-        onChange={onTrackingChange}
-      />
-      <Button
-        title="Enter the details for the new tree"
-        variant="contained"
-        disableElevation
-        onClick={onPlantClick}
-        sx={{ mt: 1, minWidth: 0, px: 1 }}
-      >
-        Plant
-      </Button>
+      <TooltipTop title="Drag to the location for the new tree">
+        <OuterCircle>
+          <InnerCircle>
+            <Target />
+          </InnerCircle>
+        </OuterCircle>
+      </TooltipTop>
+      <Toolbar>
+        <TooltipBottom
+          title="Enter the details for the new tree"
+        >
+          <AddButton
+            onClick={onPlantClick}
+          />
+        </TooltipBottom>
+        <TooltipBottom
+          title={tracking
+            ? 'Stop tracking your current location'
+            : 'Make the planting marker follow your current location'}
+        >
+          <TrackingToggle
+            checked={tracking}
+            onChange={onTrackingChange}
+          />
+        </TooltipBottom>
+      </Toolbar>
     </Container>
   );
 }
