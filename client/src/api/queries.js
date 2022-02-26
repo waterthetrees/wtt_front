@@ -13,14 +13,16 @@ import { getData, postData, putData } from './apiUtils';
  * `useQuery` function with each call to the hook.
  * @param {function(string, object, function, object)} [options.preProcessor] - An optional function
  * that can modify the custom hook's parameters before they're passed to `useQuery`.
- * @param {function(*)} [options.postProcessor] - An optional function that can modify the results of the
- * API call before they're returned by the hook.
- * @returns {object} - See the [`useQuery`](https://react-query.tanstack.com/reference/useQuery)
+ * @param {function(*)} [options.postProcessor] - An optional function that can modify the results
+ * of the API call before they're returned by the hook.
+ * @returns {function([object], [object])} - A function that wraps a call to `useQuery`.  The
+ * optional first parameter can supply additional data to the query, and the second parameter can
+ * pass options.  See the [`useQuery`](https://react-query.tanstack.com/reference/useQuery)
  * documentation for details.
  */
 function createUseQuery(api, options = {}) {
   const { defaultData = {}, defaultOptions = {}, preProcessor, postProcessor } = options;
-  const getter = typeof postProcessor === 'function'
+  const queryFn = typeof postProcessor === 'function'
     ? (...args) => getData(...args).then(postProcessor)
     : getData;
 
@@ -29,10 +31,10 @@ function createUseQuery(api, options = {}) {
     const options = { ...defaultOptions, ...queryOptions };
 
     if (typeof preProcessor === 'function') {
-      return preProcessor(api, data, getter, options);
+      return preProcessor(api, data, queryFn, options);
     }
 
-    return useQuery([api, data], getter, options);
+    return useQuery([api, data], queryFn, options);
   };
 }
 
@@ -43,7 +45,7 @@ function createUseQuery(api, options = {}) {
  * @param {string|[string]} apiList - One or more APIs whose in-flight queries should be invalidated
  * by this mutation.  The first API listed is the one that will be called by the hook.
  * @param {string} [method] - The HTTP method to use for the call.  Defaults to `'POST'`.
- * @returns {object} - See the [`useMutation`](https://react-query.tanstack.com/reference/useMutation)
+ * @returns {function} - See the [`useMutation`](https://react-query.tanstack.com/reference/useMutation)
  * documentation for details.
  */
 function createUseMutation(apiList, method) {
@@ -101,16 +103,16 @@ export const useCountriesQuery = createUseQuery('countries', {
 });
 export const useTreemapQuery = createUseQuery('treemap', { defaultData: { city: '%' } });
 export const useTreeQuery = createUseQuery('trees', {
-  preProcessor(api, data, getter, options) {
+  preProcessor(api, data, queryFn, options) {
     // If id is null, we don't want to call the server with that, as it'll return an error,
-    // cluttering the console.  So instead of the normal getter, wrap a null response in a
-    // promise to avoid the error.  We can't just conditionally call useQuery(), since that
-    // triggers a React exception.
+    // cluttering the console.  To avoid the error, use a promise that resolves to null instead of
+    // the normal queryFn.  We can't just conditionally call useQuery() when the is null, since
+    // that triggers a React exception.
     return useQuery(
       [api, data],
       !data.id
         ? () => Promise.resolve(null)
-        : getter,
+        : queryFn,
       options
     );
   }

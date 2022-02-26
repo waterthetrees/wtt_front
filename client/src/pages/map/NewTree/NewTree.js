@@ -3,16 +3,16 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { styled, ToggleButton } from '@mui/material';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { useCreateTreeDataMutation, useUserMutation } from '@/api/queries';
-import { MapboxMarkerPortal } from '@/pages/map/Map/MapboxMarkerPortal';
+import { useIsMobile } from '@/pages/map/NewTree/utilities';
+import MapboxMarkerPortal from '@/pages/map/Map/MapboxMarkerPortal';
 import PlusIconPath from '@/assets/images/addtree/plus2.svg';
-import { isMobile } from './utilities';
 import { useNewTree } from './useNewTree';
 import { useGeolocation } from './useGeolocation';
-import Marker from './Marker';
+import { Marker, markerOffset } from './Marker';
 
 const markerOptions = {
   anchor: 'top-left',
-  offset: [-35, -35],
+  offset: [-markerOffset, -markerOffset],
   draggable: true,
 };
 
@@ -46,7 +46,7 @@ const PlantButton = styled(ToggleButton)`
 export default function NewTree({ map }) {
   const { user, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
-  const [tracking, setTracking] = useState(isMobile);
+  const [tracking, setTracking] = useState(useIsMobile());
   const [markerStartCoords, setMarkerStartCoords] = useState(null);
   const mutateUser = useUserMutation();
   const mutateTreeData = useCreateTreeDataMutation();

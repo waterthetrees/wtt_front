@@ -1,33 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { useTreeDataMutation } from '@/api/queries';
 import Section from '../Section';
 
 export default function Notes({ currentTreeData: { id, notes } }) {
   const [value, setValue] = useState(notes || '');
-  const [text] = useDebounce(value, 1500);
   const mutateTreeData = useTreeDataMutation();
 
-  const saveNotes = (newValue) => {
+  useEffect(() => {
+    if (notes && !value) {
+      // The vector tile data may not contain any notes, but the /trees call might return a string
+      // after this component is mounted, so update the text field if it's currently blank.
+      setValue(notes);
+    }
+  }, [notes]);
+
+  const saveNotes = useDebouncedCallback((newValue) => {
+    const trimmedValue = newValue.trim();
+
     // Only save the new string to the backend if it's different than our prop.  We save the trimmed
     // string but don't trim the state value so that if the user is in the middle of entering some
     // blank lines, we're not fighting with their edits, but it's cleaned up when they're done.
-    if (newValue !== notes) {
-      mutateTreeData.mutate({ id, notes: newValue.trim() });
+    if (notes !== trimmedValue) {
+      mutateTreeData.mutate({ id, notes: trimmedValue });
     }
+  }, 1500);
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+
+    setValue(newValue);
+    saveNotes(newValue);
   };
 
-  useEffect(() => {
-    // Save the updated text after it's been debounced.
-    saveNotes(text);
-  }, [text]);
-
-  const handleChange = (event) => setValue(event.target.value);
-
-  // Save the undebounced current value of the text field when it's blurred, in case the string
-  // hasn't been saved yet.
-  const handleBlur = () => saveNotes(value);
+  // If there's a debounced call to save the current notes, flush it so it's posted to the
+  // backend in case the component is being unmounted.
+  const handleBlur = () => saveNotes.flush();
 
   return (
     <Section

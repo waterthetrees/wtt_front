@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Alert } from '@mui/material';
-import { useAuth0 } from '@auth0/auth0-react';
-import useAuthUtils from '@/components/Auth/useAuthUtils';
 import CoreData from './CoreData';
-import CoreDataDialog from './CoreDataDialog';
-import AdoptLikeCheckboxes from './AdoptLikeCheckboxes';
 import MaintainTree from './MaintainTree';
 import RemoveTree from './RemoveTree';
 import Health from './Health';
@@ -15,9 +11,6 @@ import Info from './Info';
 export default function TreeDetailsPanel({
   Container, drawerWidth, currentTreeData, currentTreeId, setCurrentTreeId, isTreeQueryError,
 }) {
-  const [showEditDialog, setShowEditDialog] = useState(false);
-  const { isAuthenticated } = useAuth0();
-  const { loginToCurrentPage } = useAuthUtils();
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
   const noDataChild = currentTreeId && isTreeQueryError
@@ -37,15 +30,6 @@ export default function TreeDetailsPanel({
 
   const handleClose = () => setCurrentTreeId(null);
 
-  // TODO: this should be handled by CoreData
-  const handleEditClick = () => {
-    if (!isAuthenticated) {
-      loginToCurrentPage();
-    } else {
-      setShowEditDialog(!showEditDialog);
-    }
-  };
-
   return (
     <Container
       title="Tree Details"
@@ -59,21 +43,6 @@ export default function TreeDetailsPanel({
             <CoreData
               treeData={currentTreeData}
               vacant={vacant}
-            />
-
-            {showEditDialog && (
-              <CoreDataDialog
-                currentTreeId={currentTreeId}
-                treeData={currentTreeData}
-                showEditDialog={showEditDialog}
-                setShowEditDialog={setShowEditDialog}
-              />
-            )}
-
-            <AdoptLikeCheckboxes
-              currentTreeId={currentTreeId}
-              common={common}
-              edit={handleEditClick}
             />
 
             {!vacant && (

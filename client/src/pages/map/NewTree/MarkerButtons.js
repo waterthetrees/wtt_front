@@ -2,16 +2,20 @@ import React, { forwardRef } from 'react';
 import { Checkbox, IconButton, styled } from '@mui/material';
 import { Add, LocationOn, LocationOnOutlined } from '@mui/icons-material';
 
+// When the mouse is over the button or clicks it, we don't want the map to hear those events, so
+// it doesn't show a popup for the tree or details in the drawer.
+const stopPropagation = (event) => event.stopPropagation();
+
 // These styles will be used for both the IconButton and Checkbox below.
 const styles = `
   padding: 3px;
   border-radius: 50%;
-  color: rgba(255, 255, 255, .8);
-  background: rgba(0, 0, 0, .25);
+  color: rgba(255, 255, 255, .9);
+  background: rgba(0, 0, 0, .45);
 
   &:hover {
-    color: rgba(255, 255, 255, .9);
-    background: rgba(0, 0, 0, .35);
+    color: rgba(255, 255, 255, 1);
+    background: rgba(0, 0, 0, .6);
   }
 
   & .MuiSvgIcon-root {
@@ -26,6 +30,7 @@ const StyledButton = styled(IconButton)(styles);
 const AddButton = forwardRef((props, ref) => (
   <StyledButton
     ref={ref}
+    onMouseMove={stopPropagation}
     {...props}
   >
     <Add />
@@ -38,11 +43,10 @@ const TrackingToggle = forwardRef((props, ref) => (
   <StyledCheckbox
     ref={ref}
     icon={<LocationOnOutlined />}
-    // Force the checked icon to be white, since it will default to the primary color.
+    // Force the checked icon to be white, since otherwise it will default to the `primary` color.
     checkedIcon={<LocationOn sx={{ color: 'white' }} />}
-    // In case the tracking button is over a tree circle, stop event propagation so that the map
-    // doesn't hear the click and open the details drawer for that tree.
-    onClick={(event) => event.stopPropagation()}
+    onClick={stopPropagation}
+    onMouseMove={stopPropagation}
     {...props}
   />
 ));

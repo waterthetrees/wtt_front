@@ -1,12 +1,14 @@
 /* eslint-disable max-len */
 
+// Default env to localserver in case hostname doesn't match anything, which it may not if we're
+// trying to access the local dev server from another machine using the host's address.
 const env = {
   'www.waterthetrees.com': 'prod',
   'waterthetrees.com': 'prod',
   'dev.waterthetrees.com': 'dev',
   'blue.waterthetrees.com': 'blue',
   localhost: 'localserver',
-}[window.location.hostname];
+}[location.hostname] || 'localserver';
 
 const mapboxAccessToken = {
   // key: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w'
