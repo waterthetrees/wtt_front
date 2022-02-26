@@ -46,47 +46,45 @@ const PlantButton = styled(ToggleButton)`
 export default function NewTree({ map }) {
   const { user, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
-  const [planting, setPlanting] = useState(false);
   const [tracking, setTracking] = useState(isMobile);
   const [markerStartCoords, setMarkerStartCoords] = useState(null);
   const mutateUser = useUserMutation();
   const mutateTreeData = useCreateTreeDataMutation();
+  const {
+    newTreeState, setCoords, openPanel, beginPlanting, endPlanting, beginDrag, endDrag,
+  } = useNewTree();
   const geo = useGeolocation({
     // Don't request location permission until the user clicks Plant.
-    enabled: planting && tracking,
-    // Only update the position as the user moves if tracking ison.
-    watching: planting && tracking,
+    enabled: newTreeState.isPlanting && tracking,
+    // Only update the position as the user moves if tracking is on.
+    watching: newTreeState.isPlanting && tracking,
     timeout: 15000,
     enableHighAccuracy: true,
   });
-  const {
-    newTreeState, setCoords, openPanel, cancel, reset, startDrag, endDrag,
-  } = useNewTree();
 
   useEffect(() => {
-    if (planting) {
+    if (newTreeState.isPlanting) {
       const coordinates = geo.data && tracking
         ? { lng: geo.data.coords.longitude, lat: geo.data.coords.latitude }
         : map.getCenter();
 
-      // We store the initial coords for the marker in state so they change only when planting is
+      // We store the starting coords for the marker in state, so they change only when planting is
       // toggled on.  If we passed newTreeState.coords to the marker, it would redundantly update
       // its location every time it's dragged, since setCoords() is called when the drag ends.
       setMarkerStartCoords(coordinates);
       setCoords(coordinates);
       map.flyTo({ center: coordinates });
     }
-    // This effect should only listen for changes on geo.data, as the geo result object is recreated
-    // on each call and listening for it would cause an infinite loop.
-  }, [planting, geo.data, map]);
+    // This effect should only listen for changes on geo.data, as the overall geo result object is
+    // recreated on each call and listening for it would cause an infinite loop.
+  }, [newTreeState.isPlanting, geo.data, map]);
 
   useEffect(() => {
     if (newTreeState.result) {
       // The user clicked the Add Tree button in the panel, so post the tree form to create a new
       // tree, reset the form data, and then hide the planting marker.
       mutateTreeData.mutate(newTreeState.result);
-      reset();
-      setPlanting(false);
+      endPlanting();
     }
   }, [newTreeState.result]);
 
@@ -94,7 +92,7 @@ export default function NewTree({ map }) {
   // current location.  Also tell the MapLayout to disable tree popups during the drag.
   const handleMarkerDragStart = () => {
     setTracking(false);
-    startDrag();
+    beginDrag();
   };
 
   // Update the coords with the marker's final location so that the new tree drawer will update to
@@ -111,12 +109,12 @@ export default function NewTree({ map }) {
       mutateUser.mutate(user);
     }
 
-    if (planting) {
+    if (newTreeState.isPlanting) {
       // The user just toggled off planting mode, so close the new tree drawer if it's open.
-      cancel();
+      endPlanting();
+    } else {
+      beginPlanting();
     }
-
-    setPlanting(!planting);
   };
 
   const handleTrackingChange = (event) => setTracking(event.target.checked);
@@ -125,12 +123,12 @@ export default function NewTree({ map }) {
     <>
       <PlantButton
         value="Plant"
-        selected={planting}
+        selected={newTreeState.isPlanting}
         onChange={handlePlantClick}
       />
       <MapboxMarkerPortal
         map={map}
-        visible={planting}
+        visible={newTreeState.isPlanting}
         coordinates={markerStartCoords}
         options={markerOptions}
         onDragStart={handleMarkerDragStart}

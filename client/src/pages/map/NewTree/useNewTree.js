@@ -3,6 +3,7 @@ import React, { useReducer, useMemo, useContext, createContext } from 'react';
 const newTreeInitialState = {
   coords: null,
   result: null,
+  isPlanting: false,
   isPanelOpen: false,
   isDragging: false,
 };
@@ -12,7 +13,13 @@ const newTreeReducer = (state, { type, payload }) => {
     case 'setCoords':
       return { ...state, coords: payload };
 
-    case 'startDrag':
+    case 'beginPlanting':
+      return { ...state, isPlanting: true };
+
+    case 'endPlanting':
+      return { ...newTreeInitialState };
+
+    case 'beginDrag':
       return { ...state, isDragging: true };
 
     case 'endDrag':
@@ -26,9 +33,6 @@ const newTreeReducer = (state, { type, payload }) => {
 
     case 'cancel':
       return { ...state, isPanelOpen: false, result: null };
-
-    case 'reset':
-      return { ...newTreeInitialState };
 
     default:
       throw new Error(`newTreeReducer: unrecognized type: ${type}`);
@@ -44,8 +48,14 @@ const NewTreeProvider = (props) => {
     setCoords(coords) {
       dispatch({ type: 'setCoords', payload: coords });
     },
-    startDrag() {
-      dispatch({ type: 'startDrag' });
+    beginPlanting() {
+      dispatch({ type: 'beginPlanting' });
+    },
+    endPlanting() {
+      dispatch({ type: 'endPlanting' });
+    },
+    beginDrag() {
+      dispatch({ type: 'beginDrag' });
     },
     endDrag() {
       dispatch({ type: 'endDrag' });
@@ -58,9 +68,6 @@ const NewTreeProvider = (props) => {
     },
     cancel() {
       dispatch({ type: 'cancel' });
-    },
-    reset() {
-      dispatch({ type: 'reset' });
     },
   }), [newTreeState, dispatch]);
 

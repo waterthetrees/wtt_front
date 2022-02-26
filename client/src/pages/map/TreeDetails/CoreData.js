@@ -10,7 +10,9 @@ export default function CoreData({
     common, scientific, genus, datePlanted, dbh, height,
   } = treeData;
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
-  const planted = format(new Date(datePlanted), 'MMMM d, yyyy');
+  // format() will throw an exception if datePlanted is undefined, so check it first.
+  const planted = datePlanted && format(new Date(datePlanted), 'MMMM d, yyyy');
+
   return (
     <div className="text-left">
       <h1>
