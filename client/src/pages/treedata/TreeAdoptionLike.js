@@ -7,7 +7,7 @@ import {
   useTreeHistoryMutation, useTreeLikesMutation,
 } from '@/api/queries';
 import { AdoptionCheckbox, InfoCheckbox, StarCheckbox } from '@/components/Checkbox';
-import { TooltipTop } from '../../components/Tooltip';
+import { TooltipTop } from '@/components/Tooltip';
 
 import TreeAdoptionDirections from './TreeAdoptionDirections';
 
