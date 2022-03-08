@@ -14,6 +14,10 @@
   display: none;
 }
 
+.mapboxgl-popup {
+  z-index: 1;
+}
+
 .mapboxgl-popup-content {
   background-color: black;
   color: white;
@@ -38,4 +42,9 @@
 
 .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
   border-left-color: black;
+}
+
+.planting-marker-container {
+  /* Keep the planting marker above the user location marker but below the controls. */
+  z-index: 1;
 }

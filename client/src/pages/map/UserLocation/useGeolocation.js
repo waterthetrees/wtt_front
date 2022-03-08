@@ -4,7 +4,7 @@ export const useGeolocation = ({
   enabled = true,
   watching = true,
   maximumAge = 0,
-  timeout = Infinity,
+  timeout = 10000,
   enableHighAccuracy = false,
 } = {}) => {
   const available = !!navigator.geolocation;
@@ -41,11 +41,13 @@ export const useGeolocation = ({
       }
 
       if (enabled) {
-        navigator.geolocation.getCurrentPosition(handleSuccess, handleError, geoOptions);
-
-        if (watching && !watchID.current) {
-          watchID.current = navigator.geolocation.watchPosition(handleSuccess, handleError,
-            geoOptions);
+        if (watching) {
+          if (!watchID.current) {
+            watchID.current = navigator.geolocation.watchPosition(handleSuccess, handleError,
+              geoOptions);
+          }
+        } else {
+          navigator.geolocation.getCurrentPosition(handleSuccess, handleError, geoOptions);
         }
       }
     }
