@@ -21,8 +21,8 @@ function noNulls(object) {
 
 const vacantPattern = /vacant/i;
 
-export default function TreeEditDialog({
-  currentTreeId, treeData, showEditDialog, setShowEditDialog,
+export default function CoreDataDialog({
+  open, currentTreeId, treeData, onConfirm, onCancel,
 }) {
   const { user = {} } = useAuth0();
   const mutateTreeData = useTreeDataMutation();
@@ -82,19 +82,17 @@ export default function TreeEditDialog({
       }
     }
 
-    setShowEditDialog(false);
+    onConfirm(formData);
   };
-
-  const handleCancel = () => setShowEditDialog(false);
 
   const handleError = (errorLog, e) => console.error('errors, e', errorLog, e);
 
   return (
     <FormScrollableDialog
       title="Edit Tree"
-      open={showEditDialog}
+      open={open}
       onConfirm={handleConfirm}
-      onCancel={handleCancel}
+      onCancel={onCancel}
       onError={handleError}
       fullScreen={false}
       maxWidth="xs"

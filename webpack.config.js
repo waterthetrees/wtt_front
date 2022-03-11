@@ -80,6 +80,9 @@ module.exports = (env) => {
       new HtmlWebPackPlugin({
         template: './client/src/index.html',
         filename: './index.html',
+        minify: false,
+          // add a timestamp that's injected into an HTML comment
+        buildTime: new Date().toISOString()
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

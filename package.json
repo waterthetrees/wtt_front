@@ -73,6 +73,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "scripts": {
+    "postinstall": "npm run build:data",
     "lint": "npm run lint:js || npm run lint:css",
     "lint:css": "stylelint \"client/src/**/*.scss\"",
     "lint:js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",

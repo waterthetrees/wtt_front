@@ -1,28 +1,35 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Fade, Grid, Typography } from '@mui/material';
 import Footer from '@/components/Footer';
 import treeIcon from '@/assets/images/addtree/tree16.svg';
 
+// Wrap the loading text and image in a fade transition so that it doesn't appear and then get
+// immediately replaced with the lazy-loaded component, which can cause a noticeable flicker.
 const Loading = () => (
-  <Grid container
-    justifyContent="center"
-    alignItems="center"
-    direction="column"
-    sx={{ height: '100vh' }}
+  <Fade in
+    timeout={1500}
+    easing="cubic-bezier(0.7, 0, 0.84, 0)"
   >
-    <Grid item>
-      <img src={treeIcon}
-        alt="Loading..."
-        style={{ height: '100px' }}
-      />
+    <Grid container
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      sx={{ height: '100vh' }}
+    >
+      <Grid item>
+        <img src={treeIcon}
+          alt="Loading..."
+          style={{ height: '100px' }}
+        />
+      </Grid>
+      <Grid item>
+        <Typography variant="h3" sx={{ mt: 2 }}>
+          Loading...
+        </Typography>
+      </Grid>
+      <Footer />
     </Grid>
-    <Grid item>
-      <Typography variant="h3" sx={{ mt: 2 }}>
-        Loading...
-      </Typography>
-    </Grid>
-    <Footer />
-  </Grid>
+  </Fade>
 );
 
 export default Loading;

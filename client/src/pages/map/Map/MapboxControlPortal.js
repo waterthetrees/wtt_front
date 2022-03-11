@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+// MapboxControlPortal bridges Mapbox and React.  It manages adding/removing a control to/from the
+// map, and creates a container div into which React will render the child components.
 export default function MapboxControlPortal({ map, position, children }) {
   const [container, setContainer] = useState(null);
   // Use a ref to store an instance of the IControl interface from Mapbox:

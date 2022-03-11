@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  Box, styled, useMediaQuery, useTheme,
-} from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
+import { useIsMobile } from '@/pages/map/NewTree/utilities';
 import DetailsDrawer from './DetailsDrawer';
 import Map from './Map/Map';
 import TreeDetailsPanel from './TreeDetails/TreeDetailsPanel';
 import NewTreePanel from './NewTree/NewTreePanel';
 import { useNewTree, NewTreeProvider } from './NewTree/useNewTree';
-import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 
 const drawerWidth = 350;
 
@@ -46,9 +45,8 @@ function MapLayout() {
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
   const { data: currentTreeData, isError: isTreeQueryError } = useTreeQuery({ id: currentTreeId });
-  const theme = useTheme();
   // Use a full-screen dialog on smaller screens instead of the drawer.
-  const drawerEnabled = !useMediaQuery(theme.breakpoints.down('sm'));
+  const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
   const container = drawerEnabled
     ? DetailsDrawer

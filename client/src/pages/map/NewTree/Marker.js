@@ -5,9 +5,15 @@ import { AddButton, TrackingToggle } from './MarkerButtons';
 import { TooltipBottom, TooltipTop } from '@/components/Tooltip';
 
 const circleSize = 70;
+const outerBorderSize = 2;
 
 const Container = styled(Box)`
   text-align: center;
+`;
+
+const OuterBorder = styled('div')`
+  border: ${outerBorderSize}px solid white;
+  border-radius: 50%;
 `;
 
 const OuterCircle = styled('div')(({ theme }) => `
@@ -38,8 +44,8 @@ const InnerCircle = styled('div')(({ theme }) => `
 `);
 
 const Target = styled(Crosshairs)(({ theme }) => `
-  width: 35px;
-  height: 35px;
+  width: ${circleSize / 2}px;
+  height: ${circleSize / 2}px;
   color: ${theme.palette.primary.main};
 `);
 
@@ -50,15 +56,17 @@ const Toolbar = styled(Box)`
   justify-content: space-between;
 `;
 
-export default function Marker({ tracking, onPlantClick, onTrackingChange }) {
+export function Marker({ tracking, onPlantClick, onTrackingChange }) {
   return (
     <Container>
       <TooltipTop title="Drag to the location for the new tree">
-        <OuterCircle>
-          <InnerCircle>
-            <Target />
-          </InnerCircle>
-        </OuterCircle>
+        <OuterBorder>
+          <OuterCircle>
+            <InnerCircle>
+              <Target />
+            </InnerCircle>
+          </OuterCircle>
+        </OuterBorder>
       </TooltipTop>
       <Toolbar>
         <TooltipBottom
@@ -82,3 +90,7 @@ export default function Marker({ tracking, onPlantClick, onTrackingChange }) {
     </Container>
   );
 }
+
+// Calculate the offset from the top-left of the marker to the center of the target.  Adding 1px
+// seems to align the planted tree with the crosshairs better.
+export const markerOffset = (circleSize + 2 * outerBorderSize) / 2 + 1;

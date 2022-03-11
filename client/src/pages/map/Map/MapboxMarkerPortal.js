@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 
@@ -8,87 +8,68 @@ const events = [
   ['dragend', 'onDragEnd'],
 ];
 
-export class MapboxMarkerPortal extends PureComponent {
-  marker = null;
-  addedToMap = false;
-  state = {
-    container: null
-  };
+// MapboxMarkerPortal bridges Mapbox and React.  It manages adding/removing a marker to/from the
+// map, and creates a container div into which React will render the child components.
+export default function MapboxMarkerPortal({
+  map, visible, coordinates, options = {}, children, ...eventHandlers
+}) {
+  const [container, setContainer] = useState(null);
+  const [addedToMap, setAddedToMap] = useState(false);
+  const markerRef = useRef(null);
 
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const container = document.createElement('div');
-
-    this.setState({ container });
-    this.marker = new mapboxgl.Marker({
-      element: container,
-      ...this.props.options
+  useEffect(() => {
+    const div = document.createElement('div');
+    const marker = new mapboxgl.Marker({
+      element: div,
+      ...options
     });
 
     events.forEach(([mapboxName, reactName]) => {
-      this.marker.on(mapboxName, (event) => {
-        const handler = this.props[reactName];
+      const handler = eventHandlers[reactName];
 
-        if (typeof handler === 'function') {
-          handler(event);
-        }
-      })
-    });
-  }
-
-  componentWillUnmount() {
-    const { map } = this.props;
-
-    if (map && this.marker) {
-      this.marker.remove();
-      this.marker = null;
-      this.setState({ container: null });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { visible, coordinates } = this.props;
-
-    if (coordinates && coordinates !== prevProps.coordinates) {
-        this.marker.setLngLat(coordinates)
-    }
-
-    // An update to coordinates might come after visible has changed, so we have to check for either.
-    if (visible !== prevProps.visible || coordinates !== prevProps.coordinates) {
-      if (visible && coordinates) {
-        this.add();
-      } else {
-        this.remove();
+// TODO: passing a different eventHandlers prop after the first render will have no effect.  same with options.
+      if (typeof handler === 'function') {
+        marker.on(mapboxName, (event) => handler(event));
       }
+    });
+
+    setContainer(div);
+    markerRef.current = marker;
+
+    // Return a cleanup function that will remove the marker from the map when we're unmounted.
+    return () => {
+      if (map && markerRef.current) {
+        markerRef.current.remove();
+        markerRef.current = null;
+        setContainer(null);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (coordinates) {
+        markerRef.current.setLngLat(coordinates)
     }
-  }
 
-  add() {
-    if (!this.addedToMap && this.marker && this.props.coordinates) {
-      this.marker.addTo(this.props.map);
-      this.addedToMap = true;
+    if (visible) {
+      // Adding a marker to the map with null coordinates will throw an exception in Mapbox, so we
+      // have to wait until visible is true *and* there are coordinates before adding it.
+      if (!addedToMap && coordinates) {
+        markerRef.current.addTo(map);
+        setAddedToMap(true);
+      }
+    } else if (addedToMap) {
+      markerRef.current.remove();
+      setAddedToMap(false);
     }
-  }
+  }, [visible, coordinates]);
 
-  remove() {
-    if (this.addedToMap) {
-      this.marker.remove();
-      this.addedToMap = false;
-    }
-  }
-
-  render() {
-    const { container } = this.state;
-    const { visible, children } = this.props;
-
-    return container && visible
-      ? ReactDOM.createPortal(
-        children,
-        container
-      )
-      : null;
-  }
+  return container
+    // Render this component's children into a portal rooted on the container element.  The map
+    // will track the marker's location, but React will manage and render its UI.
+    ? ReactDOM.createPortal(
+      children,
+      container,
+    )
+    : null;
 }
