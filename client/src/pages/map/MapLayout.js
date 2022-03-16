@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, styled } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
-import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import { useIsMobile } from '@/pages/NewTree/utilities';
+import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
+import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
+import NewTree from '@/pages/NewTree/NewTree';
+import TreeDetails from '@/pages/TreeDetails/TreeDetails';
+import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
-import { useIsMobile } from '@/pages/map/NewTree/utilities';
-import DetailsDrawer from './DetailsDrawer';
-import Map from './Map/Map';
-import TreeDetailsPanel from './TreeDetails/TreeDetailsPanel';
-import NewTreePanel from './NewTree/NewTreePanel';
-import { useNewTree, NewTreeProvider } from './NewTree/useNewTree';
-import { UserLocationProvider } from './UserLocation/useUserLocation';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import Map from './Map';
 
 const drawerWidth = 350;
 
@@ -45,12 +45,23 @@ function MapLayout() {
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
-  const { data: currentTreeData, isError: isTreeQueryError } = useTreeQuery({ id: currentTreeId });
+
+  // TODO: why the lame errors
+  const {
+    data: currentTreeData,
+    isError: isTreeQueryError,
+  } = useTreeQuery({ id: currentTreeId }, { retry: 0 });
+
+  if (currentTreeData) {
+    currentTreeData.sourceId = currentTreeData?.sourceId || currentTreeData?.sourceID;
+    currentTreeData.city = currentTreeData?.city || currentTreeData?.sourceId;
+  }
+
   // Use a full-screen dialog on smaller screens instead of the drawer.
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
   const container = drawerEnabled
-    ? DetailsDrawer
+    ? PanelDrawer
     : ScrollableDialog;
 
   const handleTransitionEnd = (event) => {
@@ -130,13 +141,13 @@ function MapLayout() {
           Container are correct. */}
       {newTreeState.isPanelOpen
         ? (
-          <NewTreePanel
+          <NewTree
             Container={container}
             drawerWidth={drawerWidth}
           />
         )
         : (
-          <TreeDetailsPanel
+          <TreeDetails
             // Key the panel on the current tree, so that when the selection changes, all of the
             // components get re-rendered with fresh props.
             key={currentTreeId}
@@ -154,7 +165,7 @@ function MapLayout() {
 }
 
 // Wrap the MapLayout component in an ErrorBoundary and NewTreeProvider so that it can use the
-// useNewTree() hook to share state with NewTree and NewTreePanel.
+// useNewTree() hook to share state with NewTree and NewTree.
 export default function WrappedMapLayout() {
   return (
     <ErrorBoundary>

@@ -1,8 +1,9 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 
-const AuthButton = () => {
+export const AuthButton = () => {
   const { isAuthenticated, logout } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
 
@@ -29,4 +30,4 @@ const AuthButton = () => {
   );
 };
 
-export default AuthButton;
+// export default AuthButton;

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Tooltip } from '@mui/material';
 
@@ -6,7 +7,9 @@ const defaultTooltipSx = {
   maxWidth: 150,
 };
 
-const StyledTooltip = ({ children, title, tooltipSx = {}, ...props }) => (
+const StyledTooltip = ({
+  children, title, tooltipSx = {}, ...props
+}) => (
   <Tooltip
     title={title}
     arrow
@@ -16,7 +19,7 @@ const StyledTooltip = ({ children, title, tooltipSx = {}, ...props }) => (
       tooltip: {
         // Allow callers to apply additional styling to the tooltip component, which is otherwise
         // fairly inconvenient.
-        sx: Object.assign({}, defaultTooltipSx, tooltipSx)
+        sx: { ...defaultTooltipSx, ...tooltipSx },
       },
     }}
     {...props}

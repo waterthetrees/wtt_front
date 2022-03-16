@@ -21,12 +21,14 @@ import { getData, postData, putData } from './apiUtils';
  * documentation for details.
  */
 function createUseQuery(api, options = {}) {
-  const { defaultData = {}, defaultOptions = {}, preProcessor, postProcessor } = options;
+  const {
+    defaultData = {}, defaultOptions = {}, preProcessor, postProcessor,
+  } = options;
   const queryFn = typeof postProcessor === 'function'
     ? (...args) => getData(...args).then(postProcessor)
     : getData;
 
-  return function(queryData = {}, queryOptions = {}) {
+  return function (queryData = {}, queryOptions = {}) {
     const data = { ...defaultData, ...queryData };
     const options = { ...defaultOptions, ...queryOptions };
 
@@ -56,7 +58,7 @@ function createUseMutation(apiList, method) {
     ? putData
     : postData;
 
-  return function() {
+  return function () {
     const queryClient = useQueryClient();
 
     return useMutation((data) => apiCaller(apis[0], data), {
@@ -69,7 +71,9 @@ function createUseMutation(apiList, method) {
 // Custom postProcessor to convert the response from calls to `/cities` and `/countries` into arrays
 // of GeoJSON features.
 function processTreeCounts(treeCounts) {
-  return treeCounts.map(({ city, country, count, countryCountTrees, lat, lng }) => {
+  return treeCounts.map(({
+    city, country, count, countryCountTrees, lat, lng,
+  }) => {
     const name = city || country;
     const countString = Number(count || countryCountTrees).toLocaleString();
 
@@ -80,7 +84,7 @@ function processTreeCounts(treeCounts) {
         coordinates: [lng, lat],
       },
       properties: {
-        name: name,
+        name,
         cityCountTrees: `${countString} trees`,
         count: `${countString} trees`,
       },
@@ -90,18 +94,22 @@ function processTreeCounts(treeCounts) {
 
 // Create custom `useQuery` hooks for GET calls to the WTT API.  These wrap the API method names and
 // default parameters so they don't have to be repeated with each use of a hook.
-export const useUserAdoptedQuery = createUseQuery('usercounts', { defaultData: { request: 'adopted' }});
+export const useUserAdoptedQuery = createUseQuery('usercounts', { defaultData: { request: 'adopted' } });
 export const useUserLikedQuery = createUseQuery('usercounts', { defaultData: { request: 'liked' } });
 export const useUserPlantedQuery = createUseQuery('usercounts', { defaultData: { request: 'planted' } });
 export const useUserTreeHistoryQuery = createUseQuery('usertreehistory');
 export const useCitiesQuery = createUseQuery('cities', { postProcessor: processTreeCounts });
 export const useCountriesQuery = createUseQuery('countries', {
   defaultData: {
-    country: 'All'
+    country: 'All',
   },
-  postProcessor: processTreeCounts
+  postProcessor: processTreeCounts,
 });
 export const useTreemapQuery = createUseQuery('treemap', { defaultData: { city: '%' } });
+
+// This is convoluted and difficult to follow the logic
+// without jumping around between a bunch of functions.
+// TODO fix issue of react exception rather than hack react-query
 export const useTreeQuery = createUseQuery('trees', {
   preProcessor(api, data, queryFn, options) {
     // If id is null, we don't want to call the server with that, as it'll return an error,
@@ -113,10 +121,12 @@ export const useTreeQuery = createUseQuery('trees', {
       !data.id
         ? () => Promise.resolve(null)
         : queryFn,
-      options
+      options,
     );
-  }
+  },
 });
+// export const useTreeQuery = createUseQuery('trees');
+
 export const useTreeHistoryQuery = createUseQuery('treehistory');
 export const useTreeLikesQuery = createUseQuery('treelikes', {
   defaultOptions: {
@@ -124,7 +134,7 @@ export const useTreeLikesQuery = createUseQuery('treelikes', {
       liked: false,
       likedCount: 0,
     },
-  }
+  },
 });
 export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
   defaultOptions: {
@@ -132,7 +142,7 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
       adopted: false,
       adoptedCount: 0,
     },
-  }
+  },
 });
 
 // Create custom `useMutation` hooks for the POST/PUT calls to the WTT API.  These will
@@ -140,6 +150,7 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
 // to get the latest data.
 export const useUserMutation = createUseMutation('users');
 export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
+// TODO just have ONE mutation for treedata put/post, this adds complexity and extra code
 export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap']);
 export const useTreeHistoryMutation = createUseMutation('treehistory');
 export const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);
