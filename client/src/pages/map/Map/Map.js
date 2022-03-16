@@ -6,6 +6,7 @@ import { mapboxAccessToken } from '@/util/config';
 import { tilesServerEndpoints } from '@/api/apiEndpoints';
 import { treeHealth } from '@/util/treeHealth';
 import NewTree from '../NewTree/NewTree';
+import GeolocateControl from '../UserLocation/GeolocateControl';
 import Adopt from '../Adopt/Adopt';
 import MapboxControlPortal from './MapboxControlPortal';
 import MapLayers from './MapLayers';
@@ -99,17 +100,8 @@ export default function Map({
         hash: true,
       });
 
-      // Add the navigation and geolocate controls to the map.
+      // Add the navigation controls to the map.
       mapboxMap.addControl(new mapboxgl.NavigationControl());
-      mapboxMap.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: { enableHighAccuracy: true },
-        // When active the map will receive updates to the device's location as it changes.
-        trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true,
-        auto: true,
-        fitBoundsOptions: { zoom: 20 },
-      }));
 
       mapboxMap.on('load', () => {
         // Now that the style has loaded, add the vector tile source, which will be used by the
@@ -225,6 +217,14 @@ export default function Map({
         position="top-left"
       >
         <Adopt />
+      </MapboxControlPortal>
+      <MapboxControlPortal
+        map={map}
+        position="top-right"
+      >
+        <GeolocateControl
+          map={map}
+        />
       </MapboxControlPortal>
       <MapboxControlPortal
         map={map}

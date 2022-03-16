@@ -9,6 +9,7 @@ import Map from './Map/Map';
 import TreeDetailsPanel from './TreeDetails/TreeDetailsPanel';
 import NewTreePanel from './NewTree/NewTreePanel';
 import { useNewTree, NewTreeProvider } from './NewTree/useNewTree';
+import { UserLocationProvider } from './UserLocation/useUserLocation';
 
 const drawerWidth = 350;
 
@@ -154,11 +155,13 @@ function MapLayout() {
 
 // Wrap the MapLayout component in an ErrorBoundary and NewTreeProvider so that it can use the
 // useNewTree() hook to share state with NewTree and NewTreePanel.
-export default function WrappedMayLayout() {
+export default function WrappedMapLayout() {
   return (
     <ErrorBoundary>
       <NewTreeProvider>
-        <MapLayout />
+        <UserLocationProvider>
+          <MapLayout />
+        </UserLocationProvider>
       </NewTreeProvider>
     </ErrorBoundary>
   );

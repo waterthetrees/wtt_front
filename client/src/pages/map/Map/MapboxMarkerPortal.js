@@ -11,7 +11,7 @@ const events = [
 // MapboxMarkerPortal bridges Mapbox and React.  It manages adding/removing a marker to/from the
 // map, and creates a container div into which React will render the child components.
 export default function MapboxMarkerPortal({
-  map, visible, coordinates, options = {}, children, ...eventHandlers
+  map, visible, coordinates, options = {}, className = '', children, ...eventHandlers
 }) {
   const [container, setContainer] = useState(null);
   const [addedToMap, setAddedToMap] = useState(false);
@@ -21,7 +21,7 @@ export default function MapboxMarkerPortal({
     const div = document.createElement('div');
     const marker = new mapboxgl.Marker({
       element: div,
-      ...options
+      ...options,
     });
 
     events.forEach(([mapboxName, reactName]) => {
@@ -32,6 +32,11 @@ export default function MapboxMarkerPortal({
         marker.on(mapboxName, (event) => handler(event));
       }
     });
+
+    // Calling add() on an empty className will throw, so check it first.
+    if (className) {
+      div.classList.add(className);
+    }
 
     setContainer(div);
     markerRef.current = marker;
@@ -48,7 +53,7 @@ export default function MapboxMarkerPortal({
 
   useEffect(() => {
     if (coordinates) {
-        markerRef.current.setLngLat(coordinates)
+      markerRef.current.setLngLat(coordinates);
     }
 
     if (visible) {

@@ -1,9 +1,15 @@
-import React, { useReducer, useMemo, useContext, createContext } from 'react';
+import React, {
+  useReducer, useMemo, useContext, createContext,
+} from 'react';
 
 const newTreeInitialState = {
   coords: null,
   result: null,
   isPlanting: false,
+  // Default isFollowingUser to true so that on mobile, when the user taps Plant for the first time,
+  // the marker will sync to their location.  On desktop, we don't automatically turn on tracking
+  // when clicking Plant.
+  isFollowingUser: true,
   isPanelOpen: false,
   isDragging: false,
 };
@@ -17,7 +23,16 @@ const newTreeReducer = (state, { type, payload }) => {
       return { ...state, isPlanting: true };
 
     case 'endPlanting':
-      return { ...newTreeInitialState };
+      // Reset the state except for isFollowingUser.  We want to leave that flag alone so that it's
+      // remembered across planting sessions.
+      const { isFollowingUser } = state;
+      return { ...newTreeInitialState, isFollowingUser };
+
+    case 'beginFollowingUser':
+      return { ...state, isFollowingUser: true };
+
+    case 'endFollowingUser':
+      return { ...state, isFollowingUser: false };
 
     case 'beginDrag':
       return { ...state, isDragging: true };
@@ -42,7 +57,7 @@ const newTreeReducer = (state, { type, payload }) => {
 const NewTreeContext = createContext(undefined);
 
 const NewTreeProvider = (props) => {
-  const [newTreeState, dispatch] = useReducer(newTreeReducer, newTreeInitialState);
+  const [newTreeState, dispatch] = useReducer(newTreeReducer, { ...newTreeInitialState });
   const context = useMemo(() => ({
     newTreeState,
     setCoords(coords) {
@@ -53,6 +68,12 @@ const NewTreeProvider = (props) => {
     },
     endPlanting() {
       dispatch({ type: 'endPlanting' });
+    },
+    beginFollowingUser() {
+      dispatch({ type: 'beginFollowingUser' });
+    },
+    endFollowingUser() {
+      dispatch({ type: 'endFollowingUser' });
     },
     beginDrag() {
       dispatch({ type: 'beginDrag' });

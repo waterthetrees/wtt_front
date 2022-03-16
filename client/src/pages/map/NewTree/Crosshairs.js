@@ -20,7 +20,7 @@ export const Crosshairs = (props) => (
         }
 
         .dot {
-          fill: orange;
+          fill: currentColor;
           stroke: none;
         }
       `}
