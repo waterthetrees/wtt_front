@@ -5,13 +5,15 @@ import { useTreeHistoryQuery } from '@/api/queries';
 import { maintenanceActions } from '@/util/constants';
 import { Liked, Adopted } from '@/components/Icons';
 import Section from '@/components/Section/Section';
-import TreeDetailsTable from './TreeDetailsTable';
+import TreeTable from './TreeTable';
 
 const TreeHistoryItem = ({ item }) => {
   const {
     dateVisit, volunteer = 'volunteer', comment, liked, adopted,
   } = item;
-  const isoDate = format(new Date(dateVisit), 'yyyy-MM-dd');
+  const isoDate = dateVisit
+    ? format(new Date(dateVisit), 'yyyy-MM-dd')
+    : format(new Date(), 'yyyy-MM-dd');
   const actions = maintenanceActions.reduce((result, [, pastAction]) => {
     if (item[pastAction] === 'yes') {
       result.push(pastAction);
@@ -72,8 +74,8 @@ const TreeHistoryItem = ({ item }) => {
   );
 };
 
-export default function TreeHistory({ currentTreeId }) {
-  const { data: history } = useTreeHistoryQuery({ id: currentTreeId });
+export default function TreeHistory({ currentTreeData }) {
+  const { data: history } = useTreeHistoryQuery({ id: currentTreeData.id });
 
   if (!history?.length) {
     return null;
@@ -83,14 +85,14 @@ export default function TreeHistory({ currentTreeId }) {
     <Section
       title="Tree History"
     >
-      <TreeDetailsTable>
+      <TreeTable>
         {history.map((item) => (
           <TreeHistoryItem
             key={item.dateVisit}
             item={item}
           />
         ))}
-      </TreeDetailsTable>
+      </TreeTable>
     </Section>
   );
 }

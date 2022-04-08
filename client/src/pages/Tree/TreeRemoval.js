@@ -7,7 +7,7 @@ import { useTreeDataMutation, useCreateTreeDataMutation, useTreeHistoryMutation 
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import TreeRemovalDialog from './TreeRemovalDialog';
 
-export default function RemoveTree({ currentTreeId, currentTreeData, isTreeQueryError }) {
+export default function RemoveTree({ currentTreeData, isTreeQueryError }) {
   const { common, notes } = currentTreeData;
   const { user = {}, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();

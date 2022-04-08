@@ -1,11 +1,11 @@
 import React from 'react';
 import './About.scss';
 
-import Footer from '@/components/Footer/Footer';
+import { Footer } from '@/components/Footer/Footer';
 import Contacts from '@/pages/Contact/Contacts';
 import Affiliates from '@/pages/Contact/Affiliates';
 
-function About() {
+const About = () => {
   const affiliates = [{
     city: 'Alameda',
     links: {
@@ -53,6 +53,6 @@ function About() {
       <Footer />
     </div>
   );
-}
+};
 
 export default About;

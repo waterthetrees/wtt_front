@@ -6,13 +6,11 @@ import {
 const Container = styled(TableContainer)`
   & .MuiTableCell-root {
     font-size: 1rem;
-  }
-  & .css-lt59a0-MuiTableCell-root {
     padding: 6px 0;
   }
 `;
 
-export default function TreeDetailsTable({ children }) {
+export default function TreeTable({ children }) {
   return (
     <Container>
       <Table size="small">

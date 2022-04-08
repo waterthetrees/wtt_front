@@ -107,9 +107,6 @@ export const useCountriesQuery = createUseQuery('countries', {
 });
 export const useTreemapQuery = createUseQuery('treemap', { defaultData: { city: '%' } });
 
-// This is convoluted and difficult to follow the logic
-// without jumping around between a bunch of functions.
-// TODO fix issue of react exception rather than hack react-query
 export const useTreeQuery = createUseQuery('trees', {
   preProcessor(api, data, queryFn, options) {
     // If id is null, we don't want to call the server with that, as it'll return an error,
@@ -125,7 +122,6 @@ export const useTreeQuery = createUseQuery('trees', {
     );
   },
 });
-// export const useTreeQuery = createUseQuery('trees');
 
 export const useTreeHistoryQuery = createUseQuery('treehistory');
 export const useTreeLikesQuery = createUseQuery('treelikes', {
@@ -150,7 +146,6 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
 // to get the latest data.
 export const useUserMutation = createUseMutation('users');
 export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
-// TODO just have ONE mutation for treedata put/post, this adds complexity and extra code
 export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap']);
 export const useTreeHistoryMutation = createUseMutation('treehistory');
 export const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);

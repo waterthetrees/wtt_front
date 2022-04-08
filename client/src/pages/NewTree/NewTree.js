@@ -10,7 +10,7 @@ import NewTreePlanter from './NewTreePlanter';
 import { randomInteger } from './utilities';
 import { useNewTree } from './useNewTree';
 
-export default function NewTree({ Container, drawerWidth }) {
+export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
   const { newTreeState, confirm, cancel } = useNewTree();
 
   if (!newTreeState.coords) {
@@ -54,7 +54,7 @@ export default function NewTree({ Container, drawerWidth }) {
   const handleFormSubmit = handleSubmit(handleConfirm, handleError);
 
   return (
-    <Container
+    <TreeDetailsContainer
       title="New Tree"
       width={drawerWidth}
       open={newTreeState.isPanelOpen}
@@ -78,6 +78,6 @@ export default function NewTree({ Container, drawerWidth }) {
         <NewTreeAddress />
         <NewTreePlanter />
       </Form>
-    </Container>
+    </TreeDetailsContainer>
   );
 }

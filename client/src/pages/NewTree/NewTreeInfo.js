@@ -4,9 +4,9 @@ import {
   FormTextField,
   FormSelect,
 } from '@/components/Form';
-import TreeNameAndSize from '@/components/Tree/TreeNameAndSize';
 import Section from '@/components/Section/Section';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
+import TreeNameAndSize from '@/components/TreeUtil/TreeNameAndSize';
 
 // Create an array of tree health items, reversed so that "good" comes first.
 const healthMenuItems = treeHealthUtil.getNameValuePairs().reverse()

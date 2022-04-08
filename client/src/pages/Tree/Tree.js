@@ -3,14 +3,14 @@ import { Alert } from '@mui/material';
 import TreeHeader from './TreeHeader';
 import TreeMaintenance from './TreeMaintenance';
 import TreeRemoval from './TreeRemoval';
-import TreeDetailsHealth from './TreeDetailsHealth';
+import TreeHealth from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeHistory from './TreeHistory';
 import TreeInfo from './TreeInfo';
 
-export default function TreeDetails({
+export default function Tree({
   map,
-  Container, drawerWidth, currentTreeData, currentTreeId, setCurrentTreeId, isTreeQueryError,
+  TreeDetailsContainer, drawerWidth, currentTreeData, currentTreeId, setCurrentTreeId, isTreeQueryError,
 }) {
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
@@ -32,13 +32,15 @@ export default function TreeDetails({
       'planting site',
       'other',
       '#n/a', '::'].includes(currentTreeData?.common.toLowerCase());
-    // TODO Figure out these wierdos
+    // Common name field has inconsistent data when a tree's missing.
+    // Until we clean up the data on the way into the vector tiles,
+    // We'll add it here so that Maintenance/Health/removal don't render.
   }
 
   const handleClose = () => setCurrentTreeId(null);
 
   return (
-    <Container
+    <TreeDetailsContainer
       title="Tree Details"
       width={drawerWidth}
       open={!!currentTreeId}
@@ -54,7 +56,7 @@ export default function TreeDetails({
             />
 
             {!vacant && (
-              <TreeDetailsHealth
+              <TreeHealth
                 map={map}
                 currentTreeData={currentTreeData}
                 isTreeQueryError={isTreeQueryError}
@@ -68,14 +70,12 @@ export default function TreeDetails({
 
             {!vacant && (
               <TreeMaintenance
-                currentTreeId={currentTreeId}
                 currentTreeData={currentTreeData}
                 isTreeQueryError={isTreeQueryError}
               />
             )}
 
             <TreeHistory
-              currentTreeId={currentTreeId}
               currentTreeData={currentTreeData}
             />
 
@@ -86,13 +86,12 @@ export default function TreeDetails({
             {!vacant && (
               <TreeRemoval
                 currentTreeData={currentTreeData}
-                currentTreeId={currentTreeId}
                 isTreeQueryError={isTreeQueryError}
               />
             )}
           </>
         )
         : noDataChild}
-    </Container>
+    </TreeDetailsContainer>
   );
 }

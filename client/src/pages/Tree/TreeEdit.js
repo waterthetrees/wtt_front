@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import format from 'date-fns/format';
 import { useTreeDataMutation, useCreateTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
 import { FormCheckbox, FormScrollableDialog } from '@/components/Form';
-import TreeNameAndSize from '@/components/Tree/TreeNameAndSize';
+import TreeNameAndSize from '@/components/TreeUtil/TreeNameAndSize';
 
 function noNulls(object) {
   return Object.keys(object).reduce((result, key) => {
@@ -21,7 +21,7 @@ function noNulls(object) {
 
 const vacantPattern = /vacant/i;
 
-export default function TreeDetailsEdit({
+export default function TreeEdit({
   open, currentTreeId, currentTreeData, onConfirm, onCancel, isTreeQueryError,
 }) {
   const { user = {} } = useAuth0();
@@ -59,10 +59,9 @@ export default function TreeDetailsEdit({
         sendTreeData.datePlanted = format(new Date(), 'yyyy-MM-dd');
       }
       if (isTreeQueryError) {
-        // const {saved, ...sendData, } = { ...data, ...currentTreeData }
-        mutateCreateTreeData.mutate({ ...data, ...currentTreeData });
+        mutateCreateTreeData.mutate({ ...currentTreeData, ...sendTreeData });
       } else {
-        mutateTreeData.mutate({ id: currentTreeId, ...data });
+        mutateTreeData.mutate(sendTreeData);
       }
 
       if (!vacantPattern.test(data.common)) {

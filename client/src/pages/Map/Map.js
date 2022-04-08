@@ -3,7 +3,6 @@ import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
 import { mapboxAccessToken } from '@/util/config';
-// import { tilesServerEndpoints } from '@/api/apiEndpoints';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
 import NewTreeButton from '@/pages/NewTree/NewTreeButton';
@@ -97,7 +96,6 @@ export default function Map({
     if (isMapboxSupported && !map && containerRef.current) {
       const mapboxMap = new mapboxgl.Map({
         container: containerRef.current,
-        // style: 'mapbox://styles/100ktrees/ckffjjvs41b3019ldl5tz9sps',
         style: 'mapbox://styles/waterthetrees/ckyckqkqz8e4b14rn3rm1hh9k',
         center: [-122.34725, 37.7343787],
         zoom: 10,
@@ -133,15 +131,10 @@ export default function Map({
 
           if (feature) {
             const { properties, properties: { id } } = feature;
-            // const selectedTreeData = {
-            //   ...properties,
-            //   lat: feature.geometry.coordinates[0],
-            //   lng: feature.geometry.coordinates[1],
-            // };
             const queryKeys = ['trees', { id }];
 
             // Cache the properties from the vector tile as the data for the /trees query that will
-            // be triggered by the setCurrentTreeId() call below.  The TreeDetailsPanel will first
+            // be triggered by the setCurrentTreeId() call below.  The Tree will first
             // get this cached data and then update it when the server response comes back.  But
             // only do this if there's no cached data already.  If there is, that data is presumably
             // the latest response from the server, so we don't want to override it with older data

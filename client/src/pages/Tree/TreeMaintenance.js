@@ -3,29 +3,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button, styled } from '@mui/material';
 import { Park } from '@mui/icons-material';
 import format from 'date-fns/format';
-import { useTreeHistoryMutation, useCreateTreeDataMutation, mutateTreeDataCreate } from '@/api/queries';
+import { useTreeHistoryMutation, useCreateTreeDataMutation } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import TreeMaintenanceDialog from './TreeMaintenanceDialog';
 
 const TreeMaintenanceButton = styled(Button)`
   font-size: 1.5rem;
 `;
-
-// TODO: Make it obvious what this Container is doing, rename it.
-// const Container = (props) => (
-//   <Box
-//     sx={{
-//       pt: 3,
-//       mt: 1,
-//       mb: 3,
-//       borderTop: 1,
-//       borderTopColor: 'divider',
-//       display: 'flex',
-//       justifyContent: 'space-between',
-//     }}
-//     {...props}
-//   />
-// );
 
 export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
   const { id } = currentTreeData;

@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
-import AdoptLikeCheckboxes from '@/pages/TreeDetails/AdoptLikeCheckboxes';
-import TreeDetailsEdit from '@/pages/TreeDetails/TreeDetailsEdit';
+import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
+
+import TreeEdit from './TreeEdit';
 
 export default function TreeHeader({ currentTreeData, vacant, isTreeQueryError }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -15,9 +16,9 @@ export default function TreeHeader({ currentTreeData, vacant, isTreeQueryError }
   } = currentTreeData;
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   // format() will throw an exception if datePlanted is undefined, so check it first.
-  // TODO figure out why 1969
-  const planted = datePlanted && format(new Date(datePlanted), 'MMMM d, yyyy');
-
+  const planted = datePlanted
+    ? format(new Date(datePlanted), 'MMMM d, yyyy')
+    : null;
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleEditClick = () => {
@@ -52,7 +53,7 @@ export default function TreeHeader({ currentTreeData, vacant, isTreeQueryError }
       />
 
       {isDialogOpen && (
-        <TreeDetailsEdit
+        <TreeEdit
           open={isDialogOpen}
           currentTreeId={id}
           currentTreeData={currentTreeData}

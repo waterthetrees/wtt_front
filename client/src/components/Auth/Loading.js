@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-first-prop-new-line */
 import React from 'react';
 import { Fade, Grid, Typography } from '@mui/material';
-import Footer from '@/components/Footer/Footer';
+import { Footer } from '@/components/Footer/Footer';
 import treeIcon from '@/assets/images/addtree/tree16.svg';
 
 // Wrap the loading text and image in a fade transition so that it doesn't appear and then get
@@ -34,5 +34,3 @@ export const Loading = () => (
     </Grid>
   </Fade>
 );
-
-// export default Loading;

@@ -10,4 +10,3 @@ export const RedirectWithHash = ({ param = 'to' }) => {
     <Navigate to={path + location.hash} replace />
   );
 };
-// export default RedirectWithHash;

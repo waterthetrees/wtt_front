@@ -1,9 +1,15 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import {
   TableRow, TableCell, Link, Box,
 } from '@mui/material';
 import Section from '@/components/Section/Section';
-import TreeDetailsTable from './TreeDetailsTable';
+import TreeTable from './TreeTable';
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const infoKeys = [
   'address',
@@ -14,17 +20,20 @@ const infoKeys = [
   'neighborhood',
   ['lat', 'Latitude'],
   ['lng', 'Longitude'],
+  'organization',
   'who',
-  'Organization',
   'owner',
-  ['idReference', 'Reference #'],
+  ['idReference', 'Ref #'],
   'id',
-  'sourceId',
-  'sourceID',
-  ['count', 'TreeCount'],
-].map((info) => (Array.isArray(info)
-  ? info
-  : [info, info[0].toUpperCase() + info.slice(1)]));
+  'sourceid',
+  'download',
+  'url',
+  'info',
+  'count',
+  'treelocationcount',
+].map((treeRow) => (Array.isArray(treeRow)
+  ? treeRow
+  : [treeRow, capitalizeFirstLetter(treeRow)]));
 
 export default function TreeInfo({ currentTreeData }) {
   const labelValues = infoKeys.reduce((result, [key, label]) => {
@@ -40,21 +49,15 @@ export default function TreeInfo({ currentTreeData }) {
   if (!labelValues.length) {
     return null;
   }
-
   return (
     <Section
       title="Info"
     >
-      <TreeDetailsTable>
-        {labelValues.map(([label, value, key]) => (
-          <TableRow
-            key={key}
-          >
-            <TableCell sx={{ pl: 0, fontWeight: 'bold' }}>{label}</TableCell>
-            <TableCell>{value}</TableCell>
-          </TableRow>
+      <TreeTable>
+        {labelValues.map(([label, value]) => (
+          <TableRows key={label} label={label} value={value} />
         ))}
-      </TreeDetailsTable>
+      </TreeTable>
       <Box sx={{ my: 1, textAlign: 'right' }}>
         <Link
           href="https://standards.opencouncildata.org/#/trees"
@@ -67,4 +70,10 @@ export default function TreeInfo({ currentTreeData }) {
   );
 }
 
-// sx={{ '&:nth-child(odd)': { backgroundColor: 'lightgray' } }}
+const TableRows = ({ label, value }) => (
+
+  <TableRow key={label}>
+    <TableCell sx={{ pl: 0, fontWeight: 'bold' }}>{label}</TableCell>
+    <TableCell>{value}</TableCell>
+  </TableRow>
+);

@@ -1,17 +1,19 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-import Footer from '@/components/Footer/Footer';
+import { Footer } from '@/components/Footer/Footer';
 
 export default function NotFound() {
   return (
-    <Grid container
+    <Grid
+      container
       justifyContent="center"
       alignItems="center"
       direction="column"
       sx={{ height: '100vh' }}
     >
       <Grid item>
-        <Typography variant="h1"
+        <Typography
+          variant="h1"
           sx={{ my: 2 }}
         >
           404

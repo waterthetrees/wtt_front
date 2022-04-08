@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { useDebouncedCallback } from 'use-debounce';
-import { useTreeDataMutation, useCreateTreeDataMutation } from '@/api/queries';
+import { useTreeQuery, useTreeDataMutation, useCreateTreeDataMutation } from '@/api/queries';
 import Section from '@/components/Section/Section';
 
 export default function TreeNotes({ currentTreeData, isTreeQueryError }) {
   const { id, notes } = currentTreeData;
-  const [value, setValue] = useState(notes || '');
+  const notesRef = useRef(notes);
   const mutateTreeData = useTreeDataMutation();
-  const mutateTreeDataCreate = useCreateTreeDataMutation();
+  const mutateCreateTreeData = useCreateTreeDataMutation();
 
-  useEffect(() => {
-    if (notes && !value) {
-      // The vector tile data may not contain any notes, but the /trees call might return a string
-      // after this component is mounted, so update the text field if it's currently blank.
-      setValue(notes);
-    }
-  }, [notes]);
-
-  const saveNotes = useDebouncedCallback((newValue) => {
-    const trimmedValue = newValue.trim();
+  const saveNotes = useDebouncedCallback(() => {
+    const trimmedValue = notesRef.current.value.trim();
 
     // Only save the new string to the backend if it's different than our prop.  We save the trimmed
     // string but don't trim the state value so that if the user is in the middle of entering some
     // blank lines, we're not fighting with their edits, but it's cleaned up when they're done.
-    if (notes !== trimmedValue) {
+    if (trimmedValue.length && notes !== trimmedValue) {
       if (isTreeQueryError) {
-        mutateTreeDataCreate.mutate({
+        mutateCreateTreeData.mutate({
           ...currentTreeData,
           notes: trimmedValue,
         });
@@ -34,31 +26,31 @@ export default function TreeNotes({ currentTreeData, isTreeQueryError }) {
         mutateTreeData.mutate({ id, notes: trimmedValue });
       }
     }
-  }, 1500);
+  }, 300);
 
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-
-    setValue(newValue);
-    saveNotes(newValue);
-  };
-
+  const handleChange = () => saveNotes();
   // If there's a debounced call to save the current notes, flush it so it's posted to the
   // backend in case the component is being unmounted.
   const handleBlur = () => saveNotes.flush();
+
+  useEffect(() => {
+    if (!notesRef.current) return;
+    saveNotes();
+  }, [notesRef.current]);
 
   return (
     <Section
       title="Notes"
     >
       <TextField
-        value={value}
+        inputRef={notesRef}
         placeholder="Add a note"
         variant="standard"
         multiline
         fullWidth
-        onChange={handleChange}
+        defaultValue={notes}
         onBlur={handleBlur}
+        onChange={handleChange}
       />
     </Section>
   );

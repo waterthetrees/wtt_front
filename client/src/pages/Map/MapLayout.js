@@ -5,10 +5,10 @@ import { useIsMobile } from '@/pages/NewTree/utilities';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
 import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
 import NewTree from '@/pages/NewTree/NewTree';
-import TreeDetails from '@/pages/TreeDetails/TreeDetails';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
 
 const drawerWidth = 350;
@@ -46,7 +46,6 @@ function MapLayout() {
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
 
-  // TODO: why the lame errors
   const {
     data: currentTreeData,
     isError: isTreeQueryError,
@@ -57,10 +56,10 @@ function MapLayout() {
     currentTreeData.city = currentTreeData?.city || currentTreeData?.sourceId;
   }
 
-  // Use a full-screen dialog on smaller screens instead of the drawer.
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
-  const container = drawerEnabled
+  // Opens a left side panel on desktop, and a full-screen dialog on mobile.
+  const treeDetailsContainer = drawerEnabled
     ? PanelDrawer
     : ScrollableDialog;
 
@@ -136,22 +135,24 @@ function MapLayout() {
         />
       </MapContainer>
 
-      {/* We need to render the DetailsDrawer even if nothing is selected so that its width is
+      {/* We need to render the TreeDetailsContainer Panel even if nothing
+          is selected so that its width is
           still reserved in the parent Box and therefore the marginRight calculations in
           Container are correct. */}
       {newTreeState.isPanelOpen
         ? (
           <NewTree
-            Container={container}
+            TreeDetailsContainer={treeDetailsContainer}
             drawerWidth={drawerWidth}
           />
         )
         : (
-          <TreeDetails
-            // Key the panel on the current tree, so that when the selection changes, all of the
+          <Tree
+            // Key the TreeDetailsContainer panel on the current tree,
+            // so that when the selection changes, all of the
             // components get re-rendered with fresh props.
             key={currentTreeId}
-            Container={container}
+            TreeDetailsContainer={treeDetailsContainer}
             drawerWidth={drawerWidth}
             map={map}
             currentTreeData={currentTreeData}

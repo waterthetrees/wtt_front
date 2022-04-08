@@ -9,7 +9,6 @@ const env = {
 }[window.location.hostname];
 
 const mapboxAccessTokens = {
-  // key: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w'
   prod: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrY3lmcWVqcDA5ZDYyenFpdG13bWdrOHYifQ.6er3tXeahhVUtgiu_pqWFw',
   dev: 'sk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3ljanlpZHQwYndoMzFtbzR3eWlybDI3In0.L2QhSIz4X2WIQ23QoQgVTQ',
   blue: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNramQxdzV6ZTEwN2YzMXFxZG9rbHdjYTIifQ.wuXVYDeQ7WRqALu-RZxPMg',
@@ -38,5 +37,5 @@ const auth0 = {
 }[env];
 
 export {
-  env, mapboxAccessToken, mapboxAccessTokens, auth0,
+  env, mapboxAccessToken, auth0,
 };

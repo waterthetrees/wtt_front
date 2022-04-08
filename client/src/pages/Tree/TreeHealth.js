@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Box, styled } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-// import { useDebouncedCallback } from 'use-debounce';
 import { useTreeDataMutation, useCreateTreeDataMutation } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
@@ -61,42 +60,41 @@ const healthSliderStyle = (() => {
   };
 })();
 
-export default function TreeDetailsHealth({ currentTreeData, isTreeQueryError }) {
+export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
   // Default the value to a normalized healthNum value, since many trees have bad healthNum data in
   // the vector tiles.
   const {
-    healthNum, id,
+    healthNum, health, id,
   } = currentTreeData;
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
-  const [value, setValue] = useState(treeHealthUtil.getNormalizedValue(healthNum));
+  const sliderRef = useRef(treeHealthUtil.getNormalizedValue(healthNum));
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const mutateTreeData = useTreeDataMutation();
   const mutateCreateTreeData = useCreateTreeDataMutation();
-  const sliderRef = useRef();
+
   const handleOnChange = () => {
-    const newHealth = treeHealthUtil.getNameByValue(sliderRef.current.value);
+    const currentHealthValue = parseInt(sliderRef.current.value, 10);
+    const newHealth = treeHealthUtil.getNameByValue(currentHealthValue);
     if (!isAuthenticated) {
       loginToCurrentPage();
     } else {
-      if (isTreeQueryError) {
+      if (isTreeQueryError && currentHealthValue !== healthNum) {
+        setHealthSaveAlert('saving...');
         mutateCreateTreeData.mutate({
           ...currentTreeData,
           url: currentTreeData.download,
           health: newHealth,
           scientific: currentTreeData.scientific
-          || currentTreeData.genus,
-          city: currentTreeData.city || currentTreeData.sourceId,
+          || currentTreeData.species,
+          city: currentTreeData.city,
         });
+        setTimeout(() => setHealthSaveAlert(''), 500);
       }
-      setValue(sliderRef.current.value);
 
-      if (sliderRef.current.value !== healthNum && !isTreeQueryError) {
+      if (currentHealthValue !== healthNum && !isTreeQueryError) {
         setHealthSaveAlert('saving...');
-        mutateTreeData.mutate({
-          id,
-          health: newHealth,
-        });
+        mutateTreeData.mutate({ id, health: newHealth });
 
         setTimeout(() => setHealthSaveAlert(''), 500);
       }
@@ -114,13 +112,14 @@ export default function TreeDetailsHealth({ currentTreeData, isTreeQueryError })
         className="slider"
         list="healthSlider"
         id="healthSlider"
+        value={treeHealthUtil.getNormalizedValue(healthNum)}
         style={healthSliderStyle}
         onChange={handleOnChange}
       />
       <HealthDatalist />
       <Box sx={{ textAlign: 'center' }}>
         <h4>
-          <span>{treeHealthUtil.getNameByValue(value)}</span>
+          <span>{health || 'good'}</span>
           {' '}
           {healthSaveAlert && (
             <span

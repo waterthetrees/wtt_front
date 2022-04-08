@@ -14,5 +14,3 @@ export const RequireAuth = ({ component, ...args }) => {
     <WrappedComponent {...args} />
   );
 };
-
-// export default RequireAuth;

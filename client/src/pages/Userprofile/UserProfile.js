@@ -12,7 +12,7 @@ import {
 import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
 import TreeIcon from '@/assets/images/addtree/tree12.svg';
 import UserTreeHistoryTable from '@/components/UserTreeHistoryTable/UserTreeHistoryTable';
-import Footer from '@/components/Footer/Footer';
+import { Footer } from '@/components/Footer/Footer';
 import { TooltipBottom } from '@/components/Tooltip';
 
 const ProfileContainer = styled(Box)`
@@ -73,7 +73,9 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
 
 export default function UserProfile() {
   const { user = {} } = useAuth0();
-  const { name, nickname, email, picture } = user;
+  const {
+    name, nickname, email, picture,
+  } = user;
   const emailQuery = { email };
   const emailEnabled = { enabled: !!email };
   const { data: adoptedTrees = [] } = useUserAdoptedQuery(emailQuery, emailEnabled);

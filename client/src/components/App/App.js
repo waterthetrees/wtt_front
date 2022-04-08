@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Header from '@/components/Header/Header';
-import NotFound from '@/components/NotFound/NotFound';
 import {
   Loading, Auth0ProviderWithRedirect, RequireAuth, RedirectWithHash,
 } from '@/components/Auth';
@@ -13,6 +12,7 @@ import Privacy from '@/pages/Privacy/Privacy';
 import License from '@/pages/License/License';
 import UserProfile from '@/pages/Userprofile/UserProfile';
 import Contact from '@/pages/Contact/Contact';
+import NotFound from '@/pages/NotFound/NotFound';
 import './App.css';
 
 // Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also

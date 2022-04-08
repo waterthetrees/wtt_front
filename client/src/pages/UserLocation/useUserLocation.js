@@ -21,7 +21,6 @@ const userLocationReducer = (state, { type, payload }) => {
 
   default:
     return { ...state, isTracking: false };
-      // throw new Error(`userLocationReducer: unrecognized type: ${type}`);
   }
 };
 
