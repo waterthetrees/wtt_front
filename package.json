@@ -1,6 +1,8 @@
 {
-  "name": "treeme",
-  "version": "0.0.1",
+  "name": "waterthetrees",
+  "author": "Team 'Water the Trees' (waterthetrees.com)",
+  "license": "CC-BY-NC-4.0",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "node": ">=16.0.0"

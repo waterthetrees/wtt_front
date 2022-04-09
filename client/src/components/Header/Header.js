@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import AuthButton from '@/components/Auth/AuthButton';
+import { AuthButton } from '@/components/Auth';
 import './Header.scss';
 
 const Header = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function useAuthUtils() {
@@ -6,7 +7,7 @@ export default function useAuthUtils() {
   const loginToPage = (destination) => loginWithRedirect({
     appState: {
       returnTo: destination,
-    }
+    },
   });
 
   const loginToCurrentPage = () => loginToPage(location.pathname + location.hash);
