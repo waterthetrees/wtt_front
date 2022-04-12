@@ -1,8 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import {
-  TableRow, TableCell, Link, Box,
+  TableRow, TableCell,
 } from '@mui/material';
 import Section from '@/components/Section/Section';
 import TreeTable from './TreeTable';
@@ -26,9 +28,6 @@ const infoKeys = [
   ['idReference', 'Ref #'],
   'id',
   'sourceid',
-  'download',
-  'url',
-  'info',
   'count',
   'treelocationcount',
 ].map((treeRow) => (Array.isArray(treeRow)
@@ -58,20 +57,11 @@ export default function TreeInfo({ currentTreeData }) {
           <TableRows key={label} label={label} value={value} />
         ))}
       </TreeTable>
-      <Box sx={{ my: 1, textAlign: 'right' }}>
-        <Link
-          href="https://standards.opencouncildata.org/#/trees"
-          underline="hover"
-        >
-          Open Council Data Standards
-        </Link>
-      </Box>
     </Section>
   );
 }
 
 const TableRows = ({ label, value }) => (
-
   <TableRow key={label}>
     <TableCell sx={{ pl: 0, fontWeight: 'bold' }}>{label}</TableCell>
     <TableCell>{value}</TableCell>

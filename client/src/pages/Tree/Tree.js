@@ -7,10 +7,12 @@ import TreeHealth from './TreeHealth';
 import TreeNotes from './TreeNotes';
 import TreeHistory from './TreeHistory';
 import TreeInfo from './TreeInfo';
+import TreeLinks from './TreeLinks';
 
 export default function Tree({
   map,
-  TreeDetailsContainer, drawerWidth, currentTreeData, currentTreeId, setCurrentTreeId, isTreeQueryError,
+  TreeDetailsContainer, drawerWidth, currentTreeData,
+  currentTreeId, setCurrentTreeId, isTreeQueryError,
 }) {
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
@@ -80,6 +82,10 @@ export default function Tree({
             />
 
             <TreeInfo
+              currentTreeData={currentTreeData}
+            />
+
+            <TreeLinks
               currentTreeData={currentTreeData}
             />
 

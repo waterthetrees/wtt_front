@@ -80,7 +80,6 @@ export default function AdoptLikeCheckboxes({
         scientific: currentTreeData.scientific
         || currentTreeData.genus,
         city: currentTreeData.city || currentTreeData.sourceId,
-        url: currentTreeData.download,
         volunteer: user.nickname,
         health: currentTreeData.health || 'fair',
       });

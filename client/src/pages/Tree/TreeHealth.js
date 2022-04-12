@@ -83,7 +83,6 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
         setHealthSaveAlert('saving...');
         mutateCreateTreeData.mutate({
           ...currentTreeData,
-          url: currentTreeData.download,
           health: newHealth,
           scientific: currentTreeData.scientific
           || currentTreeData.species,
