@@ -4,13 +4,11 @@ import { Box, Grid, Link } from '@mui/material';
 import format from 'date-fns/format';
 import {
   useTreeAdoptionsQuery, useTreeLikesQuery, useTreeAdoptionsMutation,
-  useTreeHistoryMutation, useTreeLikesMutation,
-  useCreateTreeDataMutation,
+  useTreeHistoryMutation, useTreeLikesMutation, useCreateOrUpdateTree,
 } from '@/api/queries';
 import { AdoptionCheckbox, InfoCheckbox, StarCheckbox } from '@/components/Checkbox';
 import { TooltipTop } from '@/components/Tooltip';
 import AdoptionDirections from '@/pages/Adopt/AdoptionDirections';
-import { useDebouncedCallback } from 'use-debounce';
 
 function Liked({ handleChange, currentTreeId, user }) {
   const { data: { liked, likedCount } } = useTreeLikesQuery({
@@ -63,37 +61,24 @@ function Adopted({
   );
 }
 
-export default function AdoptLikeCheckboxes({
-  currentTreeData, edit, isTreeQueryError,
-}) {
+export default function TreeLikeAdoptEditButtons({ currentTreeData: { id, common }, edit, }) {
   const { user } = useAuth0();
+  const createOrUpdateTree = useCreateOrUpdateTree();
   const mutateTreeLikes = useTreeLikesMutation();
   const mutateTreeAdoptions = useTreeAdoptionsMutation();
   const mutateHistory = useTreeHistoryMutation();
-  const mutateCreateTreeData = useCreateTreeDataMutation();
   const [directions, showDirections] = useState(false);
 
-  const handleChange = (event) => {
-    if (isTreeQueryError) {
-      mutateCreateTreeData.mutate({
-        ...currentTreeData,
-        scientific: currentTreeData.scientific
-        || currentTreeData.genus,
-        city: currentTreeData.city || currentTreeData.sourceId,
-        volunteer: user.nickname,
-        health: currentTreeData.health || 'fair',
-      });
-    }
-
+  const handleChange = async (event) => {
     const sendTreeHistory = {
-      id: currentTreeData.id,
+      id,
       dateVisit: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       [event.target.name]: event.target.checked,
       volunteer: user.nickname,
     };
     const sendTreeUser = {
-      id: currentTreeData.id,
-      common: currentTreeData.common,
+      id,
+      common,
       nickname: user.nickname,
       email: user.email,
       request: {
@@ -102,34 +87,34 @@ export default function AdoptLikeCheckboxes({
       },
     };
 
-    if (event.target.name === 'adopted') {
-      setTimeout(() => {
-        mutateTreeAdoptions.mutate(sendTreeUser);
-        mutateHistory.mutate(sendTreeHistory);
-      }, 500);
-      showDirections(event.target.checked);
-    }
-    if (event.target.name === 'liked') {
-      setTimeout(() => {
-        mutateTreeLikes.mutate(sendTreeUser);
-        mutateHistory.mutate(sendTreeHistory);
-      }, 500);
-    }
-  };
+    // Await the promise to make sure the tree exists before adding to its likes or adoptions below.
+    await createOrUpdateTree({ id });
 
-  if (!user) return null;
+    if (event.target.name === 'adopted') {
+      mutateTreeAdoptions.mutate(sendTreeUser);
+      showDirections(event.target.checked);
+    } else {
+      mutateTreeLikes.mutate(sendTreeUser);
+    }
+
+    mutateHistory.mutate(sendTreeHistory);
+  };
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between" flexWrap="initial">
+      <Grid container
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="initial"
+      >
         <Grid container>
           <Liked
-            currentTreeId={currentTreeData.id}
+            currentTreeId={id}
             user={user}
             handleChange={handleChange}
           />
           <Adopted
-            currentTreeId={currentTreeData.id}
+            currentTreeId={id}
             user={user}
             directions={directions}
             showDirections={showDirections}

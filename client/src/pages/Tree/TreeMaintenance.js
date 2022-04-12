@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button, styled } from '@mui/material';
 import { Park } from '@mui/icons-material';
 import format from 'date-fns/format';
-import { useTreeHistoryMutation, useCreateTreeDataMutation } from '@/api/queries';
+import { useTreeHistoryMutation, useCreateOrUpdateTree } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import TreeMaintenanceDialog from './TreeMaintenanceDialog';
 
@@ -11,13 +11,12 @@ const TreeMaintenanceButton = styled(Button)`
   font-size: 1.5rem;
 `;
 
-export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
-  const { id } = currentTreeData;
+export default function TreeMaintenance({ currentTreeData: { id } }) {
   const { user = {}, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const createOrUpdateTree = useCreateOrUpdateTree();
   const mutateHistory = useTreeHistoryMutation();
-  const mutateCreateTreeData = useCreateTreeDataMutation();
   const volunteerName = isAuthenticated
     ? user.nickname
     : 'Volunteer';
@@ -26,14 +25,14 @@ export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleClick = () => {
-    if (isAuthenticated) {
-      openDialog();
-    } else {
+    if (!isAuthenticated) {
       loginToCurrentPage();
+    } else {
+      openDialog();
     }
   };
 
-  const handleConfirm = ({ actions, volunteer, comment }) => {
+  const handleConfirm = async ({ actions, volunteer, comment }) => {
     closeDialog();
 
     if (comment || Object.keys(actions).length) {
@@ -48,12 +47,9 @@ export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
         sendTreeHistory.comment = comment;
       }
 
-      if (isTreeQueryError) {
-        mutateCreateTreeData.mutate({
-          ...currentTreeData,
-          volunteer,
-        });
-      }
+      // Make sure the tree exists before updating its history (though this doesn't actually appear
+      // to be necessary when adding maintenance history).
+      await createOrUpdateTree({ id });
       mutateHistory.mutate(sendTreeHistory);
     }
   };

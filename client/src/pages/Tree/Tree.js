@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Alert } from '@mui/material';
 import TreeHeader from './TreeHeader';
 import TreeMaintenance from './TreeMaintenance';
@@ -26,7 +26,6 @@ export const checkForUnfitData = (currentTreeData) => [currentTreeData?.common,
   // We'll add it here so that Maintenance/Health/removal don't render.
 
 export default function Tree({
-  map,
   TreeDetailsContainer, drawerWidth, currentTreeData,
   currentTreeId, setCurrentTreeId, isTreeQueryError,
 }) {
@@ -40,7 +39,7 @@ export default function Tree({
     )
     : null;
 
-  // check for malformed, missing common, scientific names, vacant sites, etc.
+  // Check for missing or malformed common and scientific names.
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
@@ -57,29 +56,24 @@ export default function Tree({
           <>
             <TreeHeader
               currentTreeData={currentTreeData}
-              hasMissingData={hasUnfitData}
-              isTreeQueryError={isTreeQueryError}
+              hasUnfitData={hasUnfitData}
             />
 
             {!hasUnfitData && (
               <TreeHealth
-                map={map}
                 currentTreeData={currentTreeData}
-                isTreeQueryError={isTreeQueryError}
               />
             )}
 
             {!hasUnfitData && (
               <TreeNotes
                 currentTreeData={currentTreeData}
-                isTreeQueryError={isTreeQueryError}
               />
             )}
 
             {!hasUnfitData && (
               <TreeMaintenance
                 currentTreeData={currentTreeData}
-                isTreeQueryError={isTreeQueryError}
               />
             )}
 
@@ -98,7 +92,6 @@ export default function Tree({
             {!hasUnfitData && (
               <TreeRemoval
                 currentTreeData={currentTreeData}
-                isTreeQueryError={isTreeQueryError}
               />
             )}
           </>

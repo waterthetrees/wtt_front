@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getData, postData, putData } from './apiUtils';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
  * Create a custom `useQuery` hook to call a given WTT server API method.
@@ -28,7 +29,7 @@ function createUseQuery(api, options = {}) {
     ? (...args) => getData(...args).then(postProcessor)
     : getData;
 
-  return function (queryData = {}, queryOptions = {}) {
+  return function(queryData = {}, queryOptions = {}) {
     const data = { ...defaultData, ...queryData };
     const options = { ...defaultOptions, ...queryOptions };
 
@@ -58,7 +59,7 @@ function createUseMutation(apiList, method) {
     ? putData
     : postData;
 
-  return function () {
+  return function() {
     const queryClient = useQueryClient();
 
     return useMutation((data) => apiCaller(apis[0], data), {
@@ -150,3 +151,63 @@ export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap'])
 export const useTreeHistoryMutation = createUseMutation('treehistory');
 export const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);
 export const useTreeAdoptionsMutation = createUseMutation(['treeadoptions', 'treehistory']);
+
+export function useCreateOrUpdateTree() {
+  const [changedData, setChangedData] = useState(null);
+  // Once the tree ID has been set, try to get its data from the backend.
+  const query = useTreeQuery({ id: changedData?.id }, {
+    // We don't want to fire this query until mutate() has been called with some data to change.
+    enabled: !!changedData,
+    // This query is likely to 404, and we don't want to retry in that case.
+    retry: 0
+  });
+  // We need separate mutations for create vs. just update, since one uses POST and the other PUT.
+  // We'll trigger only one of them in the useEffect below.
+  const createTreeData = useCreateTreeDataMutation();
+  const mutateTreeData = useTreeDataMutation();
+  // Use a ref to store the resolve function from the promise that will be returned by
+  // createOrUpdate(), so that we can resolve it later in the useEffect below once the tree has
+  // been created or updated.
+  const resolvePromise = useRef();
+  // Store a callback so we can return a function that won't change on every render.
+  const createOrUpdate = useCallback((changedData) => {
+      setChangedData(changedData);
+
+      // Return a promise so that the caller can wait for the create or update mutations to run
+      // before performing any additional updates that need to happen.
+      return new Promise((resolve) => resolvePromise.current = resolve);
+    },
+    [setChangedData]
+  );
+
+  useEffect(() => {
+    // Don't do anything until data to change has been received and the /trees query is done.
+    if (changedData && !query.isFetching) {
+      // Separate the id from any other data fields that were passed in.
+      const { id, ...data } = changedData;
+      const { current: resolve } = resolvePromise;
+      let result;
+
+      if (query.isError) {
+        // Querying for the tree by ID returned an error, which means we need to create it in the
+        // DB.  We'll use the data that was pre-cached from the vector tile, which is still cached
+        // by react-query in query.data, plus any changed data.
+        result = createTreeData.mutateAsync({ ...query.data, ...changedData });
+      } else if (Object.keys(data).length) {
+        // The tree already exists and fields other than just id were passed in, so we don't need to
+        // create a new tree, just mutate the existing one with the changed data.
+        result = mutateTreeData.mutateAsync(changedData);
+      }
+
+      // Resolve the promise that we returned from createOrUpdate() with the promise that was just
+      // returned from the react-query mutations above.  Or we'll resolve it with undefined if only
+      // an id was passed in and the tree already exists.
+      resolve(result);
+
+      // Now that we've used this data to mutate the tree, clear it.
+      setChangedData(null);
+    }
+  }, [changedData, query.isFetching]);
+
+  return createOrUpdate;
+}

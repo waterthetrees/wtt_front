@@ -10,17 +10,17 @@ const initialState = {
 
 const userLocationReducer = (state, { type, payload }) => {
   switch (type) {
-  case 'setCoords':
-    return { ...state, coords: payload };
+    case 'setCoords':
+      return { ...state, coords: payload };
 
-  case 'beginTracking':
-    return { ...state, isTracking: true };
+    case 'beginTracking':
+      return { ...state, isTracking: true };
 
-  case 'endTracking':
-    return { ...state, isTracking: false };
+    case 'endTracking':
+      return { ...state, isTracking: false };
 
-  default:
-    return { ...state, isTracking: false };
+    default:
+      throw new Error(`userLocationReducer: unrecognized type: ${type}`);
   }
 };
 

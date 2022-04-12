@@ -21,20 +21,24 @@ export default function MapLayers({
   map, layers, handlers, currentTreeData,
 }) {
   useEffect(() => {
-    if (!currentTreeData) return;
     const data = {
       features: [],
       type: 'FeatureCollection',
     };
 
-    const { lng, lat } = currentTreeData;
+    if (currentTreeData) {
+      const { lng, lat } = currentTreeData;
 
-    data.features.push({
-      geometry: {
-        type: 'Point',
-        coordinates: [lng, lat],
-      },
-    });
+      data.features.push({
+        geometry: {
+          type: 'Point',
+          coordinates: [lng, lat],
+        },
+      });
+    }
+
+    // Update the selection layer with a feature for the selected tree, or an empty array if nothing
+    // is selected, so that the selection border is cleared.
     map.getSource('selection').setData(data);
   }, [currentTreeData]);
 
@@ -122,7 +126,6 @@ export default function MapLayers({
           },
         }}
       />
-
     </>
   );
 }
