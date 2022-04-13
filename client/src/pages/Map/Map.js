@@ -99,6 +99,8 @@ export default function Map({
         style: 'mapbox://styles/waterthetrees/ckyckqkqz8e4b14rn3rm1hh9k',
         center: [-122.34725, 37.7343787],
         zoom: 10,
+        maxZoom: 18.5,
+        minZoom: 2,
         // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
         hash: true,
       });

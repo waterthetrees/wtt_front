@@ -4,31 +4,17 @@ import { treeHealthUtil } from '@/util/treeHealthUtil';
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
 
-// TODO make the dots bigger on zoom out so you can see which cities have trees
-const circleRadius = {
-  'circle-radius': [
-    'interpolate', ['linear'], ['zoom'],
-    10, 2,
-    11, 3,
-    17, 9,
-  ],
-};
+const linearZoom = ['interpolate', ['linear'], ['zoom'],
+  5, 10,
+  7, 7,
+  10, 2,
+  18, 6,
+];
+
 const circleLayerZoomRange = {
   type: 'circle',
-  minzoom: 5,
-  maxzoom: 18,
-};
-
-const circleLayerZoomRangeGeo = {
-  type: 'circle',
-  minzoom: 5,
-  maxzoom: 24,
-};
-
-const sourceLayerMapboxVectorTiles = {
-  source: 'WTTV',
-  'source-layer': 'data',
-  ...circleLayerZoomRange,
+  minzoom: 2,
+  maxzoom: 18.51,
 };
 
 export default function MapLayers({
@@ -70,7 +56,8 @@ export default function MapLayers({
           map={map}
           on={handlers}
           layer={{
-            ...sourceLayerMapboxVectorTiles,
+            source: 'WTTV',
+            'source-layer': 'data',
             ...circleLayerZoomRange,
             filter: id === 'noData'
               ? ['!has', 'health']
@@ -81,7 +68,7 @@ export default function MapLayers({
               ],
             paint: {
               'circle-color': treeHealthUtil.getColorByName(id, 'fill'),
-              ...circleRadius,
+              'circle-radius': linearZoom,
             },
           }}
         />
@@ -101,7 +88,7 @@ export default function MapLayers({
               type: 'FeatureCollection',
             },
           },
-          ...circleLayerZoomRangeGeo,
+          ...circleLayerZoomRange,
           paint: {
             // Unlike the other layers above, this one can contain trees with different health
             // values.  So set each circle's paint color by matching the health value to a color.
@@ -110,7 +97,7 @@ export default function MapLayers({
               ['get', 'health'],
               ...treeHealthUtil.getPaintColors('fill'),
             ],
-            ...circleRadius,
+            'circle-radius': linearZoom,
           },
         }}
       />
@@ -126,16 +113,12 @@ export default function MapLayers({
               type: 'FeatureCollection',
             },
           },
-          ...circleLayerZoomRangeGeo,
+          ...circleLayerZoomRange,
           paint: {
             'circle-color': 'transparent',
-            ...circleRadius,
+            'circle-radius': linearZoom,
             'circle-stroke-color': 'white',
-            'circle-stroke-width': [
-              'interpolate', ['linear'], ['zoom'],
-              12, 2,
-              24, 12,
-            ],
+            'circle-stroke-width': linearZoom,
           },
         }}
       />
