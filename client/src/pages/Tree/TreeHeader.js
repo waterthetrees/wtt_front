@@ -7,7 +7,7 @@ import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 
 import TreeEdit from './TreeEdit';
 
-export default function TreeHeader({ currentTreeData, vacant, isTreeQueryError }) {
+export default function TreeHeader({ currentTreeData, isTreeQueryError, hasUnfitData }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
@@ -32,25 +32,29 @@ export default function TreeHeader({ currentTreeData, vacant, isTreeQueryError }
   return (
     <>
       <div className="text-left">
-        <h1>
-          {common}
-        </h1>
-        {!vacant && (
-          <div>
-            <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>
-            {(scientific !== genus) && <h2>{genus}</h2>}
-            {height && <h5>Height: {height}</h5>}
-            {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
-            {datePlanted && <h5>Planted: {planted}</h5>}
-          </div>
+        {common && (
+          <h1>
+            {common}
+          </h1>
         )}
+
+        <div>
+          {scientific && <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>}
+          {(scientific !== genus) && <h2>{genus}</h2>}
+          {height && <h5>Height: {height}</h5>}
+          {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
+          {datePlanted && <h5>Planted: {planted}</h5>}
+        </div>
+
       </div>
 
-      <AdoptLikeCheckboxes
-        currentTreeData={currentTreeData}
-        edit={handleEditClick}
-        isTreeQueryError={isTreeQueryError}
-      />
+      {!hasUnfitData && (
+        <AdoptLikeCheckboxes
+          currentTreeData={currentTreeData}
+          edit={handleEditClick}
+          isTreeQueryError={isTreeQueryError}
+        />
+      )}
 
       {isDialogOpen && (
         <TreeEdit
