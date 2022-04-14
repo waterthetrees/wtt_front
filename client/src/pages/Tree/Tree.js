@@ -9,6 +9,22 @@ import TreeHistory from './TreeHistory';
 import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
 
+const undefRequiredField = ((requiredField) => typeof requiredField === 'undefined');
+
+export const checkForUnfitData = (currentTreeData) => [currentTreeData?.common,
+  currentTreeData?.scientific]
+  .some(undefRequiredField)
+    || ['vacant',
+      'vacant site',
+      'unsuitable site',
+      'asphalted well',
+      'planting site',
+      'other',
+      '#n/a', '::'].includes(currentTreeData?.common.toLowerCase());
+  // Common name field has inconsistent data when a tree's missing.
+  // Until we clean up the data on the way into the vector tiles,
+  // We'll add it here so that Maintenance/Health/removal don't render.
+
 export default function Tree({
   map,
   TreeDetailsContainer, drawerWidth, currentTreeData,
@@ -24,20 +40,8 @@ export default function Tree({
     )
     : null;
 
-  let vacant = false;
-
-  if (currentTreeData?.common) {
-    vacant = ['vacant',
-      'vacant site',
-      'unsuitable site',
-      'asphalted well',
-      'planting site',
-      'other',
-      '#n/a', '::'].includes(currentTreeData?.common.toLowerCase());
-    // Common name field has inconsistent data when a tree's missing.
-    // Until we clean up the data on the way into the vector tiles,
-    // We'll add it here so that Maintenance/Health/removal don't render.
-  }
+  // check for malformed, missing common, scientific names, vacant sites, etc.
+  const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
 
@@ -53,11 +57,11 @@ export default function Tree({
           <>
             <TreeHeader
               currentTreeData={currentTreeData}
-              vacant={vacant}
+              hasMissingData={hasUnfitData}
               isTreeQueryError={isTreeQueryError}
             />
 
-            {!vacant && (
+            {!hasUnfitData && (
               <TreeHealth
                 map={map}
                 currentTreeData={currentTreeData}
@@ -65,12 +69,14 @@ export default function Tree({
               />
             )}
 
-            <TreeNotes
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
+            {!hasUnfitData && (
+              <TreeNotes
+                currentTreeData={currentTreeData}
+                isTreeQueryError={isTreeQueryError}
+              />
+            )}
 
-            {!vacant && (
+            {!hasUnfitData && (
               <TreeMaintenance
                 currentTreeData={currentTreeData}
                 isTreeQueryError={isTreeQueryError}
@@ -89,7 +95,7 @@ export default function Tree({
               currentTreeData={currentTreeData}
             />
 
-            {!vacant && (
+            {!hasUnfitData && (
               <TreeRemoval
                 currentTreeData={currentTreeData}
                 isTreeQueryError={isTreeQueryError}
