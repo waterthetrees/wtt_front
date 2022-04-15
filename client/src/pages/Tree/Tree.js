@@ -57,7 +57,7 @@ export default function Tree({
           <>
             <TreeHeader
               currentTreeData={currentTreeData}
-              hasMissingData={hasUnfitData}
+              hasUnfitData={hasUnfitData}
               isTreeQueryError={isTreeQueryError}
             />
 
