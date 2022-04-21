@@ -136,22 +136,6 @@ export default function AdoptLikeCheckboxes({
             handleChange={handleChange}
           />
         </Grid>
-        <Grid item>
-          <Link
-            component="button"
-            onClick={edit}
-            sx={{
-              m: 1,
-              textDecoration: 'none',
-              fontSize: '1em',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-          >
-            EDIT
-          </Link>
-        </Grid>
       </Grid>
       {directions && (
         <AdoptionDirections
