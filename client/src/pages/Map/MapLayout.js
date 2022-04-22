@@ -40,8 +40,9 @@ const MapContainer = styled('main', { shouldForwardProp: (prop) => prop.indexOf(
 );
 
 function MapLayout() {
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const [currentTreeId, setCurrentTreeId] = useState(hashParams.get('id'));
   const [map, setMap] = useState(null);
-  const [currentTreeId, setCurrentTreeId] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
@@ -116,6 +117,17 @@ function MapLayout() {
   useEffect(() => {
     setMapSelectionEnabled(!newTreeState.isDragging);
   }, [newTreeState.isDragging]);
+
+  // On initial page load, if there is a tree id in the url as
+  // a hash param, move to that tree on the map.
+  useEffect(() => {
+    if (map && currentTreeId) {
+      map.flyTo({
+        center: [currentTreeData.lng, currentTreeData.lat],
+        zoom: 17,
+      });
+    }
+  }, [map]);
 
   return (
     <Box sx={{ display: 'flex' }}>
