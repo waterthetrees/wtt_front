@@ -29,6 +29,7 @@ export default function Tree({
   map,
   TreeDetailsContainer, drawerWidth, currentTreeData,
   currentTreeId, setCurrentTreeId, isTreeQueryError,
+  currentVectorTreeData,
 }) {
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
@@ -41,10 +42,10 @@ export default function Tree({
     : null;
 
   // check for malformed, missing common, scientific names, vacant sites, etc.
-  const hasUnfitData = checkForUnfitData(currentTreeData);
+  const hasUnfitData = checkForUnfitData();
 
   const handleClose = () => setCurrentTreeId(null);
-
+  const newData = { ...currentVectorTreeData, ...currentTreeData };
   return (
     <TreeDetailsContainer
       title="Tree Details"
@@ -88,11 +89,11 @@ export default function Tree({
             />
 
             <TreeInfo
-              currentTreeData={currentTreeData}
+              currentTreeData={newData}
             />
 
             <TreeLinks
-              currentTreeData={currentTreeData}
+              currentTreeData={newData}
             />
 
             {!hasUnfitData && (

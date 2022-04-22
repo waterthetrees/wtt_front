@@ -42,6 +42,7 @@ const MapContainer = styled('main', { shouldForwardProp: (prop) => prop.indexOf(
 function MapLayout() {
   const [map, setMap] = useState(null);
   const [currentTreeId, setCurrentTreeId] = useState(null);
+  const [currentVectorTreeData, setCurrentVectorTreeData] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
@@ -52,6 +53,8 @@ function MapLayout() {
   } = useTreeQuery({ id: currentTreeId }, { retry: 0 });
 
   if (currentTreeData) {
+    console.log('maplayout currentTreeData', currentTreeData);
+    console.log('maplayout currentVectorTreeData', currentVectorTreeData);
     currentTreeData.sourceId = currentTreeData?.sourceId || currentTreeData?.sourceID;
     currentTreeData.city = currentTreeData?.city || currentTreeData?.sourceId;
   }
@@ -129,6 +132,7 @@ function MapLayout() {
         <Map
           containerRef={mapContainerRef}
           currentTreeData={currentTreeData}
+          setCurrentVectorTreeData={setCurrentVectorTreeData}
           setCurrentTreeId={setCurrentTreeId}
           selectionEnabled={mapSelectionEnabled}
           onLoad={setMap}
@@ -156,6 +160,7 @@ function MapLayout() {
             drawerWidth={drawerWidth}
             map={map}
             currentTreeData={currentTreeData}
+            currentVectorTreeData={currentVectorTreeData}
             currentTreeId={currentTreeId}
             setCurrentTreeId={setCurrentTreeId}
             isTreeQueryError={isTreeQueryError}

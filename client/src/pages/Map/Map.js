@@ -71,7 +71,7 @@ const layerIDs = [
 ];
 
 export default function Map({
-  containerRef, currentTreeData, setCurrentTreeId, selectionEnabled, onLoad,
+  containerRef, currentTreeData, setCurrentTreeId, setCurrentVectorTreeData, selectionEnabled, onLoad,
 }) {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
@@ -146,7 +146,7 @@ export default function Map({
             }
 
             setCurrentTreeId(id);
-
+            setCurrentVectorTreeData(properties);
             mapboxMap.getCanvas().style.cursor = 'pointer';
           } else {
             // This click was on a blank part of the map, so clear the selection.
