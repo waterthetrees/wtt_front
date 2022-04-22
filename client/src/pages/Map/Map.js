@@ -101,8 +101,8 @@ export default function Map({
         zoom: 10,
         maxZoom: 18.5,
         minZoom: 2,
-        // Update the browser URL hash with the current zoom and lat/long of the map.
-        hash: 'pos',
+        // Pass true to update the browser URL hash with the current zoom and lat/long of the map.
+        hash: true,
       });
 
       // Add the navigation controls to the map.
@@ -129,7 +129,6 @@ export default function Map({
             return;
           }
 
-          const hashParams = new URLSearchParams(window.location.hash.slice(1));
           const [feature] = mapboxMap.queryRenderedFeatures([x, y], { layers: layerIDs });
 
           if (feature) {
@@ -147,15 +146,12 @@ export default function Map({
             }
 
             setCurrentTreeId(id);
-            hashParams.set('id', id);
+
             mapboxMap.getCanvas().style.cursor = 'pointer';
           } else {
             // This click was on a blank part of the map, so clear the selection.
             setCurrentTreeId(null);
-            hashParams.delete('id');
           }
-
-          window.location.hash = decodeURIComponent(hashParams.toString());
         });
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
