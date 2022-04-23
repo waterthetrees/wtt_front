@@ -121,11 +121,19 @@ function MapLayout() {
   // On initial page load, if there is a tree id in the url as
   // a hash param, move to that tree on the map.
   useEffect(() => {
-    if (map && currentTreeId) {
+    if (!map) {
+      return;
+    }
+
+    if (currentTreeData) {
       map.flyTo({
         center: [currentTreeData.lng, currentTreeData.lat],
         zoom: 17,
       });
+    } else {
+      setCurrentTreeId(null);
+      hashParams.delete('id');
+      window.location.hash = decodeURIComponent(hashParams.toString());
     }
   }, [map]);
 
