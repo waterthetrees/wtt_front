@@ -1,40 +1,36 @@
 module.exports = {
+  root: true,
   env: {
+    es2022: true,
     browser: true,
-    es2021: true,
     node: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:prettier/recommended',
+    'eslint:recommended', // https://eslint.org/docs/rules/
+    'plugin:import/recommended', // https://github.com/import-js/eslint-plugin-import
+    'plugin:jsx-a11y/recommended', // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+    'plugin:prettier/recommended', // https://github.com/prettier/eslint-plugin-prettier
+    'plugin:react/recommended', // https://github.com/yannickcr/eslint-plugin-react
+    'plugin:react-hooks/recommended', // https://www.npmjs.com/package/eslint-plugin-react-hooks
   ],
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+      impliedStrict: true,
+    },
   },
-  plugins: [
-    'react',
-  ],
   settings: {
+    react: {
+      version: 'detect',
+    },
     'import/resolver': {
-      alias: [
-        ['@', './client/src']
-      ]
-    }
+      alias: [['@', './client/src']],
+    },
   },
   rules: {
-    'react/prop-types': [0, { skipUndeclared: 1 }],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'import/prefer-default-export': 'off',
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'import/no-extraneous-dependencies': [
-      'error', {
-        devDependencies: true,
-        optionalDependencies: true,
-        peerDependencies: true,
-        packageDir: './',
-      },
-    ],
+    'react/prop-types': 'off',
+    'no-console': 'warn',
   },
 };
