@@ -4,8 +4,8 @@ import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
-
 import TreeEdit from './TreeEdit';
+import treeImages from '@/data/dist/treeImages.json';
 
 export default function TreeHeader({ currentTreeData, isTreeQueryError, hasUnfitData }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -44,6 +44,7 @@ export default function TreeHeader({ currentTreeData, isTreeQueryError, hasUnfit
           {height && <h5>Height: {height}</h5>}
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
           {datePlanted && <h5>Planted: {planted}</h5>}
+          {treeImages[scientific] && <img src={treeImages[scientific]} alt="" />}
         </div>
 
       </div>

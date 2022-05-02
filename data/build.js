@@ -74,6 +74,73 @@ function createTreeSorter(name) {
   };
 }
 
+async function buildScientificNameToImageMap(names) {
+  function partition(arr, size) {
+    const numGroups = Math.ceil(arr.length / size);
+    const groups = new Array(numGroups).fill(null);
+
+    return groups.map((_, i) => arr.slice(i * size, i * size + size));
+  }
+
+  function buildRequestURL(titles) {
+    const BASE_URL = 'https://en.wikipedia.org/w/api.php';
+    const requestURL = new URL(BASE_URL);
+    requestURL.search = new URLSearchParams({
+      action: 'query',
+      format: 'json',
+      prop: 'pageimages',
+      piprop: 'thumbnail',
+      pithumbsize: '600',
+      titles,
+    });
+
+    return requestURL;
+  }
+
+  function getRequestURLs(data) {
+    const MAX_TITLES_PER_QUERY = 50;
+    const partitions = partition(data, MAX_TITLES_PER_QUERY);
+    const queryTitles = partitions.map((titles) => titles.join('|'));
+    const queries = queryTitles.map((titles) => buildRequestURL(titles));
+    return queries.map((query) => query.href);
+  }
+
+  async function getResponseJSON(url) {
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  async function getImages(requestURLs) {
+    const images = {};
+    const responsesMap = requestURLs.map((url) => getResponseJSON(url));
+    const responses = await Promise.all(responsesMap);
+    const allPages = responses.reduce((accumulator, response) => {
+      const { query: { pages = [] } = {} } = response;
+      return accumulator.concat(...Object.values(pages));
+    }, []);
+
+    Object.values(allPages).forEach((page) => {
+      const { title, thumbnail: { source } = {} } = page;
+      images[title] = source;
+    });
+
+    const allNormalized = responses.reduce((accumulator, response) => {
+      const { query: { normalized = [] } = {} } = response;
+      return accumulator.concat(...normalized);
+    }, []);
+
+    allNormalized.forEach(({ from, to }) => {
+      images[from] = images[to];
+      delete images[to];
+    });
+
+    return images;
+  }
+
+  const requestURLs = getRequestURLs(names);
+  return getImages(requestURLs);
+}
+
 const trees = [];
 const processedTrees = {};
 
@@ -116,6 +183,20 @@ jsonFiles.forEach((filename) => {
       processedTrees[key] = true;
     }
   });
+});
+
+async function buildImagesMap(trees) {
+  const scientificNames = trees.map((tree) => tree.scientific);
+  const uniqueScientificNames = [...new Set(scientificNames)];
+  return buildScientificNameToImageMap(uniqueScientificNames);
+}
+
+buildImagesMap(trees).then((data) => {
+  const formattedData = JSON.stringify(data, null, 2);
+  const filename = 'treeImages.json';
+  const output = path.resolve(outputPath, filename);
+  console.log(`[build:data] Writing ${filename}.`);
+  fs.writeFileSync(output, formattedData);
 });
 
 writeJSTemplate('trees', trees.sort(createTreeSorter('common')));
