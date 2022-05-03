@@ -161,8 +161,7 @@ jsonFiles.forEach((filename) => {
   // Combine the trees into one deduped list, normalizing the names.
   data.forEach(({ common, scientific, genus }) => {
     const commonTitleCase = toTitleCase(common);
-    const lcNames = [common, scientific, genus]
-      .map((name) => name.toLowerCase().replace(/[^\w\s]/g, ''));
+    const lcNames = [common, scientific, genus].map(normalizeNames);
     const key = lcNames.join('');
 
     // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
@@ -172,9 +171,9 @@ jsonFiles.forEach((filename) => {
       && !ignoreScientificPattern.test(scientific)
     ) {
       trees.push({
-        common: commonTitleCase,
-        scientific,
-        genus,
+        common: replaceIrregularNames(commonTitleCase),
+        scientific: replaceIrregularNames(scientific),
+        genus: replaceIrregularNames(genus),
         // Store the lowercased names on each tree, so that we can sort by those strings.  They
         // don't include non-letter characters, so names like `"Ohi" A Lehua` won't get sorted to
         // the front of the list.
@@ -184,6 +183,23 @@ jsonFiles.forEach((filename) => {
     }
   });
 });
+
+function normalizeNames(name) {
+  if (!name) {
+    return null;
+  }
+
+  const normalized = name
+    .normalize('NFD')
+    .toLowerCase()
+    .replace(/[^\w\s]/g, '');
+
+  return normalized || null;
+}
+
+function replaceIrregularNames(name) {
+  return name === '\b' ? '' : name;
+}
 
 async function buildImagesMap(trees) {
   const scientificNames = trees.map((tree) => tree.scientific);

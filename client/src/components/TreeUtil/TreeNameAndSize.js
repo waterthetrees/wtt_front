@@ -10,7 +10,14 @@ function getNames(treeList, name, firstItem) {
   // Otherwise, React will complain about duplicate keys in the menu.  Sort the trees by the
   // different fields before extracting the strings, so that the sort function can access the
   // per-tree lowercase sort fields.
-  return firstItem.concat([...new Set(treeList.sort(sortTreesBy[name]).map((tree) => tree[name]))]);
+  return firstItem.concat([
+    ...new Set(
+      treeList
+        .filter((tree) => !['', 'vacant site'].includes(tree[name].toLowerCase()))
+        .sort(sortTreesBy[name])
+        .map((tree) => tree[name]),
+    ),
+  ]);
 }
 
 // Adjust the adornment label so it aligns with the input placeholder.
