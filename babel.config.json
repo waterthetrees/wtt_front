@@ -4,6 +4,7 @@
     "@babel/react"
   ],
   "plugins": [
+    "styled-components",
     "@babel/plugin-transform-runtime",
     [
       "babel-plugin-direct-import",

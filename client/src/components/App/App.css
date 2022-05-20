@@ -130,13 +130,6 @@ a:hover {
   text-decoration: underline;
 }
 
-img {
-  vertical-align: middle;
-  border-style: none;
-  max-width: 100%;
-  height: auto;
-}
-
 svg {
   overflow: hidden;
   vertical-align: middle;
