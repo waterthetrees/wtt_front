@@ -3,9 +3,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 import React from 'react';
-import {
-  TableRow, TableCell,
-} from '@mui/material';
+import { TableRow, TableCell } from '@mui/material';
 import Section from '@/components/Section/Section';
 import TreeTable from './TreeTable';
 
@@ -25,14 +23,14 @@ const infoKeys = [
   'organization',
   'who',
   'owner',
-  ['idReference', 'Ref #'],
+  ['idReference', 'Ref #', 'ref'],
   'id',
   'sourceid',
   'count',
   'treelocationcount',
-].map((treeRow) => (Array.isArray(treeRow)
-  ? treeRow
-  : [treeRow, capitalizeFirstLetter(treeRow)]));
+].map((treeRow) =>
+  Array.isArray(treeRow) ? treeRow : [treeRow, capitalizeFirstLetter(treeRow)],
+);
 
 export default function TreeInfo({ currentTreeData }) {
   const labelValues = infoKeys.reduce((result, [key, label]) => {
@@ -49,9 +47,7 @@ export default function TreeInfo({ currentTreeData }) {
     return null;
   }
   return (
-    <Section
-      title="Info"
-    >
+    <Section title="Info">
       <TreeTable>
         {labelValues.map(([label, value]) => (
           <TableRows key={label} label={label} value={value} />

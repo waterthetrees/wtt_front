@@ -13,9 +13,14 @@ import Map from './Map';
 
 const drawerWidth = 350;
 
-const MapContainer = styled('main', { shouldForwardProp: (prop) => prop.indexOf('drawer') !== 0 })(
+const MapContainer = styled('main', {
+  shouldForwardProp: (prop) => prop.indexOf('drawer') !== 0,
+})(
   ({
-    theme, drawerEnabled, drawerOpen, drawerWidth, // eslint-disable-line no-shadow
+    theme,
+    drawerEnabled,
+    drawerOpen,
+    drawerWidth, // eslint-disable-line no-shadow
   }) => ({
     background: '#c5def6',
     flexGrow: 1,
@@ -42,27 +47,26 @@ const MapContainer = styled('main', { shouldForwardProp: (prop) => prop.indexOf(
 function MapLayout() {
   const hashParams = new URLSearchParams(window.location.hash.slice(1));
   const [currentTreeId, setCurrentTreeId] = useState(hashParams.get('id'));
+  const [currentTreeData, setCurrentTreeData] = useState();
   const [map, setMap] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
 
-  const {
-    data: currentTreeData,
-    isError: isTreeQueryError,
-  } = useTreeQuery({ id: currentTreeId }, { retry: 0 });
+  const { data: currentTreeDb, isError: isTreeQueryError } = useTreeQuery(
+    { id: currentTreeId },
+    { retry: 0 },
+  );
 
-  if (currentTreeData) {
-    currentTreeData.sourceId = currentTreeData?.sourceId || currentTreeData?.sourceID;
-    currentTreeData.city = currentTreeData?.city || currentTreeData?.sourceId;
+  if (currentTreeDb) {
+    currentTreeDb.sourceId = currentTreeDb?.sourceId || currentTreeDb?.sourceID;
+    currentTreeDb.city = currentTreeDb?.city || currentTreeDb?.sourceId;
   }
 
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
   // Opens a left side panel on desktop, and a full-screen dialog on mobile.
-  const treeDetailsContainer = drawerEnabled
-    ? PanelDrawer
-    : ScrollableDialog;
+  const treeDetailsContainer = drawerEnabled ? PanelDrawer : ScrollableDialog;
 
   const handleTransitionEnd = (event) => {
     // This event handler will get other transitions, like for the close box on the legend, so make
@@ -72,9 +76,10 @@ function MapLayout() {
     if (event.target === mapContainerRef.current && map) {
       // If the transition has ended and the right margin is 0, then the drawer just opened.  In
       // other words, the right margin has transitioned from -350 (closed) to 0 (open).
-      const drawerOpened = parseInt(getComputedStyle(event.target).marginRight, 10) === 0;
+      const drawerOpened =
+        parseInt(getComputedStyle(event.target).marginRight, 10) === 0;
       // Get the location of the selected tree or the new tree to plant, if any.
-      const { lng, lat } = (currentTreeData || newTreeState.coords || {});
+      const { lng, lat } = currentTreeDb || newTreeState.coords || {};
       // Resizing the map will cause it to shift horizontally by half the drawerWidth.  We need to
       // shift it back by that amount so the user doesn't see the map move at all.  This delta is
       // not a const, as we'll adjust it below to keep a selected location in view, if necessary.
@@ -87,7 +92,9 @@ function MapLayout() {
         // visible.
         const minDrawerOffset = 60;
         const newMapWidth = mapContainerRef.current.offsetWidth;
-        const adjustment = Math.round((treePoint.x + minDrawerOffset) - newMapWidth);
+        const adjustment = Math.round(
+          treePoint.x + minDrawerOffset - newMapWidth,
+        );
 
         // Ignore negative adjustments, as those locations are > than the offset away from the
         // drawer. Positive adjustments will pan the map to the right, moving the selected location
@@ -125,9 +132,10 @@ function MapLayout() {
       return;
     }
 
-    if (currentTreeData) {
+    if (currentTreeData || currentTreeDb) {
+      const { lng, lat } = currentTreeData || currentTreeDb;
       map.flyTo({
-        center: [currentTreeData.lng, currentTreeData.lat],
+        center: [lng, lat],
         zoom: 17,
       });
     } else {
@@ -135,7 +143,7 @@ function MapLayout() {
       hashParams.delete('id');
       window.location.hash = decodeURIComponent(hashParams.toString());
     }
-  }, [map]);
+  }, [map, currentTreeData, currentTreeDb, hashParams]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -148,7 +156,8 @@ function MapLayout() {
       >
         <Map
           containerRef={mapContainerRef}
-          currentTreeData={currentTreeData}
+          currentTreeDb={currentTreeDb}
+          setCurrentTreeData={setCurrentTreeData}
           setCurrentTreeId={setCurrentTreeId}
           selectionEnabled={mapSelectionEnabled}
           onLoad={setMap}
@@ -159,28 +168,26 @@ function MapLayout() {
           is selected so that its width is
           still reserved in the parent Box and therefore the marginRight calculations in
           Container are correct. */}
-      {newTreeState.isPanelOpen
-        ? (
-          <NewTree
-            TreeDetailsContainer={treeDetailsContainer}
-            drawerWidth={drawerWidth}
-          />
-        )
-        : (
-          <Tree
-            // Key the TreeDetailsContainer panel on the current tree,
-            // so that when the selection changes, all of the
-            // components get re-rendered with fresh props.
-            key={currentTreeId}
-            TreeDetailsContainer={treeDetailsContainer}
-            drawerWidth={drawerWidth}
-            map={map}
-            currentTreeData={currentTreeData}
-            currentTreeId={currentTreeId}
-            setCurrentTreeId={setCurrentTreeId}
-            isTreeQueryError={isTreeQueryError}
-          />
-        )}
+      {newTreeState.isPanelOpen ? (
+        <NewTree
+          TreeDetailsContainer={treeDetailsContainer}
+          drawerWidth={drawerWidth}
+        />
+      ) : (
+        <Tree
+          // Key the TreeDetailsContainer panel on the current tree,
+          // so that when the selection changes, all of the
+          // components get re-rendered with fresh props.
+          key={currentTreeId}
+          TreeDetailsContainer={treeDetailsContainer}
+          drawerWidth={drawerWidth}
+          map={map}
+          currentTreeData={currentTreeData}
+          currentTreeId={currentTreeId}
+          setCurrentTreeId={setCurrentTreeId}
+          isTreeQueryError={isTreeQueryError}
+        />
+      )}
     </Box>
   );
 }
