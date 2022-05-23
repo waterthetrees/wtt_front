@@ -16,13 +16,23 @@ export default function TreeHeader({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
-  const { id, common, scientific, genus, datePlanted, dbh, height } =
-    currentTreeData;
+  const {
+    id,
+    common,
+    scientific,
+    genus,
+    datePlanted,
+    dbh,
+    height,
+    planted,
+    count,
+  } = currentTreeData;
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   // format() will throw an exception if datePlanted is undefined, so check it first.
-  const planted = datePlanted
-    ? format(new Date(datePlanted), 'MMMM d, yyyy')
-    : null;
+  const plantDate =
+    datePlanted || planted
+      ? format(new Date(datePlanted || planted), 'MMMM d, yyyy')
+      : null;
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleEditClick = () => {
@@ -54,7 +64,8 @@ export default function TreeHeader({
           {scientific !== genus && <h2>{genus}</h2>}
           {height && <h5>Height: {height}</h5>}
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
-          {datePlanted && <h5>Planted: {planted}</h5>}
+          {(datePlanted || planted) && <h5>Planted: {plantDate}</h5>}
+          {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
           {treeImages[scientific] && (
             <Fade in={treeImages[scientific] !== null}>
               <img src={treeImages[scientific]} alt="" />
