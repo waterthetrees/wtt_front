@@ -47,6 +47,7 @@ const MapContainer = styled('main', {
 function MapLayout() {
   const hashParams = new URLSearchParams(window.location.hash.slice(1));
   const [currentTreeId, setCurrentTreeId] = useState(hashParams.get('id'));
+  const [currentTreeDataVector, setCurrentTreeDataVector] = useState();
   const [currentTreeData, setCurrentTreeData] = useState();
   const [map, setMap] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
@@ -131,9 +132,8 @@ function MapLayout() {
     if (!map) {
       return;
     }
-
-    if (currentTreeData || currentTreeDb) {
-      const { lng, lat } = currentTreeData || currentTreeDb;
+    if (currentTreeDataVector || currentTreeDb) {
+      const { lng, lat } = currentTreeDataVector || currentTreeDb;
       map.flyTo({
         center: [lng, lat],
         zoom: 17,
@@ -145,6 +145,13 @@ function MapLayout() {
     }
   }, [map, currentTreeData, currentTreeDb, hashParams]);
 
+  useEffect(() => {
+    if (currentTreeDb) {
+      setCurrentTreeData({ ...currentTreeDataVector, ...currentTreeDb });
+    }
+  }, [currentTreeDb]);
+
+  console.log('MAPLayout currentTreeData', currentTreeData);
   return (
     <Box sx={{ display: 'flex' }}>
       <MapContainer
@@ -157,7 +164,7 @@ function MapLayout() {
         <Map
           containerRef={mapContainerRef}
           currentTreeDb={currentTreeDb}
-          setCurrentTreeData={setCurrentTreeData}
+          setCurrentTreeDataVector={setCurrentTreeDataVector}
           setCurrentTreeId={setCurrentTreeId}
           selectionEnabled={mapSelectionEnabled}
           onLoad={setMap}

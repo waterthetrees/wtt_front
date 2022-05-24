@@ -72,7 +72,7 @@ const layerIDs = [
 ];
 
 export default function Map({
-  setCurrentTreeData,
+  setCurrentTreeDataVector,
   containerRef,
   currentTreeData,
   currentTreeDb,
@@ -148,18 +148,15 @@ export default function Map({
               geometry,
             } = feature;
 
-            console.log('properties', properties);
-            console.log('currentTreeDb', currentTreeDb);
-
             const currentTree = {
               ...currentTreeDb,
               ...properties,
               lng: geometry.coordinates[0],
               lat: geometry.coordinates[1],
             };
-            console.log('currentTree', currentTree);
+            console.log('MAP currentTree', currentTree);
 
-            setCurrentTreeData(currentTree);
+            setCurrentTreeDataVector(currentTree);
             const queryKeys = ['trees', { id }];
 
             // Cache the properties from the vector tile as the data for the /trees query that will

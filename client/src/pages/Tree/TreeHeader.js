@@ -42,7 +42,7 @@ export default function TreeHeader({
       setIsDialogOpen(true);
     }
   };
-
+  const treeImage = treeImages[scientific] || null;
   return (
     <>
       <div className="text-left">
@@ -66,9 +66,9 @@ export default function TreeHeader({
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
           {(datePlanted || planted) && <h5>Planted: {plantDate}</h5>}
           {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
-          {treeImages[scientific] && (
-            <Fade in={treeImages[scientific] !== null}>
-              <img src={treeImages[scientific]} alt="" />
+          {treeImage && (
+            <Fade in={treeImage !== null}>
+              <img src={treeImage} alt={treeImage} />
             </Fade>
           )}
         </div>
