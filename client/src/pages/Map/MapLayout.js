@@ -10,6 +10,7 @@ import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
+import treeImages from '@/data/dist/treeImages.json';
 
 const drawerWidth = 350;
 
@@ -147,11 +148,16 @@ function MapLayout() {
 
   useEffect(() => {
     if (currentTreeDb) {
-      setCurrentTreeData({ ...currentTreeDataVector, ...currentTreeDb });
+      setCurrentTreeData({
+        ...currentTreeDataVector,
+        ...currentTreeDb,
+        treeImage:
+          treeImages[currentTreeDataVector.scientific] ||
+          treeImages[currentTreeDb.scientific],
+      });
     }
   }, [currentTreeDb]);
 
-  console.log('MAPLayout currentTreeData', currentTreeData);
   return (
     <Box sx={{ display: 'flex' }}>
       <MapContainer
