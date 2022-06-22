@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
-// import Fade from '@mui/material/Fade';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 import TreeEdit from './TreeEdit';
 
@@ -25,8 +24,8 @@ export default function TreeHeader({
     height,
     planted,
     count,
-    treeImage,
   } = currentTreeData;
+
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   // format() will throw an exception if datePlanted is undefined, so check it first.
   const plantDate =
@@ -42,15 +41,6 @@ export default function TreeHeader({
       setIsDialogOpen(true);
     }
   };
-  // console.log('treeImages exist', treeImage[scientific] === scientific);
-  // console.log('treeImages[scientific]', scientific, treeImages[scientific]);
-
-  // useEffect(() => {
-  //   if (!treeImages[scientific]) return;
-  //   setTreeImage(treeImages[scientific]);
-  // }, [scientific]);
-
-  // console.log('treeImage', treeImage);
   return (
     <>
       <div className="text-left">
@@ -74,7 +64,6 @@ export default function TreeHeader({
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
           {(datePlanted || planted) && <h5>Planted: {plantDate}</h5>}
           {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
-          {scientific && treeImage && <img src={treeImage} alt={treeImage} />}
         </div>
       </div>
 

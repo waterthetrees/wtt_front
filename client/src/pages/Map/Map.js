@@ -154,7 +154,6 @@ export default function Map({
               lng: geometry.coordinates[0],
               lat: geometry.coordinates[1],
             };
-            console.log('MAP currentTree', currentTree);
 
             setCurrentTreeDataVector(currentTree);
             const queryKeys = ['trees', { id }];
