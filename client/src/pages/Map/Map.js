@@ -25,19 +25,20 @@ const unsupportedError = (
     }}
   >
     <Alert severity="error">
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>An error occurred while loading the tree map.</Typography>
-      <Typography variant="body1">Please make sure your computer and browser support WebGL.</Typography>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+        An error occurred while loading the tree map.
+      </Typography>
+      <Typography variant="body1">
+        Please make sure your computer and browser support WebGL.
+      </Typography>
     </Alert>
   </Box>
 );
 
 function createPopupHTML({ common, scientific }) {
-  const commonString = common
-    ? `<h4>${common}</h4>`
-    : '';
-  const scientificString = scientific && scientific !== common
-    ? `<h5>${scientific}</h5>`
-    : '';
+  const commonString = common ? `<h4>${common}</h4>` : '';
+  const scientificString =
+    scientific && scientific !== common ? `<h5>${scientific}</h5>` : '';
 
   return `<div>${commonString}${scientificString}</div>`;
 }
@@ -52,14 +53,14 @@ const layers = [
   // Reverse the tree health names, so they go from good to vacant.
   ...treeHealthUtil.getNameValuePairs().reverse(),
   ['noData', 'No Data'],
-]
-  .map(([id, label]) => ({
-    id,
-    label: typeof label === 'string'
+].map(([id, label]) => ({
+  id,
+  label:
+    typeof label === 'string'
       ? label
       : id.replace(/(^\w)/g, (m) => m.toUpperCase()),
-    color: treeHealthUtil.getColorByName(id, 'fill'),
-  }));
+  color: treeHealthUtil.getColorByName(id, 'fill'),
+}));
 
 // This is not working correctly
 // AND I think it may re-adds the layer every time another tree is added?
@@ -71,7 +72,13 @@ const layerIDs = [
 ];
 
 export default function Map({
-  containerRef, currentTreeData, setCurrentTreeId, selectionEnabled, onLoad,
+  setCurrentTreeDataVector,
+  containerRef,
+  currentTreeData,
+  currentTreeDb,
+  setCurrentTreeId,
+  selectionEnabled,
+  onLoad,
 }) {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
@@ -130,10 +137,25 @@ export default function Map({
           }
 
           const hashParams = new URLSearchParams(window.location.hash.slice(1));
-          const [feature] = mapboxMap.queryRenderedFeatures([x, y], { layers: layerIDs });
+          const [feature] = mapboxMap.queryRenderedFeatures([x, y], {
+            layers: layerIDs,
+          });
 
           if (feature) {
-            const { properties, properties: { id } } = feature;
+            const {
+              properties,
+              properties: { id },
+              geometry,
+            } = feature;
+
+            const currentTree = {
+              ...currentTreeDb,
+              ...properties,
+              lng: geometry.coordinates[0],
+              lat: geometry.coordinates[1],
+            };
+
+            setCurrentTreeDataVector(currentTree);
             const queryKeys = ['trees', { id }];
 
             // Cache the properties from the vector tile as the data for the /trees query that will
@@ -160,37 +182,40 @@ export default function Map({
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
         // on the tree layers, not the entire map, so pass an array of layer IDs.
-        mapboxMap.on('mousemove', layerIDs, ({ features: [feature], lngLat: { lng } }) => {
-          if (!selectionEnabledRef.current) {
-            return;
-          }
-
-          const id = feature?.properties?.id;
-
-          // If the tree circles are big enough, we'll get lots of mousemove events for a single
-          // tree, so make sure it's a different one than what the popup is currently showing, to
-          // avoid moving and re-adding the popup.
-          if (id && (feature.properties.id !== currentFeature.current?.properties?.id
-              || !popup.isOpen())) {
-            const coordinates = [...feature.geometry.coordinates];
-            const html = createPopupHTML(feature.properties);
-
-            // Ensure that if the map is zoomed out such that multiple copies of the feature are
-            // visible, the popup appears over the copy being pointed to.
-            while (Math.abs(lng - coordinates[0]) > 180) {
-              coordinates[0] += lng > coordinates[0]
-                ? 360
-                : -360;
+        mapboxMap.on(
+          'mousemove',
+          layerIDs,
+          ({ features: [feature], lngLat: { lng } }) => {
+            if (!selectionEnabledRef.current) {
+              return;
             }
 
-            currentFeature.current = feature;
-            mapboxMap.getCanvas().style.cursor = 'pointer';
-            popup
-              .setLngLat(coordinates)
-              .setHTML(html)
-              .addTo(mapboxMap);
-          }
-        });
+            const id = feature?.properties?.id;
+
+            // If the tree circles are big enough, we'll get lots of mousemove events for a single
+            // tree, so make sure it's a different one than what the popup is currently showing, to
+            // avoid moving and re-adding the popup.
+            if (
+              id &&
+              (feature.properties.id !==
+                currentFeature.current?.properties?.id ||
+                !popup.isOpen())
+            ) {
+              const coordinates = [...feature.geometry.coordinates];
+              const html = createPopupHTML(feature.properties);
+
+              // Ensure that if the map is zoomed out such that multiple copies of the feature are
+              // visible, the popup appears over the copy being pointed to.
+              while (Math.abs(lng - coordinates[0]) > 180) {
+                coordinates[0] += lng > coordinates[0] ? 360 : -360;
+              }
+
+              currentFeature.current = feature;
+              mapboxMap.getCanvas().style.cursor = 'pointer';
+              popup.setLngLat(coordinates).setHTML(html).addTo(mapboxMap);
+            }
+          },
+        );
 
         mapboxMap.on('mouseleave', layerIDs, () => {
           mapboxMap.getCanvas().style.cursor = '';
@@ -207,46 +232,32 @@ export default function Map({
     return unsupportedError;
   }
 
-  return isMapLoaded && (
-    <>
-      <MapLayers
-        map={map}
-        layers={layers}
-        currentTreeData={currentTreeData}
-      />
-      <MapboxControlPortal
-        map={map}
-        position="top-left"
-      >
-        <NewTreeButton
+  return (
+    isMapLoaded && (
+      <>
+        <MapLayers
           map={map}
-        />
-      </MapboxControlPortal>
-      <MapboxControlPortal
-        map={map}
-        position="top-left"
-      >
-        <Adopt />
-      </MapboxControlPortal>
-      <MapboxControlPortal
-        map={map}
-        position="top-right"
-      >
-        <GeolocateControl
-          map={map}
-        />
-      </MapboxControlPortal>
-      <MapboxControlPortal
-        map={map}
-        position="bottom-right"
-      >
-        <TreeLayerLegend
-          map={map}
-          title="Tree layers:"
           layers={layers}
-          expanded
+          currentTreeData={currentTreeData}
         />
-      </MapboxControlPortal>
-    </>
+        <MapboxControlPortal map={map} position="top-left">
+          <NewTreeButton map={map} />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="top-left">
+          <Adopt />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="top-right">
+          <GeolocateControl map={map} />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="bottom-right">
+          <TreeLayerLegend
+            map={map}
+            title="Tree layers:"
+            layers={layers}
+            expanded
+          />
+        </MapboxControlPortal>
+      </>
+    )
   );
 }

@@ -5,20 +5,33 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 import TreeEdit from './TreeEdit';
-import treeImages from '@/data/dist/treeImages.json';
 
-export default function TreeHeader({ currentTreeData, isTreeQueryError, hasUnfitData }) {
+export default function TreeHeader({
+  currentTreeData,
+  isTreeQueryError,
+  hasUnfitData,
+}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const {
-    id, common, scientific, genus, datePlanted, dbh, height,
+    id,
+    common,
+    scientific,
+    genus,
+    datePlanted,
+    dbh,
+    height,
+    planted,
+    count,
   } = currentTreeData;
+
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   // format() will throw an exception if datePlanted is undefined, so check it first.
-  const planted = datePlanted
-    ? format(new Date(datePlanted), 'MMMM d, yyyy')
-    : null;
+  const plantDate =
+    datePlanted || planted
+      ? format(new Date(datePlanted || planted), 'MMMM d, yyyy')
+      : null;
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleEditClick = () => {
@@ -28,25 +41,30 @@ export default function TreeHeader({ currentTreeData, isTreeQueryError, hasUnfit
       setIsDialogOpen(true);
     }
   };
-
   return (
     <>
       <div className="text-left">
-        {common && (
-          <h1>
-            {common}
-          </h1>
-        )}
+        {common && <h1>{common}</h1>}
 
         <div>
-          {scientific && <h2><a href={wikipediaLink} name={wikipediaLink} target="_blank" rel="noreferrer">{scientific}</a></h2>}
-          {(scientific !== genus) && <h2>{genus}</h2>}
+          {scientific && (
+            <h2>
+              <a
+                href={wikipediaLink}
+                name={wikipediaLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {scientific}
+              </a>
+            </h2>
+          )}
+          {scientific !== genus && <h2>{genus}</h2>}
           {height && <h5>Height: {height}</h5>}
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
-          {datePlanted && <h5>Planted: {planted}</h5>}
-          {treeImages[scientific] && <img src={treeImages[scientific]} alt="" />}
+          {(datePlanted || planted) && <h5>Planted: {plantDate}</h5>}
+          {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
         </div>
-
       </div>
 
       {!hasUnfitData && (

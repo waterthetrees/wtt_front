@@ -9,12 +9,12 @@ import Section from '@/components/Section/Section';
 export default function TreeLinks({ currentTreeData }) {
   const links = [
     {
-      url: currentTreeData.download && currentTreeData.download.url,
-      label: `Download ${currentTreeData.city} Data`,
+      url: currentTreeData.download,
+      label: `${currentTreeData.city} Data`,
     },
     {
       url: currentTreeData.info,
-      label: `Download ${currentTreeData.city} Info`,
+      label: `${currentTreeData.city} Info`,
     },
     {
       url: 'https://standards.opencouncildata.org/#/trees',
@@ -23,9 +23,7 @@ export default function TreeLinks({ currentTreeData }) {
   ];
 
   return (
-    <Section
-      title="Links"
-    >
+    <Section title="Links">
       {links.map((link) => (
         <Anchor key={link.label} label={link.label} url={link.url} />
       ))}
