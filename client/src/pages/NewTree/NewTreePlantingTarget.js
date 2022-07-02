@@ -12,7 +12,8 @@ const markerBaseColor = '#000000';
 const followingColor = '#1da1f2';
 
 const OuterCircle = styled('div')`
-  &, &::before {
+  &,
+  &::before {
     width: ${targetSize}px;
     height: ${targetSize}px;
     border-width: ${targetBorderWidth}px;
@@ -32,7 +33,7 @@ const OuterCircle = styled('div')`
 
   &::before {
     border-color: ${followingColor};
-    content: "";
+    content: '';
     left: 0;
     top: 0;
     position: absolute;
@@ -40,7 +41,7 @@ const OuterCircle = styled('div')`
   }
 
   &::after {
-    content: "";
+    content: '';
     width: ${markerFullSize}px;
     height: ${markerFullSize}px;
     border: ${outerBorderWidth}px solid white;
@@ -53,19 +54,19 @@ const OuterCircle = styled('div')`
 
   @keyframes pulseAnimation {
     0% {
-        transform: scale(1);
-        opacity: 1
+      transform: scale(1);
+      opacity: 1;
     }
 
     70% {
-        transform: scale(1.5);
-        border-width: ${3 * targetBorderWidth}px;
-        opacity: 0
+      transform: scale(1.5);
+      border-width: ${3 * targetBorderWidth}px;
+      opacity: 0;
     }
 
     to {
-        transform: scale(1);
-        opacity: 0
+      transform: scale(1);
+      opacity: 0;
     }
   }
 `;
@@ -81,28 +82,32 @@ const InnerCircle = styled('div')`
   opacity: 0.7;
 `;
 
-const Target = styled(NewTreeCrosshairs)`
-  width: ${targetSize / 2}px;
-  height: ${targetSize / 2}px;
+const AddTreeFaceSrc = styled('img')`
+  width: ${targetSize}px;
+  height: ${targetSize}px;
   color: black;
 `;
 
 // To put a tooltip on this component, we have to both forward the ref and spread the props on it.
-export const NewTreePlantingTarget = forwardRef(({ isFollowingUser, ...props }, ref) => (
-  <OuterCircle
-    ref={ref}
-    sx={{
-      // The isFollowingUser prop could be passed into the styled() call above, but it's a little
-      // simpler to add this styling via the sx prop.
-      borderColor: `${isFollowingUser ? followingColor : `${markerBaseColor}99`}`,
-      '&::before': {
-        display: isFollowingUser ? 'block' : 'none',
-      },
-    }}
-    {...props}
-  >
-    <InnerCircle>
-      <img src={AddTreeIcon} alt="AddTreeFaceIcon" />
-    </InnerCircle>
-  </OuterCircle>
-));
+export const NewTreePlantingTarget = forwardRef(
+  ({ isFollowingUser, ...props }, ref) => (
+    <OuterCircle
+      ref={ref}
+      sx={{
+        // The isFollowingUser prop could be passed into the styled() call above, but it's a little
+        // simpler to add this styling via the sx prop.
+        borderColor: `${
+          isFollowingUser ? followingColor : `${markerBaseColor}99`
+        }`,
+        '&::before': {
+          display: isFollowingUser ? 'block' : 'none',
+        },
+      }}
+      {...props}
+    >
+      <InnerCircle>
+        <AddTreeFaceSrc src={AddTreeIcon} />
+      </InnerCircle>
+    </OuterCircle>
+  ),
+);

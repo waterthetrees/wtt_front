@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import format from 'date-fns/format';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
+import { styled } from '@mui/material';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 import TreeEdit from './TreeEdit';
 
@@ -14,6 +15,7 @@ export default function TreeHeader({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
+
   const {
     id,
     common,
