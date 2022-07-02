@@ -4,27 +4,32 @@ const path = require('path');
 const jsonPattern = /(.+)\.json$/;
 const dataPath = path.resolve(__dirname, 'json');
 const outputPath = path.resolve(__dirname, '../client/src/data/dist');
-const jsTemplate = (name, data) => `export const ${name} = ${toSource(data)};\n`;
+const jsTemplate = (name, data) =>
+  `export const ${name} = ${toSource(data)};\n`;
 const ignoreFilePattern = /alameda/i;
-const ignoreCommonPattern = new RegExp([
-  'fungus',
-  'mushroom',
-  'turtle',
-  'rainbow trout',
-  'waterfowl',
-  'chanterelle',
-  'crayfish',
-  'squirrel',
-  'moss',
-  'red-eared slider',
-  'American black bear',
-  '-cap',
-].join('|'), 'i');
+const ignoreCommonPattern = new RegExp(
+  [
+    'fungus',
+    'mushroom',
+    'turtle',
+    'rainbow trout',
+    'waterfowl',
+    'chanterelle',
+    'crayfish',
+    'squirrel',
+    'moss',
+    'red-eared slider',
+    'American black bear',
+    '-cap',
+  ].join('|'),
+  'i',
+);
 // We need to ignore 'fish' by matching the full scientific name, as some actual trees have 'fish'
 // in their common names.
-const ignoreScientificPattern = new RegExp(`^(${[
-  'chordata',
-].join('|')})$`, 'i');
+const ignoreScientificPattern = new RegExp(
+  `^(${['chordata'].join('|')})$`,
+  'i',
+);
 
 function writeJSTemplate(name, data) {
   const filename = `${name}.js`;
@@ -48,13 +53,17 @@ function ignoreError(func, code) {
 
 function toSource(obj) {
   // Strip the quotes off stringified object keys.
-  return JSON.stringify(obj, null, 2)
-    .replace(/^[\t ]*"[^:\n\r]+(?<!\\)":/gm, (match) => match.replace(/"/g, ''));
+  return JSON.stringify(obj, null, 2).replace(
+    /^[\t ]*"[^:\n\r]+(?<!\\)":/gm,
+    (match) => match.replace(/"/g, ''),
+  );
 }
 
 function toTitleCase(string) {
-  return string.replace(/([^\W_]+[^\s-]*) */g, (word) => word.charAt(0).toUpperCase()
-    + word.slice(1));
+  return string.replace(
+    /([^\W_]+[^\s-]*) */g,
+    (word) => word.charAt(0).toUpperCase() + word.slice(1),
+  );
 }
 
 function createTreeSorter(name) {
@@ -145,8 +154,12 @@ const trees = [];
 const processedTrees = {};
 
 // Ignore the Alameda file, since it doesn't include trees.
-const jsonFiles = fs.readdirSync(dataPath)
-  .filter((filename) => jsonPattern.test(filename) && !ignoreFilePattern.test(filename));
+const jsonFiles = fs
+  .readdirSync(dataPath)
+  .filter(
+    (filename) =>
+      jsonPattern.test(filename) && !ignoreFilePattern.test(filename),
+  );
 
 ignoreError(() => fs.rmSync(outputPath, { recursive: true }), 'ENOENT');
 ignoreError(() => fs.mkdirSync(outputPath), 'EEXIST');
@@ -166,9 +179,9 @@ jsonFiles.forEach((filename) => {
 
     // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
     if (
-      !processedTrees[key]
-      && !ignoreCommonPattern.test(commonTitleCase)
-      && !ignoreScientificPattern.test(scientific)
+      !processedTrees[key] &&
+      !ignoreCommonPattern.test(commonTitleCase) &&
+      !ignoreScientificPattern.test(scientific)
     ) {
       trees.push({
         common: replaceIrregularNames(commonTitleCase),

@@ -63,9 +63,7 @@ const healthSliderStyle = (() => {
 export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
   // Default the value to a normalized healthNum value, since many trees have bad healthNum data in
   // the vector tiles.
-  const {
-    healthNum, health, id,
-  } = currentTreeData;
+  const { healthNum, health, id } = currentTreeData;
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const sliderRef = useRef(treeHealthUtil.getNormalizedValue(healthNum));
   const { isAuthenticated } = useAuth0();
@@ -84,8 +82,7 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
         mutateCreateTreeData.mutate({
           ...currentTreeData,
           health: newHealth,
-          scientific: currentTreeData.scientific
-          || currentTreeData.species,
+          scientific: currentTreeData.scientific || currentTreeData.species,
           city: currentTreeData.city,
         });
         setTimeout(() => setHealthSaveAlert(''), 500);
@@ -118,19 +115,14 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
       <HealthDatalist />
       <Box sx={{ textAlign: 'center' }}>
         <h4>
-          <span>{health || 'good'}</span>
-          {' '}
+          <span>{health || 'good'}</span>{' '}
           {healthSaveAlert && (
-            <span
-              className="alert alert-success"
-              role="alert"
-            >
+            <span className="alert alert-success" role="alert">
               {healthSaveAlert}
             </span>
           )}
         </h4>
       </Box>
-
     </Section>
   );
 }

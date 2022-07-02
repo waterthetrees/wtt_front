@@ -1,69 +1,79 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 import React from 'react';
-import {
-  TableRow, TableCell,
-} from '@mui/material';
-import Section from '@/components/Section/Section';
+import { TableRow, TableCell, styled } from '@mui/material';
 import TreeTable from './TreeTable';
+import Section from '@/components/Section/Section';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const infoKeys = [
-  'address',
-  'city',
-  'zip',
-  'state',
-  'country',
-  'neighborhood',
-  ['lat', 'Latitude'],
-  ['lng', 'Longitude'],
-  'organization',
-  'who',
-  'owner',
-  ['idReference', 'Ref #'],
-  'id',
-  'sourceid',
-  'count',
-  'treelocationcount',
-].map((treeRow) => (Array.isArray(treeRow)
-  ? treeRow
-  : [treeRow, capitalizeFirstLetter(treeRow)]));
+const getSectionInfo = (infoArray, currentTreeData) => {
+  const target = {};
+  infoArray.forEach(
+    (key) => (target[capitalizeFirstLetter(key)] = currentTreeData[key]),
+  );
+  return target;
+};
 
 export default function TreeInfo({ currentTreeData }) {
-  const labelValues = infoKeys.reduce((result, [key, label]) => {
-    const value = currentTreeData[key];
-
-    if (value) {
-      result.push([label, value, key]);
-    }
-
-    return result;
-  }, []);
-
-  if (!labelValues.length) {
-    return null;
-  }
+  const sections = {
+    Address: ['address', 'city', 'state', 'country', 'zip', 'lng', 'lat'],
+    Organization: ['who', 'organization', 'email', 'phone', 'website', 'owner'],
+    Ids: ['id', 'ref', 'sourceId'],
+  };
   return (
-    <Section
-      title="Info"
-    >
-      <TreeTable>
-        {labelValues.map(([label, value]) => (
-          <TableRows key={label} label={label} value={value} />
-        ))}
-      </TreeTable>
-    </Section>
+    <>
+      {Object.entries(sections).map(([title, sectionKeys]) => (
+        <TreeInfoSections
+          key={title}
+          title={title}
+          treeInfo={getSectionInfo(sectionKeys, currentTreeData)}
+        />
+      ))}
+    </>
   );
 }
 
-const TableRows = ({ label, value }) => (
-  <TableRow key={label}>
-    <TableCell sx={{ pl: 0, fontWeight: 'bold' }}>{label}</TableCell>
-    <TableCell>{value}</TableCell>
-  </TableRow>
-);
+const TableRowThin = styled(TableRow)`
+  & .MuiTableCell-root {
+    padding: 0.2rem;
+    width: 100vw;
+  }
+`;
+
+const TreeInfoSections = ({ treeInfo, title }) => {
+  if (Object.keys(treeInfo).length === 0) {
+    return null;
+  }
+  return (
+    <Section title={title}>
+      <TreeTable>
+        {Object.entries(treeInfo).map(([label, value]) => {
+          if (!value) return;
+          return <TableRows key={label} label={label} value={value} />;
+        })}
+      </TreeTable>
+    </Section>
+  );
+};
+
+const TableRows = ({ label, value }) => {
+  return (
+    <TableRowThin key={label}>
+      <TableCell sx={{ pl: 0, fontWeight: 'bold' }} style={{ width: '30%' }}>
+        {label}
+      </TableCell>
+      <TableCell>{value}</TableCell>
+    </TableRowThin>
+  );
+};

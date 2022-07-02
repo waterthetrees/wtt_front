@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Table, TableBody, TableContainer, styled,
-} from '@mui/material';
+import { Table, TableBody, TableContainer, styled } from '@mui/material';
 
 const Container = styled(TableContainer)`
   & .MuiTableCell-root {
@@ -14,9 +12,7 @@ export default function TreeTable({ children }) {
   return (
     <Container>
       <Table size="small">
-        <TableBody>
-          {children}
-        </TableBody>
+        <TableBody>{children}</TableBody>
       </Table>
     </Container>
   );
