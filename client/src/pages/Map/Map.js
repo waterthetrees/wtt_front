@@ -103,13 +103,29 @@ export default function Map({
     if (isMapboxSupported && !map && containerRef.current) {
       const mapboxMap = new mapboxgl.Map({
         container: containerRef.current,
+        projection: 'globe',
         style: 'mapbox://styles/waterthetrees/ckyckqkqz8e4b14rn3rm1hh9k',
-        center: [-122.34725, 37.7343787],
-        zoom: 10,
+        center: [-99.08, 41.03],
+        zoom: 2,
         maxZoom: 18.5,
         minZoom: 2,
         // Update the browser URL hash with the current zoom and lat/long of the map.
         hash: 'pos',
+      });
+
+      // Switch at runtime
+      // mapboxMap.setProjection('globe');
+
+      mapboxMap.on('style.load', () => {
+        mapboxMap.setFog({
+          // color: 'rgb(186, 210, 235)', // Lower atmosphere
+          // 'high-color': 'rgb(36, 92, 223)', // Upper atmosphere
+          color: 'rgb(25, 90, 130)', // Lower atmosphere
+          'high-color': 'rgb(36, 98, 130)', // Upper atmosphere
+          'horizon-blend': 0.02, // Atmosphere thickness (default 0.2 at low zooms)
+          'space-color': 'rgb(17, 79, 130)', // Background color
+          'star-intensity': 1, // Background star brightness (default 0.35 at low zoooms )
+        });
       });
 
       // Add the navigation controls to the map.
@@ -240,22 +256,22 @@ export default function Map({
           layers={layers}
           currentTreeData={currentTreeData}
         />
-        <MapboxControlPortal map={map} position="top-left">
+        <MapboxControlPortal map={map} position="bottom-left">
           <NewTreeButton map={map} />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="top-left">
-          <Adopt />
-        </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="top-right">
-          <GeolocateControl map={map} />
-        </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-right">
+        <MapboxControlPortal map={map} position="bottom-left">
           <TreeLayerLegend
             map={map}
             title="Tree layers:"
             layers={layers}
             expanded
           />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="bottom-left">
+          <GeolocateControl map={map} />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="bottom-left">
+          <Adopt />
         </MapboxControlPortal>
       </>
     )
