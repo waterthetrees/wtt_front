@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-import Loading from "./Loading";
+import { Loading } from './Loading';
 
-// TODO: it's not clear if this is the best approach for react-router v6, but it was the simplest change.
-const RequireAuth = ({ component, ...args }) => {
+// TODO: it's not clear if this is the best approach for react-router v6,
+// but it was the simplest change.
+export const RequireAuth = ({ component, ...args }) => {
   const WrappedComponent = withAuthenticationRequired(component, {
     onRedirecting: () => <Loading />,
   });
@@ -12,5 +14,3 @@ const RequireAuth = ({ component, ...args }) => {
     <WrappedComponent {...args} />
   );
 };
-
-export default RequireAuth;

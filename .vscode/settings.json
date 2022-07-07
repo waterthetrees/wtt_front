@@ -9,7 +9,7 @@
   "eslint.validate": [
     "javascript"
   ],
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "eslint.alwaysShowStatus": true
 }

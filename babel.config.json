@@ -3,5 +3,17 @@
     "@babel/env",
     "@babel/react"
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [
+    "styled-components",
+    "@babel/plugin-transform-runtime",
+    [
+      "babel-plugin-direct-import",
+      {
+        "modules": [
+          "@mui/material",
+          "@mui/icons-material"
+        ]
+      }
+    ]
+  ]
 }

@@ -3,6 +3,9 @@ package-lock.json
 .DS_Store
 client/public/*
 
+#lockfiles
+yarn.lock
+
 # The files in this directory are generated with npm run build:data
 client/src/data/dist
 

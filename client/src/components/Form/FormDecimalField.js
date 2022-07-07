@@ -4,7 +4,7 @@ import FormTextField from './FormTextField';
 const decimalPattern = { pattern: /^\s*\d+([,\\.]\d+)?\s*$/ };
 
 export default function FormDecimalField({
-  rules, ...restProps
+  rules, ...props
 }) {
   // Provide a default pattern (which the caller can still override), so if they just want to make
   // the field required, they don't also have to specify the full decimal regex.
@@ -14,7 +14,7 @@ export default function FormDecimalField({
     <FormTextField
       rules={mergedRules}
       inputProps={{ inputMode: 'decimal' }}
-      {...restProps}
+      {...props}
     />
   );
 }

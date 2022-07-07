@@ -8,13 +8,14 @@ const env = {
   localhost: 'localserver',
 }[window.location.hostname];
 
-const mapboxAccessToken = {
-  // key: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w'
-  prod: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrY3lmcWVqcDA5ZDYyenFpdG13bWdrOHYifQ.6er3tXeahhVUtgiu_pqWFw',
-  dev: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
+const mapboxAccessTokens = {
+  prod: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
+  dev: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
   blue: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNramQxdzV6ZTEwN2YzMXFxZG9rbHdjYTIifQ.wuXVYDeQ7WRqALu-RZxPMg',
-  localserver: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
-}[env];
+  localold: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
+  localserver: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
+};
+const mapboxAccessToken = mapboxAccessTokens[env];
 
 const auth0 = {
   prod: {
@@ -35,4 +36,6 @@ const auth0 = {
   },
 }[env];
 
-export { env, mapboxAccessToken, auth0 };
+export {
+  env, mapboxAccessToken, auth0,
+};

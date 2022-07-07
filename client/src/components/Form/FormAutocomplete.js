@@ -8,7 +8,7 @@ import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
 export default function FormAutocomplete({
-  name, label, options = [], rules, ...restProps
+  name, label, options = [], rules, ...props
 }) {
   return (
     <>
@@ -30,7 +30,7 @@ export default function FormAutocomplete({
                 variant="standard"
               />
             )}
-            {...restProps}
+            {...props}
           />
         )}
       />

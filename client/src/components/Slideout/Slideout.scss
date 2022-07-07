@@ -1,41 +1,24 @@
-.slideout {
-  opacity: 0.8;
-}
-
-.makeStyles-slideout-2 {
-  width: 50px;
-}
-
-.shape__txt{
- font-size: 1rem;
- line-height: 1rem;
- height: 5rem;
- width: 5rem;
- transform: rotate(+45deg);
- padding: 25px 20px 0 10px;
-}
-
-.slideout__btn:hover {
-  opacity:.8;
-}
-
-.slideout__item{
-  padding:10px 0;
-}
-
 .slideout__btn {
+  color: white;
   background-color: transparent;
   border-width: 0;
   border-radius: 0;
   border: 0;
   height: 5rem;
   width: 5rem;
-  background-color: green;
   border-radius: 15%;
-  font: 1.1rem 900 Arial;
   font-size: 1.1rem;
   font-weight: 900;
   padding: 1px 0;
+}
+
+.slideout__btn:active {
+  color: black;
+  background-color: white;
+}
+
+.slideout__btn:focus {
+  outline: none;
 }
 
 .slideout__btn__shape {
@@ -46,55 +29,32 @@
   transform: rotate(-45deg);
 }
 
-.slideout__btn:active{
-  background-color: white;
-}
-.shape:focus{
-  background-color: white;
-  outline: none;
+.slideout__btn-txt {
+  font-size: 1.2rem;
+  line-height: 1rem;
+  font-weight: 900;
 }
 
-.slideout__btn-txt{
- font-size: 1.2rem;
- line-height: 1rem;
- font-weight: 900;
-}
-
-.slideout__btn-txt__shape{
+.slideout__btn-txt__shape {
   height: 5rem;
   width: 5rem;
   transform: rotate(+45deg);
-  padding: 25px 20px 0 8px;
- }
+  padding-top: 25px;
+}
 
-.slideout__btn-selected{
+.slideout__btn-selected {
   background-color: transparent;
   border-radius: 50%;
 }
 
-.slideout__btn:focus {
- outline: none;
- background-color: transparent;
- -webkit-background-color: transparent;
--moz-background-color: transparent;
--o-background-color: transparent;
+@media only screen and (max-width: 767px) {
+  .sidebar__content {
+    font-size: 1.1rem;
+  }
 }
 
-.slideout__btn:active {
- background-color: transparent;
- -webkit-background-color: transparent;
- -moz-background-color: transparent;
- -o-background-color: transparent;
+@media only screen and (max-width: 414px) {
+  .sidebar__content {
+    font-size: 1rem;
+  }
 }
-
- @media only screen and (max-width: 767px) {
-  .sidebar__content {
-   font-size: 1.1rem;
-  }
- }
- 
- @media only screen and (max-width: 414px) {
-  .sidebar__content {
-   font-size: 1rem;
-  }
- }

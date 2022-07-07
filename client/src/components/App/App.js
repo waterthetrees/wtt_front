@@ -2,54 +2,68 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Auth0ProviderWithRedirect from '../Auth/Auth0ProviderWithRedirect';
-import Header from '../Header';
-import Mapper from '../../pages/mapper/Mapper';
-import About from '../../pages/about/About';
-import Privacy from '../../pages/privacy/Privacy';
-import License from '../../pages/license/License';
-import UserProfile from '../../pages/userprofile/UserProfile';
-import Contact from '../../pages/contact/Contact';
-import NotFound from '../../pages/notFound/NotFound';
-import RequireAuth from '../Auth/RequireAuth';
-import RedirectWithHash from '../Auth/RedirectWithHash';
-import Loading from '../Auth/Loading';
-import "../../styles/app.scss";
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import Header from '@/components/Header/Header';
+import {
+  Loading, Auth0ProviderWithRedirect, RequireAuth, RedirectWithHash,
+} from '@/components/Auth';
+import About from '@/pages/About/About';
+import Privacy from '@/pages/Privacy/Privacy';
+import License from '@/pages/License/License';
+import UserProfile from '@/pages/Userprofile/UserProfile';
+import Contact from '@/pages/Contact/Contact';
+import NotFound from '@/pages/NotFound/NotFound';
+import './App.css';
 
-// Lazy-load the data page, so that we only load the large JSON files it uses if needed.
-const Data = React.lazy(() => import(/* webpackChunkName: "Data" */ '../../pages/data/Data'));
+// Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also
+// lazy-load the /map route, so that it doesn't impact the default route.
+const Data = React.lazy(() => import(/* webpackChunkName: "Data" */ '@/pages/Data/Data'));
+const MapLayout = React.lazy(() => import(/* webpackChunkName: "MapLayout" */ '@/pages/Map/MapLayout'));
 
-// Create a client for react-query calls.
-const queryClient = new QueryClient();
+// Create a client for react-query calls.  Don't automatically refetch the data when the window is
+// focused since it's not changing that frequently.
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
-// Create a default MUI theme so that any child can access it for styling.
-const theme = createTheme();
+// Create an MUI theme so that any child can access it for styling via the hooks.
+const theme = createTheme({
+  typography: {
+    fontFamily: 'inherit',
+  },
+});
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/">
-          <Auth0ProviderWithRedirect>
-            <Header />
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<Mapper />} />
-                <Route path="/treemap" element={<Mapper />} />
-                <Route path="/userprofile" element={<RequireAuth component={UserProfile} />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/license" element={<License />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/data" element={<Data />} />
-                <Route path="/go" element={<RedirectWithHash param="to" />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </Auth0ProviderWithRedirect>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter basename="/">
+            <Auth0ProviderWithRedirect>
+              <Header />
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<MapLayout />} />
+                  <Route path="/map" element={<MapLayout />} />
+                  <Route path="/userprofile" element={<RequireAuth component={UserProfile} />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/license" element={<License />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/data" element={<Data />} />
+                  <Route path="/go" element={<RedirectWithHash param="to" />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </Auth0ProviderWithRedirect>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
