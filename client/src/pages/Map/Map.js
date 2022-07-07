@@ -267,7 +267,7 @@ export default function Map({
             expanded
           />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-left">
+        <MapboxControlPortal map={map} position="top-right">
           <GeolocateControl map={map} />
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="bottom-left">
