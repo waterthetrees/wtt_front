@@ -30,10 +30,13 @@ export default function TreeHeader({
 
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
   // format() will throw an exception if datePlanted is undefined, so check it first.
-  const plantDate =
-    datePlanted || planted
-      ? format(new Date(datePlanted || planted), 'MMMM d, yyyy')
-      : null;
+  console.log(datePlanted,planted)	
+  // const newPlant = datePlanted || planted
+  // const plantDate =
+  // newPlant 
+  //    ? format(new Date(newPlant), 'MMMM d, yyyy')
+  //    : null;
+  const plantDate = datePlanted || planted
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleEditClick = () => {
