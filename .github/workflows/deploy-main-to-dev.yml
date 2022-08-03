@@ -1,9 +1,9 @@
-name: deploy_development_to_dev.waterthetrees.com
+name: deploy_main_to_dev.waterthetrees.com
 
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
   deploy-dev:
