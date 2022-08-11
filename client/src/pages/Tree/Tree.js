@@ -72,7 +72,7 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          {scientific && Object.hasOwn(treeImages, scientific) && (
+          {scientific && Object.hasOwnProperty(treeImages, scientific) && (
             <ImageLoad
               src={treeImages[scientific]}
               placeholder="placeholder.jpg"
