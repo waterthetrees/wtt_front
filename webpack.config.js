@@ -8,7 +8,10 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
-  const { ifProduction, ifNotProduction, ifAnalyze } = getIfUtils(env, ['production', 'analyze']);
+  const { ifProduction, ifNotProduction, ifAnalyze } = getIfUtils(env, [
+    'production',
+    'analyze',
+  ]);
   // Save the config into a variable so that we can wrap it with SpeedMeasurePlugin
   // below if env.analyze is true
   const config = {
@@ -44,10 +47,10 @@ module.exports = (env) => {
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
     // which we can safely ignore.
     ignoreWarnings: [/Failed to parse source map/],
-		stats: {
+    stats: {
       // Log a build timestamp in the console.
-			builtAt: true
-		},
+      builtAt: true,
+    },
     module: {
       rules: removeEmpty([
         {
@@ -81,8 +84,8 @@ module.exports = (env) => {
         template: './client/src/index.html',
         filename: './index.html',
         minify: false,
-          // add a timestamp that's injected into an HTML comment
-        buildTime: new Date().toISOString()
+        // add a timestamp that's injected into an HTML comment
+        buildTime: new Date().toISOString(),
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
