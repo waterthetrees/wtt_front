@@ -48,7 +48,8 @@ const dataSources = [
     columns: dataColumns.slice(0, 3),
     url: 'https://fallingfruit.org',
     thanks: 'Thanks to FallingFruit.org for the top US food tree data!',
-  }, {
+  },
+  {
     name: 'San Francisco Street Trees',
     data: topTreesSanFrancisco,
     columns: dataColumns.slice(0, 6),
@@ -57,19 +58,14 @@ const dataSources = [
   },
 ];
 const dataSourceMenuItems = dataSources.map(({ name }, value) => (
-  <MenuItem
-    key={name}
-    value={value}
-  >
+  <MenuItem key={name} value={value}>
     {name}
   </MenuItem>
 ));
 
 export default function Data() {
   const [selectedSourceIndex, setSelectedSourceIndex] = useState(0);
-  const {
-    name, data, columns, url, thanks,
-  } = dataSources[selectedSourceIndex];
+  const { name, data, columns, url, thanks } = dataSources[selectedSourceIndex];
 
   const handleChange = (event) => {
     setSelectedSourceIndex(event.target.value);
@@ -77,12 +73,12 @@ export default function Data() {
 
   return (
     <div className="data">
-      <div className="data__menus">
-        <div className="data__menus-item">
+      <div className="data-menus">
+        <div className="data-menus-item">
           <FormControl sx={{ minWidth: 200, my: 1 }}>
             <Select
-              labelId="data__select-label"
-              id="data__select"
+              labelId="data-select-label"
+              id="data-select"
               size="small"
               value={selectedSourceIndex}
               onChange={handleChange}
@@ -91,38 +87,36 @@ export default function Data() {
             </Select>
           </FormControl>
         </div>
-        <div className="data__menus-item">
-          <CSVLink
-            data={data}
-            filename={`${name.replaceAll(' ', '-')}.csv`}
-          >
+        <div className="data-menus-item">
+          <CSVLink data={data} filename={`${name.replaceAll(' ', '-')}.csv`}>
             <Button variant="outlined">
-              Download CSV
-              {' '}
-              <GetApp color="primary" fontSize="large" aria-label="Download CSV" />
+              Download CSV{' '}
+              <GetApp
+                color="primary"
+                fontSize="large"
+                aria-label="Download CSV"
+              />
             </Button>
           </CSVLink>
         </div>
-        <div className="data__menus-item">
+        <div className="data-menus-item">
           <a href={url} target="_blank" rel="noreferrer">
             {thanks}
           </a>
         </div>
-        <div className="data__menus-item">
-          Unless otherwise specified, data are licensed as
-          {' '}
+        <div className="data-menus-item">
+          Unless otherwise specified, data are licensed as{' '}
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             target="_blank"
             rel="noreferrer"
           >
             CC BY-NC-SA
-          </a>
-          {' '}
-          (Creative Commons – Attribution, Non-commercial, Share-alike).
-          This means that you are free to use and distribute the data so long as you
-          preserve the original author/source attributions and
-          do not use it (without permission) for commercial applications.
+          </a>{' '}
+          (Creative Commons – Attribution, Non-commercial, Share-alike). This
+          means that you are free to use and distribute the data so long as you
+          preserve the original author/source attributions and do not use it
+          (without permission) for commercial applications.
         </div>
       </div>
       <TreeList data={data} columns={columns} />
@@ -171,11 +165,8 @@ function TreeList({ data, columns }) {
   };
 
   return (
-    <div className="data__treelist">
-      <TreeHeader
-        clickHandler={clickHandler}
-        columns={columns}
-      />
+    <div className="data-treelist">
+      <TreeHeader clickHandler={clickHandler} columns={columns} />
       {sortedTrees.map((tree) => (
         <Tree
           tree={tree}
@@ -189,12 +180,12 @@ function TreeList({ data, columns }) {
 
 function TreeHeader({ clickHandler, columns }) {
   return (
-    <div className="data__treelist-tree-header">
+    <div className="data-treelist-tree-header">
       {columns.map(({ key, label }) => (
-        <div className="data__treelist-tree-header-item" key={key}>
+        <div className="data-treelist-tree-header-item" key={key}>
           <button
             type="button"
-            className="data__treeheader-btn"
+            className="data-treeheader-btn"
             value={key}
             onClick={clickHandler}
           >
@@ -208,9 +199,11 @@ function TreeHeader({ clickHandler, columns }) {
 
 function Tree({ tree, columns }) {
   return (
-    <div className="data__treelist-tree" key={tree.common}>
+    <div className="data-treelist-tree" key={tree.common}>
       {columns.map(({ key }) => (
-        <div className="data__treelist-tree-item" key={key}>{tree[key]}</div>
+        <div className="data-treelist-tree-item" key={key}>
+          {tree[key]}
+        </div>
       ))}
     </div>
   );

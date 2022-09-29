@@ -1,29 +1,28 @@
 .footer {
-  position:fixed;
-  bottom:0;
-  right:0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
   width: 100%;
   background-color: #147d16;
-  opacity: .8;
+  opacity: 80%;
   z-index: 2;
 }
 
-.footer__content {
+.footer-content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 10px;
 }
 
-.footer__link {
+.footer-link {
   text-align: center;
   font-size: 1rem;
-  color:black;
+  color: black;
 }
 
-
 @media only screen and (max-width: 768px) {
-  .footer__content {
+  .footer-content {
     padding: 5px;
   }
 }
