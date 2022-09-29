@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'wtt-thin';
-  src: local('wtt-thin'), url(../../assets/fonts/WTT-THIN.ttf) format('truetype');
+  font-family: wtt-thin;
+  src: local("wtt-thin"), url("../../assets/fonts/WTT-THIN.ttf") format("truetype");
 }
 
 .header {
@@ -8,14 +8,15 @@
   top: 0;
   width: 100%;
   background-color: #147d16;
-  opacity: 0.8;
+  opacity: 80%;
   border-color: transparent;
+
   /* put this above the map drawer but below modal dialogs */
   z-index: 1250 !important;
 }
 
-.header__font{
-  font-family: 'wtt-thin', Arial, sans-serif, "PT Sans";
+.header-font {
+  font-family: wtt-thin, Arial, sans-serif, "PT Sans";
   color: white;
   white-space: nowrap;
   letter-spacing: -3px;
@@ -23,11 +24,11 @@
   word-spacing: 0.6rem;
 }
 
-.header__font::first-letter {
+.header-font::first-letter {
   letter-spacing: 0;
 }
 
-.header__content {
+.header-content {
   display: flex;
   flex-direction: row;
   padding: 0 10px;
@@ -39,42 +40,41 @@
   outline: none;
 }
 
-.header__icon {
+.header-icon {
   height: 5vh;
 }
 
-.header__icon:hover {
+.header-icon:hover {
   cursor: pointer;
 }
 
-.header__icon:focus {
+.header-icon:focus {
   box-shadow: none;
   outline: none;
 }
 
-.header__link {
+.header-link {
   width: 100%;
 }
 
-.header .MuiListItem-gutters {
-  padding-left: 5px;
-  padding-right: 5px;
-}
+// .header .MuiListItem-gutters {
+//   padding-left: 5px;
+//   padding-right: 5px;
+// }
 
-.header__btn-menu {
+.header-btn-menu {
   background-color: transparent;
-  margin: 0em;
+  margin: 0;
   padding: 0;
   border-width: 0;
   color: white;
-  background: none;
   border: none;
   outline: none;
   font-size: 2.3rem;
 }
 
 @media only screen and (max-width: 768px) {
-  .header__icon {
+  .header-icon {
     width: 70vw;
   }
 }

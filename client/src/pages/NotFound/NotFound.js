@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
-    <div className="NotFound">
+    <div className="not-found">
       <div className="background-overlay"></div>
       <Container>
         <Grid
