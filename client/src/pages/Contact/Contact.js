@@ -14,11 +14,13 @@ export default function Contact() {
 
       <div className="contact__main">
         <div className="contact__p">
-          <span>Join us on slack to get involved in coding for the trees and climate change!</span>
+          <span>
+            Join us on slack to get involved in coding for the trees and climate
+            change!
+          </span>
           <Contacts />
           <span>
-            Or, email us at
-            {' '}
+            Or, email us at{' '}
             <a
               href="mailto:info@waterthetrees.com"
               rel="noreferrer"
@@ -30,28 +32,34 @@ export default function Contact() {
         </div>
 
         <div className="contact__p">
-          <span>Additionally, our parent organizations are always looking for volunteers!</span>
           <span>
-            For developers:
-
+            Additionally, our parent organizations are always looking for
+            volunteers!
           </span>
+          <span>For developers:</span>
           <a
             href="https://www.codeforsanfrancisco.org/"
             rel="noreferrer"
             target="_blank"
           >
-            <img alt="Code for America Logo" src={CodeLogo} className="contact__logo" />
+            <img
+              alt="Code for America Logo"
+              src={CodeLogo}
+              className="contact__logo"
+            />
             Code for America San Francisco
           </a>
-          <span>
-            For tree afficionados and climate enthusiasts:
-          </span>
+          <span>For tree afficionados and climate enthusiasts:</span>
           <a
             href="https://www.sierraclub.org/san-francisco-bay/tree-planting"
             rel="noreferrer"
             target="_blank"
           >
-            <img alt="Sierra Club Logo" src={SierrClubLogo} className="contact__logo" />
+            <img
+              alt="Sierra Club Logo"
+              src={SierrClubLogo}
+              className="contact__logo"
+            />
             Sierra Club Tree Team
           </a>
         </div>
