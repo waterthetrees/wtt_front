@@ -66,23 +66,35 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
     <UserActionIcon
       title="Planted"
       count={plantedCount}
-      icon={<img src={TreeIcon} style={{ ...iconStyle, marginRight: '.2em' }} />}
+      icon={
+        <img
+          alt=""
+          src={TreeIcon}
+          style={{ ...iconStyle, marginRight: '0.2em' }}
+        />
+      }
     />
   </Box>
 );
 
 export default function UserProfile() {
   const { user = {} } = useAuth0();
-  const {
-    name, nickname, email, picture,
-  } = user;
+  const { name, nickname, email, picture } = user;
   const emailQuery = { email };
   const emailEnabled = { enabled: !!email };
-  const { data: adoptedTrees = [] } = useUserAdoptedQuery(emailQuery, emailEnabled);
+  const { data: adoptedTrees = [] } = useUserAdoptedQuery(
+    emailQuery,
+    emailEnabled,
+  );
   const { data: likedTrees = [] } = useUserLikedQuery(emailQuery, emailEnabled);
-  const { data: plantedTrees = [] } = useUserPlantedQuery(emailQuery, emailEnabled);
-  const { data: treeHistory = [] } = useUserTreeHistoryQuery({ volunteer: nickname },
-    { enabled: !!nickname });
+  const { data: plantedTrees = [] } = useUserPlantedQuery(
+    emailQuery,
+    emailEnabled,
+  );
+  const { data: treeHistory = [] } = useUserTreeHistoryQuery(
+    { volunteer: nickname },
+    { enabled: !!nickname },
+  );
 
   return (
     <>
