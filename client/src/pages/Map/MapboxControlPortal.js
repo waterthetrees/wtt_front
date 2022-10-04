@@ -49,12 +49,9 @@ export default function MapboxControlPortal({ map, position, children }) {
   }, [map]);
 
   return container
-    // Render this component's children into a portal rooted on the container element.  The map
+    ? // Render this component's children into a portal rooted on the container element.  The map
     // will be aware of the control container and insert it in the appropriate control group, but
     // React will manage the control's state and contents.
-    ? ReactDOM.createPortal(
-      children,
-      container,
-    )
+    ReactDOM.createPortal(children, container)
     : null;
 }
