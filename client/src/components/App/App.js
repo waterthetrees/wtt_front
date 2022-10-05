@@ -35,6 +35,9 @@ const theme = createTheme({
   typography: {
     fontFamily: 'inherit',
   },
+  palette: {
+    mode: 'dark',
+  }
 });
 
 function App() {

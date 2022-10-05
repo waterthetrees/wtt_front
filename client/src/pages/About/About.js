@@ -1,9 +1,11 @@
 import React from 'react';
 import './About.scss';
+import { Paper } from '@mui/material';
 
 import { Footer } from '@/components/Footer/Footer';
 import Contacts from '@/pages/Contact/Contacts';
 import Affiliates from '@/pages/Contact/Affiliates';
+import { Typography } from '@mui/material';
 
 const About = () => {
   const affiliates = [{
@@ -25,33 +27,38 @@ const About = () => {
   }];
 
   return (
-    <div className="about">
+    <Paper style={{ height: "100vh" }}>
       <div>
-        <div className="about__text">
+      
+        {/* <Typography variant='h2'>
           Water The Trees is a platform that crowd
           sources tree planting and maintenance.
-        </div>
-        <div className="about__text">
+        </Typography> */}
+       
+        
+        <div>
           We are an open source project
           run by tree planting volunteers.
         </div>
-        <div className="about__text">
+        <div>
           We believe in the power of
           trees to restore natural habitat for animals, insects, and fauna.
         </div>
-        <div className="about__text">
+        <div>
           We are interested in continuous massive tree planting events
           to help sequester carbon and stabilize climate change extremes.
         </div>
-        <div className="about__text">
+        <div>
           To join our dev team, reach out below:
         </div>
+      
       </div>
       <Contacts />
       To contribute to trees in your local community, reach out through the forms below:
       <Affiliates affiliates={affiliates} />
       <Footer />
-    </div>
+
+</Paper>
   );
 };
 
