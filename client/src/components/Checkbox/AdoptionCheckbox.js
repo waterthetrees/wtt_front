@@ -7,10 +7,5 @@ const CheckedIcon = <Adopted fontSize="large" />;
 
 // The Tooltip that wraps this will need a ref to the component.
 export default React.forwardRef((props, ref) => (
-  <Checkbox
-    ref={ref}
-    icon={Icon}
-    checkedIcon={CheckedIcon}
-    {...props}
-  />
+  <Checkbox ref={ref} icon={Icon} checkedIcon={CheckedIcon} {...props} />
 ));

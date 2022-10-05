@@ -4,7 +4,12 @@ import { SvgIcon } from '@mui/material';
 
 export const NewTreeCrosshairs = (props) => (
   <SvgIcon {...props}>
-    <svg viewBox="-10 -10 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor">
+    <svg
+      viewBox="-10 -10 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      stroke="currentColor"
+    >
       <style>
         {`
         circle, line {

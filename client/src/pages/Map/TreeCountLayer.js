@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 
 export default function TreeCountLayer({
-  id, useQuery, map, minzoom, maxzoom, flyToZoom,
+  id,
+  useQuery,
+  map,
+  minzoom,
+  maxzoom,
+  flyToZoom,
 }) {
   const { data } = useQuery();
 

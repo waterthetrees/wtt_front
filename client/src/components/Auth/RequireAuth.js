@@ -10,7 +10,5 @@ export const RequireAuth = ({ component, ...args }) => {
     onRedirecting: () => <Loading />,
   });
 
-  return (
-    <WrappedComponent {...args} />
-  );
+  return <WrappedComponent {...args} />;
 };

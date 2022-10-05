@@ -26,7 +26,7 @@ const NewTreePlantButton = styled(ToggleButton)`
   }
 
   &.Mui-selected {
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: white;
     background-color: transparent;
 
@@ -42,7 +42,10 @@ export default function NewTreeButton({ map }) {
   const mutateUser = useUserMutation();
   const mutateTreeData = useCreateTreeDataMutation();
   const {
-    newTreeState: { isPlanting, isFollowingUser, result }, openPanel, beginPlanting, endPlanting,
+    newTreeState: { isPlanting, isFollowingUser, result },
+    openPanel,
+    beginPlanting,
+    endPlanting,
   } = useNewTree();
   const { beginTracking } = useUserLocation();
   const isMobile = useIsMobile();
@@ -82,12 +85,7 @@ export default function NewTreeButton({ map }) {
         selected={isPlanting}
         onChange={handlePlantClick}
       />
-      {map && (
-        <NewTreePlantingMarker
-          map={map}
-          onPlantClick={openPanel}
-        />
-      )}
+      {map && <NewTreePlantingMarker map={map} onPlantClick={openPanel} />}
     </>
   );
 }

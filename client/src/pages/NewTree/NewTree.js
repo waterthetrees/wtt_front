@@ -39,7 +39,10 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
     notes: '',
     health: 'good',
     email: email || '',
-    idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(1000000, 9999999)}`,
+    idReference: `WTT${format(new Date(), 'yyyyMMdd')}${randomInteger(
+      1000000,
+      9999999,
+    )}`,
   };
   // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
@@ -49,7 +52,8 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
 
   const handleCancel = () => cancel();
 
-  const handleError = (err, e) => console.error('Form errors:', err, 'Event:', e);
+  const handleError = (err, e) =>
+    console.error('Form errors:', err, 'Event:', e);
 
   const handleFormSubmit = handleSubmit(handleConfirm, handleError);
 
@@ -58,22 +62,15 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
       title="New Tree"
       width={drawerWidth}
       open={newTreeState.isPanelOpen}
-      actions={(
+      actions={
         <>
-          <Button onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button onClick={handleFormSubmit}>
-            Plant New Tree
-          </Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleFormSubmit}>Plant New Tree</Button>
         </>
-      )}
+      }
       onClose={handleCancel}
     >
-      <Form
-        {...formMethods}
-        onSubmit={handleFormSubmit}
-      >
+      <Form {...formMethods} onSubmit={handleFormSubmit}>
         <NewTreeInfo />
         <NewTreeAddress />
         <NewTreePlanter />

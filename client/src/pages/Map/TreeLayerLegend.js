@@ -5,7 +5,8 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel, IconButton,
+  FormLabel,
+  IconButton,
   styled,
 } from '@mui/material';
 import { Close, FormatListBulleted } from '@mui/icons-material';
@@ -26,7 +27,8 @@ const CloseButton = (props) => (
   </IconButton>
 );
 
-const Dot = styled('div')(({ color, filled }) => `
+const Dot = styled('div')(
+  ({ color, filled }) => `
   width: 1em;
   height: 1em;
   margin-right: .25em;
@@ -34,11 +36,10 @@ const Dot = styled('div')(({ color, filled }) => `
   border: solid 2px ${color};
   border-radius: 50%;
   display: inline-block;
-`);
+`,
+);
 
-const DotCheckbox = ({
-  name, color, checked, onChange,
-}) => (
+const DotCheckbox = ({ name, color, checked, onChange }) => (
   <Checkbox
     name={name}
     checked={checked}
@@ -52,18 +53,16 @@ const DotCheckbox = ({
   />
 );
 
-const LayerControl = ({
-  layer, label, color, checked, onChange,
-}) => (
+const LayerControl = ({ layer, label, color, checked, onChange }) => (
   <FormControlLabel
-    control={(
+    control={
       <DotCheckbox
         name={layer}
         checked={checked}
         color={color}
         onChange={onChange}
       />
-    )}
+    }
     label={label}
     sx={{
       mx: 0,
@@ -78,9 +77,15 @@ const LayerControl = ({
 );
 
 export default function TreeLayerLegend({
-  map, title, layers, expanded = false,
+  map,
+  title,
+  layers,
+  expanded = false,
 }) {
-  const defaultVisibility = layers.reduce((result, { id }) => ({ ...result, [id]: true }), {});
+  const defaultVisibility = layers.reduce(
+    (result, { id }) => ({ ...result, [id]: true }),
+    {},
+  );
   const [layerVisibility, setLayerVisibility] = useState(defaultVisibility);
   const [isMapLoaded, setIsMapLoaded] = useState(map.loaded());
   const [isExpanded, setIsExpanded] = useState(expanded);
@@ -108,11 +113,16 @@ export default function TreeLayerLegend({
   useEffect(() => {
     for (const { id } of layers) {
       if (map.getLayer(id)) {
-        const currentVisible = map.getLayoutProperty(id, 'visibility') === 'visible';
+        const currentVisible =
+          map.getLayoutProperty(id, 'visibility') === 'visible';
         const nextVisible = layerVisibility[id];
 
         if (currentVisible !== nextVisible) {
-          map.setLayoutProperty(id, 'visibility', nextVisible ? 'visible' : 'none');
+          map.setLayoutProperty(
+            id,
+            'visibility',
+            nextVisible ? 'visible' : 'none',
+          );
         }
       }
     }
@@ -127,43 +137,30 @@ export default function TreeLayerLegend({
 
   const handleExpandClick = () => setIsExpanded(!isExpanded);
 
-  return (
-    isExpanded
-      ? (
-        <Box sx={{ p: 1 }}>
-          <FormControl
-            component="fieldset"
-            variant="standard"
-          >
-            <FormLabel
-              component="legend"
-              sx={{ mb: 0.25 }}
-            >
-              {title}
-              <CloseButton onClick={handleExpandClick} />
-            </FormLabel>
-            <FormGroup>
-              {layers.map(({ id, label, color }) => (
-                <LayerControl
-                  key={id}
-                  layer={id}
-                  label={label}
-                  color={color}
-                  checked={layerVisibility[id]}
-                  onChange={handleChange}
-                />
-              ))}
-            </FormGroup>
-          </FormControl>
-        </Box>
-      ) : (
-        <button
-          type="button"
-          title="Show map legend"
-          onClick={handleExpandClick}
-        >
-          <FormatListBulleted />
-        </button>
-      )
+  return isExpanded ? (
+    <Box sx={{ p: 1 }}>
+      <FormControl component="fieldset" variant="standard">
+        <FormLabel component="legend" sx={{ mb: 0.25 }}>
+          {title}
+          <CloseButton onClick={handleExpandClick} />
+        </FormLabel>
+        <FormGroup>
+          {layers.map(({ id, label, color }) => (
+            <LayerControl
+              key={id}
+              layer={id}
+              label={label}
+              color={color}
+              checked={layerVisibility[id]}
+              onChange={handleChange}
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    </Box>
+  ) : (
+    <button type="button" title="Show map legend" onClick={handleExpandClick}>
+      <FormatListBulleted />
+    </button>
   );
 }

@@ -4,11 +4,18 @@ import { treeHealthUtil } from '@/util/treeHealthUtil';
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
 
-const linearZoom = ['interpolate', ['linear'], ['zoom'],
-  5, 10,
-  7, 7,
-  10, 2,
-  18, 6,
+const linearZoom = [
+  'interpolate',
+  ['linear'],
+  ['zoom'],
+  5,
+  10,
+  7,
+  7,
+  10,
+  2,
+  18,
+  6,
 ];
 
 const circleLayerZoomRange = {
@@ -17,9 +24,7 @@ const circleLayerZoomRange = {
   maxzoom: 18.51,
 };
 
-export default function MapLayers({
-  map, layers, handlers, currentTreeData,
-}) {
+export default function MapLayers({ map, layers, handlers, currentTreeData }) {
   useEffect(() => {
     if (!currentTreeData) return;
     const data = {
@@ -49,30 +54,28 @@ export default function MapLayers({
         flyToZoom={12}
       />
 
-      {!map.getLayer('WTTV') && layers.map(({ id }) => (
-        <TreeLayer
-          key={id}
-          id={id}
-          map={map}
-          on={handlers}
-          layer={{
-            source: 'WTTV',
-            'source-layer': 'data',
-            ...circleLayerZoomRange,
-            filter: id === 'noData'
-              ? ['!has', 'health']
-              : [
-                'match',
-                ['get', 'health'],
-                id, true, false,
-              ],
-            paint: {
-              'circle-color': treeHealthUtil.getColorByName(id, 'fill'),
-              'circle-radius': linearZoom,
-            },
-          }}
-        />
-      ))}
+      {!map.getLayer('WTTV') &&
+        layers.map(({ id }) => (
+          <TreeLayer
+            key={id}
+            id={id}
+            map={map}
+            on={handlers}
+            layer={{
+              source: 'WTTV',
+              'source-layer': 'data',
+              ...circleLayerZoomRange,
+              filter:
+                id === 'noData'
+                  ? ['!has', 'health']
+                  : ['match', ['get', 'health'], id, true, false],
+              paint: {
+                'circle-color': treeHealthUtil.getColorByName(id, 'fill'),
+                'circle-radius': linearZoom,
+              },
+            }}
+          />
+        ))}
 
       <TreeLayer
         id="editedTrees"
@@ -122,7 +125,6 @@ export default function MapLayers({
           },
         }}
       />
-
     </>
   );
 }
