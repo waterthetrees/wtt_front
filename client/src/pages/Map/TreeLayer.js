@@ -5,7 +5,11 @@ import { useEffect } from 'react';
 const noopQuery = () => ({});
 
 export default function TreeLayer({
-  id, layer, map, useQuery = noopQuery, on = {},
+  id,
+  layer,
+  map,
+  useQuery = noopQuery,
+  on = {},
 }) {
   // why is useQuery here? not clear
   const { data } = useQuery();

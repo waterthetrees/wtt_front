@@ -23,9 +23,7 @@ export const AuthButton = () => {
       className="authbutton btn btn-light btn-block"
       onClick={handleClick}
     >
-      {isAuthenticated
-        ? 'Log Out'
-        : 'Log In'}
+      {isAuthenticated ? 'Log Out' : 'Log In'}
     </button>
   );
 };

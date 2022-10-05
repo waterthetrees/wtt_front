@@ -15,9 +15,7 @@ import {
 } from '@mui/material';
 import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 
-function TableColumnNames({
-  columnNames, orderBy, order, onRequestSort,
-}) {
+function TableColumnNames({ columnNames, orderBy, order, onRequestSort }) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -28,22 +26,14 @@ function TableColumnNames({
         {columnNames.map((columnName, index) => (
           <TableCell
             key={columnName}
-            sortDirection={orderBy === columnName
-              ? order
-              : false}
-            align={index <= 2
-              ? 'left'
-              : 'center'}
+            sortDirection={orderBy === columnName ? order : false}
+            align={index <= 2 ? 'left' : 'center'}
           >
             <TableSortLabel
               active={orderBy === columnName}
-              direction={orderBy === columnName
-                ? order
-                : 'asc'}
+              direction={orderBy === columnName ? order : 'asc'}
               onClick={createSortHandler(columnName)}
-              style={orderBy === columnName
-                ? {}
-                : { marginRight: '-24px' }}
+              style={orderBy === columnName ? {} : { marginRight: '-24px' }}
             >
               {columnName}
             </TableSortLabel>
@@ -67,7 +57,9 @@ const TableColumns = ({ row }) => (
     {Object.keys(row).map((key, index2) => {
       if (index2 === 0) {
         return (
-          <TableCell key={`col-${index2}`}>{format(new Date(row[key]), 'MMMM dd yyyy')}</TableCell>
+          <TableCell key={`col-${index2}`}>
+            {format(new Date(row[key]), 'MMMM dd yyyy')}
+          </TableCell>
         );
       }
       if (index2 <= 2) {
@@ -75,9 +67,7 @@ const TableColumns = ({ row }) => (
       }
       return (
         <TableCell key={`col-${index2}`} align="center">
-          {row[key]
-            ? <CheckBox />
-            : <CheckBoxOutlineBlank />}
+          {row[key] ? <CheckBox /> : <CheckBoxOutlineBlank />}
         </TableCell>
       );
     })}
@@ -117,15 +107,14 @@ const UserTreeHistoryTable = ({ rows }) => {
   const [rowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('dateVisit');
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   const columnNames = Object.keys(rows[0] ?? {});
 
   const handleChangePage = (event, newPage) => setPage(newPage);
 
   const handleRequestSort = (event, property) => {
-    setOrder(orderBy === property && order === 'asc'
-      ? 'desc'
-      : 'asc');
+    setOrder(orderBy === property && order === 'asc' ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
