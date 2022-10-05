@@ -81,7 +81,7 @@
     "postinstall": "npm run build:data",
     "lint": "npm run lint:js || npm run lint:css",
     "lint:css": "stylelint \"client/src/**/*.scss\"",
-    "lint:js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "npm run lint:fix:js || npm run lint:fix:css",
     "lint:fix:js": "npm run lint:js -- --fix",
     "lint:fix:css": "npm run lint:css -- --fix",
