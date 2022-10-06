@@ -9,12 +9,12 @@ const stopPropagation = (event) => event.stopPropagation();
 const StyledButton = styled(IconButton)`
   padding: 3px;
   border-radius: 50%;
-  color: rgba(255, 255, 255, .9);
-  background: rgba(0, 0, 0, .45);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.45);
 
   &:hover {
     color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
   }
 
   & .MuiSvgIcon-root {
@@ -25,11 +25,7 @@ const StyledButton = styled(IconButton)`
 
 // Wrap this with forwardRef() so it can be wrapped in a Tooltip.
 const NewTreeOpenAddButton = forwardRef((props, ref) => (
-  <StyledButton
-    ref={ref}
-    onMouseMove={stopPropagation}
-    {...props}
-  >
+  <StyledButton ref={ref} onMouseMove={stopPropagation} {...props}>
     <Add />
   </StyledButton>
 ));

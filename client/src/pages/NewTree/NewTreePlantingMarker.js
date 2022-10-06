@@ -22,7 +22,7 @@ const Container = styled(Box)`
 
 const Toolbar = styled(Box)`
   width: 100%;
-  margin-top: .75rem;
+  margin-top: 0.75rem;
   display: flex;
   justify-content: center;
 `;
@@ -30,15 +30,19 @@ const Toolbar = styled(Box)`
 export function NewTreePlantingMarker({ map, onPlantClick }) {
   const [markerStartCoords, setMarkerStartCoords] = useState(null);
   const {
-    newTreeState: { isPlanting, isFollowingUser }, setCoords, endFollowingUser, beginDrag, endDrag,
+    newTreeState: { isPlanting, isFollowingUser },
+    setCoords,
+    endFollowingUser,
+    beginDrag,
+    endDrag,
   } = useNewTree();
-  const { state: { coords, isTracking } } = useUserLocation();
+  const {
+    state: { coords, isTracking },
+  } = useUserLocation();
 
   useEffect(() => {
     if (isPlanting) {
-      const coordinates = coords && isFollowingUser
-        ? coords
-        : map.getCenter();
+      const coordinates = coords && isFollowingUser ? coords : map.getCenter();
 
       // We store the starting coords for the marker in local state, so they change only when
       // isPlanting is toggled on.  If we passed newTreeState.coords to the marker, it would
@@ -92,7 +96,6 @@ export function NewTreePlantingMarker({ map, onPlantClick }) {
             onClick={onPlantClick}
           />
         </TooltipTop>
-
       </Container>
     </MapboxMarkerPortal>
   );
