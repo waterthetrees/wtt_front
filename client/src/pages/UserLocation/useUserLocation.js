@@ -1,5 +1,9 @@
 import React, {
-  useReducer, useMemo, useContext, createContext, useEffect,
+  useReducer,
+  useMemo,
+  useContext,
+  createContext,
+  useEffect,
 } from 'react';
 import { useGeolocation } from '@/pages/UserLocation/useGeolocation';
 
@@ -10,48 +14,59 @@ const initialState = {
 
 const userLocationReducer = (state, { type, payload }) => {
   switch (type) {
-  case 'setCoords':
-    return { ...state, coords: payload };
+    case 'setCoords':
+      return { ...state, coords: payload };
 
-  case 'beginTracking':
-    return { ...state, isTracking: true };
+    case 'beginTracking':
+      return { ...state, isTracking: true };
 
-  case 'endTracking':
-    return { ...state, isTracking: false };
+    case 'endTracking':
+      return { ...state, isTracking: false };
 
-  default:
-    return { ...state, isTracking: false };
+    default:
+      return { ...state, isTracking: false };
   }
 };
 
 const UserLocationContext = createContext(undefined);
 
 const UserLocationProvider = (props) => {
-  const [state, dispatch] = useReducer(userLocationReducer, { ...initialState });
+  const [state, dispatch] = useReducer(userLocationReducer, {
+    ...initialState,
+  });
   const { data } = useGeolocation({
     enabled: state.isTracking,
     // Only update the position as the user moves if tracking is on.
     watching: state.isTracking,
     enableHighAccuracy: true,
   });
-  const context = useMemo(() => ({
-    state,
-    setCoords(coords) {
-      dispatch({ type: 'setCoords', payload: coords });
-    },
-    beginTracking() {
-      dispatch({ type: 'beginTracking' });
-    },
-    endTracking() {
-      dispatch({ type: 'endTracking' });
-    },
-  }), [state, dispatch]);
+  const context = useMemo(
+    () => ({
+      state,
+      setCoords(coords) {
+        dispatch({ type: 'setCoords', payload: coords });
+      },
+      beginTracking() {
+        dispatch({ type: 'beginTracking' });
+      },
+      endTracking() {
+        dispatch({ type: 'endTracking' });
+      },
+    }),
+    [state, dispatch],
+  );
 
   useEffect(() => {
     if (data && state.isTracking) {
-      const { coords: { longitude: lng, latitude: lat } } = data;
+      const {
+        coords: { longitude: lng, latitude: lat },
+      } = data;
 
-      if (!state.coords || lng !== state.coords.lng || lat !== state.coords.lat) {
+      if (
+        !state.coords ||
+        lng !== state.coords.lng ||
+        lat !== state.coords.lat
+      ) {
         context.setCoords({ lng, lat });
       }
     }
@@ -65,13 +80,12 @@ const useUserLocation = () => {
   const context = useContext(UserLocationContext);
 
   if (!context) {
-    throw new Error('useUserLocation() must be used within a UserLocationProvider.');
+    throw new Error(
+      'useUserLocation() must be used within a UserLocationProvider.',
+    );
   }
 
   return context;
 };
 
-export {
-  UserLocationProvider,
-  useUserLocation,
-};
+export { UserLocationProvider, useUserLocation };

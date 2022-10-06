@@ -9,7 +9,9 @@ export const useGeolocation = ({
 } = {}) => {
   const available = !!navigator.geolocation;
   const [data, setData] = useState(null);
-  const [error, setError] = useState(available ? null : 'Geolocation API is not available');
+  const [error, setError] = useState(
+    available ? null : 'Geolocation API is not available',
+  );
   const watchID = useRef(null);
   const geoOptions = { maximumAge, timeout, enableHighAccuracy };
 
@@ -43,11 +45,18 @@ export const useGeolocation = ({
       if (enabled) {
         if (watching) {
           if (!watchID.current) {
-            watchID.current = navigator.geolocation.watchPosition(handleSuccess, handleError,
-              geoOptions);
+            watchID.current = navigator.geolocation.watchPosition(
+              handleSuccess,
+              handleError,
+              geoOptions,
+            );
           }
         } else {
-          navigator.geolocation.getCurrentPosition(handleSuccess, handleError, geoOptions);
+          navigator.geolocation.getCurrentPosition(
+            handleSuccess,
+            handleError,
+            geoOptions,
+          );
         }
       }
     }
