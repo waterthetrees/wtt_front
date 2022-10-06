@@ -2,7 +2,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
 import format from 'date-fns/format';
-import { useTreeDataMutation, useCreateTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
+import {
+  useTreeDataMutation,
+  useCreateTreeDataMutation,
+  useTreeHistoryMutation,
+} from '@/api/queries';
 import { FormCheckbox, FormScrollableDialog } from '@/components/Form';
 import TreeNameAndSize from '@/components/TreeUtil/TreeNameAndSize';
 
@@ -11,9 +15,7 @@ function noNulls(object) {
     const value = object[key];
 
     // eslint-disable-next-line no-param-reassign
-    result[key] = value === null || value === undefined
-      ? ''
-      : value;
+    result[key] = value === null || value === undefined ? '' : value;
 
     return result;
   }, {});
@@ -22,19 +24,26 @@ function noNulls(object) {
 const vacantPattern = /vacant/i;
 
 export default function TreeEdit({
-  open, currentTreeId, currentTreeData, onConfirm, onCancel, isTreeQueryError,
+  open,
+  currentTreeId,
+  currentTreeData,
+  onConfirm,
+  onCancel,
+  isTreeQueryError,
 }) {
   const { user = {} } = useAuth0();
   const mutateTreeData = useTreeDataMutation();
   const mutateCreateTreeData = useCreateTreeDataMutation();
   const mutateHistory = useTreeHistoryMutation();
-  const {
-    common, scientific, genus, height, dbh,
-  } = currentTreeData;
+  const { common, scientific, genus, height, dbh } = currentTreeData;
   // React will complain about defaulting value on an input to null (which may be returned by the
   // backend), so convert any nulls or undefineds to ''.
   const initialValues = noNulls({
-    common, scientific, genus, height, dbh,
+    common,
+    scientific,
+    genus,
+    height,
+    dbh,
   });
   const defaultValues = {
     ...initialValues,
@@ -69,8 +78,8 @@ export default function TreeEdit({
         const comment = newTree
           ? `This ${common} was replaced with ${data.common}.`
           : common !== data.common
-            ? `This ${common} name was changed to ${data.common}.`
-            : `The attributes of this ${common} were changed.`;
+          ? `This ${common} name was changed to ${data.common}.`
+          : `The attributes of this ${common} were changed.`;
 
         const sendTreeHistory = {
           id: currentTreeId,
@@ -98,10 +107,7 @@ export default function TreeEdit({
       fullScreen={false}
       maxWidth="xs"
       formMethods={formMethods}
-      actions={[
-        { cancel: 'Cancel' },
-        { confirm: 'Save Changes' },
-      ]}
+      actions={[{ cancel: 'Cancel' }, { confirm: 'Save Changes' }]}
     >
       <TreeNameAndSize />
 

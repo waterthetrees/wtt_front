@@ -3,25 +3,16 @@ import { FormControl, InputLabel, Select } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
-export default function FormSelect({
-  children, name, label, rules, ...props
-}) {
+export default function FormSelect({ children, name, label, rules, ...props }) {
   return (
     <>
-      <FormControl
-        variant="standard"
-        fullWidth
-      >
+      <FormControl variant="standard" fullWidth>
         <InputLabel id="state">{label}</InputLabel>
         <Controller
           name={name}
           rules={rules}
           render={({ field }) => (
-            <Select
-              {...field}
-              variant="standard"
-              {...props}
-            >
+            <Select {...field} variant="standard" {...props}>
               {children}
             </Select>
           )}

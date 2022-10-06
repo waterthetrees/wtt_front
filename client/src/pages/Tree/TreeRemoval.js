@@ -3,7 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@mui/material';
 import { RemoveCircle } from '@mui/icons-material';
 import format from 'date-fns/format';
-import { useTreeDataMutation, useCreateTreeDataMutation, useTreeHistoryMutation } from '@/api/queries';
+import {
+  useTreeDataMutation,
+  useCreateTreeDataMutation,
+  useTreeHistoryMutation,
+} from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import TreeRemovalDialog from './TreeRemovalDialog';
 
@@ -50,9 +54,10 @@ export default function RemoveTree({ currentTreeData, isTreeQueryError }) {
     };
     const newNote = `${common} was removed by ${user.nickname} ${today} - "${comment}"`;
 
-    sendTreeData.notes = (notes && notes !== newNote)
-      ? `${notes ? `${notes}\n` : ''}${newNote}`
-      : newNote;
+    sendTreeData.notes =
+      notes && notes !== newNote
+        ? `${notes ? `${notes}\n` : ''}${newNote}`
+        : newNote;
     delete sendTreeData.healthNum;
     if (isTreeQueryError) {
       mutateCreateTreeData.mutate(sendTreeData);

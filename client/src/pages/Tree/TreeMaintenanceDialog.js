@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
-  ToggleButton, ToggleButtonGroup, TextField, styled,
+  ToggleButton,
+  ToggleButtonGroup,
+  TextField,
+  styled,
 } from '@mui/material';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import { maintenanceActions } from '@/util/constants';
@@ -31,7 +34,8 @@ const ActionButton = styled(ToggleButton)`
   &:hover {
     background-color: #777;
   }
-  &.Mui-selected, &.Mui-selected:hover {
+  &.Mui-selected,
+  &.Mui-selected:hover {
     background-color: #545b62;
   }
 `;
@@ -42,20 +46,13 @@ const MaintenanceButtons = ({ actions, setActions }) => {
   }
 
   return (
-    <ActionGroup
-      value={actions}
-      onChange={handleChange}
-      sx={{ mb: 3 }}
-    >
+    <ActionGroup value={actions} onChange={handleChange} sx={{ mb: 3 }}>
       {maintenanceActions.map(([action, pastAction]) => {
         const selected = actions.includes(pastAction);
         const label = selected ? pastAction : action;
 
         return (
-          <ActionButton
-            key={pastAction}
-            value={pastAction}
-          >
+          <ActionButton key={pastAction} value={pastAction}>
             <img src={`${treeImagesPath}${label}.svg`} />
             {label}
           </ActionButton>
@@ -66,15 +63,20 @@ const MaintenanceButtons = ({ actions, setActions }) => {
 };
 
 export default function MaintainTreeActions({
-  open, onConfirm, onCancel, volunteer,
+  open,
+  onConfirm,
+  onCancel,
+  volunteer,
 }) {
   const [actions, setActions] = useState([]);
   const volunteerRef = useRef(null);
   const commentRef = useRef(null);
 
   const handleConfirm = () => {
-    const completedActions = actions.reduce((result, action) => ({ ...result, [action]: 'yes' }),
-      {});
+    const completedActions = actions.reduce(
+      (result, action) => ({ ...result, [action]: 'yes' }),
+      {},
+    );
     const result = {
       actions: completedActions,
       volunteer: volunteerRef.current.value,
@@ -92,15 +94,9 @@ export default function MaintainTreeActions({
       onCancel={onCancel}
       fullScreen={false}
       maxWidth="xs"
-      actions={[
-        { cancel: 'Cancel' },
-        { confirm: 'Save Changes' },
-      ]}
+      actions={[{ cancel: 'Cancel' }, { confirm: 'Save Changes' }]}
     >
-      <MaintenanceButtons
-        actions={actions}
-        setActions={setActions}
-      />
+      <MaintenanceButtons actions={actions} setActions={setActions} />
       <TextField
         inputRef={volunteerRef}
         label="Volunteer"

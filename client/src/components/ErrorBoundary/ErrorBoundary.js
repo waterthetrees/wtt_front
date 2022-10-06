@@ -37,13 +37,12 @@ const Fallback = ({ error, resetErrorBoundary }) => {
 };
 
 export default function WTTErrorBoundary({
-  children, FallbackComponent = Fallback, onReset = () => location.reload(),
+  children,
+  FallbackComponent = Fallback,
+  onReset = () => location.reload(),
 }) {
   return (
-    <ErrorBoundary
-      FallbackComponent={FallbackComponent}
-      onReset={onReset}
-    >
+    <ErrorBoundary FallbackComponent={FallbackComponent} onReset={onReset}>
       {children}
     </ErrorBoundary>
   );

@@ -1,14 +1,10 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
 
-export default function Form({
-  children, onSubmit, ...methods
-}) {
+export default function Form({ children, onSubmit, ...methods }) {
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={onSubmit}
-      >
+      <form onSubmit={onSubmit}>
         {children}
 
         {/* Add a hidden input to the form so that automatic submission when pressing enter is

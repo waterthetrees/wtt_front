@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { useDebouncedCallback } from 'use-debounce';
-import { useTreeQuery, useTreeDataMutation, useCreateTreeDataMutation } from '@/api/queries';
+import {
+  useTreeQuery,
+  useTreeDataMutation,
+  useCreateTreeDataMutation,
+} from '@/api/queries';
 import Section from '@/components/Section/Section';
 
 export default function TreeNotes({ currentTreeData, isTreeQueryError }) {
@@ -39,9 +43,7 @@ export default function TreeNotes({ currentTreeData, isTreeQueryError }) {
   }, [notesRef.current]);
 
   return (
-    <Section
-      title="Notes"
-    >
+    <Section title="Notes">
       <TextField
         inputRef={notesRef}
         placeholder="Add a note"

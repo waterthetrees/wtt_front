@@ -15,12 +15,19 @@ const healthInfo = [
 ];
 const maxValue = healthInfo.length - 1;
 
-const healthByName = healthInfo.reduce((result, [name, maintainable, fill, stroke = fill], i) => ({
-  ...result,
-  [name]: {
-    key: name, value: i, maintainable, fill, stroke,
-  },
-}), {});
+const healthByName = healthInfo.reduce(
+  (result, [name, maintainable, fill, stroke = fill], i) => ({
+    ...result,
+    [name]: {
+      key: name,
+      value: i,
+      maintainable,
+      fill,
+      stroke,
+    },
+  }),
+  {},
+);
 
 // If the health isn't between 0 and 6, default to the good color.
 healthByName.default = healthByName.good;
@@ -35,9 +42,7 @@ export const treeHealthUtil = {
     const index = parseInt(value, 10);
 
     // If value is out of bounds for health, return the default value.
-    return (index >= 0 && index <= maxValue)
-      ? index
-      : healthByName.default.value;
+    return index >= 0 && index <= maxValue ? index : healthByName.default.value;
   },
   getValueByName(name) {
     return (healthByName[name] || healthByName.default).value;
@@ -49,7 +54,10 @@ export const treeHealthUtil = {
     return (healthByName[name] || healthByName.default)[colorType];
   },
   getPaintColors(colorType) {
-    const colors = healthInfo.reduce((result, [name]) => [...result, name, healthByName[name][colorType]], []);
+    const colors = healthInfo.reduce(
+      (result, [name]) => [...result, name, healthByName[name][colorType]],
+      [],
+    );
 
     colors.push(healthByName.default[colorType]);
 

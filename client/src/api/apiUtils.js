@@ -14,12 +14,14 @@ const defaultPostOptions = {
 };
 
 function createAPIFetch(method) {
-  return async function(query, data) {
+  return async function (query, data) {
     const options = { ...defaultOptions, method };
     let url;
 
     if (method === 'GET') {
-      const { queryKey: [api, params] } = query;
+      const {
+        queryKey: [api, params],
+      } = query;
       // Cast all non-objects to {} so that the paramString will be empty.
       const paramString = String(new URLSearchParams(Object(params)));
 
@@ -29,9 +31,7 @@ function createAPIFetch(method) {
         url += `?${paramString}`;
       }
     } else {
-      const [api, body] = Array.isArray(query)
-        ? query
-        : [query, data];
+      const [api, body] = Array.isArray(query) ? query : [query, data];
 
       url = apiEndpoints[api];
       Object.assign(options, defaultPostOptions);

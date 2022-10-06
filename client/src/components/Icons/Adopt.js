@@ -16,5 +16,9 @@ const AdoptionIcon = ({ primary = false, ...props }) => (
   </SvgIcon>
 );
 
-export const Adopt = (props) => <AdoptionIcon sx={{ verticalAlign: 'top' }} {...props} />;
-export const Adopted = (props) => <AdoptionIcon primary sx={{ verticalAlign: 'top' }} {...props} />;
+export const Adopt = (props) => (
+  <AdoptionIcon sx={{ verticalAlign: 'top' }} {...props} />
+);
+export const Adopted = (props) => (
+  <AdoptionIcon primary sx={{ verticalAlign: 'top' }} {...props} />
+);

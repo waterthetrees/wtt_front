@@ -13,7 +13,9 @@ function getNames(treeList, name, firstItem) {
   return firstItem.concat([
     ...new Set(
       treeList
-        .filter((tree) => !['', 'vacant site'].includes(tree[name].toLowerCase()))
+        .filter(
+          (tree) => !['', 'vacant site'].includes(tree[name].toLowerCase()),
+        )
         .sort(sortTreesBy[name])
         .map((tree) => tree[name]),
     ),
@@ -22,7 +24,11 @@ function getNames(treeList, name, firstItem) {
 
 // Adjust the adornment label so it aligns with the input placeholder.
 const unit = (label) => ({
-  endAdornment: <InputAdornment position="end" sx={{ marginBottom: '2px' }}>{label}</InputAdornment>,
+  endAdornment: (
+    <InputAdornment position="end" sx={{ marginBottom: '2px' }}>
+      {label}
+    </InputAdornment>
+  ),
 });
 
 const vacantLabel = 'Vacant Site';
@@ -56,13 +62,19 @@ export default function TreeNameAndSize() {
   }, [setValue, common, lastCommon]);
 
   const allFieldsEmpty = !common && !scientific && !genus;
-  const firstItem = allFieldsEmpty || [common, scientific, genus].includes(vacantLabel)
-    ? [vacantLabel]
-    : [];
+  const firstItem =
+    allFieldsEmpty || [common, scientific, genus].includes(vacantLabel)
+      ? [vacantLabel]
+      : [];
   const treeList = allFieldsEmpty
     ? trees
-    // Find the union of trees that match one or more of the names.
-    : trees.filter((tree) => (tree.common === common || tree.scientific === scientific || tree.genus === genus));
+    : // Find the union of trees that match one or more of the names.
+      trees.filter(
+        (tree) =>
+          tree.common === common ||
+          tree.scientific === scientific ||
+          tree.genus === genus,
+      );
   const commonNames = getNames(treeList, 'common', firstItem);
   const scientificNames = getNames(treeList, 'scientific', firstItem);
   const genusNames = getNames(treeList, 'genus', firstItem);
