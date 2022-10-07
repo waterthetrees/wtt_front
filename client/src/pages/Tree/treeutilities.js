@@ -1,4 +1,8 @@
-import { useTreeQuery, useTreeDataMutation, useCreateTreeDataMutation } from '@/api/queries';
+import {
+  useTreeQuery,
+  useTreeDataMutation,
+  useCreateTreeDataMutation,
+} from '@/api/queries';
 
 export async function updateOrCreateTree(id, fullData, updatedData) {
   const { isError } = useTreeQuery({ id });

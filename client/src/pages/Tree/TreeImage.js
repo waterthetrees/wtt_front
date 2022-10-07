@@ -23,7 +23,7 @@ export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
       style={{
         opacity: loading ? 0.1 : 1,
         transition: 'opacity .30s linear',
-	width: '100%'
+        width: '100%',
       }}
       placeholder={placeholder}
       alt={alt}

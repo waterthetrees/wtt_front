@@ -12,8 +12,10 @@ const mapboxAccessTokens = {
   prod: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
   dev: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
   blue: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNramQxdzV6ZTEwN2YzMXFxZG9rbHdjYTIifQ.wuXVYDeQ7WRqALu-RZxPMg',
-  localold: 'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
-  localserver: 'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
+  localold:
+    'pk.eyJ1IjoiMTAwa3RyZWVzIiwiYSI6ImNrNzFqdWFpeDA2cDQzbnF3amtoM2xrdzQifQ.XEXk0ePKHFgN8rp1YHNn4w',
+  localserver:
+    'pk.eyJ1Ijoid2F0ZXJ0aGV0cmVlcyIsImEiOiJja3MyOWpnMXowZndqMnVwazcycGRibGk3In0.dDso0u-ApDzqxRiX9bmwOw',
 };
 const mapboxAccessToken = mapboxAccessTokens[env];
 
@@ -36,6 +38,4 @@ const auth0 = {
   },
 }[env];
 
-export {
-  env, mapboxAccessToken, auth0,
-};
+export { env, mapboxAccessToken, auth0 };

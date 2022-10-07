@@ -9,7 +9,8 @@ const dotSize = 15;
 const borderWidth = 2;
 
 const MarkerDot = styled('div')`
-  &, &::before {
+  &,
+  &::before {
     width: ${dotSize}px;
     height: ${dotSize}px;
     background-color: #1da1f2;
@@ -17,13 +18,13 @@ const MarkerDot = styled('div')`
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     animation: dotPulseAnimation 2s infinite;
   }
 
   &::after {
-    content: "";
+    content: '';
     top: -${borderWidth}px;
     left: -${borderWidth}px;
     width: ${dotSize + 2 * borderWidth}px;
@@ -36,18 +37,18 @@ const MarkerDot = styled('div')`
 
   @keyframes dotPulseAnimation {
     0% {
-        transform: scale(1);
-        opacity: 1
+      transform: scale(1);
+      opacity: 1;
     }
 
     70% {
-        transform: scale(3);
-        opacity: 0
+      transform: scale(3);
+      opacity: 0;
     }
 
     to {
-        transform: scale(1);
-        opacity: 0
+      transform: scale(1);
+      opacity: 0;
     }
   }
 `;

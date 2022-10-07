@@ -3,17 +3,26 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Grid, Link } from '@mui/material';
 import format from 'date-fns/format';
 import {
-  useTreeAdoptionsQuery, useTreeLikesQuery, useTreeAdoptionsMutation,
-  useTreeHistoryMutation, useTreeLikesMutation,
+  useTreeAdoptionsQuery,
+  useTreeLikesQuery,
+  useTreeAdoptionsMutation,
+  useTreeHistoryMutation,
+  useTreeLikesMutation,
   useCreateTreeDataMutation,
 } from '@/api/queries';
-import { AdoptionCheckbox, InfoCheckbox, StarCheckbox } from '@/components/Checkbox';
+import {
+  AdoptionCheckbox,
+  InfoCheckbox,
+  StarCheckbox,
+} from '@/components/Checkbox';
 import { TooltipTop } from '@/components/Tooltip';
 import AdoptionDirections from '@/pages/Adopt/AdoptionDirections';
 import { useDebouncedCallback } from 'use-debounce';
 
 function Liked({ handleChange, currentTreeId, user }) {
-  const { data: { liked, likedCount } } = useTreeLikesQuery({
+  const {
+    data: { liked, likedCount },
+  } = useTreeLikesQuery({
     id: currentTreeId,
     email: user.email,
   });
@@ -36,9 +45,15 @@ function Liked({ handleChange, currentTreeId, user }) {
 }
 
 function Adopted({
-  handleChange, user, currentTreeId, directions, showDirections,
+  handleChange,
+  user,
+  currentTreeId,
+  directions,
+  showDirections,
 }) {
-  const { data: { adopted, adoptedCount } } = useTreeAdoptionsQuery({
+  const {
+    data: { adopted, adoptedCount },
+  } = useTreeAdoptionsQuery({
     id: currentTreeId,
     email: user.email,
   });
@@ -64,7 +79,9 @@ function Adopted({
 }
 
 export default function AdoptLikeCheckboxes({
-  currentTreeData, edit, isTreeQueryError,
+  currentTreeData,
+  edit,
+  isTreeQueryError,
 }) {
   const { user } = useAuth0();
   const mutateTreeLikes = useTreeLikesMutation();
@@ -77,8 +94,7 @@ export default function AdoptLikeCheckboxes({
     if (isTreeQueryError) {
       mutateCreateTreeData.mutate({
         ...currentTreeData,
-        scientific: currentTreeData.scientific
-        || currentTreeData.genus,
+        scientific: currentTreeData.scientific || currentTreeData.genus,
         city: currentTreeData.city || currentTreeData.sourceId,
         volunteer: user.nickname,
         health: currentTreeData.health || 'fair',
@@ -121,7 +137,12 @@ export default function AdoptLikeCheckboxes({
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between" flexWrap="initial">
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="initial"
+      >
         <Grid container>
           <Liked
             currentTreeId={currentTreeData.id}

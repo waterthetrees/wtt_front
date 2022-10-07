@@ -3,9 +3,7 @@ import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 
-export default function FormTextField({
-  name, label, rules, ...props
-}) {
+export default function FormTextField({ name, label, rules, ...props }) {
   return (
     <>
       <Controller

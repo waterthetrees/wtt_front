@@ -36,12 +36,8 @@ const Content = styled('div')`
 export default function FormTreeGroup({ title, children }) {
   return (
     <Group>
-      <Header>
-        {title}
-      </Header>
-      <Content>
-        {children}
-      </Content>
+      <Header>{title}</Header>
+      <Content>{children}</Content>
     </Group>
   );
 }

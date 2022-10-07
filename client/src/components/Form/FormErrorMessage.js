@@ -4,7 +4,7 @@ import { Alert, styled } from '@mui/material';
 
 const FormAlert = styled(Alert)`
   padding: 2px 12px;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
   & .MuiAlert-icon {
     margin-right: 10px;
@@ -24,17 +24,15 @@ const messagesByType = {
 };
 
 export default function FormErrorMessage({ name, label = name }) {
-  const { formState: { errors } } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
   const error = errors[name];
 
   if (error) {
     const message = messagesByType[error.type || 'default'](label);
 
-    return (
-      <FormAlert severity="error">
-        {message}
-      </FormAlert>
-    );
+    return <FormAlert severity="error">{message}</FormAlert>;
   }
 
   return null;

@@ -82,7 +82,7 @@ export default function MapboxMarkerPortal({
 
   return container
     ? // Render this component's children into a portal rooted on the container element.  The map
-    // will track the marker's location, but React will manage and render its UI.
-    ReactDOM.createPortal(children, container)
+      // will track the marker's location, but React will manage and render its UI.
+      ReactDOM.createPortal(children, container)
     : null;
 }

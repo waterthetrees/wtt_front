@@ -22,11 +22,15 @@ import { getData, postData, putData } from './apiUtils';
  */
 function createUseQuery(api, options = {}) {
   const {
-    defaultData = {}, defaultOptions = {}, preProcessor, postProcessor,
+    defaultData = {},
+    defaultOptions = {},
+    preProcessor,
+    postProcessor,
   } = options;
-  const queryFn = typeof postProcessor === 'function'
-    ? (...args) => getData(...args).then(postProcessor)
-    : getData;
+  const queryFn =
+    typeof postProcessor === 'function'
+      ? (...args) => getData(...args).then(postProcessor)
+      : getData;
 
   return function (queryData = {}, queryOptions = {}) {
     const data = { ...defaultData, ...queryData };
@@ -51,19 +55,17 @@ function createUseQuery(api, options = {}) {
  * documentation for details.
  */
 function createUseMutation(apiList, method) {
-  const apis = Array.isArray(apiList)
-    ? apiList
-    : [apiList];
-  const apiCaller = method === 'PUT'
-    ? putData
-    : postData;
+  const apis = Array.isArray(apiList) ? apiList : [apiList];
+  const apiCaller = method === 'PUT' ? putData : postData;
 
   return function () {
     const queryClient = useQueryClient();
 
     return useMutation((data) => apiCaller(apis[0], data), {
-      onSuccess: () => apis.forEach((api) => queryClient.invalidateQueries(api)),
-      onError: (error) => console.error(`useMutation: ${method} ${apis} ${error}`),
+      onSuccess: () =>
+        apis.forEach((api) => queryClient.invalidateQueries(api)),
+      onError: (error) =>
+        console.error(`useMutation: ${method} ${apis} ${error}`),
     });
   };
 }
@@ -71,41 +73,51 @@ function createUseMutation(apiList, method) {
 // Custom postProcessor to convert the response from calls to `/cities` and `/countries` into arrays
 // of GeoJSON features.
 function processTreeCounts(treeCounts) {
-  return treeCounts.map(({
-    city, country, count, countryCountTrees, lat, lng,
-  }) => {
-    const name = city || country;
-    const countString = Number(count || countryCountTrees).toLocaleString();
+  return treeCounts.map(
+    ({ city, country, count, countryCountTrees, lat, lng }) => {
+      const name = city || country;
+      const countString = Number(count || countryCountTrees).toLocaleString();
 
-    return {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [lng, lat],
-      },
-      properties: {
-        name,
-        cityCountTrees: `${countString} trees`,
-        count: `${countString} trees`,
-      },
-    };
-  });
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [lng, lat],
+        },
+        properties: {
+          name,
+          cityCountTrees: `${countString} trees`,
+          count: `${countString} trees`,
+        },
+      };
+    },
+  );
 }
 
 // Create custom `useQuery` hooks for GET calls to the WTT API.  These wrap the API method names and
 // default parameters so they don't have to be repeated with each use of a hook.
-export const useUserAdoptedQuery = createUseQuery('usercounts', { defaultData: { request: 'adopted' } });
-export const useUserLikedQuery = createUseQuery('usercounts', { defaultData: { request: 'liked' } });
-export const useUserPlantedQuery = createUseQuery('usercounts', { defaultData: { request: 'planted' } });
+export const useUserAdoptedQuery = createUseQuery('usercounts', {
+  defaultData: { request: 'adopted' },
+});
+export const useUserLikedQuery = createUseQuery('usercounts', {
+  defaultData: { request: 'liked' },
+});
+export const useUserPlantedQuery = createUseQuery('usercounts', {
+  defaultData: { request: 'planted' },
+});
 export const useUserTreeHistoryQuery = createUseQuery('usertreehistory');
-export const useCitiesQuery = createUseQuery('cities', { postProcessor: processTreeCounts });
+export const useCitiesQuery = createUseQuery('cities', {
+  postProcessor: processTreeCounts,
+});
 export const useCountriesQuery = createUseQuery('countries', {
   defaultData: {
     country: 'All',
   },
   postProcessor: processTreeCounts,
 });
-export const useTreemapQuery = createUseQuery('treemap', { defaultData: { city: '%' } });
+export const useTreemapQuery = createUseQuery('treemap', {
+  defaultData: { city: '%' },
+});
 
 export const useTreeQuery = createUseQuery('trees', {
   preProcessor(api, data, queryFn, options) {
@@ -115,9 +127,7 @@ export const useTreeQuery = createUseQuery('trees', {
     // that triggers a React exception.
     return useQuery(
       [api, data],
-      !data.id
-        ? () => Promise.resolve(null)
-        : queryFn,
+      !data.id ? () => Promise.resolve(null) : queryFn,
       options,
     );
   },
@@ -145,8 +155,20 @@ export const useTreeAdoptionsQuery = createUseQuery('treeadoptions', {
 // automatically invalidate related in-flight queries, so that they'll be retried after the mutation
 // to get the latest data.
 export const useUserMutation = createUseMutation('users');
-export const useTreeDataMutation = createUseMutation(['trees', 'treemap'], 'PUT');
-export const useCreateTreeDataMutation = createUseMutation(['trees', 'treemap']);
+export const useTreeDataMutation = createUseMutation(
+  ['trees', 'treemap'],
+  'PUT',
+);
+export const useCreateTreeDataMutation = createUseMutation([
+  'trees',
+  'treemap',
+]);
 export const useTreeHistoryMutation = createUseMutation('treehistory');
-export const useTreeLikesMutation = createUseMutation(['treelikes', 'treehistory']);
-export const useTreeAdoptionsMutation = createUseMutation(['treeadoptions', 'treehistory']);
+export const useTreeLikesMutation = createUseMutation([
+  'treelikes',
+  'treehistory',
+]);
+export const useTreeAdoptionsMutation = createUseMutation([
+  'treeadoptions',
+  'treehistory',
+]);

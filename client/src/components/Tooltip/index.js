@@ -7,9 +7,7 @@ const defaultTooltipSx = {
   maxWidth: 150,
 };
 
-const StyledTooltip = ({
-  children, title, tooltipSx = {}, ...props
-}) => (
+const StyledTooltip = ({ children, title, tooltipSx = {}, ...props }) => (
   <Tooltip
     title={title}
     arrow
@@ -28,7 +26,15 @@ const StyledTooltip = ({
   </Tooltip>
 );
 
-export const TooltipTop = (props) => (<StyledTooltip placement="top" {...props} />);
-export const TooltipBottom = (props) => (<StyledTooltip placement="bottom" {...props} />);
-export const TooltipLeft = (props) => (<StyledTooltip placement="left" {...props} />);
-export const TooltipRight = (props) => (<StyledTooltip placement="left" {...props} />);
+export const TooltipTop = (props) => (
+  <StyledTooltip placement="top" {...props} />
+);
+export const TooltipBottom = (props) => (
+  <StyledTooltip placement="bottom" {...props} />
+);
+export const TooltipLeft = (props) => (
+  <StyledTooltip placement="left" {...props} />
+);
+export const TooltipRight = (props) => (
+  <StyledTooltip placement="left" {...props} />
+);

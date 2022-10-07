@@ -15,21 +15,27 @@ const FollowingIcon = styled(MyLocation)(iconStyle);
 const NotFollowingIcon = styled(LocationSearching)(iconStyle);
 
 function GeolocateIcon({ isTracking, isFollowingUser }) {
-  const color = isTracking
-    ? 'primary'
-    : 'inherit';
+  const color = isTracking ? 'primary' : 'inherit';
 
   // Show the target icon with no middle dot when tracking is enabled and the user has pulled the
   // planting marker away from the geolocation marker.
-  return isTracking && !isFollowingUser
-    ? <NotFollowingIcon color={color} />
-    : <FollowingIcon color={color} />;
+  return isTracking && !isFollowingUser ? (
+    <NotFollowingIcon color={color} />
+  ) : (
+    <FollowingIcon color={color} />
+  );
 }
 
 export default function GeolocateControl({ map }) {
-  const { state: { coords, isTracking }, beginTracking, endTracking } = useUserLocation();
   const {
-    newTreeState: { isPlanting, isFollowingUser }, beginFollowingUser, endFollowingUser,
+    state: { coords, isTracking },
+    beginTracking,
+    endTracking,
+  } = useUserLocation();
+  const {
+    newTreeState: { isPlanting, isFollowingUser },
+    beginFollowingUser,
+    endFollowingUser,
   } = useNewTree();
 
   useEffect(() => {
@@ -54,10 +60,7 @@ export default function GeolocateControl({ map }) {
 
   return (
     <>
-      <IconButton
-        onClick={handleClick}
-        style={{ color: '#333' }}
-      >
+      <IconButton onClick={handleClick} style={{ color: '#333' }}>
         <GeolocateIcon
           isTracking={isTracking}
           isFollowingUser={isFollowingUser}

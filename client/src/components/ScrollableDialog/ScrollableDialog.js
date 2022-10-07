@@ -13,7 +13,14 @@ import {
 import { Close } from '@mui/icons-material';
 
 export default function ScrollableDialog({
-  children, title, open, onClose, onConfirm, onCancel = onClose, actions, ...props
+  children,
+  title,
+  open,
+  onClose,
+  onConfirm,
+  onCancel = onClose,
+  actions,
+  ...props
 }) {
   const theme = useTheme();
   // Use a full-screen dialog on smaller screens.
@@ -26,24 +33,15 @@ export default function ScrollableDialog({
     actionButtons = actions.map((action) => {
       const { confirm, cancel } = action;
 
-      return confirm
-        ? (
-          <Button
-            key={confirm}
-            type="submit"
-            onClick={onConfirm}
-          >
-            {confirm}
-          </Button>
-        )
-        : (
-          <Button
-            key={cancel}
-            onClick={onCancel}
-          >
-            {cancel}
-          </Button>
-        );
+      return confirm ? (
+        <Button key={confirm} type="submit" onClick={onConfirm}>
+          {confirm}
+        </Button>
+      ) : (
+        <Button key={cancel} onClick={onCancel}>
+          {cancel}
+        </Button>
+      );
     });
   }
 
@@ -65,15 +63,8 @@ export default function ScrollableDialog({
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent dividers>
-        {children}
-      </DialogContent>
-      {actionButtons
-        && (
-          <DialogActions>
-            {actionButtons}
-          </DialogActions>
-        )}
+      <DialogContent dividers>{children}</DialogContent>
+      {actionButtons && <DialogActions>{actionButtons}</DialogActions>}
     </Dialog>
   );
 }

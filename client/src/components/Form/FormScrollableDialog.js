@@ -3,11 +3,16 @@ import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import { Form } from './index';
 
 export default function FormScrollableDialog({
-  children, formMethods, onConfirm, onCancel, onError, ...props
+  children,
+  formMethods,
+  onConfirm,
+  onCancel,
+  onError,
+  ...props
 }) {
   const handleSubmit = formMethods.handleSubmit(
     (data, event) => onConfirm(data, event),
-    (data, event) => typeof onError === 'function' && onError(data, event)
+    (data, event) => typeof onError === 'function' && onError(data, event),
   );
 
   return (
@@ -17,10 +22,7 @@ export default function FormScrollableDialog({
       onCancel={onCancel}
       {...props}
     >
-      <Form
-        {...formMethods}
-        onSubmit={handleSubmit}
-      >
+      <Form {...formMethods} onSubmit={handleSubmit}>
         {children}
       </Form>
     </ScrollableDialog>

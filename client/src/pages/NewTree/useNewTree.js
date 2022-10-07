@@ -1,6 +1,4 @@
-import React, {
-  useReducer, useMemo, useContext, createContext,
-} from 'react';
+import React, { useReducer, useMemo, useContext, createContext } from 'react';
 
 const newTreeInitialState = {
   coords: null,
@@ -16,81 +14,86 @@ const newTreeInitialState = {
 
 const newTreeReducer = (state, { type, payload }) => {
   switch (type) {
-  case 'setCoords':
-    return { ...state, coords: payload };
+    case 'setCoords':
+      return { ...state, coords: payload };
 
-  case 'beginPlanting':
-    return { ...state, isPlanting: true };
+    case 'beginPlanting':
+      return { ...state, isPlanting: true };
 
-  case 'endPlanting':
-    // Reset the state except for isFollowingUser.  We want to leave that flag alone so that it's
-    // remembered across planting sessions.
-    const { isFollowingUser } = state;
-    return { ...newTreeInitialState, isFollowingUser };
+    case 'endPlanting':
+      // Reset the state except for isFollowingUser.  We want to leave that flag alone so that it's
+      // remembered across planting sessions.
+      const { isFollowingUser } = state;
+      return { ...newTreeInitialState, isFollowingUser };
 
-  case 'beginFollowingUser':
-    return { ...state, isFollowingUser: true };
+    case 'beginFollowingUser':
+      return { ...state, isFollowingUser: true };
 
-  case 'endFollowingUser':
-    return { ...state, isFollowingUser: false };
+    case 'endFollowingUser':
+      return { ...state, isFollowingUser: false };
 
-  case 'beginDrag':
-    return { ...state, isDragging: true };
+    case 'beginDrag':
+      return { ...state, isDragging: true };
 
-  case 'endDrag':
-    return { ...state, isDragging: false };
+    case 'endDrag':
+      return { ...state, isDragging: false };
 
-  case 'openPanel':
-    return { ...state, isPanelOpen: true };
+    case 'openPanel':
+      return { ...state, isPanelOpen: true };
 
-  case 'confirm':
-    return { ...state, isPanelOpen: false, result: payload };
+    case 'confirm':
+      return { ...state, isPanelOpen: false, result: payload };
 
-  case 'cancel':
-    return { ...state, isPanelOpen: false, result: null };
+    case 'cancel':
+      return { ...state, isPanelOpen: false, result: null };
 
-  default:
-    throw new Error(`newTreeReducer: unrecognized type: ${type}`);
+    default:
+      throw new Error(`newTreeReducer: unrecognized type: ${type}`);
   }
 };
 
 const NewTreeContext = createContext(undefined);
 
 const NewTreeProvider = (props) => {
-  const [newTreeState, dispatch] = useReducer(newTreeReducer, { ...newTreeInitialState });
-  const context = useMemo(() => ({
-    newTreeState,
-    setCoords(coords) {
-      dispatch({ type: 'setCoords', payload: coords });
-    },
-    beginPlanting() {
-      dispatch({ type: 'beginPlanting' });
-    },
-    endPlanting() {
-      dispatch({ type: 'endPlanting' });
-    },
-    beginFollowingUser() {
-      dispatch({ type: 'beginFollowingUser' });
-    },
-    endFollowingUser() {
-      dispatch({ type: 'endFollowingUser' });
-    },
-    beginDrag() {
-      dispatch({ type: 'beginDrag' });
-    },
-    endDrag() {
-      dispatch({ type: 'endDrag' });
-    },
-    openPanel() {
-      dispatch({ type: 'openPanel' });
-    },
-    confirm(result) {
-      dispatch({ type: 'confirm', payload: result });
-    },
-    cancel() {
-      dispatch({ type: 'cancel' });
-    },
-  }), [newTreeState, dispatch]);
+  const [newTreeState, dispatch] = useReducer(newTreeReducer, {
+    ...newTreeInitialState,
+  });
+  const context = useMemo(
+    () => ({
+      newTreeState,
+      setCoords(coords) {
+        dispatch({ type: 'setCoords', payload: coords });
+      },
+      beginPlanting() {
+        dispatch({ type: 'beginPlanting' });
+      },
+      endPlanting() {
+        dispatch({ type: 'endPlanting' });
+      },
+      beginFollowingUser() {
+        dispatch({ type: 'beginFollowingUser' });
+      },
+      endFollowingUser() {
+        dispatch({ type: 'endFollowingUser' });
+      },
+      beginDrag() {
+        dispatch({ type: 'beginDrag' });
+      },
+      endDrag() {
+        dispatch({ type: 'endDrag' });
+      },
+      openPanel() {
+        dispatch({ type: 'openPanel' });
+      },
+      confirm(result) {
+        dispatch({ type: 'confirm', payload: result });
+      },
+      cancel() {
+        dispatch({ type: 'cancel' });
+      },
+    }),
+    [newTreeState, dispatch],
+  );
 
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <NewTreeContext.Provider value={context} {...props} />;
@@ -106,7 +109,4 @@ const useNewTree = () => {
   return context;
 };
 
-export {
-  NewTreeProvider,
-  useNewTree,
-};
+export { NewTreeProvider, useNewTree };

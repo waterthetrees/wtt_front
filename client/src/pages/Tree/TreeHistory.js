@@ -8,9 +8,7 @@ import Section from '@/components/Section/Section';
 import TreeTable from './TreeTable';
 
 const TreeHistoryItem = ({ item }) => {
-  const {
-    dateVisit, volunteer = 'volunteer', comment, liked, adopted,
-  } = item;
+  const { dateVisit, volunteer = 'volunteer', comment, liked, adopted } = item;
   const isoDate = dateVisit
     ? format(new Date(dateVisit), 'yyyy-MM-dd')
     : format(new Date(), 'yyyy-MM-dd');
@@ -27,48 +25,30 @@ const TreeHistoryItem = ({ item }) => {
       <TableCell>
         <p>
           <strong>
-            {isoDate}
-            :
-            {' '}
-            {volunteer}
+            {isoDate}: {volunteer}
           </strong>
         </p>
-        {actions.length > 0
-          && (
-            <p>
-              <strong>Maintenance:&nbsp;</strong>
-              {actions.join(', ')}
-            </p>
-          )}
-        {comment
-          && (
-            <p>
-              "
-              {comment}
-              "
-            </p>
-          )}
-        {(liked || adopted)
-          && (
-            <p>
-              {liked
-                && (
-                  <span>
-                    <Liked />
-                    {' '}
-                    liked &nbsp;
-                  </span>
-                )}
-              {adopted
-                && (
-                  <span>
-                    <Adopted />
-                    {' '}
-                    adopted
-                  </span>
-                )}
-            </p>
-          )}
+        {actions.length > 0 && (
+          <p>
+            <strong>Maintenance:&nbsp;</strong>
+            {actions.join(', ')}
+          </p>
+        )}
+        {comment && <p>"{comment}"</p>}
+        {(liked || adopted) && (
+          <p>
+            {liked && (
+              <span>
+                <Liked /> liked &nbsp;
+              </span>
+            )}
+            {adopted && (
+              <span>
+                <Adopted /> adopted
+              </span>
+            )}
+          </p>
+        )}
       </TableCell>
     </TableRow>
   );
@@ -82,15 +62,10 @@ export default function TreeHistory({ currentTreeData }) {
   }
 
   return (
-    <Section
-      title="Tree History"
-    >
+    <Section title="Tree History">
       <TreeTable>
         {history.map((item) => (
-          <TreeHistoryItem
-            key={item.dateVisit}
-            item={item}
-          />
+          <TreeHistoryItem key={item.dateVisit} item={item} />
         ))}
       </TreeTable>
     </Section>
