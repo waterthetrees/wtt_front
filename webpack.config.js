@@ -81,6 +81,7 @@ module.exports = (env) => {
     },
     plugins: removeEmpty([
       new HtmlWebPackPlugin({
+        favicon: './client/public/assets/images/favicons/favicon.ico',
         template: './client/src/index.html',
         filename: './index.html',
         minify: false,
