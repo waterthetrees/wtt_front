@@ -27,7 +27,6 @@ const Header = () => {
             src={WttHalloween}
             alt="WTT Halloween"
           />
-          {/* <div className="header-font">Water The Trees</div> */}
         </Link>
 
         <button
