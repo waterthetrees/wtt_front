@@ -3,7 +3,7 @@ export const env =
     'waterthetrees.com': 'prod',
     'dev.waterthetrees.com': 'dev',
     'blue.waterthetrees.com': 'blue',
-    localhost: 'docker',
+    localhost: 'dev',
   }[window.location.hostname] || 'localserver';
 
 export const url = {
