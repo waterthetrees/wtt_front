@@ -11,8 +11,8 @@ Water the Trees is an open source project run by tree planting volunteers and de
 1. install git https://git-scm.com/downloads
 2. Install node with nvm
 ```shell
-$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-$ nvm install 18;
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+nvm install 18;
 ```
 
 ### CLONE REPO
@@ -20,9 +20,9 @@ $ nvm install 18;
 1. Open terminal and run this
 
 ```shell
-$ git clone https://github.com/waterthetrees/wtt_front.git;
-$ cd wtt_front;
-$ nvm use;
+git clone https://github.com/waterthetrees/wtt_front.git;
+cd wtt_front;
+nvm use;
 ```
 
 ### BUILD AND START JUST FRONT END
@@ -30,8 +30,8 @@ $ nvm use;
 1. Command T (on osx)
 
 ```shell
-$ cd wtt_front;
-$ npm run start:dev;
+cd wtt_front;
+npm run start:dev;
 ```
 
 ### BUILD AND START FULL STACK APP [FOLLOW DIRECTIONS HERE](https://github.com/waterthetrees/waterthetrees)
@@ -39,7 +39,7 @@ $ npm run start:dev;
 If you want to run wtt_server and wtt_db locally:
 Run one of these to connect to your localhost instead of dev.waterthetrees.com.
 ```shell
-$ npm run start;
-$ npm run start:docker;
-$ npm run start:nodemon;
+npm run start;
+npm run start:docker;
+npm run start:nodemon;
 ```
