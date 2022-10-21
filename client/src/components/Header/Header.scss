@@ -15,13 +15,9 @@
   z-index: 1250 !important;
 }
 
-.header-font {
-  font-family: wtt-thin, Arial, sans-serif, "PT Sans";
-  color: white;
-  white-space: nowrap;
-  letter-spacing: -3px;
-  font-size: 1.8rem;
-  word-spacing: 0.6rem;
+.header--logo {
+  width: 215px;
+  height: 24px;
 }
 
 .header-font::first-letter {
@@ -76,5 +72,10 @@
 @media only screen and (max-width: 768px) {
   .header-icon {
     width: 70vw;
+  }
+
+  .header--logo {
+    width: 144px;
+    height: 16px;
   }
 }
