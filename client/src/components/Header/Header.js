@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, styled } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton } from '@/components/Auth';
 import HeaderLogo from '@/assets/images/logos/header-logo.svg';
 import './Header.scss';
 
 const Header = () => {
+  const Image = styled('img')({
+    width: '100%',
+    height: '100%',
+  });
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -22,7 +27,7 @@ const Header = () => {
     <div id="header" className="header">
       <div className="header-content">
         <Link to="/">
-          <img className="header--logo" src={HeaderLogo} alt="header logo" />
+          <Image src={HeaderLogo} alt="Header Logo" />
         </Link>
 
         <button
