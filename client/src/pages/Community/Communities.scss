@@ -1,0 +1,18 @@
+.communities{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 3.29vh;
+    &__main{
+        &__p{
+            font-size: 1.2em;
+            // font-size: medium;
+        }
+        &__search {
+            &__input {
+                width: 60%;
+                border: 1px #00000050 solid;
+            }
+        }
+    }
+}
