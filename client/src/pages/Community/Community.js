@@ -39,7 +39,7 @@ export default function Community() {
                         We are always looking to add or update our data to be as current as possible. To
                     </span>
                     <span>
-                        upload tree data go to our <a>source page</a>.
+                        upload tree data go to our <a href="https://waterthetrees.com/">source page</a>.
                     </span>
                 </div>
             </div>
