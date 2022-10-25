@@ -18,7 +18,7 @@ export default function LinkMenu(props) {
     let fields = {}
     if (props.state === 1) {
         fields.header = "Add Link"
-        fields.summary = "Didn't find your organization and want to add it to our list? Input the required text and link, then submit it. A team member will review the request, and if it meets the requirements you will see the organization on the list ASAP"
+        fields.summary = "Didn't find your organization and want to add it to our list? Input the required text and link, then submit it. A team member will review the request, and if it meets the requirements you will see the organization on the list ASAP."
         fields.inputs = [
             { label: 'Country', text: 'none' },
             { label: 'City', text: 'none' },
@@ -30,7 +30,13 @@ export default function LinkMenu(props) {
     }
 
     else if (props.state === 2) {
-
+        fields.header = "Report Broken Link"
+        fields.summary = "Clicked a link and it sent you to an error page? Or found yourself where the page doesn't exist anymore? Search for the broken link and set the link then add the new link to submit. A team member will review the request, and if it meets the requirements, you will see the updated link on the list ASAP."
+        fields.inputs = [
+            { label: 'Search Broken Link or Organization', text: 'none' },
+            { label: 'Broken Link', text: 'none' },
+            { label: 'New Link', text: 'none' },
+        ]
     }
 
     const handleInput = (i) => {
@@ -51,10 +57,6 @@ export default function LinkMenu(props) {
         }
     }
 
-
-    console.log(props.state)
-    console.log(fields)
-    console.log(menuRef.current)
     return (
         <Drawer open={props.state} onClose={handleClose}>
             <Box>
