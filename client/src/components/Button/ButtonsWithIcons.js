@@ -30,7 +30,7 @@ export const ButtonWithIcon = (props) => {
 
     return (
         <ExportButton
-            onClick={props.click}
+            onClick={props.onClick}
         >
             {icon}
             {props.text}
