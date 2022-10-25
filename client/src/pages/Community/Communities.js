@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { ButtonWithIcon }  from '@/components/Button'
 import LinkMenu from '@/components/LinkMenu/LinkMenu'
+import CommunityTableRow from '@/components/Table/TableRow'
 import './Communities.scss';
 
 export default function Communities() {
@@ -29,8 +30,10 @@ export default function Communities() {
         ]
         setState(newState)
         setOpen(true)
-
     }
+
+
+
 
     const handleReportLink = () => {
         const newState = {}
@@ -77,9 +80,18 @@ export default function Communities() {
                     >
                     </input>
 
-                    <ButtonWithIcon text={"Export"} color={'red'}/>
-                    <ButtonWithIcon text={"Add Link"} click={handleAddLink} />
-                    <ButtonWithIcon text={"Report Broken Link"} click={handleReportLink} />
+                    <ButtonWithIcon text={"Export"}/>
+                    <ButtonWithIcon text={"Add Link"} onClick={handleAddLink} />
+                    <ButtonWithIcon text={"Report Broken Link"} onClick={handleReportLink} />
+
+                </div>
+                <div className='communities__main__table'>
+                    <CommunityTableRow row={{ country: 'United States', city: 'Oakland', territory: 'California', service: 'Tree Service', organization: 'Oakland Tree Services', link:'https://www.oaklandca.gov/topics/tree-services'}}/>
+                    <CommunityTableRow row={{ country: 'United States', city: 'Berkeley', territory: 'California', service: 'Tree Service', organization: 'Berkeley Tree Services', link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted' }} />
+                    <CommunityTableRow row={{ country: 'United States', city: 'Alameda', territory: 'California', service: 'Tree Service', organization: 'Alameda Tree Services', link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees' }} />
+                    <CommunityTableRow row={{ country: 'United States', city: 'San Francisco', territory: 'California', service: 'Tree Service', organization: 'San Francisco Tree Services', link: 'https://sfpublicworks.org/remove-street-tree' }} />
+                    <CommunityTableRow row={{ country: 'United States', city: 'Monterey', territory: 'California', service: 'Organization', organization: 'City of Monterey', link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php' }} />
+                    <CommunityTableRow row={{ country: 'United States', city: 'Oxnard', territory: 'California', service: 'Organization', organization: 'City of Oxnard', link: 'https://www.oxnard.org/environmental-resources/' }} />
 
                 </div>
                 <div className='communities__main__categories'>
