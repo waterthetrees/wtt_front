@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import Sidebar from '@/components/Sidebar/Sidebar'
-import { ExportButton, LinkButton, ReportLinkButton } from '@/components/Icons'
+import { CommunityButton } from '@/components/Icons'
 import LinkMenu from '@/components/LinkMenu/LinkMenu'
 import './Communities.scss';
 
@@ -56,9 +55,11 @@ export default function Communities() {
                         placeholder='Search City, Country, Service, or something else'
                     >
                     </input>
-                    <ExportButton text={"Export"} color={'red'} />
-                    <LinkButton text={"Add Link"} handleclick={handleAddLink} />
-                    <ReportLinkButton text={"Report Broken Link"} handleclick={handleReportLink} />
+
+                    <CommunityButton text={"Export"} color={'red'} />
+                    <CommunityButton text={"Add Link"} handleclick={handleAddLink} />
+                    <CommunityButton text={"Report Broken Link"} handleclick={handleReportLink} />
+
                 </div>
                 <div className='communities__main__categories'>
 

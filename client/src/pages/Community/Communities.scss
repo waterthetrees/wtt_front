@@ -9,10 +9,13 @@
             // font-size: medium;
         }
         &__search {
+            display: flex;
+            justify-content: space-between;
             &__input {
                 width: 60%;
                 border: 1px #00000050 solid;
             }
         }
+
     }
 }
