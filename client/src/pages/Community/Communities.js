@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-import { CommunityButton } from '@/components/Icons'
+import { ButtonWithIcon }  from '@/components/Button'
 import LinkMenu from '@/components/LinkMenu/LinkMenu'
 import './Communities.scss';
 
 export default function Communities() {
     const [search, setSearch] = useState("")
 
-    const [state,setState] = useState(0)
+    const [open,setOpen] = useState(false)
+    const [state,setState] = useState({})
 
 
     const handleExport = () => {
@@ -16,23 +17,43 @@ export default function Communities() {
 
 
     const handleAddLink = () => {
-        if(state === 1) return setState(0)
-        setState(1)
+        const newState = {}
+        newState.header = "Add Link"
+        newState.summary = "Didn't find your organization and want to add it to our list? Input the required text and link, then submit it. A team member will review the request, and if it meets the requirements you will see the organization on the list ASAP."
+        newState.inputs = [
+            { label: 'Country', name: 'country', text: '' },
+            { label: 'City', name: 'city', text: '' },
+            { label: 'State', name: 'state', text: '' },
+            { label: 'Organization Type', name: 'type', text: '' },
+            { label: 'Link', name: 'link', text: '' },
+        ]
+        setState(newState)
+        setOpen(true)
+
     }
 
     const handleReportLink = () => {
-        if (state === 2) return setState(0)
-        setState(2)
+        const newState = {}
+        newState.header = "Report Broken Link"
+        newState.summary = "Clicked a link and it sent you to an error page? Or found yourself where the page doesn't exist anymore? Search for the broken link and set the link then add the new link to submit. A team member will review the request, and if it meets the requirements, you will see the updated link on the list ASAP."
+        newState.inputs = [
+            { label: 'Search Broken Link or Organization', name: '', text: '' },
+            { label: 'Broken Link', name: 'broken' ,text: '' },
+            { label: 'New Link', name: 'new' ,text: '' },
+        ]
+        setState(newState)
+        setOpen(true)
     }
 
     return (
         <div className='communities'>
             <div>
                 {
-                    state ?
+                    open ?
                     <LinkMenu 
                         state={state}
-                        setState={setState}
+                        open = {open}
+                        setOpen={setOpen}
                     />
                     :
                     null
@@ -56,9 +77,9 @@ export default function Communities() {
                     >
                     </input>
 
-                    <CommunityButton text={"Export"} color={'red'} />
-                    <CommunityButton text={"Add Link"} handleclick={handleAddLink} />
-                    <CommunityButton text={"Report Broken Link"} handleclick={handleReportLink} />
+                    <ButtonWithIcon text={"Export"} color={'red'}/>
+                    <ButtonWithIcon text={"Add Link"} handleclick={handleAddLink} />
+                    <ButtonWithIcon text={"Report Broken Link"} handleclick={handleReportLink} />
 
                 </div>
                 <div className='communities__main__categories'>
