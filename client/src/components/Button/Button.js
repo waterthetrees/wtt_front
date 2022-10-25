@@ -15,7 +15,7 @@ export const GreenButton = (props) => {
     })
 
     return(
-        <Green type="submit">
+        <Green type={props.type}>
             {props.text}
         </Green>
     )
@@ -30,9 +30,8 @@ export const WhiteButton = (props) => {
         height: '32px',
     })
 
-    console.log(props.sx)
     return (
-        <White type="button" onClick={props.handleClose} sx={props?.sx}>
+        <White type={props.type} onClick={props.handleClose} sx={props?.sx}>
             {props.text}
         </White>
     )
