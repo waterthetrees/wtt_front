@@ -78,8 +78,8 @@ export default function Communities() {
                     </input>
 
                     <ButtonWithIcon text={"Export"} color={'red'}/>
-                    <ButtonWithIcon text={"Add Link"} handleclick={handleAddLink} />
-                    <ButtonWithIcon text={"Report Broken Link"} handleclick={handleReportLink} />
+                    <ButtonWithIcon text={"Add Link"} click={handleAddLink} />
+                    <ButtonWithIcon text={"Report Broken Link"} click={handleReportLink} />
 
                 </div>
                 <div className='communities__main__categories'>
