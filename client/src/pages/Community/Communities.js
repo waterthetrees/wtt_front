@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 
-import { ButtonWithIcon }  from '@/components/Button'
+import { ButtonWithIcon } from '@/components/Button'
 import LinkMenu from '@/components/LinkMenu/LinkMenu'
 import CommunityTableRow from '@/components/Table/TableRow'
+import  { SearchBar }  from '@/components/SearchBar/SearchBar';
+
 import './Communities.scss';
 
 export default function Communities() {
     const [search, setSearch] = useState("")
 
-    const [open,setOpen] = useState(false)
-    const [state,setState] = useState({})
+    const [open, setOpen] = useState(false)
+    const [state, setState] = useState({})
 
+    const links = [
+        { country: 'United States', city: 'Oakland', territory: 'California', service: 'Tree Service', organization: 'Oakland Tree Services', link: 'https://www.oaklandca.gov/topics/tree-services' } ,
+        { country: 'United States', city: 'Berkeley', territory: 'California', service: 'Tree Service', organization: 'Berkeley Tree Services', link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted' },
+        { country: 'United States', city: 'Alameda', territory: 'California', service: 'Tree Service', organization: 'Alameda Tree Services', link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees' },
+        { country: 'United States', city: 'San Francisco', territory: 'California', service: 'Tree Service', organization: 'San Francisco Tree Services', link: 'https://sfpublicworks.org/remove-street-tree' },
+        { country: 'United States', city: 'Monterey', territory: 'California', service: 'Organization', organization: 'City of Monterey', link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php' },
+        { country: 'United States', city: 'Oxnard', territory: 'California', service: 'Organization', organization: 'City of Oxnard', link: 'https://www.oxnard.org/environmental-resources/' },
+    ]
+
+    const filteredLinks = links.filter((link) => {
+        return (
+            link.country.toLowerCase().includes(search.toLowerCase()) ||
+            link.city.toLowerCase().includes(search.toLowerCase()) ||
+            link.territory.toLowerCase().includes(search.toLowerCase()) ||
+            link.service.toLowerCase().includes(search.toLowerCase())
+        )
+    })
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
 
     const handleExport = () => {
 
@@ -41,8 +64,8 @@ export default function Communities() {
         newState.summary = "Clicked a link and it sent you to an error page? Or found yourself where the page doesn't exist anymore? Search for the broken link and set the link then add the new link to submit. A team member will review the request, and if it meets the requirements, you will see the updated link on the list ASAP."
         newState.inputs = [
             { label: 'Search Broken Link or Organization', name: '', text: '' },
-            { label: 'Broken Link', name: 'broken' ,text: '' },
-            { label: 'New Link', name: 'new' ,text: '' },
+            { label: 'Broken Link', name: 'broken', text: '' },
+            { label: 'New Link', name: 'new', text: '' },
         ]
         setState(newState)
         setOpen(true)
@@ -53,13 +76,13 @@ export default function Communities() {
             <div>
                 {
                     open ?
-                    <LinkMenu 
-                        state={state}
-                        open = {open}
-                        setOpen={setOpen}
-                    />
-                    :
-                    null
+                        <LinkMenu
+                            state={state}
+                            open={open}
+                            setOpen={setOpen}
+                        />
+                        :
+                        null
                 }
             </div>
             <div className='communities__header'>
@@ -74,24 +97,16 @@ export default function Communities() {
                     </span>
                 </div>
                 <div className='communities__main__search'>
-                    <input
-                        className='communities__main__search__input'
-                        placeholder='Search City, Country, Service, or something else'
-                    >
-                    </input>
-
-                    <ButtonWithIcon text={"Export"}/>
+                    <SearchBar style={{ div: { width: '60%', borderRadius: '.3vw' }, input: { borderRadius: '.3vw' }}}search={search} handleSearch={handleSearch} placeholder={'Search City, Country, Service or something else'}/>
+                    <ButtonWithIcon text={"Export"} />
                     <ButtonWithIcon text={"Add Link"} onClick={handleAddLink} />
                     <ButtonWithIcon text={"Report Broken Link"} onClick={handleReportLink} />
 
                 </div>
                 <div className='communities__main__table'>
-                    <CommunityTableRow row={{ country: 'United States', city: 'Oakland', territory: 'California', service: 'Tree Service', organization: 'Oakland Tree Services', link:'https://www.oaklandca.gov/topics/tree-services'}}/>
-                    <CommunityTableRow row={{ country: 'United States', city: 'Berkeley', territory: 'California', service: 'Tree Service', organization: 'Berkeley Tree Services', link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted' }} />
-                    <CommunityTableRow row={{ country: 'United States', city: 'Alameda', territory: 'California', service: 'Tree Service', organization: 'Alameda Tree Services', link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees' }} />
-                    <CommunityTableRow row={{ country: 'United States', city: 'San Francisco', territory: 'California', service: 'Tree Service', organization: 'San Francisco Tree Services', link: 'https://sfpublicworks.org/remove-street-tree' }} />
-                    <CommunityTableRow row={{ country: 'United States', city: 'Monterey', territory: 'California', service: 'Organization', organization: 'City of Monterey', link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php' }} />
-                    <CommunityTableRow row={{ country: 'United States', city: 'Oxnard', territory: 'California', service: 'Organization', organization: 'City of Oxnard', link: 'https://www.oxnard.org/environmental-resources/' }} />
+                    {filteredLinks.map(({country,city,territory,service,organization,link},i) => (
+                        <CommunityTableRow row={{ country, city, territory, service, organization, link }} />
+                    ))}
 
                 </div>
                 <div className='communities__main__categories'>

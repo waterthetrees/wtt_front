@@ -15,7 +15,7 @@ export default function CommunityTableRow({ row }) {
 
     const StyledCell = styled(TableCell)({
         borderBottom: '1px #00000050 solid',
-        color:'#00000050',
+        color:'#000000',
         fontSize: '14px' ,
         fontFamily:'Montserrat'
 
