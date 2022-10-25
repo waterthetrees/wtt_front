@@ -19,18 +19,18 @@ export const ButtonWithIcon = (props) => {
     let icon
 
     if (props.text === 'Export') {
-        icon = <UploadFile sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} {...props} />
+        icon = <UploadFile sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} />
     }
     else if (props.text === "Add Link") {
-        icon = <Link sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} {...props} />
+        icon = <Link sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} />
     }
     else if (props.text === "Report Broken Link") {
-        icon = <LinkOff sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} {...props} />
+        icon = <LinkOff sx={{ color: '#00000050', verticalAlign: 'top', marginRight: '.4vw' }} />
     }
 
     return (
         <ExportButton
-            onClick={props.handleclick}
+            onClick={props.click}
         >
             {icon}
             {props.text}

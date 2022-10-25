@@ -1,4 +1,5 @@
 import React, { createRef, useState, useRef, useEffect } from 'react';
+import { GreenButton, WhiteButton } from '@/components/Button';
 
 import { styled } from '@mui/material/styles';
 import {
@@ -15,7 +16,6 @@ export default function LinkMenu(props) {
 
     // const menuRef = useRef([])
 
-    console.log(props)
 
     const handleClose = () => {
         props.setOpen(false)
@@ -29,7 +29,6 @@ export default function LinkMenu(props) {
         props.state.inputs.forEach((input) => {
             input.name ? payload[`${input.name}`] = e.target[`${input.name}`].value : null
         })
-        console.log(payload)
 
         // Submit payload
 
@@ -54,20 +53,23 @@ export default function LinkMenu(props) {
         display: 'flex',
         justifyContent: 'center',
         marginTop: '30px',
-        fontWeight: '500',
+        fontWeight: '600',
         fontSize: 'Medium',
         marginBottom: '24px',
+        fontFamily: 'Montserrat'
     })
 
     const StyledSummary = styled(Typography)({
         fontSize: '12px',
         marginBottom: '32px',
+        fontFamily: 'Montserrat'
     })
 
     const StyledLabel = styled(Typography)({
         fontSize: '14px',
-        fontWeight: '500',
-        marginBottom: '8px'
+        fontWeight: '600',
+        marginBottom: '8px',
+        fontFamily: 'Montserrat'
     })
 
     const StyledInput = styled(TextField)({
@@ -115,10 +117,13 @@ export default function LinkMenu(props) {
                         </Box>
                     ))}
                 </Box>
-                <div>
-                    <button type='button' onClick={handleClose}>cancel</button>
-                    <button >submit</button>
-                </div>
+                <Box
+                    component='div'
+                    sx={{ display:'flex',justifyContent:'flex-end' }}
+                >
+                    <WhiteButton text="Cancel" handleClose={handleClose} sx={{"marginRight":'16px'}}/>
+                    <GreenButton text="Submit Link" />
+                </Box>
 
             </StyledBox>
         </StyledDrawer>
