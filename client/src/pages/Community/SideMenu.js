@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Form, FormTextField } from '@/components/Form';
+import { Form } from '@/components/Form';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { GreenButton, WhiteButton } from '@/components/Button';
 
@@ -47,38 +47,35 @@ export default function SideMenu({ state, ...props }) {
           />
         </div>
       )}
-      <Form
-        onSubmit={handleSubmit}
-        children={
-          <>
-            <div className="form__fields">
-              {state.inputs.map((input, i) => (
-                <div key={i} className="form__fields__text">
-                  <label className="form__fields__text__label">
-                    {input.label}
-                  </label>
-                  <input
-                    className="form__fields__text__input"
-                    name={input.name}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="form__buttons">
-              <WhiteButton
-                type={'button'}
-                children={<span>Cancel</span>}
-                onClick={props.onClick}
-                sx={{ marginRight: '16px' }}
-              />
-              <GreenButton
-                type={'submit'}
-                children={<span>Submit Link</span>}
-              />
-            </div>
-          </>
-        }
-      />
+      <Form onSubmit={handleSubmit}>
+        <>
+          <div className="form__fields">
+            {state.inputs.map((input, i) => (
+              <div key={i} className="form__fields__text">
+                <label className="form__fields__text__label">
+                  {input.label}
+                </label>
+                <input
+                  className="form__fields__text__input"
+                  name={input.name}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="form__buttons">
+            <WhiteButton
+              type={'button'}
+              onClick={props.onClick}
+              sx={{ marginRight: '16px' }}
+            >
+              <span>Cancel</span>
+            </WhiteButton>
+            <GreenButton type={'submit'}>
+              <span>Submit Link</span>
+            </GreenButton>
+          </div>
+        </>
+      </Form>
     </div>
   );
 }

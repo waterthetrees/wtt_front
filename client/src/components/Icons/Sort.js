@@ -1,29 +1,15 @@
+import React from 'react';
 
-import React from "react";
+import { Remove, ExpandLess, ExpandMore } from '@mui/icons-material';
 
-import { Remove, ExpandLess,ExpandMore } from "@mui/icons-material";
+export const Neutral = (props) => (
+  <Remove sx={{ verticalAlign: 'top' }} {...props} />
+);
 
-export const Neutral = (props) => {
-    return (
-        <>
-            <Remove {...props} />
-        </>
-    )
-}
+export const SortUp = (props) => (
+  <ExpandLess sx={{ verticalAlign: 'top' }} {...props} />
+);
 
-export const SortUp = (props) => {
-
-    return (
-        <>
-            <ExpandLess {...props} />
-        </>
-    )
-}
-
-export const SortDown = (props) => {
-    return (
-        <>
-            <ExpandMore {...props} />
-        </>
-    )
-}
+export const SortDown = (props) => (
+  <ExpandMore sx={{ verticalAlign: 'top' }} {...props} />
+);
