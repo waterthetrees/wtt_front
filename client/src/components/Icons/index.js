@@ -4,3 +4,4 @@ export * from './Like';
 export * from './Link'
 export * from './Upload'
 export * from './Search'
+export * from './Sort'
