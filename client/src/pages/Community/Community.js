@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Communities from './Communities';
-
 import { Footer } from '@/components/Footer/Footer';
 import TreeImage from '@/assets/images/addtree/treefattrunk.png';
+
+import Communities from './Communities';
 import './Community.scss';
 
 export default function Community() {

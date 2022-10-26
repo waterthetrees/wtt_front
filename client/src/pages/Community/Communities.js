@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
-import { GrayButton } from '@/components/Button/Button';
-import SideMenu from './SideMenu';
-import { Sidebar } from '@/components/SideMenu/Sidebar';
-import CommunityTableRow from '@/components/Table/TableRow';
-import { SearchBar } from '@/components/SearchBar/SearchBar';
-import Section from '@/components/Section/Section';
-
 import { IconButton } from '@mui/material';
 import {
   Neutral,
@@ -17,6 +9,13 @@ import {
   UploadFileIcon,
 } from '@/components/Icons';
 
+import { GrayButton } from '@/components/Button/Button';
+import { Sidebar } from '@/components/SideMenu/Sidebar';
+import CommunityTableRow from '@/components/Table/TableRow';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
+import Section from '@/components/Section/Section';
+
+import SideMenu from './SideMenu';
 import './Communities.scss';
 
 export default function Communities() {
@@ -31,57 +30,6 @@ export default function Communities() {
   const [service, setService] = useState(true);
   const [organization, setOrganization] = useState(true);
 
-  let links = [
-    {
-      country: 'United States',
-      city: 'Oakland',
-      territory: 'California',
-      service: 'Tree Service',
-      organization: 'Oakland Tree Services',
-      link: 'https://www.oaklandca.gov/topics/tree-services',
-    },
-    {
-      country: 'United States',
-      city: 'Berkeley',
-      territory: 'California',
-      service: 'Tree Service',
-      organization: 'Berkeley Tree Services',
-      link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted',
-    },
-    {
-      country: 'United States',
-      city: 'Alameda',
-      territory: 'California',
-      service: 'Tree Service',
-      organization: 'Alameda Tree Services',
-      link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees',
-    },
-    {
-      country: 'United States',
-      city: 'San Francisco',
-      territory: 'California',
-      service: 'Tree Service',
-      organization: 'San Francisco Tree Services',
-      link: 'https://sfpublicworks.org/remove-street-tree',
-    },
-    {
-      country: 'United States',
-      city: 'Monterey',
-      territory: 'California',
-      service: 'Organization',
-      organization: 'City of Monterey',
-      link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php',
-    },
-    {
-      country: 'United States',
-      city: 'Oxnard',
-      territory: 'California',
-      service: 'Organization',
-      organization: 'City of Oxnard',
-      link: 'https://www.oxnard.org/environmental-resources/',
-    },
-  ];
-
   const filteredLinks = Links?.filter((link) => {
     return (
       link.country.toLowerCase().includes(search.toLowerCase()) ||
@@ -92,6 +40,56 @@ export default function Communities() {
   });
 
   useEffect(() => {
+    let links = [
+      {
+        country: 'United States',
+        city: 'Oakland',
+        territory: 'California',
+        service: 'Tree Service',
+        organization: 'Oakland Tree Services',
+        link: 'https://www.oaklandca.gov/topics/tree-services',
+      },
+      {
+        country: 'United States',
+        city: 'Berkeley',
+        territory: 'California',
+        service: 'Tree Service',
+        organization: 'Berkeley Tree Services',
+        link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted',
+      },
+      {
+        country: 'United States',
+        city: 'Alameda',
+        territory: 'California',
+        service: 'Tree Service',
+        organization: 'Alameda Tree Services',
+        link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees',
+      },
+      {
+        country: 'United States',
+        city: 'San Francisco',
+        territory: 'California',
+        service: 'Tree Service',
+        organization: 'San Francisco Tree Services',
+        link: 'https://sfpublicworks.org/remove-street-tree',
+      },
+      {
+        country: 'United States',
+        city: 'Monterey',
+        territory: 'California',
+        service: 'Organization',
+        organization: 'City of Monterey',
+        link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php',
+      },
+      {
+        country: 'United States',
+        city: 'Oxnard',
+        territory: 'California',
+        service: 'Organization',
+        organization: 'City of Oxnard',
+        link: 'https://www.oxnard.org/environmental-resources/',
+      },
+    ];
     setLinks(
       [...links].sort(
         (a, b) =>
