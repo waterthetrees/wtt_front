@@ -10,11 +10,11 @@ export default function TreeLinks({ currentTreeData }) {
   const links = [
     {
       url: currentTreeData.download,
-      label: `${currentTreeData.city} Data`,
+      label: currentTreeData.city ? `${currentTreeData.city} Data` : `Data`,
     },
     {
       url: currentTreeData.info,
-      label: `${currentTreeData.city} Info`,
+      label: currentTreeData.city ? `${currentTreeData.city} Info` : `Info`,
     },
     {
       url: 'https://standards.opencouncildata.org/#/trees',
