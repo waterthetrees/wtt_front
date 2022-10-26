@@ -17,8 +17,8 @@ export default function CommunityTableRow({ row }) {
         borderBottom: '1px #00000050 solid',
         color:'#000000',
         fontSize: '14px' ,
-        fontFamily:'Montserrat'
-
+        fontFamily:'Montserrat',
+        padding: '0px'
     })
 
     return (
