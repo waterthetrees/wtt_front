@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
-import { ButtonWithIcon } from '@/components/Button'
+import { GrayButton } from '@/components/Button/Button';
 import LinkMenu from '@/components/LinkMenu/LinkMenu'
 import CommunityTableRow from '@/components/Table/TableRow'
-import  { SearchBar }  from '@/components/SearchBar/SearchBar';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
+
+import { LinkIcon, LinkOffIcon } from '@/components/Icons/Link'
+import { UploadFileIcon } from '@/components/Icons';
 
 import './Communities.scss';
 
@@ -14,7 +17,7 @@ export default function Communities() {
     const [state, setState] = useState({})
 
     const links = [
-        { country: 'United States', city: 'Oakland', territory: 'California', service: 'Tree Service', organization: 'Oakland Tree Services', link: 'https://www.oaklandca.gov/topics/tree-services' } ,
+        { country: 'United States', city: 'Oakland', territory: 'California', service: 'Tree Service', organization: 'Oakland Tree Services', link: 'https://www.oaklandca.gov/topics/tree-services' },
         { country: 'United States', city: 'Berkeley', territory: 'California', service: 'Tree Service', organization: 'Berkeley Tree Services', link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted' },
         { country: 'United States', city: 'Alameda', territory: 'California', service: 'Tree Service', organization: 'Alameda Tree Services', link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees' },
         { country: 'United States', city: 'San Francisco', territory: 'California', service: 'Tree Service', organization: 'San Francisco Tree Services', link: 'https://sfpublicworks.org/remove-street-tree' },
@@ -97,15 +100,33 @@ export default function Communities() {
                     </span>
                 </div>
                 <div className='communities__main__search'>
-                    <SearchBar style={{ div: { width: '60%', borderRadius: '.3vw' }, input: { borderRadius: '.3vw' }}}search={search} handleSearch={handleSearch} placeholder={'Search City, Country, Service or something else'}/>
-                    <ButtonWithIcon text={"Export"} />
-                    <ButtonWithIcon text={"Add Link"} onClick={handleAddLink} />
-                    <ButtonWithIcon text={"Report Broken Link"} onClick={handleReportLink} />
+                    <SearchBar style={{ div: { width: '60%', borderRadius: '.3vw' }, input: { borderRadius: '.3vw' } }} search={search} handleSearch={handleSearch} placeholder={'Search City, Country, Service or something else'} />
 
+                    <GrayButton
+                        children={<>
+                            <UploadFileIcon sx={{ marginRight: '7px' }} />
+                            <span>Export</span>
+                        </>}
+                    />
+                    <GrayButton
+                        children={<>
+                            <LinkIcon sx={{ marginRight: '7px' }} />
+                            <span>Add Link</span>
+                        </>}
+                        onClick={handleAddLink}
+                    />
+
+                    <GrayButton
+                        children={<>
+                            <LinkOffIcon sx={{ marginRight: '7px' }} />
+                            <span>Report Broken Link</span>
+                        </>}
+                        onClick={handleReportLink}
+                    />
                 </div>
                 <div className='communities__main__table'>
-                    {filteredLinks.map(({country,city,territory,service,organization,link},i) => (
-                        <CommunityTableRow row={{ country, city, territory, service, organization, link }} />
+                    {filteredLinks.map(({ country, city, territory, service, organization, link }, i) => (
+                        <CommunityTableRow key={i} row={{ country, city, territory, service, organization, link }} />
                     ))}
 
                 </div>
