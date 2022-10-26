@@ -1,0 +1,49 @@
+.communityform{
+    width: 400px;
+    padding: 16px;
+}
+.form{
+    &__header{
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 24px;
+        font-family: Montserrat;
+    }
+    &__summary{
+        font-size: 12px;
+        margin-bottom: 32px;
+        font-family: Montserrat;
+    }
+    &__search{
+        margin-bottom: 16px;
+        font-family: Montserrat;
+        font-size: 14px;
+        &__label{
+            margin-bottom: 8px;
+        }
+    }
+    &__fields{
+        margin-bottom: 16px;
+        &__text{
+            display: flex;
+            flex-direction: column;
+            font-family: Montserrat;
+            font-size: 14px;
+            &__label{
+                margin-bottom: 8px;
+            }
+            &__input{
+                border: 1px solid #00000050;
+                border-radius: .3vw;
+
+            }
+        }
+    }
+    &__buttons{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
