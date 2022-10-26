@@ -14,7 +14,7 @@ export const SearchBar = (props) => {
             <input
                 style={{ ...props.style.input }}
                 value={props.search}
-                onChange={props.handleSearch}
+                onChange={props.onChange}
                 placeholder={props.placeholder}
                 className="searchbar__input"
             />

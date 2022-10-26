@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import { GrayButton } from '@/components/Button/Button';
-import LinkMenu from '@/components/LinkMenu/LinkMenu'
+import SideMenu from './SideMenu';
+import { Sidebar } from '@/components/SideMenu/Sidebar';
 import CommunityTableRow from '@/components/Table/TableRow'
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import Section from '@/components/Section/Section'
@@ -56,9 +57,9 @@ export default function Communities() {
         setLinks(state => (
             [...state].sort((a, b) => {
                 return (
+                    a.country.toLowerCase().localeCompare(b.country.toLowerCase()) ||
                     a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-                    a.territory.toLowerCase().localeCompare(b.territory.toLowerCase()) ||
-                    a.country.toLowerCase().localeCompare(b.country.toLowerCase())
+                    a.territory.toLowerCase().localeCompare(b.territory.toLowerCase())
                 )
             })
 
@@ -71,9 +72,9 @@ export default function Communities() {
         setLinks(state => (
             [...state].sort((a, b) => {
                 return (
+                    b.country.toLowerCase().localeCompare(a.country.toLowerCase()) ||
                     a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-                    a.territory.toLowerCase().localeCompare(b.territory.toLowerCase()) ||
-                    b.country.toLowerCase().localeCompare(a.country.toLowerCase())
+                    a.territory.toLowerCase().localeCompare(b.territory.toLowerCase())
                 )
             })
 
@@ -99,7 +100,6 @@ export default function Communities() {
     }
 
     const sortTerritoryDesc = () => {
-
         setLinks(state => [...state].sort((a, b) => b.territory.toLowerCase().localeCompare(a.territory.toLowerCase())))
         setTerritory(state => !state)
     }
@@ -175,7 +175,6 @@ export default function Communities() {
         newState.header = "Report Broken Link"
         newState.summary = "Clicked a link and it sent you to an error page? Or found yourself where the page doesn't exist anymore? Search for the broken link and set the link then add the new link to submit. A team member will review the request, and if it meets the requirements, you will see the updated link on the list ASAP."
         newState.inputs = [
-            { label: 'Search Broken Link or Organization', name: '', text: '' },
             { label: 'Broken Link', name: 'broken', text: '' },
             { label: 'New Link', name: 'new', text: '' },
         ]
@@ -183,20 +182,19 @@ export default function Communities() {
         setOpen(true)
     }
 
+    const handleClose = () => {
+        setOpen(false)
+    }
+
     return (
         <div className='communities'>
-            <div>
-                {
-                    open ?
-                        <LinkMenu
-                            state={state}
-                            open={open}
-                            setOpen={setOpen}
-                        />
-                        :
-                        null
+            <Sidebar
+                open={open}
+                onClose={handleClose}
+                children={
+                    <SideMenu state={state} onClick={handleClose} />
                 }
-            </div>
+            />
             <div className='communities__header'>
                 <h2>Community Search</h2>
             </div>
@@ -210,7 +208,7 @@ export default function Communities() {
                 </div>
                 <div className='communities__main__search'>
 
-                    <SearchBar style={{ div: { width: '60%', borderRadius: '.3vw' }, input: { borderRadius: '.3vw' } }} search={search} handleSearch={handleSearch} placeholder={'Search City, Country, Service or something else'} />
+                    <SearchBar style={{ div: { width: '60%', borderRadius: '.3vw' }, input: { borderRadius: '.3vw' } }} search={search} onChange={handleSearch} placeholder={'Search City, Country, Service or something else'} />
 
                     <GrayButton
                         children={<>

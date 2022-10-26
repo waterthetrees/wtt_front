@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+
 import Communities from './Communities';
 
 import { Footer } from '@/components/Footer/Footer';
@@ -40,7 +42,7 @@ export default function Community() {
                         We are always looking to add or update our data to be as current as possible. To
                     </span>
                     <span>
-                        upload tree data go to our <a href="https://waterthetrees.com/">source page</a>.
+                        upload tree data go to our <Link to={"/"}>source page</Link>.
                     </span>
                 </div>
             </div>
