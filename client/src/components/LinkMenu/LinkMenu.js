@@ -29,7 +29,6 @@ export default function LinkMenu(props) {
         props.state.inputs.forEach((input) => {
             input.name ? payload[`${input.name}`] = e.target[`${input.name}`].value : null
         })
-        console.log(payload)
 
         // Submit payload
 
@@ -122,8 +121,8 @@ export default function LinkMenu(props) {
                     component='div'
                     sx={{ display:'flex',justifyContent:'flex-end' }}
                 >
-                    <WhiteButton type={'button'}text="Cancel" handleClose={handleClose} sx={{"marginRight":'16px'}}/>
-                    <GreenButton type={'submit'} text="Submit Link" />
+                    <WhiteButton type={'button'} children={<span>Cancel</span>} onClick={handleClose} sx={{"marginRight":'16px'}}/>
+                    <GreenButton type={'submit'} children={<span>Submit Link</span>} />
                 </Box>
 
             </StyledBox>
