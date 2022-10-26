@@ -1,16 +1,16 @@
 import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
+import {Search} from '@/components/Icons/Search'
+
 import './SearchBar.scss'
 export const SearchBar = (props) => {
-    console.log(props.style)
+
     return (
         <div className="searchbar"
             style={{ ...props.style.div }}
         >
-            {<SearchIcon
-                sx={{ color: '#00000050', fontSize: '24px', marginLeft: '10px', marginRight: '10px', fontFamily:'Montserrat' }}
-            />}
+            <Search sx={{ color: '#00000050', fontSize: '24px', marginLeft: '10px', marginRight: '10px', fontFamily: 'Montserrat' }} />
 
             <input
                 style={{ ...props.style.input }}

@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer/Footer';
 import TreeImage from '@/assets/images/addtree/treefattrunk.png'
 import './Community.scss';
 
+
 export default function Community() {
     return (
         <div className='community'>
