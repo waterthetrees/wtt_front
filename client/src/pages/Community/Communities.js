@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import {
-  Neutral,
   SortUp,
   SortDown,
   LinkIcon,
