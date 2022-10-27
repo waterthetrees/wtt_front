@@ -72,12 +72,13 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          {scientific && Object.hasOwnProperty(treeImages, scientific) && (
-            <ImageLoad
-              src={treeImages[scientific]}
-              placeholder="placeholder.jpg"
-            />
-          )}
+          {scientific &&
+            Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
+              <ImageLoad
+                src={treeImages[scientific]}
+                placeholder="placeholder.jpg"
+              />
+            )}
 
           {!hasUnfitData && (
             <TreeHealth
