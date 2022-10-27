@@ -14,6 +14,7 @@ export default function FormSelect({ children, name, label, rules, ...props }) {
           render={({ field }) => (
             <Select {...field} variant="standard" {...props}>
               {children}
+              {console.log({children})}
             </Select>
           )}
         />
