@@ -9,7 +9,7 @@ function Privacy() {
         <h2>Privacy Policy</h2>
       </div>
 
-      <div>
+      <div className='scrollable' >
         <div className="privacy-p">
           This page is used to inform Water the Trees visitors regarding our
           policies with the collection, use, and disclosure of Personal
