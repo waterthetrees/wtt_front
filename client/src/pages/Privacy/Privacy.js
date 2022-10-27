@@ -4,7 +4,7 @@ import './Privacy.scss';
 function Privacy() {
   return (
     <div className="privacy">
-      <div className="scrollable">
+      <div className="scrollable" >
         <div>
           <h2>Water the Trees</h2>
           <h2>Privacy Policy</h2>
