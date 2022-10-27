@@ -7,14 +7,16 @@ import { Link, Box } from '@mui/material';
 import Section from '@/components/Section/Section';
 
 export default function TreeLinks({ currentTreeData }) {
+  const { download, info, city, sourceId } = currentTreeData;
+  const sourceName = city || sourceId || '';
   const links = [
     {
-      url: currentTreeData.download,
-      label: currentTreeData.city ? `${currentTreeData.city} Data` : `Data`,
+      url: download,
+      label: `${sourceName} Data`,
     },
     {
-      url: currentTreeData.info,
-      label: currentTreeData.city ? `${currentTreeData.city} Info` : `Info`,
+      url: info,
+      label: `${sourceName} Info`,
     },
     {
       url: 'https://standards.opencouncildata.org/#/trees',
