@@ -110,7 +110,6 @@ export default function Communities() {
         );
       }),
     );
-    // setLinks(state => [...state].sort((a, b) => a.country.toLowerCase().localeCompare(b.country.toLowerCase())))
     setCountry((state) => !state);
   };
 
@@ -124,7 +123,6 @@ export default function Communities() {
         );
       }),
     );
-    // setLinks(state => [...state].sort((a, b) => b.country.toLowerCase().localeCompare(a.country.toLowerCase())))
     setCountry((state) => !state);
   };
 
@@ -167,12 +165,7 @@ export default function Communities() {
   const sortServiceAsc = () => {
     setLinks((state) =>
       [...state].sort((a, b) => {
-        return (
-          // (a.country.toLowerCase().localeCompare(b.country.toLowerCase())) ||
-          // (a.city.toLowerCase().localeCompare(b.city.toLowerCase())) ||
-          // (a.territory.toLowerCase().localeCompare(b.territory.toLowerCase())) ||
-          a.service.toLowerCase().localeCompare(b.service.toLowerCase())
-        );
+        return a.service.toLowerCase().localeCompare(b.service.toLowerCase());
       }),
     );
     setService((state) => !state);
@@ -181,12 +174,7 @@ export default function Communities() {
   const sortServiceDesc = () => {
     setLinks((state) =>
       [...state].sort((a, b) => {
-        return (
-          // a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-          // a.territory.toLowerCase().localeCompare(b.territory.toLowerCase()) ||
-          // a.country.toLowerCase().localeCompare(b.country.toLowerCase()) ||
-          b.service.toLowerCase().localeCompare(a.service.toLowerCase())
-        );
+        return b.service.toLowerCase().localeCompare(a.service.toLowerCase());
       }),
     );
     setService((state) => !state);
@@ -217,8 +205,6 @@ export default function Communities() {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
-  const handleExport = () => {};
 
   const handleAddLink = () => {
     const newState = {};
@@ -255,11 +241,7 @@ export default function Communities() {
 
   return (
     <div className="communities">
-      <Sidebar
-        open={open}
-        onClose={handleClose}
-        // children={<SideMenu state={state} onClick={handleClose} /> }
-      >
+      <Sidebar open={open} onClose={handleClose}>
         <SideMenu state={state} onClick={handleClose} />
       </Sidebar>
       <div className="communities__header">
