@@ -21,7 +21,7 @@ export const GreenButton = (props) => {
 export const WhiteButton = (props) => {
   const White = styled(Button)({
     backgroundColor: 'white',
-    border: '1px #147d16 solid',
+    outline: '1px #147d16 solid',
     borderRadius: '.3vw',
     color: '#00000050',
     height: '32px',
@@ -38,7 +38,7 @@ export const GrayButton = (props) => {
   const Gray = styled(Button)({
     backgroundColor: 'white',
     borderRadius: '.3vw',
-    border: '1px solid #00000050',
+    outline: '1px solid #00000050',
     color: '#00000050',
     height: '32px',
   });
