@@ -77,7 +77,11 @@ export default function CommunityTableRow({ row }) {
             <ShortCell>{row.service}</ShortCell>
             <LongCell>
               <a
-                style={hover ? { color: '#3FAB45' } : { color: '#000000' }}
+                style={
+                  hover
+                    ? { color: '#3FAB45', textDecoration: 'underline' }
+                    : { color: '#000000', textDecoration: 'underline' }
+                }
                 href={row.link}
                 target="_blank"
                 rel="noopener noreferrer"
