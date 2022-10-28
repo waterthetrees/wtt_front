@@ -9,7 +9,7 @@ import {
 } from '@/components/Icons';
 
 import { GrayButton } from '@/components/Button/Button';
-import { Sidebar } from '@/components/SideMenu/Sidebar';
+import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import CommunityTableRow from '@/components/Table/TableRow';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import Section from '@/components/Section/Section';
@@ -240,9 +240,12 @@ export default function Communities() {
 
   return (
     <div className="communities">
-      <Sidebar open={open} onClose={handleClose}>
+      <PanelDrawer open={open} onClose={handleClose} width={'400px'}>
         <SideMenu state={state} onClick={handleClose} />
-      </Sidebar>
+      </PanelDrawer>
+      {/* <Sidebar open={open} onClose={handleClose}>
+        <SideMenu state={state} onClick={handleClose} />
+      </Sidebar> */}
       <div className="communities__header">
         <h2>Community Search</h2>
       </div>
