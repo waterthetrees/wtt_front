@@ -20,11 +20,12 @@ const newTreeReducer = (state, { type, payload }) => {
     case 'beginPlanting':
       return { ...state, isPlanting: true };
 
-    case 'endPlanting':
+    case 'endPlanting': {
       // Reset the state except for isFollowingUser.  We want to leave that flag alone so that it's
       // remembered across planting sessions.
       const { isFollowingUser } = state;
       return { ...newTreeInitialState, isFollowingUser };
+    }
 
     case 'beginFollowingUser':
       return { ...state, isFollowingUser: true };
