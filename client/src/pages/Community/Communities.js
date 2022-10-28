@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { IconButton } from '@mui/material';
 import {
   SortUp,
@@ -235,6 +235,10 @@ export default function Communities() {
     setOpen(true);
   };
 
+  const ref = useClickOutside(() => {
+    setHover(false);
+  });
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -261,6 +265,9 @@ export default function Communities() {
         <SideMenu state={state} onClick={handleClose} />
       </Sidebar> */}
       <div className="communities__main">
+        <div>
+          <h2>Community Search</h2>
+        </div>
         <div className="communities__main__p">
           <span>
             In the community search section, you can find and view other city
@@ -281,13 +288,32 @@ export default function Communities() {
             onChange={handleSearch}
             placeholder={'Search City, Country, Service or something else'}
           />
-
-          <GrayButton>
-            <div onMouseEnter={() => setHover(true)}>
+          <div ref={ref} onMouseEnter={() => setHover(true)}>
+            <GrayButton>
               <UploadFileIcon sx={{ marginRight: '7px' }} />
               <span>Export</span>
-            </div>
-          </GrayButton>
+            </GrayButton>
+            {hover && (
+              <div
+                style={{
+                  position: 'relative',
+                  width: '0px',
+                  height: '0px',
+                  top: '5px',
+                  zIndex: '1',
+                }}
+              >
+                <div className="communities__main__search__hovermenu">
+                  <div onClick={exportXslx}>
+                    <span onClick={exportXslx}>Export as .xslx</span>
+                  </div>
+                  <div onClick={exportDoc}>
+                    <span style={{ width: '100%' }}>Export as .doc</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <GrayButton onClick={handleAddLink}>
             <LinkIcon sx={{ marginRight: '7px' }} />
             <span>Add Link</span>
@@ -298,27 +324,6 @@ export default function Communities() {
             <span>Report Broken Link</span>
           </GrayButton>
         </div>
-        {hover && (
-          <div
-            style={{
-              position: 'relative',
-              width: '0px',
-              height: '0px',
-              left: '585px',
-              bottom: '25px',
-              zIndex: '1',
-            }}
-          >
-            <div className="communities__main__search__hovermenu">
-              <div onClick={exportXslx}>
-                <span>Export as .xslx</span>
-              </div>
-              <div onClick={exportDoc}>
-                <span>Export as .doc</span>
-              </div>
-            </div>
-          </div>
-        )}
         <div className="communities__main__section">
           <Section sx={{ width: '16.67%' }}>
             <span>Country</span>
@@ -373,4 +378,24 @@ export default function Communities() {
       </div>
     </div>
   );
+}
+// handle export close menu when clicking outside
+
+function useClickOutside(handler) {
+  const ref = useRef();
+  useEffect(() => {
+    const onClose = (e) => {
+      if (!ref.current?.contains(e.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', onClose);
+
+    return () => {
+      document.removeEventListener('mousedown', onClose);
+    };
+  });
+
+  return ref;
 }

@@ -8,6 +8,7 @@ import './SideMenu.scss';
 
 export default function SideMenu({ state, ...props }) {
   const [search, setSearch] = useState('');
+  const [menu, setMenu] = useState(false);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -35,15 +36,18 @@ export default function SideMenu({ state, ...props }) {
             Search Broken Link or Organization
           </p>
           <p></p>
-          <SearchBar
-            search={search}
-            onChange={handleSearch}
-            style={{
-              div: { width: '100%', borderRadius: '.3vw' },
-              input: { borderRadius: '.3vw' },
-            }}
-            placeholder={'Search Broken Link or Organization'}
-          />
+          <div onClick={() => setMenu(true)}>
+            <SearchBar
+              search={search}
+              onChange={handleSearch}
+              style={{
+                div: { width: '100%', borderRadius: '.3vw' },
+                input: { borderRadius: '.3vw' },
+              }}
+              placeholder={'Search Broken Link or Organization'}
+            />
+          </div>
+          {menu && <div>hey</div>}
         </div>
       )}
       <Form onSubmit={handleSubmit}>
@@ -70,7 +74,7 @@ export default function SideMenu({ state, ...props }) {
               <span>Cancel</span>
             </GrayButton>
             <GreenButton type={'submit'}>
-              <span >Submit Link</span>
+              <span>Submit Link</span>
             </GreenButton>
           </div>
         </>
