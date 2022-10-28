@@ -26,7 +26,17 @@ export default function SideMenu({ state, ...props }) {
     // Submit payload
   };
 
-  console.log(state)
+  const filteredLinks = state?.links?.filter((links) =>
+    links.organization.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  const handleMenuClick = (i) => {
+    const input = document.querySelector('.form__fields__text__input');
+    input.value = filteredLinks[i].link;
+    setSearch(filteredLinks[i].organization);
+    setMenu(false);
+  };
+
   return (
     <div className="communityform">
       <p className="form__summary">{state.summary}</p>
@@ -48,7 +58,17 @@ export default function SideMenu({ state, ...props }) {
               placeholder={'Search Broken Link or Organization'}
             />
           </div>
-          {menu && <div>hey</div>}
+          {menu && (
+            <div className="form__menu">
+              <div className="form__menu__container">
+                {filteredLinks.map((link, i) => (
+                  <span onClick={() => handleMenuClick(i)}>
+                    {link.organization}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
       <Form onSubmit={handleSubmit}>
