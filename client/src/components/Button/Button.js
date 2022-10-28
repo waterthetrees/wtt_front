@@ -25,6 +25,7 @@ export const WhiteButton = (props) => {
     borderRadius: '.3vw',
     color: '#00000050',
     height: '32px',
+    fontSize: '12px',
   });
 
   return (
@@ -41,6 +42,7 @@ export const GrayButton = (props) => {
     outline: '1px solid #00000050',
     color: '#00000050',
     height: '32px',
+    fontSize: '12px',
   });
 
   return (
