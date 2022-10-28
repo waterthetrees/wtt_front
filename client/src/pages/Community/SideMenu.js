@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { Form } from '@/components/Form';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
@@ -11,6 +11,7 @@ export default function SideMenu({ state, ...props }) {
   const [menu, setMenu] = useState(false);
 
   const handleSearch = (e) => {
+    setMenu(true);
     setSearch(e.target.value);
   };
 
@@ -30,6 +31,10 @@ export default function SideMenu({ state, ...props }) {
     links.organization.toLowerCase().includes(search.toLowerCase()),
   );
 
+  const ref = useClickOutside(() => {
+    setMenu(false);
+  });
+
   const handleMenuClick = (i) => {
     const input = document.querySelector('.form__fields__text__input');
     input.value = filteredLinks[i].link;
@@ -47,7 +52,7 @@ export default function SideMenu({ state, ...props }) {
             Search Broken Link or Organization
           </p>
           <p></p>
-          <div onClick={() => setMenu(true)}>
+          <div ref={ref} onClick={() => setMenu(true)}>
             <SearchBar
               search={search}
               onChange={handleSearch}
@@ -60,12 +65,15 @@ export default function SideMenu({ state, ...props }) {
           </div>
           {menu && (
             <div className="form__menu">
-              <div className="form__menu__container">
+              <div className="form__menu__container" ref={ref}>
                 {filteredLinks.map((link, i) => (
-                  <span onClick={() => handleMenuClick(i)}>
+                  <span key={i} onClick={() => handleMenuClick(i)}>
                     {link.organization}
                   </span>
                 ))}
+                {filteredLinks.length === 0 && (
+                  <span>No Organization Found</span>
+                )}
               </div>
             </div>
           )}
@@ -102,4 +110,25 @@ export default function SideMenu({ state, ...props }) {
       </Form>
     </div>
   );
+}
+
+// handle export close menu when clicking outside
+
+function useClickOutside(handler) {
+  const ref = useRef();
+  useEffect(() => {
+    const onClose = (e) => {
+      if (!ref.current?.contains(e.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', onClose);
+
+    return () => {
+      document.removeEventListener('mousedown', onClose);
+    };
+  });
+
+  return ref;
 }
