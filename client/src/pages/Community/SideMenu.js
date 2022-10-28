@@ -26,6 +26,7 @@ export default function SideMenu({ state, ...props }) {
     // Submit payload
   };
 
+  console.log(state)
   return (
     <div className="communityform">
       <p className="form__summary">{state.summary}</p>

@@ -206,7 +206,8 @@ export default function Communities() {
     setSearch(e.target.value);
   };
 
-  const handleAddLink = () => {
+  const handleAddLink = async () => {
+    await setOpen(false);
     const newState = {};
     newState.header = 'Add Link';
     newState.summary =
@@ -218,11 +219,12 @@ export default function Communities() {
       { label: 'Organization Type', name: 'type', text: '' },
       { label: 'Link', name: 'link', text: '' },
     ];
-    setState(newState);
-    setOpen(true);
+    await setState(newState);
+    await setOpen(true);
   };
 
-  const handleReportLink = () => {
+  const handleReportLink = async () => {
+    await setOpen(false);
     const newState = {};
     newState.header = 'Report Broken Link';
     newState.summary =
@@ -231,8 +233,8 @@ export default function Communities() {
       { label: 'Broken Link', name: 'broken', text: '' },
       { label: 'New Link', name: 'new', text: '' },
     ];
-    setState(newState);
-    setOpen(true);
+    await setState(newState);
+    await setOpen(true);
   };
 
   const ref = useClickOutside(() => {
@@ -253,14 +255,16 @@ export default function Communities() {
 
   return (
     <div className="communities">
-      <PanelDrawer
-        title={state?.header}
-        open={open}
-        onClose={handleClose}
-        width={'400px'}
-      >
-        <SideMenu state={state} onClick={handleClose} />
-      </PanelDrawer>
+      {open && (
+        <PanelDrawer
+          title={state?.header}
+          open={open}
+          onClose={handleClose}
+          width={'400px'}
+        >
+          <SideMenu state={state} onClick={handleClose} />
+        </PanelDrawer>
+      )}
       {/* <Sidebar open={open} onClose={handleClose}>
         <SideMenu state={state} onClick={handleClose} />
       </Sidebar> */}
