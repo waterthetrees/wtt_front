@@ -43,6 +43,14 @@
                 flex-direction: column;
                 margin-bottom: 2.461vh;
             }
+
+            &__link {
+                color: #3FAB45;
+
+                &:hover {
+                    color: #3FAB45;
+                }
+            }
         }
     }
 
