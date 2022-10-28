@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Form } from '@/components/Form';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
-import { GreenButton, WhiteButton } from '@/components/Button';
+import { GreenButton, GrayButton } from '@/components/Button';
 
 import './SideMenu.scss';
 
@@ -50,7 +50,7 @@ export default function SideMenu({ state, ...props }) {
       <Form onSubmit={handleSubmit}>
         <>
           <div className="form__fields">
-            {state.inputs.map((input, i) => (
+            {state.inputs?.map((input, i) => (
               <div key={i} className="form__fields__text">
                 <label className="form__fields__text__label">
                   {input.label}
@@ -63,15 +63,15 @@ export default function SideMenu({ state, ...props }) {
             ))}
           </div>
           <div className="form__buttons">
-            <WhiteButton
+            <GrayButton
               type={'button'}
               onClick={props.onClick}
               sx={{ marginRight: '16px' }}
             >
               <span>Cancel</span>
-            </WhiteButton>
+            </GrayButton>
             <GreenButton type={'submit'}>
-              <span>Submit Link</span>
+              <span >Submit Link</span>
             </GreenButton>
           </div>
         </>
