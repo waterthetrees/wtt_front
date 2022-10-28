@@ -233,6 +233,32 @@ export default function Communities() {
       { label: 'Broken Link', name: 'broken', text: '' },
       { label: 'New Link', name: 'new', text: '' },
     ];
+    newState.links = [
+      {
+        organization: 'Oakland Tree Services',
+        link: 'https://www.oaklandca.gov/topics/tree-services',
+      },
+      {
+        organization: 'Berkeley Tree Services',
+        link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted',
+      },
+      {
+        organization: 'Alameda Tree Services',
+        link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees',
+      },
+      {
+        organization: 'San Francisco Tree Services',
+        link: 'https://sfpublicworks.org/remove-street-tree',
+      },
+      {
+        organization: 'City of Monterey',
+        link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php',
+      },
+      {
+        organization: 'City of Oxnard',
+        link: 'https://www.oxnard.org/environmental-resources/',
+      },
+    ];
     await setState(newState);
     await setOpen(true);
   };
