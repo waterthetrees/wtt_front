@@ -255,19 +255,6 @@ export default function Communities() {
 
   return (
     <div className="communities">
-      {open && (
-        <PanelDrawer
-          title={state?.header}
-          open={open}
-          onClose={handleClose}
-          width={'400px'}
-        >
-          <SideMenu state={state} onClick={handleClose} />
-        </PanelDrawer>
-      )}
-      {/* <Sidebar open={open} onClose={handleClose}>
-        <SideMenu state={state} onClick={handleClose} />
-      </Sidebar> */}
       <div className="communities__main">
         <div>
           <h2>Community Search</h2>
@@ -328,6 +315,16 @@ export default function Communities() {
             <span>Report Broken Link</span>
           </GrayButton>
         </div>
+        {open && (
+          <PanelDrawer
+            title={state?.header}
+            open={open}
+            onClose={handleClose}
+            width={'400px'}
+          >
+            <SideMenu state={state} onClick={handleClose} />
+          </PanelDrawer>
+        )}
         <div className="communities__main__section">
           <Section sx={{ width: '16.67%' }}>
             <span>Country</span>
