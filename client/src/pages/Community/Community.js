@@ -44,7 +44,11 @@ export default function Community() {
             possible. To
           </span>
           <span>
-            upload tree data go to our <Link to={'/'}>source page</Link>.
+            upload tree data go to our{' '}
+            <Link className="community__main__p__link" to={'/'}>
+              source page
+            </Link>
+            .
           </span>
         </div>
       </div>
