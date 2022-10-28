@@ -27,7 +27,6 @@ export default function SideMenu({ state, ...props }) {
 
   return (
     <div className="communityform">
-      <span className="form__header">{state.header}</span>
       <p className="form__summary">{state.summary}</p>
       <p></p>
       {state.header === 'Report Broken Link' && (
