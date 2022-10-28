@@ -1,26 +1,46 @@
-.communities{
+.communities {
     display: flex;
     flex-direction: column;
     width: 50%;
     margin-bottom: 3.29vh;
-    &__main{
-        &__p{
+
+    &__main {
+        &__p {
             font-size: 1.2em;
         }
+
         &__search {
             display: flex;
             justify-content: space-between;
             margin-top: 16px;
             margin-bottom: 32px;
+
             &__input {
                 width: 60%;
                 border: 1px #00000050 solid;
             }
+
+            &__hovermenu {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                min-width: 104px;
+                height: 72px;
+                font-family: Montserrat;
+                font-size: 14px;
+                padding: 6px;
+                outline: 1px solid #00000050;
+                color: #00000050;
+                background-color: white;
+                border-radius: .3vw;
+            }
         }
-        &__section{
+
+        &__section {
             display: flex;
-            border-bottom: 1px #00000050 solid ;
-            &__one{
+            border-bottom: 1px #00000050 solid;
+
+            &__one {
                 width: 16.67%;
             }
         }

@@ -28,6 +28,7 @@ export default function Communities() {
   const [territory, setTerritory] = useState(true);
   const [service, setService] = useState(true);
   const [organization, setOrganization] = useState(true);
+  const [hover, setHover] = useState(false);
 
   const filteredLinks = Links?.filter((link) => {
     return (
@@ -238,17 +239,27 @@ export default function Communities() {
     setOpen(false);
   };
 
+  const exportXslx = (e) => {
+    setHover(false);
+  };
+
+  const exportDoc = (e) => {
+    setHover(false);
+  };
+
   return (
     <div className="communities">
-      <PanelDrawer open={open} onClose={handleClose} width={'400px'}>
+      <PanelDrawer
+        title={state?.header}
+        open={open}
+        onClose={handleClose}
+        width={'400px'}
+      >
         <SideMenu state={state} onClick={handleClose} />
       </PanelDrawer>
       {/* <Sidebar open={open} onClose={handleClose}>
         <SideMenu state={state} onClick={handleClose} />
       </Sidebar> */}
-      <div className="communities__header">
-        <h2>Community Search</h2>
-      </div>
       <div className="communities__main">
         <div className="communities__main__p">
           <span>
@@ -272,8 +283,10 @@ export default function Communities() {
           />
 
           <GrayButton>
-            <UploadFileIcon sx={{ marginRight: '7px' }} />
-            <span>Export</span>
+            <div onMouseEnter={() => setHover(true)}>
+              <UploadFileIcon sx={{ marginRight: '7px' }} />
+              <span>Export</span>
+            </div>
           </GrayButton>
           <GrayButton onClick={handleAddLink}>
             <LinkIcon sx={{ marginRight: '7px' }} />
@@ -285,6 +298,27 @@ export default function Communities() {
             <span>Report Broken Link</span>
           </GrayButton>
         </div>
+        {hover && (
+          <div
+            style={{
+              position: 'relative',
+              width: '0px',
+              height: '0px',
+              left: '585px',
+              bottom: '25px',
+              zIndex: '1',
+            }}
+          >
+            <div className="communities__main__search__hovermenu">
+              <div onClick={exportXslx}>
+                <span>Export as .xslx</span>
+              </div>
+              <div onClick={exportDoc}>
+                <span>Export as .doc</span>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="communities__main__section">
           <Section sx={{ width: '16.67%' }}>
             <span>Country</span>
