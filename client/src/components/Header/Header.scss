@@ -16,8 +16,37 @@
 }
 
 .header--logo {
-  width: 215px;
-  height: 24px;
+  height: 4em;
+  width: 36em;
+  padding: 0;
+  margin: 10px 0;
+  background-color: white;
+  border-radius: 4px;
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+  box-shadow: 0 0 0 2pxrgba 0, 0, 0, 0.1;
+}
+
+.header-btn-menu {
+  background-color: white;
+  border-radius: 4px;
+  margin-right: 0px;
+  padding: 0 3px;
+  border-width: 0;
+  color: black;
+  border: none;
+  height: 4rem;
+  outline: none;
+  font-size: 2.2rem;
+}
+
+.header-font {
+  font-family: wtt-thin, Arial, sans-serif, "PT Sans";
+  color: white;
+  white-space: nowrap;
+  letter-spacing: -3px;
+  font-size: 1.8rem;
+  word-spacing: 0.6rem;
 }
 
 .header-font::first-letter {
@@ -75,7 +104,7 @@
   }
 
   .header--logo {
-    width: 144px;
-    height: 16px;
+    width: 70vw;
   }
+
 }
