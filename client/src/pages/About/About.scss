@@ -15,6 +15,15 @@
     padding-top: 112px;
     margin-bottom: 56px;
 
+    &__logo {
+      margin-bottom: 24px;
+
+      &__img {
+        max-width: 2.5vw;
+        aspect-ratio: 1/1;
+      }
+    }
+
     &__text {
       font-size: 32px;
       margin-bottom: 8px;

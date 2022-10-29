@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './About.scss';
 import { Footer } from '@/components/Footer/Footer';
 
+import TreeImage from '@/assets/images/addtree/treefattrunk.png';
+
 const About = () => {
   const affiliates = [
     {
@@ -30,6 +32,13 @@ const About = () => {
   return (
     <div className="about">
       <div className="about__header">
+        <div className="about__header__logo">
+          <img
+            className="about__header__logo__img"
+            src={TreeImage}
+            alt="tree"
+          ></img>
+        </div>
         <h1 className="about__header__text">About Water the Trees</h1>
         <span className="about__header__summary">
           Welcome to Water the Trees, a platform that crowd sources tree
