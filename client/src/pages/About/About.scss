@@ -5,12 +5,14 @@
   font-size: 1.5rem;
   box-sizing: border-box;
   font-family: Montserrat;
+  height: 1304px;
+  overflow-y: auto;
 
   &__header {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-top: 112px;
+    padding-top: 112px;
     margin-bottom: 56px;
 
     &__text {
@@ -75,7 +77,6 @@
       &__affiliates {
         width: 30%;
         display: flex;
-
         justify-content: space-between;
       }
 
@@ -107,6 +108,15 @@
 
     &__body {
       margin: 0 1rem;
+    }
+
+    &__footer {
+      &__section {
+        &__affiliates {
+          width: auto;
+        }
+
+      }
     }
   }
 }
