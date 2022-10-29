@@ -1,32 +1,101 @@
 .about {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  margin: 5rem;
+  align-items: center;
   font-size: 1.5rem;
   box-sizing: border-box;
+  font-family: Montserrat;
 
-  &__text {
-    margin: 1rem 0;
-    width: 100%;
-  }
-
-  &__links {
-    padding: 1rem;
-  }
-
-  &__body {
+  &__header {
     display: flex;
-    justify-content: space-evenly;
-    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 112px;
+    width: 40%;
+    margin-bottom: 56px;
+
+    &__text {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    &__summary {
+      font-size: 14px;
+    }
   }
 
-  &__volunteers {
-    background-color: green;
-    color: white;
-    border-radius: 3rem;
-    padding: 2rem;
-    box-sizing: border-box;
+  &__main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &__section {
+      margin-bottom: 40px;
+
+      & span,
+      p {
+        font-size: 12px;
+      }
+
+      &__header {
+        font-size: 24px;
+      }
+
+      &__subsection {
+        margin-top: 16px;
+      }
+
+      &__subsection2 {
+        margin-top: 24px;
+
+        &__header {
+          font-size: 18px;
+        }
+
+        & a {
+          text-decoration: underline;
+          color: #3FAB45;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #EFEFEF;
+    width: 100%;
+
+    &__section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__affiliates {
+        width: 30%;
+        display: flex;
+
+        justify-content: space-between;
+      }
+
+      & p,
+      span {
+        font-size: 12px;
+        margin-bottom: 32px;
+      }
+
+      & a {
+        text-decoration: underline;
+        color: #3FAB45;
+        cursor: pointer;
+      }
+
+      & img {
+        height: 64px;
+      }
+    }
   }
 }
 
