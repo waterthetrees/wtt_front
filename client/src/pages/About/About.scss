@@ -5,21 +5,23 @@
   font-size: 1.5rem;
   box-sizing: border-box;
   font-family: Montserrat;
-  height: 1304px;
+  // height: max(890px,92vh);
+  height: max(50em, 92.5vh);
   overflow-y: auto;
-
+  margin-top: 41px;
+  // margin-bottom: 38px;
   &__header {
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-top: 112px;
+    margin-top: 112px;
     margin-bottom: 56px;
 
     &__logo {
       margin-bottom: 24px;
 
       &__img {
-        max-width: 2.5vw;
+        max-width: 3.6em;
         aspect-ratio: 1/1;
       }
     }
@@ -30,7 +32,7 @@
     }
 
     &__summary {
-      font-size: 14px;
+      font-size: 0.875em
     }
   }
 
@@ -44,7 +46,7 @@
 
       & span,
       p {
-        font-size: 12px;
+        font-size: .75em;
       }
 
       &__header {
