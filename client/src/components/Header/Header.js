@@ -22,7 +22,7 @@ const Header = () => {
     <div id="header" className="header">
       <div className="header-content">
         <Link to="/">
-          <img className="header--logo" src={HeaderLogo} alt="header logo" />
+          <img className="header--logo" src={HeaderLogo} alt="Header Logo" />
         </Link>
 
         <button
