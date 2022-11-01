@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { useDebouncedCallback } from 'use-debounce';
 import {
-  useTreeQuery,
   useTreeDataMutation,
   useCreateTreeDataMutation,
 } from '@/api/queries';

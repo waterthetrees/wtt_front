@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import format from 'date-fns/format';
 import {
   useTreeAdoptionsQuery,
@@ -17,7 +17,6 @@ import {
 } from '@/components/Checkbox';
 import { TooltipTop } from '@/components/Tooltip';
 import AdoptionDirections from '@/pages/Adopt/AdoptionDirections';
-import { useDebouncedCallback } from 'use-debounce';
 
 function Liked({ handleChange, currentTreeId, user }) {
   const {
@@ -80,7 +79,6 @@ function Adopted({
 
 export default function AdoptLikeCheckboxes({
   currentTreeData,
-  edit,
   isTreeQueryError,
 }) {
   const { user } = useAuth0();
