@@ -95,12 +95,15 @@ export default function TreeEdit({
     onConfirm(formData);
   };
 
+  const handleError = (errorLog, e) => console.error('errors, e', errorLog, e);
+
   return (
     <FormScrollableDialog
       title="Edit Tree"
       open={open}
       onConfirm={handleConfirm}
       onCancel={onCancel}
+      onError={handleError}
       fullScreen={false}
       maxWidth="xs"
       formMethods={formMethods}
