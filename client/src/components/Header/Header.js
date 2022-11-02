@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Box } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton } from '@/components/Auth';
 import './Header.scss';
@@ -18,7 +18,11 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div id="header" className="header">
+    <Box
+      id="header"
+      className="header"
+      sx={{ display: { xs: 'block', sm: 'none' } }}
+    >
       <div className="header-content">
         <Link to="/">
           <div className="header-font">WATER THE TREES</div>
@@ -78,7 +82,7 @@ const Header = () => {
           </MenuItem>
         </Menu>
       </div>
-    </div>
+    </Box>
   );
 };
 
