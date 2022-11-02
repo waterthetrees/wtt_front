@@ -1,96 +1,190 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem, Box } from '@mui/material';
-import { useAuth0 } from '@auth0/auth0-react';
-import { AuthButton } from '@/components/Auth';
-import HeaderLogo from '@/assets/images/logos/header-logo.svg';
+import { styled } from '@mui/material/styles';
 import './Header.scss';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Drawer,
+  Divider,
+  Toolbar,
+  AppBar,
+  IconButton,
+} from '@mui/material';
+import { useAuth0 } from '@auth0/auth0-react';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 
-const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+import HeaderLogo from '@/assets/images/logos/header-logo.svg';
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+import MapIcon from '@mui/icons-material/Map';
+import MenuIcon from '@mui/icons-material/Menu';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import LoginIcon from '@mui/icons-material/Login';
+import CloseIcon from '@mui/icons-material/Close';
+
+const Header = (props) => {
+  const { isAuthenticated, logout } = useAuth0();
+  const { loginToCurrentPage } = useAuthUtils();
+
+  const handleClick = () => {
+    if (isAuthenticated) {
+      // Only logging out to the root seems to be allowed, so if the user is on a subpage like
+      // /contact, they'll be sent back to /.
+      logout({ returnTo: location.origin });
+    } else {
+      loginToCurrentPage();
+    }
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
-  const { isAuthenticated } = useAuth0();
+
+  let navItems = [
+    {
+      text: 'Map',
+      icon: <MapIcon />,
+      path: '/map',
+    },
+    { text: 'About', icon: <InfoOutlinedIcon />, path: '/about' },
+    { text: 'Contact', icon: <MailOutlinedIcon />, path: '/contact' },
+    { text: 'Data', icon: <AssessmentIcon />, path: '/data' },
+  ];
+
+  const StyledListItemIcon = styled(ListItemIcon)({
+    justifyContent: 'center',
+    '.MuiSvgIcon-root': {
+      color: '#323232',
+      width: '24px',
+      height: '24px',
+    },
+  });
+
+  const StyledListItemText = styled(ListItemText)({
+    '.MuiTypography-root': {
+      fontFamily: 'Montserrat',
+      fontSize: '14px',
+      fontWeight: 400,
+      color: '#323232',
+    },
+  });
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle}>
+      <Box
+        sx={{
+          my: 1,
+          px: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Link to="/">
+          <Box
+            component="img"
+            src={HeaderLogo}
+            alt="WTT logo"
+            sx={{ height: 35 }}
+          />
+        </Link>
+        <CloseIcon fontSize="large" />
+      </Box>
+      <Divider />
+      <List>
+        {navItems.map((item) => {
+          const { text, icon, path } = item;
+          return (
+            <ListItem
+              key={text}
+              disablePadding
+              component={Link}
+              to={path}
+              sx={{
+                '&:hover': {
+                  textDecoration: 'none',
+                },
+              }}
+            >
+              <ListItemButton sx={{ justifyContent: 'center', my: '4px' }}>
+                <StyledListItemIcon>{icon}</StyledListItemIcon>
+                <StyledListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+        <Divider sx={{ my: '4px', mx: '16px' }} />
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => handleClick()}>
+            <StyledListItemIcon>
+              <LoginIcon />
+            </StyledListItemIcon>
+            <StyledListItemText
+              primary={isAuthenticated ? 'Log Out' : 'Log In'}
+            />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box
-      id="header"
-      className="header"
-      sx={{ display: { xs: 'block', sm: 'none' } }}
-    >
-      <div className="header-content">
-        <Link to="/">
-          <img className="header--logo" src={HeaderLogo} alt="header logo" />
-        </Link>
+    <Box sx={{ display: { xs: 'flex', sm: 'none' } }}>
+      <AppBar component="nav" sx={{ backgroundColor: '#fff' }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Link to="/">
+            <Box
+              component="img"
+              src={HeaderLogo}
+              alt="WTT logo"
+              sx={{ height: 30 }}
+            />
+          </Link>
 
-        <button
-          type="button"
-          className="header-btn-menu"
-          aria-controls="wtt-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon fontSize="large" sx={{ color: '#323232' }} />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Box component="nav">
+        <Drawer
+          anchor="top"
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+            },
+          }}
         >
-          &#9776;
-        </button>
-
-        <Menu
-          id="wtt-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {isAuthenticated && (
-            <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header-link">
-                <HeaderButton menuItem="User Profile" />
-              </Link>
-            </MenuItem>
-          )}
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/" className="header-link">
-              <HeaderButton menuItem="Map" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/about" className="header-link">
-              <HeaderButton menuItem="About" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/contact" className="header-link">
-              <HeaderButton menuItem="Contact" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/data" className="header-link">
-              <HeaderButton menuItem="Data" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <AuthButton />
-          </MenuItem>
-        </Menu>
-      </div>
+          {drawer}
+        </Drawer>
+      </Box>
     </Box>
   );
 };
-
-const HeaderButton = ({ menuItem }) => (
-  <button type="button" className="btn btn-success btn-block">
-    {menuItem}
-  </button>
-);
 
 export default Header;
