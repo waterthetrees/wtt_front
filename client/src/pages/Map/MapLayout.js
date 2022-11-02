@@ -11,6 +11,8 @@ import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
 
+import Sidebar from '@/components/Sidebar/Sidebar';
+
 const drawerWidth = 350;
 
 const MapContainer = styled('main')({
@@ -58,7 +60,7 @@ function MapLayout() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <MapContainer
         ref={mapContainerRef}
         drawerEnabled={drawerEnabled}
@@ -91,7 +93,7 @@ function MapLayout() {
           isTreeQueryError={isTreeQueryError}
         />
       )}
-    </Box>
+    </>
   );
 }
 
