@@ -11,7 +11,9 @@ export default function TreeLayer({
   useQuery = noopQuery,
   on = {},
 }) {
-  // why is useQuery here? not clear
+  // useCitiesQuery and useTreemapQuery are getting passed in here, abstracting the queries from react-query.
+  // TODO Prefer just using the actual queries with switch from id here
+  // to make the code faster to read and less props
   const { data } = useQuery();
 
   useEffect(() => {

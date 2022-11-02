@@ -109,10 +109,11 @@ export const useUserTreeHistoryQuery = createUseQuery('usertreehistory');
 export const useCitiesQuery = createUseQuery('cities', {
   postProcessor: processTreeCounts,
 });
+export const useSourcesQuery = createUseQuery('sources', {
+  defaultData: { source: 'All' },
+});
 export const useCountriesQuery = createUseQuery('countries', {
-  defaultData: {
-    country: 'All',
-  },
+  defaultData: { country: 'All' },
   postProcessor: processTreeCounts,
 });
 export const useTreemapQuery = createUseQuery('treemap', {
@@ -172,3 +173,7 @@ export const useTreeAdoptionsMutation = createUseMutation([
   'treeadoptions',
   'treehistory',
 ]);
+
+export const useCountriesMutation = createUseMutation(['countries']);
+export const useCitiesMutation = createUseMutation(['cities', 'city']);
+export const useSourcesMutation = createUseMutation(['sources']);
