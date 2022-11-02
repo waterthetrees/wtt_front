@@ -5,11 +5,10 @@
   font-size: 1.5rem;
   box-sizing: border-box;
   font-family: Montserrat;
-  // height: max(890px,92vh);
-  height: max(50em, 92.5vh);
   overflow-y: auto;
   margin-top: 41px;
-  // margin-bottom: 38px;
+  margin-bottom: 38px;
+
   &__header {
     display: flex;
     flex-direction: column;
@@ -18,12 +17,9 @@
     margin-bottom: 56px;
 
     &__logo {
+      display: flex;
+      justify-content: center;
       margin-bottom: 24px;
-
-      &__img {
-        max-width: 3.6em;
-        aspect-ratio: 1/1;
-      }
     }
 
     &__text {
