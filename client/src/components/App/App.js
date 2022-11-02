@@ -18,7 +18,6 @@ import UserProfile from '@/pages/Userprofile/UserProfile';
 import Contact from '@/pages/Contact/Contact';
 import NotFound from '@/pages/NotFound/NotFound';
 import './App.css';
-import { Box } from '@mui/material';
 
 // Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also
 // lazy-load the /map route, so that it doesn't impact the default route.
@@ -54,30 +53,25 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter basename="/">
             <Auth0ProviderWithRedirect>
-              <Box sx={{ display: 'flex' }}>
-                <Header />
-                <Sidebar />
-                <Suspense fallback={<Loading />}>
-                  <Routes>
-                    <Route path="/" element={<MapLayout />} />
-                    <Route path="/map" element={<MapLayout />} />
-                    <Route
-                      path="/userprofile"
-                      element={<RequireAuth component={UserProfile} />}
-                    />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/privacy" element={<Privacy />} />
-                    <Route path="/license" element={<License />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/data" element={<Data />} />
-                    <Route
-                      path="/go"
-                      element={<RedirectWithHash param="to" />}
-                    />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </Box>
+              <Header />
+              <Sidebar />
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<MapLayout />} />
+                  <Route path="/map" element={<MapLayout />} />
+                  <Route
+                    path="/userprofile"
+                    element={<RequireAuth component={UserProfile} />}
+                  />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/license" element={<License />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/data" element={<Data />} />
+                  <Route path="/go" element={<RedirectWithHash param="to" />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </Auth0ProviderWithRedirect>
           </BrowserRouter>
         </QueryClientProvider>
