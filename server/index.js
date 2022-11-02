@@ -29,7 +29,7 @@ app.use(compression());
 app.use(morgan('dev'));
 app.use('/', express.static('client/public'));
 app.get('/*', (req, res) => {
-  res.sendFile(path.resolve('../client/public/index.html'), (err) => {
+  res.sendFile(path.resolve(__dirname, '../client/public/index.html'), (err) => {
     if (err) {
       res.status(500).send(err);
     }
