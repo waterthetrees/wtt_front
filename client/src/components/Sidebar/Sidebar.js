@@ -29,7 +29,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import wttLogo from '@/assets/images/addtree/treefattrunk.png';
 import TreeIcon from '@/assets/images/Tree.svg';
-import PlantIcon from '@/assets/images/Plant.svg';
+// import PlantIcon from '@/assets/images/Plant.svg';
 
 export default function Sidebar() {
   const { isAuthenticated, logout } = useAuth0();
@@ -93,22 +93,22 @@ export default function Sidebar() {
         },
       ],
     },
-    {
-      title: 'Input',
-      items: [
-        {
-          text: 'Plant',
-          icon: (
-            <img
-              src={PlantIcon}
-              alt="plant icon"
-              style={{ width: '24px', height: '24px' }}
-            />
-          ),
-          path: '/',
-        },
-      ],
-    },
+    // {
+    //   title: 'Input',
+    //   items: [
+    //     {
+    //       text: 'Plant',
+    //       icon: (
+    //         <img
+    //           src={PlantIcon}
+    //           alt="plant icon"
+    //           style={{ width: '24px', height: '24px' }}
+    //         />
+    //       ),
+    //       path: '/',
+    //     },
+    //   ],
+    // },
   ];
 
   /***** Bottom section of sidebar *****/
