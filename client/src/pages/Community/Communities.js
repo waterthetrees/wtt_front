@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSourcesQuery, useSourcesMutation } from '@/api/queries';
 import { IconButton } from '@mui/material';
 import {
   SortUp,
@@ -99,6 +100,42 @@ export default function Communities() {
       ),
     );
   }, []);
+
+  const { data: sources } = useSourcesQuery({ country: 'United States' });
+  console.log('sources', sources);
+  const handleAddSource = () => {
+    const sendSourceUpdate = {
+      country: 'Luxembourg',
+      city: 'Luxembourg',
+      short: 'Luxembourg',
+      long: 'Grand-Duchy of Luxembourg',
+      id: 'luxembourg',
+      id_city_name: 'luxembourg',
+      primary: 'luxembourg',
+      center: null,
+      latitude: null,
+      longitude: null,
+      info: 'https://data.public.lu/en/datasets/inspire-annex-i-theme-protected-sites-remarkable-trees/#_',
+      srs: null,
+      broken: true,
+      brokenNotes: 'Requires outreach to get a compatible file format',
+      download:
+        'https://download.data.public.lu/resources/inspire-annex-i-theme-protected-sites-remarkable-trees/20220405-122622/ps.protectedsitesnatureconservation-trees.gml',
+      format: 'gml',
+      filename: null,
+      gdal_options: null,
+      license: null,
+      email: null,
+      contact: null,
+      crosswalk: {
+        ref: 'localId',
+        scientific: '(x) => String(x.text).split(" - ")[0]',
+        common: '(x) => String(x.text).split(" - ")[1]',
+      },
+    };
+
+    useSourcesMutation.mutate(sendSourceUpdate);
+  };
 
   const sortCountryAsc = () => {
     setLinks((state) =>
@@ -271,11 +308,11 @@ export default function Communities() {
     setOpen(false);
   };
 
-  const exportXslx = (e) => {
+  const exportXslx = () => {
     setHover(false);
   };
 
-  const exportDoc = (e) => {
+  const exportDoc = () => {
     setHover(false);
   };
 
@@ -321,16 +358,22 @@ export default function Communities() {
                 }}
               >
                 <div className="communities__main__search__hovermenu">
-                  <div onClick={exportXslx}>
-                    <span onClick={exportXslx}>Export as .xslx</span>
-                  </div>
-                  <div onClick={exportDoc}>
+                  <button onClick={exportXslx}>
+                    <span>Export as .xslx</span>
+                  </button>
+                  <button onClick={exportDoc}>
                     <span style={{ width: '100%' }}>Export as .doc</span>
-                  </div>
+                  </button>
                 </div>
               </div>
             )}
           </div>
+
+          <GrayButton onClick={handleAddSource}>
+            <LinkIcon sx={{ marginRight: '7px' }} />
+            <span>Add Source</span>
+          </GrayButton>
+
           <GrayButton onClick={handleAddLink}>
             <LinkIcon sx={{ marginRight: '7px' }} />
             <span>Add Link</span>
