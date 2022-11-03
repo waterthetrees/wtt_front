@@ -53,7 +53,7 @@ const MaintenanceButtons = ({ actions, setActions }) => {
 
         return (
           <ActionButton key={pastAction} value={pastAction}>
-            <img src={`${treeImagesPath}${label}.svg`} />
+            <img src={`${treeImagesPath}${label}.svg`} alt="No-tree-path" />
             {label}
           </ActionButton>
         );

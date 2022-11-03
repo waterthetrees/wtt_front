@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Box, styled } from '@mui/material';
-import { TooltipBottom, TooltipTop } from '@/components/Tooltip';
+import { TooltipTop } from '@/components/Tooltip';
 import MapboxMarkerPortal from '@/pages/Map/MapboxMarkerPortal';
 import { useUserLocation } from '@/pages/UserLocation/useUserLocation';
 import { useNewTree } from './useNewTree';
 import { targetSize, NewTreePlantingTarget } from './NewTreePlantingTarget';
-import NewTreeOpenAddButton from './NewTreeOpenAddButton';
 
 // Calculate the offset from the top-left of the marker to the center of the target.  Adding 1px
 // seems to align the planted tree with the crosshairs better.
@@ -18,13 +17,6 @@ const markerOptions = {
 
 const Container = styled(Box)`
   text-align: center;
-`;
-
-const Toolbar = styled(Box)`
-  width: 100%;
-  margin-top: 0.75rem;
-  display: flex;
-  justify-content: center;
 `;
 
 export function NewTreePlantingMarker({ map, onPlantClick }) {
