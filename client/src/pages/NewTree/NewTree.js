@@ -44,7 +44,7 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
   };
 
   const formMethods = useForm({ defaultValues, mode: 'all' });
-  
+
   if (!newTreeState.coords) {
     return null;
   }
