@@ -12,11 +12,6 @@ import { useNewTree } from './useNewTree';
 
 export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
   const { newTreeState, confirm, cancel } = useNewTree();
-
-  if (!newTreeState.coords) {
-    return null;
-  }
-
   const { user = {} } = useAuth0();
   const { nickname, email, name } = user;
   const defaultValues = {
@@ -31,8 +26,8 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
     state: '',
     zip: '',
     neighborhood: '',
-    lng: newTreeState.coords.lng,
-    lat: newTreeState.coords.lat,
+    lng: newTreeState.coords ? newTreeState.coords?.lng : '',
+    lat: newTreeState.coords ? newTreeState.coords?.lat : '',
     owner: 'public',
     who: '',
     volunteer: nickname || name || email || 'volunteer',
@@ -44,8 +39,12 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
       9999999,
     )}`,
   };
-  // Set mode to "all" to check for errors when fields change or lose focus.
   const formMethods = useForm({ defaultValues, mode: 'all' });
+  if (!newTreeState.coords) {
+    return null;
+  }
+
+  // Set mode to "all" to check for errors when fields change or lose focus.
   const { handleSubmit } = formMethods;
 
   const handleConfirm = (data) => confirm({ ...defaultValues, ...data });
