@@ -12,8 +12,11 @@ import { useNewTree } from './useNewTree';
 
 export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
   const { newTreeState, confirm, cancel } = useNewTree();
+
   const { user = {} } = useAuth0();
+
   const { nickname, email, name } = user;
+
   const defaultValues = {
     city: '',
     common: '',
@@ -39,7 +42,9 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
       9999999,
     )}`,
   };
+
   const formMethods = useForm({ defaultValues, mode: 'all' });
+  
   if (!newTreeState.coords) {
     return null;
   }
