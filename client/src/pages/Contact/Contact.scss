@@ -65,6 +65,13 @@
         cursor: pointer;
       }
     }
+
+    &__section2 {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+            margin-bottom: 24px;
+    }
   }
 }
 
