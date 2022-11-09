@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { Footer } from '@/components/Footer/Footer';
 import { C4SF } from '@/components/Contacts';
 import { TreeLogo, SlackLogo, GithubLogo, FigmaLogo } from '@/components/Icons';
@@ -6,19 +7,88 @@ import { TreeLogo, SlackLogo, GithubLogo, FigmaLogo } from '@/components/Icons';
 import './Contact.scss';
 
 export default function Contact() {
+  const PageContainer = styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    boxSizing: 'border-box',
+    fontFamily: 'Montserrat',
+    marginTop: '72px',
+    padding: '0px 0px 64px 0px',
+    textAlign: 'center',
+    fontSize: '1.33rem',
+    '@media(max-width: 768px)': {
+      margin: '0px',
+      padding: '3rem 2rem',
+    },
+    a: {
+      textDecoration: 'underline',
+      color: '#3FAB45',
+      cursor: 'pointer',
+    },
+  });
 
+  const HeaderContainer = styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '112px',
+    marginBottom: '24px',
+    width: '30%',
+    '@media(max-width: 768px)': {
+      width: '100%',
+    },
+  });
 
+  const HeaderLogoContainer = styled.div({
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '24px',
+  });
 
+  const HeaderText = styled.h1({
+    fontSize: '2.65rem',
+    marginBottom: '8px',
+  });
 
-  
+  const MainContainer = styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '28%',
+    '@media(max-width: 768px)': {
+      width: '100%',
+    },
+  });
+
+  const MainSection = styled.div({
+    marginBottom: '24px',
+    'p:last-child': {
+      marginBottom: '0px',
+    },
+  });
+
+  const MainSection2 = styled.div({
+    display: 'flex',
+    marginBottom: '24px',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  });
+
+  const MainSectionSummary = styled.p({});
+
+  const MainSectionHeader = styled.h2({});
+
+  const HeaderSummary = styled.span({});
+
   return (
-    <div className="contact">
-      <div className="contact__logo">
-        <TreeLogo />
-      </div>
-      <div className="contact__header">
-        <h1>Get in Touch</h1>
-        <span>
+    <PageContainer>
+      <HeaderContainer>
+        <HeaderLogoContainer>
+          <TreeLogo />
+        </HeaderLogoContainer>
+        <HeaderText>Get in Touch</HeaderText>
+        <HeaderSummary>
           We meet every week on Wednesday at 6:30PM Pacific. Join our{' '}
           <a
             href="https://join.slack.com/share/zt-ouzg0084-34S7_J9UZlcJSe9~qV7jbQ"
@@ -28,25 +98,29 @@ export default function Contact() {
             Slack
           </a>
           .
-        </span>
-      </div>
+        </HeaderSummary>
+      </HeaderContainer>
 
-      <div className="contact__main">
-        <div className="contact__main__section">
-          <h2>Email us at:</h2>
-          <a
-            href="mailto:info@waterthetrees.com"
-            rel="noreferrer"
-            target="_blank"
-          >
-            info@waterthetrees.com
-          </a>
-        </div>
-        <div className="contact__main__section">
-          <h2>Socials</h2>
-          <span>Follow us on our various social media accounts!</span>
-        </div>
-        <div className="contact__main__section2">
+      <MainContainer>
+        <MainSection>
+          <MainSectionHeader>Email us at:</MainSectionHeader>
+          <MainSectionSummary>
+            <a
+              href="mailto:info@waterthetrees.com"
+              rel="noreferrer"
+              target="_blank"
+            >
+              info@waterthetrees.com
+            </a>
+          </MainSectionSummary>
+        </MainSection>
+        <MainSection>
+          <MainSectionHeader>Socials: </MainSectionHeader>
+          <MainSectionSummary>
+            Follow us on our various social media accounts!
+          </MainSectionSummary>
+        </MainSection>
+        <MainSection2>
           <a
             href="https://join.slack.com/share/zt-ouzg0084-34S7_J9UZlcJSe9~qV7jbQ"
             rel="noreferrer"
@@ -68,21 +142,21 @@ export default function Contact() {
           >
             <FigmaLogo />
           </a>
-        </div>
-        <div className="contact__main__section">
-          <h2>Help Locally!</h2>
-          <span>
+        </MainSection2>
+        <MainSection>
+          <MainSectionHeader>Help Locally!</MainSectionHeader>
+          <MainSectionSummary>
             Please visit our <a href="/community">Community Page</a> to learn
             how you can contribute today!
-          </span>
-        </div>
-        <div className="contact__main__section">
-          <h2>Join the Team!</h2>
-          <span>
+          </MainSectionSummary>
+        </MainSection>
+        <MainSection>
+          <MainSectionHeader>Join the Team!</MainSectionHeader>
+          <MainSectionSummary>
             Additionally our parent organization is always looking for
             volunteers!
-          </span>
-          <span>
+          </MainSectionSummary>
+          <MainSectionSummary>
             For developers,{' '}
             <a
               href="https://www.codeforsanfrancisco.org/"
@@ -91,11 +165,11 @@ export default function Contact() {
             >
               Code for San Francisco
             </a>
-          </span>
-        </div>
+          </MainSectionSummary>
+        </MainSection>
         <C4SF />
         <Footer />
-      </div>
-    </div>
+      </MainContainer>
+    </PageContainer>
   );
 }

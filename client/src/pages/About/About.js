@@ -17,9 +17,7 @@ const About = () => {
     boxSizing: 'border-box',
     fontFamily: 'Montserrat',
     marginTop: '72px',
-    // margin: '72px auto 0px auto',
     padding: '0px 0px 40px 0px',
-    // padding: '72px auto 100px auto',
     textAlign: 'center',
     fontSize: '1.33rem',
     '@media(max-width: 768px)': {
@@ -191,8 +189,8 @@ const About = () => {
         <MainSectionHeader>Community</MainSectionHeader>
         <MainSectionSummary>
           To save trees in your local community, please visit our{' '}
-          <Link to="/community">Community</Link> outreach page to find
-          organizations near you.
+          <Link to="/community">Community</Link>
+          outreach page to find organizations near you.
         </MainSectionSummary>
         <AffiliatesContainer>
           <Affiliates />
