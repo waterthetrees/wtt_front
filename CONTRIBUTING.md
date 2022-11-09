@@ -2,9 +2,15 @@
 
 Water The Trees is a platform that crowd sources tree planting and maintenance. We believe in the power of trees to restore natural habitat for animals, insects, and fauna. We are interesting in continuous massive tree planting events to help sequester carbon and stabilize climate change extremes.
 
+## Hacktoberfest!
+
+We are participating in [hacktoberfest](https://hacktoberfest.com)!! Get 4 PR's merged and get a tree planted! 
+We are looking for help with the following: [HELP WANTED PROJECT BOARD](https://github.com/orgs/waterthetrees/projects/2/views/7)
+Our stack is React, Node, Mapbox, and Postgres. 
+
 ## Join Us!
 
-Water the Trees is an open source project run by tree planting volunteers and developers at Code for America.
+Water the Trees is an open source project run by tree planting volunteers and developers at Code for America. We are looking for developers, designers, and tree planting volunteers to help us build this platform. We are also looking for tree planting organizations to help us build this platform. If you are interested in joining us, please email us at [info@waterthetrees.com](mailto:info@waterthetrees.com) or join our #project-waterthetrees channel on [slack](sfbrigade.slack.com).
 
 ### INSTALL GIT
 
