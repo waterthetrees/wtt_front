@@ -12,7 +12,7 @@
   &__header {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
     margin-top: 112px;
     margin-bottom: 56px;
 
@@ -35,7 +35,7 @@
   &__main {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
 
     &__section {
       margin-bottom: 40px;
@@ -108,23 +108,23 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .about {
-    overflow-y: scroll;
-    margin: 0;
-    padding: 3rem 2rem;
-    height: 100vh;
+  // .about {
+  //   overflow-y: scroll;
+  //   margin: 0;
+  //   padding: 3rem 2rem;
+  //   height: 100vh;
 
-    &__body {
-      margin: 0 1rem;
-    }
+  //   &__body {
+  //     margin: 0 1rem;
+  //   }
 
-    &__footer {
-      &__section {
-        &__affiliates {
-          width: auto;
-        }
+  //   &__footer {
+  //     &__section {
+  //       &__affiliates {
+  //         width: auto;
+  //       }
 
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 }
