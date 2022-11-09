@@ -16,9 +16,10 @@ const About = () => {
     alignItems: 'center',
     boxSizing: 'border-box',
     fontFamily: 'Montserrat',
-    margin: '72px auto 38px auto',
-    // marginTop: '72px',
-    // marginBottom: '38px',
+    marginTop: '72px',
+    // margin: '72px auto 0px auto',
+    padding: '0px 0px 40px 0px',
+    // padding: '72px auto 100px auto',
     textAlign: 'center',
     fontSize: '1.33rem',
     '@media(max-width: 768px)': {
@@ -90,6 +91,7 @@ const About = () => {
   const MainSubSectionHeader = styled.h4({});
 
   const FooterContainer = styled.div({
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -100,6 +102,7 @@ const About = () => {
     width: '30%',
     display: 'flex',
     justifyContent: 'space-between',
+    marginTop: '32px',
     marginBottom: '24px',
     img: {
       height: '64px',

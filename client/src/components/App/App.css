@@ -49,10 +49,10 @@ body {
   text-align: left;
   padding: 0;
   margin: 0;
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   background-color: #fff;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

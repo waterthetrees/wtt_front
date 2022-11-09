@@ -6,6 +6,11 @@ import { TreeLogo, SlackLogo, GithubLogo, FigmaLogo } from '@/components/Icons';
 import './Contact.scss';
 
 export default function Contact() {
+
+
+
+
+  
   return (
     <div className="contact">
       <div className="contact__logo">
