@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, styled } from '@mui/material';
+import { styled } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import { useIsMobile } from '@/pages/NewTree/utilities';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
@@ -10,8 +10,6 @@ import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
-
-import Sidebar from '@/components/Sidebar/Sidebar';
 
 const drawerWidth = 350;
 
