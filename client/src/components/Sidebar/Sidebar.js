@@ -17,6 +17,7 @@ import {
   Typography,
   Box,
   Divider,
+  SvgIcon,
 } from '@mui/material';
 
 import MapIcon from '@mui/icons-material/Map';
@@ -28,7 +29,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import wttLogo from '@/assets/images/addtree/treefattrunk.png';
-import TreeIcon from '@/assets/images/Tree.svg';
+import { TreeIcon } from './TreeIcon';
 // import PlantIcon from '@/assets/images/Plant.svg';
 
 export default function Sidebar() {
@@ -41,24 +42,20 @@ export default function Sidebar() {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      // Only logging out to the root seems to be allowed, so if the user is on a subpage like
-      // /contact, they'll be sent back to /.
       logout({ returnTo: location.origin });
     } else {
       loginToCurrentPage();
     }
   };
 
-  //if screen width > 900px isLarge == true, else isLarge == false
-  const isLarge = useMediaQuery('(min-width:900px)');
+  //if screen width > 1000px, default sidebar to open
+  const isLarge = useMediaQuery('(min-width:1000px)');
 
-  //listens for if window size changes from md to lg or vice versa
   React.useEffect(() => {
     setOpen(isLarge);
   }, [isLarge]);
 
-  /***** Top section of sidebar *****/
-  let sidebarTop = [
+  let sidebarItems = [
     {
       title: 'Navigation',
       items: [
@@ -78,11 +75,9 @@ export default function Sidebar() {
         {
           text: 'My Trees',
           icon: (
-            <img
-              src={TreeIcon}
-              alt="tree icon"
-              style={{ width: '24px', height: '24px' }}
-            />
+            <SvgIcon color="inherit">
+              <TreeIcon />
+            </SvgIcon>
           ),
           path: '/userprofile',
         },
@@ -111,23 +106,9 @@ export default function Sidebar() {
     // },
   ];
 
-  /***** Bottom section of sidebar *****/
-  const sidebarBottom = [
-    {
-      title: 'Auth',
-      items: [
-        {
-          text: 'Login',
-          icon: <LoginIcon />,
-          path: Object.keys(user).length ? '/userprofile' : null,
-        },
-      ],
-    },
-  ];
-
   // Remove 'Personal' section from sidebar if no logged in user is present
   if (!Object.keys(user).length) {
-    sidebarTop = sidebarTop.filter(
+    sidebarItems = sidebarItems.filter(
       (item) => item.title === 'Navigation' || item.title === 'Input',
     );
   }
@@ -135,7 +116,6 @@ export default function Sidebar() {
   const drawerOpen = '248px';
   const drawerClosed = '80px';
 
-  /************* MUI STYLING **************/
   const StyledDrawer = styled(Drawer)({
     width: open ? drawerOpen : drawerClosed,
     '.MuiDrawer-paper': {
@@ -178,7 +158,7 @@ export default function Sidebar() {
     marginLeft: open ? '8px' : '0px',
   });
 
-  const GridToggle = styled(Grid)({
+  const StyledToggleGrid = styled(Grid)({
     display: open ? 'inline' : 'none',
   });
 
@@ -189,10 +169,7 @@ export default function Sidebar() {
     justifyContent: 'center',
   });
 
-  const StyledSectionTitle = styled(
-    Typography,
-    {},
-  )({
+  const StyledSectionTitle = styled(Typography)({
     fontFamily: 'Montserrat',
     padding: open ? '0px 24px' : '0px 0px',
   });
@@ -212,12 +189,18 @@ export default function Sidebar() {
         fontWeight: 500,
         color: '#3FAB45',
       },
+      '.MuiListItemIcon-root': {
+        '.MuiSvgIcon-root': {
+          color: '#3FAB45',
+        },
+      },
     },
   });
 
   const StyledListItemIcon = styled(ListItemIcon)({
-    minWidth: '40px',
     justifyContent: open ? 'start' : 'center',
+    minWidth: 'auto',
+    marginRight: open ? '16px' : '0px',
     '.MuiSvgIcon-root': {
       color: '#323232',
       width: '24px',
@@ -257,9 +240,9 @@ export default function Sidebar() {
             <Grid item>
               <SiteLogo src={wttLogo} alt="WTT logo" />
             </Grid>
-            <GridToggle item>
+            <StyledToggleGrid item>
               <SiteTitle className="title__font">WATER THE TREES</SiteTitle>
-            </GridToggle>
+            </StyledToggleGrid>
             <Grid item onClick={() => setOpen(!open)}>
               <Togglebutton>
                 {open ? (
@@ -272,7 +255,7 @@ export default function Sidebar() {
           </StyledTitleGrid>
 
           <List disablePadding>
-            {sidebarTop.map((list) => {
+            {sidebarItems.map((list) => {
               const { title, items } = list;
 
               return (
@@ -293,7 +276,7 @@ export default function Sidebar() {
                       </StyledListItem>
                     );
                   })}
-                  {title === 'Input' ? null : <StyledDivider />}
+                  <StyledDivider />
                 </Box>
               );
             })}
@@ -302,73 +285,41 @@ export default function Sidebar() {
         <Grid item>
           <StyledDivider />
           <List disablePadding sx={{ paddingBottom: '16px' }}>
-            {sidebarBottom.map((list) => {
-              const { title, items } = list;
-              return (
-                <div key={title}>
-                  {title === 'Auth' ? null : (
-                    <StyledSectionTitle align={open ? 'left' : 'center'}>
-                      {title}
-                    </StyledSectionTitle>
-                  )}
-
-                  {items.map((item) => {
-                    const { text, icon, path } = item;
-
-                    return (
-                      <StyledListItem
-                        key={text}
-                        component={path ? Link : null}
-                        to={path ? path : null}
-                      >
-                        {Object.keys(user).length ? (
-                          <StyledListItemButton disableGutters>
-                            <Grid container spacing={2}>
-                              <Grid item>
-                                <StyledAvatar
-                                  component="img"
-                                  src={picture}
-                                  alt="Avatar"
-                                />
-                              </Grid>
-                              <GridToggle item>
-                                <Typography
-                                  sx={{
-                                    fontWeight: 'bold',
-                                    color: '#323232',
-                                  }}
-                                >
-                                  {nickname}
-                                </Typography>
-                                <Typography
-                                  sx={{
-                                    color: '#323232',
-                                  }}
-                                >
-                                  {email}
-                                </Typography>
-                              </GridToggle>
-                            </Grid>
-                          </StyledListItemButton>
-                        ) : (
-                          <StyledListItemButton
-                            disableGutters
-                            onClick={() =>
-                              text === 'Logout' || text === 'Login'
-                                ? handleClick()
-                                : null
-                            }
-                          >
-                            <StyledListItemIcon>{icon}</StyledListItemIcon>
-                            <StyledListItemText primary={text} />
-                          </StyledListItemButton>
-                        )}
-                      </StyledListItem>
-                    );
-                  })}
-                </div>
-              );
-            })}
+            {Object.keys(user).length ? (
+              <StyledListItem>
+                <StyledListItemButton
+                  component={Link}
+                  to="/userprofile"
+                  disableGutters
+                  sx={{ py: 0 }}
+                >
+                  <StyledListItemIcon>
+                    {' '}
+                    <StyledAvatar
+                      component="img"
+                      src={picture}
+                      alt="User avatar"
+                    />
+                  </StyledListItemIcon>
+                  <StyledListItemText>
+                    <div>{nickname}</div>
+                    <div>{email}</div>
+                  </StyledListItemText>
+                </StyledListItemButton>
+              </StyledListItem>
+            ) : (
+              <StyledListItem>
+                <StyledListItemButton
+                  disableGutters
+                  onClick={() => handleClick()}
+                >
+                  <StyledListItemIcon>
+                    <LoginIcon />
+                  </StyledListItemIcon>
+                  <StyledListItemText primary="Login" />
+                </StyledListItemButton>
+              </StyledListItem>
+            )}
           </List>
         </Grid>
       </StyledOuterGrid>
