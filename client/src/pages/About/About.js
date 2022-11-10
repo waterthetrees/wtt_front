@@ -123,7 +123,6 @@ const About = () => {
           planting volunteers.
         </HeaderSummary>
       </HeaderContainer>
-      <MainContainer></MainContainer>
       <MainContainer>
         <MainSection>
           <MainSectionHeader>Vision</MainSectionHeader>
