@@ -1,7 +1,7 @@
 import React from 'react';
 import './Privacy.scss';
 
-function Privacy(props) {
+function Privacy() {
   return (
     <div className="privacy">
       <div>
