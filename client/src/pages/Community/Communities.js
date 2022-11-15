@@ -19,6 +19,10 @@ import SideMenu from './SideMenu';
 import './Communities.scss';
 
 export default function Communities() {
+  const { data: sources } = useSourcesQuery({ country: 'United States' });
+  const mutateSources = useSourcesMutation();
+  console.log('sources', sources);
+
   const [search, setSearch] = useState('');
 
   const [open, setOpen] = useState(false);
@@ -100,42 +104,6 @@ export default function Communities() {
       ),
     );
   }, []);
-
-  const { data: sources } = useSourcesQuery({ country: 'United States' });
-  console.log('sources', sources);
-  const handleAddSource = () => {
-    const sendSourceUpdate = {
-      country: 'Luxembourg',
-      city: 'Luxembourg',
-      short: 'Luxembourg',
-      long: 'Grand-Duchy of Luxembourg',
-      id: 'luxembourg',
-      id_city_name: 'luxembourg',
-      primary: 'luxembourg',
-      center: null,
-      latitude: null,
-      longitude: null,
-      info: 'https://data.public.lu/en/datasets/inspire-annex-i-theme-protected-sites-remarkable-trees/#_',
-      srs: null,
-      broken: true,
-      brokenNotes: 'Requires outreach to get a compatible file format',
-      download:
-        'https://download.data.public.lu/resources/inspire-annex-i-theme-protected-sites-remarkable-trees/20220405-122622/ps.protectedsitesnatureconservation-trees.gml',
-      format: 'gml',
-      filename: null,
-      gdal_options: null,
-      license: null,
-      email: null,
-      contact: null,
-      crosswalk: {
-        ref: 'localId',
-        scientific: '(x) => String(x.text).split(" - ")[0]',
-        common: '(x) => String(x.text).split(" - ")[1]',
-      },
-    };
-
-    useSourcesMutation.mutate(sendSourceUpdate);
-  };
 
   const sortCountryAsc = () => {
     setLinks((state) =>
@@ -258,6 +226,38 @@ export default function Communities() {
     ];
     await setState(newState);
     await setOpen(true);
+
+    const sendSourceUpdate = {
+      country: 'Luxembourg',
+      city: 'Luxembourg',
+      short: 'Luxembourg',
+      long: 'Grand-Duchy of Luxembourg',
+      id: 'luxembourg',
+      id_city_name: 'luxembourg',
+      primary: 'luxembourg',
+      center: null,
+      latitude: null,
+      longitude: null,
+      info: 'https://data.public.lu/en/datasets/inspire-annex-i-theme-protected-sites-remarkable-trees/#_',
+      srs: null,
+      broken: true,
+      brokenNotes: 'Requires outreach to get a compatible file format',
+      download:
+        'https://download.data.public.lu/resources/inspire-annex-i-theme-protected-sites-remarkable-trees/20220405-122622/ps.protectedsitesnatureconservation-trees.gml',
+      format: 'gml',
+      filename: null,
+      gdal_options: null,
+      license: null,
+      email: null,
+      contact: null,
+      crosswalk: {
+        ref: 'localId',
+        scientific: '(x) => String(x.text).split(" - ")[0]',
+        common: '(x) => String(x.text).split(" - ")[1]',
+      },
+    };
+
+    mutateSources.mutate(sendSourceUpdate);
   };
 
   const handleReportLink = async () => {
@@ -369,19 +369,14 @@ export default function Communities() {
             )}
           </div>
 
-          <GrayButton onClick={handleAddSource}>
-            <LinkIcon sx={{ marginRight: '7px' }} />
-            <span>Add Source</span>
-          </GrayButton>
-
           <GrayButton onClick={handleAddLink}>
             <LinkIcon sx={{ marginRight: '7px' }} />
-            <span>Add Link</span>
+            <span>Add City/Source Link</span>
           </GrayButton>
 
           <GrayButton onClick={handleReportLink}>
             <LinkOffIcon sx={{ marginRight: '7px' }} />
-            <span>Report Broken Link</span>
+            <span>Report Broken City/Source Link</span>
           </GrayButton>
         </div>
         {open && (
