@@ -14,6 +14,7 @@ import {
   Toolbar,
   AppBar,
   IconButton,
+  Typography,
 } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
@@ -69,13 +70,11 @@ const Header = (props) => {
     },
   });
 
-  const StyledListItemText = styled(ListItemText)({
-    '.MuiTypography-root': {
-      fontFamily: 'Montserrat',
-      fontSize: '14px',
-      fontWeight: 400,
-      color: '#323232',
-    },
+  const StyledListItemText = styled(Typography)({
+    fontFamily: 'Montserrat',
+    fontSize: '14px',
+    fontWeight: 400,
+    color: '#323232',
   });
 
   const drawer = (
@@ -117,20 +116,23 @@ const Header = (props) => {
             >
               <ListItemButton sx={{ justifyContent: 'center', my: '4px' }}>
                 <StyledListItemIcon>{icon}</StyledListItemIcon>
-                <StyledListItemText primary={text} />
+                <StyledListItemText>{text}</StyledListItemText>
               </ListItemButton>
             </ListItem>
           );
         })}
         <Divider sx={{ my: '4px', mx: '16px' }} />
         <ListItem disablePadding>
-          <ListItemButton onClick={() => handleClick()}>
+          <ListItemButton
+            onClick={() => handleClick()}
+            sx={{ justifyContent: 'center' }}
+          >
             <StyledListItemIcon>
               <LoginIcon />
             </StyledListItemIcon>
-            <StyledListItemText
-              primary={isAuthenticated ? 'Log Out' : 'Log In'}
-            />
+            <StyledListItemText>
+              {isAuthenticated ? 'Log Out' : 'Log In'}
+            </StyledListItemText>
           </ListItemButton>
         </ListItem>
       </List>

@@ -55,7 +55,7 @@ export default function Sidebar() {
     setOpen(isLarge);
   }, [isLarge]);
 
-  let sidebarItems = [
+  let sidebarSections = [
     {
       title: 'Navigation',
       items: [
@@ -108,7 +108,7 @@ export default function Sidebar() {
 
   // Remove 'Personal' section from sidebar if no logged in user is present
   if (!Object.keys(user).length) {
-    sidebarItems = sidebarItems.filter(
+    sidebarSections = sidebarSections.filter(
       (item) => item.title === 'Navigation' || item.title === 'Input',
     );
   }
@@ -255,7 +255,7 @@ export default function Sidebar() {
           </StyledTitleGrid>
 
           <List disablePadding>
-            {sidebarItems.map((list) => {
+            {sidebarSections.map((list) => {
               const { title, items } = list;
 
               return (
