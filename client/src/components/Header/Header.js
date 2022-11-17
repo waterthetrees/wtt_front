@@ -7,7 +7,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Drawer,
   Divider,
   Toolbar,
@@ -26,6 +25,7 @@ import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = (props) => {
   const { isAuthenticated, logout } = useAuth0();
@@ -126,7 +126,7 @@ const Header = (props) => {
             sx={{ justifyContent: 'center' }}
           >
             <StyledListItemIcon>
-              <LoginIcon />
+              {isAuthenticated ? <LogoutIcon /> : <LoginIcon />}
             </StyledListItemIcon>
             <StyledListItemText>
               {isAuthenticated ? 'Log Out' : 'Log In'}

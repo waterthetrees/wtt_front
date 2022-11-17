@@ -18,6 +18,7 @@ import {
   Box,
   Divider,
   SvgIcon,
+  Button,
 } from '@mui/material';
 
 import MapIcon from '@mui/icons-material/Map';
@@ -30,6 +31,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import wttLogo from '@/assets/images/addtree/treefattrunk.png';
 import { TreeIcon } from './TreeIcon';
+import LogoutIcon from '@mui/icons-material/Logout';
 // import PlantIcon from '@/assets/images/Plant.svg';
 
 export default function Sidebar() {
@@ -141,21 +143,8 @@ export default function Sidebar() {
     color: 'black',
     whiteSpace: 'nowrap',
     letterSpacing: '-3px',
-    fontSize: '.95rem',
+    fontSize: '1rem',
     wordSpacing: '0.6rem',
-  });
-
-  const Togglebutton = styled(Box)({
-    color: 'white',
-    width: '16px',
-    height: '16px',
-    borderRadius: '50%',
-    backgroundColor: '#3FAB45',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    marginLeft: open ? '8px' : '0px',
   });
 
   const StyledToggleGrid = styled(Grid)({
@@ -229,6 +218,16 @@ export default function Sidebar() {
     borderRadius: '5px',
   });
 
+  const StyledBottomButton = styled(Button)({
+    height: '32px',
+    fontFamily: 'Montserrat',
+    color: '#323232',
+    fontSize: '12px',
+    textTransform: 'none',
+    border: '1px solid #3FAB45',
+    borderRadius: '8px',
+  });
+
   return (
     <StyledDrawer
       variant="permanent"
@@ -243,15 +242,6 @@ export default function Sidebar() {
             <StyledToggleGrid item>
               <SiteTitle className="title__font">WATER THE TREES</SiteTitle>
             </StyledToggleGrid>
-            <Grid item onClick={() => setOpen(!open)}>
-              <Togglebutton>
-                {open ? (
-                  <ArrowBackIosNewIcon fontSize="inherit" />
-                ) : (
-                  <ArrowForwardIosIcon fontSize="inherit" />
-                )}
-              </Togglebutton>
-            </Grid>
           </StyledTitleGrid>
 
           <List disablePadding>
@@ -307,19 +297,54 @@ export default function Sidebar() {
                   </StyledListItemText>
                 </StyledListItemButton>
               </StyledListItem>
-            ) : (
-              <StyledListItem>
-                <StyledListItemButton
-                  disableGutters
-                  onClick={() => handleClick()}
-                >
-                  <StyledListItemIcon>
-                    <LoginIcon />
-                  </StyledListItemIcon>
-                  <StyledListItemText primary="Login" />
-                </StyledListItemButton>
-              </StyledListItem>
-            )}
+            ) : null}
+            <StyledListItem>
+              <Grid container justifyContent="space-between">
+                <Grid item>
+                  <StyledBottomButton
+                    variant="outlined"
+                    onClick={() => handleClick()}
+                  >
+                    {Object.keys(user).length ? (
+                      <>
+                        {open ? (
+                          <>
+                            <LogoutIcon /> Logout
+                          </>
+                        ) : (
+                          <LogoutIcon />
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {open ? (
+                          <>
+                            <LoginIcon /> Login
+                          </>
+                        ) : (
+                          <LoginIcon />
+                        )}
+                      </>
+                    )}
+                  </StyledBottomButton>
+                </Grid>
+                <Grid item>
+                  <StyledBottomButton
+                    variant="outlined"
+                    onClick={() => setOpen(!open)}
+                    sx={{ width: open ? '84px' : '10px' }}
+                  >
+                    {open ? (
+                      <>
+                        Collapse <ArrowBackIosNewIcon />
+                      </>
+                    ) : (
+                      <ArrowForwardIosIcon />
+                    )}
+                  </StyledBottomButton>
+                </Grid>
+              </Grid>
+            </StyledListItem>
           </List>
         </Grid>
       </StyledOuterGrid>
