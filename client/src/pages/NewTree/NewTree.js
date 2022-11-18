@@ -18,7 +18,7 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
   const { nickname, email, name } = user;
 
   /* 
-    tenery used to avoid any errors caused by useForm hook
+    ternary used to avoid any errors caused by useForm hook
     when moving early return statements after hook calls for linting
   */
 
