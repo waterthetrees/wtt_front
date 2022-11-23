@@ -17,11 +17,6 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
 
   const { nickname, email, name } = user;
 
-  /* 
-    ternary used to avoid any errors caused by useForm hook
-    when moving early return statements after hook calls for linting
-  */
-
   const defaultValues = {
     city: '',
     common: '',
@@ -34,8 +29,8 @@ export default function NewTree({ TreeDetailsContainer, drawerWidth }) {
     state: '',
     zip: '',
     neighborhood: '',
-    lng: newTreeState.coords ? newTreeState.coords.lng : '',
-    lat: newTreeState.coords ? newTreeState.coords.lat : '',
+    lng: newTreeState.coords ? newTreeState.coords?.lng : '',
+    lat: newTreeState.coords ? newTreeState.coords?.lat : '',
     owner: 'public',
     who: '',
     volunteer: nickname || name || email || 'volunteer',
