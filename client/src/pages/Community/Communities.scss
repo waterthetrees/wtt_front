@@ -1,19 +1,8 @@
 .communities {
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
-    width: 50%;
-    margin-bottom: 3.29vh;
 
     &__main {
-        &__p {
-            font-size: 1.2em;
-        }
-
-=======
-
-    &__main {
->>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
         &__search {
             display: flex;
             justify-content: space-between;
