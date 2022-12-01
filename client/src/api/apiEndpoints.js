@@ -3,7 +3,8 @@ export const env =
     'waterthetrees.com': 'prod',
     'dev.waterthetrees.com': 'dev',
     'blue.waterthetrees.com': 'blue',
-    localhost: 'dev',
+    // localhost: 'dev',
+    localhost: 'localserver',
   }[window.location.hostname] || 'localserver';
 
 export const url = {
@@ -45,6 +46,7 @@ const apiEndpoints = {
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
   countries: `${url}${port}/api/countries`,
+  sources: `${url}${port}/api/sources`,
   usercounts: `${url}${port}/api/usercounts`,
   usertreehistory: `${url}${port}/api/usertreehistory`,
 };

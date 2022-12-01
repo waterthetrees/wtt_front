@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+<<<<<<< HEAD
 import { IconButton } from '@mui/material';
 import {
   SortUp,
   SortDown,
+=======
+import { useSourcesQuery, useSourcesMutation } from '@/api/queries';
+// import { IconButton } from '@mui/material';
+import {
+  // SortUp,
+  // SortDown,
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
   LinkIcon,
   LinkOffIcon,
   UploadFileIcon,
@@ -10,6 +18,7 @@ import {
 
 import { GrayButton } from '@/components/Button/Button';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
+<<<<<<< HEAD
 import CommunityTableRow from '@/components/Table/TableRow';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import Section from '@/components/Section/Section';
@@ -18,10 +27,60 @@ import SideMenu from './SideMenu';
 import './Communities.scss';
 
 export default function Communities() {
+=======
+// import CommunityTableRow from '@/components/Table/TableRow';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
+// import Section from '@/components/Section/Section';
+import { ListGrid } from '@/components/ListGrid/ListGrid';
+
+import SideMenu from './SideMenu';
+import './Communities.scss';
+import { capFirstLetter } from '../../util/treeHealthUtil';
+
+// const columnHeaders = [
+//   'id',
+//   'main',
+//   'state',
+//   'country',
+//   'email',
+//   'contact',
+//   'who',
+//   'phone',
+//   'broken',
+//   'info',
+//   'download',
+//   'source',
+//   'source_url',
+//   'countryCode',
+//   'brokenReason',
+// ];
+
+export function createColumnHeaders(source) {
+  if (!source) return [];
+  const sourceKeys = Object.keys(source[0]);
+  return sourceKeys.map((column) => {
+    return {
+      key: column,
+      label: capFirstLetter(column),
+    };
+  });
+}
+
+export default function Communities() {
+  const { data: sources } = useSourcesQuery();
+  const mutateSources = useSourcesMutation();
+  console.log('sources 0000', sources);
+  // const [columnHeaders, setColumnHeaders] = useState();
+
+  const columnHeaders = createColumnHeaders(sources);
+  console.log('columnHeaders 0000', columnHeaders);
+
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
   const [search, setSearch] = useState('');
 
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({});
+<<<<<<< HEAD
   const [Links, setLinks] = useState([]);
   const [country, setCountry] = useState(true);
   const [city, setCity] = useState(true);
@@ -31,6 +90,17 @@ export default function Communities() {
   const [hover, setHover] = useState(false);
 
   const filteredLinks = Links?.filter((link) => {
+=======
+  const [links, setLinks] = useState(sources);
+  // const [country, setCountry] = useState(true);
+  // const [city, setCity] = useState(true);
+  // const [territory, setTerritory] = useState(true);
+  // const [service, setService] = useState(true);
+  // const [organization, setOrganization] = useState(true);
+  const [hover, setHover] = useState(false);
+
+  const filteredLinks = links?.filter((link) => {
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
     return (
       link.country.toLowerCase().includes(search.toLowerCase()) ||
       link.city.toLowerCase().includes(search.toLowerCase()) ||
@@ -39,6 +109,7 @@ export default function Communities() {
     );
   });
 
+<<<<<<< HEAD
   useEffect(() => {
     let links = [
       {
@@ -202,6 +273,8 @@ export default function Communities() {
     setOrganization((state) => !state);
   };
 
+=======
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -221,6 +294,41 @@ export default function Communities() {
     ];
     await setState(newState);
     await setOpen(true);
+<<<<<<< HEAD
+=======
+
+    const sendSourceUpdate = {
+      country: 'Luxembourg',
+      city: 'Luxembourg',
+      short: 'Luxembourg',
+      long: 'Grand-Duchy of Luxembourg',
+      id: 'luxembourg',
+      id_city_name: 'luxembourg',
+      primary: 'luxembourg',
+      center: null,
+      latitude: null,
+      longitude: null,
+      info: 'https://data.public.lu/en/datasets/inspire-annex-i-theme-protected-sites-remarkable-trees/#_',
+      srs: null,
+      broken: true,
+      brokenNotes: 'Requires outreach to get a compatible file format',
+      download:
+        'https://download.data.public.lu/resources/inspire-annex-i-theme-protected-sites-remarkable-trees/20220405-122622/ps.protectedsitesnatureconservation-trees.gml',
+      format: 'gml',
+      filename: null,
+      gdal_options: null,
+      license: null,
+      email: null,
+      contact: null,
+      crosswalk: {
+        ref: 'localId',
+        scientific: '(x) => String(x.text).split(" - ")[0]',
+        common: '(x) => String(x.text).split(" - ")[1]',
+      },
+    };
+
+    mutateSources.mutate(sendSourceUpdate);
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
   };
 
   const handleReportLink = async () => {
@@ -271,11 +379,19 @@ export default function Communities() {
     setOpen(false);
   };
 
+<<<<<<< HEAD
   const exportXslx = (e) => {
     setHover(false);
   };
 
   const exportDoc = (e) => {
+=======
+  const exportXslx = () => {
+    setHover(false);
+  };
+
+  const exportDoc = () => {
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
     setHover(false);
   };
 
@@ -321,24 +437,44 @@ export default function Communities() {
                 }}
               >
                 <div className="communities__main__search__hovermenu">
+<<<<<<< HEAD
                   <div onClick={exportXslx}>
                     <span onClick={exportXslx}>Export as .xslx</span>
                   </div>
                   <div onClick={exportDoc}>
                     <span style={{ width: '100%' }}>Export as .doc</span>
                   </div>
+=======
+                  <button onClick={exportXslx}>
+                    <span>Export as .xslx</span>
+                  </button>
+                  <button onClick={exportDoc}>
+                    <span style={{ width: '100%' }}>Export as .doc</span>
+                  </button>
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
                 </div>
               </div>
             )}
           </div>
+<<<<<<< HEAD
           <GrayButton onClick={handleAddLink}>
             <LinkIcon sx={{ marginRight: '7px' }} />
             <span>Add Link</span>
+=======
+
+          <GrayButton onClick={handleAddLink}>
+            <LinkIcon sx={{ marginRight: '7px' }} />
+            <span>Add City/Source Link</span>
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
           </GrayButton>
 
           <GrayButton onClick={handleReportLink}>
             <LinkOffIcon sx={{ marginRight: '7px' }} />
+<<<<<<< HEAD
             <span>Report Broken Link</span>
+=======
+            <span>Report Broken City/Source Link</span>
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
           </GrayButton>
         </div>
         {open && (
@@ -351,6 +487,7 @@ export default function Communities() {
             <SideMenu state={state} onClick={handleClose} />
           </PanelDrawer>
         )}
+<<<<<<< HEAD
         <div className="communities__main__section">
           <Section sx={{ width: '16.67%' }}>
             <span>Country</span>
@@ -400,6 +537,18 @@ export default function Communities() {
             ),
           )}
         </div>
+=======
+        <div>
+          {sources && (
+            <ListGrid
+              data={sources}
+              columns={columnHeaders}
+              defaultSortIndex={0}
+            />
+          )}
+        </div>
+
+>>>>>>> 4be28025c350f55f4e446290fc038ee8a4e8e011
         <div className="communities__main__categories"></div>
         <div className="communities__main__links"></div>
       </div>
