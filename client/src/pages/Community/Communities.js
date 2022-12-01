@@ -63,11 +63,11 @@ export default function Communities() {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({});
   const [links, setLinks] = useState(sources);
-  const [country, setCountry] = useState(true);
-  const [city, setCity] = useState(true);
-  const [territory, setTerritory] = useState(true);
-  const [service, setService] = useState(true);
-  const [organization, setOrganization] = useState(true);
+  // const [country, setCountry] = useState(true);
+  // const [city, setCity] = useState(true);
+  // const [territory, setTerritory] = useState(true);
+  // const [service, setService] = useState(true);
+  // const [organization, setOrganization] = useState(true);
   const [hover, setHover] = useState(false);
 
   const filteredLinks = links?.filter((link) => {
