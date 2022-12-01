@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSourcesQuery, useSourcesMutation } from '@/api/queries';
-import { IconButton } from '@mui/material';
+// import { IconButton } from '@mui/material';
 import {
-  SortUp,
-  SortDown,
+  // SortUp,
+  // SortDown,
   LinkIcon,
   LinkOffIcon,
   UploadFileIcon,
@@ -11,23 +11,58 @@ import {
 
 import { GrayButton } from '@/components/Button/Button';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
-import CommunityTableRow from '@/components/Table/TableRow';
+// import CommunityTableRow from '@/components/Table/TableRow';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
-import Section from '@/components/Section/Section';
+// import Section from '@/components/Section/Section';
+import { ListGrid } from '@/components/ListGrid/ListGrid';
 
 import SideMenu from './SideMenu';
 import './Communities.scss';
+import { capFirstLetter } from '../../util/treeHealthUtil';
+
+// const columnHeaders = [
+//   'id',
+//   'main',
+//   'state',
+//   'country',
+//   'email',
+//   'contact',
+//   'who',
+//   'phone',
+//   'broken',
+//   'info',
+//   'download',
+//   'source',
+//   'source_url',
+//   'countryCode',
+//   'brokenReason',
+// ];
+
+export function createColumnHeaders(source) {
+  if (!source) return [];
+  const sourceKeys = Object.keys(source[0]);
+  return sourceKeys.map((column) => {
+    return {
+      key: column,
+      label: capFirstLetter(column),
+    };
+  });
+}
 
 export default function Communities() {
-  const { data: sources } = useSourcesQuery({ country: 'United States' });
+  const { data: sources } = useSourcesQuery();
   const mutateSources = useSourcesMutation();
-  console.log('sources', sources);
+  console.log('sources 0000', sources);
+  // const [columnHeaders, setColumnHeaders] = useState();
+
+  const columnHeaders = createColumnHeaders(sources);
+  console.log('columnHeaders 0000', columnHeaders);
 
   const [search, setSearch] = useState('');
 
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({});
-  const [Links, setLinks] = useState([]);
+  const [links, setLinks] = useState(sources);
   const [country, setCountry] = useState(true);
   const [city, setCity] = useState(true);
   const [territory, setTerritory] = useState(true);
@@ -35,7 +70,7 @@ export default function Communities() {
   const [organization, setOrganization] = useState(true);
   const [hover, setHover] = useState(false);
 
-  const filteredLinks = Links?.filter((link) => {
+  const filteredLinks = links?.filter((link) => {
     return (
       link.country.toLowerCase().includes(search.toLowerCase()) ||
       link.city.toLowerCase().includes(search.toLowerCase()) ||
@@ -43,169 +78,6 @@ export default function Communities() {
       link.service.toLowerCase().includes(search.toLowerCase())
     );
   });
-
-  useEffect(() => {
-    let links = [
-      {
-        country: 'United States',
-        city: 'Oakland',
-        territory: 'California',
-        service: 'Tree Service',
-        organization: 'Oakland Tree Services',
-        link: 'https://www.oaklandca.gov/topics/tree-services',
-      },
-      {
-        country: 'United States',
-        city: 'Berkeley',
-        territory: 'California',
-        service: 'Tree Service',
-        organization: 'Berkeley Tree Services',
-        link: 'https://berkeleyca.gov/city-services/streets-sidewalks-sewers-and-utilities/city-trees-and-coast-live-oak-ordinance#:~:text=To%20apply%20for%20a%20permit,or%20removal%20will%20be%20permitted',
-      },
-      {
-        country: 'United States',
-        city: 'Alameda',
-        territory: 'California',
-        service: 'Tree Service',
-        organization: 'Alameda Tree Services',
-        link: 'https://www.alamedaca.gov/Departments/Public-Works-Department/Street-Trees',
-      },
-      {
-        country: 'United States',
-        city: 'San Francisco',
-        territory: 'California',
-        service: 'Tree Service',
-        organization: 'San Francisco Tree Services',
-        link: 'https://sfpublicworks.org/remove-street-tree',
-      },
-      {
-        country: 'United States',
-        city: 'Monterey',
-        territory: 'California',
-        service: 'Organization',
-        organization: 'City of Monterey',
-        link: 'https://monterey.org/city_hall/parks___recreation/beaches,_parks___playgrounds/trees___urban_forestry/local_tree___plant_selections.php',
-      },
-      {
-        country: 'United States',
-        city: 'Oxnard',
-        territory: 'California',
-        service: 'Organization',
-        organization: 'City of Oxnard',
-        link: 'https://www.oxnard.org/environmental-resources/',
-      },
-    ];
-    setLinks(
-      [...links].sort(
-        (a, b) =>
-          a.country.toLowerCase().localeCompare(b.country.toLowerCase()) ||
-          a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-          a.territory.toLowerCase().localeCompare(b.territory.toLowerCase()),
-      ),
-    );
-  }, []);
-
-  const sortCountryAsc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) => {
-        return (
-          a.country.toLowerCase().localeCompare(b.country.toLowerCase()) ||
-          a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-          a.territory.toLowerCase().localeCompare(b.territory.toLowerCase())
-        );
-      }),
-    );
-    setCountry((state) => !state);
-  };
-
-  const sortCountryDesc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) => {
-        return (
-          b.country.toLowerCase().localeCompare(a.country.toLowerCase()) ||
-          a.city.toLowerCase().localeCompare(b.city.toLowerCase()) ||
-          a.territory.toLowerCase().localeCompare(b.territory.toLowerCase())
-        );
-      }),
-    );
-    setCountry((state) => !state);
-  };
-
-  const sortCityAsc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        a.city.toLowerCase().localeCompare(b.city.toLowerCase()),
-      ),
-    );
-    setCity((state) => !state);
-  };
-
-  const sortCityDesc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        b.city.toLowerCase().localeCompare(a.city.toLowerCase()),
-      ),
-    );
-    setCity((state) => !state);
-  };
-
-  const sortTerritoryAsc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        a.territory.toLowerCase().localeCompare(b.territory.toLowerCase()),
-      ),
-    );
-    setTerritory((state) => !state);
-  };
-
-  const sortTerritoryDesc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        b.territory.toLowerCase().localeCompare(a.territory.toLowerCase()),
-      ),
-    );
-    setTerritory((state) => !state);
-  };
-
-  const sortServiceAsc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) => {
-        return a.service.toLowerCase().localeCompare(b.service.toLowerCase());
-      }),
-    );
-    setService((state) => !state);
-  };
-
-  const sortServiceDesc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) => {
-        return b.service.toLowerCase().localeCompare(a.service.toLowerCase());
-      }),
-    );
-    setService((state) => !state);
-  };
-
-  const sortOrganizationAsc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        a.organization
-          .toLowerCase()
-          .localeCompare(b.organization.toLowerCase()),
-      ),
-    );
-    setOrganization((state) => !state);
-  };
-
-  const sortOrganizationDesc = () => {
-    setLinks((state) =>
-      [...state].sort((a, b) =>
-        b.organization
-          .toLowerCase()
-          .localeCompare(a.organization.toLowerCase()),
-      ),
-    );
-    setOrganization((state) => !state);
-  };
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -389,55 +261,16 @@ export default function Communities() {
             <SideMenu state={state} onClick={handleClose} />
           </PanelDrawer>
         )}
-        <div className="communities__main__section">
-          <Section sx={{ width: '16.67%' }}>
-            <span>Country</span>
-            <IconButton onClick={country ? sortCountryDesc : sortCountryAsc}>
-              {country ? <SortUp /> : <SortDown />}
-            </IconButton>
-          </Section>
-          <Section sx={{ width: '25%' }}>
-            <span>City</span>
-            <IconButton onClick={city ? sortCityDesc : sortCityAsc}>
-              {city ? <SortUp /> : <SortDown />}
-            </IconButton>
-          </Section>
-          <Section sx={{ width: '16.67%' }}>
-            <span>State/Territory</span>
-            <IconButton
-              onClick={territory ? sortTerritoryDesc : sortTerritoryAsc}
-            >
-              {territory ? <SortUp /> : <SortDown />}
-            </IconButton>
-          </Section>
-          <Section sx={{ width: '16.67%' }}>
-            <span>Service</span>
-            <IconButton onClick={service ? sortServiceDesc : sortServiceAsc}>
-              {service ? <SortUp /> : <SortDown />}
-            </IconButton>
-          </Section>
-          <Section sx={{ width: '25%' }}>
-            <span>Organization</span>
-            <IconButton
-              onClick={
-                organization ? sortOrganizationDesc : sortOrganizationAsc
-              }
-            >
-              {organization ? <SortUp /> : <SortDown />}
-            </IconButton>
-          </Section>
-        </div>
-
-        <div className="communities__main__table">
-          {filteredLinks?.map(
-            ({ country, city, territory, service, organization, link }, i) => (
-              <CommunityTableRow
-                key={i}
-                row={{ country, city, territory, service, organization, link }}
-              />
-            ),
+        <div>
+          {sources && (
+            <ListGrid
+              data={sources}
+              columns={columnHeaders}
+              defaultSortIndex={0}
+            />
           )}
         </div>
+
         <div className="communities__main__categories"></div>
         <div className="communities__main__links"></div>
       </div>

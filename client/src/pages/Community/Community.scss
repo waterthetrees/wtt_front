@@ -1,7 +1,7 @@
 .community {
     display: flex;
     flex-direction: column;
-    margin-top: 112px;
+    margin: 100px;
     font-family: Montserrat;
 
     &__logo {
@@ -36,7 +36,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 56px;
 
             &__text {
                 display: flex;
