@@ -31,6 +31,7 @@ nvm use;
 
 ```shell
 cd wtt_front;
+npm install
 npm run start:dev;
 ```
 
