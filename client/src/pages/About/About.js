@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Affiliates } from '@/components/Contacts';
 
@@ -8,8 +7,7 @@ const About = () => {
   const PageContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '72px',
-    paddingTop: '42px',
+    marginTop: '114px',
     fontFamily: 'montserrat',
     '@media(max-width: 768px)': {
       margin: '0px',
@@ -17,14 +15,12 @@ const About = () => {
     },
   });
 
-  const MainContainer = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-  });
-
   const Main = styled.div({
     display: 'flex',
     flexDirection: 'column',
+    '> div': {
+      paddingTop: '0px',
+    },
     'p:last-child': {
       marginBottom: '0px',
     },
@@ -186,162 +182,157 @@ const About = () => {
 
   return (
     <PageContainer>
-      <MainContainer>
-        <Main>
-          <MainSections>
-            <SubSection>
-              <SubSectionHeader>
-                We are connecting our forest{' '}
-                <GreenText>to our digital world</GreenText>
-              </SubSectionHeader>
-            </SubSection>
-            <SubSection>
-              <SubSectionHeader2>About Us</SubSectionHeader2>
-              <SubSectionText>
-                Welcome to Water the Trees, a platform that crowd sources tree
-                planting and maintenance. We are an open source project run by
-                tree planting volunteers.
-              </SubSectionText>
-            </SubSection>
-          </MainSections>
-          <ImageContainer>
-            <Image src="https://image.lexica.art/md/2dfa8c75-1d97-4c23-9065-d5c4932da719"></Image>
-          </ImageContainer>
-          <MainSections>
-            <SubSection>
-              <SubSectionHeader>
-                Together we can <GreenText>map out the world</GreenText>
-              </SubSectionHeader>
-            </SubSection>
-            <SubSection>
-              <SubSectionHeader2>Vision</SubSectionHeader2>
-              <SubSectionText>
-                Crowdsource the planting and maintenance of our world's tree to
-                quickly mitigate climate change.
-              </SubSectionText>
-              <SubSectionHeader2>Mission</SubSectionHeader2>
-              <SubSectionText>
-                Trees provide the very necessities of life itself. They provide
-                oxygen for us to breath, clean our air, protect our drinking
-                water, create healthy communities, mitigate global warming, and
-                can help stablilize the occuring drastic climate change,
-                WaterTheTrees is dedicated to crowdsourcing the planting and
-                maintenance of our world's trees.
-              </SubSectionText>
-              <SubSectionHeader2>Strategies & Goals</SubSectionHeader2>
-              <ul>
-                <Bulletpoint>
-                  Keep a record of tree health and maintenance.
-                </Bulletpoint>
-                <Bulletpoint>
-                  Enable people to adopt and follow neightborhood and favorite
-                  trees.
-                </Bulletpoint>
-                <Bulletpoint>
-                  Notify people when trees need watering.
-                </Bulletpoint>
-                <Bulletpoint>
-                  Allow cities and tree organizations to make and track trees.
-                </Bulletpoint>
-              </ul>
-            </SubSection>
-          </MainSections>
-          <MainSections>
-            <SubSection2>
-              <NumberContainer>
-                <NumberContainer2>
-                  <Number>1</Number>
-                </NumberContainer2>
-              </NumberContainer>
-              <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
-              <SubSectionText>
-                Our goal, we want everyone to plant more trees to provide
-                ourselves a better future to control climate change.
-              </SubSectionText>
-            </SubSection2>
-            <SubSection2>
-              <NumberContainer>
-                <NumberContainer2>
-                  <Number>2</Number>
-                </NumberContainer2>
-              </NumberContainer>
-              <SubSectionHeader2>Keep More Trees Alive</SubSectionHeader2>
-              <SubSectionText>
-                As the climate continues to heat up trees suffer. We want to
-                maintain as many trees as possible worldwide.
-              </SubSectionText>
-            </SubSection2>
-            <SubSection2>
-              <NumberContainer>
-                <NumberContainer2>
-                  <Number>3</Number>
-                </NumberContainer2>
-              </NumberContainer>
-              <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
-              <SubSectionText>
-                to grow our tree population we want everyone to contribute to
-                local tree planting and be aware of tree health.
-              </SubSectionText>
-            </SubSection2>
-          </MainSections>
-          <MainSections>
-            <SubSection>
-              <SubSectionHeader>
-                <GreenText>Join Our Team!</GreenText>
-              </SubSectionHeader>
-            </SubSection>
-            <SubSection>
-              <SubSectionHeader2>Everyone is Welcomed!</SubSectionHeader2>
-              <SubSectionText>
-                We are always looking for team members to contribute to the
-                project. Currently we are looking for Backend Developers,
-                Frontend Developers, UX/UI Designers, Researchers, Admin,
-                Marketing.
-              </SubSectionText>
-              <SubSectionHeader2>Get started by:</SubSectionHeader2>
-              <SubSectionText>
-                1. Read our{' '}
-                <WebLink
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
-                >
-                  Onboarding Steps
-                </WebLink>
-                .
-              </SubSectionText>
-              <SubSectionText>
-                2. Join us on{' '}
-                <WebLink
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://sfbrigade.slack.com/archives/C010EGACUTU"
-                >
-                  Slack
-                </WebLink>
-                , and say Hi!
-              </SubSectionText>
-              <a
+      <Main>
+        <MainSections>
+          <SubSection>
+            <SubSectionHeader>
+              We are connecting our forest{' '}
+              <GreenText>to our digital world</GreenText>
+            </SubSectionHeader>
+          </SubSection>
+          <SubSection>
+            <SubSectionHeader2>About Us</SubSectionHeader2>
+            <SubSectionText>
+              Welcome to Water the Trees, a platform that crowd sources tree
+              planting and maintenance. We are an open source project run by
+              tree planting volunteers.
+            </SubSectionText>
+          </SubSection>
+        </MainSections>
+        <ImageContainer>
+          <Image src="https://image.lexica.art/md/2dfa8c75-1d97-4c23-9065-d5c4932da719"></Image>
+        </ImageContainer>
+        <MainSections>
+          <SubSection>
+            <SubSectionHeader>
+              Together we can <GreenText>map out the world</GreenText>
+            </SubSectionHeader>
+          </SubSection>
+          <SubSection>
+            <SubSectionHeader2>Vision</SubSectionHeader2>
+            <SubSectionText>
+              Crowdsource the planting and maintenance of our world's tree to
+              quickly mitigate climate change.
+            </SubSectionText>
+            <SubSectionHeader2>Mission</SubSectionHeader2>
+            <SubSectionText>
+              Trees provide the very necessities of life itself. They provide
+              oxygen for us to breath, clean our air, protect our drinking
+              water, create healthy communities, mitigate global warming, and
+              can help stablilize the occuring drastic climate change,
+              WaterTheTrees is dedicated to crowdsourcing the planting and
+              maintenance of our world's trees.
+            </SubSectionText>
+            <SubSectionHeader2>Strategies & Goals</SubSectionHeader2>
+            <ul>
+              <Bulletpoint>
+                Keep a record of tree health and maintenance.
+              </Bulletpoint>
+              <Bulletpoint>
+                Enable people to adopt and follow neightborhood and favorite
+                trees.
+              </Bulletpoint>
+              <Bulletpoint>Notify people when trees need watering.</Bulletpoint>
+              <Bulletpoint>
+                Allow cities and tree organizations to make and track trees.
+              </Bulletpoint>
+            </ul>
+          </SubSection>
+        </MainSections>
+        <MainSections>
+          <SubSection2>
+            <NumberContainer>
+              <NumberContainer2>
+                <Number>1</Number>
+              </NumberContainer2>
+            </NumberContainer>
+            <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
+            <SubSectionText>
+              Our goal, we want everyone to plant more trees to provide
+              ourselves a better future to control climate change.
+            </SubSectionText>
+          </SubSection2>
+          <SubSection2>
+            <NumberContainer>
+              <NumberContainer2>
+                <Number>2</Number>
+              </NumberContainer2>
+            </NumberContainer>
+            <SubSectionHeader2>Keep More Trees Alive</SubSectionHeader2>
+            <SubSectionText>
+              As the climate continues to heat up trees suffer. We want to
+              maintain as many trees as possible worldwide.
+            </SubSectionText>
+          </SubSection2>
+          <SubSection2>
+            <NumberContainer>
+              <NumberContainer2>
+                <Number>3</Number>
+              </NumberContainer2>
+            </NumberContainer>
+            <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
+            <SubSectionText>
+              to grow our tree population we want everyone to contribute to
+              local tree planting and be aware of tree health.
+            </SubSectionText>
+          </SubSection2>
+        </MainSections>
+        <MainSections>
+          <SubSection>
+            <SubSectionHeader>
+              <GreenText>Join Our Team!</GreenText>
+            </SubSectionHeader>
+          </SubSection>
+          <SubSection>
+            <SubSectionHeader2>Everyone is Welcomed!</SubSectionHeader2>
+            <SubSectionText>
+              We are always looking for team members to contribute to the
+              project. Currently we are looking for Backend Developers, Frontend
+              Developers, UX/UI Designers, Researchers, Admin, Marketing.
+            </SubSectionText>
+            <SubSectionHeader2>Get started by:</SubSectionHeader2>
+            <SubSectionText>
+              1. Read our{' '}
+              <WebLink
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
+              >
+                Onboarding Steps
+              </WebLink>
+              .
+            </SubSectionText>
+            <SubSectionText>
+              2. Join us on{' '}
+              <WebLink
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://sfbrigade.slack.com/archives/C010EGACUTU"
               >
-                <GreenButton>Join our Slack</GreenButton>
-              </a>
-            </SubSection>
-          </MainSections>
-          <MainSections>
-            <SubSection3>
-              <SubSectionText>
-                A few organizations we'd like to thank for their support.
-              </SubSectionText>
-              <AffiliatesContainer>
-                <Affiliates />
-              </AffiliatesContainer>
-            </SubSection3>
-          </MainSections>
-        </Main>
-      </MainContainer>
+                Slack
+              </WebLink>
+              , and say Hi!
+            </SubSectionText>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://sfbrigade.slack.com/archives/C010EGACUTU"
+            >
+              <GreenButton>Join our Slack</GreenButton>
+            </a>
+          </SubSection>
+        </MainSections>
+        <MainSections>
+          <SubSection3>
+            <SubSectionText>
+              A few organizations we'd like to thank for their support.
+            </SubSectionText>
+            <AffiliatesContainer>
+              <Affiliates />
+            </AffiliatesContainer>
+          </SubSection3>
+        </MainSections>
+      </Main>
     </PageContainer>
   );
 };

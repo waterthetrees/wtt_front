@@ -12,7 +12,6 @@ const StyledLinks = styled(Link)({
 });
 
 const StyledImg = styled(CardMedia)({
-  maxWidth: '20vw',
   maxHeight: '20vh',
   margin: '1rem',
 });
@@ -40,4 +39,3 @@ export const Sierra = () => {
     </a>
   );
 };
-
