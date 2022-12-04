@@ -35,12 +35,19 @@ const About = () => {
   });
 
   const MainSections = styled.div({
-    margin: '4em 0',
+    boxSizing: 'border-box',
+    marginBottom: '4em',
+    paddingTop: '4em',
     display: 'flex',
     justifyContent: 'space-between',
     width: '60%',
+    borderTop: '1px solid black',
+    ':first-child': {
+      borderTop: '0px',
+    },
     '@media(max-width: 768px)': {
-      margin: '1em 0',
+      marginBottom: '.5em',
+      paddingTop: '.5em',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -115,7 +122,9 @@ const About = () => {
   const ImageContainer = styled.div({
     width: '100%',
     height: '50em',
+    marginBottom: '4em',
     '@media(max-width: 768px)': {
+      marginBottom: '.5em',
       width: '100%',
       height: '50%',
     },
