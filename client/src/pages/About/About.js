@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Affiliates } from '@/components/Contacts';
+import { Footer } from '@/components/Footer/Footer';
 
 import './About.scss';
 const About = () => {
@@ -330,6 +331,7 @@ const About = () => {
           </SubSection3>
         </MainSections>
       </Main>
+      <Footer />
     </PageContainer>
   );
 };
