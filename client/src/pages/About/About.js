@@ -7,7 +7,7 @@ const About = () => {
   const PageContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '114px',
+    marginTop: '72px',
     fontFamily: 'montserrat',
     '@media(max-width: 768px)': {
       margin: '0px',
@@ -18,9 +18,6 @@ const About = () => {
   const Main = styled.div({
     display: 'flex',
     flexDirection: 'column',
-    '> div': {
-      paddingTop: '0px',
-    },
     'p:last-child': {
       marginBottom: '0px',
     },
