@@ -52,7 +52,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

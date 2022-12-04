@@ -1,29 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Footer } from '@/components/Footer/Footer';
 import { Affiliates } from '@/components/Contacts';
-import { TreeLogo } from '@/components/Icons';
-
-import TreeImage from '@/assets/images/addtree/treefattrunk.png';
 
 import './About.scss';
-
 const About = () => {
   const PageContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
     marginTop: '72px',
     paddingTop: '42px',
+    fontFamily: 'montserrat',
+    '@media(max-width: 768px)': {
+      margin: '0px',
+      padding: '5rem 1rem',
+    },
   });
 
   const MainContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
-
-    '@media(max-width: 768px)': {
-      width: '100%',
-    },
   });
 
   const Main = styled.div({
@@ -33,6 +29,9 @@ const About = () => {
       marginBottom: '0px',
     },
     alignItems: 'center',
+    '@media(max-width: 768px)': {
+      width: '100%',
+    },
   });
 
   const MainSections = styled.div({
@@ -40,16 +39,61 @@ const About = () => {
     display: 'flex',
     justifyContent: 'space-between',
     width: '60%',
+    '@media(max-width: 768px)': {
+      margin: '1em 0',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
   });
 
   const SubSection = styled.div({
     display: 'flex',
     flexDirection: 'column',
     width: '40%',
+    span: {
+      marginBottom: '1em',
+    },
+    '@media(max-width: 768px)': {
+      margin: '1rem 0',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      '> a': {
+        display: 'flex',
+        justifyContent: 'center',
+      },
+    },
   });
 
+  const SubSection2 = styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '20%',
+    textAlign: 'center',
+    '@media(max-width: 768px)': {
+      margin: '1rem 0',
+      width: '60%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+  });
+
+  const SubSection3 = styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    alignItems: 'center',
+    '@media(max-width: 768px)': {
+      margin: '1rem 0',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  });
   const SubSectionHeader = styled.h1({
-    fontSize: '3.4em',
+    fontSize: '3.75em',
   });
 
   const SubSectionHeader2 = styled.h2({
@@ -59,11 +103,76 @@ const About = () => {
   const SubSectionText = styled.span({
     fontSize: '1.5em',
   });
-  // const SubSectionHeader = styled.h1({
-  //   fontSize: '40px',
-  // });
+
+  const WebLink = styled.a({
+    color: '#3fab45',
+    textDecoration: 'underline',
+    '&:hover': {
+      color: 'green',
+      textDecoration: 'underline',
+    },
+  });
+  const ImageContainer = styled.div({
+    width: '100%',
+    height: '50em',
+    '@media(max-width: 768px)': {
+      width: '100%',
+      height: '50%',
+    },
+  });
+  const Image = styled.img({
+    width: '100%',
+    height: '100%',
+  });
+
+  const Bulletpoint = styled.li({
+    fontSize: '1.5em',
+    '&::marker': {
+      color: '#3fab45',
+    },
+  });
+
   const GreenText = styled.span({
-    color: 'green',
+    color: '#3fab45',
+  });
+
+  const GreenButton = styled.button({
+    background: '#3fab45',
+    color: 'white',
+    fontSize: '1.75em',
+    border: 'none',
+    borderRadius: '.5em',
+  });
+
+  const NumberContainer = styled.div({
+    position: 'relative',
+    width: '100%',
+    bottom: '4em',
+  });
+
+  const NumberContainer2 = styled.div({
+    position: 'absolute',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    color: '#3fab4530',
+  });
+  const Number = styled.h1({
+    fontSize: '12.5em',
+  });
+
+  const AffiliatesContainer = styled.div({
+    width: '50%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '32px',
+    marginBottom: '24px',
+    img: {
+      height: '64px',
+    },
+    '@media(max-width: 768px)': {
+      width: '100%',
+    },
   });
 
   return (
@@ -78,6 +187,7 @@ const About = () => {
               </SubSectionHeader>
             </SubSection>
             <SubSection>
+              <SubSectionHeader2>About Us</SubSectionHeader2>
               <SubSectionText>
                 Welcome to Water the Trees, a platform that crowd sources tree
                 planting and maintenance. We are an open source project run by
@@ -85,6 +195,9 @@ const About = () => {
               </SubSectionText>
             </SubSection>
           </MainSections>
+          <ImageContainer>
+            <Image src="https://image.lexica.art/md/2dfa8c75-1d97-4c23-9065-d5c4932da719"></Image>
+          </ImageContainer>
           <MainSections>
             <SubSection>
               <SubSectionHeader>
@@ -107,215 +220,121 @@ const About = () => {
                 maintenance of our world's trees.
               </SubSectionText>
               <SubSectionHeader2>Strategies & Goals</SubSectionHeader2>
-              <SubSectionText>
-                Keep a record of tree health and maintenance.
-              </SubSectionText>
-              <SubSectionText>
-                Enable people to adopt and follow neightborhood and favorite
-                trees.
-              </SubSectionText>
-              <SubSectionText>
-                Notify people when trees need watering.
-              </SubSectionText>
-              <SubSectionText>
-                Allow cities and tree organizations to make and track trees.
-              </SubSectionText>
+              <ul>
+                <Bulletpoint>
+                  Keep a record of tree health and maintenance.
+                </Bulletpoint>
+                <Bulletpoint>
+                  Enable people to adopt and follow neightborhood and favorite
+                  trees.
+                </Bulletpoint>
+                <Bulletpoint>
+                  Notify people when trees need watering.
+                </Bulletpoint>
+                <Bulletpoint>
+                  Allow cities and tree organizations to make and track trees.
+                </Bulletpoint>
+              </ul>
             </SubSection>
+          </MainSections>
+          <MainSections>
+            <SubSection2>
+              <NumberContainer>
+                <NumberContainer2>
+                  <Number>1</Number>
+                </NumberContainer2>
+              </NumberContainer>
+              <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
+              <SubSectionText>
+                Our goal, we want everyone to plant more trees to provide
+                ourselves a better future to control climate change.
+              </SubSectionText>
+            </SubSection2>
+            <SubSection2>
+              <NumberContainer>
+                <NumberContainer2>
+                  <Number>2</Number>
+                </NumberContainer2>
+              </NumberContainer>
+              <SubSectionHeader2>Keep More Trees Alive</SubSectionHeader2>
+              <SubSectionText>
+                As the climate continues to heat up trees suffer. We want to
+                maintain as many trees as possible worldwide.
+              </SubSectionText>
+            </SubSection2>
+            <SubSection2>
+              <NumberContainer>
+                <NumberContainer2>
+                  <Number>3</Number>
+                </NumberContainer2>
+              </NumberContainer>
+              <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
+              <SubSectionText>
+                to grow our tree population we want everyone to contribute to
+                local tree planting and be aware of tree health.
+              </SubSectionText>
+            </SubSection2>
+          </MainSections>
+          <MainSections>
+            <SubSection>
+              <SubSectionHeader>
+                <GreenText>Join Our Team!</GreenText>
+              </SubSectionHeader>
+            </SubSection>
+            <SubSection>
+              <SubSectionHeader2>Everyone is Welcomed!</SubSectionHeader2>
+              <SubSectionText>
+                We are always looking for team members to contribute to the
+                project. Currently we are looking for Backend Developers,
+                Frontend Developers, UX/UI Designers, Researchers, Admin,
+                Marketing.
+              </SubSectionText>
+              <SubSectionHeader2>Get started by:</SubSectionHeader2>
+              <SubSectionText>
+                1. Read our{' '}
+                <WebLink
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
+                >
+                  Onboarding Steps
+                </WebLink>
+                .
+              </SubSectionText>
+              <SubSectionText>
+                2. Join us on{' '}
+                <WebLink
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://sfbrigade.slack.com/archives/C010EGACUTU"
+                >
+                  Slack
+                </WebLink>
+                , and say Hi!
+              </SubSectionText>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://sfbrigade.slack.com/archives/C010EGACUTU"
+              >
+                <GreenButton>Join our Slack</GreenButton>
+              </a>
+            </SubSection>
+          </MainSections>
+          <MainSections>
+            <SubSection3>
+              <SubSectionText>
+                A few organizations we'd like to thank for their support.
+              </SubSectionText>
+              <AffiliatesContainer>
+                <Affiliates />
+              </AffiliatesContainer>
+            </SubSection3>
           </MainSections>
         </Main>
       </MainContainer>
-      <h1>Hi</h1>
     </PageContainer>
   );
-
-  // const PageContainer = styled.div({
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   boxSizing: 'border-box',
-  //   fontFamily: 'Montserrat',
-  //   marginTop: '72px',
-  //   padding: '0px 0px 40px 0px',
-  //   textAlign: 'center',
-  //   fontSize: '1.33rem',
-  //   '@media(max-width: 768px)': {
-  //     margin: '0px',
-  //     padding: '3rem 2rem',
-  //   },
-  //   a: {
-  //     textDecoration: 'underline',
-  //     color: '#3FAB45',
-  //     cursor: 'pointer',
-  //   },
-  // });
-
-  // const HeaderContainer = styled.div({
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   marginTop: '112px',
-  //   marginBottom: '56px',
-  //   width: '30%',
-  //   '@media(max-width: 768px)': {
-  //     width: '100%',
-  //   },
-  // });
-
-  // const HeaderLogoContainer = styled.div({
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   marginBottom: '24px',
-  // });
-
-  // const HeaderText = styled.h1({
-  //   fontSize: '2.65rem',
-  //   marginBottom: '8px',
-  // });
-
-  // const HeaderSummary = styled.span({});
-
-  // const MainContainer = styled.div({
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   width: '28%',
-  //   '@media(max-width: 768px)': {
-  //     width: '100%',
-  //   },
-  // });
-
-  // const MainSection = styled.div({
-  //   marginBottom: '40px',
-  //   'p:last-child': {
-  //     marginBottom: '0px',
-  //   },
-  // });
-
-  // const MainSectionHeader = styled.h2({});
-
-  // const MainSectionSummary = styled.p({
-  //   marginBottom: '16px',
-  // });
-
-  // const MainSubSection = styled.div({
-  //   marginTop: '24px',
-  //   p: {
-  //     marginBottom: '0px',
-  //   },
-  // });
-
-  // const MainSubSectionHeader = styled.h4({});
-
-  // const FooterContainer = styled.div({
-  //   width: '100%',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   backgroundColor: '#EFEFEF',
-  // });
-
-  // const AffiliatesContainer = styled.div({
-  //   width: '30%',
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   marginTop: '32px',
-  //   marginBottom: '24px',
-  //   img: {
-  //     height: '64px',
-  //   },
-  //   '@media(max-width: 768px)': {
-  //     width: '100%',
-  //   },
-  // });
-
-  // return (
-  //   <PageContainer>
-  //     <HeaderContainer>
-  //       <HeaderLogoContainer>
-  //         <TreeLogo />
-  //       </HeaderLogoContainer>
-  //       <HeaderText>About Water the Trees</HeaderText>
-  //       <HeaderSummary>
-  //         Welcome to Water the Trees, a platform that crowd sources tree
-  //         planting and maintenance. We are an open source project run by tree
-  //         planting volunteers.
-  //       </HeaderSummary>
-  //     </HeaderContainer>
-  //     <MainContainer>
-  //       <MainSection>
-  //         <MainSectionHeader>Vision</MainSectionHeader>
-  //         <MainSectionSummary>
-  //           We believe in the power of trees to restore natural habitat for
-  //           animals, insect, and fauna.
-  //         </MainSectionSummary>
-  //       </MainSection>
-  //       <MainSection>
-  //         <MainSectionHeader>Mission</MainSectionHeader>
-  //         <MainSectionSummary>
-  //           We are interested in continuous massive tree planting events to help
-  //           sequester carbon footprint and stablize climate change extremes.
-  //         </MainSectionSummary>
-  //       </MainSection>
-  //       <MainSection>
-  //         <MainSectionHeader>Who we are!</MainSectionHeader>
-  //         <MainSectionSummary>
-  //           Water the Trees begun as a tree tracking platform to track the life
-  //           and health of a tree worldwide.
-  //         </MainSectionSummary>
-  //         <MainSectionSummary>
-  //           Together with data, three enthusiast, and volunteers we are able to
-  //           maintain a source to see the growth of trees in all communities.
-  //         </MainSectionSummary>
-  //       </MainSection>
-
-  //       <MainSection>
-  //         <MainSectionHeader>Join the team!</MainSectionHeader>
-  //         <MainSectionSummary>
-  //           We are always looking for team members to contribute to the project.
-  //         </MainSectionSummary>
-  //         <MainSectionSummary>
-  //           Currently we are looking for Backend Developers,Frontend Developers,
-  //           Designers, Researchers, Admin, Marketing and many more!
-  //         </MainSectionSummary>
-  //         <MainSubSection>
-  //           <MainSubSectionHeader>How to get started:</MainSubSectionHeader>
-  //           <MainSectionSummary>
-  //             1. Read our{' '}
-  //             <a
-  //               target="_blank"
-  //               rel="noopener noreferrer"
-  //               href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
-  //             >
-  //               Onboarding Steps
-  //             </a>
-  //           </MainSectionSummary>
-  //           <MainSectionSummary>
-  //             2. Join us on{' '}
-  //             <a
-  //               target="_blank"
-  //               rel="noopener noreferrer"
-  //               href="https://join.slack.com/share/zt-ouzg0084-34S7_J9UZlcJSe9~qV7jbQ"
-  //             >
-  //               Slack
-  //             </a>
-  //           </MainSectionSummary>
-  //         </MainSubSection>
-  //       </MainSection>
-  //     </MainContainer>
-  //     <FooterContainer>
-  //       <MainSectionHeader>Community</MainSectionHeader>
-  //       <MainSectionSummary>
-  //         To save trees in your local community, please visit our{' '}
-  //         <Link to="/community">Community</Link>
-  //         outreach page to find organizations near you.
-  //       </MainSectionSummary>
-  //       <AffiliatesContainer>
-  //         <Affiliates />
-  //       </AffiliatesContainer>
-  //     </FooterContainer>
-  //     <Footer />
-  //   </PageContainer>
-  // );
 };
 
 export default About;
