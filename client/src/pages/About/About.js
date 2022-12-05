@@ -9,10 +9,9 @@ const About = () => {
   const PageContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
-
+    marginTop: '72px',
     fontFamily: 'montserrat',
     '@media(max-width: 768px)': {
-      marginTop: '72px',
       padding: '1.5rem 1.5rem',
     },
   });
