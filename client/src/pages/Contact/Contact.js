@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Footer } from '@/components/Footer/Footer';
 import { C4SF } from '@/components/Contacts';
 import { SlackLogo, GithubLogo, FigmaLogo } from '@/components/Icons';
+import tree from '../../assets/images/contact/tree.png';
 
 import './Contact.scss';
 
@@ -133,7 +134,7 @@ export default function Contact() {
     width: '100%',
   });
 
-  const ImageContainer = styled.div({
+  const Position = styled.div({
     position: 'absolute',
     width: '60%',
     zIndex: '10',
@@ -142,7 +143,7 @@ export default function Contact() {
     },
   });
 
-  const ImageContainer2 = styled.div({
+  const Position2 = styled.div({
     position: 'relative',
     width: '25%',
     height: '100%',
@@ -158,7 +159,7 @@ export default function Contact() {
   const Image = styled.img({
     width: '100%',
     height: '100%',
-    // objectFit: 'contain',
+    objectFit: 'cover',
   });
 
   return (
@@ -166,9 +167,9 @@ export default function Contact() {
       <Main>
         <MainSections2>
           <SubSection2>
-            <Image src="https://image.lexica.art/md/28781071-3412-4a88-9441-0425ef099122"></Image>
-            <ImageContainer>
-              <ImageContainer2>
+            <Image src={tree}></Image>
+            <Position>
+              <Position2>
                 <SubSectionHeader>Get in Touch with us!</SubSectionHeader>
                 <SubSectionHeader2>
                   We meet every week on wednesday at 6:30 PM PST.
@@ -180,8 +181,8 @@ export default function Contact() {
                 >
                   <GreenButton>Join our Slack</GreenButton>
                 </a>
-              </ImageContainer2>
-            </ImageContainer>
+              </Position2>
+            </Position>
           </SubSection2>
         </MainSections2>
         <MainSections>

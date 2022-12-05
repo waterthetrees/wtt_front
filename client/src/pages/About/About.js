@@ -2,17 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Affiliates } from '@/components/Contacts';
 import { Footer } from '@/components/Footer/Footer';
+import tree from '../../assets/images/about/treehug.jpeg';
 
 import './About.scss';
 const About = () => {
   const PageContainer = styled.div({
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '72px',
+
     fontFamily: 'montserrat',
     '@media(max-width: 768px)': {
-      margin: '0px',
-      padding: '5rem 1rem',
+      marginTop: '72px',
+      padding: '1.5rem 1.5rem',
     },
   });
 
@@ -126,6 +127,7 @@ const About = () => {
   const Image = styled.img({
     width: '100%',
     height: '100%',
+    objectFit: 'cover',
   });
 
   const Bulletpoint = styled.li({
@@ -198,7 +200,7 @@ const About = () => {
           </SubSection>
         </MainSections>
         <ImageContainer>
-          <Image src="https://image.lexica.art/md/2dfa8c75-1d97-4c23-9065-d5c4932da719"></Image>
+          <Image src={tree}></Image>
         </ImageContainer>
         <MainSections>
           <SubSection>
