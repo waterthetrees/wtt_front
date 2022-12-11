@@ -82,7 +82,7 @@ module.exports = (env) => {
     plugins: removeEmpty([
       new HtmlWebPackPlugin({
         favicon:
-          './client/src/assets/images/favicons/wtt-halloween-favicon.png',
+          './client/src/assets/images/favicons/wtt-christmas-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
         minify: false,
