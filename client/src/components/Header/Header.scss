@@ -8,8 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #147d16;
-  opacity: 80%;
+  background-color: rgba(20,125,22, 0.8);
   border-color: transparent;
 
   /* put this above the map drawer but below modal dialogs */
@@ -31,14 +30,11 @@
 .header-btn-menu {
   background-color: white;
   border-radius: 4px;
-  margin-right: 0px;
-  padding: 0 3px;
   border-width: 0;
   color: black;
   border: none;
-  height: 4rem;
   outline: none;
-  font-size: 2.2rem;
+  padding: 0;
 }
 
 .header-font {
@@ -83,20 +79,13 @@
   width: 100%;
 }
 
-// .header .MuiListItem-gutters {
-//   padding-left: 5px;
-//   padding-right: 5px;
-// }
-
 .header-btn-menu {
   background-color: transparent;
-  margin: 0;
-  padding: 0;
   border-width: 0;
   color: white;
   border: none;
   outline: none;
-  font-size: 2.3rem;
+  font-size: 3rem;
 }
 
 @media only screen and (max-width: 768px) {
