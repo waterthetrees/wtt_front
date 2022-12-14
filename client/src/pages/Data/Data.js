@@ -5,6 +5,7 @@ import { CSVLink } from 'react-csv';
 import { topTreesCaliforniaNative } from '@/data/dist/topTreesCaliforniaNative';
 import { topTreesUSFood } from '@/data/dist/topTreesUSFood';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
+import { ListGrid } from '@/components/ListGrid/ListGrid';
 import './Data.scss';
 
 const dataColumns = [
@@ -33,7 +34,7 @@ const dataColumns = [
     label: 'Notes',
   },
 ];
-const defaultSortColumn = dataColumns[0].key;
+
 const dataSources = [
   {
     name: 'Native California Trees',
@@ -119,92 +120,7 @@ export default function Data() {
           (without permission) for commercial applications.
         </div>
       </div>
-      <TreeList data={data} columns={columns} />
-    </div>
-  );
-}
-
-function TreeList({ data, columns }) {
-  const [sortOrderAsc, setSortOrderAsc] = useState(true);
-  const [lastSortColumn, setLastSortColumn] = useState(defaultSortColumn);
-  let sortColumn = lastSortColumn;
-
-  if (!columns.find(({ key }) => key === sortColumn)) {
-    // The new data doesn't include the last column we sorted on, so default to common/asc and
-    // update the state for the next render.
-    sortColumn = defaultSortColumn;
-    setLastSortColumn(sortColumn);
-    setSortOrderAsc(true);
-  }
-
-  const sortedTrees = sortTrees(data);
-
-  function sortTrees(trees) {
-    return [...trees].sort((a, b) => {
-      const aa = a[sortColumn].toLowerCase();
-      const bb = b[sortColumn].toLowerCase();
-
-      if (aa > bb) return sortOrderAsc ? 1 : -1;
-      if (bb > aa) return sortOrderAsc ? -1 : 1;
-
-      return 0;
-    });
-  }
-
-  const clickHandler = (event) => {
-    const newColumn = event.target.value;
-    let newOrder = !sortOrderAsc;
-
-    if (newColumn !== sortColumn) {
-      // Reset the sort order to ascending when the sort column changes.
-      newOrder = true;
-    }
-
-    setSortOrderAsc(newOrder);
-    setLastSortColumn(newColumn);
-  };
-
-  return (
-    <div className="data-treelist">
-      <TreeHeader clickHandler={clickHandler} columns={columns} />
-      {sortedTrees.map((tree) => (
-        <Tree
-          tree={tree}
-          columns={columns}
-          key={`${tree.common}${tree.scientific}`}
-        />
-      ))}
-    </div>
-  );
-}
-
-function TreeHeader({ clickHandler, columns }) {
-  return (
-    <div className="data-treelist-tree-header">
-      {columns.map(({ key, label }) => (
-        <div className="data-treelist-tree-header-item" key={key}>
-          <button
-            type="button"
-            className="data-treeheader-btn"
-            value={key}
-            onClick={clickHandler}
-          >
-            {label}
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Tree({ tree, columns }) {
-  return (
-    <div className="data-treelist-tree" key={tree.common}>
-      {columns.map(({ key }) => (
-        <div className="data-treelist-tree-item" key={key}>
-          {tree[key]}
-        </div>
-      ))}
+      <ListGrid data={data} columns={columns} />
     </div>
   );
 }

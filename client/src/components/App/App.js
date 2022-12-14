@@ -15,6 +15,7 @@ import Privacy from '@/pages/Privacy/Privacy';
 import License from '@/pages/License/License';
 import UserProfile from '@/pages/Userprofile/UserProfile';
 import Contact from '@/pages/Contact/Contact';
+import Community from '@/pages/Community/Community';
 import NotFound from '@/pages/NotFound/NotFound';
 import './App.css';
 
@@ -64,6 +65,7 @@ function App() {
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/community" element={<Community />} />
                   <Route path="/data" element={<Data />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
