@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Affiliates } from '@/components/Contacts';
 import { Footer } from '@/components/Footer/Footer';
-import tree from '../../assets/images/about/treehug.jpeg';
+import tree from '../../assets/images/about/abouttree.jpg';
 
 import './About.scss';
 const About = () => {
@@ -223,19 +223,19 @@ const About = () => {
               maintenance of our world's trees.
             </SubSectionText>
             <SubSectionHeader2>Strategies & Goals</SubSectionHeader2>
-            <ul>
-              <Bulletpoint>
-                Keep a record of tree health and maintenance.
-              </Bulletpoint>
-              <Bulletpoint>
-                Enable people to adopt and follow neightborhood and favorite
-                trees.
-              </Bulletpoint>
-              <Bulletpoint>Notify people when trees need watering.</Bulletpoint>
-              <Bulletpoint>
-                Allow cities and tree organizations to make and track trees.
-              </Bulletpoint>
-            </ul>
+            <SubSectionText>
+              Keep a record of tree health and maintenance.
+            </SubSectionText>
+            <SubSectionText>
+              Enable people to adopt and follow neightborhood and favorite
+              trees.
+            </SubSectionText>
+            <SubSectionText>
+              Notify people when trees need watering.
+            </SubSectionText>
+            <SubSectionText>
+              Allow cities and tree organizations to make and track trees.
+            </SubSectionText>
           </SubSection>
         </MainSections>
         <MainSections>
