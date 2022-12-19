@@ -59,11 +59,6 @@ function MapLayout() {
     { retry: 0 },
   );
 
-  if (currentTreeDb) {
-    currentTreeDb.sourceId = currentTreeDb?.sourceId || currentTreeDb?.sourceID;
-    currentTreeDb.city = currentTreeDb?.city || currentTreeDb?.sourceId;
-  }
-
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
   // Opens a left side panel on desktop, and a full-screen dialog on mobile.
@@ -132,16 +127,16 @@ function MapLayout() {
     if (!map) {
       return;
     }
-    if (currentTreeDataVector || currentTreeDb) {
-      const { lng, lat } = currentTreeDataVector || currentTreeDb;
+    const { lng, lat } = currentTreeDataVector || currentTreeDb || {};
+    if (lng) {
       map.flyTo({
         center: [lng, lat],
         zoom: 17,
       });
     } else {
-      setCurrentTreeId(null);
       hashParams.delete('id');
       window.location.hash = decodeURIComponent(hashParams.toString());
+      setCurrentTreeId(null);
     }
   }, [map, currentTreeData, currentTreeDb, hashParams]);
 
