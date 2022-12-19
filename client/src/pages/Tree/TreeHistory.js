@@ -54,8 +54,8 @@ const TreeHistoryItem = ({ item }) => {
   );
 };
 
-export default function TreeHistory({ currentTreeData }) {
-  const { data: history } = useTreeHistoryQuery({ id: currentTreeData.id });
+export default function TreeHistory({ currentTreeId }) {
+  const { data: history } = useTreeHistoryQuery({ id: currentTreeId });
 
   if (!history?.length) {
     return null;
