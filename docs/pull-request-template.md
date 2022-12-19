@@ -6,7 +6,8 @@
 
 ## The commit message should be structured as follows:
 
-```<type>[optional scope]: <description>
+```
+<type>[optional scope]: <description>
 
 [optional body]
 
@@ -24,7 +25,8 @@
 
 **Example**
 
-```feat: allow provided config object to extend other configs
+```
+feat: allow provided config object to extend other configs
 
 BREAKING CHANGE: `extends` key in config file is now used for extending other config files
 ```
