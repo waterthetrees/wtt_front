@@ -7,33 +7,32 @@ const path = require('path');
 const compression = require('compression');
 const { logger } = require('./logger');
 
-const env = process.argv[2] || 'local';
+const env = process.argv[2] || 'localhost';
 const host = {
-  local: 'http://localhost',
   development: 'http://localhost',
   production: 'http://localhost',
-  blue: 'http://localhost',
-  localserver: 'http://localhost',
+  localhost: 'http://localhost',
   docker: 'http://localhost',
 }[env];
 const port = {
   production: 3001,
-  blue: 3000,
   development: 3001,
-  local: 3001,
-  localserver: 3000,
-  docker: 3000,
+  localhost: 3001,
+  docker: 3001,
 }[env];
 
 app.use(compression());
 app.use(morgan('dev'));
 app.use('/', express.static('client/public'));
 app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/public/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
+  res.sendFile(
+    path.resolve(__dirname, '../client/public/index.html'),
+    (err) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    },
+  );
 });
 
 const httpServer = http.createServer(app);

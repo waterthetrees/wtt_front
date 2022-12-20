@@ -54,10 +54,8 @@ function MapLayout() {
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
 
-  const { data: currentTreeDb, isError: isTreeQueryError } = useTreeQuery(
-    { id: currentTreeId },
-    { retry: 0 },
-  );
+  const newTree = useTreeQuery({ id: currentTreeId }, { retry: 0 });
+  const { data: currentTreeDb, isError: isTreeQueryError } = newTree || {};
 
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
@@ -143,8 +141,8 @@ function MapLayout() {
   useEffect(() => {
     if (currentTreeDb) {
       setCurrentTreeData({
-        ...currentTreeDataVector,
         ...currentTreeDb,
+        ...currentTreeDataVector,
       });
     }
   }, [currentTreeDb]);

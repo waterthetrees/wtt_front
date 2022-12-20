@@ -2,32 +2,27 @@ export const env =
   {
     'waterthetrees.com': 'prod',
     'dev.waterthetrees.com': 'dev',
-    'blue.waterthetrees.com': 'blue',
-    localhost: 'dev',
-  }[window.location.hostname] || 'localserver';
+    localhost: 'localhost',
+  }[window.location.hostname] || 'localhost';
 
 export const url = {
   prod: 'https://waterthetrees.com',
   dev: 'https://dev.waterthetrees.com',
-  blue: 'https://blue.waterthetrees.com',
-  localserver: 'http://localhost',
+  localhost: 'http://localhost',
   docker: 'http://localhost',
 }[env];
 
 export const port = {
   prod: '',
   dev: '',
-  blue: '',
-  localserver: ':3002',
+  localhost: ':3002',
   docker: ':3002',
 }[env];
 
 export const tilesServerEndpoints = {
-  localserver: `${url}:3001`,
+  localhost: `${url}:3001`,
   docker: `${url}:3001`,
   dev: `${url}/tiles`,
-  local: `${url}:3001`,
-  blue: `${url}/tiles`,
   prod: `${url}/tiles`,
 }[env];
 

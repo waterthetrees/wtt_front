@@ -66,7 +66,7 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
   const { healthNum, health, id } = currentTreeData;
   const [healthSaveAlert, setHealthSaveAlert] = useState('');
   const sliderRef = useRef(treeHealthUtil.getNormalizedValue(healthNum));
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const mutateTreeData = useTreeDataMutation();
   const mutateCreateTreeData = useCreateTreeDataMutation();
@@ -81,6 +81,11 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
         setHealthSaveAlert('saving...');
         mutateCreateTreeData.mutate({
           ...currentTreeData,
+          volunteer: user.nickname || user.name,
+          date_planted: currentTreeData.datePlanted,
+          planted: currentTreeData.planted,
+          modified: new Date().toISOString(),
+          created: new Date().toISOString(),
           health: newHealth,
           scientific: currentTreeData.scientific || currentTreeData.species,
           city: currentTreeData.city,
@@ -90,7 +95,11 @@ export default function TreeHealth({ currentTreeData, isTreeQueryError }) {
 
       if (currentHealthValue !== healthNum && !isTreeQueryError) {
         setHealthSaveAlert('saving...');
-        mutateTreeData.mutate({ id, health: newHealth });
+        mutateTreeData.mutate({
+          id,
+          health: newHealth,
+          modified: new Date().toISOString(),
+        });
 
         setTimeout(() => setHealthSaveAlert(''), 500);
       }

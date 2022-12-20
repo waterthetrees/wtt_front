@@ -102,7 +102,7 @@ export default function Tree({
             />
           )}
 
-	  {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
+          {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
 
           <TreeInfo currentTreeData={currentTreeData} />
 
