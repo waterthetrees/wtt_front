@@ -34,7 +34,8 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 - _footers_ other than _"BREAKING CHANGE: <description>"_ may be provided
 
 **link to an open issue for more information**
-**Other information**
+
+<!-- **Other information** -->
 
 <!-- **Did you add tests for your changes?**
 
