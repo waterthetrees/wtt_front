@@ -20,7 +20,7 @@
 
 - **fix:** a commit of the type _fix_ patches a bug in the codebase
 - **feat:** a commit of the type _feat_ introduces a new feature to the codebase
-- **BREAKING CHANGE:** a commit that has a footer BREAKING CHANGE:, or appends a _!_ after the type/scope, introduces a breaking API change. _A BREAKING CHANGE_ can be part of commits of any type.
+- **BREAKING CHANGE:** a commit that has a footer BREAKING CHANGE:, or appends a _!_ after the type/scope, introduces a breaking API change or other kind. _A BREAKING CHANGE_ can be part of commits of any type.
 - **types other than fix: and feat:** are allowed, recommends build:, chore:, ci:, docs:, style:, refactor:, perf:, test:, and others.
 
 **Example**
@@ -33,17 +33,11 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 
 - _footers_ other than _"BREAKING CHANGE: <description>"_ may be provided
 
+**link to an open issue for more information**
+**Other information**
+
 <!-- **Did you add tests for your changes?**
 
 **If relevant, did you update the README?**
 
 **Summary** -->
-
-<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? -->
-<!-- Try to link to an open issue for more information. -->
-
-<!-- **Does this PR introduce a breaking change?** -->
-
-<!-- If this PR introduces a breaking change, please describe the impact and a migration path for existing applications. -->
-
-<!-- **Other information** -->
