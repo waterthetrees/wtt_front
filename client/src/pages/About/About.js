@@ -129,13 +129,6 @@ const About = () => {
     objectFit: 'cover',
   });
 
-  const Bulletpoint = styled.li({
-    fontSize: '1.5em',
-    '&::marker': {
-      color: '#3fab45',
-    },
-  });
-
   const GreenText = styled.span({
     color: '#3fab45',
   });
