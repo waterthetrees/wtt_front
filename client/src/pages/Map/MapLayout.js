@@ -54,15 +54,8 @@ function MapLayout() {
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
 
-  const { data: currentTreeDb, isError: isTreeQueryError } = useTreeQuery(
-    { id: currentTreeId },
-    { retry: 0 },
-  );
-
-  if (currentTreeDb) {
-    currentTreeDb.sourceId = currentTreeDb?.sourceId || currentTreeDb?.sourceID;
-    currentTreeDb.city = currentTreeDb?.city || currentTreeDb?.sourceId;
-  }
+  const newTree = useTreeQuery({ id: currentTreeId }, { retry: 0 });
+  const { data: currentTreeDb, isError: isTreeQueryError } = newTree || {};
 
   const drawerEnabled = !useIsMobile();
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
@@ -132,24 +125,24 @@ function MapLayout() {
     if (!map) {
       return;
     }
-    if (currentTreeDataVector || currentTreeDb) {
-      const { lng, lat } = currentTreeDataVector || currentTreeDb;
+    const { lng, lat } = currentTreeDataVector || currentTreeDb || {};
+    if (lng) {
       map.flyTo({
         center: [lng, lat],
         zoom: 17,
       });
     } else {
-      setCurrentTreeId(null);
       hashParams.delete('id');
       window.location.hash = decodeURIComponent(hashParams.toString());
+      setCurrentTreeId(null);
     }
   }, [map, currentTreeData, currentTreeDb, hashParams]);
 
   useEffect(() => {
     if (currentTreeDb) {
       setCurrentTreeData({
-        ...currentTreeDataVector,
         ...currentTreeDb,
+        ...currentTreeDataVector,
       });
     }
   }, [currentTreeDb]);
