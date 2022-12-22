@@ -3,144 +3,11 @@ import styled from '@emotion/styled';
 import { Affiliates } from '@/components/Contacts';
 import { Footer } from '@/components/Footer/Footer';
 import tree from '../../assets/images/about/abouttree.jpg';
+import * as Page from '@/components/Section/Section';
 
 import './About.scss';
+
 const About = () => {
-  const PageContainer = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: '72px',
-    fontFamily: 'montserrat',
-    '@media(max-width: 768px)': {
-      padding: '1.5rem 1.5rem',
-    },
-  });
-
-  const Main = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    'p:last-child': {
-      marginBottom: '0px',
-    },
-    alignItems: 'center',
-    '@media(max-width: 768px)': {
-      width: '100%',
-    },
-  });
-
-  const MainSections = styled.div({
-    boxSizing: 'border-box',
-    marginBottom: '4em',
-    paddingTop: '4em',
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '60%',
-    borderTop: '1px solid black',
-    ':first-child': {
-      borderTop: '0px',
-    },
-    '@media(max-width: 768px)': {
-      marginBottom: '.5em',
-      paddingTop: '.5em',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-  });
-
-  const SubSection = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '40%',
-    span: {
-      marginBottom: '1em',
-    },
-    '@media(max-width: 768px)': {
-      margin: '1rem 0',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      '> a': {
-        display: 'flex',
-        justifyContent: 'center',
-      },
-    },
-  });
-
-  const SubSection2 = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '20%',
-    textAlign: 'center',
-    '@media(max-width: 768px)': {
-      margin: '1rem 0',
-      width: '60%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-  });
-
-  const SubSection3 = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    alignItems: 'center',
-    '@media(max-width: 768px)': {
-      margin: '1rem 0',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-  });
-  const SubSectionHeader = styled.h1({
-    fontSize: '3.75em',
-  });
-
-  const SubSectionHeader2 = styled.h2({
-    fontSize: '2em',
-  });
-
-  const SubSectionText = styled.span({
-    fontSize: '1.5em',
-  });
-
-  const WebLink = styled.a({
-    color: '#3fab45',
-    textDecoration: 'underline',
-    '&:hover': {
-      color: 'green',
-      textDecoration: 'underline',
-    },
-  });
-  const ImageContainer = styled.div({
-    width: '100%',
-    height: '50em',
-    marginBottom: '4em',
-    '@media(max-width: 768px)': {
-      marginBottom: '.5em',
-      width: '100%',
-      height: '50%',
-    },
-  });
-  const Image = styled.img({
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  });
-
-  const GreenText = styled.span({
-    color: '#3fab45',
-  });
-
-  const GreenButton = styled.button({
-    background: '#3fab45',
-    color: 'white',
-    fontSize: '1.75em',
-    border: 'none',
-    borderRadius: '.5em',
-  });
-
   const NumberContainer = styled.div({
     position: 'relative',
     width: '100%',
@@ -173,160 +40,164 @@ const About = () => {
   });
 
   return (
-    <PageContainer>
-      <Main>
-        <MainSections>
-          <SubSection>
-            <SubSectionHeader>
+    <Page.PageContainer>
+      <Page.Main>
+        <Page.MainSections>
+          <Page.SubSection>
+            <Page.SubSectionHeader>
               We are connecting our forest{' '}
-              <GreenText>to our digital world</GreenText>
-            </SubSectionHeader>
-          </SubSection>
-          <SubSection>
-            <SubSectionHeader2>About Us</SubSectionHeader2>
-            <SubSectionText>
+              <Page.GreenText>to our digital world</Page.GreenText>
+            </Page.SubSectionHeader>
+          </Page.SubSection>
+          <Page.SubSection>
+            <Page.SubSectionHeader2>About Us</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               Welcome to Water the Trees, a platform that crowd sources tree
               planting and maintenance. We are an open source project run by
               tree planting volunteers.
-            </SubSectionText>
-          </SubSection>
-        </MainSections>
-        <ImageContainer>
-          <Image src={tree}></Image>
-        </ImageContainer>
-        <MainSections>
-          <SubSection>
-            <SubSectionHeader>
-              Together we can <GreenText>map out the world</GreenText>
-            </SubSectionHeader>
-          </SubSection>
-          <SubSection>
-            <SubSectionHeader2>Vision</SubSectionHeader2>
-            <SubSectionText>
+            </Page.SubSectionText>
+          </Page.SubSection>
+        </Page.MainSections>
+        <Page.ImageSection>
+          <Page.Image src={tree}></Page.Image>
+        </Page.ImageSection>
+        <Page.MainSections>
+          <Page.SubSection>
+            <Page.SubSectionHeader>
+              Together we can <Page.GreenText>map out the world</Page.GreenText>
+            </Page.SubSectionHeader>
+          </Page.SubSection>
+          <Page.SubSection>
+            <Page.SubSectionHeader2>Vision</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               Crowdsource the planting and maintenance of our world's tree to
               quickly mitigate climate change.
-            </SubSectionText>
-            <SubSectionHeader2>Mission</SubSectionHeader2>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionHeader2>Mission</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               Trees provide the very necessities of life itself. They provide
               oxygen for us to breath, clean our air, protect our drinking
               water, create healthy communities, mitigate global warming, and
               can help stablilize the occuring drastic climate change,
               WaterTheTrees is dedicated to crowdsourcing the planting and
               maintenance of our world's trees.
-            </SubSectionText>
-            <SubSectionHeader2>Strategies & Goals</SubSectionHeader2>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionHeader2>Strategies & Goals</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               Keep a record of tree health and maintenance.
-            </SubSectionText>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionText>
               Enable people to adopt and follow neightborhood and favorite
               trees.
-            </SubSectionText>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionText>
               Notify people when trees need watering.
-            </SubSectionText>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionText>
               Allow cities and tree organizations to make and track trees.
-            </SubSectionText>
-          </SubSection>
-        </MainSections>
-        <MainSections>
-          <SubSection2>
+            </Page.SubSectionText>
+          </Page.SubSection>
+        </Page.MainSections>
+        <Page.MainSections>
+          <Page.NumberSubSection>
             <NumberContainer>
               <NumberContainer2>
                 <Number>1</Number>
               </NumberContainer2>
             </NumberContainer>
-            <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
-            <SubSectionText>
+            <Page.SubSectionHeader2>Plant More Trees</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               Our goal, we want everyone to plant more trees to provide
               ourselves a better future to control climate change.
-            </SubSectionText>
-          </SubSection2>
-          <SubSection2>
+            </Page.SubSectionText>
+          </Page.NumberSubSection>
+          <Page.NumberSubSection>
             <NumberContainer>
               <NumberContainer2>
                 <Number>2</Number>
               </NumberContainer2>
             </NumberContainer>
-            <SubSectionHeader2>Keep More Trees Alive</SubSectionHeader2>
-            <SubSectionText>
+            <Page.SubSectionHeader2>
+              Keep More Trees Alive
+            </Page.SubSectionHeader2>
+            <Page.SubSectionText>
               As the climate continues to heat up trees suffer. We want to
               maintain as many trees as possible worldwide.
-            </SubSectionText>
-          </SubSection2>
-          <SubSection2>
+            </Page.SubSectionText>
+          </Page.NumberSubSection>
+          <Page.NumberSubSection>
             <NumberContainer>
               <NumberContainer2>
                 <Number>3</Number>
               </NumberContainer2>
             </NumberContainer>
-            <SubSectionHeader2>Plant More Trees</SubSectionHeader2>
-            <SubSectionText>
+            <Page.SubSectionHeader2>Plant More Trees</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               to grow our tree population we want everyone to contribute to
               local tree planting and be aware of tree health.
-            </SubSectionText>
-          </SubSection2>
-        </MainSections>
-        <MainSections>
-          <SubSection>
-            <SubSectionHeader>
-              <GreenText>Join Our Team!</GreenText>
-            </SubSectionHeader>
-          </SubSection>
-          <SubSection>
-            <SubSectionHeader2>Everyone is Welcomed!</SubSectionHeader2>
-            <SubSectionText>
+            </Page.SubSectionText>
+          </Page.NumberSubSection>
+        </Page.MainSections>
+        <Page.MainSections>
+          <Page.SubSection>
+            <Page.SubSectionHeader>
+              <Page.GreenText>Join Our Team!</Page.GreenText>
+            </Page.SubSectionHeader>
+          </Page.SubSection>
+          <Page.SubSection>
+            <Page.SubSectionHeader2>
+              Everyone is Welcomed!
+            </Page.SubSectionHeader2>
+            <Page.SubSectionText>
               We are always looking for team members to contribute to the
               project. Currently we are looking for Backend Developers, Frontend
               Developers, UX/UI Designers, Researchers, Admin, Marketing.
-            </SubSectionText>
-            <SubSectionHeader2>Get started by:</SubSectionHeader2>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionHeader2>Get started by:</Page.SubSectionHeader2>
+            <Page.SubSectionText>
               1. Read our{' '}
-              <WebLink
+              <Page.WebLink
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://docs.google.com/document/d/1L5Hc8_K_NhVhAejdE05C_Y__CgqeBWFrFYFoNqBSBbQ/edit"
               >
                 Onboarding Steps
-              </WebLink>
+              </Page.WebLink>
               .
-            </SubSectionText>
-            <SubSectionText>
+            </Page.SubSectionText>
+            <Page.SubSectionText>
               2. Join us on{' '}
-              <WebLink
+              <Page.WebLink
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://sfbrigade.slack.com/archives/C010EGACUTU"
               >
                 Slack
-              </WebLink>
+              </Page.WebLink>
               , and say Hi!
-            </SubSectionText>
+            </Page.SubSectionText>
             <a
               target="_blank"
               rel="noopener noreferrer"
               href="https://sfbrigade.slack.com/archives/C010EGACUTU"
             >
-              <GreenButton>Join our Slack</GreenButton>
+              <Page.GreenButton>Join our Slack</Page.GreenButton>
             </a>
-          </SubSection>
-        </MainSections>
-        <MainSections>
-          <SubSection3>
-            <SubSectionText>
+          </Page.SubSection>
+        </Page.MainSections>
+        <Page.MainSections>
+          <Page.AffiliatesSubSection>
+            <Page.SubSectionText>
               A few organizations we'd like to thank for their support.
-            </SubSectionText>
+            </Page.SubSectionText>
             <AffiliatesContainer>
               <Affiliates />
             </AffiliatesContainer>
-          </SubSection3>
-        </MainSections>
-      </Main>
+          </Page.AffiliatesSubSection>
+        </Page.MainSections>
+      </Page.Main>
       <Footer />
-    </PageContainer>
+    </Page.PageContainer>
   );
 };
 
