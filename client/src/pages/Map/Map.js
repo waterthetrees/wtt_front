@@ -35,9 +35,11 @@ const unsupportedError = (
   </Box>
 );
 
-// If browser supports geolocation, let's check if we have geo permissions and update lat/long if so
+// If browser supports geolocation and there is no hash param on page load,
+// let's check if we have geo permissions and use that to recenter map if so
 const geoPermissionsPromise =
-  'geolocation' in navigator
+  'geolocation' in navigator &&
+  !new URLSearchParams(window.location.hash.slice(1)).get('pos')
     ? navigator.permissions.query({ name: 'geolocation' })
     : Promise.resolve('unsupported');
 
@@ -106,7 +108,7 @@ export default function Map({
   }, [selectionEnabled]);
 
   useEffect(() => {
-    const getGeolocation = async () => {
+    const recenterOnLocation = async () => {
       const result = await geoPermissionsPromise;
       // Will return ['granted', 'prompt', 'denied', 'unsupported']
       if (result.state === 'granted') {
@@ -117,8 +119,9 @@ export default function Map({
         });
       }
     };
+
     if (map) {
-      getGeolocation();
+      recenterOnLocation();
     }
   }, [map]);
 
