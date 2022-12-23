@@ -35,6 +35,12 @@ const unsupportedError = (
   </Box>
 );
 
+// If browser supports geolocation, let's check if we have geo permissions and update lat/long if so
+const geoPermissionsPromise =
+  'geolocation' in navigator
+    ? navigator.permissions.query({ name: 'geolocation' })
+    : Promise.resolve('unsupported');
+
 function createPopupHTML({ common, scientific }) {
   const commonString = common ? `<h4>${common}</h4>` : '';
   const scientificString =
@@ -100,6 +106,23 @@ export default function Map({
   }, [selectionEnabled]);
 
   useEffect(() => {
+    const getGeolocation = async () => {
+      const result = await geoPermissionsPromise;
+      // Will return ['granted', 'prompt', 'denied', 'unsupported']
+      if (result.state === 'granted') {
+        navigator.geolocation.getCurrentPosition((position) => {
+          map.flyTo({
+            center: [position.coords.longitude, position.coords.latitude],
+          });
+        });
+      }
+    };
+    if (map) {
+      getGeolocation();
+    }
+  }, [map]);
+
+  useEffect(() => {
     if (isMapboxSupported && !map && containerRef.current) {
       const mapboxMap = new mapboxgl.Map({
         container: containerRef.current,
@@ -141,23 +164,6 @@ export default function Map({
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
         });
-
-        // If browser supports geolocation, let's check if we have geo permissions and update lat/long if so
-        if ('geolocation' in navigator) {
-          navigator.permissions
-            .query({ name: 'geolocation' })
-            .then(function (result) {
-              // Will return ['granted', 'prompt', 'denied']
-              if (result.state === 'granted') {
-                navigator.geolocation.getCurrentPosition((position) => {
-                  mapboxMap.setCenter([
-                    position.coords.longitude,
-                    position.coords.latitude,
-                  ]);
-                });
-              }
-            });
-        }
 
         onLoad(mapboxMap);
         setIsMapLoaded(true);
