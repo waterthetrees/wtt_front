@@ -142,6 +142,23 @@ export default function Map({
           url: 'mapbox://waterthetrees.open-trees',
         });
 
+        // If browser supports geolocation, let's check if we have geo permissions and update lat/long if so
+        if ('geolocation' in navigator) {
+          navigator.permissions
+            .query({ name: 'geolocation' })
+            .then(function (result) {
+              // Will return ['granted', 'prompt', 'denied']
+              if (result.state === 'granted') {
+                navigator.geolocation.getCurrentPosition((position) => {
+                  mapboxMap.setCenter([
+                    position.coords.longitude,
+                    position.coords.latitude,
+                  ]);
+                });
+              }
+            });
+        }
+
         onLoad(mapboxMap);
         setIsMapLoaded(true);
 
