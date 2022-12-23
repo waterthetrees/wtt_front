@@ -37,11 +37,15 @@ const unsupportedError = (
 
 // If browser supports geolocation and there is no hash param on page load,
 // let's check if we have geo permissions and use that to recenter map if so
-const geoPermissionsPromise =
+let geoPermissionsPromise = Promise.resolve('unsupported');
+if (
   'geolocation' in navigator &&
   !new URLSearchParams(window.location.hash.slice(1)).get('pos')
-    ? navigator.permissions.query({ name: 'geolocation' })
-    : Promise.resolve('unsupported');
+) {
+  geoPermissionsPromise = navigator.permissions.query({ name: 'geolocation' });
+} else if ('geolocation' in navigator) {
+  Promise.resolve('denied');
+}
 
 function createPopupHTML({ common, scientific }) {
   const commonString = common ? `<h4>${common}</h4>` : '';
