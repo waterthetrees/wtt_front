@@ -42,7 +42,7 @@ export default function GeolocateControl({ map }) {
     if (isTracking && coords && map) {
       map.flyTo({ center: coords });
     }
-  }, [isTracking, coords, map]);
+  }, [isTracking, map]);
 
   const handleClick = () => {
     if (isTracking) {
