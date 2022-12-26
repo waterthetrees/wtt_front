@@ -11,6 +11,7 @@ import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
 
+const DEFAULT_TREE_ZOOM = 17;
 const drawerWidth = 350;
 
 const MapContainer = styled('main', {
@@ -126,10 +127,11 @@ function MapLayout() {
       return;
     }
     const { lng, lat } = currentTreeDataVector || currentTreeDb || {};
+    const currentZoom = map.getZoom();
     if (lng) {
       map.flyTo({
         center: [lng, lat],
-        zoom: 17,
+        zoom: currentZoom > DEFAULT_TREE_ZOOM ? currentZoom : DEFAULT_TREE_ZOOM,
       });
     } else {
       hashParams.delete('id');
