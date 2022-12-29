@@ -24,7 +24,8 @@ Please select the appropriate type for this pull request:
 - **feat**: a commit of the type feat introduces a new feature to the codebase.
 - **BREAKING CHANGE**: a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change or other significant change. A BREAKING CHANGE can be part of commits of any type.
 - Other types: other types such as build, chore, ci, docs, style, refactor, perf, and test are allowed and may be more appropriate for certain changes.
-  Example
+
+**Example**
 
 ```
 feat: allow provided config object to extend other configs
