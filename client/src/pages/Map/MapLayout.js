@@ -135,10 +135,13 @@ function MapLayout() {
       });
     } else {
       hashParams.delete('id');
-      window.location.hash = decodeURIComponent(hashParams.toString());
+      const newUrl = `${window.location.origin}#${decodeURIComponent(
+        hashParams.toString(),
+      )}`;
+      window.history.replaceState({}, '', newUrl);
       setCurrentTreeId(null);
     }
-  }, [map, currentTreeData, currentTreeDb, hashParams]);
+  }, [map, currentTreeDataVector, currentTreeDb]);
 
   useEffect(() => {
     if (currentTreeDb) {

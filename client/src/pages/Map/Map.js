@@ -194,7 +194,10 @@ export default function Map({
             hashParams.delete('id');
           }
 
-          window.location.hash = decodeURIComponent(hashParams.toString());
+          const newUrl = `${window.location.origin}#${decodeURIComponent(
+            hashParams.toString(),
+          )}`;
+          window.history.replaceState({}, '', newUrl);
         });
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
