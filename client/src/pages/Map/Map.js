@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { unstable_batchedUpdates } from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
@@ -189,8 +190,10 @@ export default function Map({
             mapboxMap.getCanvas().style.cursor = 'pointer';
           } else {
             // This click was on a blank part of the map, so clear the selection.
-            setCurrentTreeId(null);
-            setCurrentTreeDataVector(null);
+            unstable_batchedUpdates(() => {
+              setCurrentTreeId(null);
+              setCurrentTreeDataVector(null);
+            });
             hashParams.delete('id');
           }
 
