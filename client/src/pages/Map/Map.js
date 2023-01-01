@@ -190,6 +190,7 @@ export default function Map({
           } else {
             // This click was on a blank part of the map, so clear the selection.
             setCurrentTreeId(null);
+            setCurrentTreeDataVector(null);
             hashParams.delete('id');
           }
 

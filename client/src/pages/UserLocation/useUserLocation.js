@@ -68,8 +68,6 @@ const UserLocationProvider = (props) => {
         lat !== state.coords.lat
       ) {
         context.setCoords({ lng, lat });
-      } else {
-        context.setCoords(null);
       }
     }
   }, [data, state.isTracking]);
