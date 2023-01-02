@@ -89,13 +89,6 @@ function MapLayout() {
         center: [lng, lat],
         zoom: currentZoom > DEFAULT_TREE_ZOOM ? currentZoom : DEFAULT_TREE_ZOOM,
       });
-    } else {
-      hashParams.delete('id');
-      const newUrl = `${window.location.origin}#${decodeURIComponent(
-        hashParams.toString(),
-      )}`;
-      window.history.replaceState({}, '', newUrl);
-      setCurrentTreeId(null);
     }
   }, [map, currentTreeDataVector, currentTreeDb]);
 
