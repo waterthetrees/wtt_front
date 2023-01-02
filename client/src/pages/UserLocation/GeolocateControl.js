@@ -29,7 +29,7 @@ function GeolocateIcon({ isTracking, isFollowingUser }) {
 export default function GeolocateControl({ map }) {
   const {
     state: { coords, isTracking },
-    beginTracking,
+    enableTracking,
     endTracking,
   } = useUserLocation();
   const {
@@ -53,7 +53,7 @@ export default function GeolocateControl({ map }) {
         endFollowingUser();
       }
     } else {
-      beginTracking();
+      enableTracking();
       beginFollowingUser();
     }
   };

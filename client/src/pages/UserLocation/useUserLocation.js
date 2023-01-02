@@ -9,6 +9,7 @@ import { useGeolocation } from '@/pages/UserLocation/useGeolocation';
 
 const initialState = {
   coords: null,
+  enabled: false,
   isTracking: false,
 };
 
@@ -17,14 +18,17 @@ const userLocationReducer = (state, { type, payload }) => {
     case 'setCoords':
       return { ...state, coords: payload };
 
+    case 'enableTracking':
+      return { ...state, enabled: true };
+
     case 'beginTracking':
       return { ...state, isTracking: true };
 
     case 'endTracking':
-      return { ...state, isTracking: false };
+      return { coords: null, isTracking: false, enabled: false };
 
     default:
-      return { ...state, isTracking: false };
+      return { ...state, isTracking: false, enabled: false };
   }
 };
 
@@ -35,9 +39,9 @@ const UserLocationProvider = (props) => {
     ...initialState,
   });
   const { data } = useGeolocation({
-    enabled: state.isTracking,
+    enabled: state.enabled,
     // Only update the position as the user moves if tracking is on.
-    watching: state.isTracking,
+    watching: state.enabled,
     enableHighAccuracy: true,
   });
   const context = useMemo(
@@ -45,6 +49,9 @@ const UserLocationProvider = (props) => {
       state,
       setCoords(coords) {
         dispatch({ type: 'setCoords', payload: coords });
+      },
+      enableTracking() {
+        dispatch({ type: 'enableTracking' });
       },
       beginTracking() {
         dispatch({ type: 'beginTracking' });
@@ -57,7 +64,7 @@ const UserLocationProvider = (props) => {
   );
 
   useEffect(() => {
-    if (data && state.isTracking) {
+    if (data && state.enabled) {
       const {
         coords: { longitude: lng, latitude: lat },
       } = data;
@@ -68,9 +75,10 @@ const UserLocationProvider = (props) => {
         lat !== state.coords.lat
       ) {
         context.setCoords({ lng, lat });
+        context.beginTracking();
       }
     }
-  }, [data, state.isTracking]);
+  }, [context, data, state.enabled]);
 
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <UserLocationContext.Provider value={context} {...props} />;
