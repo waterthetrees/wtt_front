@@ -32,7 +32,6 @@ export default function UserWeatherSection() {
   const day = date.getDay();
 
   const { data } = useGeolocation();
-  const API_KEY = 'e28a2bf635aa01de83b389bce17192cc';
 
   const [temperature, setTemperature] = useState(null);
   const [weather, setWeather] = useState(null);
