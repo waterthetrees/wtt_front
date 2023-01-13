@@ -136,7 +136,7 @@ export const WebLink = styled.a({
 });
 
 export const SubSectionHeader = styled.h1({
-  fontSize: '4.75rem',
+  fontSize: '4.5rem',
   marginBottom: '1rem',
   '@media only screen and (max-width: 768px)': {
     fontSize: '3.75em',

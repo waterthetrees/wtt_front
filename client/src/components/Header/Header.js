@@ -173,7 +173,6 @@ const Header = () => {
                     />
                     <div className="header--navigation--authcontainer--profile--menuitem--details">
                       <p>{name}</p>
-                      <p>{email}</p>
                     </div>
                   </MenuItem>
                 </Link>
