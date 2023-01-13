@@ -16,7 +16,7 @@
 // }
 
 .header {
-  font-family: montserrat;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -26,7 +26,7 @@
     display: flex;
     width: 70%;
 
-    @media (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 90%;
     }
 
@@ -35,7 +35,7 @@
       align-items: center;
 
 
-      @media (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 70%;
       }
 
@@ -51,13 +51,13 @@
       left: 10%;
       align-items: center;
 
-      @media(max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         display: none;
       }
 
       &--buttons {
         margin: 8px 8px;
-        font-size: 2em;
+        font-size: 1.75rem;
         border: none;
         background-color: white;
         padding-right: 40px;
@@ -89,14 +89,31 @@
       align-items: center;
       margin-left: auto;
 
-      @media (max-width: 768px) {}
+      &--button {
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      &--burger {
+        display: none;
+
+        @media only screen and (max-width: 768px) {
+          display: inline-block;
+        }
+      }
+
+      &--menu {
+        display: flex;
+
+      }
 
       &--profile {
         width: 40px;
         height: 40px;
         border-radius: 50%;
 
-        :hover: {
+        &:hover {
           cursor: pointer;
         }
 
@@ -110,12 +127,26 @@
 
           &--routes {
             display: none;
-            width: 200px;
+            width: 100%;
 
-            @media(max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               display: flex;
               flex-direction: column;
-              border-bottom: black 1px solid;
+              border-bottom: rgba(0, 0, 0, 0.4) 1px solid;
+            }
+
+            &--links {
+              color: black;
+
+              &:hover {
+                text-decoration: none;
+                color: #3fab45;
+              }
+
+              &--span {
+                padding-left: 15px;
+                font-size: 1.2em;
+              }
             }
           }
         }

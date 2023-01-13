@@ -19,7 +19,7 @@ export default function Contact() {
     position: 'absolute',
     width: '70%',
     zIndex: '10',
-    '@media(max-width: 768px)': {
+    '@media only screen and (max-width: 768px)': {
       width: '100%',
     },
   });
@@ -31,7 +31,7 @@ export default function Contact() {
     display: 'flex',
     flexDirection: 'column',
     color: 'white',
-    '@media(max-width: 768px)': {
+    '@media only screen and (max-width: 768px)': {
       padding: '0 1.5rem',
       width: '70%',
     },

@@ -11,7 +11,7 @@ const About = () => {
   const NumberContainer = styled.div({
     position: 'relative',
     width: '100%',
-    bottom: '4em',
+    bottom: '4rem',
   });
 
   const NumberContainer2 = styled.div({
@@ -21,8 +21,9 @@ const About = () => {
     justifyContent: 'center',
     color: '#3fab4530',
   });
+
   const Number = styled.h1({
-    fontSize: '12.5em',
+    fontSize: '15.5rem',
   });
 
   const AffiliatesContainer = styled.div({

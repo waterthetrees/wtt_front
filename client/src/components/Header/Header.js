@@ -1,19 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
-// import { styled } from '@mui/system';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton, ProfileAuthButton } from '@/components/Auth';
-// import HeaderLogo from '@/assets/images/logos/header-logo.svg';
-import { TreeLogo } from '@/components/Icons';
-import styled from '@emotion/styled';
+import {
+  TreeLogo,
+  TreeIcon,
+  BellIcon,
+  PlantIcon,
+  GlobeIcon,
+  InfoIcon,
+  HelpIcon,
+  ContactIcon,
+  FolderIcon,
+} from '@/components/Icons';
 import HeaderLogo from '@/assets/images/logos/header-logo.svg';
 
 import './Header.scss';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,70 +29,12 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const HeaderButton = ({ menuItem }) => (
-    <button type="button" className="btn btn-success btn-block">
-      {menuItem}
-    </button>
-  );
-
   const { isAuthenticated, user = {} } = useAuth0();
   const { name, nickname, email, picture } = user;
   const emailQuery = { email };
   const emailEnabled = { enabled: !!email };
 
-  // const AuthContainer = styled.div({
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   marginLeft: 'auto',
-  //   '@media(max-width: 768px)': {
-  //     display: 'none',
-  //     // width: '90%',
-  //     // display: 'flex',
-  //   },
-  // });
-
-  // const MenuContainer = styled.div({
-  //   marginLeft: 'auto',
-  // });
-
-  const Image = styled.img({
-    width: '32px',
-    height: '32px',
-    borderRadius: '50%',
-    // objectFit: 'cover',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  });
-
-  // const ProfileMenuPosition = styled.div({
-  //   position: 'relative',
-  //   height: '0',
-  //   weight: '0',
-  // });
-
-  // const ProfileMenu = styled.div({
-  //   position: 'absolute',
-  //   top: '50px',
-  //   right: '275px',
-  //   width: '200px',
-  //   border: '1px solid black',
-  // });
-
-  const handleProfileMenu = (e) => {
-    setOpen(true);
-  };
-
-  const profileRef = useRef();
-  console.log(anchorEl);
-
-  useEffect(() => {
-    const handler = (e) => {
-      if (!profileRef.current?.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
+  console.log(name, picture, email, emailQuery, emailEnabled);
 
   return (
     <div className="header">
@@ -125,132 +73,265 @@ const Header = () => {
             </Link>
           </button>
         </div>
-        {isAuthenticated ? (
-          <div className="header--navigation--authcontainer">
+        <div className="header--navigation--authcontainer">
+          {isAuthenticated ? (
             <img
               className="header--navigation--authcontainer--profile"
               onClick={handleClick}
               src={picture}
               alt="profile"
             />
-            <Menu
-              id="wtt-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              MenuListProps={{
-                style: {
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  border: 'none',
-                  width: '200px',
-                },
-              }}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: 'visible',
-                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                  mt: 1.5,
-                  '& .MuiAvatar-root': {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  '&:before': {
-                    content: '""',
-                    display: 'block',
-                    position: 'absolute',
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: 'background.paper',
-                    transform: 'translateY(-50%) rotate(45deg)',
-                    zIndex: 0,
-                  },
-                },
-              }}
+          ) : (
+            <button
+              type="button"
+              className="header-btn-menu header--navigation--authcontainer--burger"
+              aria-controls="wtt-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
             >
-              <MenuItem
-                sx={{
-                  padding: '0px',
-                  paddingBottom: '8px',
-                  width: '180px',
-                  borderBottom: 'black 1px solid',
-                }}
+              &#9776;
+            </button>
+          )}
+          {isAuthenticated ? null : (
+            <div className="header--navigation--authcontainer--button">
+              <AuthButton />
+            </div>
+          )}
+        </div>
+        <Menu
+          id="wtt-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          MenuListProps={{
+            style: {
+              fontFamily: '"Montserrat", sans-serif',
+              boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '8px',
+              border: 'none',
+              width: '200px',
+            },
+          }}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&:before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          }}
+        >
+          {isAuthenticated && (
+            <div>
+              <div>
+                <Link
+                  className="header--navigation--authcontainer--profile--menuitem--routes--links"
+                  to="/userprofile"
+                >
+                  <MenuItem
+                    onClick={handleClose}
+                    sx={{
+                      padding: '0px',
+                      paddingBottom: '8px',
+                      width: '180px',
+                      borderBottom: '#00000040 1px solid',
+                    }}
+                  >
+                    <img
+                      className="header--navigation--authcontainer--profile"
+                      src={picture}
+                      alt="profile"
+                    />
+                    <div className="header--navigation--authcontainer--profile--menuitem--details">
+                      <p>{name}</p>
+                      <p>{email}</p>
+                    </div>
+                  </MenuItem>
+                </Link>
+              </div>
+              <Link
+                to="/userprofile"
+                className="header--navigation--authcontainer--profile--menuitem--routes--links"
               >
-                <img
-                  className="header--navigation--authcontainer--profile"
-                  src={picture}
-                  alt="profile"
-                />
-
-                <div className="header--navigation--authcontainer--profile--menuitem--details">
-                  <p>{nickname}</p>
-                  <p>{email}</p>
-                </div>
-              </MenuItem>
-              {isAuthenticated && (
-                <MenuItem onClick={handleClose}>
-                  <Link to="/userprofile" className="header-link">
-                    <HeaderButton menuItem="User Profile" />
-                  </Link>
+                <MenuItem
+                  sx={{
+                    padding: '8px',
+                    width: '180px',
+                  }}
+                  onClick={handleClose}
+                >
+                  <TreeIcon />
+                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                    My Trees
+                  </span>
                 </MenuItem>
-              )}
-              <div className="header--navigation--authcontainer--profile--menuitem--routes">
+              </Link>
+              <Link className="header--navigation--authcontainer--profile--menuitem--routes--links">
                 <MenuItem
                   onClick={handleClose}
                   sx={{
-                    display: 'none',
-                    '@media(max-width: 768px)': {
-                      display: 'flex',
-                    },
+                    padding: '8px',
+                    width: '180px',
+                    borderBottom: '#00000040 1px solid',
                   }}
                 >
-                  <Link to="/" className="header-link">
-                    <HeaderButton menuItem="Map" />
-                  </Link>
+                  <BellIcon />
+                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                    Activity
+                  </span>
                 </MenuItem>
-
-                <MenuItem onClick={handleClose}>
-                  <Link to="/about" className="header-link">
-                    <HeaderButton menuItem="About" />
-                  </Link>
+              </Link>
+              <Link
+                className="header--navigation--authcontainer--profile--menuitem--routes--links"
+                to="/"
+              >
+                <MenuItem
+                  onClick={handleClose}
+                  sx={{
+                    padding: '8px',
+                    width: '180px',
+                    borderBottom: '#00000040 1px solid',
+                  }}
+                >
+                  <PlantIcon />
+                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                    Plant
+                  </span>
                 </MenuItem>
+              </Link>
+            </div>
+          )}
 
-                <MenuItem onClick={handleClose}>
-                  <Link to="/contact" className="header-link">
-                    <HeaderButton menuItem="Contact" />
-                  </Link>
-                </MenuItem>
+          <div className="header--navigation--authcontainer--profile--menuitem--routes">
+            <Link
+              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              to="/"
+            >
+              <MenuItem
+                sx={{
+                  padding: '8px',
+                  width: '180px',
+                }}
+                onClick={handleClose}
+              >
+                <GlobeIcon />
+                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  Map
+                </span>
+              </MenuItem>
+            </Link>
 
-                <MenuItem onClick={handleClose}>
-                  <Link to="/data" className="header-link">
-                    <HeaderButton menuItem="Data" />
-                  </Link>
-                </MenuItem>
-              </div>
+            <Link
+              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              to="/about"
+            >
+              <MenuItem
+                sx={{
+                  padding: '8px',
+                  width: '180px',
+                }}
+                onClick={handleClose}
+              >
+                <InfoIcon />
+                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  About
+                </span>
+              </MenuItem>
+            </Link>
 
-              <ProfileAuthButton></ProfileAuthButton>
-            </Menu>
+            <Link
+              to="/contact"
+              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+            >
+              <MenuItem
+                sx={{
+                  padding: '8px',
+                  width: '180px',
+                }}
+                onClick={handleClose}
+              >
+                <ContactIcon />
+                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  Contact
+                </span>
+              </MenuItem>
+            </Link>
+            <Link
+              to="/data"
+              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+            >
+              <MenuItem
+                sx={{
+                  padding: '8px',
+                  width: '180px',
+                }}
+                onClick={handleClose}
+              >
+                <FolderIcon />
+                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  Data
+                </span>
+              </MenuItem>
+            </Link>
           </div>
-        ) : (
-          <div className="header--navigation--authcontainer">
-            <AuthButton />
-          </div>
-        )}
+          <Link
+            className="header--navigation--authcontainer--profile--menuitem--routes--links"
+            to="/"
+          >
+            <MenuItem
+              sx={{
+                padding: '8px',
+                width: '180px',
+              }}
+              onClick={handleClose}
+            >
+              <HelpIcon />
+              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                Help
+              </span>
+            </MenuItem>
+          </Link>
+          <ProfileAuthButton>
+            {isAuthenticated ? (
+              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                Log Out
+              </span>
+            ) : (
+              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                Sign In
+              </span>
+            )}
+          </ProfileAuthButton>
+        </Menu>
       </div>
     </div>
   );
