@@ -1,42 +1,22 @@
 .communities {
     display: flex;
-    flex-direction: column;
+    height: 100vh;
+    flex-grow: 1;
+    padding: 10px;
+    width: 100%;
 
-    &__main {
-        &__search {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 16px;
-            margin-bottom: 32px;
-
-            &__input {
-                width: 60%;
-                border: 1px #00000050 solid;
-            }
-
-            &__hovermenu {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                min-width: 104px;
-                height: 72px;
-                font-family: Montserrat;
-                font-size: 14px;
-                padding: 6px;
-                outline: 1px solid #00000050;
-                color: #00000050;
-                background-color: white;
-                border-radius: .3vw;
-            }
-        }
-
-        &__section {
-            display: flex;
-            border-bottom: 1px #00000050 solid;
-
-            &__one {
-                width: 16.67%;
-            }
+    &__smallcolumn {
+        // background-color:lightblue;
+        max-width: 150px;
+        flex-grow: 1;
+        padding: 10px;
+    }
+    &__middle {
+        // background-color:lightgreen;
+        flex-grow: 1;
+        padding: 10px;
+        &__card {
+            padding: 5px;
         }
     }
 }

@@ -1,11 +1,16 @@
 import React from 'react';
-
 import { Search } from '@/components/Icons';
-
 import './SearchBar.scss';
-export const SearchBar = (props) => {
+
+export const SearchBar = ({
+  searchValue,
+  style,
+  placeholder,
+  setSearchValue,
+}) => {
+  const handleSearch = (event) => setSearchValue(event.target.value);
   return (
-    <div className="searchbar" style={{ ...props.style.div }}>
+    <div className="searchbar" style={{ ...style.div }}>
       <label htmlFor="searchbar">
         <Search
           sx={{
@@ -20,10 +25,10 @@ export const SearchBar = (props) => {
 
       <input
         id="searchbar"
-        style={{ ...props.style.input }}
-        value={props.search}
-        onChange={props.onChange}
-        placeholder={props.placeholder}
+        style={{ ...style.input }}
+        value={searchValue}
+        onSubmit={handleSearch}
+        placeholder={placeholder}
         className="searchbar__input"
       />
     </div>
