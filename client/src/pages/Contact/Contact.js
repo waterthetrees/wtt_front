@@ -17,7 +17,7 @@ export default function Contact() {
 
   const Position = styled.div({
     position: 'absolute',
-    width: '60%',
+    width: '70%',
     zIndex: '10',
     '@media(max-width: 768px)': {
       width: '100%',
@@ -26,7 +26,7 @@ export default function Contact() {
 
   const Position2 = styled.div({
     position: 'relative',
-    width: '25%',
+    width: '27%',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',

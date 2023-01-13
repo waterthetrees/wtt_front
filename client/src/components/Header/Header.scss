@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(20,125,22, 0.8);
+  background-color: rgba(20, 125, 22, 0.8);
   border-color: transparent;
 
   /* put this above the map drawer but below modal dialogs */
@@ -26,6 +26,7 @@
   -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
   box-shadow: 0 0 0 2pxrgba 0, 0, 0, 0.1;
 }
+
 
 .header-btn-menu {
   background-color: white;
@@ -82,7 +83,7 @@
 .header-btn-menu {
   background-color: transparent;
   border-width: 0;
-  color: white;
+  color: #3fab45;
   border: none;
   outline: none;
   font-size: 3rem;

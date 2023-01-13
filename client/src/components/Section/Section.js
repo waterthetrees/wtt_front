@@ -22,7 +22,6 @@ export default function Section({ children, title }) {
 export const PageContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  marginTop: '72px',
   fontFamily: 'montserrat',
 });
 
@@ -41,7 +40,7 @@ export const MainSections = styled.div({
   paddingTop: '4em',
   display: 'flex',
   justifyContent: 'space-between',
-  width: '60%',
+  width: '70%',
   borderTop: '1px solid black',
   ':first-child': {
     borderTop: '0px',
@@ -59,7 +58,7 @@ export const MainSections = styled.div({
 export const SubSection = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  width: '40%',
+  width: '47.5%',
   span: {
     marginBottom: '1em',
   },
@@ -137,17 +136,26 @@ export const WebLink = styled.a({
 });
 
 export const SubSectionHeader = styled.h1({
-  fontSize: '3.75em',
+  fontSize: '5.5rem',
   marginBottom: '1rem',
+  '@media(max-width: 768px)': {
+    fontSize: '3.75em',
+  },
 });
 
 export const SubSectionHeader2 = styled.h2({
-  fontSize: '2em',
+  fontSize: '3em',
   marginBottom: '1rem',
+  '@media(max-width: 768px)': {
+    fontSize: '2em',
+  },
 });
 
 export const SubSectionText = styled.span({
-  fontSize: '1.5em',
+  fontSize: '2em',
+  '@media(max-width: 768px)': {
+    fontSize: '1.5em',
+  },
 });
 
 export const GreenText = styled.span({
