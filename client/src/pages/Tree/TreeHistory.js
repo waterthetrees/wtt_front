@@ -34,7 +34,7 @@ const TreeHistoryItem = ({ item }) => {
             {actions.join(', ')}
           </p>
         )}
-        {comment && <p>"{comment}"</p>}
+        {comment && <p>`&quot;`,{comment}`&quot;`,</p>}
         {(liked || adopted) && (
           <p>
             {liked && (
