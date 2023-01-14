@@ -102,19 +102,26 @@
 
       &--menu {
         display: flex;
+        flex-direction: column;
 
-      }
-
-      &--profile {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-
-        &:hover {
-          cursor: pointer;
+        &--profile {
+          &--picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
         }
 
         &--menuitem {
+          display: none;
+          width: 100%;
+
+          @media only screen and (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            border-bottom: rgba(0, 0, 0, 0.4) 1px solid;
+          }
+
           &--details {
             display: flex;
             flex-direction: column;
@@ -122,30 +129,39 @@
             padding-left: 5px;
           }
 
-          &--routes {
-            display: none;
-            width: 100%;
+          &--links {
+            color: black;
 
-            @media only screen and (max-width: 768px) {
-              display: flex;
-              flex-direction: column;
-              border-bottom: rgba(0, 0, 0, 0.4) 1px solid;
+            &:hover {
+              text-decoration: none;
+              color: #3fab45;
+              cursor: default;
             }
 
-            &--links {
-              color: black;
-
-              &:hover {
-                text-decoration: none;
-                color: #3fab45;
-              }
-
-              &--span {
-                padding-left: 15px;
-                font-size: 1.2em;
-              }
+            &--span {
+              padding-left: 15px;
+              font-size: 1.2em;
             }
           }
+
+          &--disabled {
+            color: #00000040;
+
+            &:hover {
+              text-decoration: none;
+              color: #00000040;
+            }
+          }
+
+
+        }
+      }
+
+      &--profile {
+
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }

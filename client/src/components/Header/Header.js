@@ -13,6 +13,7 @@ import {
   HelpIcon,
   ContactIcon,
   FolderIcon,
+  AccountIcon,
 } from '@/components/Icons';
 import HeaderLogo from '@/assets/images/logos/header-logo.svg';
 
@@ -76,7 +77,7 @@ const Header = () => {
         <div className="header--navigation--authcontainer">
           {isAuthenticated ? (
             <img
-              className="header--navigation--authcontainer--profile"
+              className="header--navigation--authcontainer--menu--profile--picture"
               onClick={handleClick}
               src={picture}
               alt="profile"
@@ -151,50 +152,28 @@ const Header = () => {
           }}
         >
           {isAuthenticated && (
-            <div>
-              <div>
+            <div className="header--navigation--authcontainer--menu">
+              <div className="header--navigation--authcontainer--menu--profile">
                 <Link
-                  className="header--navigation--authcontainer--profile--menuitem--routes--links"
+                  className="header--navigation--authcontainer--menu--menuitem--links"
                   to="/userprofile"
                 >
                   <MenuItem
                     onClick={handleClose}
                     sx={{
-                      padding: '0px',
-                      paddingBottom: '8px',
+                      padding: '8px',
                       width: '180px',
                       borderBottom: '#00000040 1px solid',
                     }}
                   >
-                    <img
-                      className="header--navigation--authcontainer--profile"
-                      src={picture}
-                      alt="profile"
-                    />
-                    <div className="header--navigation--authcontainer--profile--menuitem--details">
-                      <p>{name}</p>
-                    </div>
+                    <AccountIcon />
+                    <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+                      Profile
+                    </span>
                   </MenuItem>
                 </Link>
               </div>
-              <Link
-                to="/userprofile"
-                className="header--navigation--authcontainer--profile--menuitem--routes--links"
-              >
-                <MenuItem
-                  sx={{
-                    padding: '8px',
-                    width: '180px',
-                  }}
-                  onClick={handleClose}
-                >
-                  <TreeIcon />
-                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
-                    My Trees
-                  </span>
-                </MenuItem>
-              </Link>
-              <Link className="header--navigation--authcontainer--profile--menuitem--routes--links">
+              {/* <Link className="header--navigation--authcontainer--menu--menuitem--links">
                 <MenuItem
                   onClick={handleClose}
                   sx={{
@@ -204,13 +183,13 @@ const Header = () => {
                   }}
                 >
                   <BellIcon />
-                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                     Activity
                   </span>
                 </MenuItem>
               </Link>
               <Link
-                className="header--navigation--authcontainer--profile--menuitem--routes--links"
+                className="header--navigation--authcontainer--menu--menuitem--links"
                 to="/"
               >
                 <MenuItem
@@ -222,17 +201,17 @@ const Header = () => {
                   }}
                 >
                   <PlantIcon />
-                  <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                  <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                     Plant
                   </span>
                 </MenuItem>
-              </Link>
+              </Link> */}
             </div>
           )}
 
-          <div className="header--navigation--authcontainer--profile--menuitem--routes">
+          <div className="header--navigation--authcontainer--menu--menuitem">
             <Link
-              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              className="header--navigation--authcontainer--menu--menuitem--links"
               to="/"
             >
               <MenuItem
@@ -243,14 +222,14 @@ const Header = () => {
                 onClick={handleClose}
               >
                 <GlobeIcon />
-                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                   Map
                 </span>
               </MenuItem>
             </Link>
 
             <Link
-              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              className="header--navigation--authcontainer--menu--menuitem--links"
               to="/about"
             >
               <MenuItem
@@ -261,7 +240,7 @@ const Header = () => {
                 onClick={handleClose}
               >
                 <InfoIcon />
-                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                   About
                 </span>
               </MenuItem>
@@ -269,7 +248,7 @@ const Header = () => {
 
             <Link
               to="/contact"
-              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              className="header--navigation--authcontainer--menu--menuitem--links"
             >
               <MenuItem
                 sx={{
@@ -279,14 +258,14 @@ const Header = () => {
                 onClick={handleClose}
               >
                 <ContactIcon />
-                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                   Contact
                 </span>
               </MenuItem>
             </Link>
             <Link
               to="/data"
-              className="header--navigation--authcontainer--profile--menuitem--routes--links"
+              className="header--navigation--authcontainer--menu--menuitem--links"
             >
               <MenuItem
                 sx={{
@@ -296,36 +275,33 @@ const Header = () => {
                 onClick={handleClose}
               >
                 <FolderIcon />
-                <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+                <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                   Data
                 </span>
               </MenuItem>
             </Link>
           </div>
-          <Link
-            className="header--navigation--authcontainer--profile--menuitem--routes--links"
-            to="/"
-          >
+          <Link className="header--navigation--authcontainer--menu--menuitem--disabled">
             <MenuItem
               sx={{
                 padding: '8px',
                 width: '180px',
+                cursor: 'default',
               }}
-              onClick={handleClose}
             >
               <HelpIcon />
-              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                 Help
               </span>
             </MenuItem>
           </Link>
           <ProfileAuthButton>
             {isAuthenticated ? (
-              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                 Log Out
               </span>
             ) : (
-              <span className="header--navigation--authcontainer--profile--menuitem--routes--links--span">
+              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
                 Sign In
               </span>
             )}

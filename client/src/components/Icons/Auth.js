@@ -1,5 +1,9 @@
 import React from 'react';
-import { LoginOutlined, LogoutOutlined } from '@mui/icons-material';
+import {
+  LoginOutlined,
+  LogoutOutlined,
+  AccountCircleOutlined,
+} from '@mui/icons-material';
 
 export const LoginIcon = (props) => (
   <LoginOutlined sx={{ fontSize: '2rem' }} {...props} />
@@ -7,4 +11,8 @@ export const LoginIcon = (props) => (
 
 export const LogoutIcon = (props) => (
   <LogoutOutlined sx={{ fontSize: '2rem' }} {...props} />
+);
+
+export const AccountIcon = (props) => (
+  <AccountCircleOutlined sx={{ fontSize: '2rem' }} {...props} />
 );
