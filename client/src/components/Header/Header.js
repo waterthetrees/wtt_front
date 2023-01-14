@@ -31,11 +31,7 @@ const Header = () => {
   };
 
   const { isAuthenticated, user = {} } = useAuth0();
-  const { name, nickname, email, picture } = user;
-  const emailQuery = { email };
-  const emailEnabled = { enabled: !!email };
-
-  console.log(name, picture, email, emailQuery, emailEnabled);
+  const { picture } = user;
 
   return (
     <div className="header">
