@@ -1,92 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem } from '@mui/material';
+import { TreeLogo } from '@/components/Icons';
+import HeaderLogo from '@/assets/images/logos/header-logo.svg';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton } from '@/components/Auth';
-import HeaderLogo from '@/assets/images/logos/header-logo.svg';
+import Menu from './Menu';
+
 import './Header.scss';
 
 const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div id="header" className="header">
-      <div className="header-content">
-        <Link to="/">
-          <img className="header--logo" src={HeaderLogo} alt="Header Logo" />
-        </Link>
-
-        <button
-          type="button"
-          className="header-btn-menu"
-          aria-controls="wtt-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          &#9776;
-        </button>
-
-        <Menu
-          id="wtt-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {isAuthenticated && (
-            <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header-link">
-                <HeaderButton menuItem="User Profile" />
-              </Link>
-            </MenuItem>
+    <div className="header">
+      <div className="header--navigation">
+        <div className="header--navigation--logocontainer">
+          <Link to="/">
+            <TreeLogo />
+          </Link>
+          <Link to="/">
+            <img
+              className="header--navigation--logocontainer--logo"
+              src={HeaderLogo}
+              alt="Header Logo"
+            ></img>
+          </Link>
+        </div>
+        <div className="header--navigation--navcontainer">
+          <button className="header--navigation--navcontainer--buttons">
+            <Link to="/" title="Map">
+              Map
+            </Link>
+          </button>
+          <button className="header--navigation--navcontainer--buttons">
+            <Link to="/about" title="About">
+              About
+            </Link>
+          </button>
+          <button className="header--navigation--navcontainer--buttons">
+            <Link to="/contact" title="Contact">
+              Contact
+            </Link>
+          </button>
+          <button className="header--navigation--navcontainer--buttons">
+            <Link to="/data" title="Data">
+              Data
+            </Link>
+          </button>
+        </div>
+        <div className="header--navigation--authcontainer">
+          {isAuthenticated ? null : (
+            <div className="header--navigation--authcontainer--button">
+              <AuthButton />
+            </div>
           )}
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/" className="header-link">
-              <HeaderButton menuItem="Map" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/about" className="header-link">
-              <HeaderButton menuItem="About" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/contact" className="header-link">
-              <HeaderButton menuItem="Contact" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <Link to="/data" className="header-link">
-              <HeaderButton menuItem="Data" />
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <AuthButton />
-          </MenuItem>
-        </Menu>
+          <Menu />
+        </div>
       </div>
     </div>
   );
 };
-
-const HeaderButton = ({ menuItem }) => (
-  <button type="button" className="btn btn-success btn-block">
-    {menuItem}
-  </button>
-);
 
 export default Header;
