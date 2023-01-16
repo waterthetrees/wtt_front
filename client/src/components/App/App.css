@@ -499,3 +499,9 @@ a.btn.disabled, fieldset:disabled a.btn {
 .text-center {
   text-align: center !important;
 }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'),
+    url('../../assets/fonts/Montserrat-Regular.otf') format('truetype');
+}
