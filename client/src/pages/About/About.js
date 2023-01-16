@@ -132,9 +132,11 @@ const About = () => {
                 <Number>3</Number>
               </NumberContainer2>
             </NumberContainer>
-            <Page.SubSectionHeader2>Plant More Trees</Page.SubSectionHeader2>
+            <Page.SubSectionHeader2>
+              Involve the general public
+            </Page.SubSectionHeader2>
             <Page.SubSectionText>
-              to grow our tree population we want everyone to contribute to
+              To grow our tree population, we want everyone to contribute to
               local tree planting and be aware of tree health.
             </Page.SubSectionText>
           </Page.NumberSubSection>

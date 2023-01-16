@@ -137,6 +137,7 @@ export const WebLink = styled.a({
 
 export const SubSectionHeader = styled.h1({
   fontSize: '4.5rem',
+  fontWeight: 'bold',
   marginBottom: '1rem',
   '@media only screen and (max-width: 768px)': {
     fontSize: '3.75em',
@@ -146,6 +147,7 @@ export const SubSectionHeader = styled.h1({
 export const SubSectionHeader2 = styled.h2({
   fontSize: '2.5rem',
   marginBottom: '1rem',
+  fontWeight: 'bold',
   '@media only screen and (max-width: 768px)': {
     fontSize: '2.25rem',
   },
