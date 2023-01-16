@@ -1,86 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import { useGeolocation } from '../UserLocation/useGeolocation';
 
+const directions = [
+  'N',
+  'NNE',
+  'NE',
+  'ENE',
+  'E',
+  'ESE',
+  'SE',
+  'SSE',
+  'S',
+  'SSW',
+  'SW',
+  'WSW',
+  'W',
+  'WNW',
+  'NW',
+  'NNW',
+];
+
 export default function UserWeatherSection() {
   const date = new Date();
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const weekdays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+  const month = date.toLocaleString('default', { month: 'long' });
+  const weekday = date.toLocaleString('default', { weekday: 'long' });
+  const day = date.getDate();
 
-  const month = months[date.getMonth()];
-  const weekday = weekdays[date.getDay()];
-  const day = date.getDay();
+  const { data } = useGeolocation({ watching: false });
 
-  const { data } = useGeolocation();
+  const [weather, setWeatherAPI] = useState({})
 
-  const [temperature, setTemperature] = useState(null);
-  const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState(null);
-  const [country, setCountry] = useState(null);
-  const [windSpeed, setWindSpeed] = useState(null);
-  const [compassDirection, setCompassDirection] = useState('');
+  const findDirection = (degrees) => {
+    const points = Math.round(degrees / 22.5)
+    const index = points % 16;
+    const direction = directions[index]
+    return direction
+  }
 
   const fetchWeather = async () => {
-    if (!data || temperature) return;
     const response = await fetch(
       `http://api.openweathermap.org/data/2.5/weather?units=metric&lat=${data?.coords?.latitude}&lon=${data?.coords?.longitude}&appid=${API_KEY}`,
     );
     const json = await response.json();
-    console.log(json);
-    setTemperature(json.main.temp);
-    setWeather(json.weather[0].main);
-    setCity(json.name);
-    setCountry(json.sys.country);
-    setWindSpeed(json.wind.speed);
-    const points = Math.round(json.wind.deg / 22.5);
-    const directions = [
-      'N',
-      'NNE',
-      'NE',
-      'ENE',
-      'E',
-      'ESE',
-      'SE',
-      'SSE',
-      'S',
-      'SSW',
-      'SW',
-      'WSW',
-      'W',
-      'WNW',
-      'NW',
-      'NNW',
-    ];
-    const index = points % 16;
-
-    setCompassDirection(directions[index]);
+    
+    const compassDirection = findDirection(json?.wind?.deg)
+    
+    setWeatherAPI({
+      temperature: json?.main?.temp,
+      weather: json?.weather[0]?.main,
+      city: json?.name,
+      country: json?.sys?.country,
+      windSpeed: json?.wind?.speed,
+      compassDirection: compassDirection
+    })
   };
 
   useEffect(() => {
+    if (!data || weather.temperature) return;
     fetchWeather();
   }, [data]);
-
-  console.log(data);
 
   return (
     <section
@@ -96,7 +74,7 @@ export default function UserWeatherSection() {
         flexDirection: 'column',
       }}
     >
-      <p>{weather}</p>
+      <p>{weather.weather}</p>
       <div style={{ display: 'flex' }}>
         <article
           style={{
@@ -106,12 +84,12 @@ export default function UserWeatherSection() {
             marginRight: '16px',
           }}
         >
-          {temperature}&deg;
+          {weather.temperature}&deg;
         </article>
         <article style={{ display: 'flex', alignItems: 'center' }}>
           {weekday}, {day} {month}
           <br />
-          {city}, {country}
+          {weather.city}, {weather.country}
         </article>
       </div>
       <div
@@ -125,11 +103,11 @@ export default function UserWeatherSection() {
       >
         <article>
           <p>Wind Speed</p>
-          <p style={{ fontSize: '20px' }}>{windSpeed}km/h</p>
+          <p style={{ fontSize: '20px' }}>{weather.windSpeed}km/h</p>
         </article>
         <article>
           <p>Wind Direction</p>
-          <p style={{ fontSize: '20px' }}>{compassDirection}</p>
+          <p style={{ fontSize: '20px' }}>{weather.compassDirection}</p>
         </article>
         <article>
           <p>UVI</p>
