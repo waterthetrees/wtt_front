@@ -20,6 +20,7 @@ export default function Section({ children, title }) {
 }
 
 export const PageContainer = styled.div({
+  marginTop: '64px',
   fontFamily: '"Montserrat", sans-serif',
 });
 
