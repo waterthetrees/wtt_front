@@ -20,8 +20,6 @@ export default function Section({ children, title }) {
 }
 
 export const PageContainer = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
   fontFamily: '"Montserrat", sans-serif',
 });
 
