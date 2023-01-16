@@ -154,7 +154,7 @@ export const SubSectionHeader2 = styled.h2({
 });
 
 export const SubSectionText = styled.span({
-  fontSize: '1.5rem',
+  fontSize: '1.7rem',
   '@media only screen and (max-width: 768px)': {
     fontSize: '1.25rem',
   },
