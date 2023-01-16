@@ -1,3 +1,7 @@
+body {
+  overflow: hidden !important;
+}
+
 /* don't show an outline when the map is clicked on and gets focus */
 .mapboxgl-canvas:focus-visible {
   outline: none;
