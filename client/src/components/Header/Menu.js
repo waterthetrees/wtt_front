@@ -35,7 +35,7 @@ const NavMenu = () => {
     <>
       {isAuthenticated ? (
         <img
-          className="header--navigation--authcontainer--menu--profile--picture"
+          className="header__navigation__authcontainer__picture"
           onClick={handleClick}
           src={picture}
           alt="profile"
@@ -43,7 +43,7 @@ const NavMenu = () => {
       ) : (
         <button
           type="button"
-          className="header-btn-menu header--navigation--authcontainer--burger"
+          className="header-btn-menu header__navigation__authcontainer__burger"
           aria-controls="wtt-menu"
           aria-haspopup="true"
           onClick={handleClick}
@@ -104,10 +104,10 @@ const NavMenu = () => {
         }}
       >
         {isAuthenticated && (
-          <div className="header--navigation--authcontainer--menu">
-            <div className="header--navigation--authcontainer--menu--profile">
+          <div className="header__navigation__authcontainer__menu">
+            <div className="header__navigation__authcontainer__menu__profile">
               <Link
-                className="header--navigation--authcontainer--menu--menuitem--links"
+                className="header__navigation__authcontainer__menu__menuitem__links"
                 to="/userprofile"
               >
                 <MenuItem
@@ -119,51 +119,18 @@ const NavMenu = () => {
                   }}
                 >
                   <AccountIcon />
-                  <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+                  <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                     Profile
                   </span>
                 </MenuItem>
               </Link>
             </div>
-            {/* <Link className="header--navigation--authcontainer--menu--menuitem--links">
-                <MenuItem
-                onClick={handleClose}
-                  sx={{
-                    padding: '8px',
-                    width: '180px',
-                    borderBottom: '#00000040 1px solid',
-                  }}
-                  >
-                  <BellIcon />
-                  <span className="header--navigation--authcontainer--menu--menuitem--links--span">
-                    Activity
-                    </span>
-                    </MenuItem>
-                    </Link>
-                    <Link
-                className="header--navigation--authcontainer--menu--menuitem--links"
-                to="/"
-              >
-                <MenuItem
-                onClick={handleClose}
-                sx={{
-                  padding: '8px',
-                  width: '180px',
-                  borderBottom: '#00000040 1px solid',
-                }}
-                >
-                  <PlantIcon />
-                  <span className="header--navigation--authcontainer--menu--menuitem--links--span">
-                    Plant
-                  </span>
-                </MenuItem>
-              </Link> */}
           </div>
         )}
 
-        <div className="header--navigation--authcontainer--menu--menuitem">
+        <div className="header__navigation__authcontainer__menu__menuitem">
           <Link
-            className="header--navigation--authcontainer--menu--menuitem--links"
+            className="header__navigation__authcontainer__menu__menuitem__links"
             to="/"
           >
             <MenuItem
@@ -174,14 +141,14 @@ const NavMenu = () => {
               onClick={handleClose}
             >
               <GlobeIcon />
-              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+              <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Map
               </span>
             </MenuItem>
           </Link>
 
           <Link
-            className="header--navigation--authcontainer--menu--menuitem--links"
+            className="header__navigation__authcontainer__menu__menuitem__links"
             to="/about"
           >
             <MenuItem
@@ -192,7 +159,7 @@ const NavMenu = () => {
               onClick={handleClose}
             >
               <InfoIcon />
-              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+              <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 About
               </span>
             </MenuItem>
@@ -200,7 +167,7 @@ const NavMenu = () => {
 
           <Link
             to="/contact"
-            className="header--navigation--authcontainer--menu--menuitem--links"
+            className="header__navigation__authcontainer__menu__menuitem__links"
           >
             <MenuItem
               sx={{
@@ -210,14 +177,14 @@ const NavMenu = () => {
               onClick={handleClose}
             >
               <ContactIcon />
-              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+              <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Contact
               </span>
             </MenuItem>
           </Link>
           <Link
             to="/data"
-            className="header--navigation--authcontainer--menu--menuitem--links"
+            className="header__navigation__authcontainer__menu__menuitem__links"
           >
             <MenuItem
               sx={{
@@ -227,13 +194,13 @@ const NavMenu = () => {
               onClick={handleClose}
             >
               <FolderIcon />
-              <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+              <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Data
               </span>
             </MenuItem>
           </Link>
         </div>
-        <Link className="header--navigation--authcontainer--menu--menuitem--disabled">
+        <Link className="header__navigation__authcontainer__menu__menuitem__disabled">
           <MenuItem
             sx={{
               padding: '8px',
@@ -242,18 +209,18 @@ const NavMenu = () => {
             }}
           >
             <HelpIcon />
-            <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+            <span className="header__navigation__authcontainer__menu__menuitem__links__span">
               Help
             </span>
           </MenuItem>
         </Link>
         <ProfileAuthButton>
           {isAuthenticated ? (
-            <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+            <span className="header__navigation__authcontainer__menu__menuitem__links__span">
               Log Out
             </span>
           ) : (
-            <span className="header--navigation--authcontainer--menu--menuitem--links--span">
+            <span className="header__navigation__authcontainer__menu__menuitem__links__span">
               Sign In
             </span>
           )}

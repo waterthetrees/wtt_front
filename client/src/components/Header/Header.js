@@ -13,44 +13,44 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="header--navigation">
-        <div className="header--navigation--logocontainer">
+      <div className="header__navigation">
+        <div className="header__navigation__logocontainer">
           <Link to="/">
             <TreeLogo />
           </Link>
           <Link to="/">
             <img
-              className="header--navigation--logocontainer--logo"
+              className="header__navigation__logocontainer__logo"
               src={HeaderLogo}
               alt="Header Logo"
             ></img>
           </Link>
         </div>
-        <div className="header--navigation--navcontainer">
-          <button className="header--navigation--navcontainer--buttons">
+        <div className="header__navigation__navcontainer">
+          <button className="header__navigation__navcontainer__buttons">
             <Link to="/" title="Map">
               Map
             </Link>
           </button>
-          <button className="header--navigation--navcontainer--buttons">
+          <button className="header__navigation__navcontainer__buttons">
             <Link to="/about" title="About">
               About
             </Link>
           </button>
-          <button className="header--navigation--navcontainer--buttons">
+          <button className="header__navigation__navcontainer__buttons">
             <Link to="/contact" title="Contact">
               Contact
             </Link>
           </button>
-          <button className="header--navigation--navcontainer--buttons">
+          <button className="header__navigation__navcontainer__buttons">
             <Link to="/data" title="Data">
               Data
             </Link>
           </button>
         </div>
-        <div className="header--navigation--authcontainer">
+        <div className="header__navigation__authcontainer">
           {isAuthenticated ? null : (
-            <div className="header--navigation--authcontainer--button">
+            <div className="header__navigation__authcontainer__button">
               <AuthButton />
             </div>
           )}
