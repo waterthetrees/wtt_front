@@ -1,16 +1,16 @@
 import React from 'react';
 import './Footer.scss';
 import { Link } from 'react-router-dom';
+import { TreeLogo } from '@/components/Icons';
 
 const Footer = () => (
   <div className="footer">
-    <div className="footer-content">
-      <Link to="/privacy" className="footer-link">
-        Privacy Policy
+    <div className="footer--content">
+      <Link to="/">
+        <TreeLogo />
       </Link>
-      <Link to="/license" className="footer-link">
-        License
-      </Link>
+      <Link to="/privacy">Privacy Policy</Link>
+      <Link to="/license">License</Link>
     </div>
   </div>
 );
