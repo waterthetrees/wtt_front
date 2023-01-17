@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AuthButton, ProfileAuthButton } from '@/components/Auth';
+import { ProfileAuthButton } from '@/components/Auth';
 import {
-  TreeIcon,
-  BellIcon,
-  PlantIcon,
   GlobeIcon,
   InfoIcon,
   HelpIcon,
