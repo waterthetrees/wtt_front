@@ -1,15 +1,21 @@
 .footer {
+  padding-top: 16px;
   display: flex;
   justify-content: center;
   width: 100%;
   font-family: "Montserrat", sans-serif;
+  border-top: rgba(0, 0, 0, 0.472) solid 1px;
 
-  &--content {
+  &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: max(200px, 13%);
+    width: 14%;
+
+    @media only screen and (max-width: 768px) {
+      width: 240px;
+    }
 
     a {
       font-size: 1.2rem;
@@ -22,10 +28,4 @@
     }
   }
 
-}
-
-@media only screen and (max-width: 768px) {
-  .footer-content {
-    padding: 5px;
-  }
 }

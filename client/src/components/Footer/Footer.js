@@ -5,7 +5,7 @@ import { TreeLogo } from '@/components/Icons';
 
 const Footer = () => (
   <div className="footer">
-    <div className="footer--content">
+    <div className="footer__content">
       <Link to="/">
         <TreeLogo />
       </Link>
