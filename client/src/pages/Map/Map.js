@@ -10,6 +10,7 @@ import { treeHealthUtil } from '@/util/treeHealthUtil';
 import MapboxControlPortal from './MapboxControlPortal';
 import MapLayers from './MapLayers';
 import TreeLayerLegend from './TreeLayerLegend';
+import { getData } from '../../api/apiUtils';
 import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
@@ -140,6 +141,14 @@ export default function Map({
         mapboxMap.addSource('WTTV', {
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
+        });
+
+        getData('trees').then((response) => {
+          const { lng, lat } = response;
+          map.flyTo({
+            center: [lng, lat],
+            zoom: 15,
+          });
         });
 
         onLoad(mapboxMap);
