@@ -45,8 +45,7 @@ const MapContainer = styled('main', {
 );
 
 function MapLayout() {
-  const hashParams = new URLSearchParams(window.location.hash.slice(1));
-  const [currentTreeId, setCurrentTreeId] = useState(hashParams.get('id'));
+  const [currentTreeId, setCurrentTreeId] = useState();
   const [currentTreeDataVector, setCurrentTreeDataVector] = useState();
   const [currentTreeData, setCurrentTreeData] = useState();
   const [map, setMap] = useState(null);
@@ -61,50 +60,6 @@ function MapLayout() {
   const drawerOpen = !!currentTreeId || newTreeState.isPanelOpen;
   // Opens a left side panel on desktop, and a full-screen dialog on mobile.
   const treeDetailsContainer = drawerEnabled ? PanelDrawer : ScrollableDialog;
-
-  const handleTransitionEnd = (event) => {
-    // This event handler will get other transitions, like for the close box on the legend, so make
-    // sure we're only listening to the map container changing size.  Also make sure the map has
-    // loaded before trying to resize it, as this event seems to be triggered once on mobile before
-    // the map is ready.
-    if (event.target === mapContainerRef.current && map) {
-      // If the transition has ended and the right margin is 0, then the drawer just opened.  In
-      // other words, the right margin has transitioned from -350 (closed) to 0 (open).
-      const drawerOpened =
-        parseInt(getComputedStyle(event.target).marginRight, 10) === 0;
-      // Get the location of the selected tree or the new tree to plant, if any.
-      const { lng, lat } = currentTreeDb || newTreeState.coords || {};
-      // Resizing the map will cause it to shift horizontally by half the drawerWidth.  We need to
-      // shift it back by that amount so the user doesn't see the map move at all.  This delta is
-      // not a const, as we'll adjust it below to keep a selected location in view, if necessary.
-      let deltaX = (drawerWidth / 2) * (drawerOpened ? -1 : 1);
-
-      if (Number.isFinite(lng)) {
-        // Figure out where the selected location is in screen space.
-        const treePoint = map.project([lng, lat]);
-        // If the location is closer to the drawer than this, we'll shift the map so it stays
-        // visible.
-        const minDrawerOffset = 60;
-        const newMapWidth = mapContainerRef.current.offsetWidth;
-        const adjustment = Math.round(
-          treePoint.x + minDrawerOffset - newMapWidth,
-        );
-
-        // Ignore negative adjustments, as those locations are > than the offset away from the
-        // drawer. Positive adjustments will pan the map to the right, moving the selected location
-        // out from under the newly opened drawer.
-        deltaX += Math.max(0, adjustment);
-      }
-
-      // Opening/closing the drawer triggers a transition on this component, so now that it's done,
-      // tell the map to resize to its new container size.
-      map.resize();
-
-      // Shift the map to counteract the shift caused by the resize we just did. Set the duration
-      // to 0 so the pan is instant.
-      map.panBy([deltaX, 0], { duration: 0 });
-    }
-  };
 
   useEffect(() => {
     if (newTreeState.isPanelOpen) {
@@ -135,7 +90,6 @@ function MapLayout() {
         drawerEnabled={drawerEnabled}
         drawerOpen={drawerOpen}
         drawerWidth={drawerWidth}
-        onTransitionEnd={handleTransitionEnd}
       >
         <Map
           containerRef={mapContainerRef}
