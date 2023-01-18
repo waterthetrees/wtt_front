@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
+import { getData } from '@/api/apiUtils';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
@@ -10,7 +11,6 @@ import { treeHealthUtil } from '@/util/treeHealthUtil';
 import MapboxControlPortal from './MapboxControlPortal';
 import MapLayers from './MapLayers';
 import TreeLayerLegend from './TreeLayerLegend';
-import { getData } from '../../api/apiUtils';
 import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
@@ -143,13 +143,7 @@ export default function Map({
           url: 'mapbox://waterthetrees.open-trees',
         });
 
-        getData('trees').then((response) => {
-          const { lng, lat } = response;
-          map.flyTo({
-            center: [lng, lat],
-            zoom: 15,
-          });
-        });
+        flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId);
 
         onLoad(mapboxMap);
         setIsMapLoaded(true);
@@ -288,4 +282,20 @@ export default function Map({
       </>
     )
   );
+}
+
+function flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId) {
+  const currentTreeId = new URLSearchParams(window.location.hash.slice(1)).get(
+    'id',
+  );
+  const queryKey = ['trees', { id: currentTreeId }];
+  getData({ queryKey }).then((response) => {
+    const { lng, lat } = response;
+    mapboxMap.flyTo({
+      center: [lng, lat],
+      zoom: 15,
+    });
+    queryClient.setQueryData(queryKey, response);
+    setCurrentTreeId(currentTreeId);
+  });
 }
