@@ -11,7 +11,6 @@ import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
 
-const DEFAULT_TREE_ZOOM = 17;
 const drawerWidth = 350;
 
 const MapContainer = styled('main', {
