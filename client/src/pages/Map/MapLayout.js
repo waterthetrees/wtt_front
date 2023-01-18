@@ -120,26 +120,6 @@ function MapLayout() {
     setMapSelectionEnabled(!newTreeState.isDragging);
   }, [newTreeState.isDragging]);
 
-  // On initial page load, if there is a tree id in the url as
-  // a hash param, move to that tree on the map.
-  useEffect(() => {
-    if (!map) {
-      return;
-    }
-    const { lng, lat } = currentTreeDataVector || currentTreeDb || {};
-    const currentZoom = map.getZoom();
-    if (lng) {
-      map.flyTo({
-        center: [lng, lat],
-        zoom: currentZoom > DEFAULT_TREE_ZOOM ? currentZoom : DEFAULT_TREE_ZOOM,
-      });
-    } else {
-      hashParams.delete('id');
-      window.location.hash = decodeURIComponent(hashParams.toString());
-      setCurrentTreeId(null);
-    }
-  }, [map, currentTreeData, currentTreeDb, hashParams]);
-
   useEffect(() => {
     if (currentTreeDb) {
       setCurrentTreeData({
