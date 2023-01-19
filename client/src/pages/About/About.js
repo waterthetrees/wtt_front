@@ -2,7 +2,7 @@ import React from 'react';
 import { Affiliates } from '@/components/Contact/Index';
 import { Footer } from '@/components/Footer/Footer';
 import tree from '../../assets/images/abouttree.jpg';
-import { GreenButton } from '@/components/Section/Page';
+import { GreenButton } from '@/components/Button/Green';
 
 import './About.scss';
 
