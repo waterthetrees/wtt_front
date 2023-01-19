@@ -4,13 +4,13 @@ import { Menu, MenuItem } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ProfileAuthButton } from '@/components/Auth';
 import {
-  GlobeIcon,
-  InfoIcon,
-  HelpIcon,
-  ContactIcon,
-  FolderIcon,
-  AccountIcon,
-} from '@/components/Icons';
+  PublicOutlined,
+  InfoOutlined,
+  HelpOutlineOutlined,
+  ContactMailOutlined,
+  FolderSpecialOutlined,
+  AccountCircleOutlined,
+} from '@mui/icons-material/';
 
 import './Header.scss';
 
@@ -115,7 +115,7 @@ const NavMenu = () => {
                     borderBottom: '#00000040 1px solid',
                   }}
                 >
-                  <AccountIcon />
+                  <AccountCircleOutlined sx={{ fontSize: '2rem' }} />
                   <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                     Profile
                   </span>
@@ -137,7 +137,7 @@ const NavMenu = () => {
               }}
               onClick={handleClose}
             >
-              <GlobeIcon />
+              <PublicOutlined sx={{ fontSize: '2rem' }} />
               <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Map
               </span>
@@ -155,7 +155,7 @@ const NavMenu = () => {
               }}
               onClick={handleClose}
             >
-              <InfoIcon />
+              <InfoOutlined sx={{ fontSize: '2rem' }} />
               <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 About
               </span>
@@ -173,7 +173,7 @@ const NavMenu = () => {
               }}
               onClick={handleClose}
             >
-              <ContactIcon />
+              <ContactMailOutlined sx={{ fontSize: '2rem' }} />
               <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Contact
               </span>
@@ -190,7 +190,7 @@ const NavMenu = () => {
               }}
               onClick={handleClose}
             >
-              <FolderIcon />
+              <FolderSpecialOutlined sx={{ fontSize: '2rem' }} />
               <span className="header__navigation__authcontainer__menu__menuitem__links__span">
                 Data
               </span>
@@ -205,7 +205,7 @@ const NavMenu = () => {
               cursor: 'default',
             }}
           >
-            <HelpIcon />
+            <HelpOutlineOutlined sx={{ fontSize: '2rem' }} />
             <span className="header__navigation__authcontainer__menu__menuitem__links__span">
               Help
             </span>

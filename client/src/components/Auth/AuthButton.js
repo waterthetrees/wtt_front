@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { GreenButton } from '@/components/Section/Section';
 import { MenuItem } from '@mui/material';
-import { LoginIcon, LogoutIcon } from '@/components/Icons';
+import { LoginOutlined, LogoutOutlined } from '@mui/icons-material';
 
 export const AuthButton = () => {
   const { isAuthenticated, logout } = useAuth0();
@@ -38,6 +38,13 @@ export const AuthButton = () => {
 };
 
 export const ProfileAuthButton = (props) => {
+  const LoginIcon = (props) => (
+    <LoginOutlined sx={{ fontSize: '2rem' }} {...props} />
+  );
+
+  const LogoutIcon = (props) => (
+    <LogoutOutlined sx={{ fontSize: '2rem' }} {...props} />
+  );
   const { isAuthenticated, logout } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
 
