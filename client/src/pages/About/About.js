@@ -19,8 +19,10 @@ const About = () => {
               </span>
             </h1>
           </div>
-          <div className="about__main__section__sub">
-            <h2>About Us</h2>
+          <div
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
+            className="about__main__section__sub"
+          >
             <p>
               Welcome to Water the Trees, a platform that crowd sources tree
               planting and maintenance. We are an open source project run by
@@ -97,7 +99,7 @@ const About = () => {
               </div>
             </div>
             <h2>Involve the general public</h2>
-            <p>
+            <p style={{ marginBottom: '0px' }}>
               To grow our tree population, we want everyone to contribute to
               local tree planting and be aware of tree health.
             </p>
@@ -128,9 +130,7 @@ const About = () => {
               >
                 Onboarding Steps
               </a>
-              .
-            </p>
-            <p>
+              .<br></br>
               2. Join us on{' '}
               <a
                 target="_blank"
@@ -146,7 +146,9 @@ const About = () => {
               rel="noopener noreferrer"
               href="https://sfbrigade.slack.com/archives/C010EGACUTU"
             >
-              <GreenButton>Join our Slack</GreenButton>
+              <GreenButton styles={{ padding: '4px 12px' }}>
+                <strong>Join our Slack</strong>
+              </GreenButton>
             </a>
           </div>
         </div>
