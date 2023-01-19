@@ -144,7 +144,7 @@ function License() {
           <h3>SIL OPEN FONT LICENSE Version 1.1</h3>
         </div>
         <div className="license-p">
-          <h3>PREAMBLE</h3>
+          <h3>Preamble</h3>
           The goals of the Open Font License (OFL) are to stimulate worldwide
           development of collaborative font projects, to support the font
           creation efforts of academic and linguistic communities, and to
@@ -160,7 +160,7 @@ function License() {
           their derivatives.
         </div>
         <div className="license-p">
-          <h3>DEFINITIONS</h3>
+          <h3>Definitions</h3>
           "Font Software" refers to the set of files released by the Copyright
           Holder(s) under this license and clearly marked as such. This may
           include source files, build scripts and documentation. "Reserved Font
@@ -175,7 +175,7 @@ function License() {
           contributed to the Font Software.
         </div>
         <div className="license-p">
-          <h3>PERMISSION & CONDITIONS</h3>
+          <h3>Permissions & Conditions</h3>
           Permission is hereby granted, free of charge, to any person obtaining
           a copy of the Font Software, to use, study, copy, merge, embed,
           modify, redistribute, and sell modified and unmodified copies of the
@@ -202,7 +202,7 @@ function License() {
           any document created using the Font Software.
         </div>
         <div className="license-p">
-          <h3>PERMISSION & CONDITIONS</h3>
+          <h3>Disclaimers</h3>
           THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
           EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
           MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
