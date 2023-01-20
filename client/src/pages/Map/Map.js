@@ -288,14 +288,16 @@ function flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId) {
   const currentTreeId = new URLSearchParams(window.location.hash.slice(1)).get(
     'id',
   );
-  const queryKey = ['trees', { id: currentTreeId }];
-  getData({ queryKey }).then((response) => {
-    const { lng, lat } = response;
-    mapboxMap.flyTo({
-      center: [lng, lat],
-      zoom: 15,
+  if (currentTreeId != null) {
+    const queryKey = ['trees', { id: currentTreeId }];
+    getData({ queryKey }).then((response) => {
+      const { lng, lat } = response;
+      mapboxMap.flyTo({
+        center: [lng, lat],
+        zoom: 15,
+      });
+      queryClient.setQueryData(queryKey, response);
+      setCurrentTreeId(currentTreeId);
     });
-    queryClient.setQueryData(queryKey, response);
-    setCurrentTreeId(currentTreeId);
-  });
+  }
 }
