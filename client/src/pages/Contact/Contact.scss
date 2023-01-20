@@ -1,58 +1,110 @@
 .contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin: 10rem 8rem;
-  font-size: 1.5rem;
-  box-sizing: border-box;
+  margin-top: 5rem;
+  font-family: "Montserrat", sans-serif;
 
-  &__header {
-    margin-bottom: 1rem;
-  }
-
-  &__logo {
-    max-width: 20vw;
-    max-height: 20vh;
-    margin: 1rem;
-  }
-
-  &__p {
+  &__main {
     display: flex;
     flex-direction: column;
-  }
+    align-items: center;
+    width: 100%;
 
-  &__p span {
-    margin: 1.5rem;
-    box-sizing: border-box;
-  }
+    h1 {
+      font-size: 4.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
 
-  &__p a {
-    cursor: pointer;
-
-    a:link {
-      color: #ccc;
+      @media only screen and (max-width: 768px) {
+        font-size: 3.75rem;
+        margin-bottom: 1.5rem;
+      }
     }
 
-    /* visited link */
-    a:visited {
-      color: #095484;
+    h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 2.25rem;
+        margin-bottom: 1.5rem;
+      }
     }
 
-    /* mouse over link */
-    a:hover {
-      color: #8ebf42;
+    p {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+      }
     }
 
-    /* selected link */
-    a:active {
-      color: #800000;
+    &:first-child {
+      border-top: 0px,
     }
-  }
-}
 
-@media only screen and (max-width: 768px) {
-  .contact {
-    margin: 5rem 2rem;
+    &__green {
+      color: #3fab45;
+    }
+
+    &__section {
+      margin-bottom: 4rem;
+      padding-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      border-top: 1px solid black;
+    }
+
+
+    &__image {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50rem;
+      margin-bottom: 4rem;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+        height: 500px;
+        justify-content: flex-end;
+      }
+
+      &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &__absolute {
+        position: absolute;
+        width: 70%;
+        z-index: 10;
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+
+      &__relative {
+        position: relative;
+        width: 27%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        color: white;
+
+        @media only screen and (max-width: 768px) {
+          padding: 1.5rem;
+          width: 70%;
+        }
+      }
+    }
+
+    &__subsec {}
+
   }
 }
