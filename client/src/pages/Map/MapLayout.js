@@ -13,36 +13,15 @@ import Map from './Map';
 
 const drawerWidth = 350;
 
-const MapContainer = styled('main', {
-  shouldForwardProp: (prop) => prop.indexOf('drawer') !== 0,
-})(
-  ({
-    theme,
-    drawerEnabled,
-    drawerOpen,
-    drawerWidth, // eslint-disable-line no-shadow
-  }) => ({
-    background: '#c5def6',
-    flexGrow: 1,
-    // We need to use vh here, as height: 100% leaves the map at 0 height.
-    height: '100vh',
-    padding: 0,
-    // Put a position on this element so that the map control groups will move when it changes size.
-    position: 'relative',
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: drawerEnabled ? -drawerWidth : 0,
-    ...(drawerOpen && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginRight: 0,
-    }),
-  }),
-);
+const MapContainer = styled('main')({
+  background: '#c5def6',
+  flexGrow: 1,
+  // We need to use vh here, as height: 100% leaves the map at 0 height.
+  height: '100vh',
+  padding: 0,
+  // Put a position on this element so that the map control groups will move when it changes size.
+  position: 'relative',
+});
 
 function MapLayout() {
   const [currentTreeId, setCurrentTreeId] = useState();
@@ -101,10 +80,6 @@ function MapLayout() {
         />
       </MapContainer>
 
-      {/* We need to render the TreeDetailsContainer Panel even if nothing
-          is selected so that its width is
-          still reserved in the parent Box and therefore the marginRight calculations in
-          Container are correct. */}
       {newTreeState.isPanelOpen ? (
         <NewTree
           TreeDetailsContainer={treeDetailsContainer}

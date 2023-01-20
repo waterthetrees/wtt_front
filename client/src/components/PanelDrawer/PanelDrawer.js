@@ -12,9 +12,7 @@ import { Close } from '@mui/icons-material';
 
 const StyledDrawer = styled(Drawer)(
   ({ width }) => `
-  // Give the background of the container the same color as land on the map, so that it's not
-  // so jarring when the white drawer closes.
-  background: #c5def6;
+  position: absolute;
   width: ${width}px;
   flex-shrink: 0;
 
@@ -36,6 +34,9 @@ export default function PanelDrawer({
   actions,
   onClose,
 }) {
+  if (!open) {
+    return null;
+  }
   return (
     <StyledDrawer
       open={open}
