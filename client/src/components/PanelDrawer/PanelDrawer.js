@@ -16,6 +16,7 @@ const StyledDrawer = styled(Drawer)(
   position: absolute;
   right: 0;
   width: ${width}px;
+  height: 100vh;
 
   & .MuiDrawer-paper {
     // Add padding at the top to account for the header.
