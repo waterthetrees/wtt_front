@@ -87,10 +87,6 @@ function MapLayout() {
         />
       ) : (
         <Tree
-          // Key the TreeDetailsContainer panel on the current tree,
-          // so that when the selection changes, all of the
-          // components get re-rendered with fresh props.
-          key={currentTreeId}
           TreeDetailsContainer={treeDetailsContainer}
           drawerWidth={drawerWidth}
           map={map}
