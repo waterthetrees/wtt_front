@@ -7,7 +7,7 @@ import SierrClubLogo from '@/assets/images/logos/san-francisco-bay.png';
 
 const StyledImg = styled(CardMedia)({
   maxHeight: '20vh',
-  margin: '1rem',
+  width: '100%',
 });
 
 export const C4SF = () => {
@@ -16,6 +16,7 @@ export const C4SF = () => {
       href="https://www.codeforsanfrancisco.org/"
       rel="noreferrer"
       target="_blank"
+      style={{ width: '100%', display: 'inline-block' }}
     >
       <StyledImg component="img" alt="Code for America Logo" src={CodeLogo} />
     </a>
