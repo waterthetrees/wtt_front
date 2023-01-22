@@ -161,8 +161,10 @@ const About = () => {
             </div>
           </div>
         </div>
+        <div className="about__main__footer">
+          <Footer />
+        </div>
       </div>
-      <Footer />
     </div>
   );
 };
