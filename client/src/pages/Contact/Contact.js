@@ -102,7 +102,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div className="contact__main__section">
+        <div className="contact__footer">
           <Footer />
         </div>
       </div>

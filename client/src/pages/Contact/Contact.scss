@@ -40,16 +40,6 @@
       }
     }
 
-    a {
-      color: #3fab45;
-      text-decoration: underline;
-      font-weight: bold;
-
-      &:hover {
-        color: green;
-      }
-    }
-
     &> :last-child {
       border-top: none;
       padding-top: 0px;
@@ -114,6 +104,16 @@
       width: 70%;
       border-top: 2px solid #80808070;
 
+      a {
+        color: #3fab45;
+        text-decoration: underline;
+        font-weight: bold;
+
+        &:hover {
+          color: green;
+        }
+      }
+
       &__sub {
         display: flex;
         flex-direction: column;
@@ -147,8 +147,13 @@
       }
     }
 
-    &__footer {
-      width: 100%;
+  }
+
+  &__footer {
+    width: 70%;
+
+    @media only screen and (max-width: 768px) {
+      width: 90%;
     }
   }
 }
