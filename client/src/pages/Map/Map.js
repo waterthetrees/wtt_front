@@ -129,7 +129,7 @@ export default function Map({
       });
 
       // Add the navigation controls to the map.
-      mapboxMap.addControl(new mapboxgl.NavigationControl());
+      mapboxMap.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
       mapboxMap.on('load', () => {
         // Now that the style has loaded, add the vector tile source, which will be used by the
@@ -267,7 +267,7 @@ export default function Map({
             expanded
           />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="top-right">
+        <MapboxControlPortal map={map} position="top-left">
           <GeolocateControl map={map} />
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="bottom-left">
