@@ -284,20 +284,27 @@ export default function Map({
   );
 }
 
-function flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId) {
+async function flyToTreeAndUpdateCache(
+  mapboxMap,
+  queryClient,
+  setCurrentTreeId,
+) {
   const currentTreeId = new URLSearchParams(window.location.hash.slice(1)).get(
     'id',
   );
   if (currentTreeId != null) {
     const queryKey = ['trees', { id: currentTreeId }];
-    getData({ queryKey }).then((response) => {
+    try {
+      const response = await getData({ queryKey });
       const { lng, lat } = response;
       mapboxMap.flyTo({
         center: [lng, lat],
         zoom: 15,
       });
       queryClient.setQueryData(queryKey, response);
-      setCurrentTreeId(currentTreeId);
-    });
+    } catch {
+      // Do nothing. Since query cache is not updated, request will be retried.
+    }
+    setCurrentTreeId(currentTreeId);
   }
 }
