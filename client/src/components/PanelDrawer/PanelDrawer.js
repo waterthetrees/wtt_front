@@ -6,7 +6,6 @@ import {
   DialogTitle,
   Drawer,
   IconButton,
-  Slide,
   styled,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
@@ -37,25 +36,23 @@ export default function PanelDrawer({
   onClose,
 }) {
   return (
-    <Slide direction="left" in={open} timeout={500} mountOnEnter unmountOnExit>
-      <StyledDrawer
-        open
-        anchor={anchor}
-        width={width}
-        onClose={onClose}
-        variant="persistent"
-      >
-        <DialogTitle sx={{ py: 1 }}>
-          <Box display="flex" alignItems="center">
-            <Box flexGrow={1}>{title}</Box>
-            <IconButton size="small" onClick={onClose} sx={{ mr: -1.5 }}>
-              <Close />
-            </IconButton>
-          </Box>
-        </DialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
-        {actions && <DialogActions>{actions}</DialogActions>}
-      </StyledDrawer>
-    </Slide>
+    <StyledDrawer
+      open={open}
+      anchor={anchor}
+      width={width}
+      onClose={onClose}
+      variant="persistent"
+    >
+      <DialogTitle sx={{ py: 1 }}>
+        <Box display="flex" alignItems="center">
+          <Box flexGrow={1}>{title}</Box>
+          <IconButton size="small" onClick={onClose} sx={{ mr: -1.5 }}>
+            <Close />
+          </IconButton>
+        </Box>
+      </DialogTitle>
+      <DialogContent dividers>{children}</DialogContent>
+      {actions && <DialogActions>{actions}</DialogActions>}
+    </StyledDrawer>
   );
 }
