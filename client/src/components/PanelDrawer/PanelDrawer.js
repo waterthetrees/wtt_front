@@ -13,7 +13,7 @@ import { Close } from '@mui/icons-material';
 const StyledDrawer = styled(Drawer)(
   ({ width }) => `
   position: absolute;
-  right: 0;
+  left: 0;
   width: ${width}px;
   height: 100vh;
 
@@ -31,7 +31,7 @@ export default function PanelDrawer({
   width,
   open,
   title = '',
-  anchor = 'right',
+  anchor = 'left',
   actions,
   onClose,
 }) {
