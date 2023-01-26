@@ -282,10 +282,10 @@ export default function Map({
           layers={layers}
           currentTreeData={currentTreeData}
         />
-        <MapboxControlPortal map={map} position="bottom-left">
+        <MapboxControlPortal map={map} position="bottom-right">
           <NewTreeButton map={map} />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-left">
+        <MapboxControlPortal map={map} position="bottom-right">
           <TreeLayerLegend
             map={map}
             title="Tree layers:"
@@ -296,7 +296,7 @@ export default function Map({
         <MapboxControlPortal map={map} position="top-left">
           <GeolocateControl map={map} />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-left">
+        <MapboxControlPortal map={map} position="bottom-right">
           <Adopt />
         </MapboxControlPortal>
       </>
