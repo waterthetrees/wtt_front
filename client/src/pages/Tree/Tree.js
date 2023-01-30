@@ -11,6 +11,7 @@ import TreeLinks from './TreeLinks';
 import { ImageLoad } from './TreeImage';
 
 import treeImages from '@/data/dist/treeImages.json';
+import { CarbonCalculator } from './CarbonCalculator';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -107,6 +108,8 @@ export default function Tree({
           <TreeInfo currentTreeData={currentTreeData} />
 
           <TreeLinks currentTreeData={currentTreeData} />
+
+          <CarbonCalculator currentTreeData={currentTreeData} />
 
           {!hasUnfitData && (
             <TreeRemoval
