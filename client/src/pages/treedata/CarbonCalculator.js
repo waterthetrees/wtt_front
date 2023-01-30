@@ -13,20 +13,45 @@ const carbonCalculatorExplainer = (carbonDetails) => ({
   weightCarbonDioxideInKg: `${carbonDetails.convertWeightCarbonDioxideToKg} kg`,
 });
 
-const carbonCalculatorMath = (age, dbh, height, planted, decimalYear) => ({
-  planted: format(new Date(planted), 'yyyy-MM-dd'),
-  decimalYear,
-  DBH: dbh,
-  height,
-  weightaboveGround: 0.25 * dbh * height,
-  weightTotalGreen: 1.2 * 0.25 * dbh * height,
-  weightDry: 0.725 * 1.2 * 0.25 * dbh * height,
-  weightCarbon: 0.5 * 0.725 * 1.2 * 0.25 * dbh * height,
-  weightCarbonDioxideInLbs: 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height,
-  weightCarbonDioxideInKg: 0.45359237 * 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height,
-  weightCarbonDioxidePerYearInLbs: (3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height) / age,
-  weightCarbonDioxidePerYearInKg: (0.45359237 * 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height) / age,
-});
+const carbonCalculatorMathShortForm = (age, dbh, height, planted, decimalYear) => {
+  const planted = format(new Date(planted), 'yyyy-MM-dd');
+  const weightaboveGround = 0.25 * dbh * height;
+  const weightTotalGreen = 1.2 * weightaboveGround;
+  const weightDry = 0.725 * weightTotalGreen;
+  const weightCarbon = 0.5 * weightDry;
+  const weightCarbonDioxideInLbs = 3.67 * weightCarbon;
+  const weightCarbonDioxideInKg = 0.45359237 * weightCarbonDioxideInLbs;
+  const weightCarbonDioxidePerYearInLbs = (weightCarbonDioxideInLbs) / age;
+  const weightCarbonDioxidePerYearInKg = (weightCarbonDioxideInKg) / age;
+  return {
+    weightaboveGround, weightTotalGreen, 
+    weightDry, weightCarbon, 
+    weightCarbonDioxideInLbs, weightCarbonDioxideInKg, 
+    weightCarbonDioxidePerYearInLbs, weightCarbonDioxidePerYearInKg, 
+  }
+};
+
+/**
+ * carbonCalculatorMathLongForm This explains the math in the short form
+ * @param {*} planted 
+ * @param {*} decimalYear
+ * @param {*} age
+ * @param {*} dbh
+ * @param {*} height
+ * @returns 
+ */
+// const carbonCalculatorMathLongForm = (age, dbh, height, planted, decimalYear) => {
+//   const carbonCalculator = {};
+//   const planted = format(new Date(planted), 'yyyy-MM-dd')
+//   const weightaboveGround = 0.25 * dbh * height
+//   const weightTotalGreen = 1.2 * 0.25 * dbh * height
+//   const weightDry = 0.725 * 1.2 * 0.25 * dbh * height
+//   const weightCarbon = 0.5 * 0.725 * 1.2 * 0.25 * dbh * height
+//   const weightCarbonDioxideInLbs = 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height
+//   const weightCarbonDioxideInKg = 0.45359237 * 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height
+//   const weightCarbonDioxidePerYearInLbs = (3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height) / age
+//   const weightCarbonDioxidePerYearInKg = (0.45359237 * 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height) / age
+// };
 
 const calculateAge = (planted) => {
   const functionName = 'calculateAge';
@@ -43,11 +68,12 @@ export const CarbonCalculator = ({ treeData }) => {
   }
   const decimalYear = calculateAge(datePlanted);
   const age = (decimalYear < 1) ? 1 : decimalYear;
-  const carbonDetails = carbonCalculatorMath(age, dbh, height, datePlanted, decimalYear);
+  const carbonDetails = carbonCalculatorMathShortForm(age, dbh, height, datePlanted, decimalYear);
   if (decimalYear < 1) {
     delete carbonDetails.weightCarbonDioxideInLbs;
     delete carbonDetails.weightCarbonDioxideInKg;
   }
+
 
   return (
     <div className="flex-grid border-top">
@@ -77,7 +103,7 @@ export const CarbonCalculator = ({ treeData }) => {
 
           <p>        
             <a href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc">
-              Tree Carbon Calculator
+            Forestry Service USDA Tree Carbon Calculator
             </a>
           </p>
 
@@ -86,6 +112,32 @@ export const CarbonCalculator = ({ treeData }) => {
               Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
             </a>
           </p>
+
+          <p>
+            <a href="https://www.fs.usda.gov/research/treesearch/52933">
+             Forestry Service USDA Tree Carbon Calculator Paper
+            </a>
+          </p>
+
+          <p>
+            <a href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020">
+              iTools Carbon Equations and Methods 2020
+            </a>
+          </p>
+
+          <p>
+            <a href="https://dtbe-api.daveyinstitute.com/
+https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf">
+              The Davey Tree Benefits Engine
+            </a>
+          </p>
+
+          <p>
+            <a href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full">
+              Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+            </a>
+          </p>
+
           
         </div>
       </div>
