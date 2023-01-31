@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
-import { getData } from '@/api/apiUtils';
+import { useTreeQuery } from '@/api/queries';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
@@ -86,6 +86,17 @@ export default function Map({
   const queryClient = useQueryClient();
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
+  const hasInitialFlyToFired = useRef(false);
+
+  const initialLoadTreeId = useRef(
+    new URLSearchParams(window.location.hash.slice(1)).get('id'),
+  );
+  // This tree query is intentionally separate from the one in `MapLayout`,
+  // since it kicks off only once on load!
+  const { data: initialLoadTreeData } = useTreeQuery(
+    { id: initialLoadTreeId.current },
+    { retry: 0, enabled: isMapLoaded && !!initialLoadTreeId },
+  );
 
   // TODO: maybe use a class for Map so that event handlers bound to the instance can look at
   //  this.props.selectionEnabled instead of having to mirror it in a ref like this
@@ -142,8 +153,6 @@ export default function Map({
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
         });
-
-        flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId);
 
         onLoad(mapboxMap);
         setIsMapLoaded(true);
@@ -250,6 +259,17 @@ export default function Map({
     }
   }, [map, containerRef]);
 
+  useEffect(() => {
+    if (!isMapLoaded || hasInitialFlyToFired.current) {
+      return;
+    }
+    if (initialLoadTreeData) {
+      const { lng, lat, id } = initialLoadTreeData;
+      flyTo({ map, lng, lat, hasInitialFlyToFired });
+      setCurrentTreeId(id);
+    }
+  }, [isMapLoaded, map, initialLoadTreeData, setCurrentTreeId]);
+
   if (!isMapboxSupported) {
     return unsupportedError;
   }
@@ -284,27 +304,10 @@ export default function Map({
   );
 }
 
-async function flyToTreeAndUpdateCache(
-  mapboxMap,
-  queryClient,
-  setCurrentTreeId,
-) {
-  const currentTreeId = new URLSearchParams(window.location.hash.slice(1)).get(
-    'id',
-  );
-  if (currentTreeId != null) {
-    const queryKey = ['trees', { id: currentTreeId }];
-    try {
-      const response = await getData({ queryKey });
-      const { lng, lat } = response;
-      mapboxMap.flyTo({
-        center: [lng, lat],
-        zoom: 15,
-      });
-      queryClient.setQueryData(queryKey, response);
-    } catch {
-      // Do nothing. Since query cache is not updated, request will be retried.
-    }
-    setCurrentTreeId(currentTreeId);
-  }
+function flyTo({ map, lng, lat, hasInitialFlyToFired }) {
+  map.flyTo({
+    center: [lng, lat],
+    zoom: 15,
+  });
+  hasInitialFlyToFired.current = true;
 }
