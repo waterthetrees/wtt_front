@@ -47,4 +47,4 @@ npm run start:docker;
 npm run start:nodemon;
 ```
 
-see [pull-request-template](./docs/pull-request-template.md) for more information on commits and pr conventions
+see [pull-request-template](./client/docs/pull-request-template.md) for more information on commits and pr conventions
