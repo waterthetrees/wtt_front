@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
+import { useTreeQuery } from '@/api/queries';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
@@ -85,6 +86,17 @@ export default function Map({
   const queryClient = useQueryClient();
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
+  const hasInitialFlyToFired = useRef(false);
+
+  const initialLoadTreeId = useRef(
+    new URLSearchParams(window.location.hash.slice(1)).get('id'),
+  );
+  // This tree query is intentionally separate from the one in `MapLayout`,
+  // since it kicks off only once on load!
+  const { data: initialLoadTreeData } = useTreeQuery(
+    { id: initialLoadTreeId.current },
+    { retry: 0, enabled: isMapLoaded && !!initialLoadTreeId },
+  );
 
   // TODO: maybe use a class for Map so that event handlers bound to the instance can look at
   //  this.props.selectionEnabled instead of having to mirror it in a ref like this
@@ -193,7 +205,10 @@ export default function Map({
             hashParams.delete('id');
           }
 
-          window.location.hash = decodeURIComponent(hashParams.toString());
+          const newUrl = `${window.location.origin}#${decodeURIComponent(
+            hashParams.toString(),
+          )}`;
+          window.history.replaceState({}, '', newUrl);
         });
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
@@ -244,6 +259,17 @@ export default function Map({
     }
   }, [map, containerRef]);
 
+  useEffect(() => {
+    if (!isMapLoaded || hasInitialFlyToFired.current) {
+      return;
+    }
+    if (initialLoadTreeData) {
+      const { lng, lat, id } = initialLoadTreeData;
+      flyTo({ map, lng, lat, hasInitialFlyToFired });
+      setCurrentTreeId(id);
+    }
+  }, [isMapLoaded, map, initialLoadTreeData, setCurrentTreeId]);
+
   if (!isMapboxSupported) {
     return unsupportedError;
   }
@@ -276,4 +302,12 @@ export default function Map({
       </>
     )
   );
+}
+
+function flyTo({ map, lng, lat, hasInitialFlyToFired }) {
+  map.flyTo({
+    center: [lng, lat],
+    zoom: 15,
+  });
+  hasInitialFlyToFired.current = true;
 }

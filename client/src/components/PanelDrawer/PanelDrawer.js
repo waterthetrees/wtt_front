@@ -12,16 +12,15 @@ import { Close } from '@mui/icons-material';
 
 const StyledDrawer = styled(Drawer)(
   ({ width }) => `
-  // Give the background of the container the same color as land on the map, so that it's not
-  // so jarring when the white drawer closes.
-  background: #c5def6;
+  position: absolute;
+  right: 0;
   width: ${width}px;
-  flex-shrink: 0;
+  height: 100vh;
 
   & .MuiDrawer-paper {
     // Add padding at the top to account for the header.
+    position: relative;
     padding-top: 3.5rem;
-    width: ${width}px;
     box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
   }
 `,
