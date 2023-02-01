@@ -26,7 +26,6 @@ const MapContainer = styled('main')({
 function MapLayout() {
   const [currentTreeId, setCurrentTreeId] = useState();
   const [currentTreeDataVector, setCurrentTreeDataVector] = useState();
-  const [currentTreeData, setCurrentTreeData] = useState();
   const [map, setMap] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
@@ -53,14 +52,10 @@ function MapLayout() {
     setMapSelectionEnabled(!newTreeState.isDragging);
   }, [newTreeState.isDragging]);
 
-  useEffect(() => {
-    if (currentTreeDb) {
-      setCurrentTreeData({
-        ...currentTreeDb,
-        ...currentTreeDataVector,
-      });
-    }
-  }, [currentTreeDb]);
+  const currentTreeData = {
+    ...currentTreeDataVector,
+    ...currentTreeDb,
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>

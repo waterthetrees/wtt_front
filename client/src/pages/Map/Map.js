@@ -184,18 +184,6 @@ export default function Map({
             };
 
             setCurrentTreeDataVector(currentTree);
-            const queryKeys = ['trees', { id }];
-
-            // Cache the properties from the vector tile as the data for the /trees query that will
-            // be triggered by the setCurrentTreeId() call below.  The Tree will first
-            // get this cached data and then update it when the server response comes back.  But
-            // only do this if there's no cached data already.  If there is, that data is presumably
-            // the latest response from the server, so we don't want to override it with older data
-            // from the vector tile.
-            if (!queryClient.getQueryState(queryKeys)) {
-              queryClient.setQueryData(queryKeys, properties);
-            }
-
             setCurrentTreeId(id);
             hashParams.set('id', id);
             mapboxMap.getCanvas().style.cursor = 'pointer';
