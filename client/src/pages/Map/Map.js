@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
-import { useQueryClient } from 'react-query';
 import { useTreeQuery } from '@/api/queries';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
@@ -83,7 +82,6 @@ export default function Map({
 }) {
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const queryClient = useQueryClient();
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
   const hasInitialFlyToFired = useRef(false);
