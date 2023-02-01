@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
+import { getData } from '@/api/apiUtils';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
@@ -142,6 +143,8 @@ export default function Map({
           url: 'mapbox://waterthetrees.open-trees',
         });
 
+        flyToTreeAndUpdateCache(mapboxMap, queryClient, setCurrentTreeId);
+
         onLoad(mapboxMap);
         setIsMapLoaded(true);
 
@@ -193,7 +196,10 @@ export default function Map({
             hashParams.delete('id');
           }
 
-          window.location.hash = decodeURIComponent(hashParams.toString());
+          const newUrl = `${window.location.origin}#${decodeURIComponent(
+            hashParams.toString(),
+          )}`;
+          window.history.replaceState({}, '', newUrl);
         });
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
@@ -276,4 +282,29 @@ export default function Map({
       </>
     )
   );
+}
+
+async function flyToTreeAndUpdateCache(
+  mapboxMap,
+  queryClient,
+  setCurrentTreeId,
+) {
+  const currentTreeId = new URLSearchParams(window.location.hash.slice(1)).get(
+    'id',
+  );
+  if (currentTreeId != null) {
+    const queryKey = ['trees', { id: currentTreeId }];
+    try {
+      const response = await getData({ queryKey });
+      const { lng, lat } = response;
+      mapboxMap.flyTo({
+        center: [lng, lat],
+        zoom: 15,
+      });
+      queryClient.setQueryData(queryKey, response);
+    } catch {
+      // Do nothing. Since query cache is not updated, request will be retried.
+    }
+    setCurrentTreeId(currentTreeId);
+  }
 }
