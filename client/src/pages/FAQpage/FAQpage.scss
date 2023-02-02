@@ -1,0 +1,12 @@
+@media only screen and (max-width: 768px) {
+  .faq {
+    overflow-y: scroll;
+    margin: 0;
+    padding: 3rem 2rem;
+    height: 100vh;
+
+    &__body {
+      margin: 0 1rem;
+    }
+  }
+}

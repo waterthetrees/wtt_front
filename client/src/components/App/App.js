@@ -11,7 +11,7 @@ import {
   RedirectWithHash,
 } from '@/components/Auth';
 import About from '@/pages/About/About';
-import FAQPage from '@/pages/FAQPage/FAQPage';
+import Faqpage from '@/pages/FAQPage/FAQPage';
 import Privacy from '@/pages/Privacy/Privacy';
 import License from '@/pages/License/License';
 import UserProfile from '@/pages/Userprofile/UserProfile';
@@ -62,7 +62,7 @@ function App() {
                     element={<RequireAuth component={UserProfile} />}
                   />
                   <Route path="/about" element={<About />} />
-                  <Route path="/faq" element={<FAQPage />} />
+                  <Route path="/faq" element={<Faqpage />} />
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />

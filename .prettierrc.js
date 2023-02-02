@@ -10,4 +10,5 @@ module.exports = {
   bracketSpacing: true, // https://prettier.io/docs/en/options.html#bracket-spacing
   bracketSameLine: false, // https://prettier.io/docs/en/options.html#bracket-line
   arrowParens: 'always', // https://prettier.io/docs/en/options.html#arrow-function-parentheses
+  'prettier/prettier': false,
 };
