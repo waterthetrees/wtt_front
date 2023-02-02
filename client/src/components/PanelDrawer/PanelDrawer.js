@@ -39,7 +39,7 @@ export default function PanelDrawer({
     <StyledDrawer
       open={open}
       anchor={anchor}
-      width={width}
+      width={open ? width : 0}
       onClose={onClose}
       variant="persistent"
     >
