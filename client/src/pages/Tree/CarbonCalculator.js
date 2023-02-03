@@ -98,11 +98,6 @@ const carbonCalculatorMathShortForm = (age, dbh, height) => {
 //   const weightCarbonDioxidePerYearInKg = (0.45359237 * 3.67 * 0.5 * 0.725 * 1.2 * 0.25 * dbh * height) / age
 // };
 
-const getAverageFromRange = (range) => {
-  const [min, max] = range.split('-');
-  return (Number(min) + Number(max)) / 2;
-};
-
 const calculateAge = (planted) => {
   // TODO decide what to do for trees with no date planted. We are defaulting to 1 year for those trees.
   if (!planted) return 1;
@@ -113,33 +108,53 @@ const calculateAge = (planted) => {
   return decimalYear < 1 ? 1 : decimalYear;
 };
 
+const isRange = (value) => value.includes('-');
+
+const getAverageFromRange = (range) => {
+  const [min, max] = range.split('-');
+  return (Number(min) + Number(max)) / 2;
+};
+
+const setMessage = (isRangeDbh, isRangeHeight, age, height) => {
+  const dbhMessage = isRangeDbh
+    ? 'NOTE: DBH for this tree contains a range so we are using the average in our CO2 calculations.'
+    : '';
+
+  const heightMessage = height
+    ? isRangeHeight
+      ? 'NOTE: Height for this tree contains a range so we are using the average in our CO2 calculations.'
+      : ''
+    : 'NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.';
+
+  const ageMessage = age
+    ? ''
+    : 'NOTE: Tree age is missing, not formatted, or less than 1yr so we are defaulting to 1 yr in our CO2 calculations.';
+
+  return { dbhMessage, heightMessage, ageMessage };
+};
+
 export const CarbonCalculator = ({ currentTreeData }) => {
   const { height, dbh, datePlanted, planted } = currentTreeData;
   if (!dbh) {
     return <h4>This tree needs dbh for our Carbon Calculator.</h4>;
   }
-  const dbhAverage = dbh.includes('-') ? getAverageFromRange(dbh) : dbh;
-  const heightAverage = height.includes('-')
-    ? getAverageFromRange(height)
-    : height;
-
-  const dbhMessage = dbh.includes('-')
-    ? 'dbh for this tree contains a range so we are using the average.'
-    : '';
-
-  const heightMessage = !height
-    ? 'Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.'
-    : 'Height for this tree contains a range so we are using the average.';
-
-  const ageMessage = !age
-    ? 'Tree age is missing, not formatted, or less than 1yr so we are defaulting to 1 yr.'
-    : '';
+  const isRangeDbh = isRange(dbh);
+  const isRangeHeight = isRange(height);
+  const dbhAverage = isRangeDbh ? getAverageFromRange(dbh) : dbh;
+  const heightAverage = isRangeHeight ? getAverageFromRange(height) : height;
 
   const age = calculateAge(datePlanted || planted);
   const carbonDetails = carbonCalculatorMathShortForm(
     age,
     dbhAverage,
     heightAverage,
+  );
+
+  const { dbhMessage, heightMessage, ageMessage } = setMessage(
+    isRangeDbh,
+    isRangeHeight,
+    age,
+    height,
   );
 
   return (
