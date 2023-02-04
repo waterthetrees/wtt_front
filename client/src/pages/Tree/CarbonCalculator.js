@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import { format } from 'date-fns';
 import {
   TableRow,
   TableCell,
@@ -108,60 +109,26 @@ const calculateAge = (planted) => {
   return decimalYear < 1 ? 1 : decimalYear;
 };
 
-const isRange = (value) => value.includes('-');
-
-const getAverageFromRange = (range) => {
-  const [min, max] = range.split('-');
-  return (Number(min) + Number(max)) / 2;
-};
-
-const setMessage = (isRangeDbh, isRangeHeight, age, height) => {
-  const dbhMessage = isRangeDbh
-    ? 'NOTE: DBH for this tree contains a range so we are using the average in our CO2 calculations.'
-    : '';
-
-  const heightMessage = height
-    ? isRangeHeight
-      ? 'NOTE: Height for this tree contains a range so we are using the average in our CO2 calculations.'
-      : ''
-    : 'NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.';
-
-  const ageMessage = age
-    ? ''
-    : 'NOTE: Tree age is missing, not formatted, or less than 1yr so we are defaulting to 1 yr in our CO2 calculations.';
-
-  return { dbhMessage, heightMessage, ageMessage };
-};
-
 export const CarbonCalculator = ({ currentTreeData }) => {
   const { height, dbh, datePlanted, planted } = currentTreeData;
   if (!dbh) {
-    return <h4>This tree needs dbh for our Carbon Calculator.</h4>;
+    return <h4>This tree at least dbh for our Carbon Calculator.</h4>;
   }
-  const isRangeDbh = isRange(dbh);
-  const isRangeHeight = isRange(height);
-  const dbhAverage = isRangeDbh ? getAverageFromRange(dbh) : dbh;
-  const heightAverage = isRangeHeight ? getAverageFromRange(height) : height;
+  const heightMessage = !height
+    ? 'Height is missing or not formatted so we are defaulting to 1 foot or meter.'
+    : '';
+
+  const ageMessage = !age
+    ? 'Age is missing, not formatted, or less than 1yr so we are defaulting to 1 yr.'
+    : '';
 
   const age = calculateAge(datePlanted || planted);
-  const carbonDetails = carbonCalculatorMathShortForm(
-    age,
-    dbhAverage,
-    heightAverage,
-  );
-
-  const { dbhMessage, heightMessage, ageMessage } = setMessage(
-    isRangeDbh,
-    isRangeHeight,
-    age,
-    height,
-  );
+  const carbonDetails = carbonCalculatorMathShortForm(age, dbh, height);
 
   return (
     <div className="flex-grid border-top">
       <div className="treehistory-list text-left">
-        <CarbonCalcSections data={carbonDetails} title={'CO2 Calculations'} />
-        {dbhMessage && <p>{dbhMessage}</p>}
+        <CarbonCalcSections data={carbonDetails} title={'CO2 Calcs'} />
         {heightMessage && <p>{heightMessage}</p>}
         {ageMessage && <p>{ageMessage}</p>}
         <CarbonCalcSections
@@ -177,7 +144,7 @@ export const CarbonCalculator = ({ currentTreeData }) => {
 
 const CarbonCalculatorOverView = () => (
   <Section title={'Calculating CO2'}>
-    <ol style={{ paddingLeft: '15px' }}>
+    <ol style={{ 'padding-left': '15px' }}>
       <li>Determine the total (green) weight of the tree.</li>
       <li>Determine the dry weight of the tree.</li>
       <li>Determine the weight of carbon in the tree.</li>
@@ -216,6 +183,7 @@ export const CarbonCalcSections = ({ data, title }) => {
         <Table size="small">
           <TableBody>
             {Object.entries(data).map(([label, value]) => {
+              console.log(label, value);
               if (!value || !label) return;
               return <TableRows key={label} label={label} value={value} />;
             })}
