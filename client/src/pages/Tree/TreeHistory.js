@@ -2,10 +2,10 @@ import React from 'react';
 import { TableCell, TableRow } from '@mui/material';
 import format from 'date-fns/format';
 import { useTreeHistoryQuery } from '@/api/queries';
-import { maintenanceActions } from '@/util/constants';
 import { Liked, Adopted } from '@/components/Icons';
 import Section from '@/components/Section/Section';
 import TreeTable from './TreeTable';
+import { maintenanceActions } from './TreeMaintenanceActions';
 
 const TreeHistoryItem = ({ item }) => {
   const { dateVisit, volunteer = 'volunteer', comment, liked, adopted } = item;
