@@ -45,7 +45,7 @@ const ActionButton = styled(ToggleButton)`
   }
 `;
 
-const maintenanceActions = [
+export const maintenanceActions = [
   ['water', 'watered'],
   ['weed', 'weeded'],
   ['mulch', 'mulched'],
@@ -92,7 +92,7 @@ const maintenanceResults = {
   pruned: 'yes',
 };
 
-function createActionsObj(actions) {
+export const createActionsObj = (actions) => {
   return actions.reduce(
     (result, action) => ({
       ...result,
@@ -100,7 +100,7 @@ function createActionsObj(actions) {
     }),
     {},
   );
-}
+};
 
 export default function TreeMaintenanceActions({
   currentTreeData,
@@ -142,26 +142,28 @@ export default function TreeMaintenanceActions({
     <div
       style={{
         backgroundColor: 'rgba(16, 100, 18, 0.8)',
-        padding: '5px',
+        padding: '10px',
+        borderRadius: '0 0 15px 15px ',
       }}
     >
       <form id="treemaintenance" onSubmit={handleSubmit}>
         <MaintenanceButtons actions={actions} setActions={setActions} />
-        <div>
-          <label htmlFor="comment">Comment</label>
+        <div style={{ margin: '5px', fontSize: '1.5em', textAlign: 'right' }}>
           <input
             ref={commentRef}
             type="text"
             id="comment"
+            name="comment"
+            placeholder="Maintenance Comment"
             style={{ width: '100%', marginBottom: '5px' }}
           />
-        </div>
 
-        <input
-          type="submit"
-          value="Save"
-          style={{ width: '100%', marginBottom: '5px', fontSize: '1.5em' }}
-        />
+          <input
+            type="submit"
+            value="Save Maintenance"
+            style={{ marginBottom: '5px', fontSize: '1em' }}
+          />
+        </div>
       </form>
     </div>
   );
