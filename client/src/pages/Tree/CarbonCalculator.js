@@ -108,7 +108,10 @@ const calculateAge = (planted) => {
   return decimalYear < 1 ? 1 : decimalYear;
 };
 
-const isRange = (value) => value.includes('-');
+const isRange = (value) => {
+  if (!value) return false;
+  return String(value)?.includes('-');
+};
 
 const getAverageFromRange = (range) => {
   const [min, max] = range.split('-');
@@ -134,10 +137,12 @@ const setMessage = (isRangeDbh, isRangeHeight, age, height) => {
 };
 
 export const CarbonCalculator = ({ currentTreeData }) => {
-  const { height, dbh, datePlanted, planted } = currentTreeData;
+  const { dbh, datePlanted, planted } = currentTreeData;
   if (!dbh) {
     return <h4>This tree needs dbh for our Carbon Calculator.</h4>;
   }
+  const height = currentTreeData?.height || 1;
+
   const isRangeDbh = isRange(dbh);
   const isRangeHeight = isRange(height);
   const dbhAverage = isRangeDbh ? getAverageFromRange(dbh) : dbh;
