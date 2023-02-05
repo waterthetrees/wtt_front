@@ -6,25 +6,8 @@ import {
   DialogTitle,
   Drawer,
   IconButton,
-  styled,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
-
-const StyledDrawer = styled(Drawer)(
-  ({ width }) => `
-  position: absolute;
-  left: 0;
-  width: ${width}px;
-  height: 100vh;
-
-  & .MuiDrawer-paper {
-    // Add padding at the top to account for the header.
-    position: relative;
-    padding-top: 3.5rem;
-    box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
-  }
-`,
-);
 
 export default function PanelDrawer({
   children,
@@ -36,10 +19,18 @@ export default function PanelDrawer({
   onClose,
 }) {
   return (
-    <StyledDrawer
+    <Drawer
+      PaperProps={{
+        sx: {
+          position: 'absolute',
+          left: 0,
+          width: `${width}px`,
+          height: '100vh',
+          'padding-top': '3.5rem',
+        },
+      }}
       open={open}
       anchor={anchor}
-      width={open ? width : 0}
       onClose={onClose}
       variant="persistent"
     >
@@ -53,6 +44,6 @@ export default function PanelDrawer({
       </DialogTitle>
       <DialogContent dividers>{children}</DialogContent>
       {actions && <DialogActions>{actions}</DialogActions>}
-    </StyledDrawer>
+    </Drawer>
   );
 }
