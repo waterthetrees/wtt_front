@@ -102,6 +102,6 @@
     "start:dev": "webpack --env development && webpack serve --env development",
     "test": "jest",
     "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
-    "test:watch": "echo \"No test specified\""
+    "test:watch": "jest --watch"
   }
 }
