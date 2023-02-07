@@ -1,0 +1,2441 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tree /> spec renders with PanelDrawer correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiDrawer-root MuiDrawer-docked css-qiigop-MuiDrawer-docked"
+        width="350"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-286frr-MuiTypography-root-MuiDialogTitle-root"
+          >
+            <div
+              class="MuiBox-root css-70qvj9"
+            >
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                Tree Details
+              </div>
+              <button
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1nv01ym-MuiButtonBase-root-MuiIconButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="CloseIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </h2>
+          <div
+            class="MuiDialogContent-root MuiDialogContent-dividers css-1t4vnk2-MuiDialogContent-root"
+          >
+            <div
+              class="text-left"
+            >
+              <h1>
+                Windmill Palm
+              </h1>
+              <div>
+                <h2>
+                  <a
+                    href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Trachycarpus fortunei
+                  </a>
+                </h2>
+                <h5
+                  title="Diameter at breast height"
+                >
+                  DBH: 
+                  6
+                </h5>
+              </div>
+            </div>
+            <img
+              alt=""
+              placeholder="placeholder.jpg"
+              src="placeholder.jpg"
+              style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+            />
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Health
+              </h3>
+              <input
+                class="slider css-1bf4s6b"
+                id="healthSlider"
+                list="healthSlider"
+                max="6"
+                min="0"
+                step="1"
+                style="margin: 1em 0px .5em 0px; cursor: pointer;"
+                type="range"
+                value="6"
+              />
+              <datalist
+                aria-label="healthSlider"
+                id="healthSlider"
+              >
+                <option
+                  aria-label="vacant"
+                  name="vacant"
+                  value="0"
+                />
+                <option
+                  aria-label="dead"
+                  name="dead"
+                  value="1"
+                />
+                <option
+                  aria-label="missing"
+                  name="missing"
+                  value="2"
+                />
+                <option
+                  aria-label="stump"
+                  name="stump"
+                  value="3"
+                />
+                <option
+                  aria-label="poor"
+                  name="poor"
+                  value="4"
+                />
+                <option
+                  aria-label="fair"
+                  name="fair"
+                  value="5"
+                />
+                <option
+                  aria-label="good"
+                  name="good"
+                  value="6"
+                />
+              </datalist>
+              <div
+                class="MuiBox-root css-xi606m"
+              >
+                <h4>
+                  <span>
+                    good
+                  </span>
+                   
+                  
+                </h4>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Notes
+              </h3>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+              >
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline css-1rcvvn7-MuiInputBase-root-MuiInput-root"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                    id="mui-1"
+                    placeholder="Add a note"
+                    style="height: 0px; overflow: hidden;"
+                  />
+                  <textarea
+                    aria-hidden="true"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                    readonly=""
+                    style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth css-1mnel35-MuiButtonBase-root-MuiButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="ParkIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                    />
+                  </svg>
+                </span>
+                Maintenance
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Tree History
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        <p>
+                          <strong>
+                            2023-01-29
+                            : 
+                            park.mason
+                          </strong>
+                        </p>
+                        <p>
+                          <strong>
+                            Maintenance: 
+                          </strong>
+                          watered
+                        </p>
+                        <p>
+                          "
+                          Test
+                          "
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Address
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Address
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        881 Jamestown Ave
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        City
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        San Francisco
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        State
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        California
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Country
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        United States
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Zip
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        58
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Lng
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        -122.39179253152456
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Lat
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        37.717466057201726
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Organization
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Who
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        DPW Maintained 
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Email
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        urbanforestry@sfdpw.org
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Owner
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        Private
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Ids
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Id
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        4984644562906934
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Ref
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        22101
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        SourceId
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        Sidewalk: Property side : Yard
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Links
+              </h3>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Data
+                </a>
+              </div>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Info
+                </a>
+              </div>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://standards.opencouncildata.org/#/trees"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Open Council Data Standards
+                </a>
+              </div>
+            </div>
+            <div
+              class="flex-grid border-top"
+            >
+              <div
+                class="treehistory-list text-left"
+              >
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    CO2 Calculations
+                  </h3>
+                  <div
+                    class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+                  >
+                    <table
+                      class="MuiTable-root css-rqglhn-MuiTable-root"
+                    >
+                      <tbody
+                        class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                      >
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                
+                
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    Calculating CO2
+                  </h3>
+                  <ol
+                    style="padding-left: 15px;"
+                  >
+                    <li>
+                      Determine the total (green) weight of the tree.
+                    </li>
+                    <li>
+                      Determine the dry weight of the tree.
+                    </li>
+                    <li>
+                      Determine the weight of carbon in the tree.
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree per year
+                    </li>
+                  </ol>
+                </div>
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    CO2 Calculator References
+                  </h3>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                      >
+                        Calculating CO2 Carbon
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                      >
+                        Trees.org Carbon Brief
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                      >
+                        Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/research/treesearch/52933"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator Paper
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                      >
+                        iTools Carbon Equations and Methods 2020
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                      >
+                        The Davey Tree Benefits Engine
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                      >
+                        What Is DBH
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-180lf2n-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="RemoveCircleIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                  />
+                </svg>
+              </span>
+              Remove Tree
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiDrawer-root MuiDrawer-docked css-qiigop-MuiDrawer-docked"
+      width="350"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-286frr-MuiTypography-root-MuiDialogTitle-root"
+        >
+          <div
+            class="MuiBox-root css-70qvj9"
+          >
+            <div
+              class="MuiBox-root css-i9gxme"
+            >
+              Tree Details
+            </div>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1nv01ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="CloseIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </h2>
+        <div
+          class="MuiDialogContent-root MuiDialogContent-dividers css-1t4vnk2-MuiDialogContent-root"
+        >
+          <div
+            class="text-left"
+          >
+            <h1>
+              Windmill Palm
+            </h1>
+            <div>
+              <h2>
+                <a
+                  href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                  name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Trachycarpus fortunei
+                </a>
+              </h2>
+              <h5
+                title="Diameter at breast height"
+              >
+                DBH: 
+                6
+              </h5>
+            </div>
+          </div>
+          <img
+            alt=""
+            placeholder="placeholder.jpg"
+            src="placeholder.jpg"
+            style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+          />
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Health
+            </h3>
+            <input
+              class="slider css-1bf4s6b"
+              id="healthSlider"
+              list="healthSlider"
+              max="6"
+              min="0"
+              step="1"
+              style="margin: 1em 0px .5em 0px; cursor: pointer;"
+              type="range"
+              value="6"
+            />
+            <datalist
+              aria-label="healthSlider"
+              id="healthSlider"
+            >
+              <option
+                aria-label="vacant"
+                name="vacant"
+                value="0"
+              />
+              <option
+                aria-label="dead"
+                name="dead"
+                value="1"
+              />
+              <option
+                aria-label="missing"
+                name="missing"
+                value="2"
+              />
+              <option
+                aria-label="stump"
+                name="stump"
+                value="3"
+              />
+              <option
+                aria-label="poor"
+                name="poor"
+                value="4"
+              />
+              <option
+                aria-label="fair"
+                name="fair"
+                value="5"
+              />
+              <option
+                aria-label="good"
+                name="good"
+                value="6"
+              />
+            </datalist>
+            <div
+              class="MuiBox-root css-xi606m"
+            >
+              <h4>
+                <span>
+                  good
+                </span>
+                 
+                
+              </h4>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Notes
+            </h3>
+            <div
+              class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+            >
+              <div
+                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline css-1rcvvn7-MuiInputBase-root-MuiInput-root"
+              >
+                <textarea
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                  id="mui-1"
+                  placeholder="Add a note"
+                  style="height: 0px; overflow: hidden;"
+                />
+                <textarea
+                  aria-hidden="true"
+                  class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                  readonly=""
+                  style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth css-1mnel35-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="ParkIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                  />
+                </svg>
+              </span>
+              Maintenance
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Tree History
+            </h3>
+            <div
+              class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+            >
+              <table
+                class="MuiTable-root css-rqglhn-MuiTable-root"
+              >
+                <tbody
+                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      <p>
+                        <strong>
+                          2023-01-29
+                          : 
+                          park.mason
+                        </strong>
+                      </p>
+                      <p>
+                        <strong>
+                          Maintenance: 
+                        </strong>
+                        watered
+                      </p>
+                      <p>
+                        "
+                        Test
+                        "
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Address
+            </h3>
+            <div
+              class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+            >
+              <table
+                class="MuiTable-root css-rqglhn-MuiTable-root"
+              >
+                <tbody
+                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Address
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      881 Jamestown Ave
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      City
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      San Francisco
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      State
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      California
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Country
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      United States
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Zip
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      58
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Lng
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      -122.39179253152456
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Lat
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      37.717466057201726
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Organization
+            </h3>
+            <div
+              class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+            >
+              <table
+                class="MuiTable-root css-rqglhn-MuiTable-root"
+              >
+                <tbody
+                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Who
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      DPW Maintained 
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Email
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      urbanforestry@sfdpw.org
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Owner
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      Private
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Ids
+            </h3>
+            <div
+              class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+            >
+              <table
+                class="MuiTable-root css-rqglhn-MuiTable-root"
+              >
+                <tbody
+                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Id
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      4984644562906934
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      Ref
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      22101
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                      style="width: 30%;"
+                    >
+                      SourceId
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                    >
+                      Sidewalk: Property side : Yard
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-9u13kw"
+          >
+            <h3>
+              Links
+            </h3>
+            <div
+              class="MuiBox-root css-24suia"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                rel="noopener"
+                target="_blank"
+              >
+                San Francisco Data
+              </a>
+            </div>
+            <div
+              class="MuiBox-root css-24suia"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                rel="noopener"
+                target="_blank"
+              >
+                San Francisco Info
+              </a>
+            </div>
+            <div
+              class="MuiBox-root css-24suia"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                href="https://standards.opencouncildata.org/#/trees"
+                rel="noopener"
+                target="_blank"
+              >
+                Open Council Data Standards
+              </a>
+            </div>
+          </div>
+          <div
+            class="flex-grid border-top"
+          >
+            <div
+              class="treehistory-list text-left"
+            >
+              <div
+                class="MuiBox-root css-9u13kw"
+              >
+                <h3>
+                  CO2 Calculations
+                </h3>
+                <div
+                  class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+                >
+                  <table
+                    class="MuiTable-root css-rqglhn-MuiTable-root"
+                  >
+                    <tbody
+                      class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                    >
+                      <tr
+                        class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 In Lbs
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                        >
+                          2.39
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 In Kg
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                        >
+                          1.09
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 Per Year In Lbs
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                        >
+                          2.39
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 Per Year In Kg
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                        >
+                          1.09
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              
+              
+              <div
+                class="MuiBox-root css-9u13kw"
+              >
+                <h3>
+                  Calculating CO2
+                </h3>
+                <ol
+                  style="padding-left: 15px;"
+                >
+                  <li>
+                    Determine the total (green) weight of the tree.
+                  </li>
+                  <li>
+                    Determine the dry weight of the tree.
+                  </li>
+                  <li>
+                    Determine the weight of carbon in the tree.
+                  </li>
+                  <li>
+                    Determine the weight of CO2 sequestered in the tree
+                  </li>
+                  <li>
+                    Determine the weight of CO2 sequestered in the tree per year
+                  </li>
+                </ol>
+              </div>
+              <div
+                class="MuiBox-root css-9u13kw"
+              >
+                <h3>
+                  CO2 Calculator References
+                </h3>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                    >
+                      Calculating CO2 Carbon
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                    >
+                      Trees.org Carbon Brief
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                    >
+                      Forestry Service USDA Tree Carbon Calculator
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                    >
+                      Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.fs.usda.gov/research/treesearch/52933"
+                    >
+                      Forestry Service USDA Tree Carbon Calculator Paper
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                    >
+                      iTools Carbon Equations and Methods 2020
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                    >
+                      The Davey Tree Benefits Engine
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                    >
+                      What Is DBH
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-180lf2n-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="RemoveCircleIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                />
+              </svg>
+            </span>
+            Remove Tree
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<Tree /> spec renders with ScrollableDialog correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body
+    style="padding-right: 1024px; overflow: hidden;"
+  >
+    <div
+      aria-hidden="true"
+    />
+    <div
+      class="MuiDialog-root MuiModal-root css-zw3mfo-MuiModal-root-MuiDialog-root"
+      role="presentation"
+      width="350"
+    >
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop"
+        style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+      />
+      <div
+        data-testid="sentinelStart"
+        tabindex="0"
+      />
+      <div
+        class="MuiDialog-container MuiDialog-scrollPaper css-hz1bth-MuiDialog-container"
+        role="presentation"
+        style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+        tabindex="-1"
+      >
+        <div
+          aria-labelledby="mui-2"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-tlc64q-MuiPaper-root-MuiDialog-paper"
+          role="dialog"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-t8qb21-MuiTypography-root-MuiDialogTitle-root"
+            id="mui-2"
+          >
+            <div
+              class="MuiBox-root css-70qvj9"
+            >
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                Tree Details
+              </div>
+              <button
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="CloseIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </h2>
+          <div
+            class="MuiDialogContent-root MuiDialogContent-dividers css-1t4vnk2-MuiDialogContent-root"
+          >
+            <div
+              class="text-left"
+            >
+              <h1>
+                Windmill Palm
+              </h1>
+              <div>
+                <h2>
+                  <a
+                    href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Trachycarpus fortunei
+                  </a>
+                </h2>
+                <h5
+                  title="Diameter at breast height"
+                >
+                  DBH: 
+                  6
+                </h5>
+              </div>
+            </div>
+            <img
+              alt=""
+              placeholder="placeholder.jpg"
+              src="placeholder.jpg"
+              style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+            />
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Health
+              </h3>
+              <input
+                class="slider css-1bf4s6b"
+                id="healthSlider"
+                list="healthSlider"
+                max="6"
+                min="0"
+                step="1"
+                style="margin: 1em 0px .5em 0px; cursor: pointer;"
+                type="range"
+                value="6"
+              />
+              <datalist
+                aria-label="healthSlider"
+                id="healthSlider"
+              >
+                <option
+                  aria-label="vacant"
+                  name="vacant"
+                  value="0"
+                />
+                <option
+                  aria-label="dead"
+                  name="dead"
+                  value="1"
+                />
+                <option
+                  aria-label="missing"
+                  name="missing"
+                  value="2"
+                />
+                <option
+                  aria-label="stump"
+                  name="stump"
+                  value="3"
+                />
+                <option
+                  aria-label="poor"
+                  name="poor"
+                  value="4"
+                />
+                <option
+                  aria-label="fair"
+                  name="fair"
+                  value="5"
+                />
+                <option
+                  aria-label="good"
+                  name="good"
+                  value="6"
+                />
+              </datalist>
+              <div
+                class="MuiBox-root css-xi606m"
+              >
+                <h4>
+                  <span>
+                    good
+                  </span>
+                   
+                  
+                </h4>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Notes
+              </h3>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+              >
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline css-1rcvvn7-MuiInputBase-root-MuiInput-root"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                    id="mui-3"
+                    placeholder="Add a note"
+                    style="height: 0px; overflow: hidden;"
+                  />
+                  <textarea
+                    aria-hidden="true"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline css-66dh3a-MuiInputBase-input-MuiInput-input"
+                    readonly=""
+                    style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth css-1mnel35-MuiButtonBase-root-MuiButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="ParkIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                    />
+                  </svg>
+                </span>
+                Maintenance
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Tree History
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        <p>
+                          <strong>
+                            2023-01-29
+                            : 
+                            park.mason
+                          </strong>
+                        </p>
+                        <p>
+                          <strong>
+                            Maintenance: 
+                          </strong>
+                          watered
+                        </p>
+                        <p>
+                          "
+                          Test
+                          "
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Address
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Address
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        881 Jamestown Ave
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        City
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        San Francisco
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        State
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        California
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Country
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        United States
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Zip
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        58
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Lng
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        -122.39179253152456
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Lat
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        37.717466057201726
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Organization
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Who
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        DPW Maintained 
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Email
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        urbanforestry@sfdpw.org
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Owner
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        Private
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Ids
+              </h3>
+              <div
+                class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+              >
+                <table
+                  class="MuiTable-root css-rqglhn-MuiTable-root"
+                >
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Id
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        4984644562906934
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        Ref
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        22101
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                        style="width: 30%;"
+                      >
+                        SourceId
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                      >
+                        Sidewalk: Property side : Yard
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-9u13kw"
+            >
+              <h3>
+                Links
+              </h3>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Data
+                </a>
+              </div>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Info
+                </a>
+              </div>
+              <div
+                class="MuiBox-root css-24suia"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ps4owl-MuiTypography-root-MuiLink-root"
+                  href="https://standards.opencouncildata.org/#/trees"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Open Council Data Standards
+                </a>
+              </div>
+            </div>
+            <div
+              class="flex-grid border-top"
+            >
+              <div
+                class="treehistory-list text-left"
+              >
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    CO2 Calculations
+                  </h3>
+                  <div
+                    class="MuiTableContainer-root css-1flnnmm-MuiTableContainer-root"
+                  >
+                    <table
+                      class="MuiTable-root css-rqglhn-MuiTable-root"
+                    >
+                      <tbody
+                        class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                      >
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root css-alqmtx-MuiTableRow-root"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-150e1mc-MuiTableCell-root"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-dsuxgy-MuiTableCell-root"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                
+                
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    Calculating CO2
+                  </h3>
+                  <ol
+                    style="padding-left: 15px;"
+                  >
+                    <li>
+                      Determine the total (green) weight of the tree.
+                    </li>
+                    <li>
+                      Determine the dry weight of the tree.
+                    </li>
+                    <li>
+                      Determine the weight of carbon in the tree.
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree per year
+                    </li>
+                  </ol>
+                </div>
+                <div
+                  class="MuiBox-root css-9u13kw"
+                >
+                  <h3>
+                    CO2 Calculator References
+                  </h3>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                      >
+                        Calculating CO2 Carbon
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                      >
+                        Trees.org Carbon Brief
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                      >
+                        Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/research/treesearch/52933"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator Paper
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                      >
+                        iTools Carbon Equations and Methods 2020
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                      >
+                        The Davey Tree Benefits Engine
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                      >
+                        What Is DBH
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-180lf2n-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="RemoveCircleIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                  />
+                </svg>
+              </span>
+              Remove Tree
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="sentinelEnd"
+        tabindex="0"
+      />
+    </div>
+  </body>,
+  "container": <div
+    aria-hidden="true"
+  />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
