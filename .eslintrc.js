@@ -4,6 +4,7 @@ module.exports = {
     es2022: true,
     browser: true,
     node: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended', // https://eslint.org/docs/rules/
