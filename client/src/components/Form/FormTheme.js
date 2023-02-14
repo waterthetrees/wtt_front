@@ -4,21 +4,26 @@ const fontSize = '1.2rem';
 const labelFontSize = '1.3rem';
 const focusedColor = '#28a745';
 
+const rootBaseStyle = {
+  label: {
+    fontSize: labelFontSize,
+  },
+  '& label.Mui-focused': {
+    color: focusedColor,
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: focusedColor,
+  },
+  '& .MuiInputBase-input': {
+    fontSize: labelFontSize,
+  },
+};
+
 const theme = createTheme({
   components: {
     MuiAutocomplete: {
       styleOverrides: {
-        root: {
-          label: {
-            fontSize: labelFontSize,
-          },
-          '& label.Mui-focused': {
-            color: focusedColor,
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: focusedColor,
-          },
-        },
+        root: rootBaseStyle,
         inputRoot: {
           fontSize: fontSize,
         },
@@ -29,18 +34,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           marginBottom: '1.2rem',
-          label: {
-            fontSize: labelFontSize,
-          },
-          '& label.Mui-focused': {
-            color: focusedColor,
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: focusedColor,
-          },
-          '& .MuiInputBase-input': {
-            fontSize: labelFontSize,
-          },
+          ...rootBaseStyle,
         },
         inputRoot: {
           fontSize: fontSize,
@@ -50,20 +44,7 @@ const theme = createTheme({
 
     MuiSelect: {
       styleOverrides: {
-        root: {
-          label: {
-            fontSize: labelFontSize,
-          },
-          '& label.Mui-focused': {
-            color: focusedColor,
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: focusedColor,
-          },
-          '& .MuiInputBase-input': {
-            fontSize: labelFontSize,
-          },
-        },
+        root: rootBaseStyle,
         inputRoot: {
           fontSize: fontSize,
         },
