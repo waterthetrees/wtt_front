@@ -35,7 +35,6 @@ export const checkForUnfitData = (currentTreeData) =>
 // We'll add it here so that Maintenance/Health/removal don't render.
 
 export default function Tree({
-  map,
   TreeDetailsContainer,
   drawerWidth,
   currentTreeData,
@@ -83,7 +82,6 @@ export default function Tree({
 
           {!hasUnfitData && (
             <TreeHealth
-              map={map}
               currentTreeData={currentTreeData}
               isTreeQueryError={isTreeQueryError}
             />

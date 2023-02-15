@@ -1,0 +1,4909 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tree /> spec renders with PanelDrawer correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  position: absolute;
+  left: 0;
+  width: 350px;
+  height: 100vh;
+}
+
+.emotion-0 .MuiDrawer-paper {
+  position: relative;
+  padding-top: 3.5rem;
+  box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+.emotion-1 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: none;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  z-index: 1200;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  outline: 0;
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  padding: 16px 24px;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-4 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  overflow: visible;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 5px;
+  font-size: 1.125rem;
+  margin-right: -12px;
+}
+
+.emotion-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-5:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-5:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-5.Mui-disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.emotion-7 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.emotion-8 {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-9 {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.emotion-9:last-child {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 100%;
+  border-radius: 1px;
+  margin: 0;
+  background-color: #008c00;
+  border: 1px solid #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.emotion-10 .slider:hover {
+  opacity: 1;
+}
+
+.emotion-10::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 5px solid #666;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.emotion-11 {
+  text-align: center;
+}
+
+.emotion-13 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+  width: 100%;
+}
+
+.emotion-14 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 4px 0 5px;
+  width: 100%;
+  position: relative;
+}
+
+.emotion-14.Mui-disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+}
+
+label+.emotion-14 {
+  margin-top: 16px;
+}
+
+.emotion-14:after {
+  border-bottom: 2px solid #1976d2;
+  left: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-14.Mui-focused:after {
+  -webkit-transform: scaleX(1) translateX(0);
+  -moz-transform: scaleX(1) translateX(0);
+  -ms-transform: scaleX(1) translateX(0);
+  transform: scaleX(1) translateX(0);
+}
+
+.emotion-14.Mui-error:before,
+.emotion-14.Mui-error:after {
+  border-bottom-color: #d32f2f;
+}
+
+.emotion-14:before {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  left: 0;
+  bottom: 0;
+  content: "\\00a0";
+  position: absolute;
+  right: 0;
+  -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-14:hover:not(.Mui-disabled, .Mui-error):before {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+}
+
+@media (hover: none) {
+  .emotion-14:hover:not(.Mui-disabled, .Mui-error):before {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
+}
+
+.emotion-14.Mui-disabled:before {
+  border-bottom-style: dotted;
+}
+
+.emotion-15 {
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  padding: 0;
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  height: auto;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0;
+  width: 100%;
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  resize: none;
+  padding-top: 0;
+}
+
+.emotion-15::-webkit-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15::-moz-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15:-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15::-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15:focus {
+  outline: 0;
+}
+
+.emotion-15:invalid {
+  box-shadow: none;
+}
+
+.emotion-15::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-webkit-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-moz-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-webkit-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-moz-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus:-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+.emotion-15.Mui-disabled {
+  opacity: 1;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
+}
+
+.emotion-15:-webkit-autofill {
+  -webkit-animation-duration: 5000s;
+  animation-duration: 5000s;
+  -webkit-animation-name: mui-auto-fill;
+  animation-name: mui-auto-fill;
+}
+
+.emotion-17 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 8px 22px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #fff;
+  background-color: #2e7d32;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  width: 100%;
+  box-shadow: none;
+  font-size: 1.5rem;
+}
+
+.emotion-17::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-17.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-17 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-17:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #1b5e20;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+@media (hover: none) {
+  .emotion-17:hover {
+    background-color: #2e7d32;
+  }
+}
+
+.emotion-17:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+.emotion-17.Mui-focusVisible {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+.emotion-17.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.emotion-17:hover {
+  box-shadow: none;
+}
+
+.emotion-17.Mui-focusVisible {
+  box-shadow: none;
+}
+
+.emotion-17:active {
+  box-shadow: none;
+}
+
+.emotion-17.Mui-disabled {
+  box-shadow: none;
+}
+
+.emotion-18 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-18>*:nth-of-type(1) {
+  font-size: 22px;
+}
+
+.emotion-22 {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.emotion-22 .MuiTableCell-root {
+  font-size: 1rem;
+  padding: 6px 0;
+}
+
+.emotion-23 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.emotion-23 caption {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  caption-side: bottom;
+}
+
+.emotion-24 {
+  display: table-row-group;
+}
+
+.emotion-25 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-25.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-25.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-25.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-26 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.emotion-26.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-26.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-31 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-31.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-31.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-31.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-31 .MuiTableCell-root {
+  padding: 0.2rem;
+  width: 100vw;
+}
+
+.emotion-32 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+  padding-left: 0px;
+  font-weight: 700;
+}
+
+.emotion-32.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-32.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-79 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.emotion-80 {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+}
+
+.emotion-80:hover {
+  text-decoration-color: inherit;
+}
+
+.emotion-103 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+  color: #d32f2f;
+}
+
+.emotion-103::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-103.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-103 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-103:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(211, 47, 47, 0.04);
+  border: 1px solid #d32f2f;
+}
+
+@media (hover: none) {
+  .emotion-103:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-103.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-104 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-104>*:nth-of-type(1) {
+  font-size: 20px;
+}
+
+<body>
+    <div>
+      <div
+        class="MuiDrawer-root MuiDrawer-docked emotion-0"
+        width="350"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root emotion-2"
+          >
+            <div
+              class="MuiBox-root emotion-3"
+            >
+              <div
+                class="MuiBox-root emotion-4"
+              >
+                Tree Details
+              </div>
+              <button
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall emotion-5"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                  data-testid="CloseIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root emotion-7"
+                />
+              </button>
+            </div>
+          </h2>
+          <div
+            class="MuiDialogContent-root MuiDialogContent-dividers emotion-8"
+          >
+            <div
+              class="text-left"
+            >
+              <h1>
+                Windmill Palm
+              </h1>
+              <div>
+                <h2>
+                  <a
+                    href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Trachycarpus fortunei
+                  </a>
+                </h2>
+                <h5
+                  title="Diameter at breast height"
+                >
+                  DBH: 
+                  6
+                </h5>
+              </div>
+            </div>
+            <img
+              alt=""
+              placeholder="placeholder.jpg"
+              src="placeholder.jpg"
+              style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+            />
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Health
+              </h3>
+              <input
+                class="slider emotion-10"
+                id="healthSlider"
+                list="healthSlider"
+                max="6"
+                min="0"
+                step="1"
+                style="margin: 1em 0px .5em 0px; cursor: pointer;"
+                type="range"
+                value="6"
+              />
+              <datalist
+                aria-label="healthSlider"
+                id="healthSlider"
+              >
+                <option
+                  aria-label="vacant"
+                  name="vacant"
+                  value="0"
+                />
+                <option
+                  aria-label="dead"
+                  name="dead"
+                  value="1"
+                />
+                <option
+                  aria-label="missing"
+                  name="missing"
+                  value="2"
+                />
+                <option
+                  aria-label="stump"
+                  name="stump"
+                  value="3"
+                />
+                <option
+                  aria-label="poor"
+                  name="poor"
+                  value="4"
+                />
+                <option
+                  aria-label="fair"
+                  name="fair"
+                  value="5"
+                />
+                <option
+                  aria-label="good"
+                  name="good"
+                  value="6"
+                />
+              </datalist>
+              <div
+                class="MuiBox-root emotion-11"
+              >
+                <h4>
+                  <span>
+                    good
+                  </span>
+                   
+                  
+                </h4>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Notes
+              </h3>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root emotion-13"
+              >
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline emotion-14"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
+                    id="mui-1"
+                    placeholder="Add a note"
+                    style="height: 0px; overflow: hidden;"
+                  />
+                  <textarea
+                    aria-hidden="true"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
+                    readonly=""
+                    style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth emotion-17"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-startIcon MuiButton-iconSizeLarge emotion-18"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                    data-testid="ParkIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                    />
+                  </svg>
+                </span>
+                Maintenance
+                <span
+                  class="MuiTouchRipple-root emotion-7"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Tree History
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-22"
+              >
+                <table
+                  class="MuiTable-root emotion-23"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-24"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-25"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        <p>
+                          <strong>
+                            2023-01-29
+                            : 
+                            park.mason
+                          </strong>
+                        </p>
+                        <p>
+                          <strong>
+                            Maintenance: 
+                          </strong>
+                          watered
+                        </p>
+                        <p>
+                          "
+                          Test
+                          "
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Address
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-22"
+              >
+                <table
+                  class="MuiTable-root emotion-23"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-24"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Address
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        881 Jamestown Ave
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        City
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        San Francisco
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        State
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        California
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Country
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        United States
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Zip
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        58
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Lng
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        -122.39179253152456
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Lat
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        37.717466057201726
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Organization
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-22"
+              >
+                <table
+                  class="MuiTable-root emotion-23"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-24"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Who
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        DPW Maintained 
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Email
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        urbanforestry@sfdpw.org
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Owner
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        Private
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Ids
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-22"
+              >
+                <table
+                  class="MuiTable-root emotion-23"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-24"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Id
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        4984644562906934
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        Ref
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        22101
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-31"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                        style="width: 30%;"
+                      >
+                        SourceId
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                      >
+                        Sidewalk: Property side : Yard
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-9"
+            >
+              <h3>
+                Links
+              </h3>
+              <div
+                class="MuiBox-root emotion-79"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                  href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Data
+                </a>
+              </div>
+              <div
+                class="MuiBox-root emotion-79"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                  href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Info
+                </a>
+              </div>
+              <div
+                class="MuiBox-root emotion-79"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                  href="https://standards.opencouncildata.org/#/trees"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Open Council Data Standards
+                </a>
+              </div>
+            </div>
+            <div
+              class="flex-grid border-top"
+            >
+              <div
+                class="treehistory-list text-left"
+              >
+                <div
+                  class="MuiBox-root emotion-9"
+                >
+                  <h3>
+                    CO2 Calculations
+                  </h3>
+                  <div
+                    class="MuiTableContainer-root emotion-22"
+                  >
+                    <table
+                      class="MuiTable-root emotion-23"
+                    >
+                      <tbody
+                        class="MuiTableBody-root emotion-24"
+                      >
+                        <tr
+                          class="MuiTableRow-root emotion-31"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-31"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-31"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-31"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                
+                
+                <div
+                  class="MuiBox-root emotion-9"
+                >
+                  <h3>
+                    Calculating CO2
+                  </h3>
+                  <ol
+                    style="padding-left: 15px;"
+                  >
+                    <li>
+                      Determine the total (green) weight of the tree.
+                    </li>
+                    <li>
+                      Determine the dry weight of the tree.
+                    </li>
+                    <li>
+                      Determine the weight of carbon in the tree.
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree per year
+                    </li>
+                  </ol>
+                </div>
+                <div
+                  class="MuiBox-root emotion-9"
+                >
+                  <h3>
+                    CO2 Calculator References
+                  </h3>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                      >
+                        Calculating CO2 Carbon
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                      >
+                        Trees.org Carbon Brief
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                      >
+                        Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/research/treesearch/52933"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator Paper
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                      >
+                        iTools Carbon Equations and Methods 2020
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                      >
+                        The Davey Tree Benefits Engine
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                      >
+                        What Is DBH
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium emotion-103"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeMedium emotion-104"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                  data-testid="RemoveCircleIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                  />
+                </svg>
+              </span>
+              Remove Tree
+              <span
+                class="MuiTouchRipple-root emotion-7"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  position: absolute;
+  left: 0;
+  width: 350px;
+  height: 100vh;
+}
+
+.emotion-0 .MuiDrawer-paper {
+  position: relative;
+  padding-top: 3.5rem;
+  box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+.emotion-1 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: none;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  z-index: 1200;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  outline: 0;
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  padding: 16px 24px;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-4 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  overflow: visible;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 5px;
+  font-size: 1.125rem;
+  margin-right: -12px;
+}
+
+.emotion-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-5:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-5:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-5.Mui-disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.emotion-7 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.emotion-8 {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-9 {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.emotion-9:last-child {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 100%;
+  border-radius: 1px;
+  margin: 0;
+  background-color: #008c00;
+  border: 1px solid #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.emotion-10 .slider:hover {
+  opacity: 1;
+}
+
+.emotion-10::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 5px solid #666;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.emotion-11 {
+  text-align: center;
+}
+
+.emotion-13 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+  width: 100%;
+}
+
+.emotion-14 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 4px 0 5px;
+  width: 100%;
+  position: relative;
+}
+
+.emotion-14.Mui-disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+}
+
+label+.emotion-14 {
+  margin-top: 16px;
+}
+
+.emotion-14:after {
+  border-bottom: 2px solid #1976d2;
+  left: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-14.Mui-focused:after {
+  -webkit-transform: scaleX(1) translateX(0);
+  -moz-transform: scaleX(1) translateX(0);
+  -ms-transform: scaleX(1) translateX(0);
+  transform: scaleX(1) translateX(0);
+}
+
+.emotion-14.Mui-error:before,
+.emotion-14.Mui-error:after {
+  border-bottom-color: #d32f2f;
+}
+
+.emotion-14:before {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  left: 0;
+  bottom: 0;
+  content: "\\00a0";
+  position: absolute;
+  right: 0;
+  -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-14:hover:not(.Mui-disabled, .Mui-error):before {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+}
+
+@media (hover: none) {
+  .emotion-14:hover:not(.Mui-disabled, .Mui-error):before {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
+}
+
+.emotion-14.Mui-disabled:before {
+  border-bottom-style: dotted;
+}
+
+.emotion-15 {
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  padding: 0;
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  height: auto;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0;
+  width: 100%;
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  resize: none;
+  padding-top: 0;
+}
+
+.emotion-15::-webkit-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15::-moz-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15:-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15::-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-15:focus {
+  outline: 0;
+}
+
+.emotion-15:invalid {
+  box-shadow: none;
+}
+
+.emotion-15::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-webkit-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-moz-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15::-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-webkit-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-moz-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus:-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+.emotion-15.Mui-disabled {
+  opacity: 1;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
+}
+
+.emotion-15:-webkit-autofill {
+  -webkit-animation-duration: 5000s;
+  animation-duration: 5000s;
+  -webkit-animation-name: mui-auto-fill;
+  animation-name: mui-auto-fill;
+}
+
+.emotion-17 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 8px 22px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #fff;
+  background-color: #2e7d32;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  width: 100%;
+  box-shadow: none;
+  font-size: 1.5rem;
+}
+
+.emotion-17::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-17.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-17 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-17:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #1b5e20;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+@media (hover: none) {
+  .emotion-17:hover {
+    background-color: #2e7d32;
+  }
+}
+
+.emotion-17:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+.emotion-17.Mui-focusVisible {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+.emotion-17.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.emotion-17:hover {
+  box-shadow: none;
+}
+
+.emotion-17.Mui-focusVisible {
+  box-shadow: none;
+}
+
+.emotion-17:active {
+  box-shadow: none;
+}
+
+.emotion-17.Mui-disabled {
+  box-shadow: none;
+}
+
+.emotion-18 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-18>*:nth-of-type(1) {
+  font-size: 22px;
+}
+
+.emotion-22 {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.emotion-22 .MuiTableCell-root {
+  font-size: 1rem;
+  padding: 6px 0;
+}
+
+.emotion-23 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.emotion-23 caption {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  caption-side: bottom;
+}
+
+.emotion-24 {
+  display: table-row-group;
+}
+
+.emotion-25 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-25.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-25.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-25.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-26 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.emotion-26.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-26.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-31 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-31.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-31.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-31.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-31 .MuiTableCell-root {
+  padding: 0.2rem;
+  width: 100vw;
+}
+
+.emotion-32 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+  padding-left: 0px;
+  font-weight: 700;
+}
+
+.emotion-32.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-32.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-79 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.emotion-80 {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+}
+
+.emotion-80:hover {
+  text-decoration-color: inherit;
+}
+
+.emotion-103 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+  color: #d32f2f;
+}
+
+.emotion-103::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-103.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-103 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-103:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(211, 47, 47, 0.04);
+  border: 1px solid #d32f2f;
+}
+
+@media (hover: none) {
+  .emotion-103:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-103.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-104 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-104>*:nth-of-type(1) {
+  font-size: 20px;
+}
+
+<div>
+    <div
+      class="MuiDrawer-root MuiDrawer-docked emotion-0"
+      width="350"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root emotion-2"
+        >
+          <div
+            class="MuiBox-root emotion-3"
+          >
+            <div
+              class="MuiBox-root emotion-4"
+            >
+              Tree Details
+            </div>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall emotion-5"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                data-testid="CloseIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root emotion-7"
+              />
+            </button>
+          </div>
+        </h2>
+        <div
+          class="MuiDialogContent-root MuiDialogContent-dividers emotion-8"
+        >
+          <div
+            class="text-left"
+          >
+            <h1>
+              Windmill Palm
+            </h1>
+            <div>
+              <h2>
+                <a
+                  href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                  name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Trachycarpus fortunei
+                </a>
+              </h2>
+              <h5
+                title="Diameter at breast height"
+              >
+                DBH: 
+                6
+              </h5>
+            </div>
+          </div>
+          <img
+            alt=""
+            placeholder="placeholder.jpg"
+            src="placeholder.jpg"
+            style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+          />
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Health
+            </h3>
+            <input
+              class="slider emotion-10"
+              id="healthSlider"
+              list="healthSlider"
+              max="6"
+              min="0"
+              step="1"
+              style="margin: 1em 0px .5em 0px; cursor: pointer;"
+              type="range"
+              value="6"
+            />
+            <datalist
+              aria-label="healthSlider"
+              id="healthSlider"
+            >
+              <option
+                aria-label="vacant"
+                name="vacant"
+                value="0"
+              />
+              <option
+                aria-label="dead"
+                name="dead"
+                value="1"
+              />
+              <option
+                aria-label="missing"
+                name="missing"
+                value="2"
+              />
+              <option
+                aria-label="stump"
+                name="stump"
+                value="3"
+              />
+              <option
+                aria-label="poor"
+                name="poor"
+                value="4"
+              />
+              <option
+                aria-label="fair"
+                name="fair"
+                value="5"
+              />
+              <option
+                aria-label="good"
+                name="good"
+                value="6"
+              />
+            </datalist>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h4>
+                <span>
+                  good
+                </span>
+                 
+                
+              </h4>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Notes
+            </h3>
+            <div
+              class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root emotion-13"
+            >
+              <div
+                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline emotion-14"
+              >
+                <textarea
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
+                  id="mui-1"
+                  placeholder="Add a note"
+                  style="height: 0px; overflow: hidden;"
+                />
+                <textarea
+                  aria-hidden="true"
+                  class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
+                  readonly=""
+                  style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth emotion-17"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeLarge emotion-18"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                  data-testid="ParkIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                  />
+                </svg>
+              </span>
+              Maintenance
+              <span
+                class="MuiTouchRipple-root emotion-7"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Tree History
+            </h3>
+            <div
+              class="MuiTableContainer-root emotion-22"
+            >
+              <table
+                class="MuiTable-root emotion-23"
+              >
+                <tbody
+                  class="MuiTableBody-root emotion-24"
+                >
+                  <tr
+                    class="MuiTableRow-root emotion-25"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      <p>
+                        <strong>
+                          2023-01-29
+                          : 
+                          park.mason
+                        </strong>
+                      </p>
+                      <p>
+                        <strong>
+                          Maintenance: 
+                        </strong>
+                        watered
+                      </p>
+                      <p>
+                        "
+                        Test
+                        "
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Address
+            </h3>
+            <div
+              class="MuiTableContainer-root emotion-22"
+            >
+              <table
+                class="MuiTable-root emotion-23"
+              >
+                <tbody
+                  class="MuiTableBody-root emotion-24"
+                >
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Address
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      881 Jamestown Ave
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      City
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      San Francisco
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      State
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      California
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Country
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      United States
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Zip
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      58
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Lng
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      -122.39179253152456
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Lat
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      37.717466057201726
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Organization
+            </h3>
+            <div
+              class="MuiTableContainer-root emotion-22"
+            >
+              <table
+                class="MuiTable-root emotion-23"
+              >
+                <tbody
+                  class="MuiTableBody-root emotion-24"
+                >
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Who
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      DPW Maintained 
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Email
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      urbanforestry@sfdpw.org
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Owner
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      Private
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Ids
+            </h3>
+            <div
+              class="MuiTableContainer-root emotion-22"
+            >
+              <table
+                class="MuiTable-root emotion-23"
+              >
+                <tbody
+                  class="MuiTableBody-root emotion-24"
+                >
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Id
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      4984644562906934
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      Ref
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      22101
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root emotion-31"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                      style="width: 30%;"
+                    >
+                      SourceId
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                    >
+                      Sidewalk: Property side : Yard
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root emotion-9"
+          >
+            <h3>
+              Links
+            </h3>
+            <div
+              class="MuiBox-root emotion-79"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                rel="noopener"
+                target="_blank"
+              >
+                San Francisco Data
+              </a>
+            </div>
+            <div
+              class="MuiBox-root emotion-79"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                rel="noopener"
+                target="_blank"
+              >
+                San Francisco Info
+              </a>
+            </div>
+            <div
+              class="MuiBox-root emotion-79"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-80"
+                href="https://standards.opencouncildata.org/#/trees"
+                rel="noopener"
+                target="_blank"
+              >
+                Open Council Data Standards
+              </a>
+            </div>
+          </div>
+          <div
+            class="flex-grid border-top"
+          >
+            <div
+              class="treehistory-list text-left"
+            >
+              <div
+                class="MuiBox-root emotion-9"
+              >
+                <h3>
+                  CO2 Calculations
+                </h3>
+                <div
+                  class="MuiTableContainer-root emotion-22"
+                >
+                  <table
+                    class="MuiTable-root emotion-23"
+                  >
+                    <tbody
+                      class="MuiTableBody-root emotion-24"
+                    >
+                      <tr
+                        class="MuiTableRow-root emotion-31"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 In Lbs
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                        >
+                          2.39
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root emotion-31"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 In Kg
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                        >
+                          1.09
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root emotion-31"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 Per Year In Lbs
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                        >
+                          2.39
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root emotion-31"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-32"
+                          style="width: 60%;"
+                        >
+                          Weight CO2 Per Year In Kg
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-26"
+                        >
+                          1.09
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              
+              
+              <div
+                class="MuiBox-root emotion-9"
+              >
+                <h3>
+                  Calculating CO2
+                </h3>
+                <ol
+                  style="padding-left: 15px;"
+                >
+                  <li>
+                    Determine the total (green) weight of the tree.
+                  </li>
+                  <li>
+                    Determine the dry weight of the tree.
+                  </li>
+                  <li>
+                    Determine the weight of carbon in the tree.
+                  </li>
+                  <li>
+                    Determine the weight of CO2 sequestered in the tree
+                  </li>
+                  <li>
+                    Determine the weight of CO2 sequestered in the tree per year
+                  </li>
+                </ol>
+              </div>
+              <div
+                class="MuiBox-root emotion-9"
+              >
+                <h3>
+                  CO2 Calculator References
+                </h3>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                    >
+                      Calculating CO2 Carbon
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                    >
+                      Trees.org Carbon Brief
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                    >
+                      Forestry Service USDA Tree Carbon Calculator
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                    >
+                      Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.fs.usda.gov/research/treesearch/52933"
+                    >
+                      Forestry Service USDA Tree Carbon Calculator Paper
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                    >
+                      iTools Carbon Equations and Methods 2020
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                    >
+                      The Davey Tree Benefits Engine
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <a
+                      href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                    >
+                      What Is DBH
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium emotion-103"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeMedium emotion-104"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+                data-testid="RemoveCircleIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                />
+              </svg>
+            </span>
+            Remove Tree
+            <span
+              class="MuiTouchRipple-root emotion-7"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<Tree /> spec renders with ScrollableDialog correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+}
+
+@media print {
+  .emotion-0 {
+    position: absolute!important;
+  }
+}
+
+.emotion-1 {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  z-index: -1;
+}
+
+.emotion-2 {
+  height: 100%;
+  outline: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media print {
+  .emotion-2 {
+    height: auto;
+  }
+}
+
+.emotion-3 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
+  margin: 32px;
+  position: relative;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-height: calc(100% - 64px);
+  max-width: 600px;
+  width: calc(100% - 64px);
+}
+
+@media print {
+  .emotion-3 {
+    overflow-y: visible;
+    box-shadow: none;
+  }
+}
+
+@media (max-width:663.95px) {
+  .emotion-3.MuiDialog-paperScrollBody {
+    max-width: calc(100% - 64px);
+  }
+}
+
+.emotion-4 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  padding: 16px 24px;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-6 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  overflow: visible;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 5px;
+  font-size: 1.125rem;
+}
+
+.emotion-7::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-7.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-7 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-7:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-7:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-7.Mui-disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-8 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.emotion-10 {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-11 {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.emotion-11:last-child {
+  margin-bottom: 16px;
+}
+
+.emotion-12 {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 100%;
+  border-radius: 1px;
+  margin: 0;
+  background-color: #008c00;
+  border: 1px solid #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.emotion-12 .slider:hover {
+  opacity: 1;
+}
+
+.emotion-12::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 5px solid #666;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.emotion-13 {
+  text-align: center;
+}
+
+.emotion-15 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+  width: 100%;
+}
+
+.emotion-16 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 4px 0 5px;
+  width: 100%;
+  position: relative;
+}
+
+.emotion-16.Mui-disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+}
+
+label+.emotion-16 {
+  margin-top: 16px;
+}
+
+.emotion-16:after {
+  border-bottom: 2px solid #1976d2;
+  left: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: -webkit-transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-16.Mui-focused:after {
+  -webkit-transform: scaleX(1) translateX(0);
+  -moz-transform: scaleX(1) translateX(0);
+  -ms-transform: scaleX(1) translateX(0);
+  transform: scaleX(1) translateX(0);
+}
+
+.emotion-16.Mui-error:before,
+.emotion-16.Mui-error:after {
+  border-bottom-color: #d32f2f;
+}
+
+.emotion-16:before {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  left: 0;
+  bottom: 0;
+  content: "\\00a0";
+  position: absolute;
+  right: 0;
+  -webkit-transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  pointer-events: none;
+}
+
+.emotion-16:hover:not(.Mui-disabled, .Mui-error):before {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+}
+
+@media (hover: none) {
+  .emotion-16:hover:not(.Mui-disabled, .Mui-error):before {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
+}
+
+.emotion-16.Mui-disabled:before {
+  border-bottom-style: dotted;
+}
+
+.emotion-17 {
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  padding: 0;
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  height: auto;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0;
+  width: 100%;
+  -webkit-animation-name: mui-auto-fill-cancel;
+  animation-name: mui-auto-fill-cancel;
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  resize: none;
+  padding-top: 0;
+}
+
+.emotion-17::-webkit-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-17::-moz-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-17:-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-17::-ms-input-placeholder {
+  color: currentColor;
+  opacity: 0.42;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.emotion-17:focus {
+  outline: 0;
+}
+
+.emotion-17:invalid {
+  box-shadow: none;
+}
+
+.emotion-17::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17::-webkit-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17::-moz-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17::-ms-input-placeholder {
+  opacity: 0!important;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-webkit-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-moz-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus:-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-placeholder {
+  opacity: 0.42;
+}
+
+.emotion-17.Mui-disabled {
+  opacity: 1;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
+}
+
+.emotion-17:-webkit-autofill {
+  -webkit-animation-duration: 5000s;
+  animation-duration: 5000s;
+  -webkit-animation-name: mui-auto-fill;
+  animation-name: mui-auto-fill;
+}
+
+.emotion-19 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 8px 22px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #fff;
+  background-color: #2e7d32;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  width: 100%;
+  box-shadow: none;
+  font-size: 1.5rem;
+}
+
+.emotion-19::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-19.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-19 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-19:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #1b5e20;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+@media (hover: none) {
+  .emotion-19:hover {
+    background-color: #2e7d32;
+  }
+}
+
+.emotion-19:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+.emotion-19.Mui-focusVisible {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+.emotion-19.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.emotion-19:hover {
+  box-shadow: none;
+}
+
+.emotion-19.Mui-focusVisible {
+  box-shadow: none;
+}
+
+.emotion-19:active {
+  box-shadow: none;
+}
+
+.emotion-19.Mui-disabled {
+  box-shadow: none;
+}
+
+.emotion-20 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-20>*:nth-of-type(1) {
+  font-size: 22px;
+}
+
+.emotion-24 {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.emotion-24 .MuiTableCell-root {
+  font-size: 1rem;
+  padding: 6px 0;
+}
+
+.emotion-25 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.emotion-25 caption {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  caption-side: bottom;
+}
+
+.emotion-26 {
+  display: table-row-group;
+}
+
+.emotion-27 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-27.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-27.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-27.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-28 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.emotion-28.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-28.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-33 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-33.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-33.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-33.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.emotion-33 .MuiTableCell-root {
+  padding: 0.2rem;
+  width: 100vw;
+}
+
+.emotion-34 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 6px 16px;
+  color: rgba(0, 0, 0, 0.87);
+  padding-left: 0px;
+  font-weight: 700;
+}
+
+.emotion-34.MuiTableCell-paddingCheckbox {
+  width: 24px;
+  padding: 0 12px 0 16px;
+}
+
+.emotion-34.MuiTableCell-paddingCheckbox>* {
+  padding: 0;
+}
+
+.emotion-81 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.emotion-82 {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+}
+
+.emotion-82:hover {
+  text-decoration-color: inherit;
+}
+
+.emotion-105 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+  color: #d32f2f;
+}
+
+.emotion-105::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-105.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-105 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-105:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(211, 47, 47, 0.04);
+  border: 1px solid #d32f2f;
+}
+
+@media (hover: none) {
+  .emotion-105:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-105.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.emotion-106 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.emotion-106>*:nth-of-type(1) {
+  font-size: 20px;
+}
+
+<body
+    style="padding-right: 1024px; overflow: hidden;"
+  >
+    <div
+      aria-hidden="true"
+    />
+    <div
+      class="MuiDialog-root MuiModal-root emotion-0"
+      role="presentation"
+      width="350"
+    >
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root MuiModal-backdrop emotion-1"
+        style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+      />
+      <div
+        data-testid="sentinelStart"
+        tabindex="0"
+      />
+      <div
+        class="MuiDialog-container MuiDialog-scrollPaper emotion-2"
+        role="presentation"
+        style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+        tabindex="-1"
+      >
+        <div
+          aria-labelledby="mui-2"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth emotion-3"
+          role="dialog"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root emotion-4"
+            id="mui-2"
+          >
+            <div
+              class="MuiBox-root emotion-5"
+            >
+              <div
+                class="MuiBox-root emotion-6"
+              >
+                Tree Details
+              </div>
+              <button
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall emotion-7"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-8"
+                  data-testid="CloseIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root emotion-9"
+                />
+              </button>
+            </div>
+          </h2>
+          <div
+            class="MuiDialogContent-root MuiDialogContent-dividers emotion-10"
+          >
+            <div
+              class="text-left"
+            >
+              <h1>
+                Windmill Palm
+              </h1>
+              <div>
+                <h2>
+                  <a
+                    href="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    name="https://en.wikipedia.org/wiki/Trachycarpus fortunei"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Trachycarpus fortunei
+                  </a>
+                </h2>
+                <h5
+                  title="Diameter at breast height"
+                >
+                  DBH: 
+                  6
+                </h5>
+              </div>
+            </div>
+            <img
+              alt=""
+              placeholder="placeholder.jpg"
+              src="placeholder.jpg"
+              style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+            />
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Health
+              </h3>
+              <input
+                class="slider emotion-12"
+                id="healthSlider"
+                list="healthSlider"
+                max="6"
+                min="0"
+                step="1"
+                style="margin: 1em 0px .5em 0px; cursor: pointer;"
+                type="range"
+                value="6"
+              />
+              <datalist
+                aria-label="healthSlider"
+                id="healthSlider"
+              >
+                <option
+                  aria-label="vacant"
+                  name="vacant"
+                  value="0"
+                />
+                <option
+                  aria-label="dead"
+                  name="dead"
+                  value="1"
+                />
+                <option
+                  aria-label="missing"
+                  name="missing"
+                  value="2"
+                />
+                <option
+                  aria-label="stump"
+                  name="stump"
+                  value="3"
+                />
+                <option
+                  aria-label="poor"
+                  name="poor"
+                  value="4"
+                />
+                <option
+                  aria-label="fair"
+                  name="fair"
+                  value="5"
+                />
+                <option
+                  aria-label="good"
+                  name="good"
+                  value="6"
+                />
+              </datalist>
+              <div
+                class="MuiBox-root emotion-13"
+              >
+                <h4>
+                  <span>
+                    good
+                  </span>
+                   
+                  
+                </h4>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Notes
+              </h3>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root emotion-15"
+              >
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline emotion-16"
+                >
+                  <textarea
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-17"
+                    id="mui-3"
+                    placeholder="Add a note"
+                    style="height: 0px; overflow: hidden;"
+                  />
+                  <textarea
+                    aria-hidden="true"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-17"
+                    readonly=""
+                    style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                    tabindex="-1"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-disableElevation MuiButton-fullWidth emotion-19"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-startIcon MuiButton-iconSizeLarge emotion-20"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-8"
+                    data-testid="ParkIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17 12h2L12 2 5.05 12H7l-3.9 6h6.92v4h3.96v-4H21z"
+                    />
+                  </svg>
+                </span>
+                Maintenance
+                <span
+                  class="MuiTouchRipple-root emotion-9"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Tree History
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-24"
+              >
+                <table
+                  class="MuiTable-root emotion-25"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-26"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-27"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        <p>
+                          <strong>
+                            2023-01-29
+                            : 
+                            park.mason
+                          </strong>
+                        </p>
+                        <p>
+                          <strong>
+                            Maintenance: 
+                          </strong>
+                          watered
+                        </p>
+                        <p>
+                          "
+                          Test
+                          "
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Address
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-24"
+              >
+                <table
+                  class="MuiTable-root emotion-25"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-26"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Address
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        881 Jamestown Ave
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        City
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        San Francisco
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        State
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        California
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Country
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        United States
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Zip
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        58
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Lng
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        -122.39179253152456
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Lat
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        37.717466057201726
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Organization
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-24"
+              >
+                <table
+                  class="MuiTable-root emotion-25"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-26"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Who
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        DPW Maintained 
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Email
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        urbanforestry@sfdpw.org
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Owner
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        Private
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Ids
+              </h3>
+              <div
+                class="MuiTableContainer-root emotion-24"
+              >
+                <table
+                  class="MuiTable-root emotion-25"
+                >
+                  <tbody
+                    class="MuiTableBody-root emotion-26"
+                  >
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Id
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        4984644562906934
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        Ref
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        22101
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root emotion-33"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                        style="width: 30%;"
+                      >
+                        SourceId
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                      >
+                        Sidewalk: Property side : Yard
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root emotion-11"
+            >
+              <h3>
+                Links
+              </h3>
+              <div
+                class="MuiBox-root emotion-81"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-82"
+                  href="https://data.sfgov.org/api/views/tkzw-k3nq/rows.csv?accessType=DOWNLOAD"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Data
+                </a>
+              </div>
+              <div
+                class="MuiBox-root emotion-81"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-82"
+                  href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  San Francisco Info
+                </a>
+              </div>
+              <div
+                class="MuiBox-root emotion-81"
+              >
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-82"
+                  href="https://standards.opencouncildata.org/#/trees"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Open Council Data Standards
+                </a>
+              </div>
+            </div>
+            <div
+              class="flex-grid border-top"
+            >
+              <div
+                class="treehistory-list text-left"
+              >
+                <div
+                  class="MuiBox-root emotion-11"
+                >
+                  <h3>
+                    CO2 Calculations
+                  </h3>
+                  <div
+                    class="MuiTableContainer-root emotion-24"
+                  >
+                    <table
+                      class="MuiTable-root emotion-25"
+                    >
+                      <tbody
+                        class="MuiTableBody-root emotion-26"
+                      >
+                        <tr
+                          class="MuiTableRow-root emotion-33"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-33"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-33"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Lbs
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                          >
+                            2.39
+                          </td>
+                        </tr>
+                        <tr
+                          class="MuiTableRow-root emotion-33"
+                        >
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-34"
+                            style="width: 60%;"
+                          >
+                            Weight CO2 Per Year In Kg
+                          </td>
+                          <td
+                            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall emotion-28"
+                          >
+                            1.09
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                
+                
+                <div
+                  class="MuiBox-root emotion-11"
+                >
+                  <h3>
+                    Calculating CO2
+                  </h3>
+                  <ol
+                    style="padding-left: 15px;"
+                  >
+                    <li>
+                      Determine the total (green) weight of the tree.
+                    </li>
+                    <li>
+                      Determine the dry weight of the tree.
+                    </li>
+                    <li>
+                      Determine the weight of carbon in the tree.
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree
+                    </li>
+                    <li>
+                      Determine the weight of CO2 sequestered in the tree per year
+                    </li>
+                  </ol>
+                </div>
+                <div
+                  class="MuiBox-root emotion-11"
+                >
+                  <h3>
+                    CO2 Calculator References
+                  </h3>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.unm.edu/~jbrink/365/Documents/Calcdivating_tree_carbon.pdf"
+                      >
+                        Calculating CO2 Carbon
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://trees.org/app/uploads/2021/04/Carbon-Brief-External.pdf"
+                      >
+                        Trees.org Carbon Brief
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/ccrc/tool/cufr-tree-carbon-calculator-ctcc"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.frontiersin.org/articles/10.3389/fevo.2016.00053/full"
+                      >
+                        Carbon Storage and Sequestration of Urban Street Trees in Beijing, China
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.fs.usda.gov/research/treesearch/52933"
+                      >
+                        Forestry Service USDA Tree Carbon Calculator Paper
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.itreetools.org/support/resources-overview/i-tree-methods-and-files/new-carbon-equations-and-methods-2020"
+                      >
+                        iTools Carbon Equations and Methods 2020
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://dtbe-api.daveyinstitute.com/https://dtbe-api.daveyinstitute.com/static/home/documents/API-Usage-Information_The-Davey-Tree-Benefits-Engine.pdf"
+                      >
+                        The Davey Tree Benefits Engine
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <a
+                        href="https://www.nwf.org/-/media/PDFs/Eco-schools/2013-NASA/03_Module-III/Lesson-13/LESSON-13_What-Is-DBH.ashx?la=en&hash=4FAB7CE60A21D9543FEE54A423A50A3F521B1939"
+                      >
+                        What Is DBH
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium emotion-105"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-startIcon MuiButton-iconSizeMedium emotion-106"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-8"
+                  data-testid="RemoveCircleIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"
+                  />
+                </svg>
+              </span>
+              Remove Tree
+              <span
+                class="MuiTouchRipple-root emotion-9"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="sentinelEnd"
+        tabindex="0"
+      />
+    </div>
+  </body>,
+  "container": <div
+    aria-hidden="true"
+  />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
