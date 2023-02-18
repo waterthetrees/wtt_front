@@ -159,7 +159,7 @@ export const CarbonCalculator = ({ currentTreeData }) => {
     isRangeDbh,
     isRangeHeight,
     age,
-    height,
+    currentTreeData?.height,
   );
 
   return (
