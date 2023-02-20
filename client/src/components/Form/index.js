@@ -9,3 +9,4 @@ export { default as FormScrollableDialog } from './FormScrollableDialog';
 export { default as FormSelect } from './FormSelect';
 export { default as FormTextField } from './FormTextField';
 export { default as FormTreeGroup } from './FormTreeGroup';
+export { default as FormTheme } from './FormTheme';

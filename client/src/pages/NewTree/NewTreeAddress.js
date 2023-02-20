@@ -7,9 +7,11 @@ import {
   FormSelect,
   FormRadio,
   FormRadioGroup,
+  FormTheme,
 } from '@/components/Form';
 import Section from '@/components/Section/Section';
 import { useNewTree } from './useNewTree';
+import { ThemeProvider } from '@mui/material/styles';
 
 // Add keys to each item in the map() call below.
 const stateMenuItems = [
@@ -191,40 +193,47 @@ export default function Address() {
 
   return (
     <Section title="Location">
-      <FormTextField
-        name="address"
-        label="Address"
-        rules={{ minLength: 1, maxLength: 100 }}
-      />
+      <ThemeProvider theme={FormTheme}>
+        <FormTextField
+          name="address"
+          label="Address"
+          rules={{ minLength: 1, maxLength: 100 }}
+        />
 
-      <FormTextField
-        name="city"
-        label="City"
-        rules={{ minLength: 1, maxLength: 100 }}
-      />
+        <FormTextField
+          name="city"
+          label="City"
+          rules={{ minLength: 1, maxLength: 100 }}
+        />
 
-      <FormSelect name="state" label="State">
-        {stateMenuItems}
-      </FormSelect>
+        <FormSelect name="state" label="State">
+          {stateMenuItems}
+        </FormSelect>
 
-      <FormDecimalField
-        name="zip"
-        label="ZIP Code"
-        rules={{
-          minLength: 5,
-          maxLength: 10,
-          pattern: /^\d{5}(?:[-\s]\d{4})?$/i,
-        }}
-      />
+        <FormDecimalField
+          name="zip"
+          label="ZIP Code"
+          rules={{
+            minLength: 5,
+            maxLength: 10,
+            pattern: /^\d{5}(?:[-\s]\d{4})?$/i,
+          }}
+        />
 
-      <FormTextField name="lat" label="Latitude" disabled />
+        <FormTextField name="lat" label="Latitude" disabled />
 
-      <FormTextField name="lng" label="Longitude" disabled />
+        <FormTextField name="lng" label="Longitude" disabled />
 
-      <FormRadioGroup name="owner" label="Type of land" aria-label="owner" row>
-        <FormRadio value="public" label="Public" />
-        <FormRadio value="private" label="Private" />
-      </FormRadioGroup>
+        <FormRadioGroup
+          name="owner"
+          label="Type of land"
+          aria-label="owner"
+          row
+        >
+          <FormRadio value="public" label="Public" />
+          <FormRadio value="private" label="Private" />
+        </FormRadioGroup>
+      </ThemeProvider>
     </Section>
   );
 }

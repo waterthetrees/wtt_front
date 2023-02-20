@@ -11,6 +11,7 @@ import TreeLinks from './TreeLinks';
 import { ImageLoad } from './TreeImage';
 
 import treeImages from '@/data/dist/treeImages.json';
+import { CarbonCalculator } from './CarbonCalculator';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -34,7 +35,6 @@ export const checkForUnfitData = (currentTreeData) =>
 // We'll add it here so that Maintenance/Health/removal don't render.
 
 export default function Tree({
-  map,
   TreeDetailsContainer,
   drawerWidth,
   currentTreeData,
@@ -82,7 +82,6 @@ export default function Tree({
 
           {!hasUnfitData && (
             <TreeHealth
-              map={map}
               currentTreeData={currentTreeData}
               isTreeQueryError={isTreeQueryError}
             />
@@ -107,6 +106,8 @@ export default function Tree({
           <TreeInfo currentTreeData={currentTreeData} />
 
           <TreeLinks currentTreeData={currentTreeData} />
+
+          <CarbonCalculator currentTreeData={currentTreeData} />
 
           {!hasUnfitData && (
             <TreeRemoval
