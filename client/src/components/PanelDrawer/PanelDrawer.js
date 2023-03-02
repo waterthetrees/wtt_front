@@ -26,8 +26,8 @@ export default function PanelDrawer({
           left: 0,
           width: `${width}px`,
           height: '100vh',
-          'padding-top': '3.5rem',
-          'box-shadow': '5px 0px 15px 3px rgba(0, 0, 0, 0.15)',
+          paddingTop: '3.5rem',
+          boxShadow: '5px 0px 15px 3px rgba(0, 0, 0, 0.15)',
         },
       }}
       open={open}

@@ -7,16 +7,6 @@ exports[`<Tree /> spec renders with PanelDrawer correctly 1`] = `
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  position: absolute;
-  left: 0;
-  width: 350px;
-  height: 100vh;
-}
-
-.emotion-0 .MuiDrawer-paper {
-  position: relative;
-  padding-top: 3.5rem;
-  box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
 }
 
 .emotion-1 {
@@ -44,6 +34,12 @@ exports[`<Tree /> spec renders with PanelDrawer correctly 1`] = `
   outline: 0;
   left: 0;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
+  position: absolute;
+  left: 0;
+  width: 350px;
+  height: 100vh;
+  padding-top: 3.5rem;
+  box-shadow: 5px 0px 15px 3px rgba(0, 0, 0, 0.15);
 }
 
 .emotion-2 {
@@ -812,7 +808,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
     <div>
       <div
         class="MuiDrawer-root MuiDrawer-docked emotion-0"
-        width="350"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
@@ -1435,7 +1430,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                   </div>
                 </div>
                 
-                
+                <p>
+                  NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
+                </p>
                 
                 <div
                   class="MuiBox-root emotion-9"
@@ -1578,16 +1575,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  position: absolute;
-  left: 0;
-  width: 350px;
-  height: 100vh;
-}
-
-.emotion-0 .MuiDrawer-paper {
-  position: relative;
-  padding-top: 3.5rem;
-  box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
 }
 
 .emotion-1 {
@@ -1615,6 +1602,12 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
   outline: 0;
   left: 0;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
+  position: absolute;
+  left: 0;
+  width: 350px;
+  height: 100vh;
+  padding-top: 3.5rem;
+  box-shadow: 5px 0px 15px 3px rgba(0, 0, 0, 0.15);
 }
 
 .emotion-2 {
@@ -2382,7 +2375,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
 <div>
     <div
       class="MuiDrawer-root MuiDrawer-docked emotion-0"
-      width="350"
     >
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
@@ -3005,7 +2997,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                 </div>
               </div>
               
-              
+              <p>
+                NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
+              </p>
               
               <div
                 class="MuiBox-root emotion-9"
@@ -4708,7 +4702,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
                   </div>
                 </div>
                 
-                
+                <p>
+                  NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
+                </p>
                 
                 <div
                   class="MuiBox-root emotion-11"
