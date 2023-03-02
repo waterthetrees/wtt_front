@@ -4,6 +4,12 @@ import PanelDrawer from '../components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '../components/ScrollableDialog/ScrollableDialog';
 import Tree from '../pages/Tree/Tree';
 
+/**
+ * These snapshots are designed to catch _any_ change to UI components, so they
+ * are by definition very brittle. If the changes are related to your changes
+ * and look expected, update these snapshots with `npm test -- -u`
+ */
+
 const drawerWidth = 350;
 const mockTreeData = {
   ref: '22101',
