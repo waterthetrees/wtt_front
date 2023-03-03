@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PanelDrawer from '../components/PanelDrawer/PanelDrawer';
-import ScrollableDialog from '../components/ScrollableDialog/ScrollableDialog';
-import Tree from '../pages/Tree/Tree';
+import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
+import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
+import Tree from '@/pages/Tree/Tree';
 
 /**
  * These snapshots are designed to catch _any_ change to UI components, so they
@@ -57,32 +57,6 @@ const mockTreeData = {
 };
 const mockTreeId = 420;
 const mockSetCurrentTreeId = jest.fn(() => {});
-
-jest.mock('@/api/queries', () => {
-  const allAutoMocked = jest.createMockFromModule('@/api/queries');
-  return {
-    ...allAutoMocked,
-    useTreeHistoryQuery: jest.fn(() => ({
-      data: [
-        {
-          id: '4914702656194240',
-          watered: 'yes',
-          mulched: null,
-          weeded: null,
-          staked: null,
-          braced: null,
-          pruned: null,
-          liked: null,
-          adopted: null,
-          comment: 'Test',
-          volunteer: 'park.mason',
-          idTreehistory: 3955,
-          dateVisit: '2023-01-29T22:48:43.000Z',
-        },
-      ],
-    })),
-  };
-});
 
 describe('<Tree /> spec', () => {
   it('renders with PanelDrawer correctly', () => {

@@ -32,5 +32,7 @@ module.exports = {
     '<root-dir>/node_modules(?!/@other-packages|d3-.*)/',
   ],
 
+  setupFilesAfterEnv: ['<rootDir>/client/src/tests/setup.js'],
+
   snapshotSerializers: ['@emotion/jest/serializer'],
 };
