@@ -18,9 +18,9 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '\\.(css|less|scss)$': '<rootDir>/__mocks__/styleMock.js',
+    '\\.(css|less|scss)$': '<rootDir>/client/src/tests/__mocks__/styleMock.js',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__mocks__/fileMock.js',
+      '<rootDir>/client/src/tests/__mocks__/fileMock.js',
     '^@/(.*)$': '<rootDir>/client/src/$1', // Translate webpack @ aliases, excluding packages starting with @
   },
 
@@ -31,6 +31,8 @@ module.exports = {
   transformIgnorePatterns: [
     '<root-dir>/node_modules(?!/@other-packages|d3-.*)/',
   ],
+
+  setupFilesAfterEnv: ['<rootDir>/client/src/tests/setup.js'],
 
   snapshotSerializers: ['@emotion/jest/serializer'],
 };
