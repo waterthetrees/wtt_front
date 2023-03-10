@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 import TreeEdit from './TreeEdit';
+import { format } from 'date-fns';
 
 export default function TreeHeader({
   currentTreeData,
@@ -27,8 +28,11 @@ export default function TreeHeader({
   } = currentTreeData;
 
   const wikipediaLink = `https://en.wikipedia.org/wiki/${scientific}`;
+
   // format() will throw an exception if datePlanted is undefined, so check it first.
-  const plantDate = datePlanted || planted || new Date();
+  const plantedDate = datePlanted || planted || new Date();
+  const formatPlantedDate = format(new Date(plantedDate), 'yyyy-MM-dd');
+
   const closeDialog = () => setIsDialogOpen(false);
 
   const handleEditClick = () => {
@@ -59,7 +63,7 @@ export default function TreeHeader({
           {scientific !== genus && <h2>{genus}</h2>}
           {height && <h5>Height: {height}</h5>}
           {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
-          {(datePlanted || planted) && <h5>Planted: {plantDate}</h5>}
+          {(datePlanted || planted) && <h5>Planted: {formatPlantedDate}</h5>}
           {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
         </div>
       </div>
