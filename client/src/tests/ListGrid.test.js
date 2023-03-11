@@ -102,7 +102,7 @@ const mockSources = [
 describe('<Source /> spec', () => {
   it('renders ListGrid correctly', () => {
     const columns = createColumnHeaders(mockSources);
-    const sourceForm = render(
+    const listGrid = render(
       <ListGrid
         data={mockSources}
         columns={columns}
@@ -114,6 +114,6 @@ describe('<Source /> spec', () => {
         openEdit={false}
       />,
     );
-    expect(sourceForm).toMatchSnapshot();
+    expect(listGrid).toMatchSnapshot();
   });
 });

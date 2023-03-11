@@ -24,7 +24,7 @@ export default function Data() {
         setSelectedDataSourceIndex={setSelectedDataSourceIndex}
       />
 
-      <ListGrid data={dataFiltered} columns={columns} />
+      <ListGrid data={dataFiltered} columns={columns} listType="data" />
 
       <LicenseFooter license={license} />
     </div>

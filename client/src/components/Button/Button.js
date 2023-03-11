@@ -57,12 +57,12 @@ export const BlackButton = (props) => {
   return (
     <button
       aria-label={props['area-label']}
-      type={props.type}
-      onClick={props.onClick}
+      type={props?.type}
+      onClick={props?.onClick}
       style={props?.style}
       className="wttbuttons__black"
     >
-      {props.children}
+      {props?.children}
     </button>
   );
 };

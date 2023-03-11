@@ -51,7 +51,7 @@ export function ListGrid({
   openEdit,
   setOpenEdit,
   defaultSortIndex = 0,
-  setList,
+  setSource,
   listType,
 }) {
   const defaultSortColumn = columns[defaultSortIndex].columnHeader;
@@ -81,7 +81,7 @@ export function ListGrid({
   };
 
   return (
-    <div className="listgrid__list" key={sortedList[0]}>
+    <div className="listgrid__list" key={listType}>
       <ListGridColumnHeaders
         handleSort={handleSort}
         columns={columns}
@@ -91,10 +91,10 @@ export function ListGrid({
         <ListGridItem
           item={item}
           columns={columns}
-          key={item.id}
+          key={item?.idSourceName}
           openEdit={openEdit}
           setOpenEdit={setOpenEdit}
-          setList={setList}
+          setSource={setSource}
           listType={listType}
         />
       ))}
@@ -131,13 +131,14 @@ function ListGridColumnHeaders({ handleSort, columns, listType }) {
 
 function createKey(item, columnHeader, index) {
   return item[columnHeader]
-    ? `${columnHeader}-${item[columnHeader]}`
+    ? `${columnHeader}-${item[columnHeader]}-${index}`
     : `${columnHeader}-${index}`;
 }
 
-function ListGridItem({ item, columns, setOpenEdit, setList, listType }) {
+function ListGridItem({ item, columns, setOpenEdit, setSource, listType }) {
   return (
     <div
+      key={item?.idSourceName}
       className="listgrid__list-item"
       style={{
         gridTemplateColumns: createDynamicGridTemplateColumns(
@@ -155,7 +156,7 @@ function ListGridItem({ item, columns, setOpenEdit, setList, listType }) {
             item={item}
             columnHeader={columnHeader}
             setOpenEdit={setOpenEdit}
-            setList={setList}
+            setSource={setSource}
           />
         </div>
       ))}
@@ -163,14 +164,14 @@ function ListGridItem({ item, columns, setOpenEdit, setList, listType }) {
   );
 }
 
-function ListGridItemSwitch({ item, columnHeader, setOpenEdit, setList }) {
+function ListGridItemSwitch({ item, columnHeader, setOpenEdit, setSource }) {
   switch (columnHeader) {
     case 'idSourceName':
       return (
         <ListGridIdSourceName
           source={item}
           setOpenEdit={setOpenEdit}
-          setList={setList}
+          setSource={setSource}
         />
       );
     case 'city':
@@ -190,10 +191,10 @@ function ListGridItemSwitch({ item, columnHeader, setOpenEdit, setList }) {
   }
 }
 
-function ListGridIdSourceName({ source, setOpenEdit, setList }) {
+function ListGridIdSourceName({ source, setOpenEdit, setSource }) {
   const handleClick = () => {
     setOpenEdit(true);
-    setList(source);
+    setSource(source);
   };
   return (
     <div

@@ -64,17 +64,16 @@ export default function Source() {
   const [license, setLicense] = useState('');
   const [importCSV, setImportCSV] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [source, setList] = useState({});
+  const [source, setSource] = useState({});
   const [message, setMessage] = useState('');
   const { data: sources } = useSourcesQuery();
-  console.log(sources, 'sources');
   const columns = createColumnHeaders(sources);
   const sourceFiltered = search && searchArray(sources, search);
 
   const handleNewEditSource = (e, item) => {
     e.preventDefault();
     setOpenEdit(!openEdit);
-    setList(item);
+    setSource(item);
   };
 
   useEffect(() => {
@@ -94,12 +93,12 @@ export default function Source() {
         setImportCSV={setImportCSV}
         setOpenEdit={setOpenEdit}
         openEdit={openEdit}
-        setList={setList}
+        setSource={setSource}
       />
 
       {message && (
         <div className="message">
-          <h3>{`${source.idSourceName} ${message}`}</h3>
+          <h3>{message}</h3>
         </div>
       )}
 
@@ -108,7 +107,7 @@ export default function Source() {
           <SourceForm
             setOpenEdit={setOpenEdit}
             source={source}
-            setList={setList}
+            setSource={setSource}
             message={message}
             setMessage={setMessage}
           />
@@ -122,7 +121,7 @@ export default function Source() {
           data={sourceFiltered || sources}
           columns={columns}
           defaultSortIndex={0}
-          setList={setList}
+          setSource={setSource}
           openEdit={openEdit}
           setOpenEdit={setOpenEdit}
           handleNewEditSource={handleNewEditSource}

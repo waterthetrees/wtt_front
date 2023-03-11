@@ -26,92 +26,6 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
 }
 
 .emotion-1 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0;
-  border: 0;
-  margin: 0;
-  border-radius: 0;
-  padding: 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  vertical-align: middle;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: inherit;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.75;
-  letter-spacing: 0.02857em;
-  text-transform: uppercase;
-  min-width: 64px;
-  padding: 6px 8px;
-  border-radius: 4px;
-  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  color: #1976d2;
-  background-color: white;
-  border-radius: .3vw;
-  outline: 1px solid #00000050;
-  color: #00000050;
-  height: 32px;
-  font-size: 12px;
-  min-width: 150px;
-}
-
-.emotion-1::-moz-focus-inner {
-  border-style: none;
-}
-
-.emotion-1.Mui-disabled {
-  pointer-events: none;
-  cursor: default;
-}
-
-@media print {
-  .emotion-1 {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-  }
-}
-
-.emotion-1:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  background-color: rgba(25, 118, 210, 0.04);
-}
-
-@media (hover: none) {
-  .emotion-1:hover {
-    background-color: transparent;
-  }
-}
-
-.emotion-1.Mui-disabled {
-  color: rgba(0, 0, 0, 0.26);
-}
-
-.emotion-2 {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -126,19 +40,8 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
   -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-size: 2.1875rem;
-  vertical-align: top;
-}
-
-.emotion-3 {
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: inherit;
+  -webkit-class-name: wttbuttons__icon;
+  class-name: wttbuttons__icon;
 }
 
 <body>
@@ -194,14 +97,12 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
             class="listgridheader-content-item"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium emotion-1"
-              tabindex="0"
-              type="button"
+              class="wttbuttons__black"
             >
               <svg
                 aria-hidden="true"
                 aria-label="Download CSV"
-                class="MuiSvgIcon-root MuiSvgIcon-colorGray MuiSvgIcon-fontSizeLarge emotion-2"
+                class="MuiSvgIcon-root MuiSvgIcon-colorGray MuiSvgIcon-fontSizeLarge emotion-1"
                 data-testid="LinkIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -211,9 +112,6 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
                 />
               </svg>
               Link Source
-              <span
-                class="MuiTouchRipple-root emotion-3"
-              />
             </button>
           </div>
         </div>
@@ -243,92 +141,6 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
 }
 
 .emotion-1 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-  outline: 0;
-  border: 0;
-  margin: 0;
-  border-radius: 0;
-  padding: 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  vertical-align: middle;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: inherit;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.75;
-  letter-spacing: 0.02857em;
-  text-transform: uppercase;
-  min-width: 64px;
-  padding: 6px 8px;
-  border-radius: 4px;
-  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  color: #1976d2;
-  background-color: white;
-  border-radius: .3vw;
-  outline: 1px solid #00000050;
-  color: #00000050;
-  height: 32px;
-  font-size: 12px;
-  min-width: 150px;
-}
-
-.emotion-1::-moz-focus-inner {
-  border-style: none;
-}
-
-.emotion-1.Mui-disabled {
-  pointer-events: none;
-  cursor: default;
-}
-
-@media print {
-  .emotion-1 {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-  }
-}
-
-.emotion-1:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  background-color: rgba(25, 118, 210, 0.04);
-}
-
-@media (hover: none) {
-  .emotion-1:hover {
-    background-color: transparent;
-  }
-}
-
-.emotion-1.Mui-disabled {
-  color: rgba(0, 0, 0, 0.26);
-}
-
-.emotion-2 {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -343,19 +155,8 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
   -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-size: 2.1875rem;
-  vertical-align: top;
-}
-
-.emotion-3 {
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: inherit;
+  -webkit-class-name: wttbuttons__icon;
+  class-name: wttbuttons__icon;
 }
 
 <div>
@@ -410,14 +211,12 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
           class="listgridheader-content-item"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium emotion-1"
-            tabindex="0"
-            type="button"
+            class="wttbuttons__black"
           >
             <svg
               aria-hidden="true"
               aria-label="Download CSV"
-              class="MuiSvgIcon-root MuiSvgIcon-colorGray MuiSvgIcon-fontSizeLarge emotion-2"
+              class="MuiSvgIcon-root MuiSvgIcon-colorGray MuiSvgIcon-fontSizeLarge emotion-1"
               data-testid="LinkIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -427,9 +226,6 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
               />
             </svg>
             Link Source
-            <span
-              class="MuiTouchRipple-root emotion-3"
-            />
           </button>
         </div>
       </div>

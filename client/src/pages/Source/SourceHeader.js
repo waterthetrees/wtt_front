@@ -1,6 +1,6 @@
 import React from 'react';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
-import { GrayButton } from '@/components/Button/Button';
+import { BlackButton } from '@/components/Button/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { LinkIcon } from '@/components/Icons';
 import './Source.scss';
@@ -12,14 +12,14 @@ export default function SourceHeader({
   setImportCSV,
   openEdit,
   setOpenEdit,
-  setList,
+  setSource,
 }) {
   // TODO turn this back on after MVP release
   const featureFlagCSVImporter = false;
 
   const handleClick = () => {
     setOpenEdit(!openEdit);
-    if (openEdit) setList(null);
+    if (openEdit) setSource(null);
   };
 
   return (
@@ -31,26 +31,26 @@ export default function SourceHeader({
       searchLabel={'Search Sources'}
     >
       <div className="listgridheader-content-item">
-        <GrayButton
-          aria-label="Link City/Source"
-          size="large"
-          onClick={handleClick}
-        >
-          <LinkIcon color="gray" fontSize="large" aria-label="Download CSV" />
+        <BlackButton aria-label="Link City/Source" onClick={handleClick}>
+          <LinkIcon
+            color="gray"
+            fontSize="large"
+            aria-label="Download CSV"
+            sx={{ className: 'wttbuttons__icon' }}
+          />
           Link Source
-        </GrayButton>
+        </BlackButton>
       </div>
 
       {featureFlagCSVImporter && (
         <div className="listgridheader-content-item">
-          <GrayButton
+          <BlackButton
             aria-label="Import City/Source CSV"
-            size="small"
             onClick={() => setImportCSV(!importCSV)}
           >
-            <CloudUploadIcon sx={{ marginRight: '7px', fontSize: 24 }} />
+            <CloudUploadIcon sx={{ className: 'wttbuttons__icon' }} />
             Upload Source
-          </GrayButton>
+          </BlackButton>
         </div>
       )}
     </ListGridHeader>

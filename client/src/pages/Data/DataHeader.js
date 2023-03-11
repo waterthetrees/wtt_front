@@ -34,10 +34,10 @@ export default function DataHeader({
       setSearch={setSearch}
       title={'Tree Information'}
       description={'Look through tree information here'}
-      searchLabel={'Search Tree Information'}
+      searchLabel={'Search Tree Info'}
     >
       <div className="listgridheader-content-item">
-        <FormControl sx={{ minWidth: 300, my: 1 }}>
+        <FormControl sx={{ minWidth: 250, my: 1 }}>
           <Select
             labelId="data-select-label"
             id="data-select"
@@ -56,11 +56,12 @@ export default function DataHeader({
           data={dataFiltered}
           filename={`${name.replaceAll(' ', '-')}.csv`}
         >
-          <BlackButton aria-label="Download CSV" size="large" type="button">
+          <BlackButton aria-label="Download CSV" type="button">
             <DownloadIcon
               color="gray"
               fontSize="large"
               aria-label="Download CSV"
+              sx={{ className: 'wttbuttons__icon' }}
             />
             Download CSV{' '}
           </BlackButton>

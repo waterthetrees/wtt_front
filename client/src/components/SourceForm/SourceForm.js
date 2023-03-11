@@ -23,12 +23,11 @@ function eliminateSameKeyValuePairs(obj1, obj2, idSourceName) {
   return Object.keys(newObj).length > 0 ? { idSourceName, ...newObj } : null;
 }
 
-export function SourceForm({ setOpenEdit, setList, source, setMessage }) {
+export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   const [error, setError] = React.useState('');
-  const data = useSourcesQuery({
+  const { data: savedSource } = useSourcesQuery({
     idSourceName: source?.idSourceName,
   });
-  const savedSource = data || {};
 
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
@@ -78,38 +77,34 @@ export function SourceForm({ setOpenEdit, setList, source, setMessage }) {
     const exists =
       savedSource?.source?.idSourceName === data?.source?.idSourceName;
 
-    console.log('savedSource?.source', savedSource?.source);
-
-    console.log('source', source);
-
-    console.log('data?.source', data?.source);
-
     if (exists) {
-      console.log('exists', exists);
+      const idSourceName = data?.source?.idSourceName;
       const newSource = eliminateSameKeyValuePairs(
         data?.source,
         savedSource?.source,
-        data?.source?.idSourceName,
+        idSourceName,
       );
       const newCrosswalk = eliminateSameKeyValuePairs(
         data?.crosswalk,
         savedSource?.crosswalk,
-        data?.source?.idSourceName,
+        idSourceName,
       );
       const payload = {
         source: newSource,
         crosswalk: newCrosswalk,
       };
-      console.log('payload', payload);
+
       await mutateSources.mutateAsync(payload);
-      setMessage('Updated! Thanks for the update!');
+      setMessage(`Updated ${idSourceName}! Thanks for the update!`);
     } else {
       await createSources.mutateAsync(data);
-      setMessage('Saved! Thanks for the submission!');
+      setMessage(
+        `Saved ${data?.source?.idSourceName}! Thanks for the submission!`,
+      );
     }
     setDisabled(false);
     setSaveButton('Save');
-    setList(null);
+    setSource(null);
 
     setOpenEdit(false);
   };
@@ -128,7 +123,7 @@ export function SourceForm({ setOpenEdit, setList, source, setMessage }) {
               setOpenEdit={setOpenEdit}
               saveButton={saveButton}
               disabled={disabled}
-              setList={setList}
+              setSource={setSource}
             />
           )}
           {error && (
@@ -146,10 +141,10 @@ export function SourceForm({ setOpenEdit, setList, source, setMessage }) {
   );
 }
 
-function SubmitButtons({ setOpenEdit, setList, saveButton, disabled }) {
+function SubmitButtons({ setOpenEdit, setSource, saveButton, disabled }) {
   const handleCancel = () => {
     setOpenEdit(false);
-    setList(null);
+    setSource(null);
   };
   return (
     <div className="sourceform__submit">
