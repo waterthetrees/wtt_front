@@ -16,7 +16,7 @@ module.exports = (env) => {
   // below if env.analyze is true
   const config = {
     mode: ifProduction() ? 'production' : 'development',
-    watch: false,
+    // watch: true,
     entry: './client/src/index.js',
     resolve: {
       alias: {
@@ -42,6 +42,11 @@ module.exports = (env) => {
       historyApiFallback: true,
       static: './',
       hot: true,
+      watchOptions: {
+        poll: true,
+        // ignored: /node_modules/,
+        aggregateTimeout: 300,
+      },
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
@@ -88,6 +93,7 @@ module.exports = (env) => {
         minify: false,
         // add a timestamp that's injected into an HTML comment
         buildTime: new Date().toISOString(),
+        title: 'Hot Module Replacement',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

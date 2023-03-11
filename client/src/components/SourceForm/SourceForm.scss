@@ -1,0 +1,125 @@
+.sourceform {
+    $self: &;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+    &__section {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    &__section-item {
+        flex-grow: 1;
+        flex-basis: 50%;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: lightgray;
+    }
+    &__section-item-header {
+        background-color: darkgray;
+        padding: 15px;
+        text-align: left;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    &__field-error {
+        color: red;
+    }
+
+    &__field-error > input,
+    &__field-error > select,
+    &__field-error > checkbox {
+        background: rgba(0,0,0,0.5);
+    }
+
+    &__form-row {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        margin: 5px 0;
+        flex: 4;
+    }
+    &__form-row > label {
+        padding: 0.1em 0;
+        flex: 2;
+        text-align: start;
+    }
+    &__form-row > checkbox {
+        justify-items: flex-start;
+        flex-direction: row;
+    }
+    &__form-row > select {
+        flex: 4;
+        width: 100%;
+        padding: 0.2em;
+        height: 100%;
+    }
+    &__form-row > input,
+    &__form-row > checkbox,
+    &__form-row > button {
+        padding: .2em;
+        flex: 4;
+    }
+
+    &__submit {
+        text-align: right;
+        margin: 0 10px 0 5px;
+    }
+    &__submit > button {
+        border: 0;
+        width: fit-content;
+        border-radius: 5px;
+        font-size: large;
+        padding: 0 5px;
+        margin: 0 0 0 5px;
+    }
+    &__submit > button[type="button"] {
+        background: gray;
+    }
+    &__submit > button[type="submit"] {
+        background: green;
+    }
+    &__submit > button:hover {
+        background: lightgray;        
+    }
+
+    @media screen and (max-width: 768px) {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column-reverse;
+        margin: 5px 0;
+
+        &__section {
+            flex-direction: column;
+        }
+        &__section-item {
+            margin: 5px;
+            padding: 5px;
+        }
+        &__form-row {
+            flex-direction: column;
+        }
+        &__form-row > label {
+            flex: 1;
+        }
+        &__form-row > select,
+        &__form-row > input,
+        &__form-row > checkbox,
+        &__form-row > button {
+            flex: 1;
+        }
+        &__submit {
+            text-align: center;
+        }
+    }
+        
+    
+
+}

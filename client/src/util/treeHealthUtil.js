@@ -67,3 +67,7 @@ export const treeHealthUtil = {
     return healthByName[health]?.maintainable || false;
   },
 };
+
+export function capFirstLetter(string) {
+  return `${string[0].toUpperCase()}${string.slice(1)}`;
+}
