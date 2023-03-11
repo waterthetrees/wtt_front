@@ -33,10 +33,10 @@ export default function SourceHeader({
       <div className="listgridheader-content-item">
         <GrayButton
           aria-label="Link City/Source"
-          size="small"
+          size="large"
           onClick={handleClick}
         >
-          <LinkIcon sx={{ marginRight: '7px', fontSize: 24 }} />
+          <LinkIcon color="gray" fontSize="large" aria-label="Download CSV" />
           Link Source
         </GrayButton>
       </div>

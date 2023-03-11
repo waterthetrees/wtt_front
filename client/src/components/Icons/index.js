@@ -5,3 +5,4 @@ export * from './Link';
 export * from './Upload';
 export * from './Search';
 export * from './Sort';
+export * from './Tree';

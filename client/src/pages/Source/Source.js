@@ -67,6 +67,7 @@ export default function Source() {
   const [source, setList] = useState({});
   const [message, setMessage] = useState('');
   const { data: sources } = useSourcesQuery();
+  console.log(sources, 'sources');
   const columns = createColumnHeaders(sources);
   const sourceFiltered = search && searchArray(sources, search);
 

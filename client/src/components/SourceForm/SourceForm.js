@@ -25,9 +25,10 @@ function eliminateSameKeyValuePairs(obj1, obj2, idSourceName) {
 
 export function SourceForm({ setOpenEdit, setList, source, setMessage }) {
   const [error, setError] = React.useState('');
-  const { data: savedSource } = useSourcesQuery({
+  const data = useSourcesQuery({
     idSourceName: source?.idSourceName,
   });
+  const savedSource = data || {};
 
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();

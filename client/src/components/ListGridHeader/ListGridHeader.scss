@@ -4,15 +4,11 @@
   flex-direction: row;
   flex-basis: 100%;
   flex: 1;
+  margin-bottom: 1rem;
 
   &-title {
     display: flex;
     flex-direction: column;
-  }
-
-  &-search {
-    height: 100%;
-    margin-bottom: 1em;
   }
 
   &-content {

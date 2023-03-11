@@ -11,17 +11,27 @@ function sortList(data, sortColumn, sortOrderAsc = true) {
     if (aa === null || aa === undefined) return sortOrderAsc ? 1 : -1;
     if (bb === null || bb === undefined) return sortOrderAsc ? -1 : 1;
 
+    // handle boolean value sorting for the "broken" column in the Source page
     if (typeof aa === 'boolean' && typeof bb === 'boolean') {
       return sortOrderAsc ? aa - bb : bb - aa;
     }
 
     const aStr = String(aa).toLowerCase();
     const bStr = String(bb).toLowerCase();
-    return sortOrderAsc ? (aStr < bStr ? -1 : 1) : aStr > bStr ? -1 : 1;
+
+    if (sortOrderAsc) {
+      // If ascending, compare the strings and return either -1 or 1 based on the result.
+      return aStr < bStr ? -1 : 1;
+    } else {
+      // If descending, compare the strings and return either -1 or 1 based on the opposite result.
+      return aStr > bStr ? -1 : 1;
+    }
   });
 }
 
 function createDynamicGridTemplateColumns(columnsNumber, listType) {
+  // the case of listType source is used for the Source page to create specific column widths
+  // the default case is used for the Data Page (or any other page that uses ListGrid) to create equal column widths
   switch (listType) {
     case 'source':
       return '2em 2.3em 8em 3.5em 3em 1fr 1fr 8.5em 1fr';

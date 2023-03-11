@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
-
 import { styled } from '@mui/material/styles';
+import './Button.scss';
 
 export const GreenButton = (props) => {
   const Green = styled(Button)({
@@ -50,5 +50,19 @@ export const GrayButton = (props) => {
     <Gray type={props.type} onClick={props.onClick} sx={props?.sx}>
       {props.children}
     </Gray>
+  );
+};
+
+export const BlackButton = (props) => {
+  return (
+    <button
+      aria-label={props['area-label']}
+      type={props.type}
+      onClick={props.onClick}
+      style={props?.style}
+      className="wttbuttons__black"
+    >
+      {props.children}
+    </button>
   );
 };

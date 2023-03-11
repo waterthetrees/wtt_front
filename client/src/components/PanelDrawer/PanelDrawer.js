@@ -9,23 +9,6 @@ import {
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-const StyledDrawer = styled(Drawer)(
-  ({ width }) => `
-  // Give the background of the container the same color as land on the map, so that it's not
-  // so jarring when the white drawer closes.
-  background: #c5def6;
-  width: ${width};
-  flex-shrink: 0;
-
-  & .MuiDrawer-paper {
-    // Add padding at the top to account for the header.
-    padding-top: 4.9rem;
-    width: ${width};
-    box-shadow: -5px 0px 15px -3px rgba(0, 0, 0, 0.15);
-  }
-`,
-);
-
 export default function PanelDrawer({
   children,
   width,
