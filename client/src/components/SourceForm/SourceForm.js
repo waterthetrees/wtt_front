@@ -73,6 +73,7 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   const [disabled, setDisabled] = React.useState(false);
 
   const onSubmit = async (data) => {
+    console.log('data', data);
     setSaveButton('Saving...');
     const exists =
       savedSource?.source?.idSourceName === data?.source?.idSourceName;
@@ -97,6 +98,7 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
       await mutateSources.mutateAsync(payload);
       setMessage(`Updated ${idSourceName}! Thanks for the update!`);
     } else {
+      console.log('data', data);
       await createSources.mutateAsync(data);
       setMessage(
         `Saved ${data?.source?.idSourceName}! Thanks for the submission!`,
@@ -118,14 +120,13 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className="sourceform">
-          {!error && (
-            <SubmitButtons
-              setOpenEdit={setOpenEdit}
-              saveButton={saveButton}
-              disabled={disabled}
-              setSource={setSource}
-            />
-          )}
+          <SubmitButtons
+            setOpenEdit={setOpenEdit}
+            saveButton={saveButton}
+            disabled={disabled}
+            setSource={setSource}
+          />
+
           {error && (
             <div className="sourceform__alert">
               <h2>{error}</h2>
@@ -148,7 +149,7 @@ function SubmitButtons({ setOpenEdit, setSource, saveButton, disabled }) {
   };
   return (
     <div className="sourceform__submit">
-      <button type="button" onClick={handleCancel} disabled={disabled}>
+      <button type="button" onClick={handleCancel}>
         Cancel
       </button>
       <button type="submit" disabled={disabled}>

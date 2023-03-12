@@ -37,7 +37,7 @@ export default function DataHeader({
       searchLabel={'Search Tree Info'}
     >
       <div className="listgridheader-content-item">
-        <FormControl sx={{ minWidth: 250, my: 1 }}>
+        <FormControl sx={{ minWidth: 265, my: 1 }}>
           <Select
             labelId="data-select-label"
             id="data-select"
