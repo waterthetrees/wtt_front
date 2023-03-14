@@ -4,10 +4,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { useForm, useFormContext, FormProvider } from 'react-hook-form';
 import {
-  useSourcesQuery,
+  // useSourcesQuery,
   useSourcesMutation,
   useCreateSourcesMutation,
 } from '@/api/queries';
+import { getData } from '@/api/apiUtils';
+import { useQuery } from 'react-query';
+// import { FormErrorMessage } from '@/components/Form';
 
 import { NEW_SOURCE_FIELDS, CROSSWALK_FIELDS } from './sourceArrays';
 import './SourceForm.scss';
@@ -23,11 +26,22 @@ function eliminateSameKeyValuePairs(obj1, obj2, idSourceName) {
   return Object.keys(newObj).length > 0 ? { idSourceName, ...newObj } : null;
 }
 
+function formatErrors(errors) {
+  return Object.entries(errors).reduce((acc, [key, value]) => {
+    return `${acc} \n${key}: ${value.message || value.type}, \n`;
+  }, '');
+}
+
 export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   const [error, setError] = React.useState('');
-  const { data: savedSource } = useSourcesQuery({
-    idSourceName: source?.idSourceName,
-  });
+
+  // Going back to vanilla react-query for now as the documentation is good
+  // TODO graphql
+  const { data: savedSource } = useQuery(
+    ['sources', { idSourceName: source?.idSourceName }],
+    getData,
+    { enabled: source?.idSourceName !== undefined },
+  );
 
   const { isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
@@ -37,25 +51,10 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   const createSources = useCreateSourcesMutation();
 
   const defaultValues = {
-    source: {
-      idSourceName: savedSource?.source?.idSourceName || source?.city || '',
-      state: savedSource?.source?.state || '',
-      isoAlpha3: savedSource?.source?.isoAlpha3 || '',
-      country: savedSource?.source?.country || '',
-      info: savedSource?.source?.info || '',
-      download: savedSource?.source?.download || '',
-      latitude: savedSource?.source?.latitude || '',
-      longitude: savedSource?.source?.longitude || '',
-      notes: savedSource?.source?.notes || '',
-      format: savedSource?.source?.format || '',
-      filename: savedSource?.source?.filename || '',
-      license: savedSource?.source?.license || '',
-      email: savedSource?.source?.email || '',
-      contact: savedSource?.source?.contact || '',
-      name: savedSource?.source?.name || '',
-    },
-    crosswalk: savedSource,
+    source: source?.source || savedSource?.source || {},
+    crosswalk: source?.crosswalk || savedSource?.crosswalk || {},
   };
+
   const methods = useForm({
     mode: 'all',
     defaultValues,
@@ -73,13 +72,11 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   const [disabled, setDisabled] = React.useState(false);
 
   const onSubmit = async (data) => {
-    console.log('data', data);
     setSaveButton('Saving...');
     const exists =
       savedSource?.source?.idSourceName === data?.source?.idSourceName;
-
+    const idSourceName = data?.source?.idSourceName;
     if (exists) {
-      const idSourceName = data?.source?.idSourceName;
       const newSource = eliminateSameKeyValuePairs(
         data?.source,
         savedSource?.source,
@@ -98,11 +95,9 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
       await mutateSources.mutateAsync(payload);
       setMessage(`Updated ${idSourceName}! Thanks for the update!`);
     } else {
-      console.log('data', data);
+      data.crosswalk['idSourceName'] = data.source['idSourceName'];
       await createSources.mutateAsync(data);
-      setMessage(
-        `Saved ${data?.source?.idSourceName}! Thanks for the submission!`,
-      );
+      setMessage(`Saved ${idSourceName}! Thanks for the submission!`);
     }
     setDisabled(false);
     setSaveButton('Save');
@@ -112,8 +107,14 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
   };
 
   const onError = (err) => {
-    console.error('Source Form ERROR: ', errors, err);
-    setError(`ERROR: ${err} ${errors} `);
+    console.error('Source Form ERROR: ', errors);
+    let errorStringSource = errors?.source ? formatErrors(errors.source) : '';
+    let errorStringCrosswalk = errors?.crosswalk
+      ? formatErrors(errors.crosswalk)
+      : '';
+
+    setError(`Source ERRORs: ${errorStringSource}\n\n
+      Crosswalk ERRORs: ${errorStringCrosswalk}\n\n`);
   };
 
   return (
@@ -129,7 +130,7 @@ export function SourceForm({ setOpenEdit, setSource, source, setMessage }) {
 
           {error && (
             <div className="sourceform__alert">
-              <h2>{error}</h2>
+              <h4>{error}</h4>
             </div>
           )}
           <div className="sourceform__section">
@@ -179,43 +180,78 @@ function FormFields({ fields }) {
         const fieldClass = errors[name]
           ? `sourceform__field-${type} sourceform__field-error`
           : `sourceform__field-${type}`;
-        const fieldClassErrors = 'sourceform__field-error';
-        const errorMessage = errors[name]?.message;
-        return (
-          <li className="sourceform__form-row" key={name}>
-            <label>{label}</label>
-            {type === 'select' && (
-              <select {...register(name, rules)} className={fieldClass}>
-                {input?.options.map((option) => (
-                  <option key={option?.label} value={option?.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            )}
 
-            {type === 'checkbox' && (
-              <input
-                type="checkbox"
-                {...register(name, rules)}
-                className={fieldClass}
-              />
-            )}
+        switch (type) {
+          case 'select': {
+            return (
+              <FormRow label={label} name={name} key={name}>
+                <select {...register(name, rules)} className={fieldClass}>
+                  {input?.options.map((option) => (
+                    <option key={option?.label} value={option?.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </FormRow>
+            );
+          }
 
-            {['text', 'email', 'email', 'url'].includes(type) && (
-              <input
-                type={type}
-                {...register(name, rules)}
-                className={fieldClass}
-                placeholder={label}
-              />
-            )}
-            {errors[name] && (
-              <span className={fieldClassErrors}>{errorMessage}</span>
-            )}
-          </li>
-        );
+          case 'checkbox': {
+            return (
+              <FormRow label={label} name={name}>
+                <input
+                  type="checkbox"
+                  {...register(name, rules)}
+                  className={fieldClass}
+                />
+              </FormRow>
+            );
+          }
+
+          default: {
+            return (
+              <FormRow label={label} name={name}>
+                <input
+                  type={type}
+                  {...register(name, rules)}
+                  className={fieldClass}
+                  placeholder={label}
+                />
+              </FormRow>
+            );
+          }
+        }
       })}
     </div>
+  );
+}
+
+const errorByType = (label, type) =>
+  ({
+    required: `${label} is required.`,
+    minLength: `${label} is too short.`,
+    maxLength: `${label} is too long.`,
+    pattern: `${label} is not formatted correctly.`,
+    default: `${label} has an error.`,
+  }[type ?? 'default']);
+
+function FormRow({ children, label, name }) {
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  // TODO fix errors. Why are errors not showing up?
+  const fieldClassErrors = 'sourceform__field-error';
+
+  return (
+    <li className="sourceform__form-row" key={name}>
+      <label>{label}</label>
+      {children}
+      {errors && errors[name] && (
+        <span className={fieldClassErrors}>
+          {errorByType(label, errors[name].type)}
+        </span>
+      )}
+    </li>
   );
 }

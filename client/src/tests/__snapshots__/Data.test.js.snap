@@ -39,7 +39,7 @@ exports[`<Data/> spec renders Data Header correctly 1`] = `
   margin: 0;
   border: 0;
   vertical-align: top;
-  min-width: 250px;
+  min-width: 265px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -326,6 +326,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
   font-size: 2.1875rem;
   -webkit-class-name: wttbuttons__icon;
   class-name: wttbuttons__icon;
+  padding-right: 0.5rem;
 }
 
 <body>
@@ -457,7 +458,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
                   />
                 </svg>
                 Download CSV
-                 
               </button>
             </a>
           </div>
@@ -512,7 +512,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
   margin: 0;
   border: 0;
   vertical-align: top;
-  min-width: 250px;
+  min-width: 265px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -799,6 +799,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
   font-size: 2.1875rem;
   -webkit-class-name: wttbuttons__icon;
   class-name: wttbuttons__icon;
+  padding-right: 0.5rem;
 }
 
 <div>
@@ -929,7 +930,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
                 />
               </svg>
               Download CSV
-               
             </button>
           </a>
         </div>

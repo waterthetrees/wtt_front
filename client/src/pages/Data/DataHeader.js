@@ -61,9 +61,9 @@ export default function DataHeader({
               color="gray"
               fontSize="large"
               aria-label="Download CSV"
-              sx={{ className: 'wttbuttons__icon' }}
+              sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
             />
-            Download CSV{' '}
+            Download CSV
           </BlackButton>
         </CSVLink>
       </div>

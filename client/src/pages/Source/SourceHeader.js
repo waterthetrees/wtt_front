@@ -36,7 +36,7 @@ export default function SourceHeader({
             color="gray"
             fontSize="large"
             aria-label="Download CSV"
-            sx={{ className: 'wttbuttons__icon' }}
+            sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
           />
           Link Source
         </BlackButton>
@@ -48,7 +48,9 @@ export default function SourceHeader({
             aria-label="Import City/Source CSV"
             onClick={() => setImportCSV(!importCSV)}
           >
-            <CloudUploadIcon sx={{ className: 'wttbuttons__icon' }} />
+            <CloudUploadIcon
+              sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
+            />
             Upload Source
           </BlackButton>
         </div>

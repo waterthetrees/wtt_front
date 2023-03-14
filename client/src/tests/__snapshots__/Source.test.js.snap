@@ -42,6 +42,7 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
   font-size: 2.1875rem;
   -webkit-class-name: wttbuttons__icon;
   class-name: wttbuttons__icon;
+  padding-right: 0.5rem;
 }
 
 <body>
@@ -157,6 +158,7 @@ exports[`<Source /> spec renders Source Header correctly 1`] = `
   font-size: 2.1875rem;
   -webkit-class-name: wttbuttons__icon;
   class-name: wttbuttons__icon;
+  padding-right: 0.5rem;
 }
 
 <div>

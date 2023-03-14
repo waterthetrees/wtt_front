@@ -3,11 +3,12 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-
-
     list-style-type: none;
     padding: 0;
     border-radius: 3px;
+
+    input[type=checkbox] { flex: unset; }
+
     &__section {
         display: flex;
         justify-content: space-between;
