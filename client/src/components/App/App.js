@@ -29,6 +29,14 @@ const Source = React.lazy(() =>
 const MapLayout = React.lazy(() =>
   import(/* webpackChunkName: "MapLayout" */ '@/pages/Map/MapLayout'),
 );
+const TreeInfo = React.lazy(() =>
+  import(/* webpackChunkName: "TreeInfo" */ '@/pages/TreeInfo/TreeInfo'),
+);
+const TreeInfoLarge = React.lazy(() =>
+  import(
+    /* webpackChunkName: "TreeInfoLarge" */ '@/pages/TreeInfo/TreeInfoLarge'
+  ),
+);
 
 // Create a client for react-query calls.  Don't automatically refetch the data when the window is
 // focused since it's not changing that frequently.
@@ -70,6 +78,8 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/data" element={<Data />} />
                   <Route path="/Source" element={<Source />} />
+                  <Route path="/treeinfo" element={<TreeInfo />} />
+                  <Route path="/treeinfo/:common" element={<TreeInfoLarge />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

@@ -80,6 +80,12 @@ const Header = () => {
           </MenuItem>
 
           <MenuItem onClick={handleClose}>
+            <Link to="/treeinfo" className="header-link">
+              <HeaderButton menuItem="TreeInfo" />
+            </Link>
+          </MenuItem>
+
+          <MenuItem onClick={handleClose}>
             <AuthButton />
           </MenuItem>
         </Menu>

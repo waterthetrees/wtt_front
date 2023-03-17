@@ -17,6 +17,7 @@ export default function PanelDrawer({
   anchor = 'left',
   actions,
   onClose,
+  padding = '16px 24px',
 }) {
   const percentWidth =
     typeof width === 'string' && width.includes('%') ? width : `${width}px`;
@@ -24,7 +25,7 @@ export default function PanelDrawer({
     <Drawer
       PaperProps={{
         sx: {
-          position: 'absolute',
+          position: 'fixed',
           left: 0,
           width: `${width}px`,
           height: '100vh',
@@ -38,7 +39,7 @@ export default function PanelDrawer({
       onClose={onClose}
       variant="persistent"
     >
-      <DialogTitle sx={{ py: 1 }}>
+      <DialogTitle sx={{ py: 2 }}>
         <Box display="flex" alignItems="center">
           <Box flexGrow={1}>{title}</Box>
           <IconButton size="small" onClick={onClose} sx={{ mr: -1.5 }}>
@@ -46,7 +47,7 @@ export default function PanelDrawer({
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent dividers>{children}</DialogContent>
+      <DialogContent sx={{ padding: padding }}>{children}</DialogContent>
       {actions && <DialogActions>{actions}</DialogActions>}
     </Drawer>
   );
