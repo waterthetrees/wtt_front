@@ -83,27 +83,32 @@ export default function TreeInfoFilter({
   };
 
   return (
-    <div className="treeinfo__filter">
+    <div className="treeinfofilter">
       {checkboxFiltersArray.map((filter) => {
         return (
-          <div key={filter.title} className="treeinfo__filter-section">
-            <h3 className="treeinfo__filter-title">{filter.title}</h3>
-            {filter?.options.map((option) => {
-              return (
-                <div key={option}>
-                  <input
-                    type="checkbox"
-                    name={option}
-                    checked={!!checkboxes[option]}
-                    onChange={(event) =>
-                      handleCheckboxChange(event, filter.title)
-                    }
-                    className="treeinfo__filter-checkbox"
-                  />
-                  <label className="treeinfo__filter-label">{option}</label>
-                </div>
-              );
-            })}
+          <div key={filter.title} className="treeinfofilter__section">
+            <h3 className="treeinfofilter__section-title">{filter.title}</h3>
+            <div className="treeinfofilter__section-item">
+              {filter?.options.map((option) => {
+                return (
+                  <label
+                    className="treeinfofilter__section-item-label"
+                    key={option}
+                  >
+                    <input
+                      type="checkbox"
+                      name={option}
+                      checked={!!checkboxes[option]}
+                      onChange={(event) =>
+                        handleCheckboxChange(event, filter.title)
+                      }
+                      className="treeinfofilter__section-item-checkbox"
+                    />
+                    {option}
+                  </label>
+                );
+              })}
+            </div>
           </div>
         );
       })}

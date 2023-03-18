@@ -45,7 +45,7 @@ export default function TreeInfo() {
           dataList.map((tree, index) => {
             const nameFormatted = tree?.common.toLowerCase().replace(/ /g, '-');
             const urlRoute = `/${routeName}/${nameFormatted}`;
-
+            const { notes, ...treeRest } = tree;
             return (
               <NavLink
                 className="treeinfo__link"
@@ -55,7 +55,7 @@ export default function TreeInfo() {
                 state={tree}
                 key={`${tree?.scientific}-${index}`}
               >
-                <Card {...tree} />
+                <Card {...treeRest} />
               </NavLink>
             );
           })}

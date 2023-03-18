@@ -21,67 +21,7 @@ $white:  mix($dark, white, 20%);
     font-weight: 700;
     margin-bottom: 20px;
   }
-  &__filter-header {
-    width: 150px;
-    font-size: medium;
-    padding: 1rem;
-  }
-  &__filter {
-    display: flex;
-    flex-direction: column;
-    height: max-content;
-    color: black;
-    background-color: gray;
-  }
-
-  &__filter-section {
-    background-color: whitesmoke;
-    padding: 1rem;
-    margin-top: 10px;
-  }
-
-  &__filter-section:last-child {
-    margin-bottom: 10px;
-  }
-
-  &____filter-title {
-    background-color: lightgray;
-    font-size: medium;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  &__filter-label {
-    padding-left: 10px;
-  }
-  
-  &__filter-checkbox {
-    color: rgba(0, 0, 0, 0.6);
-    width: 15px;
-    height: 15px;
-    vertical-align: bottom;
-    position: relative;
-    top: -5px;
-    cursor: pointer;
-
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-      border-radius: 0;
-    }
-
-    input:hover {
-      background-color: #2196F3;
-    }
-
-    /* When the checkbox is checked, add a blue background */
-    input:checked {
-      background-color: #2196F3;
-    }
-  }
+ 
 
   &__list {
     margin: 0 15px 0 150px;
@@ -103,7 +43,7 @@ $white:  mix($dark, white, 20%);
     text-decoration: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     &__list {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
@@ -120,6 +60,78 @@ $white:  mix($dark, white, 20%);
   }
   }
 
+}
+
+.treeinfofilter {
+  $self: &;
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  color: black;
+  background-color: gray;
+
+
+  &__header {
+    width: 150px;
+    font-size: medium;
+    padding: 1rem;
+  }
+
+  &__section {
+    background-color: whitesmoke;
+    margin-top: 10px;
+  }
+
+  &__section:last-child {
+    margin-bottom: 10px;
+  }
+
+  &__section-title {
+    background-color: lightgray;
+    font-size: medium;
+    font-weight: 700;
+    padding: 2px 5px;
+  }
+
+  &__section-item {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+  
+  &__section-item-label {
+    padding-left: 8px;
+    font-size: medium;
+  }
+  
+  &__section-item-checkbox {
+    color: rgba(0, 0, 0, 0.6);
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    cursor: pointer;
+    margin-right: 5px;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      border-radius: 0;
+    }
+
+    input:hover {
+      background-color: #2196F3;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    input:checked {
+      background-color: #2196F3;
+    }
+  }
 }
 
 .treeinfolarge {
@@ -145,5 +157,6 @@ $white:  mix($dark, white, 20%);
 
   &__content-item{
     font-size: medium;
+    max-width: 500px;
   }
 }
