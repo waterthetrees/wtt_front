@@ -166,7 +166,7 @@ function TreeList({ data, columns }) {
 
   return (
     <div className="data-treelist">
-      <TreeHeader clickHandler={clickHandler} columns={columns} />
+      <TreeHeader clickHandler={clickHandler} columns={columns} lastSortedColumn={lastSortColumn} />
       {sortedTrees.map((tree) => (
         <Tree
           tree={tree}
@@ -178,7 +178,7 @@ function TreeList({ data, columns }) {
   );
 }
 
-function TreeHeader({ clickHandler, columns }) {
+function TreeHeader({ clickHandler, columns, lastSortedColumn }) {
   return (
     <div className="data-treelist-tree-header">
       {columns.map(({ key, label }) => (
@@ -189,7 +189,7 @@ function TreeHeader({ clickHandler, columns }) {
             value={key}
             onClick={clickHandler}
           >
-            {label}
+            {label} {lastSortedColumn === label.toLowerCase() ? <>&#9662;</> : <>&#9652;</>}
           </button>
         </div>
       ))}
