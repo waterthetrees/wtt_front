@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthButton } from '@/components/Auth';
 import './Header.scss';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const isMobile = useMediaQuery('(max-width:768px)');
+  const location = useLocation();
+  const isMapPage = location.pathname == '/' || location.pathname == '/map';
+  const showHeaderLink = !isMobile || !isMapPage;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,11 +24,8 @@ const Header = () => {
 
   return (
     <div id="header" className="header">
+      {/* Header elements are shown in row-reverse order, right to left */}
       <div className="header-content">
-        <Link to="/">
-          <div className="header-font">WATER THE TREES</div>
-        </Link>
-
         <button
           type="button"
           className="header-btn-menu"
@@ -83,6 +85,12 @@ const Header = () => {
             <AuthButton />
           </MenuItem>
         </Menu>
+
+        {showHeaderLink && (
+          <Link to="/">
+            <div className="header-font">WATER THE TREES</div>
+          </Link>
+        )}
       </div>
     </div>
   );

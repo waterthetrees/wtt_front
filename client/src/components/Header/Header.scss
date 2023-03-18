@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(20,125,22, 0.8);
+  background-color: rgba(20, 125, 22, 0.8);
   border-color: transparent;
 
   /* put this above the map drawer but below modal dialogs */
@@ -16,24 +16,12 @@
 }
 
 .header-font {
-  font-family: wtt-thin, Arial, sans-serif, "PT Sans";
+  font-family: wtt-thin, Arial, sans-serif, 'PT Sans';
   color: white;
   white-space: nowrap;
   letter-spacing: -3px;
   font-size: 2.3rem;
   word-spacing: 0.6rem;
-}
-
-.header-logo {
-  height: 4em;
-  width: 36em;
-  padding: 0;
-  margin: 10px 0;
-  background-color: #fff;
-  border-radius: 4px;
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
-  box-shadow: 0 0 0 2pxrgba 0, 0, 0, 0.1;
 }
 
 .header-btn-menu {
@@ -61,7 +49,7 @@
 
 .header-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   padding: 0 10px;
   justify-content: space-between;
   align-items: center;
@@ -99,10 +87,6 @@
 
 @media only screen and (max-width: 768px) {
   .header-icon {
-    width: 70vw;
-  }
-
-  .header--logo {
     width: 70vw;
   }
 }

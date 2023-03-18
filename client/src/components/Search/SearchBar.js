@@ -1,5 +1,6 @@
 import React from 'react';
 import { Autocomplete, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import './SearchBar.scss';
 
 const SearchBar = ({ className, options }) => {
@@ -10,15 +11,20 @@ const SearchBar = ({ className, options }) => {
       freeSolo
       autoHighlight
       autoComplete
-      noOptionsText="No places found"
+      noOptionsText="No results found"
       options={options}
       groupBy={(option) => option.type}
       sx={{
         opacity: 1,
         backgroundColor: 'white',
       }}
+      endAdornment={SearchIcon}
       renderInput={(params) => (
-        <TextField {...params} label="Search for a place" />
+        <TextField
+          {...params}
+          label="Search Water the Trees"
+          endAdornment={SearchIcon}
+        />
       )}
       renderOption={(props, option) => (
         <SearchResult props={props} option={option} />
