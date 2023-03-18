@@ -15,17 +15,23 @@ const SearchBar = ({ className, options }) => {
       options={options}
       groupBy={(option) => option.type}
       sx={{
-        opacity: 1,
         backgroundColor: 'white',
       }}
-      endAdornment={SearchIcon}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Search Water the Trees"
-          endAdornment={SearchIcon}
-        />
-      )}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            label="Search Water the Trees"
+            InputProps={{
+              ...params.InputProps,
+              sx: {
+                padding: '4px',
+              },
+              startAdornment: <SearchIcon />,
+            }}
+          />
+        );
+      }}
       renderOption={(props, option) => (
         <SearchResult props={props} option={option} />
       )}
@@ -41,8 +47,8 @@ const SearchBar = ({ className, options }) => {
 
 const SearchResult = ({ option, props }) => {
   return (
-    <div className="search-result" {...props}>
-      {option.label}
+    <div {...props} className={`${props.className} search-result`}>
+      <div>{option.label}</div>
       <div className="address">{option.address}</div>
     </div>
   );

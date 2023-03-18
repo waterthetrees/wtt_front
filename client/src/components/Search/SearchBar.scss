@@ -1,4 +1,10 @@
+#searchbar-input {
+  height: 1rem;
+  padding: 4px;
+}
+
 .search-result {
+  display: block;
   border-bottom: 1px solid #666;
   padding: 1rem;
   .address {
