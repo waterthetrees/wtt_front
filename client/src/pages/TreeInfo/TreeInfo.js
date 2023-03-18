@@ -11,12 +11,14 @@ const routeName = 'treeinfo';
 
 export default function TreeInfo() {
   const [data, setData] = useState(topTreesSanFrancisco);
+
   const [filteredData, setFilteredData] = useState(data);
   const [filterOpen, setFilterOpen] = useState(true);
-  console.log(data);
+
   const dataList = filteredData?.length > 0 ? filteredData : data;
   const handleClose = () => setFilterOpen(false);
   const handleOpen = () => setFilterOpen(true);
+
   return (
     <div className="treeinfo">
       <div className="treeinfo__filter-header">

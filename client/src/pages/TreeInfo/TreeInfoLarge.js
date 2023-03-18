@@ -3,19 +3,17 @@ import { useParams, useLocation } from 'react-router-dom';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import './TreeInfo.scss';
 
-export default function TreeInfo(props) {
-  console.log('props', props);
+const capFirstLetterAndSpace = (word) =>
+  word.at(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
+
+export default function TreeInfo() {
   const location = useLocation();
-  console.log(location.userProps);
-  console.log(location.trees);
-  console.log('location', location);
   let { common } = useParams();
   const trees = location.state;
 
-  console.log('common', common);
   // capitalize first letter of every word and separate by space
-  const commonCapFirstLetterAndSpace =
-    common.at(0).toUpperCase() + common.slice(1).replace(/-/g, ' ');
+
+  const commonCapFirstLetterAndSpace = capFirstLetterAndSpace(common);
 
   return (
     <div className="treeinfolarge">
