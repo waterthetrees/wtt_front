@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, styled } from '@mui/material';
+import { styled } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import { useIsMobile } from '@/pages/NewTree/utilities';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
@@ -58,7 +58,7 @@ function MapLayout() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <MapContainer
         ref={mapContainerRef}
         drawerEnabled={drawerEnabled}
@@ -91,7 +91,7 @@ function MapLayout() {
           isTreeQueryError={isTreeQueryError}
         />
       )}
-    </Box>
+    </>
   );
 }
 
