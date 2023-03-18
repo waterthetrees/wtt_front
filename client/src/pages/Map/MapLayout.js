@@ -5,6 +5,7 @@ import { useIsMobile } from '@/pages/NewTree/utilities';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
 import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
 import NewTree from '@/pages/NewTree/NewTree';
+import Search from '@/pages/Search/Search';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
@@ -74,6 +75,8 @@ function MapLayout() {
           onLoad={setMap}
         />
       </MapContainer>
+
+      <Search />
 
       {newTreeState.isPanelOpen ? (
         <NewTree
