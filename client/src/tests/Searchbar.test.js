@@ -35,7 +35,7 @@ const mockOptions = [
 ];
 
 describe('<Searchbar /> snapshot specs', () => {
-  it('renders with PanelDrawer correctly', () => {
+  it('renders correctly', () => {
     const searchBar = render(<Searchbar options={mockOptions} />);
     expect(searchBar).toMatchSnapshot();
   });

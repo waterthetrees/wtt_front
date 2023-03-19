@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Searchbar /> snapshot specs renders with PanelDrawer correctly 1`] = `
+exports[`<Searchbar /> snapshot specs renders correctly 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .emotion-0 {
@@ -128,6 +128,14 @@ exports[`<Searchbar /> snapshot specs renders with PanelDrawer correctly 1`] = `
   flex-grow: 1;
   text-overflow: ellipsis;
   opacity: 1;
+}
+
+.emotion-0 #searchbar-input {
+  padding: 4px;
+}
+
+.emotion-0 .MuiAutocomplete-endAdornment {
+  position: unset;
 }
 
 .emotion-1 {
@@ -465,6 +473,14 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   flex-grow: 1;
   text-overflow: ellipsis;
   opacity: 1;
+}
+
+.emotion-0 #searchbar-input {
+  padding: 4px;
+}
+
+.emotion-0 .MuiAutocomplete-endAdornment {
+  position: unset;
 }
 
 .emotion-1 {
