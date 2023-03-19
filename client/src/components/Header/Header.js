@@ -11,8 +11,7 @@ const Header = () => {
   const isMobile = useMediaQuery('(max-width:768px)');
   const location = useLocation();
   const isMapPage = location.pathname == '/' || location.pathname == '/map';
-  // FIXME when search feature is enabled
-  const showHeaderLink = true || !isMobile || !isMapPage;
+  const showHeaderLink = !isMobile || !isMapPage;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

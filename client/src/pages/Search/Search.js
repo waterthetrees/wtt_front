@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { debounce } from '@mui/material/utils';
 import SearchBar from '@/components/Search/SearchBar';
 import { mapboxAccessToken } from '@/util/config';
 
@@ -8,6 +9,7 @@ import './Search.scss';
 const MIN_CHARS_FOR_SEARCH = 2;
 const BASE_MAPBOX_SEARCH_API_URL =
   'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -15,9 +17,13 @@ const Search = () => {
     queryKey: query,
     queryFn: () => getSearchResults(query),
     enabled: query.length > MIN_CHARS_FOR_SEARCH,
+    cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
+
+  // Debounce search reqeusts to mitigate churning through our API requests budget
+  const debouncedSetQuery = debounce((query) => setQuery(query), 250);
   const handleChange = (event) => {
-    setQuery(event.currentTarget.value);
+    debouncedSetQuery(event.currentTarget.value);
   };
 
   const options = searchResults?.features.map((result) => ({
