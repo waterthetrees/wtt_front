@@ -11,7 +11,7 @@ const BASE_MAPBOX_SEARCH_API_URL =
   'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 
-const Search = () => {
+const Search = ({ map }) => {
   const [query, setQuery] = useState('');
   const { data: searchResults, isLoading } = useQuery({
     queryKey: query,
@@ -22,8 +22,12 @@ const Search = () => {
 
   // Debounce search reqeusts to mitigate churning through our API requests budget
   const debouncedSetQuery = debounce((query) => setQuery(query), 250);
-  const handleChange = (event) => {
+  const handleInputChange = (event) => {
     debouncedSetQuery(event.currentTarget.value);
+  };
+
+  const handleOptionSelect = (e, option) => {
+    map.panTo(option.coords);
   };
 
   const options = searchResults?.features.map((result) => ({
@@ -39,7 +43,8 @@ const Search = () => {
       <SearchBar
         options={options}
         loading={isLoading}
-        onChange={handleChange}
+        handleInputChange={handleInputChange}
+        handleOptionSelect={handleOptionSelect}
       />
     </div>
   );
