@@ -10,7 +10,6 @@ const SearchBar = ({ className, options }) => {
     <Autocomplete
       className={className}
       id="searchbar-input"
-      open
       freeSolo
       autoHighlight
       autoComplete
