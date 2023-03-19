@@ -5,7 +5,7 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import ArrowOutwardOutlinedIcon from '@mui/icons-material/ArrowOutwardOutlined';
 import './SearchBar.scss';
 
-const SearchBar = ({ className, options }) => {
+const SearchBar = ({ className, options, onChange }) => {
   return (
     <Autocomplete
       className={className}
@@ -41,6 +41,7 @@ const SearchBar = ({ className, options }) => {
               disableUnderline: true,
               startAdornment: <SearchIcon />,
             }}
+            onChange={onChange}
           />
         );
       }}

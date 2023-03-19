@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import SearchBar from '@/components/Search/SearchBar';
+import { mapboxAccessToken } from '@/util/config';
 
 import './Search.scss';
 
+const MIN_CHARS_FOR_SEARCH = 2;
+const BASE_MAPBOX_SEARCH_API_URL =
+  'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+
 // Remove after searchbar autocomplete is hooked up to mapbox geocoding API
 // and event listeners are hooked up to mapbox actions
-const IS_ENABLED = false;
 const mockResponse = {
   type: 'FeatureCollection',
   query: ['825', 's', 'milwaukee', 'ave', 'deerfield', 'il', '60015'],
@@ -107,41 +112,53 @@ const mockResponse = {
   attribution:
     'NOTICE: © 2018 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare.',
 };
-const mockOptions = [
-  {
-    label: 'Milwaukee Ave',
-    type: 'Results',
-    address:
-      '825 South Milwaukee Avenue, Wheeling, Illinois 60090, United States',
-    id: 'address.7464624790403620',
-    coords: [-87.910299, 42.144504],
-  },
-  {
-    label: 'Milwaukee Ave',
-    type: 'Results',
-    address:
-      '825 South Milwaukee Avenue, Wheeling, Illinois 60090, United States',
-    id: 'address.7464624790403620',
-    coords: [-87.910299, 42.144504],
-  },
-  {
-    label: 'Milwaukee Ave',
-    type: 'Recent',
-    address: '825 Milwaukee Ave, Deerfield, Illinois 60015, United States',
-    id: 'address.4356035406756260',
-    coords: [-87.921434, 42.166602],
-  },
-];
 
 const Search = () => {
-  if (!IS_ENABLED) {
-    return null;
-  }
+  const [query, setQuery] = useState('');
+  const { data: searchResults } = useQuery({
+    queryKey: query,
+    queryFn: () => getSearchResults(query),
+    enabled: query.length > MIN_CHARS_FOR_SEARCH,
+  });
+  const handleChange = (event) => {
+    setQuery(event.currentTarget.value);
+  };
+
+  const options =
+    searchResults?.features.map((result) => ({
+      label: result.text,
+      address: result.place_name,
+      id: result.id,
+      coords: result.center,
+      type: 'Results',
+    })) || [];
+
   return (
     <div className="search-container">
-      <SearchBar options={mockOptions} loading={false} />
+      <SearchBar options={options} loading={false} onChange={handleChange} />
     </div>
   );
+};
+
+const getSearchResults = async (query) => {
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const coords = hashParams.get('pos')?.split('/');
+  const searchParams = new URLSearchParams({
+    access_token: mapboxAccessToken,
+    autocomplete: true,
+    fuzzymatch: true,
+    proximity: `${coords[2]},${coords[1]}`,
+  });
+  const url = `${BASE_MAPBOX_SEARCH_API_URL}${query}.json?${searchParams}`;
+
+  const response = await fetch(url);
+
+  if (response && !response.ok) {
+    // Throw an error so react-query knows to retry the request.
+    throw new Error(`${response.status} (${response.statusText}) ${url}`);
+  }
+
+  return response && response.json();
 };
 
 export default Search;
