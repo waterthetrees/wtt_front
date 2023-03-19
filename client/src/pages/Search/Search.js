@@ -5,7 +5,7 @@ import './Search.scss';
 
 // Remove after searchbar autocomplete is hooked up to mapbox geocoding API
 // and event listeners are hooked up to mapbox actions
-const IS_ENABLED = true;
+const IS_ENABLED = false;
 const mockResponse = {
   type: 'FeatureCollection',
   query: ['825', 's', 'milwaukee', 'ave', 'deerfield', 'il', '60015'],
