@@ -5,16 +5,16 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import ArrowOutwardOutlinedIcon from '@mui/icons-material/ArrowOutwardOutlined';
 import './SearchBar.scss';
 
-const SearchBar = ({ className, options, onChange }) => {
+const SearchBar = ({ className, options = [], onChange }) => {
   return (
     <Autocomplete
       className={className}
       id="searchbar-input"
       freeSolo
       autoHighlight
-      autoComplete
       noOptionsText="No results found"
       options={options}
+      filterOptions={(option) => option}
       groupBy={(option) => option.type}
       sx={{
         backgroundColor: 'white',
@@ -45,9 +45,9 @@ const SearchBar = ({ className, options, onChange }) => {
           />
         );
       }}
-      renderOption={(props, option) => (
-        <SearchResult props={props} option={option} />
-      )}
+      renderOption={(props, option) => {
+        return <SearchResult props={props} option={option} />;
+      }}
       renderGroup={(params) => (
         <li key={params.key}>
           <GroupHeader>{params.group}</GroupHeader>
@@ -60,7 +60,11 @@ const SearchBar = ({ className, options, onChange }) => {
 
 const SearchResult = ({ option, props }) => {
   return (
-    <div {...props} className={`${props.className} search-result`}>
+    <div
+      {...props}
+      className={`${props.className} search-result`}
+      key={option.id}
+    >
       <div className="left-container">
         <PlaceOutlinedIcon fontSize="large" htmlColor="grey" />
         <div className="result-info">
