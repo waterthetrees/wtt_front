@@ -307,9 +307,124 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
   animation-name: mui-auto-fill;
 }
 
+.emotion-5 {
+  z-index: 1300;
+}
+
+.emotion-6 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  overflow: auto;
+}
+
+.emotion-7 {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  max-height: 40vh;
+  overflow: auto;
+  position: relative;
+  max-height: 80vh;
+}
+
+.emotion-7 .MuiAutocomplete-option {
+  min-height: 48px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  padding-top: 6px;
+  box-sizing: border-box;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: 6px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width:600px) {
+  .emotion-7 .MuiAutocomplete-option {
+    min-height: auto;
+  }
+}
+
+.emotion-7 .MuiAutocomplete-option.Mui-focused {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-7 .MuiAutocomplete-option.Mui-focused {
+    background-color: transparent;
+  }
+}
+
+.emotion-7 .MuiAutocomplete-option[aria-disabled="true"] {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.emotion-7 .MuiAutocomplete-option.Mui-focusVisible {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.emotion-7 .MuiAutocomplete-option[aria-selected="true"] {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-7 .MuiAutocomplete-option[aria-selected="true"].Mui-focused {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+@media (hover: none) {
+  .emotion-7 .MuiAutocomplete-option[aria-selected="true"].Mui-focused {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.emotion-7 .MuiAutocomplete-option[aria-selected="true"].Mui-focusVisible {
+  background-color: rgba(25, 118, 210, 0.2);
+}
+
+.emotion-8 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 2.1875rem;
+}
+
 <body>
     <div>
       <div
+        aria-owns="searchbar-input-listbox"
         class="MuiAutocomplete-root emotion-0"
       >
         <div
@@ -330,8 +445,10 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
               />
             </svg>
             <input
+              aria-activedescendant="searchbar-input-option-0"
               aria-autocomplete="both"
-              aria-expanded="false"
+              aria-controls="searchbar-input-listbox"
+              aria-expanded="true"
               aria-invalid="false"
               autocapitalize="none"
               autocomplete="off"
@@ -345,6 +462,190 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
             />
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiAutocomplete-popper emotion-5 MuiPopperUnstyled-root"
+      data-popper-escaped=""
+      data-popper-placement="bottom"
+      data-popper-reference-hidden=""
+      role="presentation"
+      style="position: absolute; top: 0px; left: 0px; width: 0px; margin: 0px; transform: translate(0px, 0px);"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAutocomplete-paper emotion-6"
+      >
+        <ul
+          aria-labelledby="searchbar-input-label"
+          class="MuiAutocomplete-listbox emotion-7"
+          id="searchbar-input-listbox"
+          role="listbox"
+        >
+          <li>
+            <div
+              class="group-header"
+            >
+              Results
+            </div>
+            <div
+              aria-disabled="false"
+              aria-selected="false"
+              class="MuiAutocomplete-option search-result Mui-focused"
+              data-option-index="0"
+              id="searchbar-input-option-0"
+              role="option"
+              tabindex="-1"
+            >
+              <div
+                class="left-container"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                  color="grey"
+                  data-testid="PlaceOutlinedIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z"
+                  />
+                </svg>
+                <div
+                  class="result-info"
+                >
+                  <div>
+                    Milwaukee Ave
+                  </div>
+                  <div
+                    class="address"
+                  >
+                    825 South Milwaukee Avenue, Wheeling, Illinois 60090, United States
+                  </div>
+                </div>
+              </div>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                color="grey"
+                data-testid="ArrowOutwardOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"
+                />
+              </svg>
+            </div>
+            <div
+              aria-disabled="false"
+              aria-selected="false"
+              class="MuiAutocomplete-option search-result"
+              data-option-index="1"
+              id="searchbar-input-option-1"
+              role="option"
+              tabindex="-1"
+            >
+              <div
+                class="left-container"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                  color="grey"
+                  data-testid="PlaceOutlinedIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z"
+                  />
+                </svg>
+                <div
+                  class="result-info"
+                >
+                  <div>
+                    Milwaukee Ave
+                  </div>
+                  <div
+                    class="address"
+                  >
+                    825 South Milwaukee Avenue, Wheeling, Illinois 60090, United States
+                  </div>
+                </div>
+              </div>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                color="grey"
+                data-testid="ArrowOutwardOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"
+                />
+              </svg>
+            </div>
+          </li>
+          <li>
+            <div
+              class="group-header"
+            >
+              Recent
+            </div>
+            <div
+              aria-disabled="false"
+              aria-selected="false"
+              class="MuiAutocomplete-option search-result"
+              data-option-index="2"
+              id="searchbar-input-option-2"
+              role="option"
+              tabindex="-1"
+            >
+              <div
+                class="left-container"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                  color="grey"
+                  data-testid="PlaceOutlinedIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z"
+                  />
+                </svg>
+                <div
+                  class="result-info"
+                >
+                  <div>
+                    Milwaukee Ave
+                  </div>
+                  <div
+                    class="address"
+                  >
+                    825 Milwaukee Ave, Deerfield, Illinois 60015, United States
+                  </div>
+                </div>
+              </div>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge emotion-8"
+                color="grey"
+                data-testid="ArrowOutwardOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"
+                />
+              </svg>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </body>,
@@ -654,6 +955,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
 
 <div>
     <div
+      aria-owns="searchbar-input-listbox"
       class="MuiAutocomplete-root emotion-0"
     >
       <div
@@ -674,8 +976,10 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
             />
           </svg>
           <input
+            aria-activedescendant="searchbar-input-option-0"
             aria-autocomplete="both"
-            aria-expanded="false"
+            aria-controls="searchbar-input-listbox"
+            aria-expanded="true"
             aria-invalid="false"
             autocapitalize="none"
             autocomplete="off"
