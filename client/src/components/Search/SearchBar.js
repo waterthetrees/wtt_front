@@ -1,6 +1,8 @@
 import React from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
+import ArrowOutwardOutlinedIcon from '@mui/icons-material/ArrowOutwardOutlined';
 import './SearchBar.scss';
 
 const SearchBar = ({ className, options }) => {
@@ -16,17 +18,18 @@ const SearchBar = ({ className, options }) => {
       groupBy={(option) => option.type}
       sx={{
         backgroundColor: 'white',
+        borderRadius: '4px',
       }}
       renderInput={(params) => {
         return (
           <TextField
             {...params}
-            label="Search Water the Trees"
+            variant="standard"
+            placeholder="Search Water the Trees"
             InputProps={{
               ...params.InputProps,
-              sx: {
-                padding: '4px',
-              },
+              className: 'search-input',
+              disableUnderline: true,
               startAdornment: <SearchIcon />,
             }}
           />
@@ -35,12 +38,12 @@ const SearchBar = ({ className, options }) => {
       renderOption={(props, option) => (
         <SearchResult props={props} option={option} />
       )}
-      // renderGroup={(params) => (
-      //   <li key={params.key}>
-      //     <GroupHeader>{params.group}</GroupHeader>
-      //     <GroupItems>{params.children}</GroupItems>
-      //   </li>
-      // )}
+      renderGroup={(params) => (
+        <li key={params.key}>
+          <GroupHeader>{params.group}</GroupHeader>
+          {params.children}
+        </li>
+      )}
     />
   );
 };
@@ -48,14 +51,20 @@ const SearchBar = ({ className, options }) => {
 const SearchResult = ({ option, props }) => {
   return (
     <div {...props} className={`${props.className} search-result`}>
-      <div>{option.label}</div>
-      <div className="address">{option.address}</div>
+      <div className="left-container">
+        <PlaceOutlinedIcon fontSize="large" htmlColor="grey" />
+        <div className="result-info">
+          <div className="label">{option.label}</div>
+          <div>{option.address}</div>
+        </div>
+      </div>
+      <ArrowOutwardOutlinedIcon fontSize="large" htmlColor="grey" />
     </div>
   );
 };
 
-// const GroupHeader = () => {};
-
-// const GroupItems = () => {};
+const GroupHeader = ({ children }) => {
+  return <div className="group-header">{children}</div>;
+};
 
 export default SearchBar;

@@ -118,6 +118,14 @@ const mockOptions = [
   },
   {
     label: 'Milwaukee Ave',
+    type: 'Results',
+    address:
+      '825 South Milwaukee Avenue, Wheeling, Illinois 60090, United States',
+    id: 'address.7464624790403620',
+    coords: [-87.910299, 42.144504],
+  },
+  {
+    label: 'Milwaukee Ave',
     type: 'Recent',
     address: '825 Milwaukee Ave, Deerfield, Illinois 60015, United States',
     id: 'address.4356035406756260',

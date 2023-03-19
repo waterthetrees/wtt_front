@@ -1,13 +1,32 @@
-#searchbar-input {
-  height: 1rem;
-  padding: 4px;
+.search-container {
+  .search-input {
+    padding: 6px;
+  }
+  #searchbar-input {
+    padding: 4px;
+  }
+  .MuiAutocomplete-endAdornment {
+    position: unset;
+  }
 }
 
-.search-result {
-  display: block;
-  border-bottom: 1px solid #666;
-  padding: 1rem;
-  .address {
-    font-size: 0.825rem;
+.MuiAutocomplete-popper {
+  .search-result {
+    justify-content: space-between;
+    padding: 12px;
+    .left-container {
+      display: flex;
+      align-items: center;
+    }
+    .result-info {
+      padding-left: 8px;
+      line-height: 1.2;
+    }
+    .label {
+      font-size: 1.25rem;
+    }
+  }
+  .group-header {
+    padding: 1rem;
   }
 }
