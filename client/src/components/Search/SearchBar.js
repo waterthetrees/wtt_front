@@ -10,6 +10,7 @@ const SearchBar = ({ className, options }) => {
     <Autocomplete
       className={className}
       id="searchbar-input"
+      open
       freeSolo
       autoHighlight
       autoComplete
@@ -19,6 +20,15 @@ const SearchBar = ({ className, options }) => {
       sx={{
         backgroundColor: 'white',
         borderRadius: '4px',
+        '& #searchbar-input': {
+          padding: '4px',
+        },
+        '& .MuiAutocomplete-endAdornment': {
+          position: 'unset',
+        },
+      }}
+      ListboxProps={{
+        sx: { maxHeight: '80vh' },
       }}
       renderInput={(params) => {
         return (
@@ -54,8 +64,8 @@ const SearchResult = ({ option, props }) => {
       <div className="left-container">
         <PlaceOutlinedIcon fontSize="large" htmlColor="grey" />
         <div className="result-info">
-          <div className="label">{option.label}</div>
-          <div>{option.address}</div>
+          <div>{option.label}</div>
+          <div className="address">{option.address}</div>
         </div>
       </div>
       <ArrowOutwardOutlinedIcon fontSize="large" htmlColor="grey" />

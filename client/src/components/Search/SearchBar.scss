@@ -2,12 +2,6 @@
   .search-input {
     padding: 6px;
   }
-  #searchbar-input {
-    padding: 4px;
-  }
-  .MuiAutocomplete-endAdornment {
-    position: unset;
-  }
 }
 
 .MuiAutocomplete-popper {
@@ -22,8 +16,8 @@
       padding-left: 8px;
       line-height: 1.2;
     }
-    .label {
-      font-size: 1.25rem;
+    .address {
+      font-size: 0.83rem;
     }
   }
   .group-header {
