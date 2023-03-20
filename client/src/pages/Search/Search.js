@@ -25,7 +25,7 @@ const Search = ({ map }) => {
     cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
 
-  // Debounce search reqeusts to mitigate churning through our API requests budget
+  // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = debounce((query) => setQuery(query), 250);
   const handleInputChange = (event) => {
     debouncedSetQuery(event.currentTarget.value);
