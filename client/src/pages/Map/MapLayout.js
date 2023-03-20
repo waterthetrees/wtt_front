@@ -76,7 +76,7 @@ function MapLayout() {
         />
       </MapContainer>
 
-      <Search />
+      <Search map={map} />
 
       {newTreeState.isPanelOpen ? (
         <NewTree

@@ -330,13 +330,14 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
               />
             </svg>
             <input
-              aria-autocomplete="both"
+              aria-autocomplete="list"
               aria-expanded="false"
               aria-invalid="false"
               autocapitalize="none"
               autocomplete="off"
               class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiAutocomplete-input MuiAutocomplete-inputFocused emotion-4"
               id="searchbar-input"
+              maxlength="250"
               placeholder="Search Water the Trees"
               role="combobox"
               spellcheck="false"
@@ -674,13 +675,14 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
             />
           </svg>
           <input
-            aria-autocomplete="both"
+            aria-autocomplete="list"
             aria-expanded="false"
             aria-invalid="false"
             autocapitalize="none"
             autocomplete="off"
             class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiAutocomplete-input MuiAutocomplete-inputFocused emotion-4"
             id="searchbar-input"
+            maxlength="250"
             placeholder="Search Water the Trees"
             role="combobox"
             spellcheck="false"
