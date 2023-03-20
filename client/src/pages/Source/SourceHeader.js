@@ -1,6 +1,6 @@
 import React from 'react';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
-import { BlackButton } from '@/components/Button/Button';
+import { WttButton } from '@/components/Button/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { LinkIcon } from '@/components/Icons';
 import './Source.scss';
@@ -31,7 +31,11 @@ export default function SourceHeader({
       searchLabel={'Search Sources'}
     >
       <div className="listgridheader-content-item">
-        <BlackButton aria-label="Link City/Source" onClick={handleClick}>
+        <WttButton
+          aria-label="Link City/Source"
+          onClick={handleClick}
+          colorClass="wttbuttons__black"
+        >
           <LinkIcon
             color="gray"
             fontSize="large"
@@ -39,20 +43,21 @@ export default function SourceHeader({
             sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
           />
           Link Source
-        </BlackButton>
+        </WttButton>
       </div>
 
       {featureFlagCSVImporter && (
         <div className="listgridheader-content-item">
-          <BlackButton
+          <WttButton
             aria-label="Import City/Source CSV"
             onClick={() => setImportCSV(!importCSV)}
+            colorClass="wttbuttons__black"
           >
             <CloudUploadIcon
               sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
             />
             Upload Source
-          </BlackButton>
+          </WttButton>
         </div>
       )}
     </ListGridHeader>

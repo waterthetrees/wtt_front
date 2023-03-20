@@ -18,8 +18,6 @@ export default function PanelDrawer({
   actions,
   onClose,
 }) {
-  const percentWidth =
-    typeof width === 'string' && width.includes('%') ? width : `${width}px`;
   return (
     <Drawer
       PaperProps={{
@@ -34,7 +32,6 @@ export default function PanelDrawer({
       }}
       open={open}
       anchor={anchor}
-      width={percentWidth}
       onClose={onClose}
       variant="persistent"
     >

@@ -20,11 +20,11 @@ function sortList(data, sortColumn, sortOrderAsc = true) {
     const bStr = String(bb).toLowerCase();
 
     if (sortOrderAsc) {
-      // If ascending, compare the strings and return either -1 or 1 based on the result.
-      return aStr < bStr ? -1 : 1;
+      // ascending
+      return aStr.localeCompare(bStr);
     } else {
-      // If descending, compare the strings and return either -1 or 1 based on the opposite result.
-      return aStr > bStr ? -1 : 1;
+      // descending
+      return bStr.localeCompare(aStr);
     }
   });
 }

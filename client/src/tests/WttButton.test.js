@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { BlackButton } from '@/components/Button/Button';
+import { WttButton } from '@/components/Button/Button';
 
 /**
  * These snapshots are designed to catch _any_ change to UI components, so they
@@ -10,17 +10,18 @@ import { BlackButton } from '@/components/Button/Button';
 
 const mockOnClick = jest.fn(() => {});
 
-describe('<BlackButton /> spec', () => {
-  it('renders BlackButton correctly', () => {
-    const blackButton = render(
-      <BlackButton
+describe('<WttButton /> spec', () => {
+  it('renders WttButton correctly', () => {
+    const wttButton = render(
+      <WttButton
         type={'button'}
         onClick={mockOnClick}
         aria-label="Import City/Source CSV"
+        colorClass="wttbuttons__black"
       >
         Test Button
-      </BlackButton>,
+      </WttButton>,
     );
-    expect(blackButton).toMatchSnapshot();
+    expect(wttButton).toMatchSnapshot();
   });
 });

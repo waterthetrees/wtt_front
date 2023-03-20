@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<BlackButton /> spec renders BlackButton correctly 1`] = `
+exports[`<WttButton /> spec renders WttButton correctly 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

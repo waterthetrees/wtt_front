@@ -1,68 +1,17 @@
 import React from 'react';
-import { Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import './Button.scss';
 
-export const GreenButton = (props) => {
-  const Green = styled(Button)({
-    backgroundColor: '#147d16',
-    borderRadius: '.3vw',
-    color: 'white',
-    height: '32px',
-  });
-
-  return (
-    <Green type={props.type} sx={props?.sx} onClick={props.onClick}>
-      {props.children}
-    </Green>
-  );
-};
-
-export const WhiteButton = (props) => {
-  const White = styled(Button)({
-    backgroundColor: 'white',
-    outline: '1px #147d16 solid',
-    borderRadius: '.3vw',
-    color: '#00000050',
-    height: '32px',
-    fontSize: '12px',
-  });
-
-  return (
-    <White type={props.type} onClick={props.onClick} sx={props?.sx}>
-      {props.children}
-    </White>
-  );
-};
-
-export const GrayButton = (props) => {
-  const Gray = styled(Button)({
-    backgroundColor: 'white',
-    borderRadius: '.3vw',
-    outline: '1px solid #00000050',
-    color: '#00000050',
-    height: '32px',
-    fontSize: '12px',
-    minWidth: '150px',
-  });
-
-  return (
-    <Gray type={props.type} onClick={props.onClick} sx={props?.sx}>
-      {props.children}
-    </Gray>
-  );
-};
-
-export const BlackButton = (props) => {
+export const WttButton = (props) => {
+  const { children, onClick, type, style, colorClass } = props;
   return (
     <button
       aria-label={props['area-label']}
-      type={props?.type}
-      onClick={props?.onClick}
-      style={props?.style}
-      className="wttbuttons__black"
+      type={type}
+      onClick={onClick}
+      style={style}
+      className={colorClass}
     >
-      {props?.children}
+      {children}
     </button>
   );
 };

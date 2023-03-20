@@ -4,7 +4,7 @@ import { MenuItem, FormControl, Button, Select } from '@mui/material';
 import { CSVLink } from 'react-csv';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
 import { searchArray } from '@/components/SearchBar/SearchBar';
-import { BlackButton } from '@/components/Button/Button';
+import { WttButton } from '@/components/Button/Button';
 
 import { dataSources } from '@/pages/Data/dataArrays';
 
@@ -56,7 +56,11 @@ export default function DataHeader({
           data={dataFiltered}
           filename={`${name.replaceAll(' ', '-')}.csv`}
         >
-          <BlackButton aria-label="Download CSV" type="button">
+          <WttButton
+            aria-label="Download CSV"
+            type="button"
+            colorClass="wttbuttons__black"
+          >
             <DownloadIcon
               color="gray"
               fontSize="large"
@@ -64,7 +68,7 @@ export default function DataHeader({
               sx={{ className: 'wttbuttons__icon', paddingRight: '0.5rem' }}
             />
             Download CSV
-          </BlackButton>
+          </WttButton>
         </CSVLink>
       </div>
 
