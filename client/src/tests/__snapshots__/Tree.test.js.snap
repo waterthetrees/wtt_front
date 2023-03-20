@@ -808,7 +808,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
     <div>
       <div
         class="MuiDrawer-root MuiDrawer-docked emotion-0"
-        width="350px"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
@@ -2376,7 +2375,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
 <div>
     <div
       class="MuiDrawer-root MuiDrawer-docked emotion-0"
-      width="350px"
     >
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft emotion-1"
