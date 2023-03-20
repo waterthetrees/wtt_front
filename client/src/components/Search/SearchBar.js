@@ -5,9 +5,12 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import ArrowOutwardOutlinedIcon from '@mui/icons-material/ArrowOutwardOutlined';
 import './SearchBar.scss';
 
+const MAX_QUERY_LENGTH = 250;
+
 const SearchBar = ({
   className,
-  options = [],
+  loading,
+  options,
   handleInputChange,
   handleOptionSelect,
 }) => {
@@ -15,9 +18,9 @@ const SearchBar = ({
     <Autocomplete
       className={className}
       id="searchbar-input"
-      freeSolo
       autoHighlight
-      noOptionsText="No results found"
+      loading={loading}
+      freeSolo
       options={options}
       onChange={handleOptionSelect}
       filterOptions={(option) => option}
@@ -33,7 +36,7 @@ const SearchBar = ({
         },
       }}
       ListboxProps={{
-        sx: { maxHeight: '80vh' },
+        sx: { maxHeight: '60vh' },
       }}
       renderInput={(params) => {
         return (
@@ -46,6 +49,10 @@ const SearchBar = ({
               className: 'search-input',
               disableUnderline: true,
               startAdornment: <SearchIcon />,
+            }}
+            inputProps={{
+              ...params.inputProps,
+              maxLength: MAX_QUERY_LENGTH,
             }}
             onChange={handleInputChange}
           />
@@ -67,6 +74,11 @@ const SearchBar = ({
 };
 
 const SearchResult = ({ option, props }) => {
+  // Special options like "No results found"
+  if (!option.type) {
+    return <div className="no-results">{option.label}</div>;
+  }
+
   return (
     <div
       {...props}
@@ -86,6 +98,9 @@ const SearchResult = ({ option, props }) => {
 };
 
 const GroupHeader = ({ children }) => {
+  if (!children) {
+    return null;
+  }
   return <div className="group-header">{children}</div>;
 };
 

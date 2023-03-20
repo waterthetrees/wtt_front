@@ -13,7 +13,12 @@ const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 
 const Search = ({ map }) => {
   const [query, setQuery] = useState('');
-  const { data: searchResults, isLoading } = useQuery({
+  const {
+    data: searchResults,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useQuery({
     queryKey: query,
     queryFn: () => getSearchResults(query),
     enabled: query.length > MIN_CHARS_FOR_SEARCH,
@@ -27,16 +32,25 @@ const Search = ({ map }) => {
   };
 
   const handleOptionSelect = (e, option) => {
-    map.panTo(option.coords);
+    if (option) {
+      map.panTo(option.coords);
+    }
   };
 
-  const options = searchResults?.features.map((result) => ({
-    label: result.text,
-    address: result.place_name,
-    id: result.id,
-    coords: result.center,
-    type: 'Results',
-  }));
+  let options = [];
+  if (searchResults?.features.length) {
+    options = searchResults.features.map((result) => ({
+      label: result.text,
+      address: result.place_name,
+      id: result.id,
+      coords: result.center,
+      type: 'Results',
+    }));
+  } else if (isSuccess) {
+    options = [{ label: 'No results found' }];
+  } else if (isError) {
+    options = [{ label: 'Error encountered. Please try again later.' }];
+  }
 
   return (
     <div className="search-container">
