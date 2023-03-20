@@ -3,6 +3,7 @@ export const env =
     'waterthetrees.com': 'prod',
     'dev.waterthetrees.com': 'dev',
     localhost: 'localhost',
+    // localhost: 'blue',
   }[window.location.hostname] || 'localhost';
 
 export const url = {
@@ -10,6 +11,7 @@ export const url = {
   dev: 'https://dev.waterthetrees.com',
   localhost: 'http://localhost',
   docker: 'http://localhost',
+  blue: 'http://localhost',
 }[env];
 
 export const port = {
@@ -17,6 +19,7 @@ export const port = {
   dev: '',
   localhost: ':3002',
   docker: ':3002',
+  blue: ':3004',
 }[env];
 
 export const tilesServerEndpoints = {
@@ -40,6 +43,7 @@ const apiEndpoints = {
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
   countries: `${url}${port}/api/countries`,
+  sources: `${url}${port}/api/sources`,
   usercounts: `${url}${port}/api/usercounts`,
   usertreehistory: `${url}${port}/api/usertreehistory`,
 };

@@ -13,12 +13,14 @@ const host = {
   production: 'http://localhost',
   localhost: 'http://localhost',
   docker: 'http://localhost',
+  blue: 'http://localhost',
 }[env];
 const port = {
   production: 3001,
   development: 3001,
   localhost: 3001,
   docker: 3001,
+  blue: 3000,
 }[env];
 
 app.use(compression());

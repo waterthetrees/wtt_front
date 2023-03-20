@@ -23,6 +23,9 @@ import './App.css';
 const Data = React.lazy(() =>
   import(/* webpackChunkName: "Data" */ '@/pages/Data/Data'),
 );
+const Source = React.lazy(() =>
+  import(/* webpackChunkName: "Source" */ '@/pages/Source/Source'),
+);
 const MapLayout = React.lazy(() =>
   import(/* webpackChunkName: "MapLayout" */ '@/pages/Map/MapLayout'),
 );
@@ -66,6 +69,7 @@ function App() {
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/data" element={<Data />} />
+                  <Route path="/Source" element={<Source />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

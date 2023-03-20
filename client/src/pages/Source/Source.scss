@@ -1,5 +1,5 @@
 
-.data {
+.source {
   $self: &;
   padding: 6rem 2rem 2rem;
   background-image: url('../../assets/images/sources/all_leaf.svg');
@@ -34,7 +34,7 @@
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
 
-  &-treeheader > button[type="button"] {
+  &-treeheader-btn {
     font-weight: bold;
     border: 0;
     background-color: rgb(0 0 0 / 20%);
@@ -45,8 +45,8 @@
     padding: 2px 6px;
   }
 
-  &-treeheader > button[type="button"]:active,
-  &-treeheader > button[type="button"]:hover {
+  &-treeheader-btn:active,
+  &-treeheader-btn:hover {
     color: white;
     background-color: lightslategrey;
   }
@@ -80,14 +80,13 @@
     border-right-width: 1px;
   }
 
-  &-select {
-    font-size: large;
-  }
-
   @media screen and (max-width: 768px) {
     margin: 1rem 0;
     padding: 6rem 0.5em 2rem;
   }
+    
+
+
 }
 
 
@@ -99,4 +98,8 @@
   text-align: center;
   color: #202020;
   margin-bottom: 15px;
+}
+
+.message {
+  color: green;
 }

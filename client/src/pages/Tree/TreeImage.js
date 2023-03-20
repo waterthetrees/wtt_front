@@ -1,5 +1,3 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
 
 export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
@@ -30,3 +28,4 @@ export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
     />
   );
 });
+ImageLoad.displayName = 'ImageLoad';
