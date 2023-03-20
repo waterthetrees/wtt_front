@@ -1,0 +1,26 @@
+.search-container {
+  .search-input {
+    padding: 6px;
+  }
+}
+
+.MuiAutocomplete-popper {
+  .search-result {
+    justify-content: space-between;
+    padding: 12px;
+    .left-container {
+      display: flex;
+      align-items: center;
+    }
+    .result-info {
+      padding-left: 8px;
+      line-height: 1.2;
+    }
+    .address {
+      font-size: 0.83rem;
+    }
+  }
+  .group-header {
+    padding: 1rem;
+  }
+}

@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(20,125,22, 0.8);
+  background-color: rgba(20, 125, 22, 0.8);
   border-color: transparent;
 
   /* put this above the map drawer but below modal dialogs */
@@ -16,7 +16,7 @@
 }
 
 .header-font {
-  font-family: wtt-thin, Arial, sans-serif, "PT Sans";
+  font-family: wtt-thin, Arial, sans-serif, 'PT Sans';
   color: white;
   white-space: nowrap;
   letter-spacing: -3px;
@@ -61,7 +61,7 @@
 
 .header-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   padding: 0 10px;
   justify-content: space-between;
   align-items: center;
@@ -99,10 +99,6 @@
 
 @media only screen and (max-width: 768px) {
   .header-icon {
-    width: 70vw;
-  }
-
-  .header--logo {
     width: 70vw;
   }
 }

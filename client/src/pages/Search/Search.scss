@@ -1,0 +1,17 @@
+.search-container {
+  position: absolute;
+  width: 600px;
+  top: 8px;
+  margin-left: -300px;
+  left: 50%;
+  z-index: 1300;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    // Screen width - (menu button width + padding)
+    width: calc(100% - 58px);
+    margin: 0;
+    left: 8px;
+  }
+}
