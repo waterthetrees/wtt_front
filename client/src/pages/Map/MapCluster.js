@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
-import { useTreeQuery } from '@/api/queries';
+import { useQueryClient } from 'react-query';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
@@ -10,6 +10,7 @@ import { treeHealthUtil } from '@/util/treeHealthUtil';
 import MapboxControlPortal from './MapboxControlPortal';
 import MapLayers from './MapLayers';
 import TreeLayerLegend from './TreeLayerLegend';
+import { useTreesQuery } from '@/api/queries';
 import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
@@ -43,6 +44,11 @@ function createPopupHTML({ common, scientific }) {
   return `<div>${commonString}${scientificString}</div>`;
 }
 
+const popup = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+});
+
 // What is this doing here?
 const layers = [
   // Reverse the tree health names, so they go from good to vacant.
@@ -75,26 +81,14 @@ export default function Map({
   selectionEnabled,
   onLoad,
 }) {
-  const popup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false,
-  });
-
   const [map, setMap] = useState(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const queryClient = useQueryClient();
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
-  const hasInitialFlyToFired = useRef(false);
 
-  const initialLoadTreeId = useRef(
-    new URLSearchParams(window.location.hash.slice(1)).get('id'),
-  );
-  // This tree query is intentionally separate from the one in `MapLayout`,
-  // since it kicks off only once on load!
-  const { data: initialLoadTreeData } = useTreeQuery(
-    { id: initialLoadTreeId.current },
-    { retry: 0, enabled: isMapLoaded && !!initialLoadTreeId },
-  );
+  
+  const {trees} = useTreesQuery();
 
   // TODO: maybe use a class for Map so that event handlers bound to the instance can look at
   //  this.props.selectionEnabled instead of having to mirror it in a ref like this
@@ -114,8 +108,7 @@ export default function Map({
       const mapboxMap = new mapboxgl.Map({
         container: containerRef.current,
         projection: 'globe',
-        //style: 'mapbox://styles/waterthetrees/ckyckqkqz8e4b14rn3rm1hh9k',
-        style: 'mapbox://styles/tzinckgraf/clez3031z002301o8somsmnxu',
+        style: 'mapbox://styles/waterthetrees/ckyckqkqz8e4b14rn3rm1hh9k',
         center: [-99.08, 41.03],
         zoom: 2,
         maxZoom: 18.5,
@@ -140,37 +133,94 @@ export default function Map({
       });
 
       // Add the navigation controls to the map.
-      mapboxMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
 
       mapboxMap.on('load', () => {
+          console.log('here');
         // Now that the style has loaded, add the vector tile source, which will be used by the
         // TreeLayer components to generate a layer for each health type.  We have to do this before
         // setting isMapLoaded to true below, as seems to cause an immediate re-render (because it's
         // coming from a handler outside the React context?), which will render MapLayers, which in
+        mapboxMap.addSource('clusters', {
+            'type': 'vector',
+            'tiles': [
+                'http://localhost:3002/api/cluster/{z}/{x}/{y}'
+            ],
+            'tileSize': 512,
+        });
 
         /*
-        mapboxMap.addSource('WTTV', {
-          type: 'vector',
-          url: 'mapbox://waterthetrees.open-trees',
+        mapboxMap.addSource('trees', {
+            type: 'geojson',
+            data: 'http://localhost:3002/api/trees',
+            //data: trees,
+            cluster: true,
+            clusterMaxZoom: 14,
+            clusterRadius: 50,
         });
         */
 
-        mapboxMap.addSource('WTTV', {
-          type: 'vector',
-          //url: 'mapbox://tzinckgraf.3gzq4thz'
-          tiles: ["http://localhost:3030/tiles/{z}/{x}/{y}.mvt"],
+        mapboxMap.addLayer({
+            id: 'cluster-layers',
+            type: 'circle',
+            source: 'clusters',
+            "source-layer": 'clusters',
+            paint:  {
+                //'circle-color': '#08519c',
+                //'circle-radius': 20,
+                // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+                // with three steps to implement three types of circles:
+                //   * Blue, 20px circles when point count is less than 100
+                //   * Yellow, 30px circles when point count is between 100 and 750
+                //   * Pink, 40px circles when point count is greater than or equal to 750
+                'circle-color': [
+                    'step',
+                    ['get', 'point_count'],
+                    '#51bbd6',
+                    100,
+                    '#f1f075',
+                    750,
+                    '#f28cb1'
+                ],
+                'circle-radius': [
+                    'step',
+                    ['get', 'point_count'],
+                    20,
+                    100,
+                    30,
+                    750,
+                    40
+                ]
+            }
         });
 
-        mapboxMap.addSource('WTTV-Cities', {
-          type: "geojson",
-          data: "/assets/outer-zoom.geojson",
-          cluster: true,
-          clusterMaxZoom: 8, // Max zoom to cluster points on
-          clusterRadius: 20, // Radius of each cluster when clustering points (defaults to 50)
-          clusterProperties: {
-              "point_count_combined": ["+", ["get", "point_count"]],
-            },
+        mapboxMap.addLayer({
+            id: 'cluster-count',
+            type: 'symbol',
+            source: 'clusters',
+            "source-layer": 'clusters',
+            filter: ['has', 'point_count'],
+            layout: {
+                'text-field': ['get', 'point_count_abbreviated'],
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 12
+            }
         });
+
+          /*
+        mapboxMap.addLayer({
+            id: 'unclustered-point',
+            type: 'circle',
+            source: 'trees',
+            filter: ['!', ['has', 'point_count']],
+            paint: {
+                'circle-color': '#11b4da',
+                'circle-radius': 4,
+                'circle-stroke-width': 1,
+                'circle-stroke-color': '#fff'
+            }
+        });
+        */
 
         onLoad(mapboxMap);
         setIsMapLoaded(true);
@@ -202,6 +252,18 @@ export default function Map({
             };
 
             setCurrentTreeDataVector(currentTree);
+            const queryKeys = ['trees', { id }];
+
+            // Cache the properties from the vector tile as the data for the /trees query that will
+            // be triggered by the setCurrentTreeId() call below.  The Tree will first
+            // get this cached data and then update it when the server response comes back.  But
+            // only do this if there's no cached data already.  If there is, that data is presumably
+            // the latest response from the server, so we don't want to override it with older data
+            // from the vector tile.
+            if (!queryClient.getQueryState(queryKeys)) {
+              queryClient.setQueryData(queryKeys, properties);
+            }
+
             setCurrentTreeId(id);
             hashParams.set('id', id);
             mapboxMap.getCanvas().style.cursor = 'pointer';
@@ -211,10 +273,7 @@ export default function Map({
             hashParams.delete('id');
           }
 
-          const newUrl = `${window.location.origin}#${decodeURIComponent(
-            hashParams.toString(),
-          )}`;
-          window.history.replaceState({}, '', newUrl);
+          window.location.hash = decodeURIComponent(hashParams.toString());
         });
 
         // Unlike the click handler above, we want to get mousemove/leave events only for features
@@ -228,7 +287,6 @@ export default function Map({
             }
 
             const id = feature?.properties?.id;
-            console.log(feature);
 
             // If the tree circles are big enough, we'll get lots of mousemove events for a single
             // tree, so make sure it's a different one than what the popup is currently showing, to
@@ -240,7 +298,6 @@ export default function Map({
                 !popup.isOpen())
             ) {
               const coordinates = [...feature.geometry.coordinates];
-              console.log(feature.properties);
               const html = createPopupHTML(feature.properties);
 
               // Ensure that if the map is zoomed out such that multiple copies of the feature are
@@ -267,17 +324,6 @@ export default function Map({
     }
   }, [map, containerRef]);
 
-  useEffect(() => {
-    if (!isMapLoaded || hasInitialFlyToFired.current) {
-      return;
-    }
-    if (initialLoadTreeData) {
-      const { lng, lat, id } = initialLoadTreeData;
-      flyTo({ map, lng, lat, hasInitialFlyToFired });
-      setCurrentTreeId(id);
-    }
-  }, [isMapLoaded, map, initialLoadTreeData, setCurrentTreeId]);
-
   if (!isMapboxSupported) {
     return unsupportedError;
   }
@@ -289,13 +335,11 @@ export default function Map({
           map={map}
           layers={layers}
           currentTreeData={currentTreeData}
-          popup={popup}
-          selectionEnabled={selectionEnabled}
         />
-        <MapboxControlPortal map={map} position="bottom-right">
+        <MapboxControlPortal map={map} position="bottom-left">
           <NewTreeButton map={map} />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-right">
+        <MapboxControlPortal map={map} position="bottom-left">
           <TreeLayerLegend
             map={map}
             title="Tree layers:"
@@ -306,18 +350,10 @@ export default function Map({
         <MapboxControlPortal map={map} position="top-right">
           <GeolocateControl map={map} />
         </MapboxControlPortal>
-        <MapboxControlPortal map={map} position="bottom-right">
+        <MapboxControlPortal map={map} position="bottom-left">
           <Adopt />
         </MapboxControlPortal>
       </>
     )
   );
-}
-
-function flyTo({ map, lng, lat, hasInitialFlyToFired }) {
-  map.flyTo({
-    center: [lng, lat],
-    zoom: 15,
-  });
-  hasInitialFlyToFired.current = true;
 }

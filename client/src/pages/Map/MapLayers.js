@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useCitiesQuery, useTreemapQuery } from '@/api/queries';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
-import TreeCountLayer from './TreeCountLayer';
+import CityLayer from './CityLayer';
+import ClusterLayer from './ClusterLayer';
+import TreeClusterLayer from './TreeClusterLayer';
 import TreeLayer from './TreeLayer';
 
 const linearZoom = [
@@ -18,13 +20,43 @@ const linearZoom = [
   6,
 ];
 
-const circleLayerZoomRange = {
-  type: 'circle',
+const circleRadius = [
+    'step',
+    ['get', 'point_count'],
+    10,
+    500,
+    20,
+    1000,
+    30
+];
+
+const clusterColor =  [
+    'step',
+    ['get', 'point_count'],
+    '#51bbd6',
+    100,
+    '#f1f075',
+    750,
+    '#f28cb1'
+];
+
+const clusterLayerZoomRange = {
   minzoom: 2,
-  maxzoom: 18.51,
+  maxzoom: 8,
 };
 
-export default function MapLayers({ map, layers, handlers, currentTreeData }) {
+const treeClusterLayerZoomRange = {
+  minzoom: 8,
+  maxzoom: 12,
+}
+
+const circleLayerZoomRange = {
+  type: 'circle',
+  minzoom: 12,
+  //maxzoom: 18.51,
+};
+
+export default function MapLayers({ map, layers, handlers, currentTreeData, popup, selectionEnabled }) {
   useEffect(() => {
     if (!currentTreeData) return;
     const data = {
@@ -45,7 +77,7 @@ export default function MapLayers({ map, layers, handlers, currentTreeData }) {
 
   return (
     <>
-      <TreeCountLayer
+      <CityLayer
         id="cities"
         useQuery={useCitiesQuery}
         map={map}
@@ -76,6 +108,22 @@ export default function MapLayers({ map, layers, handlers, currentTreeData }) {
             }}
           />
         ))}
+
+      <ClusterLayer
+        map={map}
+        on={handlers}
+        popup={popup}
+        selectionEnabled={selectionEnabled}
+        {...clusterLayerZoomRange}
+      />
+
+      <TreeClusterLayer
+        map={map}
+        on={handlers}
+        popup={popup}
+        selectionEnabled={selectionEnabled}
+        {...treeClusterLayerZoomRange}
+      />
 
       <TreeLayer
         id="editedTrees"

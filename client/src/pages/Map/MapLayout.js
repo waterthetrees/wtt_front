@@ -11,6 +11,7 @@ import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Tree from '@/pages/Tree/Tree';
 import Map from './Map';
+//import Map from './MapCluster';
 
 const drawerWidth = 350;
 
