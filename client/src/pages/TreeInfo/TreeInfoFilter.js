@@ -1,117 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './TreeInfo.scss';
+import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 
-const checkboxFiltersArray = [
-  { title: 'Size', options: ['small', 'medium', 'large'] },
-  { title: 'Type', options: ['evergreen', 'deciduous'] },
-  { title: 'Leaf', options: ['needle', 'broad'] },
-  { title: 'Neighborhood', options: ['mission', 'sunset'] },
-  { title: 'Other', options: ['flowering', 'fruiting', 'nut'] },
-];
+const checkboxCategories = {
+  Size: {
+    category: 'height',
+    options: ['small', 'medium', 'large'],
+  },
+  Type: {
+    category: 'deciduousEvergreen',
+    options: ['evergreen', 'deciduous'],
+  },
+};
 
-// const exampleDataArray = [
-//   {
-//     common: 'American Hophornbeam',
-//     scientific: 'Ostrya virginiana',
-//     deciduousEvergreen: 'deciduous',
-//     height: 'large 40-60',
-//     notes: 'Not clear if successful in SF yet. needs summer water.',
-//   },
-//   {
-//     common: 'Apple Tree',
-//     scientific: 'Malus domestica',
-//     deciduousEvergreen: 'deciduous',
-//     height: 'medium 20-40',
-//     notes: 'flowering',
-//   },
-//   {
-//     common: 'Ash',
-//     scientific: 'Fraxinus',
-//     deciduousEvergreen: 'deciduous',
-//     height: 'medium 20-40',
-//     notes: 'nice strong wood, no nuts',
-//   },
-// ];
-
-// const exampleCheckboxes = {
-//   medium: true,
-//   large: true,
-//   deciduous: true,
-//   broad: true,
-//   fruiting: false,
-// };
-
-function filterData(array, checkboxes) {
-  if (!array) return;
-  if (!Object.values(checkboxes).some((val) => val === true)) return array;
-  if (Object.keys(checkboxes)?.length === 0) return array;
-
-  const termsArray = Object.entries(checkboxes)
-    .filter(([_, isChecked]) => isChecked)
-    .map(([option]) => option.toLowerCase());
-
-  const filteredArray = array.filter((obj) => {
-    for (const key in obj) {
-      const value = obj[key].toString().toLowerCase();
-      if (
-        obj[key] !== null &&
-        termsArray.some((term) => value.includes(term))
-      ) {
-        return true;
-      }
-    }
-    return false;
-  });
-  return filteredArray;
+function getActiveFilters(checkboxes) {
+  return Object.entries(checkboxCategories).reduce(
+    (filters, [_, filterInfo]) => {
+      filters[filterInfo.category] = filterOptions(
+        checkboxes,
+        filterInfo.options,
+      );
+      return filters;
+    },
+    {},
+  );
 }
 
-export default function TreeInfoFilter({
-  data,
-  filteredData,
-  setFilteredData,
-}) {
-  const [checkboxes, setCheckboxes] = useState({});
-  const [newChecks, setNewChecks] = useState(false);
+function createLookup(activeFilters) {
+  const lookup = {};
+  for (const [category, options] of Object.entries(activeFilters)) {
+    lookup[category] = options.reduce((acc, option) => {
+      acc[option.toLowerCase()] = true;
+      return acc;
+    }, {});
+  }
+  return lookup;
+}
 
-  const handleCheckboxChange = (event, title) => {
-    const target = event.target;
-    const value = target.checked;
-    const name = target.name;
-    const newCheckboxes = { ...checkboxes, [name]: value };
-    setCheckboxes(newCheckboxes);
-    setFilteredData(filterData(data, newCheckboxes));
-    setNewChecks(true);
+function filterData(array, checkboxes) {
+  const activeFilters = getActiveFilters(checkboxes);
+  const lookup = createLookup(activeFilters);
+
+  // return array.filter((item) => {
+  //   return Object.entries(activeFilters).every(([category, options]) => {
+  //     if (options.length === 0) return true;
+  //     return options.some((option) => {
+  //       const itemValue = item[category].toLowerCase();
+  //       const optionValue = option.toLowerCase();
+  //       return itemValue.includes(optionValue);
+  //     });
+  //   });
+  // });
+
+  return array.filter((item) => {
+    return Object.entries(lookup).every(([category, options]) => {
+      if (Object.keys(options).length === 0) return true;
+
+      const itemValue = item[category].toLowerCase();
+      for (const option in options) {
+        if (itemValue.includes(option)) return true;
+      }
+      return false;
+    });
+  });
+}
+
+function filterOptions(checkboxes, options) {
+  return options.filter((option) => checkboxes[option]);
+}
+
+export default function FilterSidebar({ setFilteredData }) {
+  const [checkboxes, setCheckboxes] = useState({});
+
+  const handleCheckboxChange = (event) => {
+    const updatedCheckboxes = {
+      ...checkboxes,
+      [event.target.name]: event.target.checked,
+    };
+    setCheckboxes(updatedCheckboxes);
+    setFilteredData(filterData(topTreesSanFrancisco, updatedCheckboxes));
   };
 
   return (
     <div className="treeinfofilter">
-      {checkboxFiltersArray.map((filter) => {
-        return (
-          <div key={filter.title} className="treeinfofilter__section">
-            <h3 className="treeinfofilter__section-title">{filter.title}</h3>
-            <div className="treeinfofilter__section-item">
-              {filter?.options.map((option) => {
-                return (
-                  <label
-                    className="treeinfofilter__section-item-label"
-                    key={option}
-                  >
-                    <input
-                      type="checkbox"
-                      name={option}
-                      checked={!!checkboxes[option]}
-                      onChange={(event) =>
-                        handleCheckboxChange(event, filter.title)
-                      }
-                      className="treeinfofilter__section-item-checkbox"
-                    />
-                    {option}
-                  </label>
-                );
-              })}
-            </div>
+      {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
+        <div key={groupName} className="treeinfofilter__section">
+          <h3 className="treeinfofilter__section-title">{groupName}</h3>
+          <div className="treeinfofilter__section-item">
+            {groupInfo.options.map((option) => (
+              <label
+                key={option}
+                className="treeinfofilter__section-item-label"
+              >
+                <input
+                  type="checkbox"
+                  name={option}
+                  checked={checkboxes[option] || false}
+                  onChange={handleCheckboxChange}
+                  className="treeinfofilter__section-item-checkbox"
+                />
+                {option}
+              </label>
+            ))}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }
