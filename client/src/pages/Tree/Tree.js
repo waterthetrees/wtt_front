@@ -2,6 +2,7 @@ import React from 'react';
 import { Alert } from '@mui/material';
 import TreeHeader from './TreeHeader';
 import TreeMaintenance from './TreeMaintenance';
+import TreeImageUpload from "./TreeImageUpload";
 import TreeRemoval from './TreeRemoval';
 import TreeHealth from './TreeHealth';
 import TreeNotes from './TreeNotes';
@@ -10,8 +11,9 @@ import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
 import { ImageLoad } from './TreeImage';
 
-import treeImages from '@/data/dist/treeImages.json';
+import stockTreeImages from '@/data/dist/treeImages.json';
 import { CarbonCalculator } from './CarbonCalculator';
+import TreeImageCarousel from './TreeImageCarousel';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -56,6 +58,7 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
+  const treeImages = [1];
 
   return (
     <TreeDetailsContainer
@@ -72,13 +75,19 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          {scientific &&
-            Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
+          {treeImages.length > 0  ?
+            <TreeImageCarousel /> :
+            (scientific &&
+            Object.prototype.hasOwnProperty.call(stockTreeImages, scientific) && (
               <ImageLoad
-                src={treeImages[scientific]}
+                src={stockTreeImages[scientific]}
                 placeholder="placeholder.jpg"
               />
-            )}
+            ))}
+
+          {!hasUnfitData && (
+            <TreeImageUpload />
+          )}
 
           {!hasUnfitData && (
             <TreeHealth
