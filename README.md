@@ -33,6 +33,11 @@ nvm use;
 ```shell
 cd wtt_front;
 npm install
+npm run watch;
+```
+
+2. In a second console tab:
+```shell
 npm run start:dev;
 ```
 
