@@ -8,97 +8,98 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(20, 125, 22, 0.8);
   border-color: transparent;
 
   /* put this above the map drawer but below modal dialogs */
   z-index: 1250 !important;
-}
 
-.header-font {
-  font-family: wtt-thin, Arial, sans-serif, 'PT Sans';
-  color: white;
-  white-space: nowrap;
-  letter-spacing: -3px;
-  font-size: 2.3rem;
-  word-spacing: 0.6rem;
-}
 
-.header-logo {
-  height: 4em;
-  width: 36em;
-  padding: 0;
-  margin: 10px 0;
-  background-color: #fff;
-  border-radius: 4px;
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
-  box-shadow: 0 0 0 2pxrgba 0, 0, 0, 0.1;
-}
-
-.header-btn-menu {
-  background-color: white;
-  border-radius: 4px;
-  border-width: 0;
-  color: black;
-  border: none;
-  outline: none;
-  padding: 0;
-}
-
-.header-font {
-  font-family: wtt-thin, Arial, sans-serif, 'PT Sans';
-  color: white;
-  white-space: nowrap;
-  letter-spacing: -3px;
-  font-size: 1.8rem;
-  word-spacing: 0.6rem;
-}
-
-.header-font::first-letter {
-  letter-spacing: 0;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 0 10px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header:focus {
-  outline: none;
-}
-
-.header-icon {
-  height: 5vh;
-}
-
-.header-icon:hover {
-  cursor: pointer;
-}
-
-.header-icon:focus {
-  box-shadow: none;
-  outline: none;
-}
-
-.header-link {
-  width: 100%;
-}
-
-.header-btn-menu {
-  background-color: transparent;
-  border-width: 0;
-  color: white;
-  border: none;
-  outline: none;
-  font-size: 3rem;
-}
-
-@media only screen and (max-width: 768px) {
-  .header-icon {
-    width: 70vw;
+  &__font {
+    font-family: wtt-thin, Arial, sans-serif, "PT Sans";
+    color: black;
+    background-color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: -3px;
+    font-size: 1.8rem;
+    word-spacing: 0.6rem;
+    border: 1px solid #ddd;
   }
+
+  &__font-link:hover {
+    outline: none;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: #eee;
+    cursor: pointer;
+  }
+
+  &__logo {
+    height: 4em;
+    width: 36em;
+    padding: 0;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+    box-shadow: 0 0 0 2pxrgba 0, 0, 0, 0.1;
+  }
+
+  &__btn-menu {
+    background-color: white;
+  }
+
+  &__btn-menu:hover {
+    background-color: #eee;
+  }
+
+  &__font::first-letter {
+    letter-spacing: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 7px 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    height: 5vh;
+  }
+
+  &__icon:hover {
+    cursor: pointer;
+  }
+
+  &__icon:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  &__link {
+    width: 100%;
+    color: black;
+    font-size: large;
+  }
+
+  &__link:hover {
+    outline: none;
+    text-decoration: none;
+    // cursor: pointer;
+  }
+
+  @media only screen and (max-width: 768px) {
+    &__icon {
+      width: 70vw;
+    }
+  }
+
 }
