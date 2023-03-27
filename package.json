@@ -101,10 +101,10 @@
     "build:dev": "npm run build:data && webpack --env development",
     "docker": "docker-compose up",
     "watch": "webpack --watch --env development",
-    "start": "node server/index.js localserver",
+    "start": "node server/index.js localhost",
     "start:docker": "npm run watch & npm run start:nodemon",
     "start:nodemon": "nodemon server/index.js localserver",
-    "start:dev": "webpack --env development && webpack serve --env development",
+    "start:dev": "node server/index.js development",
     "test": "jest",
     "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
     "test:watch": "jest --watch"

@@ -1,0 +1,775 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> spec renders Header correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  overflow: visible;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #2e7d32;
+  padding: 5px;
+  font-size: 1.125rem;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.emotion-0::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-0.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-0 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-0:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-0:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-0:hover {
+  background-color: rgba(46, 125, 50, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-0:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-0.Mui-disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-0:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.emotion-1 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  color: #2e7d32;
+  font-size: 2.5rem;
+  color: black;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.emotion-3 {
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.emotion-4 {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  z-index: -1;
+}
+
+.emotion-5 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  max-height: calc(100% - 96px);
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+  outline: 0;
+  overflow: visible;
+  -webkit-filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
+  filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
+  margin-top: 12px;
+}
+
+.emotion-5root-MuiMenu-paper-MuiPopover-paper {
+  box-shadow: none;
+}
+
+.emotion-5 .MuiAvatar-root {
+  width: 32px;
+  height: 32px;
+  margin-left: -4px;
+  margin-right: 8px;
+}
+
+.emotion-5:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  -webkit-transform: translateY(-50%) rotate(45deg);
+  -moz-transform: translateY(-50%) rotate(45deg);
+  -ms-transform: translateY(-50%) rotate(45deg);
+  transform: translateY(-50%) rotate(45deg);
+  z-index: 0;
+}
+
+.emotion-6 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  outline: 0;
+}
+
+.emotion-7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  min-height: 48px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.emotion-7::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-7.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-7 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-7:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-7:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-7.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.emotion-7.Mui-selected.Mui-focusVisible {
+  background-color: rgba(25, 118, 210, 0.2);
+}
+
+.emotion-7.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+@media (hover: none) {
+  .emotion-7.Mui-selected:hover {
+    background-color: rgba(25, 118, 210, 0.08);
+  }
+}
+
+.emotion-7.Mui-focusVisible {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.emotion-7.Mui-disabled {
+  opacity: 0.38;
+}
+
+.emotion-7+.MuiDivider-root {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.emotion-7+.MuiDivider-inset {
+  margin-left: 52px;
+}
+
+.emotion-7 .MuiListItemText-root {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.emotion-7 .MuiListItemText-inset {
+  padding-left: 36px;
+}
+
+.emotion-7 .MuiListItemIcon-root {
+  min-width: 36px;
+}
+
+@media (min-width:600px) {
+  .emotion-7 {
+    min-height: auto;
+  }
+}
+
+.emotion-17 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+}
+
+<body>
+    <div>
+      <div
+        class="header"
+        id="header"
+      >
+        <div
+          class="header__content"
+        >
+          <button
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSuccess MuiIconButton-sizeSmall header__btn-menu emotion-0"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-colorSuccess MuiSvgIcon-fontSizeMedium emotion-1"
+              data-testid="MenuRoundedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </button>
+          <a
+            class="header__font-link"
+            href="/"
+          >
+            <div
+              class="header__font"
+            >
+              WATER THE TREES
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      class="MuiPopover-root MuiMenu-root MuiModal-root MuiModal-hidden emotion-3"
+      id="wtt-menu"
+      role="presentation"
+    >
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root MuiBackdrop-invisible MuiModal-backdrop emotion-4"
+        style="opacity: 0; visibility: hidden;"
+      />
+      <div
+        data-testid="sentinelStart"
+        tabindex="-1"
+      />
+      <div
+        class="MuiPaper-root MuiMenu-paper MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiPopover-paper emotion-5"
+        style="opacity: 0; transform: scale(0.75, 0.5625); visibility: hidden;"
+        tabindex="-1"
+      >
+        <ul
+          class="MuiList-root MuiList-padding MuiMenu-list emotion-6"
+          role="menu"
+          tabindex="-1"
+        >
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="0"
+          >
+            <a
+              class="header__link"
+              href="/"
+            >
+              Map
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <a
+              class="header__link"
+              href="/about"
+            >
+              About
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <a
+              class="header__link"
+              href="/contact"
+            >
+              Contact
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <a
+              class="header__link"
+              href="/source"
+            >
+              Source
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <a
+              class="header__link"
+              href="/data"
+            >
+              Data
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth emotion-17"
+          />
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <button
+              class="authbutton btn btn-light btn-block"
+              type="button"
+            >
+              Log In
+            </button>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+        </ul>
+      </div>
+      <div
+        data-testid="sentinelEnd"
+        tabindex="-1"
+      />
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  overflow: visible;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #2e7d32;
+  padding: 5px;
+  font-size: 1.125rem;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.emotion-0::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-0.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-0 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-0:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-0:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-0:hover {
+  background-color: rgba(46, 125, 50, 0.04);
+}
+
+@media (hover: none) {
+  .emotion-0:hover {
+    background-color: transparent;
+  }
+}
+
+.emotion-0.Mui-disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-0:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.emotion-1 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  color: #2e7d32;
+  font-size: 2.5rem;
+  color: black;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+<div>
+    <div
+      class="header"
+      id="header"
+    >
+      <div
+        class="header__content"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSuccess MuiIconButton-sizeSmall header__btn-menu emotion-0"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorSuccess MuiSvgIcon-fontSizeMedium emotion-1"
+            data-testid="MenuRoundedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root emotion-2"
+          />
+        </button>
+        <a
+          class="header__font-link"
+          href="/"
+        >
+          <div
+            class="header__font"
+          >
+            WATER THE TREES
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
