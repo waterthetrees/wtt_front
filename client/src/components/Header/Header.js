@@ -50,7 +50,6 @@ const Header = () => {
 
         <Menu
           id="wtt-menu"
-          popupId="WatertheTreesMenu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}

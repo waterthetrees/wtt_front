@@ -141,6 +141,8 @@ exports[`<Header /> spec renders Header correctly 1`] = `
   top: 0;
   left: 0;
   visibility: hidden;
+  z-index: 3002;
+  cursor: pointer;
 }
 
 .emotion-4 {
@@ -183,21 +185,16 @@ exports[`<Header /> spec renders Header correctly 1`] = `
   max-width: calc(100% - 32px);
   max-height: calc(100% - 32px);
   outline: 0;
-  overflow: visible;
   -webkit-filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
   filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
   margin-top: 12px;
-}
-
-.emotion-5root-MuiMenu-paper-MuiPopover-paper {
-  box-shadow: none;
+  margin-left: -4px;
+  margin-right: 8px;
 }
 
 .emotion-5 .MuiAvatar-root {
   width: 32px;
   height: 32px;
-  margin-left: -4px;
-  margin-right: 8px;
 }
 
 .emotion-5:before {
