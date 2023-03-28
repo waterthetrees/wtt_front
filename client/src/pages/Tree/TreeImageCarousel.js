@@ -1,11 +1,7 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import Example1 from "../../../../example1.jpg";
-import Example2 from "../../../../example2.jpg";
 
-export default function TreeImageCarousel() {
-  const imgs = [Example1, Example2];
-
+export default function TreeImageCarousel({ imgs }) {
   return (
     <Carousel height={400}>
       {
