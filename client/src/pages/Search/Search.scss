@@ -1,16 +1,20 @@
 .search-container {
   position: absolute;
-  min-width: 300px;
+  min-width: 200px;
   top: 8px;
-  left: 50%;
+  left: 68%;
   z-index: 1300;
-}
 
-@media (max-width: 768px) {
-  .search-container {
+  @media (max-width: 768px) {
     // Screen width - (menu button width + padding)
     width: calc(100% - 70px);
     margin: 0;
     left: 8px;
   }
+
+  @media (min-width: 0em) and (max-width: 50em) {
+    min-width: 35px;
+  }
 }
+
+
