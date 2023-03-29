@@ -75,7 +75,7 @@ export default function Tree({
           {scientific &&
             Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
               <ImageLoad
-                src={treeImages[scientific]}
+                src={treeImages[scientific]?.imageURL}
                 placeholder="placeholder.jpg"
               />
             )}

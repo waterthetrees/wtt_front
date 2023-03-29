@@ -94,15 +94,31 @@ async function buildScientificNameToImageMap(names) {
   function buildRequestURL(titles) {
     const BASE_URL = 'https://en.wikipedia.org/w/api.php';
     const requestURL = new URL(BASE_URL);
+    // requestURL.search = new URLSearchParams({
+    //   action: 'query',
+    //   format: 'json',
+    //   prop: 'pageimages',
+    //   piprop: 'thumbnail',
+    //   pithumbsize: '600',
+    //   titles,
+    //   origin: '*',
+    //   formatversion: '2',
+    //   search: encodeURIComponent(treeName),
+    //   utf8=1,
+    // });
     requestURL.search = new URLSearchParams({
       action: 'query',
       format: 'json',
-      prop: 'pageimages',
+      prop: 'info|extracts|pageimages',
       piprop: 'thumbnail',
+      titles: titles,
+      utf8: '1',
+      origin: '*',
+      formatversion: '2',
       pithumbsize: '600',
-      titles,
+      exintro: 'true',
+      explaintext: 'true',
     });
-
     return requestURL;
   }
 
@@ -111,6 +127,7 @@ async function buildScientificNameToImageMap(names) {
     const partitions = partition(data, MAX_TITLES_PER_QUERY);
     const queryTitles = partitions.map((titles) => titles.join('|'));
     const queries = queryTitles.map((titles) => buildRequestURL(titles));
+    console.log('queries', queries);
     return queries.map((query) => query.href);
   }
 
@@ -119,7 +136,7 @@ async function buildScientificNameToImageMap(names) {
     return response.json();
   }
 
-  async function getImages(requestURLs) {
+  async function getWikiDataImages(requestURLs) {
     const images = {};
     const responsesMap = requestURLs.map((url) => getResponseJSON(url));
     const responses = await Promise.all(responsesMap);
@@ -129,8 +146,8 @@ async function buildScientificNameToImageMap(names) {
     }, []);
 
     Object.values(allPages).forEach((page) => {
-      const { title, thumbnail: { source } = {} } = page;
-      images[title] = source;
+      const { title, fullurl, extract, thumbnail: { source } = {} } = page;
+      images[title] = { imageURL: source, fullurl, extract, title };
     });
 
     const allNormalized = responses.reduce((accumulator, response) => {
@@ -147,7 +164,7 @@ async function buildScientificNameToImageMap(names) {
   }
 
   const requestURLs = getRequestURLs(names);
-  return getImages(requestURLs);
+  return getWikiDataImages(requestURLs);
 }
 
 const trees = [];
@@ -227,5 +244,52 @@ buildImagesMap(trees).then((data) => {
   console.log(`[build:data] Writing ${filename}.`);
   fs.writeFileSync(output, formattedData);
 });
+
+// // List of tree names to query (either scientific or common names)
+// const treeNames = ["Quercus", "Acer", "Pinus", "Ficus"];
+
+// // Function to call the Wikipedia API
+// async function fetchTreeInfo(treeName) {
+//   try {
+//     const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=${encodeURIComponent(treeName)}&utf8=1&origin=*&formatversion=2`;
+
+//     const searchResponse = await fetch(searchUrl);
+
+//     if (!searchResponse.ok) {
+//       throw new Error(`HTTP error! status: ${searchResponse.status}`);
+//     }
+
+//     const searchData = await searchResponse.json();
+//     const pageTitle = searchData.query.search[0].title;
+
+//     const pageUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=info|pageimages&format=json&titles=${encodeURIComponent(pageTitle)}&utf8=1&origin=*&formatversion=2&pithumbsize=300`;
+
+//     const pageResponse = await fetch(pageUrl);
+
+//     if (!pageResponse.ok) {
+//       throw new Error(`HTTP error! status: ${pageResponse.status}`);
+//     }
+
+//     const pageData = await pageResponse.json();
+//     const pageInfo = Object.values(pageData.query.pages)[0];
+
+//     return {
+//       title: pageTitle,
+//       url: pageInfo.fullurl,
+//       imageUrl: pageInfo.thumbnail?.source || null,
+//     };
+//   } catch (error) {
+//     console.error(`Failed to fetch tree information: ${error}`);
+//     return null;
+//   }
+// }
+
+// // Example usage
+// (async () => {
+//   for (const treeName of treeNames) {
+//     const treeData = await fetchTreeInfo(treeName);
+//     console.log(treeData);
+//   }
+// })();
 
 writeJSTemplate('trees', trees.sort(createTreeSorter('common')));
