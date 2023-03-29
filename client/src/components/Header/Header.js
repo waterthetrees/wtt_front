@@ -55,20 +55,18 @@ const Header = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
           onClick={handleClose}
+          disableScrollLock={true}
+          sx={{ zIndex: 3002, cursor: 'pointer' }}
           PaperProps={{
             elevation: 0,
             sx: {
-              '&root-MuiMenu-paper-MuiPopover-paper': {
-                boxShadow: 'none',
-              },
-              overflow: 'visible',
               filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
               mt: 1.5,
+              ml: -0.5,
+              mr: 1,
               '& .MuiAvatar-root': {
                 width: 32,
                 height: 32,
-                ml: -0.5,
-                mr: 1,
               },
               '&:before': {
                 content: '""',
