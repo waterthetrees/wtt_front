@@ -944,7 +944,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                     good
                   </span>
                    
-                  
                 </h4>
               </div>
             </div>
@@ -963,7 +962,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                   <textarea
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
-                    id="mui-1"
+                    id=":r0:"
                     placeholder="Add a note"
                     style="height: 0px; overflow: hidden;"
                   />
@@ -1429,11 +1428,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                     </table>
                   </div>
                 </div>
-                
                 <p>
                   NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
                 </p>
-                
                 <div
                   class="MuiBox-root emotion-9"
                 >
@@ -2511,7 +2508,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                   good
                 </span>
                  
-                
               </h4>
             </div>
           </div>
@@ -2530,7 +2526,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                 <textarea
                   aria-invalid="false"
                   class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-15"
-                  id="mui-1"
+                  id=":r0:"
                   placeholder="Add a note"
                   style="height: 0px; overflow: hidden;"
                 />
@@ -2996,11 +2992,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
                   </table>
                 </div>
               </div>
-              
               <p>
                 NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
               </p>
-              
               <div
                 class="MuiBox-root emotion-9"
               >
@@ -4079,13 +4073,13 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
         tabindex="-1"
       >
         <div
-          aria-labelledby="mui-2"
+          aria-labelledby=":r1:"
           class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth emotion-3"
           role="dialog"
         >
           <h2
             class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root emotion-4"
-            id="mui-2"
+            id=":r1:"
           >
             <div
               class="MuiBox-root emotion-5"
@@ -4216,7 +4210,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
                     good
                   </span>
                    
-                  
                 </h4>
               </div>
             </div>
@@ -4235,7 +4228,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
                   <textarea
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline emotion-17"
-                    id="mui-3"
+                    id=":r2:"
                     placeholder="Add a note"
                     style="height: 0px; overflow: hidden;"
                   />
@@ -4701,11 +4694,9 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
                     </table>
                   </div>
                 </div>
-                
                 <p>
                   NOTE: Tree height data is missing or not formatted so we are defaulting to 1 foot or meter for the carbon calculations.
                 </p>
-                
                 <div
                   class="MuiBox-root emotion-11"
                 >
