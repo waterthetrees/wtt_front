@@ -72,8 +72,8 @@ function App() {
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/data" element={<Data />} />
-                  <Route path="/Source" element={<Source />} />
-                  <Route path="/TreeFilter" element={<TreeFilter />} />
+                  <Route path="/source" element={<Source />} />
+                  <Route path="/treefilter" element={<TreeFilter />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
