@@ -7,32 +7,34 @@ const routeName = 'treeinfo';
 export default function TreeList({ data }) {
   return (
     <div className="treeinfolist">
-      <div className="treeinfolist__header">
-        <p>
-          We encourage you to plant medium and larger-sized trees, as they
-          provide greater benefits to the city than smaller trees. Young trees
-          require 1.5 inches of rain or 25 gallons of water per week for the
-          first three years to establish their roots.
-        </p>
-      </div>
+      <div className="treeinfolist__container">
+        <div className="treeinfolist__header">
+          <p>
+            We encourage you to plant medium and larger-sized trees, as they
+            provide greater benefits to the city than smaller trees. Young trees
+            require 1.5 inches of rain or 25 gallons of water per week for the
+            first three years to establish their roots.
+          </p>
+        </div>
 
-      {data.map((tree, index) => {
-        const nameFormatted = tree?.common.toLowerCase().replace(/ /g, '-');
-        const urlRoute = `/${routeName}/${nameFormatted}`;
-        const { notes, ...treeRest } = tree;
-        return (
-          <NavLink
-            className="treeinfolist__link"
-            to={{
-              pathname: urlRoute,
-            }}
-            state={tree}
-            key={`${tree?.scientific}-${index}`}
-          >
-            <Card {...treeRest} />
-          </NavLink>
-        );
-      })}
+        {data.map((tree, index) => {
+          const nameFormatted = tree?.common.toLowerCase().replace(/ /g, '-');
+          const urlRoute = `/${routeName}/${nameFormatted}`;
+          const { notes, ...treeRest } = tree;
+          return (
+            <NavLink
+              className="treeinfolist__link"
+              to={{
+                pathname: urlRoute,
+              }}
+              state={tree}
+              key={`${tree?.scientific}-${index}`}
+            >
+              <Card {...treeRest} />
+            </NavLink>
+          );
+        })}
+      </div>
     </div>
   );
 }

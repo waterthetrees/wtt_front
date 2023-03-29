@@ -48,14 +48,20 @@ export default function TreeInfo() {
               default:
                 return (
                   <div className="treeinfolarge__content-item" key={key}>
-                    {cappedKey}: {value}
+                    <lable className="treeinfolarge__content-item-label">
+                      {cappedKey}:
+                    </lable>{' '}
+                    {value}
                   </div>
                 );
             }
           })}
         {wikipediaExtract && (
           <div className="treeinfolarge__content-item">
-            Wikipedia: {wikipediaExtract}
+            <lable className="treeinfolarge__content-item-label">
+              Wikipedia:
+            </lable>{' '}
+            {wikipediaExtract}
           </div>
         )}
       </div>

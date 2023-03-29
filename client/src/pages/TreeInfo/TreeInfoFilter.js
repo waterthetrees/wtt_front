@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './TreeInfo.scss';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 
+import DownloadIcon from '@mui/icons-material/Download';
+import { MenuItem, FormControl, Button, Select } from '@mui/material';
+import { CSVLink } from 'react-csv';
+import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
+import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
+import { WttButton } from '@/components/Button/Button';
+
+import { dataSources } from '@/pages/Data/dataArrays';
+
 const checkboxCategories = {
   Size: {
     category: 'height',
@@ -69,7 +78,38 @@ function filterOptions(checkboxes, options) {
   return options.filter((option) => checkboxes[option]);
 }
 
-export default function FilterSidebar({ setFilteredData }) {
+export function DataSourceMenuItems() {
+  const dataSourceMenuItems = dataSources.map(({ name }, value) => (
+    <MenuItem key={name} value={value}>
+      {name}
+    </MenuItem>
+  ));
+  return dataSourceMenuItems;
+}
+
+/**
+ * @param {Object} props
+ * @param {Function} props.setFilteredData
+ * @param {Number} props.selectedDataSourceIndex
+ * @param {String} props.search
+ * @param {Function} props.setSearch
+ * @param {String} props.license
+ * @param {Function} props.setLicense
+ * @param {Object} props.openCards
+ * @param {Function} props.setOpenCards
+ * @param {Object} props.data
+ * @param {Object} props.columns
+ * @param {String} props.listType
+ * @param {String} props.title
+ * @param {String} props.subtitle
+ * @param {String} props.description
+ *  */
+
+export default function FilterSidebar({
+  setFilteredData,
+  // selectedDataSourceIndex,
+  // search,
+}) {
   const [checkboxes, setCheckboxes] = useState({});
 
   const handleCheckboxChange = (event) => {
@@ -80,6 +120,14 @@ export default function FilterSidebar({ setFilteredData }) {
     setCheckboxes(updatedCheckboxes);
     setFilteredData(filterData(topTreesSanFrancisco, updatedCheckboxes));
   };
+
+  // const handleSearch = (search) => {
+  //   setFilteredData(searchArray(topTreesSanFrancisco, search));
+  // };
+
+  // const handleChange = (search) => {
+  //   console.log('handleChange', search);
+  // };
 
   return (
     <div className="treeinfofilter">
@@ -105,6 +153,36 @@ export default function FilterSidebar({ setFilteredData }) {
           </div>
         </div>
       ))}
+
+      {/* <div className="treeinfofilter__section">
+        <div className="treeinfofilter__section-item">
+          <FormControl sx={{ minWidth: 265, my: 1 }}>
+            <SearchBar
+              style={{
+                div: {
+                  width: 'max-content',
+                  borderRadius: '.3vw',
+                  fontSize: 'large',
+                },
+                input: { borderRadius: '.3vw', width: '100%' },
+              }}
+              search={search}
+              onChange={handleSearch}
+              placeholder={'Search trees'}
+            />
+            <Select
+              labelId="data-select-label"
+              id="data-select"
+              className="data-select"
+              size="small"
+              value={selectedDataSourceIndex}
+              onChange={handleChange}
+            >
+              <DataSourceMenuItems />
+            </Select>
+          </FormControl>
+        </div>
+      </div> */}
     </div>
   );
 }
