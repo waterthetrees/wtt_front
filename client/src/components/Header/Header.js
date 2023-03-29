@@ -122,6 +122,12 @@ const Header = () => {
             </Link>
           </MenuItem>
 
+          <MenuItem onClick={handleClose}>
+            <Link to="/treefilter" className="header__link">
+              TreeFilter
+            </Link>
+          </MenuItem>
+
           <Divider />
 
           <MenuItem onClick={handleClose}>

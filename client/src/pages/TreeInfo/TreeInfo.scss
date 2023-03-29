@@ -103,7 +103,7 @@ $white:  mix($dark, white, 20%);
   margin: 0 15px 0 150px;
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  // grid-template-rows: 1fr 1fr 1fr;
   gap: 15px 5px; 
 
   &__header {
@@ -114,8 +114,8 @@ $white:  mix($dark, white, 20%);
   &__link {
     text-decoration: none;
     color: black;
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
   }
 
   &__link:focus, &__link:hover, &__link:visited, &__link:link, &__link:active {
@@ -140,26 +140,29 @@ $white:  mix($dark, white, 20%);
 .treeinfolarge {
   $self: &;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: left;
+  // justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: $dark;
+  background-color: silver;
+  padding: 100px;
 
   &__header {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    // max-width: 500px;
+  }
+  &__image img {
+    max-height: 600px;
   }
   &__content {
     display: flex;
     flex-direction: column;
     justify-content: left;
+    margin: 10px;
   }
 
   &__content-item{
     font-size: medium;
-    max-width: 500px;
+    // max-width: 500px;
   }
 }

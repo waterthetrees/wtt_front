@@ -3,10 +3,10 @@ import { Card } from '../../components/Cards/Card';
 import TreeInfoFilter from './TreeInfoFilter';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import { NavLink } from 'react-router-dom';
-import { WhiteButton } from '@/components/Button/Button';
+import { WttButton } from '@/components/Button/Button';
 import './TreeInfo.scss';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
-
+console.log(topTreesSanFrancisco, 'topTreesSanFrancisco');
 const routeName = 'treeinfo';
 
 export default function TreeInfo() {
@@ -22,7 +22,7 @@ export default function TreeInfo() {
     <div className="treeinfo">
       <div className="treeinfo__filter-header">
         {filterOpen === false && (
-          <WhiteButton onClick={handleOpen}>Filter Trees</WhiteButton>
+          <WttButton onClick={handleOpen}>Filter Trees</WttButton>
         )}
         <PanelDrawer
           title="Filter Trees"

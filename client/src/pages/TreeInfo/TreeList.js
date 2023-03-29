@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './TreeInfo.scss';
 const routeName = 'treeinfo';
 
-export default function DataList({ data }) {
+export default function TreeList({ data }) {
   return (
     <div className="treeinfolist">
       <div className="treeinfolist__header">

@@ -109,7 +109,6 @@ async function buildScientificNameToImageMap(names) {
     requestURL.search = new URLSearchParams({
       action: 'query',
       format: 'json',
-      prop: 'info|extracts|pageimages',
       piprop: 'thumbnail',
       titles: titles,
       utf8: '1',
@@ -118,7 +117,12 @@ async function buildScientificNameToImageMap(names) {
       pithumbsize: '600',
       exintro: 'true',
       explaintext: 'true',
+      prop: 'info|extracts|pageimages',
+      // prop: 'info|revisions|pageimages',
+      // rvprop: 'content',
+      // rvslots: 'main',
     });
+
     return requestURL;
   }
 
@@ -244,52 +248,5 @@ buildImagesMap(trees).then((data) => {
   console.log(`[build:data] Writing ${filename}.`);
   fs.writeFileSync(output, formattedData);
 });
-
-// // List of tree names to query (either scientific or common names)
-// const treeNames = ["Quercus", "Acer", "Pinus", "Ficus"];
-
-// // Function to call the Wikipedia API
-// async function fetchTreeInfo(treeName) {
-//   try {
-//     const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=${encodeURIComponent(treeName)}&utf8=1&origin=*&formatversion=2`;
-
-//     const searchResponse = await fetch(searchUrl);
-
-//     if (!searchResponse.ok) {
-//       throw new Error(`HTTP error! status: ${searchResponse.status}`);
-//     }
-
-//     const searchData = await searchResponse.json();
-//     const pageTitle = searchData.query.search[0].title;
-
-//     const pageUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=info|pageimages&format=json&titles=${encodeURIComponent(pageTitle)}&utf8=1&origin=*&formatversion=2&pithumbsize=300`;
-
-//     const pageResponse = await fetch(pageUrl);
-
-//     if (!pageResponse.ok) {
-//       throw new Error(`HTTP error! status: ${pageResponse.status}`);
-//     }
-
-//     const pageData = await pageResponse.json();
-//     const pageInfo = Object.values(pageData.query.pages)[0];
-
-//     return {
-//       title: pageTitle,
-//       url: pageInfo.fullurl,
-//       imageUrl: pageInfo.thumbnail?.source || null,
-//     };
-//   } catch (error) {
-//     console.error(`Failed to fetch tree information: ${error}`);
-//     return null;
-//   }
-// }
-
-// // Example usage
-// (async () => {
-//   for (const treeName of treeNames) {
-//     const treeData = await fetchTreeInfo(treeName);
-//     console.log(treeData);
-//   }
-// })();
 
 writeJSTemplate('trees', trees.sort(createTreeSorter('common')));

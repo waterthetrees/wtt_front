@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import FilterSidebar from './TreeInfoFilter';
-import DataList from './TreeList';
+import TreeList from './TreeList';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
-import { WhiteButton } from '@/components/Button/Button';
+import { WttButton } from '@/components/Button/Button';
 import './TreeInfo.scss';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 
@@ -16,7 +16,7 @@ export default function TreeInfo() {
     <div className="treeinfo">
       <div className="treeinfo__header">
         {filterOpen === false && (
-          <WhiteButton onClick={handleOpen}>Filter Trees</WhiteButton>
+          <WttButton onClick={handleOpen}>Filter Trees</WttButton>
         )}
         <PanelDrawer
           title="Filter Trees"
@@ -28,7 +28,7 @@ export default function TreeInfo() {
           <FilterSidebar setFilteredData={setFilteredData} />
         </PanelDrawer>
       </div>
-      <DataList data={filteredData} />
+      <TreeList data={filteredData} />
     </div>
   );
 }
