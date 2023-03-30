@@ -41,6 +41,7 @@ const Header = () => {
           }}
           color="success"
           className="header__btn-menu"
+          title="Menu"
         >
           <MenuRoundedIcon
             sx={{ fontSize: '2.5rem', color: 'black' }}
