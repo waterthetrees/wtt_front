@@ -1,25 +1,25 @@
 import React from "react";
-import Carousel from "react-material-ui-carousel";
+import { useSpringCarousel } from "react-spring-carousel";
 
 export default function TreeImageCarousel({ imgs }) {
+  const {
+    carouselFragment,
+    slideToPrevItem,
+    slideToNextItem,
+  } = useSpringCarousel({
+    items: (imgs.map((img, idx) =>
+      ({
+        id: `img-item-${idx}`,
+        renderItem: <img src={img.src} alt={img.txt} />
+      })
+    ))
+  });
+
   return (
-    <Carousel height={400}>
-      {
-        imgs.map((img, i) =>
-          <div style={{
-            display: "flex",
-            backgroundColor: "black",
-            height: "100%",
-            alignItems: "center",
-          }}>
-            <img
-              key={i}
-              src={img}
-              style={{ display: "inline-block", width: "100%", }}
-            />
-          </div>
-        )
-      }
-    </Carousel>
-  )
+    <div>
+      <button onClick={slideToPrevItem}>Prev Item</button>
+      <div>{carouselFragment}</div>
+      <button onClick={slideToNextItem}>Next Item</button>
+    </div>
+  );
 }

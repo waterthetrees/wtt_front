@@ -37,6 +37,7 @@
     "react-query": "^3.34.15",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
+    "react-spring-carousel": "^2.0.19",
     "use-debounce": "^7.0.1",
     "winston": "^3.6.0"
   },
