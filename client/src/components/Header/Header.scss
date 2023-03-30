@@ -2,6 +2,7 @@
   font-family: wtt-thin;
   src: local('wtt-thin'),
     url('../../assets/fonts/WTT-THIN.ttf') format('truetype');
+  font-display: swap;
 }
 
 .header {
@@ -25,6 +26,7 @@
     font-size: 1.8rem;
     word-spacing: 0.6rem;
     border: 1px solid #ddd;
+    font-display: swap;
   }
 
   &__font-link:hover {
