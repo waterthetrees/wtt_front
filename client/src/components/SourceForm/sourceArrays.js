@@ -358,7 +358,7 @@ const sourceFields = () => {
         },
       },
       {
-        label: 'Info Url',
+        label: 'Info URL',
         name: 'source.info',
         type: 'url',
         rules: {
