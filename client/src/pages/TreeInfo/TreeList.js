@@ -18,7 +18,7 @@ export default function TreeList({ data }) {
         </div>
 
         {data.map((tree, index) => {
-          const nameFormatted = tree?.common.toLowerCase().replace(/ /g, '-');
+          const nameFormatted = tree?.common?.toLowerCase().replace(/ /g, '-');
           const urlRoute = `/${routeName}/${nameFormatted}`;
           const { notes, ...treeRest } = tree;
           return (

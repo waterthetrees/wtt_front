@@ -10,7 +10,7 @@ export const Card = ({
   deciduousEvergreen,
   height,
   notes,
-  image,
+  // image,
   icon,
 }) => {
   // const params = useParams();

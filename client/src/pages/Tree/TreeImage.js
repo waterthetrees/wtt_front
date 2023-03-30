@@ -25,6 +25,7 @@ export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
       }}
       placeholder={placeholder}
       alt={alt}
+      loading="lazy"
     />
   );
 });

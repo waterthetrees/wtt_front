@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TreeInfo.scss';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
+import { dataSources } from '@/pages/Data/dataArrays';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import { MenuItem, FormControl, Button, Select } from '@mui/material';
@@ -8,8 +9,6 @@ import { CSVLink } from 'react-csv';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
 import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
 import { WttButton } from '@/components/Button/Button';
-
-import { dataSources } from '@/pages/Data/dataArrays';
 
 const checkboxCategories = {
   Size: {
@@ -78,14 +77,21 @@ function filterOptions(checkboxes, options) {
   return options.filter((option) => checkboxes[option]);
 }
 
-export function DataSourceMenuItems() {
-  const dataSourceMenuItems = dataSources.map(({ name }, value) => (
-    <MenuItem key={name} value={value}>
-      {name}
-    </MenuItem>
-  ));
-  return dataSourceMenuItems;
-}
+const dataSourceMenuItems = dataSources.map(({ name }, value) => (
+  <MenuItem key={name} value={value}>
+    {name}
+  </MenuItem>
+));
+
+// export function DataSourceMenuItems() {
+//   const dataSourceMenuItems = dataSources.map(({ name }, value) => (
+//     <MenuItem key={name} value={value}>
+//       {name}
+//     </MenuItem>
+//   ));
+//   console.log(dataSourceMenuItems);
+//   return dataSourceMenuItems;
+// }
 
 /**
  * @param {Object} props
@@ -107,10 +113,12 @@ export function DataSourceMenuItems() {
 
 export default function FilterSidebar({
   setFilteredData,
-  // selectedDataSourceIndex,
-  // search,
+  setSelectedDataSourceIndex,
+  selectedDataSourceIndex,
+  data,
 }) {
   const [checkboxes, setCheckboxes] = useState({});
+  const [search, setSearch] = useState('');
 
   const handleCheckboxChange = (event) => {
     const updatedCheckboxes = {
@@ -118,46 +126,44 @@ export default function FilterSidebar({
       [event.target.name]: event.target.checked,
     };
     setCheckboxes(updatedCheckboxes);
-    setFilteredData(filterData(topTreesSanFrancisco, updatedCheckboxes));
+    setFilteredData(filterData(data, updatedCheckboxes));
   };
 
-  // const handleSearch = (search) => {
-  //   setFilteredData(searchArray(topTreesSanFrancisco, search));
-  // };
-
-  // const handleChange = (search) => {
-  //   console.log('handleChange', search);
-  // };
+  const handleChange = (event) => {
+    setSelectedDataSourceIndex(event.target.value);
+  };
 
   return (
     <div className="treeinfofilter">
-      {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
-        <div key={groupName} className="treeinfofilter__section">
-          <h3 className="treeinfofilter__section-title">{groupName}</h3>
-          <div className="treeinfofilter__section-item">
-            {groupInfo.options.map((option) => (
-              <label
-                key={option}
-                className="treeinfofilter__section-item-label"
-              >
-                <input
-                  type="checkbox"
-                  name={option}
-                  checked={checkboxes[option] || false}
-                  onChange={handleCheckboxChange}
-                  className="treeinfofilter__section-item-checkbox"
-                />
-                {option}
-              </label>
-            ))}
+      <div className="treeinfofilter__section">
+        {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
+          <div key={groupName} className="treeinfofilter__section-filter">
+            <h3 className="treeinfofilter__section-title">{groupName}</h3>
+            <div className="treeinfofilter__section-item">
+              {groupInfo.options.map((option) => (
+                <label
+                  key={option}
+                  className="treeinfofilter__section-item-label"
+                >
+                  <input
+                    type="checkbox"
+                    name={option}
+                    checked={checkboxes[option] || false}
+                    onChange={handleCheckboxChange}
+                    className="treeinfofilter__section-item-checkbox"
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-
-      {/* <div className="treeinfofilter__section">
-        <div className="treeinfofilter__section-item">
-          <FormControl sx={{ minWidth: 265, my: 1 }}>
-            <SearchBar
+        ))}
+      </div>
+      <div className="treeinfofilter__section">
+        <div className="treeinfofilter__section-data">
+          <div className="treeinfofilter__section-item">
+            <FormControl sx={{ minWidth: 265, my: 1 }}>
+              {/* <SearchBar
               style={{
                 div: {
                   width: 'max-content',
@@ -169,20 +175,21 @@ export default function FilterSidebar({
               search={search}
               onChange={handleSearch}
               placeholder={'Search trees'}
-            />
-            <Select
-              labelId="data-select-label"
-              id="data-select"
-              className="data-select"
-              size="small"
-              value={selectedDataSourceIndex}
-              onChange={handleChange}
-            >
-              <DataSourceMenuItems />
-            </Select>
-          </FormControl>
+            /> */}
+              <Select
+                labelId="data-select-label"
+                id="data-select"
+                className="treeinfofilter__section-data-select"
+                size="small"
+                value={selectedDataSourceIndex}
+                onChange={handleChange}
+              >
+                {dataSourceMenuItems}
+              </Select>
+            </FormControl>
+          </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
