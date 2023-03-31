@@ -10,9 +10,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - name: npm install production
+      - name: npm install
         run: |
-          npm install --production
+          npm install
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.11.x
