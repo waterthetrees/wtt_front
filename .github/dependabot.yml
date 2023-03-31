@@ -18,7 +18,7 @@ updates:
     reviewers:
       - "zoobot"
     rebase-strategy: "auto"
-    # Allow up to 10 open pull requests for pip dependencies
+    # Allow up to 5 open pull requests for pip dependencies
     open-pull-requests-limit: 5
     allow:
       # Allow both direct and indirect updates for all packages
