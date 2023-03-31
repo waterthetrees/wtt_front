@@ -10,11 +10,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - name: npm install
+      - name: npm ci
         run: |
-          npm install
+          npm ci
       - name: run Lighthouse CI
         run: |
+          sudo apt install chromium
           npm install -g @lhci/cli@0.11.x
           npm run build
           lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
