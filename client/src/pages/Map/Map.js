@@ -4,6 +4,7 @@ import { Alert, Box, Typography } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
+import DonateBtn from './DonateBtn/DonateBtn';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
 import NewTreeButton from '@/pages/NewTree/NewTreeButton';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
@@ -284,6 +285,9 @@ export default function Map({
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="bottom-right">
           <Adopt />
+        </MapboxControlPortal>
+        <MapboxControlPortal map={map} position="bottom-left">
+          <DonateBtn />
         </MapboxControlPortal>
       </>
     )
