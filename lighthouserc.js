@@ -3,6 +3,11 @@ module.exports = {
     collect: {
       startServerCommand: 'npm run start:dev',
       url: ['http://localhost:3001'],
+      disableStorageReset: true,
+      disableDevShmUsage: true,
+      settings: {
+        'chromeFlags': '--no-sandbox --headless --disable-gpu',
+      },
     },
     assert: {
       assertions: {

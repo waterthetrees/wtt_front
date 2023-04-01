@@ -1,7 +1,7 @@
 name: Build project and run Lighthouse CI
 on: [push]
 jobs:
-  lhci:
+  lighthouse_ci:
     name: Lighthouse CI
     runs-on: ubuntu-latest
     steps:
@@ -11,7 +11,9 @@ jobs:
         with:
           node-version: 18.x
       - name: npm ci
-        run: npm ci
+        run: |
+          npm ci
+          npm run build
       - name: Install chrome
         run: |
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -20,9 +22,6 @@ jobs:
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.11.x
-          npm run build
-          lhci autorun \
-            --only-categories=accessibility,best-practices \
-            --collect.settings.chromeFlags="--no-sandbox --disable-gpu" \
-            --disable-dev-shm-usage \
-            --disable-storage-reset || echo "LHCI failed!"
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
