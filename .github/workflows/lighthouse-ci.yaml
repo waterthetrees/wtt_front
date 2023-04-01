@@ -4,15 +4,6 @@ jobs:
   lhci:
     name: Lighthouse CI
     runs-on: ubuntu-latest
-    container:
-      image: browserless/chrome
-      options: --user root
-      env:
-        NODE_ENV: development
-      ports:
-        - 80
-      volumes:
-        - /docker_volume
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 18.x
@@ -21,6 +12,11 @@ jobs:
           node-version: 18.x
       - name: npm ci
         run: npm ci
+      - name: Install chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.11.x
