@@ -13,14 +13,14 @@ const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 
 const Search = ({ map }) => {
   const [query, setQuery] = useState('');
+  const [generatedSearchResults, setGeneratedSearchResults] = useState([]);
   const {
-    data: searchResults,
+    data: mapboxSearchResults,
     isLoading,
     isError,
-    isSuccess,
   } = useQuery({
     queryKey: query,
-    queryFn: () => getSearchResults(query),
+    queryFn: () => getMapboxSearchResults(query),
     enabled: query.length > MIN_CHARS_FOR_SEARCH,
     cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
@@ -28,6 +28,12 @@ const Search = ({ map }) => {
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = debounce((query) => setQuery(query), 250);
   const handleInputChange = (event) => {
+    debugger;
+    if (isQueryLatLong) {
+      setGeneratedSearchResults([createLatLongSearchResult(query)]);
+    } else {
+      setGeneratedSearchResults([]);
+    }
     debouncedSetQuery(event.currentTarget.value);
   };
 
@@ -37,19 +43,13 @@ const Search = ({ map }) => {
     }
   };
 
-  let options = [];
-  if (searchResults?.features.length) {
-    options = searchResults.features.map((result) => ({
-      label: result.text,
-      address: result.place_name,
-      id: result.id,
-      coords: result.center,
-      type: 'Results',
-    }));
-  } else if (isSuccess) {
-    options = [{ label: 'No results found' }];
-  } else if (isError) {
-    options = [{ label: 'Error encountered. Please try again later.' }];
+  let options = mapboxSearchResults.concat(generatedSearchResults);
+  if (!options.length) {
+    if (isError) {
+      options = [{ label: 'Error encountered. Please try again later.' }];
+    } else {
+      options = [{ label: 'No results found' }];
+    }
   }
 
   return (
@@ -64,7 +64,7 @@ const Search = ({ map }) => {
   );
 };
 
-const getSearchResults = async (query) => {
+const getMapboxSearchResponse = async (query) => {
   const hashParams = new URLSearchParams(window.location.hash.slice(1));
   const coords = hashParams.get('pos')?.split('/');
   const searchParams = new URLSearchParams({
@@ -83,6 +83,68 @@ const getSearchResults = async (query) => {
   }
 
   return response && response.json();
+};
+
+const getMapboxSearchResults = async (query) => {
+  const jsonResponse = await getMapboxSearchResponse(query);
+  return (
+    jsonResponse.features?.map((result) => ({
+      label: result.text,
+      address: result.place_name,
+      id: result.id,
+      coords: result.center,
+      type: 'Results',
+    })) || []
+  );
+};
+
+// Attempt to parse a latitude and longitude from the query
+export const isQueryLatLong = (query) => {
+  const tokens = query.split(',');
+  if (tokens.length !== 2) {
+    return false;
+  }
+
+  tokens.forEach((token) => {
+    if (!isValidFloat(token)) {
+      return false;
+    }
+  });
+
+  const latitude = parseFloat(tokens[0]);
+  // Latitude must be a number between -90 and 90
+  if (Math.abs(latitude) > 90) {
+    return false;
+  }
+
+  const longitude = parseFloat(tokens[1]);
+  // Longitude must a number between -180 and 180
+  if (Math.abs(longitude) > 180) {
+    return false;
+  }
+
+  return true;
+};
+
+const isValidFloat = (token) => {
+  // Check if a token can be parsed into a number, ignoring whitespace
+  if (!token.trim() || isNaN(token) || !isFinite(parseFloat(token))) {
+    return false;
+  }
+  return true;
+};
+
+// Return a SearchResult that is compatible with the feature data shape from mapbox search API
+const createLatLongSearchResult = (query) => {
+  const tokens = query.split(',');
+  const latLng = tokens.map((token) => parseFloat(token));
+  return {
+    label: 'Latitude/Longitude Coordinates',
+    type: 'Results',
+    address: query,
+    id: `latlng${latLng[0]}${latLng[1]}`,
+    coords: latLng,
+  };
 };
 
 export default Search;
