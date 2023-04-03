@@ -1,7 +1,7 @@
 module.exports = {
   ci: {
     collect: {
-      startServerCommand: 'npm run start:dev',
+      startServerCommand: 'npm run start',
       url: ['http://localhost:3001'],
       disableDevShmUsage: true,
       settings: {
