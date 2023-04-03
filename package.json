@@ -71,7 +71,7 @@
     "postcss-scss": "^4.0.3",
     "prettier": "^2.6.2",
     "sass": "^1.49.7",
-    "sass-loader": "^12.6.0",
+    "sass-loader": "^13.2.2",
     "source-map-loader": "^3.0.1",
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^3.3.1",
