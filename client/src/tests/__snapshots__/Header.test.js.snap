@@ -390,6 +390,7 @@ exports[`<Header /> spec renders Header correctly 1`] = `
           <button
             class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSuccess MuiIconButton-sizeSmall header__btn-menu emotion-0"
             tabindex="0"
+            title="Menu"
             type="button"
           >
             <svg
@@ -687,6 +688,7 @@ exports[`<Header /> spec renders Header correctly 1`] = `
         <button
           class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorSuccess MuiIconButton-sizeSmall header__btn-menu emotion-0"
           tabindex="0"
+          title="Menu"
           type="button"
         >
           <svg

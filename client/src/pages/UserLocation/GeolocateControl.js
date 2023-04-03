@@ -60,7 +60,7 @@ export default function GeolocateControl({ map }) {
 
   return (
     <>
-      <IconButton onClick={handleClick} style={{ color: '#333' }}>
+      <IconButton title="Find Your Location" onClick={handleClick} style={{ color: '#333' }}>
         <GeolocateIcon
           isTracking={isTracking}
           isFollowingUser={isFollowingUser}
