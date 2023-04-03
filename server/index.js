@@ -38,4 +38,4 @@ app.get('/*', (req, res) => {
 });
 
 const httpServer = http.createServer(app);
-httpServer.listen(port, () => logger.info(`${host}:${port}`));
+httpServer.listen(port, () => logger.info(`listening on ${host}:${port}`));
