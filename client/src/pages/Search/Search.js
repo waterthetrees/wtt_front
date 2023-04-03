@@ -28,13 +28,13 @@ const Search = ({ map }) => {
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = debounce((query) => setQuery(query), 250);
   const handleInputChange = (event) => {
-    debugger;
-    if (isQueryLatLong) {
-      setGeneratedSearchResults([createLatLongSearchResult(query)]);
+    const newQuery = event.currentTarget.value;
+    if (isQueryLatLong(newQuery)) {
+      setGeneratedSearchResults([createLatLongSearchResult(newQuery)]);
     } else {
       setGeneratedSearchResults([]);
     }
-    debouncedSetQuery(event.currentTarget.value);
+    debouncedSetQuery(newQuery);
   };
 
   const handleOptionSelect = (e, option) => {
@@ -43,7 +43,7 @@ const Search = ({ map }) => {
     }
   };
 
-  let options = mapboxSearchResults.concat(generatedSearchResults);
+  let options = (mapboxSearchResults || []).concat(generatedSearchResults);
   if (!options.length) {
     if (isError) {
       options = [{ label: 'Error encountered. Please try again later.' }];
@@ -87,15 +87,13 @@ const getMapboxSearchResponse = async (query) => {
 
 const getMapboxSearchResults = async (query) => {
   const jsonResponse = await getMapboxSearchResponse(query);
-  return (
-    jsonResponse.features?.map((result) => ({
-      label: result.text,
-      address: result.place_name,
-      id: result.id,
-      coords: result.center,
-      type: 'Results',
-    })) || []
-  );
+  return jsonResponse.features?.map((result) => ({
+    label: result.text,
+    address: result.place_name,
+    id: result.id,
+    coords: result.center,
+    type: 'Results',
+  }));
 };
 
 // Attempt to parse a latitude and longitude from the query
@@ -105,11 +103,9 @@ export const isQueryLatLong = (query) => {
     return false;
   }
 
-  tokens.forEach((token) => {
-    if (!isValidFloat(token)) {
-      return false;
-    }
-  });
+  if (!tokens.every((token) => isValidFloat(token))) {
+    return false;
+  }
 
   const latitude = parseFloat(tokens[0]);
   // Latitude must be a number between -90 and 90
@@ -128,7 +124,7 @@ export const isQueryLatLong = (query) => {
 
 const isValidFloat = (token) => {
   // Check if a token can be parsed into a number, ignoring whitespace
-  if (!token.trim() || isNaN(token) || !isFinite(parseFloat(token))) {
+  if (!token.trim() || isNaN(token) || /.*[a-zA-Z]+.*/.test(token)) {
     return false;
   }
   return true;
@@ -138,12 +134,12 @@ const isValidFloat = (token) => {
 const createLatLongSearchResult = (query) => {
   const tokens = query.split(',');
   const latLng = tokens.map((token) => parseFloat(token));
+
   return {
-    label: 'Latitude/Longitude Coordinates',
+    label: query,
     type: 'Results',
-    address: query,
     id: `latlng${latLng[0]}${latLng[1]}`,
-    coords: latLng,
+    coords: { lat: latLng[0], lng: latLng[1] },
   };
 };
 
