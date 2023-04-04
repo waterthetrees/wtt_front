@@ -13,8 +13,6 @@ import { ImageLoad } from './TreeImage';
 import stockTreeImages from '@/data/dist/treeImages.json';
 import { CarbonCalculator } from './CarbonCalculator';
 import TreeImageCarousel from './TreeImageCarousel';
-import Example1 from "../../../../example1.jpg";
-import Example2 from "../../../../example2.jpg";
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -59,7 +57,7 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
-  const treeImages = [Example1, Example2];
+  const treeImages = [];
 
   return (
     <TreeDetailsContainer
