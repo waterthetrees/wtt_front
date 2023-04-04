@@ -8,17 +8,20 @@
 }
 
 .donate-btn button {
-  background-color: #28a745;
-  color: white;
+  background-color: white;
+  color: black;
   width: auto;
+  font-weight: 600;
   font-size: 16px;
   padding: 0 24px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-family: inherit;
   transition: background-color 0.3s;
 }
 
-.donate-btn button:hover {
-  background-color: #218838;
+.donate-btn:hover {
+  background-color: #000;
+  color: #fff;
 }
