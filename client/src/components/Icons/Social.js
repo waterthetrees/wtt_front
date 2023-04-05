@@ -2,10 +2,10 @@ import React from 'react';
 import { CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const SlackLogo = () => {
+export const SlackLogo = (props) => {
+  console.log(props.sx)
   const StyledLogo = styled(CardMedia)({
-    height: '64px',
-    aspectRatio: '1/1',
+    ...props.sx,
   });
 
   return (
@@ -17,10 +17,9 @@ export const SlackLogo = () => {
   );
 };
 
-export const GithubLogo = () => {
+export const GithubLogo = (props) => {
   const StyledLogo = styled(CardMedia)({
-    height: '64px',
-    aspectRatio: '1/1',
+    ...props.sx,
   });
 
   return (
@@ -32,11 +31,9 @@ export const GithubLogo = () => {
   );
 };
 
-export const FigmaLogo = () => {
+export const FigmaLogo = (props) => {
   const StyledLogo = styled(CardMedia)({
-    height: '64px',
-    aspectRatio: '1/1',
-    objectFit: 'fill',
+    ...props.sx,
   });
 
   return (
@@ -48,12 +45,14 @@ export const FigmaLogo = () => {
   );
 };
 
-export const LinkedinLogo = () => {
-  const StyledLogo = styled(CardMedia)({});
+export const LinkedinLogo = (props) => {
+  const StyledLogo = styled(CardMedia)({
+    ...props.sx,
+  });
   return (
     <StyledLogo
       component="img"
-      src="https://www.citypng.com/public/uploads/preview/hd-linkedin-square-blue-icon-transparent-png-11640440454pa2qjzikf1.png"
+      src="https://cdn.icon-icons.com/icons2/2648/PNG/512/linkedin_square_icon_160786.png"
       alt="linkedin"
     ></StyledLogo>
   );

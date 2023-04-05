@@ -24,6 +24,7 @@
 
   &__section{
     display: flex;
+    align-items: center;
   }
 
   &__content {
@@ -53,8 +54,8 @@
 
   &__info {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    margin: 40px 0px;
     width: 60%;
 
     @media only screen and (max-width: 768px) {

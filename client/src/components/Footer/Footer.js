@@ -3,13 +3,22 @@ import './Footer.scss';
 import { Link } from 'react-router-dom';
 import { TreeLogo } from '@/components/Icons';
 import { LinkedIn } from '@mui/icons-material';
+import {
+  LinkedinLogo,
+  SlackLogo,
+  GithubLogo,
+  FigmaLogo,
+} from '@/components/Icons';
 
 const Footer = () => (
   <div className="footer">
     <div className="footer__follow">
       <div className="footer__section">
         <span className="footer__text2">Follow Us</span>
-        <LinkedIn sx={{ fontSize: '24px' }}></LinkedIn>
+        <LinkedinLogo sx={{ width: '24px', marginLeft: '32px' }}></LinkedinLogo>
+        <SlackLogo sx={{ width: '24px', marginLeft: '24px' }}></SlackLogo>
+        <GithubLogo sx={{ width: '24px', marginLeft: '24px' }}></GithubLogo>
+        {/* <LinkedIn sx={{ fontSize: '24px' }}></LinkedIn> */}
       </div>
     </div>
     <div className="footer__content">
