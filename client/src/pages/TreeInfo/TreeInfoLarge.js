@@ -32,6 +32,7 @@ export default function TreeInfo() {
           Object.entries(trees).map(([key, value]) => {
             const cappedKey = capFirstLetterAndSpace(key);
             const cappedValue = capFirstLetterAndSpace(value);
+            console.log(key);
             switch (key) {
               case 'common':
                 return (
@@ -45,6 +46,10 @@ export default function TreeInfo() {
                     <h3>{cappedValue}</h3>
                   </div>
                 );
+              case 'url':
+                return null;
+              case 'QRCode':
+                return null;
               default:
                 return (
                   <div className="treeinfolarge__content-item" key={key}>

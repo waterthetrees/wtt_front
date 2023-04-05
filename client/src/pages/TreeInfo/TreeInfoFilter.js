@@ -11,7 +11,7 @@ import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
 import { WttButton } from '@/components/Button/Button';
 
 const checkboxCategories = {
-  Size: {
+  Height: {
     category: 'height',
     options: ['small', 'medium', 'large'],
   },
@@ -164,18 +164,18 @@ export default function FilterSidebar({
           <div className="treeinfofilter__section-item">
             <FormControl sx={{ minWidth: 265, my: 1 }}>
               {/* <SearchBar
-              style={{
-                div: {
-                  width: 'max-content',
-                  borderRadius: '.3vw',
-                  fontSize: 'large',
-                },
-                input: { borderRadius: '.3vw', width: '100%' },
-              }}
-              search={search}
-              onChange={handleSearch}
-              placeholder={'Search trees'}
-            /> */}
+                style={{
+                  div: {
+                    width: 'max-content',
+                    borderRadius: '.3vw',
+                    fontSize: 'large',
+                  },
+                  input: { borderRadius: '.3vw', width: '100%' },
+                }}
+                search={search}
+                onChange={handleSearch}
+                placeholder={'Search trees'}
+              /> */}
               <Select
                 labelId="data-select-label"
                 id="data-select"

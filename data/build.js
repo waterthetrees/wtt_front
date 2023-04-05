@@ -131,7 +131,6 @@ async function buildScientificNameToImageMap(names) {
     const partitions = partition(data, MAX_TITLES_PER_QUERY);
     const queryTitles = partitions.map((titles) => titles.join('|'));
     const queries = queryTitles.map((titles) => buildRequestURL(titles));
-    console.log('queries', queries);
     return queries.map((query) => query.href);
   }
 
@@ -149,9 +148,28 @@ async function buildScientificNameToImageMap(names) {
       return accumulator.concat(...Object.values(pages));
     }, []);
 
-    Object.values(allPages).forEach((page) => {
+    // download Images and save to assets
+    Object.values(allPages).forEach(async (page) => {
       const { title, fullurl, extract, thumbnail: { source } = {} } = page;
       images[title] = { imageURL: source, fullurl, extract, title };
+      let count = 0;
+      if (source && title) {
+        console.log('source', source, 'title', title);
+        const imageDownload = await downloadImage(source, title);
+        if (await imageDownload) {
+          images[title].imageFileName = imageDownload;
+        }
+      } else if (title) {
+        count = count + 1;
+        images[title].count = count;
+        // const imageDownload = await fetchImagesForScientificName(title);
+        // if (await imageDownload) {
+        //   console.dir('inaturalistImages imageDownload', imageDownload, {
+        //     depth: null,
+        //   });
+        //   images[title].imagesOther = imageDownload;
+        // }
+      }
     });
 
     const allNormalized = responses.reduce((accumulator, response) => {
@@ -235,6 +253,50 @@ function replaceIrregularNames(name) {
   return name === '\b' ? '' : name;
 }
 
+async function downloadImage(imageURL, title) {
+  try {
+    const response = await fetch(imageURL);
+    if (!response.ok) {
+      throw new Error(`Failed to download image: ${response.statusText}`);
+    }
+
+    const imageName = `${title.split(' ').join('-')}.jpg`;
+    const buffer = await response.arrayBuffer();
+    fs.writeFileSync(
+      `./client/src/assets/images/treefilter/${imageName}`,
+      Buffer.from(buffer),
+    );
+    console.info(`Downloaded and saved image: ${imageName}`);
+    return imageName;
+  } catch (error) {
+    console.error(`Error downloading ${imageURL} - ${error.message}`);
+  }
+}
+
+async function fetchImagesForScientificName(scientificName) {
+  const response = await fetch(
+    `https://api.inaturalist.org/v1/taxa/autocomplete?q=${encodeURIComponent(
+      scientificName,
+    )}`,
+  );
+  const data = await response.json();
+  console.log(await data, 'data');
+  const taxon = data.results[0];
+
+  if (!taxon) {
+    console.error(`No taxon found for scientific name: ${scientificName}`);
+    return [];
+  }
+
+  const taxonId = taxon.id;
+  const photosResponse = await fetch(
+    `https://api.inaturalist.org/v1/observations?taxon_id=${taxonId}&photos=true&per_page=1`,
+  );
+  const photosData = await photosResponse.json();
+
+  return photosData;
+}
+
 async function buildImagesMap(trees) {
   const scientificNames = trees.map((tree) => tree.scientific);
   const uniqueScientificNames = [...new Set(scientificNames)];
@@ -245,7 +307,7 @@ buildImagesMap(trees).then((data) => {
   const formattedData = JSON.stringify(data, null, 2);
   const filename = 'treeImages.json';
   const output = path.resolve(outputPath, filename);
-  console.log(`[build:data] Writing ${filename}.`);
+  console.info(`[build:data] Writing ${filename}.`);
   fs.writeFileSync(output, formattedData);
 });
 

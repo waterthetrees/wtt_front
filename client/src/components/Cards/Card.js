@@ -14,7 +14,7 @@ export const Card = ({
   icon,
 }) => {
   // const params = useParams();
-
+  const scientificName = scientific.split(' ').join('-');
   // console.log('params', params.common, params);
   return (
     <div className="card">
@@ -28,7 +28,7 @@ export const Card = ({
         {scientific &&
           Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
             <ImageLoad
-              src={treeImages[scientific]?.imageURL}
+              src={`http://localhost:3000/assets/images/treefilter/${scientificName}.jpg`}
               placeholder="placeholder.jpg"
             />
           )}
