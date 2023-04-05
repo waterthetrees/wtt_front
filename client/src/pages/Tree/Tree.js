@@ -42,6 +42,7 @@ export default function Tree({
   currentTreeId,
   setCurrentTreeId,
   isTreeQueryError,
+  treeImages = [],
 }) {
   const { scientific } = currentTreeData || {};
   // If a tree is selected but there was an error in fetching the data, show an error message.
@@ -57,7 +58,6 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
-  const treeImages = [];
 
   return (
     <TreeDetailsContainer
