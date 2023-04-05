@@ -84,6 +84,7 @@ export default function NewTreeButton({ map }) {
         value="Plant"
         selected={isPlanting}
         onChange={handlePlantClick}
+        title="Plant New Tree"
       />
       {map && <NewTreePlantingMarker map={map} onPlantClick={openPanel} />}
     </>

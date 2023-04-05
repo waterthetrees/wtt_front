@@ -42,11 +42,6 @@ module.exports = (env) => {
       historyApiFallback: true,
       static: './',
       hot: true,
-      watchOptions: {
-        poll: true,
-        // ignored: /node_modules/,
-        aggregateTimeout: 300,
-      },
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
@@ -55,6 +50,12 @@ module.exports = (env) => {
     stats: {
       // Log a build timestamp in the console.
       builtAt: true,
+    },
+    watchOptions: {
+      poll: true,
+      // Exclude big folders or files which don't need to be watched.
+      ignored: ['**/node_modules', '**/vendor', '**/*.json', 'client/src/data/dist', 'data/json'],
+      aggregateTimeout: 300,
     },
     module: {
       rules: removeEmpty([

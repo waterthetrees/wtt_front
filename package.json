@@ -33,9 +33,9 @@
     "react-csv-importer": "^0.8.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
-    "react-hook-form": "^7.42.0",
+    "react-hook-form": "^7.43.9",
     "react-query": "^3.34.15",
-    "react-router": "^6.2.1",
+    "react-router": "^6.10.0",
     "react-router-dom": "^6.2.1",
     "use-debounce": "^7.0.1",
     "winston": "^3.6.0"
@@ -71,8 +71,8 @@
     "postcss-scss": "^4.0.3",
     "prettier": "^2.6.2",
     "sass": "^1.49.7",
-    "sass-loader": "^12.6.0",
-    "source-map-loader": "^3.0.1",
+    "sass-loader": "^13.2.2",
+    "source-map-loader": "^4.0.1",
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^3.3.1",
     "stylelint": "^14.13.0",
@@ -82,7 +82,7 @@
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.10.0",
     "webpack-config-utils": "^2.3.1",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.13.2"
   },
   "scripts": {
     "postinstall": "npm run build:data",
@@ -101,7 +101,7 @@
     "start": "node server/index.js localhost",
     "start:docker": "npm run watch & npm run start:nodemon",
     "start:nodemon": "nodemon server/index.js localserver",
-    "start:dev": "node server/index.js development",
+    "start:dev": "webpack serve --env development",
     "test": "jest",
     "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
     "test:watch": "jest --watch"
