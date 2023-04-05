@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import { useSpringCarousel } from "react-spring-carousel";
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward, Circle, CircleOutlined } from "@mui/icons-material";
+
+function ArrowButton({ slideAction, height, children, left }) {
+  return (
+    <IconButton
+      onClick={slideAction}
+      sx={{ 
+        alignSelf: left ? "flex-start" : "flex-end" ,
+        position: "absolute",
+        top: `${height / 2}px`,
+        zIndex: 1,
+        backgroundColor: "rgba(0, 128, 0, .8)",
+        color: "white",
+        '&:hover': {
+          backgroundColor: "white",
+          color: "green",
+        }
+      }}
+      fontSize="large"
+      color="white"
+    >
+      {children}
+    </IconButton>
+  );
+}
 
 export default function TreeImageCarousel({ imgs }) {
   const maxWidth = Math.max(...imgs.map(img => img.width));
@@ -64,50 +86,15 @@ export default function TreeImageCarousel({ imgs }) {
       width: `${maxWidth}px`,
       margin: "10px",
     }}>
-      <IconButton
-        onClick={slideToPrevItem}
-        sx={{ 
-          alignSelf: "flex-start",
-          position: "absolute",
-          top: `${maxHeight / 2}px`,
-          zIndex: 1,
-          backgroundColor: "rgba(0, 128, 0, .8)",
-          color: "white",
-          '&:hover': {
-            backgroundColor: "white",
-            color: "green",
-          }
-        }}
-        fontSize="large"
-        color="white"
-      >
-        <ArrowBack
-          sx={{ fontSize: "2em" }}
-        />
-      </IconButton>
+      <ArrowButton slideAction={slideToPrevItem} height={maxHeight} left >
+        <ArrowBack sx={{ fontSize: "2em" }} />
+      </ArrowButton>
       <div style={{ zIndex: 0 }}>
         {carouselFragment}
       </div>
-      <IconButton
-        onClick={slideToNextItem}
-        sx={{
-          alignSelf: "flex-end",
-          position: "absolute",
-          top: `${maxHeight / 2}px`,
-          zIndex: 1,
-          backgroundColor: "rgba(0, 128, 0, .8)",
-          color: "white",
-          '&:hover': {
-            backgroundColor: "white",
-            color: "green",
-          }
-        }}
-        fontSize="large"
-      >
-        <ArrowForward
-          sx={{ fontSize: "2em" }}
-        />
-      </IconButton>
+      <ArrowButton slideAction={slideToNextItem} height={maxHeight} >
+        <ArrowForward sx={{ fontSize: "2em" }} />
+      </ArrowButton>
       <div style={{ display: "flex", alignSelf: "center", justifyContent: "center", margin: "1em", gap: ".3em", color: "green" }} >
         {indicators}
       </div>
