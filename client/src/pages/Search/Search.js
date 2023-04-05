@@ -37,6 +37,7 @@ const Search = ({ map }) => {
     debouncedSetQuery(newQuery);
   };
 
+  // FIXME: This doesn't get triggered when the current selection is selected again from the autocomplete.
   const handleOptionSelect = (e, option) => {
     if (option) {
       map.panTo(option.coords);
