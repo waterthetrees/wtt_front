@@ -33,8 +33,8 @@ const Search = ({ map }) => {
       setGeneratedSearchResults([createLatLongSearchResult(newQuery)]);
     } else {
       setGeneratedSearchResults([]);
+      debouncedSetQuery(newQuery);
     }
-    debouncedSetQuery(newQuery);
   };
 
   // FIXME: This doesn't get triggered when the current selection is selected again from the autocomplete.
