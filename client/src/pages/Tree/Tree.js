@@ -75,7 +75,7 @@ export default function Tree({
           />
 
           {treeImages.length > 0 ?
-            <TreeImageCarousel imgs={treeImages} /> :
+            <TreeImageCarousel imgs={treeImages} width={drawerWidth} /> :
             (scientific &&
             Object.prototype.hasOwnProperty.call(stockTreeImages, scientific) && (
               <ImageLoad

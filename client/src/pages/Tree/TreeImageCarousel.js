@@ -4,20 +4,21 @@ import { IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward, Circle, CircleOutlined } from "@mui/icons-material";
 
 function ArrowButton({ slideAction, height, children, left }) {
+  const dirProp = left ? { left: 0 } : { right: 0 };
+
   return (
     <IconButton
       onClick={slideAction}
       sx={{ 
-        alignSelf: left ? "flex-start" : "flex-end" ,
         position: "absolute",
-        top: `${height / 2}px`,
-        zIndex: 1,
         backgroundColor: "rgba(0, 128, 0, .8)",
         color: "white",
         '&:hover': {
           backgroundColor: "white",
           color: "green",
-        }
+        },
+        zIndex: 1,
+        ...dirProp
       }}
       fontSize="large"
       color="white"
@@ -27,20 +28,21 @@ function ArrowButton({ slideAction, height, children, left }) {
   );
 }
 
-export default function TreeImageCarousel({ imgs }) {
-  const maxWidth = Math.max(...imgs.map(img => img.width));
-  const maxHeight = Math.max(...imgs.map(img => img.height));
-
+export default function TreeImageCarousel({ imgs, width }) {
+  const widths = imgs.map(img => img.width);
+  const largestImgIdx = widths.indexOf(Math.max(...widths));
+  const largestImgWidth = imgs[largestImgIdx].width;
+  const maxWidth = Math.min(largestImgWidth, width * .8);
   const [activeItem, setActiveItem] = useState("item-0");
-
   const {
     useListenToCustomEvent,
     carouselFragment,
     slideToPrevItem,
     slideToNextItem,
   } = useSpringCarousel({
+    itemsPerSlide: 1,
     withLoop: true,
-    gutter: 50,
+    gutter: width,
     items: (
       imgs.map((img, i) => ({
         id: `item-${i}`,
@@ -49,13 +51,17 @@ export default function TreeImageCarousel({ imgs }) {
             display: "flex",
             backgroundColor: "rgba(0, 0, 0, .1)",
             alignItems: "center",
-            width: `${maxWidth}px`,
-            height: `${maxHeight}px`,
+            width: largestImgWidth,
+            maxWidth: maxWidth,
           }}>
             <img
               key={i}
               src={img.src}
-              style={{ display: "inline-block" }}
+              style={{
+                display: "inline-block",
+                width: largestImgWidth,
+                maxWidth: maxWidth,
+              }}
               alt={img.text}
             />
           </div>
@@ -83,18 +89,32 @@ export default function TreeImageCarousel({ imgs }) {
     <div style={{ 
       display: "flex",
       flexDirection: "column",
-      width: `${maxWidth}px`,
       margin: "10px",
+      margin: "auto",
+      width: "fit-content",
     }}>
-      <ArrowButton slideAction={slideToPrevItem} height={maxHeight} left >
-        <ArrowBack sx={{ fontSize: "2em" }} />
-      </ArrowButton>
-      <div style={{ zIndex: 0 }}>
-        {carouselFragment}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+        <ArrowButton slideAction={slideToPrevItem} left >
+          <ArrowBack sx={{ fontSize: "2em" }} />
+        </ArrowButton>
+        <div style={{
+          zIndex: 0,
+          mx: "auto",
+          width: largestImgWidth,
+          maxWidth: maxWidth,
+        }}>
+          {carouselFragment}
+        </div>
+        <ArrowButton slideAction={slideToNextItem} >
+          <ArrowForward sx={{ fontSize: "2em" }} />
+        </ArrowButton>
       </div>
-      <ArrowButton slideAction={slideToNextItem} height={maxHeight} >
-        <ArrowForward sx={{ fontSize: "2em" }} />
-      </ArrowButton>
       <div style={{ display: "flex", alignSelf: "center", justifyContent: "center", margin: "1em", gap: ".3em", color: "green" }} >
         {indicators}
       </div>

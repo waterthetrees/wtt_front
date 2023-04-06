@@ -25,5 +25,6 @@ export default {
 export const Default = {
   args: {
     imgs: imgs,
+    width: 400
   }
 }
