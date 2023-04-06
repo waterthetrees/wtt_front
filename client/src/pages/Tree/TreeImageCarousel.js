@@ -12,6 +12,7 @@ function ArrowButton({ slideAction, children, left }) {
         position: "absolute",
         backgroundColor: "rgba(0, 128, 0, .8)",
         color: "white",
+        boxShadow: `0 5px 5px black`,
         '&:hover': {
           backgroundColor: "white",
           color: "green",
@@ -44,13 +45,10 @@ export default function TreeImageCarousel({ imgs, width }) {
     items: (
       imgs.map((img, i) => ({
         id: `item-${i}`,
-        renderItem:
+        renderItem: (
           <div style={{
-            display: "flex",
-            backgroundColor: "rgba(0, 0, 0, .1)",
-            alignItems: "center",
-            width: largestImgWidth,
-            maxWidth: maxWidth,
+            margin: "auto",
+            filter: "drop-shadow(16px 16px 10px black)",
           }}>
             <img
               key={i}
@@ -63,6 +61,7 @@ export default function TreeImageCarousel({ imgs, width }) {
               alt={img.text}
             />
           </div>
+        )
       }))
     )
   });
@@ -87,7 +86,6 @@ export default function TreeImageCarousel({ imgs, width }) {
     <section style={{ 
       display: "flex",
       flexDirection: "column",
-      margin: "10px",
       margin: "auto",
       width: "fit-content",
     }}>
