@@ -50,22 +50,6 @@ const mockTreeData = {
 };
 const mockTreeId = 420;
 const mockSetCurrentTreeId = () => {};
-import Example1 from "../../../../example1.jpg";
-import Example2 from "../../../../example2.jpg";
-const treeImages = [
-  {
-    src: Example1,
-    text: "Example 1",
-    width: 400,
-    height: 533
-  },
-  {
-    src: Example2,
-    text: "Example 2",
-    width: 400,
-    height: 280
-  }
-];
 
 export default {
   title: "Tree",
@@ -83,18 +67,6 @@ export const WithPanelDrawer = {
   }
 }
 
-export const WithPanelDrawerAndCarousel = {
-  args: {
-    TreeDetailsContainer: PanelDrawer,
-    drawerWidth: drawerWidth,
-    currentTreeData: mockTreeData,
-    currentTreeId: mockTreeId,
-    setCurrentTreeId: mockSetCurrentTreeId,
-    isTreeQueryError: false,
-    treeImages,
-  }
-}
-
 export const WithScrollableDialog = {
   args: {
     TreeDetailsContainer: ScrollableDialog,
@@ -103,17 +75,5 @@ export const WithScrollableDialog = {
     currentTreeId: mockTreeId,
     setCurrentTreeId: mockSetCurrentTreeId,
     isTreeQueryError: false,
-  }
-}
-
-export const WithScrollableDialogAndCarousel = {
-  args: {
-    TreeDetailsContainer: ScrollableDialog,
-    drawerWidth: scrollableWidth,
-    currentTreeData: mockTreeData,
-    currentTreeId: mockTreeId,
-    setCurrentTreeId: mockSetCurrentTreeId,
-    isTreeQueryError: false,
-    treeImages,
   }
 }

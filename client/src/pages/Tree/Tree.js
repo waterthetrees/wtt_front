@@ -10,9 +10,8 @@ import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
 import { ImageLoad } from './TreeImage';
 
-import stockTreeImages from '@/data/dist/treeImages.json';
+import treeImages from '@/data/dist/treeImages.json';
 import { CarbonCalculator } from './CarbonCalculator';
-import TreeImageCarousel from './TreeImageCarousel';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -42,7 +41,6 @@ export default function Tree({
   currentTreeId,
   setCurrentTreeId,
   isTreeQueryError,
-  treeImages = [],
 }) {
   const { scientific } = currentTreeData || {};
   // If a tree is selected but there was an error in fetching the data, show an error message.
@@ -74,15 +72,13 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          {treeImages.length > 0 ?
-            <TreeImageCarousel imgs={treeImages} width={drawerWidth} /> :
-            (scientific &&
-            Object.prototype.hasOwnProperty.call(stockTreeImages, scientific) && (
+          {scientific &&
+            Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
               <ImageLoad
-                src={stockTreeImages[scientific]}
+                src={treeImages[scientific]}
                 placeholder="placeholder.jpg"
               />
-            ))}
+            )}
 
           {!hasUnfitData && (
             <TreeHealth
