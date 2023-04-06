@@ -3,7 +3,6 @@ import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 
 const drawerWidth = 350;
-const scrollableWidth = 600;
 const mockTreeData = {
   ref: '22101',
   address: '881 Jamestown Ave',
@@ -56,7 +55,7 @@ export default {
   component: Tree
 }
 
-export const WithPanelDrawer = {
+export const TreeWithPanelDrawer = {
   args: {
     TreeDetailsContainer: PanelDrawer,
     drawerWidth: drawerWidth,
@@ -67,10 +66,10 @@ export const WithPanelDrawer = {
   }
 }
 
-export const WithScrollableDialog = {
+export const TreeWithScrollableDialog = {
   args: {
     TreeDetailsContainer: ScrollableDialog,
-    drawerWidth: scrollableWidth,
+    drawerWidth: drawerWidth,
     currentTreeData: mockTreeData,
     currentTreeId: mockTreeId,
     setCurrentTreeId: mockSetCurrentTreeId,
