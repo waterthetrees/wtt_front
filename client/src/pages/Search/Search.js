@@ -10,6 +10,7 @@ const MIN_CHARS_FOR_SEARCH = 2;
 const BASE_MAPBOX_SEARCH_API_URL =
   'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
+const VALID_LAT_LNG_DELIMITERS = [',', '/', '\\'];
 
 const Search = ({ map }) => {
   const [query, setQuery] = useState('');
@@ -99,8 +100,7 @@ const getMapboxSearchResults = async (query) => {
 
 // Attempt to parse a latitude and longitude from the query
 export const isQueryLatLong = (query) => {
-  // Use commas and forward slashes as possible delimiters
-  const coords = query.includes(',') ? query.split(',') : query.split('/');
+  const coords = splitWithValidDelimiter(query);
   if (coords.length !== 2) {
     return false;
   }
@@ -132,9 +132,22 @@ const isValidFloat = (token) => {
   return true;
 };
 
+// Use the first delimiter in VALID_LAT_LNG_DELIMITERS that is found in the input query string
+// to split string into potential lat/lngs
+const splitWithValidDelimiter = (query) => {
+  let coords = query;
+  VALID_LAT_LNG_DELIMITERS.forEach((delimiter) => {
+    if (query.includes(delimiter)) {
+      coords = query.split(delimiter);
+      return;
+    }
+  });
+  return coords;
+};
+
 // Return a SearchResult that is compatible with the feature data shape from mapbox search API
 const createLatLongSearchResult = (query) => {
-  const coords = query.includes(',') ? query.split(',') : query.split('/');
+  const coords = splitWithValidDelimiter(query);
   const latLng = coords.map((coord) => parseFloat(coord));
 
   return {
