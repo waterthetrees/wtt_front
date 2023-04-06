@@ -47,6 +47,12 @@ Window 2:
 npm run start
 ```
 
+### RUN STORYBOOK
+Storybook allows you to develop and test UI components in isolation from the rest of the app. To start Storybook, do this:
+```shell
+npm run storybook
+```
+
 ### BUILD AND START FULL STACK APP [FOLLOW DIRECTIONS HERE](https://github.com/waterthetrees/waterthetrees)
 
 If you want to run wtt_server and wtt_db locally:
