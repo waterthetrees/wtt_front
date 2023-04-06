@@ -99,22 +99,23 @@ const getMapboxSearchResults = async (query) => {
 
 // Attempt to parse a latitude and longitude from the query
 export const isQueryLatLong = (query) => {
-  const tokens = query.split(',');
-  if (tokens.length !== 2) {
+  // Use commas and forward slashes as possible delimiters
+  const coords = query.includes(',') ? query.split(',') : query.split('/');
+  if (coords.length !== 2) {
     return false;
   }
 
-  if (!tokens.every((token) => isValidFloat(token))) {
+  if (!coords.every((coord) => isValidFloat(coord))) {
     return false;
   }
 
-  const latitude = parseFloat(tokens[0]);
+  const latitude = parseFloat(coords[0]);
   // Latitude must be a number between -90 and 90
   if (Math.abs(latitude) > 90) {
     return false;
   }
 
-  const longitude = parseFloat(tokens[1]);
+  const longitude = parseFloat(coords[1]);
   // Longitude must a number between -180 and 180
   if (Math.abs(longitude) > 180) {
     return false;
@@ -133,8 +134,8 @@ const isValidFloat = (token) => {
 
 // Return a SearchResult that is compatible with the feature data shape from mapbox search API
 const createLatLongSearchResult = (query) => {
-  const tokens = query.split(',');
-  const latLng = tokens.map((token) => parseFloat(token));
+  const coords = query.includes(',') ? query.split(',') : query.split('/');
+  const latLng = coords.map((coord) => parseFloat(coord));
 
   return {
     label: query,
