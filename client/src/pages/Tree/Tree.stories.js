@@ -71,7 +71,7 @@ export default {
   component: Tree
 }
 
-export const WithPanelDrawer = {
+export const TreeWithPanelDrawer = {
   args: {
     TreeDetailsContainer: PanelDrawer,
     drawerWidth: drawerWidth,
@@ -82,19 +82,7 @@ export const WithPanelDrawer = {
   }
 }
 
-export const WithPanelDrawerAndCarousel = {
-  args: {
-    TreeDetailsContainer: PanelDrawer,
-    drawerWidth: drawerWidth,
-    currentTreeData: mockTreeData,
-    currentTreeId: mockTreeId,
-    setCurrentTreeId: mockSetCurrentTreeId,
-    isTreeQueryError: false,
-    treeImages,
-  }
-}
-
-export const WithScrollableDialog = {
+export const TreeWithScrollableDialog = {
   args: {
     TreeDetailsContainer: ScrollableDialog,
     drawerWidth: drawerWidth,
@@ -105,14 +93,3 @@ export const WithScrollableDialog = {
   }
 }
 
-export const WithScrollableDialogAndCarousel = {
-  args: {
-    TreeDetailsContainer: ScrollableDialog,
-    drawerWidth: drawerWidth,
-    currentTreeData: mockTreeData,
-    currentTreeId: mockTreeId,
-    setCurrentTreeId: mockSetCurrentTreeId,
-    isTreeQueryError: false,
-    treeImages,
-  }
-}
