@@ -3,9 +3,8 @@ import { useSpringCarousel } from "react-spring-carousel";
 import { IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward, Circle, CircleOutlined } from "@mui/icons-material";
 
-function ArrowButton({ slideAction, height, children, left }) {
+function ArrowButton({ slideAction, children, left }) {
   const dirProp = left ? { left: 0 } : { right: 0 };
-
   return (
     <IconButton
       onClick={slideAction}
@@ -40,7 +39,6 @@ export default function TreeImageCarousel({ imgs, width }) {
     slideToPrevItem,
     slideToNextItem,
   } = useSpringCarousel({
-    itemsPerSlide: 1,
     withLoop: true,
     gutter: width,
     items: (
@@ -86,7 +84,7 @@ export default function TreeImageCarousel({ imgs, width }) {
   }
 
   return (
-    <div style={{ 
+    <section style={{ 
       display: "flex",
       flexDirection: "column",
       margin: "10px",
@@ -101,23 +99,29 @@ export default function TreeImageCarousel({ imgs, width }) {
         }}
       >
         <ArrowButton slideAction={slideToPrevItem} left >
-          <ArrowBack sx={{ fontSize: "2em" }} />
+          <ArrowBack sx={{ fontSize: "1.5em" }} />
         </ArrowButton>
         <div style={{
           zIndex: 0,
-          mx: "auto",
           width: largestImgWidth,
           maxWidth: maxWidth,
         }}>
           {carouselFragment}
         </div>
         <ArrowButton slideAction={slideToNextItem} >
-          <ArrowForward sx={{ fontSize: "2em" }} />
+          <ArrowForward sx={{ fontSize: "1.5em" }} />
         </ArrowButton>
       </div>
-      <div style={{ display: "flex", alignSelf: "center", justifyContent: "center", margin: "1em", gap: ".3em", color: "green" }} >
+      <div style={{
+        display: "flex",
+        alignSelf: "center",
+        justifyContent: "center",
+        margin: "1em",
+        gap: ".3em",
+        color: "green"
+      }} >
         {indicators}
       </div>
-    </div>
+    </section>
   );
 }
