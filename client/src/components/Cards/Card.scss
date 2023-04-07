@@ -1,58 +1,11 @@
 .card {
   flex: 0 1 22rem;
   transition: box-shadow 0.3s ease-in-out;
-  margin: 1rem;
-  // padding: 2px;
+  margin-bottom: 1rem;
+  padding: 0 0 4px;
   height: 100%;
   background-color: whitesmoke;
   color: gray;
   break-inside: avoid;
   border-radius: 4px;
-  
-
-  h1,
-  h2,h3,h4,h5,h6 {
-    padding: 0 0.5rem;
-    color: black;
-  }
-
-  h2,
-  .h2,.h3,.h4,.h5,.h6 {
-    padding: 0 0.5rem;
-    color: black;
-  }
-
-  &:focus, &:hover, &:visited, &:link, &:active {
-    text-decoration: none;
-    color: green;
-    opacity: .8;
-  }
-
-  &__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: bottom;
-  }
-  
-  &__image img {
-    border-radius: 4px 4px 0 0;
-  }
-
-  &__item {
-    color: gray;
-    padding: 0 0.5rem;
-  }
-
-  &__item:first-letter { 
-    font-size: 1em; 
-    text-transform: uppercase;
-  }
-
-  &__item-notes {
-    padding: .5rem;
-    max-width: 250px;
-    font-weight: 500;
-  }
-  
 }

@@ -1,10 +1,12 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import treeImages from '@/data/dist/treeImages.json';
 import './TreeInfo.scss';
 import { ImageLoad } from '@/pages/Tree/TreeImage';
 import { dataSources } from '@/pages/Data/dataArrays';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
+import { ArrowBack, Download } from '@mui/icons-material';
+// import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded';
 import { CSVLink } from 'react-csv';
 import { WttButton } from '@/components/Button/Button';
 import { Tag } from '@/components/Tag/Tag';
@@ -25,6 +27,9 @@ export default function TreeInfo() {
     <div className="treeinfolarge">
       <div className="treeinfolarge__content">
         <div className="treeinfolarge__content-image">
+          <Link to="/treeinfo">
+            <ArrowBack fontSize="large" color="success" variant="filled" />
+          </Link>
           {scientific &&
             Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
               <ImageLoad
@@ -107,7 +112,7 @@ export default function TreeInfo() {
                 type="button"
                 colorClass="wttbuttons__black"
               >
-                <DownloadIcon
+                <Download
                   color="gray"
                   fontSize="large"
                   aria-label="Download CSV"

@@ -161,15 +161,12 @@ $white:  white;
 
   &__container {
     column-count: 5;
-    column-gap: .25rem;
-    padding: .25rem;
+    column-gap: 1.25rem;
     width: 100%;
     max-width: 1200px;
   }
 
   &__header {
-    padding: .5rem;
-    margin: 15px;
     font-size: large;
   }
   
@@ -180,6 +177,53 @@ $white:  white;
   &__link:focus, &__link:hover, &__link:visited, &__link:link, &__link:active {
     text-decoration: none;
   }
+
+
+  h1,
+  h2,h3,h4,h5,h6 {
+    padding: 0 0.5rem;
+    color: black;
+  }
+
+  h2,
+  .h2,.h3,.h4,.h5,.h6 {
+    padding: 0 0.5rem;
+    color: black;
+  }
+
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+    color: green;
+    opacity: .8;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+  }
+  
+  &__image img {
+    border-radius: 4px 4px 0 0;
+  }
+
+  &__item {
+    color: gray;
+    padding: 0 0.5rem;
+  }
+
+  &__item:first-letter { 
+    font-size: 1em; 
+    text-transform: uppercase;
+  }
+
+  &__item-notes {
+    padding: .5rem;
+    max-width: 250px;
+    font-weight: 500;
+  }
+
   @media screen and (max-width: 1024px) {
     &__container {
       column-count: 4;
@@ -218,6 +262,7 @@ $white:  white;
   &__content {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     align-items: left;
     background-color: $white-mix;
     padding: 10px;
