@@ -10,7 +10,7 @@ import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 export default function TreeInfo() {
   const [selectedDataSourceIndex, setSelectedDataSourceIndex] = useState(2);
 
-  const { url, thanks, data } = dataSources[selectedDataSourceIndex];
+  const { url, thanks, data, title } = dataSources[selectedDataSourceIndex];
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
@@ -29,7 +29,10 @@ export default function TreeInfo() {
           />
         </SubHeader>
       </div>
-      <TreeList data={filteredData} />
+      <TreeList
+        data={filteredData}
+        selectedDataSourceIndex={selectedDataSourceIndex}
+      />
       <div className="treeinfofilter__section-item">
         <a href={url} target="_blank" rel="noreferrer">
           {thanks}

@@ -136,6 +136,41 @@ export default function FilterSidebar({
   return (
     <div className="treeinfofilter">
       <div className="treeinfofilter__section">
+        <div className="treeinfofilter__section-data">
+          <div className="treeinfofilter__section-item">
+            <FormControl
+              sx={{ minWidth: 265, marginTop: '8px', marginBottom: '8px' }}
+            >
+              {/* <SearchBar
+                style={{
+                  div: {
+                    width: 'max-content',
+                    borderRadius: '.3vw',
+                    fontSize: 'large',
+                  },
+                  input: { borderRadius: '.3vw', width: '100%' },
+                }}
+                search={search}
+                onChange={handleSearch}
+                placeholder={'Search trees'}
+              /> */}
+              <Select
+                MenuProps={{ disableScrollLock: true }}
+                labelId="data-select-label"
+                id="data-select"
+                className="treeinfofilter__section-data-select"
+                size="small"
+                value={selectedDataSourceIndex}
+                onChange={handleChange}
+                sx={{ minWidth: 265, marginTop: '8px', marginBottom: '8px' }}
+              >
+                {dataSourceMenuItems}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+      </div>
+      <div className="treeinfofilter__section">
         {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
           <div key={groupName} className="treeinfofilter__section-filter">
             <h3 className="treeinfofilter__section-title">{groupName}</h3>
@@ -158,37 +193,6 @@ export default function FilterSidebar({
             </div>
           </div>
         ))}
-      </div>
-      <div className="treeinfofilter__section">
-        <div className="treeinfofilter__section-data">
-          <div className="treeinfofilter__section-item">
-            <FormControl sx={{ minWidth: 265, my: 1 }}>
-              {/* <SearchBar
-                style={{
-                  div: {
-                    width: 'max-content',
-                    borderRadius: '.3vw',
-                    fontSize: 'large',
-                  },
-                  input: { borderRadius: '.3vw', width: '100%' },
-                }}
-                search={search}
-                onChange={handleSearch}
-                placeholder={'Search trees'}
-              /> */}
-              <Select
-                labelId="data-select-label"
-                id="data-select"
-                className="treeinfofilter__section-data-select"
-                size="small"
-                value={selectedDataSourceIndex}
-                onChange={handleChange}
-              >
-                {dataSourceMenuItems}
-              </Select>
-            </FormControl>
-          </div>
-        </div>
       </div>
     </div>
   );

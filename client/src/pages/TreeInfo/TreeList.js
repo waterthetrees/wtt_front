@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './TreeInfo.scss';
 const routeName = 'treeinfo';
 
-export default function TreeList({ data }) {
+export default function TreeList({ data, selectedDataSourceIndex }) {
   return (
     <div className="treeinfolist">
       <div className="treeinfolist__container">
@@ -27,7 +27,7 @@ export default function TreeList({ data }) {
               to={{
                 pathname: urlRoute,
               }}
-              state={tree}
+              state={{ tree, selectedDataSourceIndex }}
               key={`${tree?.scientific}-${index}`}
             >
               <Card {...treeRest} />

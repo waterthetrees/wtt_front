@@ -263,7 +263,7 @@ async function downloadImage(imageURL, title) {
     const imageName = `${title.split(' ').join('-')}.jpg`;
     const buffer = await response.arrayBuffer();
     fs.writeFileSync(
-      `./client/src/assets/images/treefilter/${imageName}`,
+      `./client/src/assets/images/data/${imageName}`,
       Buffer.from(buffer),
     );
     console.info(`Downloaded and saved image: ${imageName}`);

@@ -78,7 +78,7 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/data" element={<Data />} />
                   <Route path="/source" element={<Source />} />
-                  <Route path="/treefilter" element={<TreeInfo />} />
+                  <Route path="/treeinfo" element={<TreeInfo />} />
                   <Route path="/treeinfo/:common" element={<TreeInfoLarge />} />
                   <Route
                     path="/treeinfo/:scientific"

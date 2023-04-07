@@ -1,16 +1,16 @@
 $border-color: #FF4040;
 $checkbox-size: 1rem;
 $checkedbox-size: 1.2rem;
-$dark: silver;
-$white:  mix($dark, white, 20%);
+$silver: silver;
+$white-mix:  mix($silver, white, 20%);
+$white:  white;
 
 .treeinfo {
   $self: &;
-  background-color: $dark;
+  background-color: $silver;
   display: flex;
   flex-direction: column;
   justify-content: right;
-  padding-top: 6rem;
   height: 100%;
 
   &__header {  
@@ -18,17 +18,24 @@ $white:  mix($dark, white, 20%);
     font-weight: 700;
     margin-bottom: 20px;
   }
+
+  @media screen and (max-width: 480px) {
+    padding-top: 0;
+  }
 }
 
 .treeinfofilter {
   $self: &;
+  background-image: url(../../assets/images/treeinfo/treeinfo2.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
   display: flex;
   flex-direction: row;
   height: max-content;
   color: black;
   background-color: gray;
-  margin-top: 58px;
-  padding: 0 10px;
+  padding: 58px 10px 0;
   gap: 10px;
   margin-bottom: 1px;
   justify-content: space-between;
@@ -47,39 +54,43 @@ $white:  mix($dark, white, 20%);
   }
 
   &__section {
-    background-color: whitesmoke;
+    background-color: $white;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
     gap: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
   }
-  &__section:last-child {
+  &__section:first-child {
     background-color: transparent;
   }
   &__section-filter {
-    background-color: lightgray;
+    margin: 10px;
   }
-  &__section-data-select{
-    background-color: whitesmoke;
+  &__section-data-select {
+    background-color: $white;
+    font-size: large;
   }
 
   &__section-title {
-    background-color: lightgray;
     font-size: medium;
-    font-weight: 700;
+    font-weight: 600;
     padding: 2px 5px;
   }
 
   &__section-item {
     display: flex;
     flex-direction: column;
-    margin: 5px;
-    // max-width: 300px;
+  }
+
+  &__section-item:focus-visible, &__section-item:hover {
+    outline: none;
   }
   
   &__section-item-label {
-    padding-left: 8px;
+    font-weight: 400;
     font-size: medium;
   }
   
@@ -111,12 +122,24 @@ $white:  mix($dark, white, 20%);
       background-color: #2196F3;
     }
   }
+ 
+
+  @media screen and (max-width: 1024px) {
+    background-size: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    background-size: 100vh;
+  }  
+  @media screen and (max-width: 600px) {
+    background-size: 100vh;
+  }
 
   @media screen and (max-width: 480px) {
-    margin-top: 58px;
-    padding:0;
+    // flex-direction: row-reverse;
+    background-size: auto 100%;
+    // padding: 58px 0;
 
-    flex-direction: column-reverse;
+    flex-direction: column;
     &__header {
       width: 100%;
     }
@@ -133,7 +156,7 @@ $white:  mix($dark, white, 20%);
 
 .treeinfolist {
   $self: &;
-  margin-top: 95px;
+  padding: 17rem 10px;
   align-self: center;
 
   &__container {
@@ -147,6 +170,7 @@ $white:  mix($dark, white, 20%);
   &__header {
     padding: .5rem;
     margin: 15px;
+    font-size: large;
   }
   
   &__link {
@@ -167,6 +191,7 @@ $white:  mix($dark, white, 20%);
     }
   }  
   @media screen and (max-width: 600px) {
+    // margin-top: 220px;
     &__container {
       column-count: 2;
       column-gap: .10rem;
@@ -174,7 +199,8 @@ $white:  mix($dark, white, 20%);
     }
   }
   @media screen and (max-width: 480px) {
-    margin-top: 235px;
+    // margin-top: 210px;
+    margin-top: 75px;
     &__container {
       column-count: 1;
       column-gap: .05rem;
@@ -185,43 +211,58 @@ $white:  mix($dark, white, 20%);
 
 .treeinfolarge {
   $self: &;
-  display: flex;
-  flex-direction: row;
-  align-items: left;
-  background-color: silver;
-  width: 100vw;
-  // height: 100vh;
+  background-color: $silver;
+  height:  100vh;
   padding: 65px 10px;
 
-  &__image {
-    // height: 100%;
-    // overflow: hidden;
-    background-color: lightgray;
-  }
-  &__image img {
-    max-height: 100%;
-  }
   &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    background-color: $white-mix;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  &__content-image img {
+    max-height: 100%;
+    min-width: 50vw;
+    border-radius: 4px;
+  }
+
+  .__content-image {
+    width: 50%;
+  }
+
+  &__content-info {
     display: flex;
     flex-direction: column;
     justify-content: left;
-    padding: 0 10px;
-    background-color: $white;
-    width: 60%;
+    padding: 0 15px;
   }
 
-  &__content-item{
+  &__content-info-item {
+    border-top: 1px solid $silver;
     font-size: medium;
-    margin: 4px 0;
+    padding: 10px 0;
   }
-  &__content-item-label {
-    font-weight: 700;
+  &__content-info-item-label {
+    font-weight: 600;
   }
+
+  @media screen and (max-width: 768px) {
+    &__content {
+      flex-direction: column;
+      width: 100%;
+    }
+    &__image {
+      width: 100%;
+    }
+  }  
 
   @media screen and (max-width: 480px) {
-    flex-direction: column;
-    padding: 0;
     &__content {
+      flex-direction: column;
       width: 100%;
     }
     &__image {

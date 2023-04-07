@@ -2,10 +2,13 @@
   flex: 0 1 22rem;
   transition: box-shadow 0.3s ease-in-out;
   margin: 1rem;
+  // padding: 2px;
   height: 100%;
   background-color: whitesmoke;
   color: gray;
   break-inside: avoid;
+  border-radius: 4px;
+  
 
   h1,
   h2,h3,h4,h5,h6 {
@@ -20,8 +23,6 @@
   }
 
   &:focus, &:hover, &:visited, &:link, &:active {
-    // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-    // border: 1px solid black;
     text-decoration: none;
     color: green;
     opacity: .8;
@@ -33,10 +34,16 @@
     object-fit: cover;
     object-position: bottom;
   }
+  
+  &__image img {
+    border-radius: 4px 4px 0 0;
+  }
+
   &__item {
     color: gray;
     padding: 0 0.5rem;
   }
+
   &__item:first-letter { 
     font-size: 1em; 
     text-transform: uppercase;
