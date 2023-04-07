@@ -1,9 +1,19 @@
 $border-color: #FF4040;
 $checkbox-size: 1rem;
 $checkedbox-size: 1.2rem;
+$black: black;
 $silver: silver;
 $white-mix:  mix($silver, white, 20%);
 $white:  white;
+.treecare {
+  font-family: arial,sans-serif;
+  font-size: medium;
+  color: $black;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 5px;
+  cursor: pointer;
+}
 
 .treeinfo {
   $self: &;
@@ -176,26 +186,10 @@ $white:  white;
 
   &__link:focus, &__link:hover, &__link:visited, &__link:link, &__link:active {
     text-decoration: none;
-  }
-
-
-  h1,
-  h2,h3,h4,h5,h6 {
-    padding: 0 0.5rem;
-    color: black;
-  }
-
-  h2,
-  .h2,.h3,.h4,.h5,.h6 {
-    padding: 0 0.5rem;
-    color: black;
-  }
-
-  &:focus, &:hover, &:visited, &:link, &:active {
-    text-decoration: none;
-    color: green;
     opacity: .8;
   }
+
+
 
   &__image {
     width: 100%;
@@ -212,6 +206,7 @@ $white:  white;
     color: gray;
     padding: 0 0.5rem;
   }
+
 
   &__item:first-letter { 
     font-size: 1em; 

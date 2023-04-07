@@ -36,6 +36,7 @@ export const dataSources = [
     columns: dataColumns.slice(0, 5),
     url: 'https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949',
     thanks: 'Thanks to calscape.org for the California native tree data!',
+    treecare: 'https://vimeo.com/416031708#t=5m35s',
   },
   {
     name: 'Food Trees',
@@ -43,6 +44,7 @@ export const dataSources = [
     columns: dataColumns.slice(0, 3),
     url: 'https://fallingfruit.org',
     thanks: 'Thanks to FallingFruit.org for the top US food tree data!',
+    treecare: 'https://vimeo.com/416031708#t=5m35s',
   },
   {
     name: 'San Francisco Street Trees',
@@ -50,5 +52,6 @@ export const dataSources = [
     columns: dataColumns.slice(0, 6),
     url: 'https://www.fuf.net/',
     thanks: 'Thanks to fuf.net for the top San Francisco street tree data!',
+    treecare: 'https://www.friendsoftheurbanforest.org/tree-care',
   },
 ];

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import treeImages from '@/data/dist/treeImages.json';
 import { ImageLoad } from '@/pages/Tree/TreeImage';
 import { Tag } from '@/components/Tag/Tag';
-import { WttButton } from '@/components/Button/Button';
+import { dataSources } from '@/pages/Data/dataArrays';
 import './TreeInfo.scss';
 const routeName = 'treeinfo';
 
@@ -14,20 +14,23 @@ require 1.5 inches of rain or 25 gallons of water per week for the
 first three years to establish their roots.`;
 
 export default function TreeList({ data, selectedDataSourceIndex }) {
+  console.log(data?.treecare);
   return (
     <div className="treeinfolist">
       <div className="treeinfolist__container">
         <div className="treeinfolist__header">
           <Card>
             <h3>{HEADING_TEXT}</h3>
-            <a
-              href="https://vimeo.com/416031708#t=5m35s"
-              target="_blank"
-              className="treeinfolist__link"
-              rel="noreferrer"
-            >
-              <h2>Street Tree Care</h2>
-            </a>
+            <div className="treecare">
+              <a
+                href={dataSources[selectedDataSourceIndex].treecare}
+                target="_blank"
+                className="treeinfolist__link"
+                rel="noreferrer"
+              >
+                Tree Care Program
+              </a>
+            </div>
           </Card>
         </div>
 
