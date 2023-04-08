@@ -8,10 +8,13 @@ describe('Test logic in generating search results', () => {
       ),
     ).toBeFalsy();
     expect(isQueryLatLong('thirty-seven,one hundred')).toBeFalsy();
+    expect(isQueryLatLong('thirty')).toBeFalsy();
   });
 
   it('isQueryLatLong with invalid lat/long', () => {
     expect(isQueryLatLong('')).toBeFalsy();
+    expect(isQueryLatLong('41')).toBeFalsy();
+    expect(isQueryLatLong('41,')).toBeFalsy();
     expect(isQueryLatLong('37.77px, -122px')).toBeFalsy();
     expect(isQueryLatLong('37.77--,-122-')).toBeFalsy();
     expect(isQueryLatLong('37.77.12,-122')).toBeFalsy();

@@ -135,7 +135,7 @@ const isValidFloat = (token) => {
 // Use the first delimiter in VALID_LAT_LNG_DELIMITERS that is found in the input query string
 // to split string into potential lat/lngs
 const splitWithValidDelimiter = (query) => {
-  let coords = query;
+  let coords = [query];
   VALID_LAT_LNG_DELIMITERS.forEach((delimiter) => {
     if (query.includes(delimiter)) {
       coords = query.split(delimiter);
