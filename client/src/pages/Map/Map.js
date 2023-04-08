@@ -4,7 +4,7 @@ import { Alert, Box, Typography } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
-import DonateBtn from './DonateBtn/DonateBtn';
+import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
 import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
 import NewTreeButton from '@/pages/NewTree/NewTreeButton';
 import { treeHealthUtil } from '@/util/treeHealthUtil';

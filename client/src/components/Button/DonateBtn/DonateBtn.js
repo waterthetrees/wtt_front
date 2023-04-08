@@ -9,7 +9,7 @@ const DonateBtn = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <button className="donate-btn">Donate</button>
+        Donate
       </a>
     </div>
   );
