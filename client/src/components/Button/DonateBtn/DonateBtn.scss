@@ -1,15 +1,15 @@
 .donate-btn {
   text-align: center;
   margin: 5px;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-
-.donate-btn {
   width: auto;
   font-size: 14px;
   padding: 0 14px;
+
+  a {
+    color: black;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
