@@ -84,24 +84,6 @@ const dataSourceMenuItems = dataSources.map(({ name }, value) => (
   </MenuItem>
 ));
 
-/**
- * @param {Object} props
- * @param {Function} props.setFilteredData
- * @param {Number} props.selectedDataSourceIndex
- * @param {String} props.search
- * @param {Function} props.setSearch
- * @param {String} props.license
- * @param {Function} props.setLicense
- * @param {Object} props.openCards
- * @param {Function} props.setOpenCards
- * @param {Object} props.data
- * @param {Object} props.columns
- * @param {String} props.listType
- * @param {String} props.title
- * @param {String} props.subtitle
- * @param {String} props.description
- *  */
-
 export default function FilterSidebar({
   setFilteredData,
   setSelectedDataSourceIndex,
@@ -131,7 +113,9 @@ export default function FilterSidebar({
       [event.target.name]: event.target.checked,
     };
     setCheckboxes(updatedCheckboxes);
-    setFilteredData(filterData(data, updatedCheckboxes));
+    const filteredDataNew = filterData(data, updatedCheckboxes);
+    const searchSubset = searchArray(filteredDataNew, search);
+    setFilteredData(searchSubset);
   };
 
   const handleSearch = (event) => {
