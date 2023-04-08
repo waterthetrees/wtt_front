@@ -28,17 +28,23 @@ nvm use;
 
 ### BUILD AND START JUST FRONT END
 
-1. Command T (on osx)
-
+1. To run with hot reloading (on osx/linux):
 ```shell
 cd wtt_front;
-npm install
+npm install;
+npm run start:dev;
+```
+
+2. if you have problems with that, try running these commands in two windows:
+
+Window 1:
+```shell
 npm run watch;
 ```
 
-2. In a second console tab:
+Window 2:
 ```shell
-npm run start:dev;
+npm run start
 ```
 
 ### BUILD AND START FULL STACK APP [FOLLOW DIRECTIONS HERE](https://github.com/waterthetrees/waterthetrees)
