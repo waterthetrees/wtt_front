@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LicenseFooter({ license = '' }) {
+export default function LicenseFooter({ license = '', children }) {
   return (
     <div className="license__footer">
       {license && <div className="license__footer-content">{license}</div>}
@@ -20,6 +20,7 @@ export default function LicenseFooter({ license = '' }) {
           (without permission) for commercial applications.
         </div>
       )}
+      {children}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import './TreeInfo.scss';
 import { dataSources } from '@/pages/Data/dataArrays';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import { ListGrid } from '@/components/ListGrid/ListGrid';
+import LicenseFooter from '@/pages/License/LicenseFooter';
 
 function searching(search, data) {
   if (!search) return data;
@@ -63,11 +64,12 @@ export default function TreeInfo() {
           <ListGrid data={searchData} columns={columns} listType="data" />
         )}
       </div>
-      <div className="treeinfofilter__section-item">
+
+      <LicenseFooter>
         <a href={url} target="_blank" rel="noreferrer">
           {thanks}
         </a>
-      </div>
+      </LicenseFooter>
     </div>
   );
 }
