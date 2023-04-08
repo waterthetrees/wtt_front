@@ -117,6 +117,14 @@ export default function FilterSidebar({
   const isMobile = useIsMobile();
   const [hideHeader, setHideHeader] = useState(isMobile);
 
+  const handleToggleView = (event, newView) => {
+    setView(newView);
+  };
+
+  const handleDataSourceChange = (event) => {
+    setSelectedDataSourceIndex(event.target.value);
+  };
+
   const handleCheckboxChange = (event) => {
     const updatedCheckboxes = {
       ...checkboxes,
@@ -126,16 +134,12 @@ export default function FilterSidebar({
     setFilteredData(filterData(data, updatedCheckboxes));
   };
 
-  const handleChange = (event) => {
-    setSelectedDataSourceIndex(event.target.value);
-  };
-
-  const handleToggleView = (event, newView) => {
-    setView(newView);
-  };
-
   const handleSearch = (event) => {
-    setSearch(event.target.value);
+    const searchValue = event.target.value;
+    setSearch(searchValue);
+    const searchSubset = searchArray(data, searchValue);
+    const filteredDataNew = filterData(searchSubset, checkboxes);
+    setFilteredData(filteredDataNew);
   };
 
   return (
@@ -164,7 +168,7 @@ export default function FilterSidebar({
                 className="treeinfofilter__section-data-select"
                 size="small"
                 value={selectedDataSourceIndex}
-                onChange={handleChange}
+                onChange={handleDataSourceChange}
                 sx={{ minWidth: 265, marginTop: '8px', marginBottom: '8px' }}
               >
                 {dataSourceMenuItems}

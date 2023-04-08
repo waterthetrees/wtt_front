@@ -9,11 +9,11 @@ import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import { ListGrid } from '@/components/ListGrid/ListGrid';
 import LicenseFooter from '@/pages/License/LicenseFooter';
 
-function searching(search, data) {
-  if (!search) return data;
-  const searchData = searchArray(data, search);
-  return searchData;
-}
+// function searching(search, data) {
+//   if (!search) return data;
+//   const searchData = searchArray(data, search);
+//   return searchData;
+// }
 
 export default function TreeInfo() {
   const [selectedDataSourceIndex, setSelectedDataSourceIndex] = useState(2);
@@ -26,16 +26,12 @@ export default function TreeInfo() {
   const [search, setSearch] = useState('');
 
   // useEffect(() => {
-  //   // const searchData =
-  //   // (search && searchArray(filteredData, search)) || filteredData;
-  //   if (!search) return;
-  const searchData = searching(search, data);
-  //   setFilteredData;
-  // }, [search]);
 
-  useEffect(() => {
-    setFilteredData(data);
-  }, [selectedDataSourceIndex, data]);
+  // }, [search, selectedDataSourceIndex, data, filteredData]);
+
+  // useEffect(() => {
+  //   setFilteredData(data);
+  // }, [selectedDataSourceIndex, data]);
 
   return (
     <div className="treeinfo">
@@ -45,7 +41,7 @@ export default function TreeInfo() {
             setFilteredData={setFilteredData}
             setSelectedDataSourceIndex={setSelectedDataSourceIndex}
             selectedDataSourceIndex={selectedDataSourceIndex}
-            data={filteredData}
+            data={data}
             view={view}
             setView={setView}
             search={search}
@@ -56,12 +52,12 @@ export default function TreeInfo() {
       <div className="treeinfo__content">
         {view === 'card' && (
           <TreeList
-            data={searchData}
+            data={filteredData}
             selectedDataSourceIndex={selectedDataSourceIndex}
           />
         )}
         {view === 'list' && (
-          <ListGrid data={searchData} columns={columns} listType="data" />
+          <ListGrid data={filteredData} columns={columns} listType="data" />
         )}
       </div>
 

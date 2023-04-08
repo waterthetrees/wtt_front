@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { Search } from '@/components/Icons';
-
 import './SearchBar.scss';
+
 export const SearchBar = (props) => {
   return (
     <div className="searchbar" style={{ ...props?.style?.div }}>

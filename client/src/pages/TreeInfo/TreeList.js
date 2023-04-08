@@ -14,7 +14,7 @@ require 1.5 inches of rain or 25 gallons of water per week for the
 first three years to establish their roots.`;
 
 export default function TreeList({ data, selectedDataSourceIndex }) {
-  console.log(data?.treecare);
+  console.log('data', data);
   return (
     <div className="treeinfolist">
       <div className="treeinfolist__container">
