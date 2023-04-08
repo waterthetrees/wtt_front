@@ -29,8 +29,15 @@ $white:  white;
     margin-bottom: 20px;
   }
 
+  &__content {  
+    padding: 200px 10px;
+  }
+
   @media screen and (max-width: 480px) {
-    padding-top: 0;
+    &__content {  
+      padding: 310px 5px;
+    }
+    
   }
 }
 
@@ -89,6 +96,14 @@ $white:  white;
     font-weight: 600;
     padding: 2px 5px;
   }
+  &__section-item-toggle {
+    font-size: 24px;
+    font-weight: 700;
+    // padding: 2px 5px;
+    background-color: $white;
+    max-width: fit-content;
+    border-radius: 4px;
+  }
 
   &__section-item {
     display: flex;
@@ -131,6 +146,14 @@ $white:  white;
     input:checked {
       background-color: #2196F3;
     }
+    @media screen and (max-width: 480px) {
+      padding: 20px 10px 0;
+      gap: 0
+      &__section {
+        gap: 0;
+        margin-bottom: 0;
+      }
+    }
   }
  
 
@@ -166,7 +189,6 @@ $white:  white;
 
 .treeinfolist {
   $self: &;
-  padding: 17rem 10px;
   align-self: center;
 
   &__container {
@@ -230,7 +252,6 @@ $white:  white;
     }
   }  
   @media screen and (max-width: 600px) {
-    // margin-top: 220px;
     &__container {
       column-count: 2;
       column-gap: .10rem;
@@ -238,8 +259,6 @@ $white:  white;
     }
   }
   @media screen and (max-width: 480px) {
-    // margin-top: 210px;
-    margin-top: 75px;
     &__container {
       column-count: 1;
       column-gap: .05rem;

@@ -4,7 +4,19 @@ import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import { dataSources } from '@/pages/Data/dataArrays';
 
 import DownloadIcon from '@mui/icons-material/Download';
-import { MenuItem, FormControl, Button, Select } from '@mui/material';
+import {
+  MenuItem,
+  FormControl,
+  Button,
+  Select,
+  ToggleButton,
+  ToggleButtonGroup,
+  Accordion,
+  AccordionSummary,
+} from '@mui/material';
+import { useIsMobile } from '../NewTree/utilities';
+
+import { ViewModule, ViewList, ExpandMore } from '@mui/icons-material';
 import { CSVLink } from 'react-csv';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
 import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
@@ -49,17 +61,6 @@ function filterData(array, checkboxes) {
   const activeFilters = getActiveFilters(checkboxes);
   const lookup = createLookup(activeFilters);
 
-  // return array.filter((item) => {
-  //   return Object.entries(activeFilters).every(([category, options]) => {
-  //     if (options.length === 0) return true;
-  //     return options.some((option) => {
-  //       const itemValue = item[category].toLowerCase();
-  //       const optionValue = option.toLowerCase();
-  //       return itemValue.includes(optionValue);
-  //     });
-  //   });
-  // });
-
   return array.filter((item) => {
     return Object.entries(lookup).every(([category, options]) => {
       if (Object.keys(options).length === 0) return true;
@@ -82,16 +83,6 @@ const dataSourceMenuItems = dataSources.map(({ name }, value) => (
     {name}
   </MenuItem>
 ));
-
-// export function DataSourceMenuItems() {
-//   const dataSourceMenuItems = dataSources.map(({ name }, value) => (
-//     <MenuItem key={name} value={value}>
-//       {name}
-//     </MenuItem>
-//   ));
-//   console.log(dataSourceMenuItems);
-//   return dataSourceMenuItems;
-// }
 
 /**
  * @param {Object} props
@@ -116,9 +107,15 @@ export default function FilterSidebar({
   setSelectedDataSourceIndex,
   selectedDataSourceIndex,
   data,
+  view,
+  setView,
+  search,
+  setSearch,
 }) {
   const [checkboxes, setCheckboxes] = useState({});
-  const [search, setSearch] = useState('');
+
+  const isMobile = useIsMobile();
+  const [hideHeader, setHideHeader] = useState(isMobile);
 
   const handleCheckboxChange = (event) => {
     const updatedCheckboxes = {
@@ -133,15 +130,21 @@ export default function FilterSidebar({
     setSelectedDataSourceIndex(event.target.value);
   };
 
+  const handleToggleView = (event, newView) => {
+    setView(newView);
+  };
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
   return (
     <div className="treeinfofilter">
       <div className="treeinfofilter__section">
         <div className="treeinfofilter__section-data">
           <div className="treeinfofilter__section-item">
-            <FormControl
-              sx={{ minWidth: 265, marginTop: '8px', marginBottom: '8px' }}
-            >
-              {/* <SearchBar
+            <FormControl>
+              <SearchBar
                 style={{
                   div: {
                     width: 'max-content',
@@ -153,7 +156,7 @@ export default function FilterSidebar({
                 search={search}
                 onChange={handleSearch}
                 placeholder={'Search trees'}
-              /> */}
+              />
               <Select
                 MenuProps={{ disableScrollLock: true }}
                 labelId="data-select-label"
@@ -167,6 +170,21 @@ export default function FilterSidebar({
                 {dataSourceMenuItems}
               </Select>
             </FormControl>
+          </div>
+          <div className="treeinfofilter__section-item-toggle">
+            <ToggleButtonGroup
+              orientation="horizontal"
+              value={view}
+              exclusive
+              onChange={handleToggleView}
+            >
+              <ToggleButton value="list" aria-label="list">
+                <ViewList />
+              </ToggleButton>
+              <ToggleButton value="card" aria-label="card">
+                <ViewModule />
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
         </div>
       </div>
