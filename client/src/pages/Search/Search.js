@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { debounce } from '@mui/material/utils';
 import SearchBar from '@/components/Search/SearchBar';
@@ -10,6 +10,7 @@ const MIN_CHARS_FOR_SEARCH = 2;
 const BASE_MAPBOX_SEARCH_API_URL =
   'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
+const AUTOCOMPLETE_DEBOUNCE_TIME = 500; // 500 milliseconds
 const VALID_LAT_LNG_DELIMITERS = [',', '/', '\\'];
 
 const Search = ({ map }) => {
@@ -27,13 +28,21 @@ const Search = ({ map }) => {
   });
 
   // Debounce search requests to mitigate churning through our API requests budget
-  const debouncedSetQuery = debounce((query) => setQuery(query), 250);
+  const debouncedSetQuery = useMemo(
+    () => debounce((query) => setQuery(query), AUTOCOMPLETE_DEBOUNCE_TIME),
+    [],
+  );
   const handleInputChange = (event) => {
     const newQuery = event.currentTarget.value;
     if (isQueryLatLong(newQuery)) {
+      if (query) {
+        setQuery('');
+      }
       setGeneratedSearchResults([createLatLongSearchResult(newQuery)]);
     } else {
-      setGeneratedSearchResults([]);
+      if (generatedSearchResults.length) {
+        setGeneratedSearchResults([]);
+      }
       debouncedSetQuery(newQuery);
     }
   };
@@ -148,13 +157,14 @@ const splitWithValidDelimiter = (query) => {
 // Return a SearchResult that is compatible with the feature data shape from mapbox search API
 const createLatLongSearchResult = (query) => {
   const coords = splitWithValidDelimiter(query);
-  const latLng = coords.map((coord) => parseFloat(coord));
+  const lat = parseFloat(coords[0]);
+  const lng = parseFloat(coords[1]);
 
   return {
-    label: query,
+    label: `${lat}, ${lng}`,
     type: 'Results',
-    id: `latlng${latLng[0]}${latLng[1]}`,
-    coords: { lat: latLng[0], lng: latLng[1] },
+    id: `latlng-${lat}-${lng}`,
+    coords: { lat, lng },
   };
 };
 
