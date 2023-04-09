@@ -1,4 +1,4 @@
-import { isQueryLatLong } from '@/pages/Search/Search';
+import { getDebouncedSetQuery, isQueryLatLong } from '@/pages/Search/Search';
 
 describe('Test logic in generating search results', () => {
   it('isQueryLatLong with text input', () => {
@@ -42,5 +42,28 @@ describe('Test logic in generating search results', () => {
     expect(
       isQueryLatLong(' 37.77538664389438,\n-122.3949618700733 \r '),
     ).toBeTruthy();
+  });
+});
+
+describe('Test debounce for sending autocomplete search queries', () => {
+  jest.useFakeTimers();
+
+  let mockFunc;
+  beforeEach(() => {
+    mockFunc = jest.fn();
+  });
+
+  it('should debounce search queries', () => {
+    // Tell Jest to mock all timeout functions
+    const debouncedSetQuery = getDebouncedSetQuery(mockFunc);
+
+    for (let i = 0; i < 100; i++) {
+      debouncedSetQuery('test query');
+    }
+
+    // Fast-forward time
+    jest.runAllTimers();
+
+    expect(mockFunc).toBeCalledTimes(1);
   });
 });

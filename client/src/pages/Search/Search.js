@@ -29,7 +29,7 @@ const Search = ({ map }) => {
 
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = useMemo(
-    () => debounce((query) => setQuery(query), AUTOCOMPLETE_DEBOUNCE_TIME),
+    (setQuery) => getDebouncedSetQuery(setQuery),
     [],
   );
   const handleInputChange = (event) => {
@@ -74,6 +74,9 @@ const Search = ({ map }) => {
     </div>
   );
 };
+
+export const getDebouncedSetQuery = (setQuery) =>
+  debounce((query) => setQuery(query), AUTOCOMPLETE_DEBOUNCE_TIME);
 
 const getMapboxSearchResponse = async (query) => {
   const hashParams = new URLSearchParams(window.location.hash.slice(1));
