@@ -71,9 +71,9 @@ $white:  white;
   }
 
   &__section {
-    background-color: $white;
+    background-color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: stretch;
     gap: 10px;
@@ -84,11 +84,12 @@ $white:  white;
     background-color: transparent;
   }
   &__section-filter {
-    margin: 10px;
+    margin: 0 2px;
   }
   &__section-data-select {
     background-color: $white;
     font-size: large;
+    min-width: 286px;
   }
 
   &__section-title {
@@ -97,10 +98,7 @@ $white:  white;
     padding: 2px 5px;
   }
   &__section-item-toggle {
-    font-size: 24px;
-    font-weight: 700;
-    // padding: 2px 5px;
-    background-color: $white;
+    background-color: transparent;
     max-width: fit-content;
     border-radius: 4px;
   }
@@ -146,14 +144,26 @@ $white:  white;
     input:checked {
       background-color: #2196F3;
     }
-    @media screen and (max-width: 480px) {
-      padding: 20px 10px 0;
-      gap: 0
-      &__section {
-        gap: 0;
-        margin-bottom: 0;
-      }
+    input[type="checkbox" i] {
+      border-radius: 0;
     }
+  }
+
+  &__section-item-checkbox:active, &__section-item-checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  &__section-item-checkbox:checked {
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+  }
+
+  &__section-filter {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
   }
  
 
@@ -177,14 +187,33 @@ $white:  white;
       width: 100%;
     }
 
-    &__section-filters {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: stretch;
-      padding: 5px;
+    &__section-filter {
+      display: inline-flex;
+      flex-direction: row;
+      padding: 0;
+    }
+    &__section-item {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &__section-item-checkbox {
+      margin: 0 3px 0 18px;
+      padding-right: 5px;
+      display: inline-block;
     }
   }
+  // @media screen and (max-width: 480px) {
+  //   padding: 20px 10px 0;
+  //   gap: 0
+  //   &__section {
+  //     gap: 0;
+  //     margin-bottom: 0;
+  //   }
+  //   &__section-item {
+  //     flex-direction: row;
+  //     justify-content: space-between;
+  //   }
+  // }
 }
 
 .treeinfolist {
@@ -328,5 +357,14 @@ $white:  white;
       width: 100%;
     }
   }
+  
+}
+
+.toggles {
+  
+  // padding: 2px 5px;
+  background-color: $white;
+  max-width: fit-content;
+  border-radius: 4px;
   
 }

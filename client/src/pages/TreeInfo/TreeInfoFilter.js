@@ -20,7 +20,7 @@ import { ViewModule, ViewList, ExpandMore } from '@mui/icons-material';
 import { CSVLink } from 'react-csv';
 import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
 import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
-import { WttButton } from '@/components/Button/Button';
+import { ButtonShowHide } from '@/components/Button';
 
 const checkboxCategories = {
   Height: {
@@ -94,28 +94,13 @@ export default function FilterSidebar({
   search,
   setSearch,
 }) {
-  const [checkboxes, setCheckboxes] = useState({});
-
   const isMobile = useIsMobile();
-  const [hideHeader, setHideHeader] = useState(isMobile);
-
-  const handleToggleView = (event, newView) => {
-    setView(newView);
-  };
+  console.log('isMobile', isMobile);
+  const [showStuff, setShowStuff] = useState(!isMobile);
+  const [checkboxes, setCheckboxes] = useState({});
 
   const handleDataSourceChange = (event) => {
     setSelectedDataSourceIndex(event.target.value);
-  };
-
-  const handleCheckboxChange = (event) => {
-    const updatedCheckboxes = {
-      ...checkboxes,
-      [event.target.name]: event.target.checked,
-    };
-    setCheckboxes(updatedCheckboxes);
-    const filteredDataNew = filterData(data, updatedCheckboxes);
-    const searchSubset = searchArray(filteredDataNew, search);
-    setFilteredData(searchSubset);
   };
 
   const handleSearch = (event) => {
@@ -129,77 +114,129 @@ export default function FilterSidebar({
   return (
     <div className="treeinfofilter">
       <div className="treeinfofilter__section">
-        <div className="treeinfofilter__section-data">
+        <div className="treeinfofilter__section-item">
+          <FormControl>
+            <SearchBar
+              style={{
+                div: {
+                  width: 'max-content',
+                  borderRadius: '4px',
+                  fontSize: 'large',
+                },
+                input: { borderRadius: '4px', width: '100%' },
+              }}
+              search={search}
+              onChange={handleSearch}
+              placeholder={'Search trees'}
+            />
+          </FormControl>
+          {isMobile && (
+            <ButtonShowHide showStuff={showStuff} setShowStuff={setShowStuff} />
+          )}
+        </div>
+
+        {showStuff && (
           <div className="treeinfofilter__section-item">
-            <FormControl>
-              <SearchBar
-                style={{
-                  div: {
-                    width: 'max-content',
-                    borderRadius: '.3vw',
-                    fontSize: 'large',
-                  },
-                  input: { borderRadius: '.3vw', width: '100%' },
-                }}
-                search={search}
-                onChange={handleSearch}
-                placeholder={'Search trees'}
-              />
-              <Select
-                MenuProps={{ disableScrollLock: true }}
-                labelId="data-select-label"
-                id="data-select"
-                className="treeinfofilter__section-data-select"
-                size="small"
-                value={selectedDataSourceIndex}
-                onChange={handleDataSourceChange}
-                sx={{ minWidth: 265, marginTop: '8px', marginBottom: '8px' }}
-              >
-                {dataSourceMenuItems}
-              </Select>
-            </FormControl>
-          </div>
-          <div className="treeinfofilter__section-item-toggle">
-            <ToggleButtonGroup
-              orientation="horizontal"
-              value={view}
-              exclusive
-              onChange={handleToggleView}
+            <Select
+              mt={0}
+              mb={0}
+              MenuProps={{ disableScrollLock: true }}
+              labelId="data-select-label"
+              id="data-select"
+              className="treeinfofilter__section-data-select"
+              size="small"
+              value={selectedDataSourceIndex}
+              onChange={handleDataSourceChange}
             >
-              <ToggleButton value="list" aria-label="list">
-                <ViewList />
-              </ToggleButton>
-              <ToggleButton value="card" aria-label="card">
-                <ViewModule />
-              </ToggleButton>
-            </ToggleButtonGroup>
+              {dataSourceMenuItems}
+            </Select>
+          </div>
+        )}
+        {showStuff && (
+          <div className="treeinfofilter__section-item-toggle">
+            <Toggles view={view} setView={setView} />
+          </div>
+        )}
+      </div>
+      {showStuff && (
+        <Checkboxes
+          setFilteredData={setFilteredData}
+          data={data}
+          search={search}
+          checkboxes={checkboxes}
+          setCheckboxes={setCheckboxes}
+        />
+      )}
+    </div>
+  );
+}
+
+function Checkboxes({
+  setFilteredData,
+  data,
+  search,
+  setCheckboxes,
+  checkboxes,
+}) {
+  const handleCheckboxChange = (event) => {
+    const updatedCheckboxes = {
+      ...checkboxes,
+      [event.target.name]: event.target.checked,
+    };
+    setCheckboxes(updatedCheckboxes);
+    const filteredDataNew = filterData(data, updatedCheckboxes);
+    const searchSubset = searchArray(filteredDataNew, search);
+    setFilteredData(searchSubset);
+  };
+
+  return (
+    <div className="treeinfofilter__section">
+      {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
+        <div key={groupName} className="treeinfofilter__section-filter">
+          <h3 className="treeinfofilter__section-title">{groupName}</h3>
+          <div className="treeinfofilter__section-item">
+            {groupInfo.options.map((option) => (
+              <label
+                key={option}
+                className="treeinfofilter__section-item-label"
+              >
+                <input
+                  type="checkbox"
+                  name={option}
+                  checked={checkboxes[option] || false}
+                  onChange={handleCheckboxChange}
+                  className="treeinfofilter__section-item-checkbox"
+                />
+                {option}
+              </label>
+            ))}
           </div>
         </div>
-      </div>
-      <div className="treeinfofilter__section">
-        {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
-          <div key={groupName} className="treeinfofilter__section-filter">
-            <h3 className="treeinfofilter__section-title">{groupName}</h3>
-            <div className="treeinfofilter__section-item">
-              {groupInfo.options.map((option) => (
-                <label
-                  key={option}
-                  className="treeinfofilter__section-item-label"
-                >
-                  <input
-                    type="checkbox"
-                    name={option}
-                    checked={checkboxes[option] || false}
-                    onChange={handleCheckboxChange}
-                    className="treeinfofilter__section-item-checkbox"
-                  />
-                  {option}
-                </label>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
+  );
+}
+
+function Toggles({ view, setView }) {
+  const handleToggleView = (event, newView) => {
+    setView(newView);
+  };
+  return (
+    <ToggleButtonGroup
+      orientation="horizontal"
+      value={view}
+      exclusive={true}
+      onChange={handleToggleView}
+      classes="toggles"
+      color="success"
+      sx={{ backgroundColor: 'white' }}
+    >
+      <ToggleButton value="list" aria-label="list">
+        <ViewList />
+      </ToggleButton>
+      <ToggleButton value="card" aria-label="card">
+        <ViewModule />
+      </ToggleButton>
+    </ToggleButtonGroup>
   );
 }

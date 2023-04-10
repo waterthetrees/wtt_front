@@ -8,7 +8,6 @@ export const SearchBar = (props) => {
       <label htmlFor="searchbar">
         <Search
           sx={{
-            color: '#00000050',
             fontSize: '24px',
             marginLeft: '10px',
             marginRight: '10px',

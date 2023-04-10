@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FilterSidebar from './TreeInfoFilter';
 import TreeList from './TreeList';
 import SubHeader from '@/components/SubHeader/SubHeader';
-import { searchArray } from '@/components/SearchBar/SearchBar';
 import './TreeInfo.scss';
 import { dataSources } from '@/pages/Data/dataArrays';
-import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
 import { ListGrid } from '@/components/ListGrid/ListGrid';
 import LicenseFooter from '@/pages/License/LicenseFooter';
-
-// function searching(search, data) {
-//   if (!search) return data;
-//   const searchData = searchArray(data, search);
-//   return searchData;
-// }
 
 export default function TreeInfo() {
   const [selectedDataSourceIndex, setSelectedDataSourceIndex] = useState(2);
@@ -24,14 +16,6 @@ export default function TreeInfo() {
 
   const [view, setView] = useState('card');
   const [search, setSearch] = useState('');
-
-  // useEffect(() => {
-
-  // }, [search, selectedDataSourceIndex, data, filteredData]);
-
-  // useEffect(() => {
-  //   setFilteredData(data);
-  // }, [selectedDataSourceIndex, data]);
 
   return (
     <div className="treeinfo">
