@@ -23,14 +23,13 @@ const Search = ({ map }) => {
   } = useQuery({
     queryKey: query,
     queryFn: () => getMapboxSearchResults(query),
-    enabled: query.length > MIN_CHARS_FOR_SEARCH,
     cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
 
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = useMemo(
-    (setQuery) => getDebouncedSetQuery(setQuery),
-    [],
+    () => getDebouncedSetQuery(setQuery),
+    [setQuery],
   );
   const handleInputChange = (event) => {
     const newQuery = event.currentTarget.value;
@@ -100,6 +99,9 @@ const getMapboxSearchResponse = async (query) => {
 };
 
 const getMapboxSearchResults = async (query) => {
+  if (query.length <= MIN_CHARS_FOR_SEARCH) {
+    return;
+  }
   const jsonResponse = await getMapboxSearchResponse(query);
   return jsonResponse.features?.map((result) => ({
     label: result.text,
