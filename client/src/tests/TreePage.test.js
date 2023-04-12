@@ -71,7 +71,6 @@ describe('<TreePage /> spec', () => {
         </Routes>
       </Router>,
     );
-    console.log('treePage', treePage);
     expect(treePage).toMatchSnapshot();
   });
 });

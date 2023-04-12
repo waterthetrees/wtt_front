@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TreeListCards from '@/pages/TreeList/TreeListCards';
+import { Card } from '@/components/Card/Card';
 
 /**
  * These snapshots are designed to catch _any_ change to UI components, so they
@@ -8,10 +8,10 @@ import TreeListCards from '@/pages/TreeList/TreeListCards';
  * and look expected, update these snapshots with `npm test -- -u`
  */
 
-describe('<TreeListCards /> spec', () => {
-  it('renders TreeListCards correctly', () => {
-    // const header = render(<TreeListCards />);
-    // console.log('header ', header);
-    // // expect(header).toMatchSnapshot();
+describe('<Card /> spec', () => {
+  it('renders Card correctly', () => {
+    // const card = render(<Card />);
+    // console.log('card', card);
+    // // expect(card).toMatchSnapshot();
   });
 });
