@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dataSources } from '@/pages/Data/dataArrays';
+import { dataSources } from './dataArrays';
 import { MenuItem, FormControl, Select } from '@mui/material';
 import { useIsMobile } from '../NewTree/utilities';
 import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';

@@ -3,7 +3,7 @@ import { Card } from '../../components/Card/Card';
 import { NavLink } from 'react-router-dom';
 import { ImageLoad, fixScientificForImage } from '@/pages/Tree/TreeImage';
 import { Tag } from '@/components/Tag/Tag';
-import { dataSources } from '@/pages/Data/dataArrays';
+import { dataSources } from './dataArrays';
 import './TreeList.scss';
 const routeName = 'tree';
 
