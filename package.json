@@ -101,7 +101,7 @@
     "start": "node server/index.js localhost",
     "start:docker": "npm run watch & npm run start:nodemon",
     "start:nodemon": "nodemon server/index.js localserver",
-    "start:dev": "webpack serve --env development",
+    "start:dev": "BROWSER=none && webpack serve --env development",
     "test": "jest",
     "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
     "test:watch": "jest --watch"

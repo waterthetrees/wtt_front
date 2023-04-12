@@ -8,7 +8,7 @@ import TreeNotes from './TreeNotes';
 import TreeHistory from './TreeHistory';
 import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
-import { ImageLoad } from './TreeImage';
+import { ImageLoad, fixScientificForImage } from './TreeImage';
 
 import { CarbonCalculator } from './CarbonCalculator';
 
