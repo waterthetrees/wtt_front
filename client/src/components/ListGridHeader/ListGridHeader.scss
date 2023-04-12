@@ -1,13 +1,10 @@
 .listgridheader {
-  $borderRadius: 4px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-basis: 100%;
   flex: 1;
   margin-bottom: 1rem;
-  border-top-left-radius: $borderRadius;
-  border-top-right-radius: $borderRadius;
 
   &-title {
     display: flex;

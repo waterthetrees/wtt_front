@@ -3,9 +3,9 @@ import './Button.scss';
 
 const treeImagesPath = 'assets/images/trees/';
 
-export const ButtonShowHide = ({ showStuff, setShowStuff }) => {
-  const onClick = () => setShowStuff(!showStuff);
-  const arrowDirection = showStuff
+export const ButtonShowHide = ({ showMore, setShowMore }) => {
+  const onClick = () => setShowMore(!showMore);
+  const arrowDirection = showMore
     ? `${treeImagesPath}arrowup.svg`
     : `${treeImagesPath}arrowdown.svg`;
   return (

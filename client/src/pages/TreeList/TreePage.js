@@ -1,7 +1,7 @@
 import React from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import treeImages from '@/data/dist/treeImages.json';
-import './TreeInfo.scss';
+import './TreeList.scss';
 import { ImageLoad } from '@/pages/Tree/TreeImage';
 import { dataSources } from '@/pages/Data/dataArrays';
 // import DownloadIcon from '@mui/icons-material/Download';
@@ -14,7 +14,7 @@ import { Tag } from '@/components/Tag/Tag';
 const capFirstLetterAndSpace = (word) =>
   word.at(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
 
-export default function TreeInfo() {
+export default function TreePage() {
   const { state } = useLocation();
   const { tree, selectedDataSourceIndex } = state;
   const { scientific } = tree;
@@ -24,10 +24,10 @@ export default function TreeInfo() {
   const wikipediaExtract =
     treeImages[scientific]?.content || treeImages[scientific]?.extract || '';
   return (
-    <div className="treeinfolarge">
-      <div className="treeinfolarge__content">
-        <div className="treeinfolarge__content-image">
-          <Link to="/treeinfo">
+    <div className="treepage">
+      <div className="treepage__content">
+        <div className="treepage__content-image">
+          <Link to="/treelist">
             <ArrowBack fontSize="large" color="success" variant="filled" />
           </Link>
           {scientific &&
@@ -38,7 +38,7 @@ export default function TreeInfo() {
               />
             )}
         </div>
-        <div className="treeinfolarge__content-info">
+        <div className="treepage__content-info">
           {tree &&
             Object.entries(tree).map(([key, value]) => {
               const cappedKey = capFirstLetterAndSpace(key);
@@ -48,28 +48,19 @@ export default function TreeInfo() {
               switch (key) {
                 case 'common':
                   return (
-                    <div
-                      className="treeinfolarge__content-info-header"
-                      key={key}
-                    >
+                    <div className="treepage__content-info-header" key={key}>
                       <h1>{cappedValue}</h1>
                     </div>
                   );
                 case 'scientific':
                   return (
-                    <div
-                      className="treeinfolarge__content-info-header"
-                      key={key}
-                    >
+                    <div className="treepage__content-info-header" key={key}>
                       <h3>{cappedValue}</h3>
                     </div>
                   );
                 case 'genus':
                   return (
-                    <div
-                      className="treeinfolarge__content-info-header"
-                      key={key}
-                    >
+                    <div className="treepage__content-info-header" key={key}>
                       <h4>{cappedValue}</h4>
                     </div>
                   );
@@ -85,8 +76,8 @@ export default function TreeInfo() {
                   return null;
                 default:
                   return (
-                    <div className="treeinfolarge__content-info-item" key={key}>
-                      <label className="treeinfolarge__content-info-item-label">
+                    <div className="treepage__content-info-item" key={key}>
+                      <label className="treepage__content-info-item-label">
                         {cappedKey}:
                       </label>{' '}
                       {value}
@@ -95,9 +86,9 @@ export default function TreeInfo() {
               }
             })}
           {wikipediaExtract && (
-            <div className="treeinfolarge__content-info-item">
+            <div className="treepage__content-info-item">
               <label
-                className="treeinfolarge__content-info-item-label"
+                className="treepage__content-info-item-label"
                 htmlFor={wikipediaExtract}
               >
                 <h3>Summary</h3>
@@ -105,7 +96,7 @@ export default function TreeInfo() {
               <p>{wikipediaExtract}</p>
             </div>
           )}
-          <div className="treeinfolarge__content-info-item">
+          <div className="treepage__content-info-item">
             <CSVLink data={data} filename={csvFileName}>
               <WttButton
                 aria-label="Download CSV"

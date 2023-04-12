@@ -1,27 +1,28 @@
 import React from 'react';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { ViewList, ViewModule } from '@mui/icons-material';
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
-export default function Toggle({ label, checked, onChange }) {
-  const [view, setView] = React.useState('list');
+export default function Toggle({ view, setView }) {
+  const handleToggleView = (event, newView) => {
+    // to persist view on refresh set in local storage
+    // before setView triggers a re-render setting state
+    localStorage.setItem('view', newView);
+    setView(newView);
+  };
   return (
     <ToggleButtonGroup
       orientation="horizontal"
-      value={view}
-      exclusive
-      onChange={handleChange}
+      value={localStorage.getItem('view') || view}
+      exclusive={true}
+      onChange={handleToggleView}
+      color="success"
+      sx={{ backgroundColor: 'white' }}
     >
       <ToggleButton value="list" aria-label="list">
-        <ViewListIcon />
+        <ViewList />
       </ToggleButton>
-      <ToggleButton value="module" aria-label="module">
-        <ViewModuleIcon />
-      </ToggleButton>
-      <ToggleButton value="quilt" aria-label="quilt">
-        <ViewQuiltIcon />
+      <ToggleButton value="card" aria-label="card">
+        <ViewModule />
       </ToggleButton>
     </ToggleButtonGroup>
   );

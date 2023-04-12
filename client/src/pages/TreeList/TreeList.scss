@@ -5,6 +5,9 @@ $black: black;
 $silver: silver;
 $white-mix:  mix($silver, white, 20%);
 $white:  white;
+$backgroundColor: white;
+
+$borderRadius: 4px;
 .treecare {
   font-family: arial,sans-serif;
   font-size: medium;
@@ -15,7 +18,7 @@ $white:  white;
   cursor: pointer;
 }
 
-.treeinfo {
+.treelist {
   $self: &;
   background-color: $silver;
   display: flex;
@@ -33,6 +36,10 @@ $white:  white;
     padding: 200px 10px;
   }
 
+  &__content-small {  
+    padding: 100px 10px;
+  }
+
   @media screen and (max-width: 480px) {
     &__content {  
       padding: 310px 5px;
@@ -41,9 +48,9 @@ $white:  white;
   }
 }
 
-.treeinfofilter {
+.treelistheader {
   $self: &;
-  background-image: url(../../assets/images/treeinfo/treeinfo2.png);
+  background-image: url(../../assets/images/treelist/treelist2.png);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100%;
@@ -77,14 +84,11 @@ $white:  white;
     justify-content: center;
     align-items: stretch;
     gap: 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    border-radius: $borderRadius;
+    margin-bottom: 2px;
   }
   &__section:first-child {
     background-color: transparent;
-  }
-  &__section-filter {
-    margin: 0 2px;
   }
   &__section-data-select {
     background-color: $white;
@@ -100,7 +104,7 @@ $white:  white;
   &__section-item-toggle {
     background-color: transparent;
     max-width: fit-content;
-    border-radius: 4px;
+    border-radius: $borderRadius;
   }
 
   &__section-item {
@@ -117,15 +121,57 @@ $white:  white;
     font-size: medium;
   }
   
-  &__section-item-checkbox {
-    color: rgba(0, 0, 0, 0.6);
-    width: 15px;
-    height: 15px;
+  @media screen and (max-width: 1024px) {
+    background-size: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    background-size: 100vh;
+  }  
+  @media screen and (max-width: 600px) {
+    background-size: 100vh;
+  }
+
+  @media screen and (max-width: 480px) {
+    background-size: auto 100%;
+
+    flex-direction: column;
+    &__header {
+      width: 100%;
+    }
+    &__section-item {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+.treelistfilters {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 0;
+  border-radius: $borderRadius;
+  background-color: white;
+  height: fit-content;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+  }
+  &__filter-item {
+    display: flex;
+    flex-direction: column;
+  }
+  &__filter-item-checkbox {
+    color: green;
+    width: 20px;
+    height: 20px;
     vertical-align: middle;
     position: relative;
-    top: -2px;
     cursor: pointer;
-    margin-right: 5px;
+    margin: 0 3px 0 18px;
 
     input {
       position: absolute;
@@ -149,74 +195,43 @@ $white:  white;
     }
   }
 
-  &__section-item-checkbox:active, &__section-item-checkbox:checked:active {
+  &__filter-item-checkbox:active, &__filter-item-checkbox:checked:active {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
   }
   
-  &__section-item-checkbox:checked {
+  &__filter-item-checkbox:checked {
     background-color: #e9ecee;
     border: 1px solid #adb8c0;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
     color: #99a1a7;
   }
 
-  &__section-filter {
-    display: flex;
-    flex-direction: row;
-    padding: 0 10px;
-  }
- 
-
-  @media screen and (max-width: 1024px) {
-    background-size: 100%;
-  }
-  @media screen and (max-width: 768px) {
-    background-size: 100vh;
-  }  
-  @media screen and (max-width: 600px) {
-    background-size: 100vh;
-  }
 
   @media screen and (max-width: 480px) {
-    // flex-direction: row-reverse;
-    background-size: auto 100%;
-    // padding: 58px 0;
-
     flex-direction: column;
+    font-size: medium;
+
     &__header {
       width: 100%;
     }
 
-    &__section-filter {
+    &__filter {
       display: inline-flex;
       flex-direction: row;
       padding: 0;
     }
-    &__section-item {
+    &__filter-item {
       flex-direction: row;
       justify-content: space-between;
     }
-    &__section-item-checkbox {
-      margin: 0 3px 0 18px;
-      padding-right: 5px;
+    &__filter-item-checkbox {
+      margin: 0 3px 0 5px;
       display: inline-block;
     }
   }
-  // @media screen and (max-width: 480px) {
-  //   padding: 20px 10px 0;
-  //   gap: 0
-  //   &__section {
-  //     gap: 0;
-  //     margin-bottom: 0;
-  //   }
-  //   &__section-item {
-  //     flex-direction: row;
-  //     justify-content: space-between;
-  //   }
-  // }
 }
 
-.treeinfolist {
+.treelistcards {
   $self: &;
   align-self: center;
 
@@ -239,8 +254,6 @@ $white:  white;
     text-decoration: none;
     opacity: .8;
   }
-
-
 
   &__image {
     width: 100%;
@@ -296,7 +309,7 @@ $white:  white;
   }
 }
 
-.treeinfolarge {
+.treepage {
   $self: &;
   background-color: $silver;
   height:  100vh;
@@ -309,13 +322,13 @@ $white:  white;
     align-items: left;
     background-color: $white-mix;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: $borderRadius;
   }
 
   &__content-image img {
     max-height: 100%;
     min-width: 50vw;
-    border-radius: 4px;
+    border-radius: $borderRadius;
   }
 
   .__content-image {
@@ -361,10 +374,8 @@ $white:  white;
 }
 
 .toggles {
-  
-  // padding: 2px 5px;
   background-color: $white;
   max-width: fit-content;
-  border-radius: 4px;
+  border-radius: $borderRadius;
   
 }

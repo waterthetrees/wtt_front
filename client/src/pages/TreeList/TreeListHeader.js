@@ -1,26 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './TreeInfo.scss';
-import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
+import React, { useState } from 'react';
 import { dataSources } from '@/pages/Data/dataArrays';
-
-import DownloadIcon from '@mui/icons-material/Download';
-import {
-  MenuItem,
-  FormControl,
-  Button,
-  Select,
-  ToggleButton,
-  ToggleButtonGroup,
-  Accordion,
-  AccordionSummary,
-} from '@mui/material';
+import { MenuItem, FormControl, Select } from '@mui/material';
 import { useIsMobile } from '../NewTree/utilities';
-
-import { ViewModule, ViewList, ExpandMore } from '@mui/icons-material';
-import { CSVLink } from 'react-csv';
-import ListGridHeader from '@/components/ListGridHeader/ListGridHeader';
 import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
 import { ButtonShowHide } from '@/components/Button';
+import { Toggle } from '@/components/Form';
+import TreeListCheckboxes from './TreeListCheckboxes';
+import './TreeList.scss';
 
 const checkboxCategories = {
   Height: {
@@ -57,7 +43,7 @@ function createLookup(activeFilters) {
   return lookup;
 }
 
-function filterData(array, checkboxes) {
+export function filterData(array, checkboxes) {
   const activeFilters = getActiveFilters(checkboxes);
   const lookup = createLookup(activeFilters);
 
@@ -84,7 +70,7 @@ const dataSourceMenuItems = dataSources.map(({ name }, value) => (
   </MenuItem>
 ));
 
-export default function FilterSidebar({
+export default function TreeListHeader({
   setFilteredData,
   setSelectedDataSourceIndex,
   selectedDataSourceIndex,
@@ -93,13 +79,14 @@ export default function FilterSidebar({
   setView,
   search,
   setSearch,
+  showMore,
+  setShowMore,
 }) {
   const isMobile = useIsMobile();
-  console.log('isMobile', isMobile);
-  const [showStuff, setShowStuff] = useState(!isMobile);
   const [checkboxes, setCheckboxes] = useState({});
 
   const handleDataSourceChange = (event) => {
+    localStorage.setItem('setSelectedDataSourceIndex', event.target.value);
     setSelectedDataSourceIndex(event.target.value);
   };
 
@@ -112,9 +99,9 @@ export default function FilterSidebar({
   };
 
   return (
-    <div className="treeinfofilter">
-      <div className="treeinfofilter__section">
-        <div className="treeinfofilter__section-item">
+    <div className="treelistheader">
+      <div className="treelistheader__section">
+        <div className="treelistheader__section-item">
           <FormControl>
             <SearchBar
               style={{
@@ -131,19 +118,19 @@ export default function FilterSidebar({
             />
           </FormControl>
           {isMobile && (
-            <ButtonShowHide showStuff={showStuff} setShowStuff={setShowStuff} />
+            <ButtonShowHide showMore={showMore} setShowMore={setShowMore} />
           )}
         </div>
 
-        {showStuff && (
-          <div className="treeinfofilter__section-item">
+        {showMore && (
+          <div className="treelistheader__section-item">
             <Select
               mt={0}
               mb={0}
               MenuProps={{ disableScrollLock: true }}
               labelId="data-select-label"
               id="data-select"
-              className="treeinfofilter__section-data-select"
+              className="treelistheader__section-data-select"
               size="small"
               value={selectedDataSourceIndex}
               onChange={handleDataSourceChange}
@@ -152,14 +139,14 @@ export default function FilterSidebar({
             </Select>
           </div>
         )}
-        {showStuff && (
-          <div className="treeinfofilter__section-item-toggle">
-            <Toggles view={view} setView={setView} />
+        {showMore && (
+          <div className="treelistheader__section-item-toggle">
+            <Toggle view={view} setView={setView} />
           </div>
         )}
       </div>
-      {showStuff && (
-        <Checkboxes
+      {showMore && (
+        <TreeListCheckboxes
           setFilteredData={setFilteredData}
           data={data}
           search={search}
@@ -168,75 +155,5 @@ export default function FilterSidebar({
         />
       )}
     </div>
-  );
-}
-
-function Checkboxes({
-  setFilteredData,
-  data,
-  search,
-  setCheckboxes,
-  checkboxes,
-}) {
-  const handleCheckboxChange = (event) => {
-    const updatedCheckboxes = {
-      ...checkboxes,
-      [event.target.name]: event.target.checked,
-    };
-    setCheckboxes(updatedCheckboxes);
-    const filteredDataNew = filterData(data, updatedCheckboxes);
-    const searchSubset = searchArray(filteredDataNew, search);
-    setFilteredData(searchSubset);
-  };
-
-  return (
-    <div className="treeinfofilter__section">
-      {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
-        <div key={groupName} className="treeinfofilter__section-filter">
-          <h3 className="treeinfofilter__section-title">{groupName}</h3>
-          <div className="treeinfofilter__section-item">
-            {groupInfo.options.map((option) => (
-              <label
-                key={option}
-                className="treeinfofilter__section-item-label"
-              >
-                <input
-                  type="checkbox"
-                  name={option}
-                  checked={checkboxes[option] || false}
-                  onChange={handleCheckboxChange}
-                  className="treeinfofilter__section-item-checkbox"
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Toggles({ view, setView }) {
-  const handleToggleView = (event, newView) => {
-    setView(newView);
-  };
-  return (
-    <ToggleButtonGroup
-      orientation="horizontal"
-      value={view}
-      exclusive={true}
-      onChange={handleToggleView}
-      classes="toggles"
-      color="success"
-      sx={{ backgroundColor: 'white' }}
-    >
-      <ToggleButton value="list" aria-label="list">
-        <ViewList />
-      </ToggleButton>
-      <ToggleButton value="card" aria-label="card">
-        <ViewModule />
-      </ToggleButton>
-    </ToggleButtonGroup>
   );
 }

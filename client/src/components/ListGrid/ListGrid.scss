@@ -1,10 +1,8 @@
 .listgrid {
-  $borderRadius: 4px;
   &__list {
     display: grid;
     grid-column: span 2;
     background-color: white;
-    border-radius: $borderRadius
   }
   
   &__columnheader {
@@ -13,8 +11,6 @@
     grid-template-columns: 2em 2.3em 7em 3em 2.5em 1fr 1fr 1fr 1fr;
     grid-auto-flow: dense;
     border-bottom: 3px solid gray;
-    border-top-left-radius: $borderRadius;
-    border-top-right-radius: $borderRadius;
   }
   
   &__columnheader-btn {
