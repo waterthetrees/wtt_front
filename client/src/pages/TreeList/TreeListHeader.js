@@ -44,14 +44,16 @@ function createLookup(activeFilters) {
 }
 
 export function filterData(array, checkboxes) {
+  if (Object.keys(checkboxes).length === 0) return array;
+  if (array.length === 0) return array;
   const activeFilters = getActiveFilters(checkboxes);
   const lookup = createLookup(activeFilters);
-
   return array.filter((item) => {
     return Object.entries(lookup).every(([category, options]) => {
       if (Object.keys(options).length === 0) return true;
 
-      const itemValue = item[category].toLowerCase();
+      const itemValue = item[category]?.toLowerCase();
+      if (!itemValue) return false;
       for (const option in options) {
         if (itemValue.includes(option)) return true;
       }

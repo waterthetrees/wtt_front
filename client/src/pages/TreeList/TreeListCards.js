@@ -1,12 +1,11 @@
 import React from 'react';
 import { Card } from '../../components/Card/Card';
 import { NavLink } from 'react-router-dom';
-import treeImages from '@/data/dist/treeImages.json';
-import { ImageLoad } from '@/pages/Tree/TreeImage';
+import { ImageLoad, fixScientificForImage } from '@/pages/Tree/TreeImage';
 import { Tag } from '@/components/Tag/Tag';
 import { dataSources } from '@/pages/Data/dataArrays';
 import './TreeList.scss';
-const routeName = 'treelist';
+const routeName = 'tree';
 
 const HEADING_TEXT = `We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
@@ -37,7 +36,7 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
           const nameFormatted = tree?.common?.toLowerCase().replace(/ /g, '-');
           const urlRoute = `/${routeName}/${nameFormatted}`;
           const { scientific, common, height, deciduousEvergreen } = tree;
-          const scientificName = scientific?.split(' ').join('-');
+          const treeImagePath = fixScientificForImage(scientific);
           const tagVariant =
             deciduousEvergreen === 'deciduous' ? 'brown' : 'green';
 
@@ -52,16 +51,10 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
             >
               <Card>
                 <div className="treelistcards__image">
-                  {scientific &&
-                    Object.prototype.hasOwnProperty.call(
-                      treeImages,
-                      scientific,
-                    ) && (
-                      <ImageLoad
-                        src={`../../assets/images/data/${scientificName}.jpg`}
-                        placeholder="placeholder.jpg"
-                      />
-                    )}
+                  <ImageLoad
+                    src={treeImagePath}
+                    placeholder="placeholder.jpg"
+                  />
                 </div>
                 <h2>{common}</h2>
                 <h4>{scientific}</h4>

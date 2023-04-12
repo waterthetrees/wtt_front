@@ -10,7 +10,6 @@ import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
 import { ImageLoad } from './TreeImage';
 
-import treeImages from '@/data/dist/treeImages.json';
 import { CarbonCalculator } from './CarbonCalculator';
 
 const undefRequiredField = (requiredField) =>
@@ -56,7 +55,7 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
-
+  const imagePath = fixScientificForImage(scientific);
   return (
     <TreeDetailsContainer
       title="Tree Details"
@@ -72,13 +71,7 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          {scientific &&
-            Object.prototype.hasOwnProperty.call(treeImages, scientific) && (
-              <ImageLoad
-                src={treeImages[scientific]?.imageURL}
-                placeholder="placeholder.jpg"
-              />
-            )}
+          <ImageLoad src={imagePath} placeholder="placeholder.jpg" />
 
           {!hasUnfitData && (
             <TreeHealth

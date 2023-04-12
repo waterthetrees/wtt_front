@@ -166,10 +166,6 @@ export default function Map({
           const [feature] = mapboxMap.queryRenderedFeatures([x, y], {
             layers: layerIDs,
           });
-          console.log('feature', feature);
-
-          const features = map.getSource('WTTV');
-          console.log('features', features);
 
           if (feature) {
             const {

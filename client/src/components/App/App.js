@@ -18,11 +18,8 @@ import Contact from '@/pages/Contact/Contact';
 import NotFound from '@/pages/NotFound/NotFound';
 import './App.css';
 
-// Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also
+// Lazy-load the treelist data page, so that we only load the large JSON files it uses if needed.  Also
 // lazy-load the /map route, so that it doesn't impact the default route.
-const Data = React.lazy(() =>
-  import(/* webpackChunkName: "Data" */ '@/pages/Data/Data'),
-);
 const Source = React.lazy(() =>
   import(/* webpackChunkName: "Source" */ '@/pages/Source/Source'),
 );
@@ -74,7 +71,6 @@ function App() {
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/data" element={<Data />} />
                   <Route path="/source" element={<Source />} />
                   <Route path="/treelist" element={<TreeList />} />
                   <Route path="/tree/:common" element={<TreePage />} />
