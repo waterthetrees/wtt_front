@@ -3,9 +3,10 @@ import { CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const SlackLogo = (props) => {
-  console.log(props.sx)
+  console.log(props.sx);
   const StyledLogo = styled(CardMedia)({
     ...props.sx,
+    '&:hover': { cursor: 'pointer' },
   });
 
   return (
@@ -20,6 +21,7 @@ export const SlackLogo = (props) => {
 export const GithubLogo = (props) => {
   const StyledLogo = styled(CardMedia)({
     ...props.sx,
+    '&:hover': { cursor: 'pointer' },
   });
 
   return (
@@ -34,6 +36,7 @@ export const GithubLogo = (props) => {
 export const FigmaLogo = (props) => {
   const StyledLogo = styled(CardMedia)({
     ...props.sx,
+    '&:hover': { cursor: 'pointer' },
   });
 
   return (
@@ -48,11 +51,12 @@ export const FigmaLogo = (props) => {
 export const LinkedinLogo = (props) => {
   const StyledLogo = styled(CardMedia)({
     ...props.sx,
+    '&:hover': { cursor: 'pointer' },
   });
   return (
     <StyledLogo
       component="img"
-      src="https://cdn.icon-icons.com/icons2/2648/PNG/512/linkedin_square_icon_160786.png"
+      src="https://cdn-icons-png.flaticon.com/512/61/61109.png"
       alt="linkedin"
     ></StyledLogo>
   );

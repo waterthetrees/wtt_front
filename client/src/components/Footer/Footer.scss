@@ -1,12 +1,52 @@
 .footer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  // flex-direction: column;
+  justify-content: center;
   // max-width: 1024px;
   width: 100%;
   font-family: "Montserrat", sans-serif;
   border-top: rgba(0, 0, 0, 0.472) solid 1px;
   font-display: swap;
+
+  &__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1024px;
+  }
+
+  &__follow{
+    margin: 24px 0px;
+    width: 100%;
+  }
+
+  &__wiki {
+    margin: 40px 0px;
+    display: flex;
+    width: 100%;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    margin: 40px 0px;
+    width: 100%;
+
+    @media only screen and (max-width: 768px) {
+      width: 240px;
+    }
+
+    a {
+      font-size: 12px;
+      color: black;
+      margin-right: 40px;
+
+      &:hover {
+        text-decoration: none;
+        color: #3fab45;
+      }
+    }
+  }
   
   &__text1{
      font-size: 12px;
@@ -17,9 +57,13 @@
   &__text3{
     font-size: 20px;
   }
-  &__follow{
-    margin: 24px 0px;
-    width: 60%;
+  &__green{
+    color: #3fab45;
+    text-decoration: underline solid #3fab45;
+    &:hover{
+      cursor: pointer;
+      color: darkgreen;
+    }
   }
 
   &__section{
@@ -27,10 +71,9 @@
     align-items: center;
   }
 
-  &__content {
-    margin: 40px 0px;
-    display: flex;
-    width: 60%;
+  &__hover:hover{
+    cursor: pointer;
+    color: #3fab45;
   }
 
   &__section1{
@@ -51,27 +94,10 @@
       margin-top: 16px;
     }
   }
-
-  &__info {
-    display: flex;
-    align-items: center;
-    margin: 40px 0px;
-    width: 60%;
-
-    @media only screen and (max-width: 768px) {
-      width: 240px;
-    }
-
-    a {
-      font-size: 1.2rem;
-      color: black;
-      margin-right: 40px;
-
-      &:hover {
-        text-decoration: none;
-        color: #3fab45;
-      }
-    }
+  &__section3{
+    margin-left: auto;
+    
   }
+
 
 }
