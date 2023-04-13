@@ -21,6 +21,7 @@ const Border = styled('section')`
   border: 2px dashed ${color};
   text-align: center;
   font-family: Montserrat;
+  cursor: pointer; // make it look clickable
 `;
 
 const ActionText = styled('h2')`
@@ -45,7 +46,7 @@ const Text = styled('p')`
   margin: 1px;
 `;
 
-function ImageUploadArea({ uploadURL }) {
+function ImageUploadArea({ uploadURL, fileDialog }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
@@ -55,6 +56,11 @@ function ImageUploadArea({ uploadURL }) {
     } else if (e.type === "dragleave") {
       setDragActive(false);
     }
+  };
+
+  const handleSelect = (e) => {
+    const fileName = fileDialog();
+    uploadURL(fileName);
   };
 
   const addImage = (e) => {
@@ -70,6 +76,7 @@ function ImageUploadArea({ uploadURL }) {
       onDragOver={handleDrag}
       onDragLeave={handleDrag}
       onDrop={addImage}
+      onClick={handleSelect}
       className={dragActive ? "dragging" : "not-dragging"}
     >
         <Icon />
@@ -198,7 +205,8 @@ export default function ImageUpload({
   apiUploadURL,
   apiUploadDone,
   apiPollUpload,
-  apiCancelUpload
+  apiCancelUpload,
+  apiFileDialog
 }) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -225,7 +233,10 @@ export default function ImageUpload({
         to track the life of your tree from
         the day you started.
       </p>
-      <ImageUploadArea uploadURL={uploadURL} />
+      <ImageUploadArea
+        uploadURL={uploadURL}
+        fileDialog={apiFileDialog}
+      />
       <p>Or upload from a URL</p>
       <ImageUploadDialog uploadURL={uploadURL} />
       {isUploading &&

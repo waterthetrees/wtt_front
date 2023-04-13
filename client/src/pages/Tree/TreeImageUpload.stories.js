@@ -27,6 +27,7 @@ export const Default = {
     apiUploadURL: (url) => { console.log(`uploaded url: ${url}`)},
     apiUploadDone: () => { console.log("upload done"); }, 
     apiCancelUpload: () => { console.log("upload cancelled"); }, 
-    apiPollUpload: pollUpload
+    apiPollUpload: pollUpload,
+    apiFileDialog: () => "random"
   },
 }
