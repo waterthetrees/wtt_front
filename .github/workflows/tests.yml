@@ -14,5 +14,5 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run Tests
         run: |
-          npm install 
+          npm ci --omit=optional 
           npm test
