@@ -45,6 +45,11 @@ const Text = styled('p')`
   margin: 1px;
 `;
 
+function uploadURL(url) {
+  // TODO: waiting on API
+  console.log(`uploaded url: ${url}`)
+}
+
 function ImageUploadArea() {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
@@ -60,8 +65,7 @@ function ImageUploadArea() {
   const addImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: waiting on API
-    console.log("added image", e.dataTransfer.files);
+    uploadURL(e.dataTransfer.files[0].name);
     setDragActive(false);
   }
 
@@ -102,6 +106,14 @@ const UploadButton = styled(Button)`
 `;
 
 function ImageUploadDialog() {
+  const [value, setValue] = useState("");
+  const handleClick = () => {
+    uploadURL(value);
+    setValue("");
+  }
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  }
   return (
     <InputBorder>
       <TextField
@@ -109,8 +121,15 @@ function ImageUploadDialog() {
         InputProps={{ disableUnderline: true }}
         placeholder='Add a file URL'
         variant='standard'
+        value={value}
+        onChange={handleChange}
       />
-      <UploadButton variant='contained'>Upload</UploadButton>
+      <UploadButton
+        variant='contained'
+        onClick={handleClick}
+      >
+        Upload
+      </UploadButton>
     </InputBorder>
   );
 }
