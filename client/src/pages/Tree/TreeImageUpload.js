@@ -1,5 +1,7 @@
 import { AddAPhoto } from "@mui/icons-material";
 import { Button, styled, TextField } from "@mui/material";
+import { useState } from "react";
+import "./TreeImageUpload.css";
 
 const color = "#9d9d9d";
 const font = "Montserrat";
@@ -44,8 +46,33 @@ const Text = styled('p')`
 `;
 
 function ImageUploadArea() {
+  const [dragActive, setDragActive] = useState(false);
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const addImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // TODO: waiting on API
+    console.log("added image", e.dataTransfer.files);
+    setDragActive(false);
+  }
+
   return (
-    <Border>
+    <Border
+      onDragEnter={handleDrag}
+      onDragOver={handleDrag}
+      onDragLeave={handleDrag}
+      onDrop={addImage}
+      className={dragActive ? "dragging" : "not-dragging"}
+    >
         <Icon />
         <ActionText>
           Select Image to Upload

@@ -1,0 +1,7 @@
+.not-dragging {
+  background-color: none;
+}
+
+.dragging {
+  background-color: gray;
+}
