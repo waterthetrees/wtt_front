@@ -28,6 +28,7 @@ export const Default = {
     apiUploadDone: () => { console.log("upload done"); }, 
     apiCancelUpload: () => { console.log("upload cancelled"); }, 
     apiPollUpload: pollUpload,
-    apiFileDialog: () => "random"
+    apiFileDialog: () => "random",
+    isMobile: false
   },
 }

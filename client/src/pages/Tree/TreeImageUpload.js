@@ -206,7 +206,8 @@ export default function ImageUpload({
   apiUploadDone,
   apiPollUpload,
   apiCancelUpload,
-  apiFileDialog
+  apiFileDialog,
+  isMobile
 }) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -237,8 +238,12 @@ export default function ImageUpload({
         uploadURL={uploadURL}
         fileDialog={apiFileDialog}
       />
-      <p>Or upload from a URL</p>
-      <ImageUploadDialog uploadURL={uploadURL} />
+      {!isMobile &&
+        <>
+          <p>Or upload from a URL</p>
+          <ImageUploadDialog uploadURL={uploadURL} />
+        </>
+      }
       {isUploading &&
         <ImageUploadBar
           uploadDone={uploadDone}
