@@ -42,10 +42,12 @@ export default function TreeListFilters({
           <div className="treelistfilters__filter-item">
             {groupInfo.options.map((option) => (
               <label
+                aria-labelledby={option}
                 key={option}
                 className="treelistfilters__filter-item-label"
               >
                 <input
+                  id={option}
                   type="checkbox"
                   name={option}
                   checked={checkboxes[option] || false}

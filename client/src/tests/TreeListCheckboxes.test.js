@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+// import { toBeInTheDocument } from '@testing-library/jest-dom';
 import TreeListCheckboxes from '@/pages/TreeList/TreeListCheckboxes';
 import { dataSources } from '@/pages/TreeList/dataArrays';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -35,5 +36,43 @@ describe('<TreeListCheckboxes /> spec', () => {
       </Router>,
     );
     expect(treeListCheckboxes).toMatchSnapshot();
+  });
+
+  it(' TreeListCheckboxes handles input changes correctly', () => {
+    const { data } = dataSources[0];
+
+    const { queryByTestId } = render(
+      <Router>
+        <TreeListCheckboxes
+          checkboxes={mockCheckboxes}
+          setCheckboxes={mockSetCheckboxes}
+          search={'Apple'}
+          setSearch={mockSetSearch}
+          selectedDataSourceIndex={0}
+          setSelectedDataSourceIndex={mockSetSelectedDataSourceIndex}
+          setFilteredData={setFilteredData}
+          data={data}
+        />
+      </Router>,
+    );
+    expect(queryByTestId('test')).not.toBeInTheDocument();
+
+    const checkbox = screen.getByLabelText('small');
+    expect(checkbox).toBeInTheDocument();
+
+    // const checkbox = screen.getByLabelText('small');
+
+    expect(checkbox.checked).toEqual(false);
+    // const checkbox = getByTestId('small');
+    // expect(checkbox.checked).toEqual(false);
+    fireEvent.click(checkbox);
+
+    console.log('checkbox.checked', checkbox.checked, checkbox);
+    expect(checkbox.checked).toEqual(true);
+    // screen.getByLabelText('small', { exact: false }); // ignore case
+    // screen.getByLabelText('small', { exact: false }); // ignore case
+    // screen.getByLabelText('small', { exact: false }); // ignore case
+    // screen.getByLabelText('small', { exact: false }); // ignore case
+    // screen.getByLabelText('small', { exact: false }); // ignore case
   });
 });

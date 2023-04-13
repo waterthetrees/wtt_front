@@ -21,31 +21,37 @@ exports[`<TreeListCheckboxes /> spec renders TreeListCheckboxes correctly 1`] = 
             class="treelistfilters__filter-item"
           >
             <label
+              aria-labelledby="small"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="small"
                 name="small"
                 type="checkbox"
               />
               small
             </label>
             <label
+              aria-labelledby="medium"
               class="treelistfilters__filter-item-label"
             >
               <input
                 checked=""
                 class="treelistfilters__filter-item-checkbox"
+                id="medium"
                 name="medium"
                 type="checkbox"
               />
               medium
             </label>
             <label
+              aria-labelledby="large"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="large"
                 name="large"
                 type="checkbox"
               />
@@ -66,21 +72,25 @@ exports[`<TreeListCheckboxes /> spec renders TreeListCheckboxes correctly 1`] = 
             class="treelistfilters__filter-item"
           >
             <label
+              aria-labelledby="evergreen"
               class="treelistfilters__filter-item-label"
             >
               <input
                 checked=""
                 class="treelistfilters__filter-item-checkbox"
+                id="evergreen"
                 name="evergreen"
                 type="checkbox"
               />
               evergreen
             </label>
             <label
+              aria-labelledby="deciduous"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="deciduous"
                 name="deciduous"
                 type="checkbox"
               />
@@ -108,31 +118,37 @@ exports[`<TreeListCheckboxes /> spec renders TreeListCheckboxes correctly 1`] = 
           class="treelistfilters__filter-item"
         >
           <label
+            aria-labelledby="small"
             class="treelistfilters__filter-item-label"
           >
             <input
               class="treelistfilters__filter-item-checkbox"
+              id="small"
               name="small"
               type="checkbox"
             />
             small
           </label>
           <label
+            aria-labelledby="medium"
             class="treelistfilters__filter-item-label"
           >
             <input
               checked=""
               class="treelistfilters__filter-item-checkbox"
+              id="medium"
               name="medium"
               type="checkbox"
             />
             medium
           </label>
           <label
+            aria-labelledby="large"
             class="treelistfilters__filter-item-label"
           >
             <input
               class="treelistfilters__filter-item-checkbox"
+              id="large"
               name="large"
               type="checkbox"
             />
@@ -153,21 +169,25 @@ exports[`<TreeListCheckboxes /> spec renders TreeListCheckboxes correctly 1`] = 
           class="treelistfilters__filter-item"
         >
           <label
+            aria-labelledby="evergreen"
             class="treelistfilters__filter-item-label"
           >
             <input
               checked=""
               class="treelistfilters__filter-item-checkbox"
+              id="evergreen"
               name="evergreen"
               type="checkbox"
             />
             evergreen
           </label>
           <label
+            aria-labelledby="deciduous"
             class="treelistfilters__filter-item-label"
           >
             <input
               class="treelistfilters__filter-item-checkbox"
+              id="deciduous"
               name="deciduous"
               type="checkbox"
             />
