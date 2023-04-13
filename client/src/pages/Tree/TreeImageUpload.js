@@ -1,6 +1,6 @@
 import { AddAPhoto } from "@mui/icons-material";
-import { Button, styled, TextField } from "@mui/material";
-import { useState } from "react";
+import { Button, LinearProgress, styled, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import "./TreeImageUpload.css";
 
 const color = "#9d9d9d";
@@ -45,12 +45,7 @@ const Text = styled('p')`
   margin: 1px;
 `;
 
-function uploadURL(url) {
-  // TODO: waiting on API
-  console.log(`uploaded url: ${url}`)
-}
-
-function ImageUploadArea() {
+function ImageUploadArea({ uploadURL }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
@@ -96,49 +91,132 @@ const InputBorder = styled('section')`
   padding: 4px 2px;
 `;
 
-const UploadButton = styled(Button)`
+const DialogButton = styled(Button)`
   border-radius: 8px;
   font-size: 12px;
   background-color: white;
   color: black;
   padding: .1em 1em;
   text-transform: none;
+
+  &:hover {
+    background-color: gray;
+  }
 `;
 
-function ImageUploadDialog() {
+const ErrorText = styled('p')`
+  color: red;
+  font-size: 12px;
+  font-family: ${font};
+  margin: 1px;
+`;
+
+function ImageUploadDialog({ uploadURL }) {
   const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
+
   const handleClick = () => {
+    if (!value) {
+      setError(true);
+      return;
+    }
+
     uploadURL(value);
     setValue("");
+    setError(false);
   }
+
   const handleChange = (e) => {
     setValue(e.target.value);
   }
+
   return (
-    <InputBorder>
-      <TextField
-        hiddenLabel
-        InputProps={{ disableUnderline: true }}
-        placeholder='Add a file URL'
-        variant='standard'
-        value={value}
-        onChange={handleChange}
-      />
-      <UploadButton
-        variant='contained'
-        onClick={handleClick}
-      >
-        Upload
-      </UploadButton>
-    </InputBorder>
+    <>
+      <InputBorder>
+        <TextField
+          hiddenLabel
+          InputProps={{ disableUnderline: true }}
+          placeholder='Add a file URL'
+          variant='standard'
+          value={value}
+          onChange={handleChange}
+        />
+        <DialogButton
+          variant='contained'
+          onClick={handleClick}
+        >
+          Upload
+        </DialogButton>
+      </InputBorder>
+      {error && <ErrorText>Invalid URL</ErrorText>}
+    </>
   );
 }
 
-function ImageUploadBar() {
+const UploadBar = styled("div")`
+  margin: 1em 0;
+  display: grid;
+  grid-template-columns: 1fr 5fr 2fr;
+  align-items: center;
+  grid-gap: 1em;
+`;
 
+const Progress = styled(LinearProgress)`
+
+`;
+
+const Percent = styled("p")`
+  margin: auto;
+`;
+
+function ImageUploadBar({ pollUpload, uploadDone, cancelUpload }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => { 
+    pollUpload((newProgess) => setProgress(newProgess), uploadDone);
+  }, []);
+
+  return (
+    <UploadBar>
+      <Percent>{progress}%</Percent>
+      <Progress
+        variant="determinate"
+        color="success"
+        value={progress}
+      />
+      <DialogButton
+        variant="contained"
+        onClick={cancelUpload}
+      >
+        Cancel
+      </DialogButton>
+    </UploadBar>
+  );
 }
 
-export default function ImageUpload() {
+export default function ImageUpload({
+  apiUploadURL,
+  apiUploadDone,
+  apiPollUpload,
+  apiCancelUpload
+}) {
+  const [isUploading, setIsUploading] = useState(false);
+
+  function uploadURL(url) {
+    apiUploadURL(url)
+    setIsUploading(true);
+  }
+
+  function uploadDone() {
+    apiUploadDone();
+    setIsUploading(false);
+  }
+
+  function cancelUpload() {
+    apiCancelUpload();
+    setIsUploading(false);
+  }
+
   return (
     <ImageUploadSection>
       <h3>Uploading Images</h3>
@@ -147,9 +225,16 @@ export default function ImageUpload() {
         to track the life of your tree from
         the day you started.
       </p>
-      <ImageUploadArea />
+      <ImageUploadArea uploadURL={uploadURL} />
       <p>Or upload from a URL</p>
-      <ImageUploadDialog />
+      <ImageUploadDialog uploadURL={uploadURL} />
+      {isUploading &&
+        <ImageUploadBar
+          uploadDone={uploadDone}
+          cancelUpload={cancelUpload}
+          pollUpload={apiPollUpload}
+        />
+      }
     </ImageUploadSection>
   )
 }

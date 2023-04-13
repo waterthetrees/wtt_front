@@ -96,10 +96,6 @@ export default function Tree({
           )}
 
           {!hasUnfitData && (
-            <TreeImageUpload />
-          )}
-
-          {!hasUnfitData && (
             <TreeMaintenance
               currentTreeData={currentTreeData}
               isTreeQueryError={isTreeQueryError}
