@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom/extend-expect';
 /**
  * This setup file is automatically run before all jest tests
  * If you don't want to use these mocks on a specific test, use jest.unmock

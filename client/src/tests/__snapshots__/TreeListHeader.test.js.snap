@@ -620,30 +620,36 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
               class="treelistfilters__filter-item"
             >
               <label
+                aria-labelledby="small"
                 class="treelistfilters__filter-item-label"
               >
                 <input
                   class="treelistfilters__filter-item-checkbox"
+                  id="small"
                   name="small"
                   type="checkbox"
                 />
                 small
               </label>
               <label
+                aria-labelledby="medium"
                 class="treelistfilters__filter-item-label"
               >
                 <input
                   class="treelistfilters__filter-item-checkbox"
+                  id="medium"
                   name="medium"
                   type="checkbox"
                 />
                 medium
               </label>
               <label
+                aria-labelledby="large"
                 class="treelistfilters__filter-item-label"
               >
                 <input
                   class="treelistfilters__filter-item-checkbox"
+                  id="large"
                   name="large"
                   type="checkbox"
                 />
@@ -664,20 +670,24 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
               class="treelistfilters__filter-item"
             >
               <label
+                aria-labelledby="evergreen"
                 class="treelistfilters__filter-item-label"
               >
                 <input
                   class="treelistfilters__filter-item-checkbox"
+                  id="evergreen"
                   name="evergreen"
                   type="checkbox"
                 />
                 evergreen
               </label>
               <label
+                aria-labelledby="deciduous"
                 class="treelistfilters__filter-item-label"
               >
                 <input
                   class="treelistfilters__filter-item-checkbox"
+                  id="deciduous"
                   name="deciduous"
                   type="checkbox"
                 />
@@ -1305,30 +1315,36 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
             class="treelistfilters__filter-item"
           >
             <label
+              aria-labelledby="small"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="small"
                 name="small"
                 type="checkbox"
               />
               small
             </label>
             <label
+              aria-labelledby="medium"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="medium"
                 name="medium"
                 type="checkbox"
               />
               medium
             </label>
             <label
+              aria-labelledby="large"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="large"
                 name="large"
                 type="checkbox"
               />
@@ -1349,20 +1365,24 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
             class="treelistfilters__filter-item"
           >
             <label
+              aria-labelledby="evergreen"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="evergreen"
                 name="evergreen"
                 type="checkbox"
               />
               evergreen
             </label>
             <label
+              aria-labelledby="deciduous"
               class="treelistfilters__filter-item-label"
             >
               <input
                 class="treelistfilters__filter-item-checkbox"
+                id="deciduous"
                 name="deciduous"
                 type="checkbox"
               />
