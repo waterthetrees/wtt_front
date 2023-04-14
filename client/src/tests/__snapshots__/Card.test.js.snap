@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Card /> spec Renders the Card component correctly 1`] = `
+<div>
+  <div
+    class="card"
+    data-testid="card"
+  />
+</div>
+`;
