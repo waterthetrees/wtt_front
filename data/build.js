@@ -1,3 +1,5 @@
+// TODO - refactor and break up this file
+
 const fs = require('fs');
 const path = require('path');
 
@@ -94,18 +96,6 @@ async function buildScientificNameToImageMap(names) {
   function buildRequestURL(titles) {
     const BASE_URL = 'https://en.wikipedia.org/w/api.php';
     const requestURL = new URL(BASE_URL);
-    // requestURL.search = new URLSearchParams({
-    //   action: 'query',
-    //   format: 'json',
-    //   prop: 'pageimages',
-    //   piprop: 'thumbnail',
-    //   pithumbsize: '600',
-    //   titles,
-    //   origin: '*',
-    //   formatversion: '2',
-    //   search: encodeURIComponent(treeName),
-    //   utf8=1,
-    // });
     requestURL.search = new URLSearchParams({
       action: 'query',
       format: 'json',
@@ -118,9 +108,6 @@ async function buildScientificNameToImageMap(names) {
       exintro: 'true',
       explaintext: 'true',
       prop: 'info|extracts|pageimages',
-      // prop: 'info|revisions|pageimages',
-      // rvprop: 'content',
-      // rvslots: 'main',
     });
 
     return requestURL;
