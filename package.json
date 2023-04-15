@@ -46,6 +46,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@emotion/jest": "^11.10.5",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "babel-jest": "^29.4.1",
     "babel-loader": "^8.2.3",
