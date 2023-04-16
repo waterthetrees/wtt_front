@@ -1,5 +1,3 @@
-import { REGION_TYPES } from '../../util/constants';
-import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import { Box, styled } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 
@@ -7,7 +5,9 @@ import { TooltipTop } from '@/components/Tooltip';
 import MapboxMarkerPortal from '@/pages/Map/MapboxMarkerPortal';
 import { useUserLocation } from '@/pages/UserLocation/useUserLocation';
 
-import { targetSize, NewTreePlantingTarget } from './NewTreePlantingTarget';
+import { REGION_TYPES } from '../../util/constants';
+import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
+import { NewTreePlantingTarget, targetSize } from './NewTreePlantingTarget';
 import { useNewTree } from './useNewTree';
 
 // Calculate the offset from the top-left of the marker to the center of the target.  Adding 1px
@@ -38,14 +38,18 @@ export function NewTreePlantingMarker({ onPlantClick }) {
   const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
-    if (isPlanting && isFollowingUser) {
+    if (isPlanting) {
+      const coordinates =
+        coords && isFollowingUser ? coords : mapboxManager.getCenter();
       // We store the starting coords for the marker in local state, so they change only when
       // isPlanting is toggled on.  If we passed newTreeState.coords to the marker, it would
       // redundantly update its location every time it's dragged, since setCoords() is called when
       // the drag ends.
-      setMarkerStartCoords(coords);
-      setCoords(coords);
-      mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
+      setMarkerStartCoords(coordinates);
+      setCoords(coordinates);
+      mapboxManager.setCenter({
+        coords: coordinates,
+      });
     }
   }, [isPlanting]);
 

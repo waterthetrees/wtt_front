@@ -80,7 +80,7 @@ export default function MapboxMarkerPortal({
       markerRef.current.remove();
       setAddedToMap(false);
     }
-  }, [visible, coordinates]);
+  }, [visible, coordinates, mapboxManager, addedToMap]);
 
   return container
     ? // Render this component's children into a portal rooted on the container element.  The map
