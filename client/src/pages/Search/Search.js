@@ -1,5 +1,3 @@
-import { REGION_TYPES } from '../../util/constants';
-import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import { debounce } from '@mui/material/utils';
 import React, { useContext, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -7,6 +5,8 @@ import { useQuery } from 'react-query';
 import SearchBar from '@/components/Search/SearchBar';
 import { mapboxAccessToken } from '@/util/config';
 
+import { REGION_TYPES } from '../../util/constants';
+import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import './Search.scss';
 
 const MIN_CHARS_FOR_SEARCH = 2;
@@ -116,8 +116,7 @@ const getMapboxSearchResults = async (query) => {
     id: result.id,
     coords: result.center,
     type: 'Results',
-    // FIXME: currently take the first element in place_type. We should choose either the smallest or largest region type
-    placeType: result.place_type[0], // Currently, this maps 1-1 with the region types in constants.js
+    placeType: result.place_type, // Currently, this maps 1-1 with the region types in constants.js
   }));
 };
 
