@@ -247,8 +247,9 @@ export default function Map({
         });
       });
 
+      // Eventually, we only want to set the mapboxManager's map and not save the mapbox map itself in state
       setMap(mapboxMap);
-      mapboxManager.setMap(map);
+      mapboxManager.setMap(mapboxMap);
     }
   }, [map, containerRef]);
 
