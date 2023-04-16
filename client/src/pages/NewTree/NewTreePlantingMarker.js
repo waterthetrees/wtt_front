@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { REGION_TYPES } from '../../util/constants';
+import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import { Box, styled } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+
 import { TooltipTop } from '@/components/Tooltip';
 import MapboxMarkerPortal from '@/pages/Map/MapboxMarkerPortal';
 import { useUserLocation } from '@/pages/UserLocation/useUserLocation';
-import { useNewTree } from './useNewTree';
+
 import { targetSize, NewTreePlantingTarget } from './NewTreePlantingTarget';
+import { useNewTree } from './useNewTree';
 
 // Calculate the offset from the top-left of the marker to the center of the target.  Adding 1px
 // seems to align the planted tree with the crosshairs better.
@@ -19,7 +23,7 @@ const Container = styled(Box)`
   text-align: center;
 `;
 
-export function NewTreePlantingMarker({ map, onPlantClick }) {
+export function NewTreePlantingMarker({ onPlantClick }) {
   const [markerStartCoords, setMarkerStartCoords] = useState(null);
   const {
     newTreeState: { isPlanting, isFollowingUser },
@@ -31,20 +35,19 @@ export function NewTreePlantingMarker({ map, onPlantClick }) {
   const {
     state: { coords, isTracking },
   } = useUserLocation();
+  const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
-    if (isPlanting) {
-      const coordinates = coords && isFollowingUser ? coords : map.getCenter();
-
+    if (isPlanting && isFollowingUser) {
       // We store the starting coords for the marker in local state, so they change only when
       // isPlanting is toggled on.  If we passed newTreeState.coords to the marker, it would
       // redundantly update its location every time it's dragged, since setCoords() is called when
       // the drag ends.
-      setMarkerStartCoords(coordinates);
-      setCoords(coordinates);
-      map.flyTo({ center: coordinates });
+      setMarkerStartCoords(coords);
+      setCoords(coords);
+      mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
     }
-  }, [isPlanting, map]);
+  }, [isPlanting]);
 
   useEffect(() => {
     if (isPlanting && isFollowingUser && coords) {
@@ -72,7 +75,6 @@ export function NewTreePlantingMarker({ map, onPlantClick }) {
 
   return (
     <MapboxMarkerPortal
-      map={map}
       visible={isPlanting}
       coordinates={markerStartCoords}
       options={markerOptions}

@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+
+import { MapboxManagerContext } from '@/pages/Map/MapboxManagerProvider';
 
 export default function TreeCountLayer({
   id,
@@ -6,9 +8,10 @@ export default function TreeCountLayer({
   map,
   minzoom,
   maxzoom,
-  flyToZoom,
+  regionType,
 }) {
   const { data } = useQuery();
+  const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
     if (!map || !data) return;
@@ -49,14 +52,12 @@ export default function TreeCountLayer({
     map.on('click', id, ({ features: [feature], lngLat: lng }) => {
       const coordinates = feature.geometry.coordinates.slice();
 
+      // FIXME: Add a comment for what this does
       while (Math.abs(lng - coordinates[0]) > 180) {
         coordinates[0] += lng > coordinates[0] ? 360 : -360;
       }
 
-      map.flyTo({
-        center: coordinates,
-        zoom: [flyToZoom],
-      });
+      mapboxManager.setCenter({ coords: coordinates, regionType });
     });
 
     map.on('mouseenter', id, () => {

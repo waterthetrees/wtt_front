@@ -11,23 +11,45 @@ class MapboxManager {
 
   // @param {LngLatLike} coords: See https://docs.mapbox.com/mapbox-gl-js/api/geography/#lnglatlike
   // (LngLat | {lng: number, lat: number} | {lon: number, lat: number} | [number, number])
-  setCenterAndZoom({ coords, regionType }) {
-    if (!this.map) {
+  setCenter({ coords, regionType }) {
+    if (!this.map || !coords) {
       return;
     }
 
     switch (regionType) {
-      case REGION_TYPES.ADDRESS:
-      case REGION_TYPES.LATLONG:
-        this.map.flyTo({
-          center: coords,
-          zoom: 15,
-        });
-        break;
       case REGION_TYPES.COUNTRY:
         this.map.flyTo({
           center: coords,
-          zoom: 15,
+          zoom: 4.5,
+        });
+        break;
+      case REGION_TYPES.REGION:
+        this.map.flyTo({
+          center: coords,
+          zoom: 6,
+        });
+        break;
+      case REGION_TYPES.PLACE:
+      case REGION_TYPES.DISTRICT:
+      case REGION_TYPES.POSTAL_CODE:
+        this.map.flyTo({
+          center: coords,
+          zoom: 12,
+        });
+        break;
+      case REGION_TYPES.NEIGHBORHOOD:
+      case REGION_TYPES.LOCALITY:
+        this.map.flyTo({
+          center: coords,
+          zoom: 14,
+        });
+        break;
+      case REGION_TYPES.ADDRESS:
+      case REGION_TYPES.LATLONG:
+      case REGION_TYPES.POI:
+        this.map.flyTo({
+          center: coords,
+          zoom: 17,
         });
         break;
       default:
@@ -35,6 +57,13 @@ class MapboxManager {
           center: coords,
         });
     }
+  }
+
+  addMarkerRefToMap(markerRef) {
+    if (!this.map) {
+      return;
+    }
+    markerRef.current.addTo(this.map);
   }
 }
 
