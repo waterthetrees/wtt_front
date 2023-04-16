@@ -9,6 +9,14 @@ class MapboxManager {
     this.map = map;
   }
 
+  getCenter() {
+    if (!this.map) {
+      return;
+    }
+
+    return this.map.getCenter();
+  }
+
   // @param {LngLatLike} coords: See https://docs.mapbox.com/mapbox-gl-js/api/geography/#lnglatlike
   // (LngLat | {lng: number, lat: number} | {lon: number, lat: number} | [number, number])
   setCenter({ coords, regionType }) {
