@@ -1,6 +1,9 @@
-import React, { useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
+import { REGION_TYPES } from '../../util/constants';
+import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import { debounce } from '@mui/material/utils';
+import React, { useContext, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
+
 import SearchBar from '@/components/Search/SearchBar';
 import { mapboxAccessToken } from '@/util/config';
 
@@ -25,6 +28,7 @@ const Search = ({ map }) => {
     queryFn: () => getMapboxSearchResults(query),
     cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
+  const mapboxManager = useContext(MapboxManagerContext);
 
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = useMemo(
@@ -49,7 +53,10 @@ const Search = ({ map }) => {
   // FIXME: This doesn't get triggered when the current selection is selected again from the autocomplete.
   const handleOptionSelect = (e, option) => {
     if (option) {
-      map.panTo(option.coords);
+      mapboxManager.setCenterAndZoom({
+        coords: option.coords,
+        regionType: option.placeType,
+      });
     }
   };
 
@@ -109,6 +116,8 @@ const getMapboxSearchResults = async (query) => {
     id: result.id,
     coords: result.center,
     type: 'Results',
+    // FIXME: currently take the first element in place_type. We should choose either the smallest or largest region type
+    placeType: result.place_type[0], // Currently, this maps 1-1 with the region types in constants.js
   }));
 };
 
@@ -170,6 +179,7 @@ const createLatLongSearchResult = (query) => {
     type: 'Results',
     id: `latlng-${lat}-${lng}`,
     coords: { lat, lng },
+    placeType: REGION_TYPES.LATLONG,
   };
 };
 

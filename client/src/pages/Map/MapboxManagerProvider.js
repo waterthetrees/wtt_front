@@ -1,15 +1,16 @@
-import React, { createContext } from 'react';
-
 import MapboxManager from './MapboxManager';
+import React, { createContext } from 'react';
 
 export const MapboxManagerContext = createContext(undefined);
 
 const mapboxManager = new MapboxManager();
 
 const MapboxManagerProvider = ({ children }) => {
-  <MapboxManagerContext.Provider value={mapboxManager}>
-    {children}
-  </MapboxManagerContext.Provider>;
+  return (
+    <MapboxManagerContext.Provider value={mapboxManager}>
+      {children}
+    </MapboxManagerContext.Provider>
+  );
 };
 
 export default MapboxManagerProvider;

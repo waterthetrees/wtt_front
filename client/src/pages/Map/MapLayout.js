@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Box, styled } from '@mui/material';
+import Map from './Map';
 import { useTreeQuery } from '@/api/queries';
-import { useIsMobile } from '@/pages/NewTree/utilities';
-import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
-import MapboxManagerProvider from '@/pages/Map/MapboxManagerProvider';
-import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
-import NewTree from '@/pages/NewTree/NewTree';
-import Search from '@/pages/Search/Search';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
-import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import MapboxManagerProvider from '@/pages/Map/MapboxManagerProvider';
+import NewTree from '@/pages/NewTree/NewTree';
+import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
+import { useIsMobile } from '@/pages/NewTree/utilities';
+import Search from '@/pages/Search/Search';
 import Tree from '@/pages/Tree/Tree';
-import Map from './Map';
+import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
+import { Box, styled } from '@mui/material';
+import React, { useState, useRef, useEffect } from 'react';
 
 const drawerWidth = 350;
 
