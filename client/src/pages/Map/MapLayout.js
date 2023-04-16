@@ -3,6 +3,7 @@ import { Box, styled } from '@mui/material';
 import { useTreeQuery } from '@/api/queries';
 import { useIsMobile } from '@/pages/NewTree/utilities';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
+import MapboxManagerProvider from '@/pages/Map/MapboxManagerProvider';
 import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
 import NewTree from '@/pages/NewTree/NewTree';
 import Search from '@/pages/Search/Search';
@@ -105,7 +106,9 @@ export default function WrappedMapLayout() {
     <ErrorBoundary>
       <NewTreeProvider>
         <UserLocationProvider>
-          <MapLayout />
+          <MapboxManagerProvider>
+            <MapLayout />
+          </MapboxManagerProvider>
         </UserLocationProvider>
       </NewTreeProvider>
     </ErrorBoundary>

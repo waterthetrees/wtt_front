@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
+import mapboxgl from 'mapbox-gl';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+
 import { useTreeQuery } from '@/api/queries';
-import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
-import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
-import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
+import { MapboxManagerContext } from '@/pages/Map/MapboxManagerProvider';
 import NewTreeButton from '@/pages/NewTree/NewTreeButton';
+import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
+import { mapboxAccessToken } from '@/util/config';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
-import MapboxControlPortal from './MapboxControlPortal';
+
+import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
 import MapLayers from './MapLayers';
+import MapboxControlPortal from './MapboxControlPortal';
 import TreeLayerLegend from './TreeLayerLegend';
+
 import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
@@ -82,6 +86,7 @@ export default function Map({
   onLoad,
 }) {
   const [map, setMap] = useState(null);
+  const mapboxManager = useContext(MapboxManagerContext);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
@@ -243,6 +248,7 @@ export default function Map({
       });
 
       setMap(mapboxMap);
+      mapboxManager.setMap(map);
     }
   }, [map, containerRef]);
 
