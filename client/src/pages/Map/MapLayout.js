@@ -1,4 +1,6 @@
-import Map from './Map';
+import { Box, styled } from '@mui/material';
+import React, { useState, useRef, useEffect } from 'react';
+
 import { useTreeQuery } from '@/api/queries';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
@@ -10,8 +12,8 @@ import { useIsMobile } from '@/pages/NewTree/utilities';
 import Search from '@/pages/Search/Search';
 import Tree from '@/pages/Tree/Tree';
 import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
-import { Box, styled } from '@mui/material';
-import React, { useState, useRef, useEffect } from 'react';
+
+import Map from './Map';
 
 const drawerWidth = 350;
 
@@ -28,7 +30,6 @@ const MapContainer = styled('main')({
 function MapLayout() {
   const [currentTreeId, setCurrentTreeId] = useState();
   const [currentTreeDataVector, setCurrentTreeDataVector] = useState();
-  const [map, setMap] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
@@ -73,11 +74,10 @@ function MapLayout() {
           setCurrentTreeDataVector={setCurrentTreeDataVector}
           setCurrentTreeId={setCurrentTreeId}
           selectionEnabled={mapSelectionEnabled}
-          onLoad={setMap}
         />
       </MapContainer>
 
-      <Search map={map} />
+      <Search />
 
       {newTreeState.isPanelOpen ? (
         <NewTree
@@ -88,7 +88,6 @@ function MapLayout() {
         <Tree
           TreeDetailsContainer={treeDetailsContainer}
           drawerWidth={drawerWidth}
-          map={map}
           currentTreeData={currentTreeData}
           currentTreeId={currentTreeId}
           setCurrentTreeId={setCurrentTreeId}

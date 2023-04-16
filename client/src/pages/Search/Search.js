@@ -16,7 +16,7 @@ const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 const AUTOCOMPLETE_DEBOUNCE_TIME = 500; // 500 milliseconds
 const VALID_LAT_LNG_DELIMITERS = [',', '/', '\\'];
 
-const Search = ({ map }) => {
+const Search = () => {
   const [query, setQuery] = useState('');
   const [generatedSearchResults, setGeneratedSearchResults] = useState([]);
   const {
@@ -53,7 +53,7 @@ const Search = ({ map }) => {
   // FIXME: This doesn't get triggered when the current selection is selected again from the autocomplete.
   const handleOptionSelect = (e, option) => {
     if (option) {
-      mapboxManager.setCenterAndZoom({
+      mapboxManager.setCenter({
         coords: option.coords,
         regionType: option.placeType,
       });

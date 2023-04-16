@@ -1,5 +1,6 @@
-import React from 'react';
 import { styled } from '@mui/material';
+import React from 'react';
+
 import MapboxMarkerPortal from '@/pages/Map/MapboxMarkerPortal';
 
 const markerOptions = {
@@ -53,10 +54,9 @@ const MarkerDot = styled('div')`
   }
 `;
 
-export default function GeoMarker({ map, visible, coordinates }) {
+export default function GeoMarker({ visible, coordinates }) {
   return (
     <MapboxMarkerPortal
-      map={map}
       visible={visible}
       coordinates={coordinates}
       options={markerOptions}
