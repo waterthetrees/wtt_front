@@ -49,22 +49,6 @@ const mockTreeData = {
 };
 const mockTreeId = 420;
 const mockSetCurrentTreeId = () => {};
-import Example1 from "../../../../example1.jpg";
-import Example2 from "../../../../example2.jpg";
-const treeImages = [
-  {
-    src: Example1,
-    text: "Example 1",
-    width: 400,
-    height: 533
-  },
-  {
-    src: Example2,
-    text: "Example 2",
-    width: 400,
-    height: 280
-  }
-];
 
 export default {
   title: "Tree",
