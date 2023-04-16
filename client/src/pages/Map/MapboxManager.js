@@ -16,6 +16,12 @@ class MapboxManager {
       return;
     }
 
+    // We currently just take the first element in place_type if array
+    // FIXME: We should choose either the smallest or largest region type instead
+    if (Array.isArray(regionType)) {
+      regionType = regionType[0];
+    }
+
     switch (regionType) {
       case REGION_TYPES.COUNTRY:
         this.map.flyTo({
