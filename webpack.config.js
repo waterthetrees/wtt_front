@@ -100,7 +100,7 @@ module.exports = (env) => {
       ]),
     },
     plugins: removeEmpty([
-      new ReactRefreshWebpackPlugin(),
+      ifNotProduction() && new ReactRefreshWebpackPlugin(),
       new HtmlWebPackPlugin({
         favicon:
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
