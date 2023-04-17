@@ -7,13 +7,13 @@ module.exports = {
     jest: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:import/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:storybook/recommended',
+    'eslint:recommended', // https://eslint.org/docs/rules/
+    'plugin:import/recommended', // https://github.com/import-js/eslint-plugin-import
+    'plugin:jsx-a11y/recommended', // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+    'plugin:prettier/recommended', // https://github.com/prettier/eslint-plugin-prettier
+    'plugin:react/recommended', // https://github.com/yannickcr/eslint-plugin-react
+    'plugin:react-hooks/recommended', // https://www.npmjs.com/package/eslint-plugin-react-hooks
+    'plugin:storybook/recommended', // https://www.npmjs.com/package/eslint-plugin-storybook
   ],
   parserOptions: {
     ecmaVersion: 'latest',
