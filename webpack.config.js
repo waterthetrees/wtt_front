@@ -92,8 +92,8 @@ module.exports = (env) => {
           exclude: [
             '/client/src/data/dist/',
             '/data/json/',
-            '/logs/',
-            '/node_modules/',
+            /logs/,
+            /node_modules/,
           ],
           use: [
             {
