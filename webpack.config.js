@@ -75,6 +75,7 @@ module.exports = (env) => {
       rules: removeEmpty([
         {
           test: /\.js$/,
+          exclude: /node_modules/,
           include: path.resolve(__dirname, 'client/src'),
           use: ['babel-loader'],
         },
@@ -84,6 +85,23 @@ module.exports = (env) => {
           exclude: /mapbox-gl-legend|react-hook-form|react-router/,
           enforce: 'pre',
           use: ['source-map-loader'],
+        }),
+        ifNotProduction({
+          test: /\.[jt]sx?$/,
+          exclude: [
+            '/client/src/data/dist',
+            '/data/json',
+            /logs/,
+            /node_modules/,
+          ],
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                plugins: [require.resolve('react-refresh/babel')],
+              },
+            },
+          ],
         }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
