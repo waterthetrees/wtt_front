@@ -6,6 +6,7 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { configure } = require('@testing-library/react');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
@@ -43,7 +44,7 @@ module.exports = (env) => {
       historyApiFallback: true,
       // static: './',
       static: {
-        directory: path.join(__dirname, 'public'),
+        directory: path.join(__dirname, 'client/public'),
       },
       compress: true,
       hot: true,
@@ -89,10 +90,10 @@ module.exports = (env) => {
         ifNotProduction({
           test: /\.[jt]sx?$/,
           exclude: [
-            '/client/src/data/dist',
-            '/data/json',
-            /logs/,
-            /node_modules/,
+            '/client/src/data/dist/',
+            '/data/json/',
+            '/logs/',
+            '/node_modules/',
           ],
           use: [
             {
@@ -148,5 +149,5 @@ module.exports = (env) => {
   // To measure the plugin times, we need to return a wrapped config.  but wrap()
   // modifies the original object, so pass it a copy of config so we keep the
   // unmodified original.
-  return ifAnalyze(new SpeedMeasurePlugin().wrap({ ...config }), config);
+  return ifAnalyze(new SpeedMeasurePlugin().wrap(config), config);
 };
