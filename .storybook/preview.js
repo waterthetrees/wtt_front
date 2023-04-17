@@ -1,5 +1,5 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { createTheme, ThemeProvider } from '@mui/material';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 // Create a client for react-query calls.  Don't automatically refetch the data when the window is
 // focused since it's not changing that frequently.
@@ -20,20 +20,19 @@ const theme = createTheme({
 });
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
-  (story) =>
+  (story) => (
     <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        {story()}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{story()}</QueryClientProvider>
     </ThemeProvider>
+  ),
 ];

@@ -3,14 +3,17 @@ import webpackConfigFunc from '../webpack.config';
 
 const config = {
   webpackFinal: (config) => {
-    const webpackConfig = webpackConfigFunc("analyze");
+    const webpackConfig = webpackConfigFunc('analyze');
     config.resolve.alias = {
       ...webpackConfig.resolve.alias,
-      ...config.resolve.alias
-    }
+      ...config.resolve.alias,
+    };
     return config;
   },
-  stories: ['../stories/**/*.mdx', '../client/src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../stories/**/*.mdx',
+    '../client/src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',

@@ -1,4 +1,4 @@
-import Tree from "./Tree";
+import Tree from './Tree';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 
@@ -51,9 +51,9 @@ const mockTreeId = 420;
 const mockSetCurrentTreeId = () => {};
 
 export default {
-  title: "Tree",
-  component: Tree
-}
+  title: 'Tree',
+  component: Tree,
+};
 
 export const TreeWithPanelDrawer = {
   args: {
@@ -63,8 +63,8 @@ export const TreeWithPanelDrawer = {
     currentTreeId: mockTreeId,
     setCurrentTreeId: mockSetCurrentTreeId,
     isTreeQueryError: false,
-  }
-}
+  },
+};
 
 export const TreeWithScrollableDialog = {
   args: {
@@ -74,6 +74,5 @@ export const TreeWithScrollableDialog = {
     currentTreeId: mockTreeId,
     setCurrentTreeId: mockSetCurrentTreeId,
     isTreeQueryError: false,
-  }
-}
-
+  },
+};

@@ -29,6 +29,7 @@ nvm use;
 ### BUILD AND START JUST FRONT END
 
 1. To run with hot reloading (on osx/linux):
+
 ```shell
 cd wtt_front;
 npm install;
@@ -38,17 +39,21 @@ npm run start:dev;
 2. if you have problems with that, try running these commands in two windows:
 
 Window 1:
+
 ```shell
 npm run watch;
 ```
 
 Window 2:
+
 ```shell
 npm run start
 ```
 
 ### RUN STORYBOOK
+
 Storybook allows you to develop and test UI components in isolation from the rest of the app. To start Storybook, do this:
+
 ```shell
 npm run storybook
 ```
