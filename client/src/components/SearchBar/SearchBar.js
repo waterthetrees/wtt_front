@@ -18,7 +18,7 @@ export const SearchBar = (props) => {
 
       <input
         id="searchbar"
-        style={{ ...props.style.input }}
+        style={{ ...props?.style?.input }}
         value={props.search}
         onChange={props.onChange}
         placeholder={props.placeholder}
