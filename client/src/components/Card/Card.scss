@@ -10,20 +10,22 @@
   border-radius: 4px;
 
   h1,
-  h2,h3,h4,h5,h6 {
-    padding: 0 0.5rem;
-    color: black;
-  }
-
   h2,
-  .h2,.h3,.h4,.h5,.h6 {
+  h3,
+  h4,
+  h5,
+  h6 {
     padding: 0 0.5rem;
     color: black;
   }
 
-  &:focus, &:hover, &:visited, &:link, &:active {
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
     text-decoration: none;
     color: green;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
