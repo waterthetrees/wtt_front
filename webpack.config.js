@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
@@ -40,8 +41,14 @@ module.exports = (env) => {
       // dev-server needs to use it so that we can hit the API
       port: 3000,
       historyApiFallback: true,
-      static: './',
+      // static: './',
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
+      compress: true,
       hot: true,
+      // will fall back to liveReload if hot fails
+      liveReload: true,
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
@@ -54,7 +61,14 @@ module.exports = (env) => {
     watchOptions: {
       poll: true,
       // Exclude big folders or files which don't need to be watched.
-      ignored: ['**/node_modules', '**/vendor', '**/*.json', 'client/src/data/dist', 'data/json'],
+      ignored: [
+        '**/node_modules',
+        '**/vendor',
+        '**/*.json',
+        'client/src/data/dist',
+        'data/json',
+        'logs/*.log',
+      ],
       aggregateTimeout: 300,
     },
     module: {
@@ -86,6 +100,7 @@ module.exports = (env) => {
       ]),
     },
     plugins: removeEmpty([
+      new ReactRefreshWebpackPlugin(),
       new HtmlWebPackPlugin({
         favicon:
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
