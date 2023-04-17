@@ -47,6 +47,7 @@ exports[`<Searchbar /> snapshot specs renders correctly 1`] = `
         <input
           class="searchbar__input"
           id="searchbar"
+          placeholder="Search here"
           value=""
         />
       </div>
@@ -95,6 +96,7 @@ exports[`<Searchbar /> snapshot specs renders correctly 1`] = `
       <input
         class="searchbar__input"
         id="searchbar"
+        placeholder="Search here"
         value=""
       />
     </div>

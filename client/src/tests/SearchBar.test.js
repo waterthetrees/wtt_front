@@ -36,19 +36,27 @@ const mockOptions = [
 ];
 
 describe('<Searchbar /> snapshot specs', () => {
+  const handleChange = jest.fn();
+
   it('renders correctly', () => {
-    const searchBar = render(<SearchBar options={mockOptions} />);
+    const searchBar = render(
+      <SearchBar
+        options={mockOptions}
+        placeholder="Search here"
+        onChange={handleChange}
+      />,
+    );
     expect(searchBar).toMatchSnapshot();
   });
 
   test('renders correctly', () => {
     const { getByPlaceholderText } = render(
-      <SearchBar placeholder="Search here" />,
+      <SearchBar placeholder="Search here" onChange={handleChange} />,
     );
     expect(getByPlaceholderText('Search here')).toBeInTheDocument();
   });
+
   test('handles onChange event', () => {
-    const handleChange = jest.fn();
     const { getByPlaceholderText } = render(
       <SearchBar placeholder="Search here" onChange={handleChange} />,
     );
@@ -59,7 +67,11 @@ describe('<Searchbar /> snapshot specs', () => {
 
   test('input value is updated correctly', () => {
     const { getByPlaceholderText } = render(
-      <SearchBar search="test value" placeholder="Search here" />,
+      <SearchBar
+        search="test value"
+        placeholder="Search here"
+        onChange={handleChange}
+      />,
     );
     const input = getByPlaceholderText('Search here');
     expect(input.value).toBe('test value');
