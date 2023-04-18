@@ -52,6 +52,7 @@
     "@storybook/testing-react": "^2.0.0",
     "@testing-library/react": "^14.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@testing-library/user-event": "^14.4.3",
     "babel-jest": "^29.4.1",
     "babel-loader": "^8.2.3",
     "babel-plugin-direct-import": "^1.0.0",
@@ -122,6 +123,7 @@
     "@storybook/react": "^7.0.4",
     "@storybook/react-webpack5": "^7.0.4",
     "eslint-plugin-storybook": "^0.6.11",
-    "storybook": "^7.0.4"
+    "storybook": "^7.0.4",
+    "@storybook/addon-a11y": "^7.0.6"
   }
 }
