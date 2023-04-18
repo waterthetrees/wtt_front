@@ -4,14 +4,14 @@ import { Button, IconButton, LinearProgress, styled, TextField } from "@mui/mate
 import { useEffect, useState } from "react";
 import "./TreeImageUpload.css";
 
-const color = "#9d9d9d";
+const color = "black";
 const font = "Montserrat";
 
 const ImageUploadSection = styled('section')`
   margin: 1em 0;
 `;
 
-const Border = styled(IconButton)`
+const DropArea = styled(IconButton)`
   display: flex;
   flex-direction: column;
   place-items: center;
@@ -51,7 +51,7 @@ const HiddenInput = styled('input')`
   display: none;
 `;
 
-function ImageUploadArea({ uploadURL, fileDialog }) {
+function ImageUploadArea({ uploadURL }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
@@ -76,16 +76,20 @@ function ImageUploadArea({ uploadURL, fileDialog }) {
   const addImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    uploadURL(e.dataTransfer.files[0].name);
+    const fileName = e.dataTransfer.files[0].name;
+    // Only allow jpg files.
+    if (!fileName.match(/\.jpg/))
+      return;
+    uploadURL(fileName);
     setDragActive(false);
   }
 
   return (
     <>
-      <Border
+      <DropArea
         onDragEnter={handleDrag}
-        onDragOver={handleDrag}
         onDragLeave={handleDrag}
+        onDragOver={handleDrag}
         onDrop={addImage}
         onClick={handleClick}
         className={dragActive ? "dragging" : "not-dragging"}
@@ -95,8 +99,14 @@ function ImageUploadArea({ uploadURL, fileDialog }) {
             Select Image to Upload
           </ActionText>
           <Text>or drag and drop here</Text>
-      </Border>
-      <HiddenInput type="file" ref={inputRef} onChange={fileSelected} />
+      </DropArea>
+      <HiddenInput
+        data-testid="file-input"
+        type="file"
+        ref={inputRef}
+        onChange={fileSelected}
+        accept='image/jpeg'
+      />
     </>
   );
 }
@@ -115,7 +125,7 @@ const DialogButton = styled(Button)`
   border-radius: 8px;
   font-size: 12px;
   background-color: #ffffff;
-  color: black;
+  color: ${color};
   padding: .1em 1em;
   text-transform: none;
 
@@ -135,9 +145,11 @@ function ImageUploadDialog({ uploadURL }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
-  const handleClick = () => {
-    if (!value) {
+  const submit = () => {
+    // Only allow jpg files.
+    if (!value.match(/\.jpg/)) {
       setError(true);
+      setValue("");
       return;
     }
 
@@ -146,13 +158,23 @@ function ImageUploadDialog({ uploadURL }) {
     setError(false);
   }
 
+  const handleEnter = (e) => {
+    if (e.key && e.key === "Enter") {
+      submit();
+    }
+  }
+
   const handleChange = (e) => {
+    if (e.target.value && error)
+      setError(false);
     setValue(e.target.value);
   }
 
   return (
     <>
-      <InputBorder>
+      <InputBorder
+        onKeyDown={handleEnter}
+      >
         <TextField
           hiddenLabel
           InputProps={{ disableUnderline: true }}
@@ -163,7 +185,7 @@ function ImageUploadDialog({ uploadURL }) {
         />
         <DialogButton
           variant='contained'
-          onClick={handleClick}
+          onClick={submit}
         >
           Upload
         </DialogButton>
