@@ -1,5 +1,6 @@
+import React, { useRef } from 'react';
 import { AddAPhoto } from "@mui/icons-material";
-import { Button, LinearProgress, styled, TextField } from "@mui/material";
+import { Button, IconButton, LinearProgress, styled, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./TreeImageUpload.css";
 
@@ -10,18 +11,18 @@ const ImageUploadSection = styled('section')`
   margin: 1em 0;
 `;
 
-const Border = styled('section')`
+const Border = styled(IconButton)`
   display: flex;
   flex-direction: column;
   place-items: center;
   justify-content: center;
   margin: auto;
   padding: 1em;
+  width: 100%;
   border-radius: 8px;
   border: 2px dashed ${color};
   text-align: center;
   font-family: Montserrat;
-  cursor: pointer; // make it look clickable
 `;
 
 const ActionText = styled('h2')`
@@ -46,6 +47,10 @@ const Text = styled('p')`
   margin: 1px;
 `;
 
+const HiddenInput = styled('input')`
+  display: none;
+`;
+
 function ImageUploadArea({ uploadURL, fileDialog }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
@@ -58,9 +63,14 @@ function ImageUploadArea({ uploadURL, fileDialog }) {
     }
   };
 
-  const handleSelect = (e) => {
-    const fileName = fileDialog();
-    uploadURL(fileName);
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    inputRef.current.click();
+  };
+
+  const fileSelected = () => {
+    uploadURL(inputRef.current.files[0].name);
   };
 
   const addImage = (e) => {
@@ -71,20 +81,23 @@ function ImageUploadArea({ uploadURL, fileDialog }) {
   }
 
   return (
-    <Border
-      onDragEnter={handleDrag}
-      onDragOver={handleDrag}
-      onDragLeave={handleDrag}
-      onDrop={addImage}
-      onClick={handleSelect}
-      className={dragActive ? "dragging" : "not-dragging"}
-    >
-        <Icon />
-        <ActionText>
-          Select Image to Upload
-        </ActionText>
-        <Text>or drag and drop here</Text>
-    </Border>
+    <>
+      <Border
+        onDragEnter={handleDrag}
+        onDragOver={handleDrag}
+        onDragLeave={handleDrag}
+        onDrop={addImage}
+        onClick={handleClick}
+        className={dragActive ? "dragging" : "not-dragging"}
+      >
+          <Icon />
+          <ActionText>
+            Select Image to Upload
+          </ActionText>
+          <Text>or drag and drop here</Text>
+      </Border>
+      <HiddenInput type="file" ref={inputRef} onChange={fileSelected} />
+    </>
   );
 }
 
@@ -168,10 +181,6 @@ const UploadBar = styled("div")`
   grid-gap: 1em;
 `;
 
-const Progress = styled(LinearProgress)`
-
-`;
-
 const Percent = styled("p")`
   margin: auto;
 `;
@@ -186,7 +195,7 @@ function ImageUploadBar({ pollUpload, uploadDone, cancelUpload }) {
   return (
     <UploadBar>
       <Percent>{progress}%</Percent>
-      <Progress
+      <LinearProgress
         variant="determinate"
         color="success"
         value={progress}
