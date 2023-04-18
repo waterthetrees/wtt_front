@@ -3,6 +3,11 @@
     "@babel/env",
     "@babel/react"
   ],
+  "env": {
+    "development" : {
+      "compact": false
+    }
+  },
   "plugins": [
     "styled-components",
     "@babel/plugin-transform-runtime",
