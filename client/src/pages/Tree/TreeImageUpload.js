@@ -101,13 +101,13 @@ const InputBorder = styled('section')`
 const DialogButton = styled(Button)`
   border-radius: 8px;
   font-size: 12px;
-  background-color: white;
+  background-color: #ffffff;
   color: black;
   padding: .1em 1em;
   text-transform: none;
 
   &:hover {
-    background-color: gray;
+    background-color: #ececec;
   }
 `;
 
