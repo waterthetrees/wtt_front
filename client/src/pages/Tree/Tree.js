@@ -8,7 +8,6 @@ import TreeNotes from './TreeNotes';
 import TreeHistory from './TreeHistory';
 import TreeInfo from './TreeInfo';
 import TreeLinks from './TreeLinks';
-import TreeImageUpload from "./TreeImageUpload";
 import { ImageLoad } from './TreeImage';
 
 import treeImages from '@/data/dist/treeImages.json';
