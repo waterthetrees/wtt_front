@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import treeImages from '@/data/dist/treeImages.json';
 
 export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
@@ -33,10 +34,13 @@ export const ImageLoad = React.memo(({ src, placeholder, alt = '' }) => {
 });
 ImageLoad.displayName = 'ImageLoad';
 
-export const fixScientificForImage = (scientific) => {
+// This function formats the scientific name to match the image file name
+// If the image has been downloaded, it will use the local file
+// If not, it will use the image URL from the treeImages.json file
+export const setFormatImagePath = (scientific) => {
   if (!scientific || !treeImages[scientific]) return null;
 
-  // replace spaces with hyphens for image path using rejex
+  // replace spaces with hyphens for image path using regex
   const scientificNospaces = scientific.replace(/\s/g, '-');
 
   const imagePath =

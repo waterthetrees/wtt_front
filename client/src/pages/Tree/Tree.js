@@ -1,16 +1,16 @@
-import React from 'react';
 import { Alert } from '@mui/material';
-import TreeHeader from './TreeHeader';
-import TreeMaintenance from './TreeMaintenance';
-import TreeRemoval from './TreeRemoval';
-import TreeHealth from './TreeHealth';
-import TreeNotes from './TreeNotes';
-import TreeHistory from './TreeHistory';
-import TreeInfo from './TreeInfo';
-import TreeLinks from './TreeLinks';
-import { ImageLoad, fixScientificForImage } from './TreeImage';
+import React from 'react';
 
 import { CarbonCalculator } from './CarbonCalculator';
+import TreeHeader from './TreeHeader';
+import TreeHealth from './TreeHealth';
+import TreeHistory from './TreeHistory';
+import { ImageLoad, setFormatImagePath } from './TreeImage';
+import TreeInfo from './TreeInfo';
+import TreeLinks from './TreeLinks';
+import TreeMaintenance from './TreeMaintenance';
+import TreeNotes from './TreeNotes';
+import TreeRemoval from './TreeRemoval';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -55,7 +55,7 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
-  const imagePath = fixScientificForImage(scientific);
+  const imagePath = setFormatImagePath(scientific);
   return (
     <TreeDetailsContainer
       title="Tree Details"

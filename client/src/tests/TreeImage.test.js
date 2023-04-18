@@ -1,6 +1,7 @@
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
-import { ImageLoad, fixScientificForImage } from '@/pages/Tree/TreeImage';
+
+import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
 
 describe('ImageLoad', () => {
   const src = 'http://example.com/image.jpg';
@@ -37,23 +38,23 @@ describe('ImageLoad', () => {
   });
 });
 
-describe('fixScientificForImage', () => {
+describe('setFormatImagePath', () => {
   it('returns the correct image path when the scientific name is provided and exists in treeImages', () => {
     const scientificName = 'Quercus alba';
     const expectedImagePath = '../../assets/images/data/Quercus-alba.jpg';
-    const result = fixScientificForImage(scientificName);
+    const result = setFormatImagePath(scientificName);
 
     expect(result).toBe(expectedImagePath);
   });
 
   it('returns null when the scientific name is not provided', () => {
-    const result = fixScientificForImage(null);
+    const result = setFormatImagePath(null);
     expect(result).toBe(null);
   });
 
   it('returns null when the scientific name does not exist in treeImages', () => {
     const scientificName = 'Nonexistent scientific name';
-    const result = fixScientificForImage(scientificName);
+    const result = setFormatImagePath(scientificName);
     expect(result).toBe(null);
   });
 });
