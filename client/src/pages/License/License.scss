@@ -3,14 +3,40 @@
   flex-direction: column;
   justify-content: center;
   margin: 10rem 8rem;
-}
 
-.license-p {
-  margin: 0 0 2rem;
-}
-
-@media only screen and (max-width: 768px) {
-  .license {
+  .license-p {
+    margin: 0 0 2rem;
+  }
+  
+  @media only screen and (max-width: 768px) {
     margin: 5rem 2rem;
   }
 }
+
+
+
+.license__footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0 1rem;
+  z-index: 100;
+  background-color: white;
+  opacity: .9;
+
+  & a {
+    color: darkgreen;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media only screen and (max-width: 480px) {
+    padding: 0 1rem;
+  } 
+}
+
