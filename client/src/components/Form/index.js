@@ -10,3 +10,4 @@ export { default as FormSelect } from './FormSelect';
 export { default as FormTextField } from './FormTextField';
 export { default as FormTreeGroup } from './FormTreeGroup';
 export { default as FormTheme } from './FormTheme';
+export { default as Toggle } from './Toggle';

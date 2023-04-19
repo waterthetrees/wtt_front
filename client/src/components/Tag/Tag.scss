@@ -1,0 +1,23 @@
+.tag {
+  margin: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  width: fit-content;
+
+  &__brown {
+    background-color: #795548;
+    border-radius: 15px;
+    padding: 5px 10px;
+  }
+  &__green {
+    background-color: green;
+    border-radius: 15px;
+    padding: 5px 10px;
+  }
+}
