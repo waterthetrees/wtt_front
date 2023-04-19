@@ -149,5 +149,8 @@ module.exports = (env) => {
   // To measure the plugin times, we need to return a wrapped config.  but wrap()
   // modifies the original object, so pass it a copy of config so we keep the
   // unmodified original.
-  return ifAnalyze(new SpeedMeasurePlugin().wrap(config), config);
+  return ifAnalyze(
+    new SpeedMeasurePlugin().wrap({ plugins: config.plugins }),
+    config,
+  );
 };
