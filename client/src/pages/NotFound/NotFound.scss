@@ -1,4 +1,4 @@
-.not-found {
+.not-found-page {
   height: 100vh;
   background-color: #FFDBBC;
 }
@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-.error-message {
+.error-messages {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
@@ -49,14 +49,14 @@ img {
   min-width: 360px;
 }
 
-.text_top {
+.error-text-top {
   font-size: 40px;
   font-weight: 600;
   font-family: 'Montserrat';
   color: #FFFFFF;
 }
 
-.text_bottom {
+.error-text-bottom {
   font-size: 24px;
   font-weight: 400;
   font-family: "Montserrat";
@@ -80,7 +80,7 @@ img {
 }
 
 @media (max-width: 900px) {
-  .error-message {
+  .error-messages {
     flex-direction: column;
     margin: 24px;
   }
