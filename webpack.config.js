@@ -125,7 +125,7 @@ module.exports = (env) => {
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
-        minify: false,
+        minify: ifNotProduction() ? false : true,
         // add a timestamp that's injected into an HTML comment
         buildTime: new Date().toISOString(),
         title: 'Hot Module Replacement',
