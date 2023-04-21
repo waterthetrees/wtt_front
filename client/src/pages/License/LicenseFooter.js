@@ -1,25 +1,34 @@
 import React from 'react';
 
-export default function LicenseFooter({ license = '' }) {
+export default function LicenseFooter({ license = '', children }) {
+  if (!license && !children) return <CreativeCommonsLicense />;
+  const licenseChoice = license || children;
   return (
     <div className="license__footer">
-      {license && <div className="license__footer-content">{license}</div>}
-      {!license && (
-        <div className="license__footer-content">
-          Unless otherwise specified, data are licensed as{' '}
+      <div className="license__footer-content">
+        <div className="license__footer-content-item">
+          Data License: {licenseChoice}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function CreativeCommonsLicense() {
+  return (
+    <div className="license__footer">
+      <div className="license__footer-content">
+        <div className="license__footer-content-item">
+          Data license:{' '}
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             target="_blank"
             rel="noreferrer"
           >
-            CC BY-NC-SA
-          </a>{' '}
-          (Creative Commons – Attribution, Non-commercial, Share-alike). This
-          means that you are free to use and distribute the data so long as you
-          preserve the original author/source attributions and do not use it
-          (without permission) for commercial applications.
+            CC BY-NC-SA (Attribution, Non-commercial, Share-alike).
+          </a>
         </div>
-      )}
+      </div>
     </div>
   );
 }

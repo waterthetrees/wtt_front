@@ -5,6 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { configure } = require('@testing-library/react');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
@@ -40,8 +42,14 @@ module.exports = (env) => {
       // dev-server needs to use it so that we can hit the API
       port: 3000,
       historyApiFallback: true,
-      static: './',
+      // static: './',
+      static: {
+        directory: path.join(__dirname, 'client/public'),
+      },
+      compress: true,
       hot: true,
+      // will fall back to liveReload if hot fails
+      liveReload: true,
     },
     devtool: ifProduction('source-map', 'eval-source-map'),
     // The MapboxLegendControl library triggers this warning when trying to load its source map,
@@ -54,13 +62,21 @@ module.exports = (env) => {
     watchOptions: {
       poll: true,
       // Exclude big folders or files which don't need to be watched.
-      ignored: ['**/node_modules', '**/vendor', '**/*.json', 'client/src/data/dist', 'data/json'],
+      ignored: [
+        '**/node_modules',
+        '**/vendor',
+        '**/*.json',
+        'client/src/data/dist',
+        'data/json',
+        'logs/*.log',
+      ],
       aggregateTimeout: 300,
     },
     module: {
       rules: removeEmpty([
         {
           test: /\.js$/,
+          exclude: /node_modules/,
           include: path.resolve(__dirname, 'client/src'),
           use: ['babel-loader'],
         },
@@ -70,6 +86,23 @@ module.exports = (env) => {
           exclude: /mapbox-gl-legend|react-hook-form|react-router/,
           enforce: 'pre',
           use: ['source-map-loader'],
+        }),
+        ifNotProduction({
+          test: /\.[jt]sx?$/,
+          exclude: [
+            '/client/src/data/dist/',
+            '/data/json/',
+            /logs/,
+            /node_modules/,
+          ],
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                plugins: [require.resolve('react-refresh/babel')],
+              },
+            },
+          ],
         }),
         {
           test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|md)(\?[a-z0-9=.]+)?$/,
@@ -86,12 +119,13 @@ module.exports = (env) => {
       ]),
     },
     plugins: removeEmpty([
+      ifNotProduction() && new ReactRefreshWebpackPlugin(),
       new HtmlWebPackPlugin({
         favicon:
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
-        minify: false,
+        minify: ifNotProduction() ? false : true,
         // add a timestamp that's injected into an HTML comment
         buildTime: new Date().toISOString(),
         title: 'Hot Module Replacement',
@@ -115,5 +149,8 @@ module.exports = (env) => {
   // To measure the plugin times, we need to return a wrapped config.  but wrap()
   // modifies the original object, so pass it a copy of config so we keep the
   // unmodified original.
-  return ifAnalyze(new SpeedMeasurePlugin().wrap({ ...config }), config);
+  return ifAnalyze(
+    new SpeedMeasurePlugin().wrap({ plugins: config.plugins }),
+    config,
+  );
 };
