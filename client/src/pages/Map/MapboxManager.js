@@ -1,8 +1,9 @@
 import { REGION_TYPES } from '../../util/constants';
 
 class MapboxManager {
-  constructor() {
-    this.map = null;
+  // map is expected to be nullable. Mostly serves as a way to pass in a mock in tests
+  constructor(map) {
+    this.map = map;
   }
 
   setMap(map) {
