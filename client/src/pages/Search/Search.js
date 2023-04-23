@@ -7,6 +7,7 @@ import { mapboxAccessToken } from '@/util/config';
 
 import { REGION_TYPES } from '../../util/constants';
 import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
+
 import './Search.scss';
 
 const MIN_CHARS_FOR_SEARCH = 2;

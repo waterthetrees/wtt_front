@@ -5,7 +5,6 @@ import { TooltipTop } from '@/components/Tooltip';
 import MapboxMarkerPortal from '@/pages/Map/MapboxMarkerPortal';
 import { useUserLocation } from '@/pages/UserLocation/useUserLocation';
 
-import { REGION_TYPES } from '../../util/constants';
 import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 import { NewTreePlantingTarget, targetSize } from './NewTreePlantingTarget';
 import { useNewTree } from './useNewTree';

@@ -11,10 +11,11 @@ import { mapboxAccessToken } from '@/util/config';
 import { REGION_TYPES } from '@/util/constants';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
 
-import './Map.css';
 import MapLayers from './MapLayers';
 import MapboxControlPortal from './MapboxControlPortal';
 import TreeLayerLegend from './TreeLayerLegend';
+
+import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
 
