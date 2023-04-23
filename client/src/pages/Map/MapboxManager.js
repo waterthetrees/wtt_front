@@ -4,10 +4,14 @@ class MapboxManager {
   // map is expected to be nullable. Mostly serves as a way to pass in a mock in tests
   constructor(map) {
     this.map = map;
+    this.mapLoadPromise = new Promise((resolve) => {
+      this.onMapLoad = resolve;
+    });
   }
 
   setMap(map) {
     this.map = map;
+    this.onMapLoad();
   }
 
   getCenter() {
@@ -20,10 +24,12 @@ class MapboxManager {
 
   // @param {LngLatLike} coords: See https://docs.mapbox.com/mapbox-gl-js/api/geography/#lnglatlike
   // (LngLat | {lng: number, lat: number} | {lon: number, lat: number} | [number, number])
-  setCenter({ coords, regionType }) {
-    if (!this.map || !coords) {
-      return;
+  async setCenter({ coords, regionType }) {
+    if (!coords) {
+      throw new Error('No coordinates specified in setCenter');
     }
+
+    await this.await_map_loaded();
 
     // We currently just take the first element in place_type if array
     // FIXME: We should choose either the smallest or largest region type instead
@@ -74,11 +80,19 @@ class MapboxManager {
     }
   }
 
-  addMarkerRefToMap(markerRef) {
-    if (!this.map) {
-      return;
-    }
+  async addMarkerRefToMap(markerRef) {
+    await this.await_map_loaded();
     markerRef.current.addTo(this.map);
+  }
+
+  async await_map_loaded() {
+    if (!this.map) {
+      await this.mapLoadPromise;
+    }
+
+    if (!this.map) {
+      throw new Error("Something went wrong. Couldn't load map.");
+    }
   }
 }
 

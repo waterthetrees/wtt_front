@@ -89,7 +89,6 @@ export default function Map({
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
-  const hasInitialFlyToFired = useRef(false);
 
   const initialLoadTreeId = useRef(
     new URLSearchParams(window.location.hash.slice(1)).get('id'),
@@ -98,7 +97,7 @@ export default function Map({
   // since it kicks off only once on load!
   const { data: initialLoadTreeData } = useTreeQuery(
     { id: initialLoadTreeId.current },
-    { retry: 0, enabled: isMapLoaded && !!initialLoadTreeId },
+    { retry: 0, enabled: !!initialLoadTreeId.current },
   );
 
   // TODO: maybe use a class for Map so that event handlers bound to the instance can look at
@@ -252,19 +251,15 @@ export default function Map({
   }, [map, containerRef]);
 
   useEffect(() => {
-    if (!isMapLoaded || hasInitialFlyToFired.current) {
-      return;
-    }
     if (initialLoadTreeData) {
       const { lng, lat, id } = initialLoadTreeData;
       mapboxManager.setCenter({
         coords: { lng, lat },
         regionType: REGION_TYPES.LATLONG,
       });
-      hasInitialFlyToFired.current = true;
       setCurrentTreeId(id);
     }
-  }, [isMapLoaded, map, initialLoadTreeData, setCurrentTreeId]);
+  }, [initialLoadTreeData, mapboxManager, setCurrentTreeId]);
 
   if (!isMapboxSupported) {
     return unsupportedError;
