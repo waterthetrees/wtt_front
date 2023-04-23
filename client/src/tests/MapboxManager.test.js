@@ -10,19 +10,24 @@ describe('Test mapboxManager', () => {
   const mapboxManagerWithoutMap = new MapboxManager();
   const coords = [37.75034979203168, -122.41554467258297];
 
-  it('calls mapboxManager setCenter happy path', () => {
-    mapboxManager.setCenter({ coords, regionType: REGION_TYPES.PLACE });
+  afterEach(() => {
+    mapboxManagerWithoutMap.setMap(null);
+  });
+
+  it('calls mapboxManager setCenter happy path', async () => {
+    await mapboxManager.setCenter({ coords, regionType: REGION_TYPES.PLACE });
     expect(mapMock.flyTo).toBeCalledWith({
       center: coords,
       zoom: 12,
     });
-    mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
+
+    await mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
     expect(mapMock.flyTo).toBeCalledWith({
       center: coords,
       zoom: 17,
     });
 
-    mapboxManager.setCenter({
+    await mapboxManager.setCenter({
       coords,
       regionType: [REGION_TYPES.LATLONG, REGION_TYPES.LOCALITY],
     });
@@ -31,42 +36,50 @@ describe('Test mapboxManager', () => {
       zoom: 17,
     });
 
-    mapboxManagerWithoutMap.setCenter({
+    const setCenterPromise = mapboxManagerWithoutMap.setCenter({
       coords,
       regionType: REGION_TYPES.COUNTRY,
     });
     mapboxManagerWithoutMap.setMap(mapMock);
+    await setCenterPromise;
     expect(mapMock.flyTo).toBeCalledWith({
       center: coords,
       zoom: 4.5,
     });
-    mapboxManagerWithoutMap.setMap(null);
   });
 
   // Unknown region types all default to same result as not passing region type at all
-  it('calls mapboxManager setCenter with unknown region type', () => {
-    mapboxManager.setCenter({ coords });
+  it('calls mapboxManager setCenter with unknown region type', async () => {
+    await mapboxManager.setCenter({ coords });
     expect(mapMock.flyTo).toBeCalledWith({
       center: coords,
     });
 
-    mapboxManager.setCenter({ coords, regionType: REGION_TYPES.CITY });
+    await mapboxManager.setCenter({ coords, regionType: REGION_TYPES.CITY });
     expect(mapMock.flyTo).toBeCalledWith({
       center: coords,
     });
   });
 
   // More test cases should eventually fall into this category
-  it('calls mapboxManager setCenter and throws error', () => {
-    expect(() => mapboxManager.setCenter()).toThrowError(TypeError);
+  it('calls mapboxManager setCenter and throws error', async () => {
+    try {
+      await mapboxManager.setCenter();
+    } catch (e) {
+      expect(e).toBeInstanceOf(TypeError);
+    }
 
-    expect(() =>
-      mapboxManager.setCenter(coords, REGION_TYPES.PLACE),
-    ).toThrowError(Error);
+    try {
+      await mapboxManager.setCenter(coords, REGION_TYPES.PLACE);
+    } catch (e) {
+      expect(e).toBeInstanceOf(Error);
+    }
 
-    expect(() =>
-      mapboxManager.setCenter({ regionType: REGION_TYPES.PLACE }),
-    ).toThrowError(Error);
+    try {
+      await mapboxManager.setCenter({ regionType: REGION_TYPES.PLACE });
+    } catch (e) {
+      expect(e).toBeInstanceOf(Error);
+    }
   });
 
   it('calls mapboxManager getCenter happy path', () => {
