@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tag /> spec Renders the Tag component correctly 1`] = `
+<div>
+  <div
+    class="tag"
+  >
+    <div
+      class="tag__green"
+    >
+      Test Tag
+    </div>
+  </div>
+</div>
+`;
