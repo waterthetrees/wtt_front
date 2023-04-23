@@ -319,6 +319,13 @@ function setInitialMapViewport(initialLoadTreeId) {
     mapPos == null &&
     localStorage.getItem('lastVisitedUrl')
   ) {
-    window.location = localStorage.getItem('lastVisitedUrl');
+    try {
+      window.location = localStorage.getItem('lastVisitedUrl');
+    } catch (e) {
+      console.error(
+        'Error when attempting to retrieve item from local storage',
+        e,
+      );
+    }
   }
 }
