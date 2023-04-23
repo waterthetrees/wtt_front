@@ -44,10 +44,10 @@ export default function GeolocateControl() {
   const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
-    if (isTracking) {
+    if (isTracking && coords) {
       mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
     }
-  }, [isTracking]);
+  }, [isTracking, coords, mapboxManager]);
 
   const handleClick = () => {
     if (isTracking) {
