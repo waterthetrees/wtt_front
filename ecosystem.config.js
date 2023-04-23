@@ -17,7 +17,7 @@ module.exports = {
       ref: 'origin/main',
       'pre-deploy-local': '',
       'post-deploy':
-        'npm install && pm2 reload ecosystem.config.js --env production',
+        'npm ci --omit=optional && pm2 reload ecosystem.config.js --env production',
       'pre-setup': '',
     },
     development: {
