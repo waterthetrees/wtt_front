@@ -30,6 +30,17 @@ describe('Test mapboxManager', () => {
       center: coords,
       zoom: 17,
     });
+
+    mapboxManagerWithoutMap.setCenter({
+      coords,
+      regionType: REGION_TYPES.COUNTRY,
+    });
+    mapboxManagerWithoutMap.setMap(mapMock);
+    expect(mapMock.flyTo).toBeCalledWith({
+      center: coords,
+      zoom: 4.5,
+    });
+    mapboxManagerWithoutMap.setMap(null);
   });
 
   // Unknown region types all default to same result as not passing region type at all
@@ -45,22 +56,17 @@ describe('Test mapboxManager', () => {
     });
   });
 
-  it('calls mapboxManager setCenter and quietly fails', () => {
-    mapboxManager.setCenter(coords, REGION_TYPES.PLACE);
-    expect(mapMock.flyTo).not.toBeCalled();
-
-    mapboxManager.setCenter({ regionType: REGION_TYPES.PLACE });
-    expect(mapMock.flyTo).not.toBeCalled();
-
-    mapboxManagerWithoutMap.setCenter({
-      coords,
-      regionType: REGION_TYPES.PLACE,
-    });
-  });
-
   // More test cases should eventually fall into this category
   it('calls mapboxManager setCenter and throws error', () => {
     expect(() => mapboxManager.setCenter()).toThrowError(TypeError);
+
+    expect(() =>
+      mapboxManager.setCenter(coords, REGION_TYPES.PLACE),
+    ).toThrowError(Error);
+
+    expect(() =>
+      mapboxManager.setCenter({ regionType: REGION_TYPES.PLACE }),
+    ).toThrowError(Error);
   });
 
   it('calls mapboxManager getCenter happy path', () => {
