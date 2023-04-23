@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo, useContext, createContext } from 'react';
+import React, { createContext, useContext, useMemo, useReducer } from 'react';
 
 const newTreeInitialState = {
   coords: null,

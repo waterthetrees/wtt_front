@@ -1,10 +1,11 @@
 import React, {
-  useReducer,
-  useMemo,
-  useContext,
   createContext,
+  useContext,
   useEffect,
+  useMemo,
+  useReducer,
 } from 'react';
+
 import { useGeolocation } from '@/pages/UserLocation/useGeolocation';
 
 const initialState = {
@@ -34,7 +35,7 @@ const UserLocationProvider = (props) => {
   const [state, dispatch] = useReducer(userLocationReducer, {
     ...initialState,
   });
-  const { data } = useGeolocation({
+  const { data, getCurrentPosition } = useGeolocation({
     enabled: state.isTracking,
     // Only update the position as the user moves if tracking is on.
     watching: state.isTracking,
@@ -43,6 +44,7 @@ const UserLocationProvider = (props) => {
   const context = useMemo(
     () => ({
       state,
+      getCurrentPosition,
       setCoords(coords) {
         dispatch({ type: 'setCoords', payload: coords });
       },
@@ -53,7 +55,7 @@ const UserLocationProvider = (props) => {
         dispatch({ type: 'endTracking' });
       },
     }),
-    [state, dispatch],
+    [state, dispatch, getCurrentPosition],
   );
 
   useEffect(() => {

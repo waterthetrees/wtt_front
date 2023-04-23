@@ -15,6 +15,11 @@ export const useGeolocation = ({
   const watchID = useRef(null);
   const geoOptions = { maximumAge, timeout, enableHighAccuracy };
 
+  const getCurrentPosition = () =>
+    new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, geoOptions);
+    });
+
   useEffect(() => {
     let didCancel = false;
 
@@ -42,17 +47,9 @@ export const useGeolocation = ({
         clearWatch();
       }
 
-      if (enabled) {
-        if (watching) {
-          if (!watchID.current) {
-            watchID.current = navigator.geolocation.watchPosition(
-              handleSuccess,
-              handleError,
-              geoOptions,
-            );
-          }
-        } else {
-          navigator.geolocation.getCurrentPosition(
+      if (enabled && watching) {
+        if (!watchID.current) {
+          watchID.current = navigator.geolocation.watchPosition(
             handleSuccess,
             handleError,
             geoOptions,
@@ -70,5 +67,6 @@ export const useGeolocation = ({
   return {
     data,
     error,
+    getCurrentPosition,
   };
 };

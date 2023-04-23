@@ -35,6 +35,7 @@ export default function GeolocateControl() {
     state: { coords, isTracking },
     beginTracking,
     endTracking,
+    getCurrentPosition,
   } = useUserLocation();
   const {
     newTreeState: { isPlanting, isFollowingUser },
@@ -44,12 +45,12 @@ export default function GeolocateControl() {
   const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
-    if (isTracking && coords) {
+    if (isFollowingUser && coords) {
       mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
     }
-  }, [isTracking, coords, mapboxManager]);
+  }, [isFollowingUser, coords, mapboxManager]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isTracking) {
       if (!isFollowingUser) {
         beginFollowingUser();
@@ -58,6 +59,13 @@ export default function GeolocateControl() {
         endFollowingUser();
       }
     } else {
+      const {
+        coords: { longitude: lng, latitude: lat },
+      } = await getCurrentPosition();
+      mapboxManager.setCenter({
+        coords: { lng, lat },
+        regionType: REGION_TYPES.LATLONG,
+      });
       beginTracking();
       beginFollowingUser();
     }
