@@ -93,11 +93,24 @@ export default function Map({
   const initialLoadTreeId = useRef(
     new URLSearchParams(window.location.hash.slice(1)).get('id'),
   );
+
   // This tree query is intentionally separate from the one in `MapLayout`,
   // since it kicks off only once on load!
-  const { data: initialLoadTreeData } = useTreeQuery(
-    { id: initialLoadTreeId.current },
-    { retry: 0, enabled: !!initialLoadTreeId.current },
+  useTreeQuery(
+    {
+      id: initialLoadTreeId.current,
+    },
+    {
+      retry: 0,
+      enabled: initialLoadTreeId.current != null,
+      onSuccess: ({ lng, lat, id }) => {
+        mapboxManager.setCenter({
+          coords: { lng, lat },
+          regionType: REGION_TYPES.LATLONG,
+        });
+        setCurrentTreeId(id);
+      },
+    },
   );
 
   // TODO: maybe use a class for Map so that event handlers bound to the instance can look at
@@ -115,6 +128,8 @@ export default function Map({
 
   useEffect(() => {
     if (isMapboxSupported && !map && containerRef.current) {
+      setInitialMapViewport(initialLoadTreeId);
+
       const mapboxMap = new mapboxgl.Map({
         container: containerRef.current,
         projection: 'globe',
@@ -241,6 +256,10 @@ export default function Map({
           currentFeature.current = null;
         });
 
+        mapboxMap.on('moveend', () => {
+          localStorage.setItem('lastVisitedUrl', window.location.href);
+        });
+
         setIsMapLoaded(true);
       });
 
@@ -249,17 +268,6 @@ export default function Map({
       mapboxManager.setMap(mapboxMap);
     }
   }, [map, containerRef]);
-
-  useEffect(() => {
-    if (initialLoadTreeData) {
-      const { lng, lat, id } = initialLoadTreeData;
-      mapboxManager.setCenter({
-        coords: { lng, lat },
-        regionType: REGION_TYPES.LATLONG,
-      });
-      setCurrentTreeId(id);
-    }
-  }, [initialLoadTreeData, mapboxManager, setCurrentTreeId]);
 
   if (!isMapboxSupported) {
     return unsupportedError;
@@ -293,4 +301,20 @@ export default function Map({
       </>
     )
   );
+}
+
+// 1. If URL contains a valid id hash param, map ignores the pos in favor of coordinates of tree with id
+// 2. Else if URL contains valid pos hash param, map loads in with passed in LatLng and zoom
+// 3. Otherwise, center map around the user’s last map url params if available
+// See https://docs.google.com/document/d/1MSSbkCo77VCE9tHZdWKAr8lfrBpRF_1AEMptInFjUBI/edit#
+function setInitialMapViewport(initialLoadTreeId) {
+  const mapPos = new URLSearchParams(window.location.hash.slice(1)).get('pos');
+
+  if (
+    initialLoadTreeId.current == null &&
+    mapPos == null &&
+    localStorage.getItem('lastVisitedUrl')
+  ) {
+    window.location = localStorage.getItem('lastVisitedUrl');
+  }
 }
