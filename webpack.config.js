@@ -6,7 +6,6 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { configure } = require('@testing-library/react');
 
 module.exports = (env) => {
   // Generate config functions for production and analyze env variables
@@ -17,7 +16,7 @@ module.exports = (env) => {
   // Save the config into a variable so that we can wrap it with SpeedMeasurePlugin
   // below if env.analyze is true
   const config = {
-    mode: ifProduction() ? 'production' : 'development',
+    mode: ifProduction('production', 'development'),
     // watch: true,
     entry: './client/src/index.js',
     resolve: {
@@ -119,13 +118,13 @@ module.exports = (env) => {
       ]),
     },
     plugins: removeEmpty([
-      ifNotProduction() && new ReactRefreshWebpackPlugin(),
+      ifNotProduction(new ReactRefreshWebpackPlugin()),
       new HtmlWebPackPlugin({
         favicon:
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
-        minify: ifNotProduction() ? false : true,
+        minify: !ifNotProduction(),
         // add a timestamp that's injected into an HTML comment
         buildTime: new Date().toISOString(),
         title: 'Hot Module Replacement',
