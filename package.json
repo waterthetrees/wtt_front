@@ -49,7 +49,6 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@testing-library/jest-dom": "^5.16.5",
     "@storybook/testing-library": "^0.1.0",
-    "@storybook/testing-react": "^2.0.0",
     "@testing-library/react": "^14.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@testing-library/user-event": "^14.4.3",
