@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageLoad Renders the ImageLoad component correctly 1`] = `
+<div>
+  <img
+    alt="Sample image"
+    loading="lazy"
+    placeholder="http://example.com/placeholder.jpg"
+    style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
+  />
+</div>
+`;

@@ -1,3 +1,5 @@
+// TODO - refactor and break up this file
+
 const fs = require('fs');
 const path = require('path');
 
@@ -35,7 +37,7 @@ function writeJSTemplate(name, data) {
   const filename = `${name}.js`;
   const filePath = path.resolve(outputPath, filename);
 
-  console.log(`[build:data] Writing ${filename}.`);
+  console.info(`[build:data] Writing ${filename}.`);
 
   return fs.writeFileSync(filePath, jsTemplate(name, data), 'utf8');
 }
@@ -97,10 +99,15 @@ async function buildScientificNameToImageMap(names) {
     requestURL.search = new URLSearchParams({
       action: 'query',
       format: 'json',
-      prop: 'pageimages',
       piprop: 'thumbnail',
+      titles: titles,
+      utf8: '1',
+      origin: '*',
+      formatversion: '2',
       pithumbsize: '600',
-      titles,
+      exintro: 'true',
+      explaintext: 'true',
+      prop: 'info|extracts|pageimages',
     });
 
     return requestURL;
@@ -119,7 +126,7 @@ async function buildScientificNameToImageMap(names) {
     return response.json();
   }
 
-  async function getImages(requestURLs) {
+  async function getWikiDataImages(requestURLs) {
     const images = {};
     const responsesMap = requestURLs.map((url) => getResponseJSON(url));
     const responses = await Promise.all(responsesMap);
@@ -128,9 +135,20 @@ async function buildScientificNameToImageMap(names) {
       return accumulator.concat(...Object.values(pages));
     }, []);
 
-    Object.values(allPages).forEach((page) => {
-      const { title, thumbnail: { source } = {} } = page;
-      images[title] = source;
+    // download Images and save to assets
+    Object.values(allPages).forEach(async (page) => {
+      const { title, fullurl, extract, thumbnail: { source } = {} } = page;
+      images[title] = { imageURL: source, fullurl, extract, title };
+      let count = 0;
+      if (source && title) {
+        const imageDownload = await downloadImage(source, title);
+        if (await imageDownload) {
+          images[title].imageFileName = imageDownload;
+        }
+      } else if (title) {
+        count = count + 1;
+        images[title].count = count;
+      }
     });
 
     const allNormalized = responses.reduce((accumulator, response) => {
@@ -147,7 +165,7 @@ async function buildScientificNameToImageMap(names) {
   }
 
   const requestURLs = getRequestURLs(names);
-  return getImages(requestURLs);
+  return getWikiDataImages(requestURLs);
 }
 
 const trees = [];
@@ -214,6 +232,53 @@ function replaceIrregularNames(name) {
   return name === '\b' ? '' : name;
 }
 
+async function downloadImage(imageURL, title) {
+  try {
+    const response = await fetch(imageURL);
+    if (!response.ok) {
+      throw new Error(`Failed to download image: ${response.statusText}`);
+    }
+
+    const dataDir = './client/src/assets/images/data';
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
+    const imageName = `${title.split(' ').join('-')}.jpg`;
+    const buffer = await response.arrayBuffer();
+    fs.writeFileSync(`${dataDir}/${imageName}`, Buffer.from(buffer));
+
+    console.info(`Downloaded and saved image: ${imageName}`);
+    return imageName;
+  } catch (error) {
+    console.error(`Error downloading ${imageURL} - ${error.message}`);
+  }
+}
+
+// TODO - Fix this to use the iNaturalist API in a stable way, doesn't always work
+async function fetchImagesForScientificName(scientificName) {
+  const response = await fetch(
+    `https://api.inaturalist.org/v1/taxa/autocomplete?q=${encodeURIComponent(
+      scientificName,
+    )}`,
+  );
+  const data = await response.json();
+  const taxon = data.results[0];
+
+  if (!taxon) {
+    console.error(`No taxon found for scientific name: ${scientificName}`);
+    return [];
+  }
+
+  const taxonId = taxon.id;
+  const photosResponse = await fetch(
+    `https://api.inaturalist.org/v1/observations?taxon_id=${taxonId}&photos=true&per_page=1`,
+  );
+  const photosData = await photosResponse.json();
+
+  return photosData;
+}
+
 async function buildImagesMap(trees) {
   const scientificNames = trees.map((tree) => tree.scientific);
   const uniqueScientificNames = [...new Set(scientificNames)];
@@ -224,7 +289,7 @@ buildImagesMap(trees).then((data) => {
   const formattedData = JSON.stringify(data, null, 2);
   const filename = 'treeImages.json';
   const output = path.resolve(outputPath, filename);
-  console.log(`[build:data] Writing ${filename}.`);
+  console.info(`[build:data] Writing ${filename}.`);
   fs.writeFileSync(output, formattedData);
 });
 
