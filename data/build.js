@@ -239,12 +239,15 @@ async function downloadImage(imageURL, title) {
       throw new Error(`Failed to download image: ${response.statusText}`);
     }
 
+    const dataDir = './client/src/assets/images/data';
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
     const imageName = `${title.split(' ').join('-')}.jpg`;
     const buffer = await response.arrayBuffer();
-    fs.writeFileSync(
-      `./client/src/assets/images/data/${imageName}`,
-      Buffer.from(buffer),
-    );
+    fs.writeFileSync(`${dataDir}/${imageName}`, Buffer.from(buffer));
+
     console.info(`Downloaded and saved image: ${imageName}`);
     return imageName;
   } catch (error) {
