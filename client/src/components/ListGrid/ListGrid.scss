@@ -2,6 +2,7 @@
   &__list {
     display: grid;
     grid-column: span 2;
+    background-color: white;
   }
   
   &__columnheader {
@@ -11,10 +12,6 @@
     grid-auto-flow: dense;
     border-bottom: 3px solid gray;
   }
-
-  // &__city {
-  //   white-space: nowrap;
-  // }
   
   &__columnheader-btn {
     font-weight: bold;
