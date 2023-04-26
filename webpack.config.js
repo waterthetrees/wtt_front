@@ -149,7 +149,7 @@ module.exports = (env) => {
   // modifies the original object, so pass it a copy of config so we keep the
   // unmodified original.
   return ifAnalyze(
-    new SpeedMeasurePlugin().wrap(config),
+    new SpeedMeasurePlugin().wrap({ plugins: config.plugins, resolve: config.resolve }),
     config,
   );
 };
