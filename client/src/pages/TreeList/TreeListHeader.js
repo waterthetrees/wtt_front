@@ -1,11 +1,14 @@
+import { FormControl, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
-import { dataSources } from './dataArrays';
-import { MenuItem, FormControl, Select } from '@mui/material';
-import { useIsMobile } from '../NewTree/utilities';
-import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
+
 import { ButtonShowHide } from '@/components/Button';
 import { Toggle } from '@/components/Form';
-import TreeListCheckboxes from './TreeListCheckboxes';
+import { SearchBar, searchArray } from '@/components/SearchBar/SearchBar';
+
+import { useIsMobile } from '../NewTree/utilities';
+import TreeListFilters from './TreeListFilters';
+import { dataSources } from './dataArrays';
+
 import './TreeList.scss';
 
 const checkboxCategories = {
@@ -97,7 +100,11 @@ export default function TreeListHeader({
     setSearch(searchValue);
     const searchSubset = searchArray(data, searchValue);
     const filteredDataNew = filterData(searchSubset, checkboxes);
-    setFilteredData(filteredDataNew);
+    if (filteredDataNew?.length === 0) {
+      setFilteredData(['no results']);
+    } else {
+      setFilteredData(filteredDataNew);
+    }
   };
 
   return (
@@ -120,7 +127,11 @@ export default function TreeListHeader({
             />
           </FormControl>
           {isMobile && (
-            <ButtonShowHide showMore={showMore} setShowMore={setShowMore} />
+            <ButtonShowHide
+              showMore={showMore}
+              setShowMore={setShowMore}
+              data-testid="button-showhide"
+            />
           )}
         </div>
 
@@ -148,7 +159,7 @@ export default function TreeListHeader({
         )}
       </div>
       {showMore && (
-        <TreeListCheckboxes
+        <TreeListFilters
           setFilteredData={setFilteredData}
           data={data}
           search={search}

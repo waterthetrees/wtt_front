@@ -1,16 +1,22 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import treeImages from '@/data/dist/treeImages.json';
-import './TreeList.scss';
-import { ImageLoad } from '@/pages/Tree/TreeImage';
-import { dataSources } from './dataArrays';
 import { ArrowBack, Download } from '@mui/icons-material';
+import React from 'react';
 import { CSVLink } from 'react-csv';
+import { Link, useLocation } from 'react-router-dom';
+
 import { WttButton } from '@/components/Button/Button';
 import { Tag } from '@/components/Tag/Tag';
+import treeImages from '@/data/dist/treeImages.json';
+import { ImageLoad } from '@/pages/Tree/TreeImage';
 
-const capFirstLetterAndSpace = (word) =>
-  word.at(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
+import { dataSources } from './dataArrays';
+
+import './TreeList.scss';
+
+export const capFirstLetterAndSpace = (word) => {
+  if (!word) return '';
+  if (!word.includes(' ')) return word;
+  return word.at(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
+};
 
 export default function TreePage() {
   const { state } = useLocation();

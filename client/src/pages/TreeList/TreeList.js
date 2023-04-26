@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import TreeListHeader from './TreeListHeader';
-import TreeListCards from './TreeListCards';
-import SubHeader from '@/components/SubHeader/SubHeader';
-import './TreeList.scss';
-import { dataSources } from './dataArrays';
-import { ListGrid } from '@/components/ListGrid/ListGrid';
-import LicenseFooter from '@/pages/License/LicenseFooter';
-import { useIsMobile } from '../NewTree/utilities';
 import { clsx } from 'clsx';
+import React, { useEffect, useState } from 'react';
+
+import { ListGrid } from '@/components/ListGrid/ListGrid';
+import SubHeader from '@/components/SubHeader/SubHeader';
+import LicenseFooter from '@/pages/License/LicenseFooter';
+
+import { useIsMobile } from '../NewTree/utilities';
+import TreeListCards from './TreeListCards';
+import TreeListHeader from './TreeListHeader';
+import { dataSources } from './dataArrays';
+
+import './TreeList.scss';
 
 export default function TreeList() {
   const isMobile = useIsMobile();
@@ -35,7 +38,7 @@ export default function TreeList() {
   return (
     <div className="treelist">
       <div className="treelist__header">
-        <SubHeader>
+        <SubHeader id="treelist__header">
           <TreeListHeader
             setFilteredData={setFilteredData}
             setSelectedDataSourceIndex={setSelectedDataSourceIndex}

@@ -1,10 +1,14 @@
 import React from 'react';
-import { Card } from '../../components/Card/Card';
 import { NavLink } from 'react-router-dom';
-import { ImageLoad, fixScientificForImage } from '@/pages/Tree/TreeImage';
+
 import { Tag } from '@/components/Tag/Tag';
+import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
+
+import { Card } from '../../components/Card/Card';
 import { dataSources } from './dataArrays';
+
 import './TreeList.scss';
+
 const routeName = 'tree';
 
 const HEADING_TEXT = `We encourage you to plant medium and larger-sized trees, as they
@@ -36,7 +40,7 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
           const nameFormatted = tree?.common?.toLowerCase().replace(/ /g, '-');
           const urlRoute = `/${routeName}/${nameFormatted}`;
           const { scientific, common, height, deciduousEvergreen } = tree;
-          const treeImagePath = fixScientificForImage(scientific);
+          const treeImagePath = setFormatImagePath(scientific);
           const tagVariant =
             deciduousEvergreen === 'deciduous' ? 'brown' : 'green';
 
