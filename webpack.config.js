@@ -124,7 +124,7 @@ module.exports = (env) => {
           './client/src/assets/images/favicons/wtt-christmas-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
-        minify: !ifNotProduction(),
+        minify: ifProduction(),
         // add a timestamp that's injected into an HTML comment
         buildTime: new Date().toISOString(),
         title: 'Hot Module Replacement',
@@ -149,7 +149,10 @@ module.exports = (env) => {
   // modifies the original object, so pass it a copy of config so we keep the
   // unmodified original.
   return ifAnalyze(
-    new SpeedMeasurePlugin().wrap({ plugins: config.plugins, resolve: config.resolve }),
+    new SpeedMeasurePlugin().wrap({
+      plugins: config.plugins,
+      resolve: config.resolve,
+    }),
     config,
   );
 };
