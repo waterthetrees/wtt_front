@@ -51,7 +51,7 @@ const HiddenInput = styled('input')`
   display: none;
 `;
 
-function ImageUploadArea({ uploadURL }) {
+function ImageUploadArea({ uploadURL, handleError }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
@@ -78,8 +78,10 @@ function ImageUploadArea({ uploadURL }) {
     e.stopPropagation();
     const fileName = e.dataTransfer.files[0].name;
     // Only allow jpg files.
-    if (!fileName.match(/\.jpg/))
+    if (!fileName.match(/\.jpg/)) {
+      handleError("Only jpg files are allowed.");
       return;
+    }
     uploadURL(fileName);
     setDragActive(false);
   }
@@ -141,21 +143,19 @@ const ErrorText = styled('p')`
   margin: 1px;
 `;
 
-function ImageUploadDialog({ uploadURL }) {
+function ImageUploadDialog({ uploadURL, handleError }) {
   const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
 
   const submit = () => {
     // Only allow jpg files.
     if (!value.match(/\.jpg/)) {
-      setError(true);
+      handleError("Only jpg files are allowed.");
       setValue("");
       return;
     }
 
     uploadURL(value);
     setValue("");
-    setError(false);
   }
 
   const handleEnter = (e) => {
@@ -165,8 +165,6 @@ function ImageUploadDialog({ uploadURL }) {
   }
 
   const handleChange = (e) => {
-    if (e.target.value && error)
-      setError(false);
     setValue(e.target.value);
   }
 
@@ -190,7 +188,6 @@ function ImageUploadDialog({ uploadURL }) {
           Upload
         </DialogButton>
       </InputBorder>
-      {error && <ErrorText>Invalid URL</ErrorText>}
     </>
   );
 }
@@ -241,8 +238,16 @@ export default function ImageUpload({
   isMobile
 }) {
   const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  function handleErr(msg) {
+    setError(true);
+    setErrMsg(msg);
+  }
 
   function uploadURL(url) {
+    setError(false);
     apiUploadURL(url)
     setIsUploading(true);
   }
@@ -268,11 +273,15 @@ export default function ImageUpload({
       <ImageUploadArea
         uploadURL={uploadURL}
         fileDialog={apiFileDialog}
+        handleError={handleErr}
       />
       {!isMobile &&
         <>
           <p>Or upload from a URL</p>
-          <ImageUploadDialog uploadURL={uploadURL} />
+          <ImageUploadDialog
+            uploadURL={uploadURL}
+            handleError={handleErr}
+          />
         </>
       }
       {isUploading &&
@@ -282,6 +291,7 @@ export default function ImageUpload({
           pollUpload={apiPollUpload}
         />
       }
+      {error && <ErrorText>{errMsg}</ErrorText>}
     </ImageUploadSection>
   )
 }
