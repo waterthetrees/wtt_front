@@ -8,10 +8,12 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import TreePage from '@/pages/TreeList/TreePage';
+import TreePage, {
+  WikipediaExtract,
+  formatWord,
+  getTagVariant,
+} from '@/pages/TreeList/TreePage';
 import { dataSources } from '@/pages/TreeList/dataArrays';
-
-import { capFirstLetterAndSpace } from '../pages/TreeList/TreePage';
 
 const LocationContext = createContext();
 
@@ -50,7 +52,7 @@ const mockTree = {
   availabilityInNurseries: 'Commonly Available',
   common: 'Fremont Cottonwood',
   commonUses: 'Bird Gardens,Butterfly Gardens',
-  deciduousEvergreen: 'Winter Deciduous',
+  deciduousEvergreen: 'DECIDUOUS',
   drainage: 'Fast,Medium,Slow',
   easeOfCare: 'Very Easy',
   floweringSeason: 'Spring,Winter',
@@ -122,49 +124,42 @@ describe('<TreePage /> spec', () => {
     expect(screen.getByLabelText('Download CSV')).toBeInTheDocument();
     expect(screen.getByText(mockDataSources.name)).toBeInTheDocument();
   });
+});
 
-  test('renders tag with correct variant based on deciduous or evergreen value', () => {
-    const deciduousTag = screen.getByText('deciduous');
-    const evergreenTag = screen.getByText('evergreen');
-
-    expect(deciduousTag).toHaveClass('tag__brown');
-    expect(evergreenTag).toHaveClass('tag__green');
-    // const innerDiv = getByText('Test Tag');
-    // expect(innerDiv.className).toContain('tag__brown');
-  });
-
-  test('renders wikipediaExtract if available', () => {
-    // const mockTreeImages = {
-    //   'Test Scientific Name': {
-    //     content: 'Test wikipediaExtract content',
-    //   },
-    // };
-
-    // jest.mock('@/data/dist/treeImages.json', () => mockTreeImages);
-
-    // render(
-    //   <Router>
-    //     <TreePage />
-    //   </Router>,
-    // );
-
-    // expect(screen.getByText('Summary')).toBeInTheDocument();
-    expect(
-      screen.getByText('Test wikipediaExtract content'),
-    ).toBeInTheDocument();
+describe('WikipediaExtract', () => {
+  test('renders WikipediaExtract component', () => {
+    render(<WikipediaExtract extract="Wikipedia Extract" />, {
+      // Override the useLocation hook
+      wrapper: ({ children }) => (
+        <LocationMock value={{ state: mockLocationState }}>
+          {children}
+        </LocationMock>
+      ),
+    });
+    expect(screen.getByText('Wikipedia Extract')).toBeInTheDocument();
   });
 });
 
-describe('capFirstLetterAndSpace', () => {
-  test('returns empty string for undefined input', () => {
-    expect(capFirstLetterAndSpace(undefined)).toBe('');
+describe('getTagVariant', () => {
+  test('returns tag variant', () => {
+    expect(getTagVariant('deciduous')).toBe('brown');
   });
 
-  test('returns input string unchanged if no spaces', () => {
-    expect(capFirstLetterAndSpace('example')).toBe('example');
+  test('returns tag variant', () => {
+    expect(getTagVariant('evergreen')).toBe('green');
+  });
+});
+
+describe('formatWord', () => {
+  test('returns empty string for undefined input', () => {
+    expect(formatWord(undefined)).toBe('');
+  });
+
+  test('returns input string with capped first letter if no spaces', () => {
+    expect(formatWord('example')).toBe('Example');
   });
 
   test('capitalizes first letter and replaces spaces with hypens', () => {
-    expect(capFirstLetterAndSpace('example word')).toBe('Example word');
+    expect(formatWord('example word')).toBe('Example word');
   });
 });

@@ -12,21 +12,29 @@ import { dataSources } from './dataArrays';
 
 import './TreeList.scss';
 
-export const capFirstLetterAndSpace = (word) => {
+export const formatWord = (word) => {
   if (!word) return '';
-  if (!word.includes(' ')) return word;
-  return word.at(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
+  if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
+  let wordFormatted = word.toLowerCase();
+  wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
+  return wordFormatted.replace(/-/g, ' ');
 };
+
+export const getTagVariant = (value) =>
+  value === 'deciduous' ? 'brown' : 'green';
 
 export default function TreePage() {
   const { state } = useLocation();
   const { tree, selectedDataSourceIndex } = state;
   const { scientific } = tree;
+  const formattedScientific = formatWord(scientific);
   const dataSelected = dataSources[selectedDataSourceIndex];
   const { data, name } = dataSelected;
   const csvFileName = `${name.replaceAll(' ', '-')}.csv`;
   const wikipediaExtract =
-    treeImages[scientific]?.content || treeImages[scientific]?.extract || '';
+    treeImages[formattedScientific]?.content ||
+    treeImages[formattedScientific]?.extract ||
+    '';
   return (
     <div className="treepage">
       <div className="treepage__content">
@@ -45,9 +53,9 @@ export default function TreePage() {
         <div className="treepage__content-info">
           {tree &&
             Object.entries(tree).map(([key, value]) => {
-              const cappedKey = capFirstLetterAndSpace(key);
-              const cappedValue = capFirstLetterAndSpace(value);
-              const tagVariant = value === 'deciduous' ? 'brown' : 'green';
+              const cappedKey = formatWord(key);
+              const cappedValue = formatWord(value);
+              const tagVariant = getTagVariant(value);
 
               switch (key) {
                 case 'common':
@@ -89,17 +97,7 @@ export default function TreePage() {
                   );
               }
             })}
-          {wikipediaExtract && (
-            <div className="treepage__content-info-item">
-              <label
-                className="treepage__content-info-item-label"
-                htmlFor={wikipediaExtract}
-              >
-                <h3>Summary</h3>
-              </label>{' '}
-              <p>{wikipediaExtract}</p>
-            </div>
-          )}
+          <WikipediaExtract extract={wikipediaExtract} />
           <div className="treepage__content-info-item">
             <CSVLink data={data} filename={csvFileName}>
               <WttButton
@@ -122,3 +120,15 @@ export default function TreePage() {
     </div>
   );
 }
+
+export const WikipediaExtract = ({ extract }) => {
+  if (!extract) return null;
+  return (
+    <div className="treepage__content-info-item">
+      <label className="treepage__content-info-item-label" htmlFor={extract}>
+        <h3>Summary</h3>
+      </label>{' '}
+      <p>{extract}</p>
+    </div>
+  );
+};

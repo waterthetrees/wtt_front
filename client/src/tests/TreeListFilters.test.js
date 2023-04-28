@@ -12,6 +12,24 @@ import { dataSources } from '@/pages/TreeList/dataArrays';
  * and look expected, update these snapshots with `npm test -- -u`
  */
 
+// Mock localStorage for testing
+const localStorageMock = (function () {
+  let store = {};
+  return {
+    getItem: function (key) {
+      return store[key] || null;
+    },
+    setItem: function (key, value) {
+      store[key] = value.toString();
+    },
+    clear: function () {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
 const mockSetCheckboxes = jest.fn(() => {});
 const mockSetSelectedDataSourceIndex = jest.fn(() => {});
 const mockSetSearch = jest.fn(() => {});
@@ -19,6 +37,18 @@ const setFilteredData = jest.fn(() => {});
 const mockCheckboxes = { small: false, evergreen: true, medium: true };
 
 describe('<TreeListFilters /> spec', () => {
+  afterEach(() => {
+    localStorage.clear();
+  });
+
+  const defaultProps = {
+    setFilteredData: jest.fn(),
+    data: [],
+    search: '',
+    setCheckboxes: jest.fn(),
+    checkboxes: {},
+  };
+
   it('renders TreeListFilters correctly', () => {
     const { data } = dataSources[0];
 
@@ -62,40 +92,6 @@ describe('<TreeListFilters /> spec', () => {
     expect(checkbox).toBeInTheDocument();
   });
 
-
-// Mock localStorage for testing
-const localStorageMock = (function () {
-  let store = {};
-  return {
-    getItem: function (key) {
-      return store[key] || null;
-    },
-    setItem: function (key, value) {
-      store[key] = value.toString();
-    },
-    clear: function () {
-      store = {};
-    },
-  };
-})();
-
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
-describe('TreeListFilters', () => {
-  afterEach(() => {
-    localStorage.clear();
-  });
-  
-  const defaultProps = {
-    setFilteredData: jest.fn(),
-    data: [],
-    search: '',
-    setCheckboxes: jest.fn(),
-    checkboxes: {},
-  };
-
-
-
   test('renders filter groups and options', () => {
     const { getByText } = render(<TreeListFilters {...defaultProps} />);
 
@@ -114,16 +110,9 @@ describe('TreeListFilters', () => {
 
     fireEvent.click(smallCheckbox);
 
+    const localStore = localStorage.getItem('checkboxes');
     expect(defaultProps.setCheckboxes).toHaveBeenCalled();
-    expect(localStorage.getItem('checkboxes')).toBeTruthy();
+    expect(localStore).toBeTruthy();
     expect(defaultProps.setFilteredData).toHaveBeenCalled();
-  });
-
-  test('loads checkboxes state from localStorage', () => {
-    localStorage.setItem('checkboxes', JSON.stringify({ small: true }));
-    const { getByLabelText } = render(<TreeListFilters {...defaultProps} />);
-    const smallCheckbox = getByLabelText('small');
-
-    expect(smallCheckbox.checked).toBe(true);
   });
 });

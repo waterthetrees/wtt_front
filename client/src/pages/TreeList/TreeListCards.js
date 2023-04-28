@@ -54,12 +54,14 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
               key={`${tree?.scientific}-${index}`}
             >
               <Card>
-                <div className="treelistcards__image">
-                  <ImageLoad
-                    src={treeImagePath}
-                    placeholder="placeholder.jpg"
-                  />
-                </div>
+                {treeImagePath && (
+                  <div className="treelistcards__image">
+                    <ImageLoad
+                      src={treeImagePath}
+                      placeholder="placeholder.jpg"
+                    />
+                  </div>
+                )}
                 <h2>{common}</h2>
                 <h4>{scientific}</h4>
                 <div className="treelistcards__item">{height}</div>

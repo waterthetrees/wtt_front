@@ -232,6 +232,14 @@ function replaceIrregularNames(name) {
   return name === '\b' ? '' : name;
 }
 
+export const formatWord = (word) => {
+  if (!word) return '';
+  if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
+  let wordFormatted = word.toLowerCase();
+  wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
+  return wordFormatted.replace(/-/g, ' ');
+};
+
 async function downloadImage(imageURL, title) {
   try {
     const response = await fetch(imageURL);
@@ -244,7 +252,7 @@ async function downloadImage(imageURL, title) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
 
-    const imageName = `${title.split(' ').join('-')}.jpg`;
+    const imageName = `${formatWord(title)}.jpg`;
     const buffer = await response.arrayBuffer();
     fs.writeFileSync(`${dataDir}/${imageName}`, Buffer.from(buffer));
 
