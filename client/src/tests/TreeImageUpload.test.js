@@ -101,12 +101,12 @@ describe("TreeImageUpload", () => {
     const dialogButton = getByRole("button", { name: "Upload" });
     await user.click(dialogButton);
     await waitFor(() =>
-      expect(getByText(/Invalid URL/)).toBeInTheDocument()
+      expect(getByText(/Only jpg/)).toBeInTheDocument()
     );
     await user.keyboard("fakefile.png");
     await user.click(dialogButton);
     await waitFor(() =>
-      expect(getByText(/Invalid URL/)).toBeInTheDocument()
+      expect(getByText(/Only jpg/)).toBeInTheDocument()
     );
   });
 
