@@ -11,6 +11,7 @@ import { mapboxAccessToken } from '@/util/config';
 import { REGION_TYPES } from '@/util/constants';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
 
+import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
 import MapLayers from './MapLayers';
 import MapboxControlPortal from './MapboxControlPortal';
 import TreeLayerLegend from './TreeLayerLegend';
