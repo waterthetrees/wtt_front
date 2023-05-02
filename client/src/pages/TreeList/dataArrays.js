@@ -12,10 +12,6 @@ const dataColumns = [
     label: 'Scientific',
   },
   {
-    columnHeader: 'genus',
-    label: 'Genus',
-  },
-  {
     columnHeader: 'height',
     label: 'Height',
   },
@@ -33,7 +29,7 @@ export const dataSources = [
   {
     name: 'Native California Trees',
     data: topTreesCaliforniaNative,
-    columns: dataColumns.slice(0, 5),
+    columns: dataColumns.slice(0, 4),
     url: 'https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949',
     thanks: '©calscape.org',
     treecare: 'https://vimeo.com/416031708#t=5m35s',
@@ -41,7 +37,7 @@ export const dataSources = [
   {
     name: 'Food Trees',
     data: topTreesUSFood,
-    columns: dataColumns.slice(0, 3),
+    columns: dataColumns.slice(0, 2),
     url: 'https://fallingfruit.org',
     thanks: '©FallingFruit.org',
     treecare: 'https://vimeo.com/416031708#t=5m35s',
@@ -49,7 +45,7 @@ export const dataSources = [
   {
     name: 'San Francisco Street Trees',
     data: topTreesSanFrancisco,
-    columns: dataColumns.slice(0, 6),
+    columns: dataColumns.slice(0, 5),
     url: 'https://www.fuf.net/',
     thanks: '©fuf.net',
     treecare: 'https://www.friendsoftheurbanforest.org/tree-care',
