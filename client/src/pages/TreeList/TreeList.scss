@@ -33,28 +33,28 @@ $borderRadius: 4px;
   }
 
   &__content {
-    padding: 200px 10px;
+    padding: 210px 10px;
   }
 
   &__content-small {
-    padding: 100px 10px;
+    padding: 105px 10px;
   }
 
   @media screen and (max-width: 768px) {
     &__content-small {
-      padding: 135px 10px;
+      padding: 140px 10px;
     }
   }
 
   @media screen and (max-width: 600px) {
     &__content {
-      padding: 225px 10px;
+      padding: 230px 10px;
     }
   }
 
   @media screen and (max-width: 480px) {
     &__content {
-      padding: 310px 5px;
+      padding: 315px 5px;
     }
   }
 }
@@ -96,7 +96,7 @@ $borderRadius: 4px;
     align-items: stretch;
     gap: 10px;
     border-radius: $borderRadius;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
   }
   &__section:first-child {
     background-color: transparent;
@@ -291,6 +291,9 @@ $borderRadius: 4px;
   &__header {
     font-size: large;
   }
+  &__info {
+    padding: 10px;
+  }
 
   &__link {
     break-inside: avoid;
@@ -317,12 +320,11 @@ $borderRadius: 4px;
   }
 
   &__item {
-    color: gray;
+    font-size: 1.2em;
     padding: 0 0.5rem;
   }
 
   &__item:first-letter {
-    font-size: 1em;
     text-transform: uppercase;
   }
 

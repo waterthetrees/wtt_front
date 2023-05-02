@@ -47,8 +47,6 @@ export function createLookup(activeFilters) {
 }
 
 export function filterData(array, checkboxes) {
-  console.log(array, 'array');
-  console.log(checkboxes, 'checkboxes');
   if (Object.keys(checkboxes).length === 0) return array;
   if (array.length === 0) return array;
   const activeFilters = getActiveFilters(checkboxes);
@@ -65,7 +63,6 @@ export function filterData(array, checkboxes) {
       return false;
     });
   });
-  console.log(filteredData, 'filteredData');
   return filteredData;
 }
 

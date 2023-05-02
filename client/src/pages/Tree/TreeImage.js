@@ -81,6 +81,5 @@ export const setFormatImagePath = (scientific) => {
 
   const imagePath = `../../assets/images/data/${scientificNospaces}.jpg`;
   // || treeImages[scientific]?.imageURL;
-  console.log('imagePath', imagePath, treeImages[scientific]?.imageURL);
   return imagePath;
 };

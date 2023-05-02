@@ -23,16 +23,18 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
       <div className="treelistcards__container">
         <div className="treelistcards__header">
           <Card>
-            <h3>{HEADING_TEXT}</h3>
-            <div className="treecare">
-              <a
-                href={dataSources[selectedDataSourceIndex].treecare}
-                target="_blank"
-                className="treelistcards__link"
-                rel="noreferrer"
-              >
-                Tree Care Program
-              </a>
+            <div className="treelistcards__info">
+              <h3>{HEADING_TEXT}</h3>
+              <div className="treecare">
+                <a
+                  href={dataSources[selectedDataSourceIndex].treecare}
+                  target="_blank"
+                  className="treelistcards__link"
+                  rel="noreferrer"
+                >
+                  Tree Care Program
+                </a>
+              </div>
             </div>
           </Card>
         </div>
@@ -65,12 +67,14 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                     />
                   </div>
                 )}
-                <h2>{formatCommon}</h2>
-                <h4 className="scientific">{formatScientific}</h4>
-                <div className="treelistcards__item">{height}</div>
-                {deciduousEvergreen && (
-                  <Tag variant={tagVariant}>{deciduousEvergreen}</Tag>
-                )}
+                <div className="treelistcards__info">
+                  <h2>{formatCommon}</h2>
+                  <h4 className="scientific">{formatScientific}</h4>
+                  <div className="treelistcards__item">{height}</div>
+                  {deciduousEvergreen && (
+                    <Tag variant={tagVariant}>{deciduousEvergreen}</Tag>
+                  )}
+                </div>
               </Card>
             </NavLink>
           );

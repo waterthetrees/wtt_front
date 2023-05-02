@@ -100,7 +100,6 @@ describe('<TreePage /> spec', () => {
         ),
       },
     );
-    console.log('treePage', treePage);
   });
 
   test('renders common name', () => {
@@ -109,10 +108,6 @@ describe('<TreePage /> spec', () => {
 
   test('renders scientific name', () => {
     expect(screen.getByText(mockTree.scientific)).toBeInTheDocument();
-  });
-
-  test('renders genus', () => {
-    expect(screen.getByText(mockTree.genus)).toBeInTheDocument();
   });
 
   test('renders deciduous/evergreen tag', () => {

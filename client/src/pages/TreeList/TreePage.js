@@ -8,25 +8,10 @@ import { Tag } from '@/components/Tag/Tag';
 import treeImages from '@/data/dist/treeImages.json';
 import { ImageLoad } from '@/pages/Tree/TreeImage';
 
+import { formatScientificName, toTitleCase } from '../../util/stringUtils';
 import { dataSources } from './dataArrays';
 
 import './TreeList.scss';
-
-// TODO this needs to be in the build phase, not here
-// export const formatWord = (key, word) => {
-//   if (!word) return '';
-//   if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
-//   let wordFormatted = word.toLowerCase();
-//   if (key === 'common')
-//     wordFormatted = word
-//       .split(' ')
-//       .map((word) => capitalizeFirstLetter(word))
-//       .join(' ');
-//   if (key === 'scientific')
-//     wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
-//   wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
-//   return wordFormatted.replace(/-/g, ' ');
-// };
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -71,21 +56,20 @@ export default function TreePage() {
                 case 'common':
                   return (
                     <div className="treepage__content-info-header" key={key}>
-                      <h1>{value}</h1>
+                      <h1>{toTitleCase(value)}</h1>
                     </div>
                   );
                 case 'scientific':
                   return (
-                    <div className="treepage__content-info-header" key={key}>
-                      <h3>{value}</h3>
+                    <div
+                      className="treepage__content-info-header scientific"
+                      key={key}
+                    >
+                      <h3>{formatScientificName(value)}</h3>
                     </div>
                   );
                 case 'genus':
-                  return (
-                    <div className="treepage__content-info-header" key={key}>
-                      <h4>{value}</h4>
-                    </div>
-                  );
+                  return null;
                 case 'deciduousEvergreen':
                   return (
                     <Tag variant={tagVariant} key={key}>

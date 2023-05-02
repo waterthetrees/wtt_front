@@ -2,6 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
+
+// const { toTitleCase } = Promise.all([import('@/util/stringUtils')]).then(
+//   ([{ default: toTitleCase }]) => ({ toTitleCase }),
+// );
+
 const featureFlags = {
   downloadImages: true,
 };
@@ -63,8 +68,8 @@ function toSource(obj) {
   );
 }
 
-// TODO use functions from utils/stringUtils.js
-// Common Names should be title case. All major words are capitalized, while minor words are lowercased
+// // TODO use functions from utils/stringUtils.js once this is es6
+// // Common Names should be title case. All major words are capitalized, while minor words are lowercased
 function toTitleCase(str) {
   if (!str) return '';
   const wordsToSkip = ['of', 'and', 'the', 'in', 'on'];
@@ -82,7 +87,7 @@ function toTitleCase(str) {
     .join(' ');
 }
 
-// TODO use functions from utils/stringUtils.js
+// TODO use functions from utils/stringUtils.js once this is es6
 // Cultivar should be title case and in single quotes.
 function formatCultivar(cultivar) {
   if (!cultivar) return '';
@@ -91,12 +96,29 @@ function formatCultivar(cultivar) {
   return ` '${titleCasedCultivar}'`;
 }
 
-// TODO use functions from utils/stringUtils.js
-// Scientific naming:
-// Genus name is always capitalized,
-// Species name and any infraspecific epithets are written in lowercase.
-// Cultivar should be capitalized and in single quotes.
-// All should be typically italicized.
+// TODO use functions from utils/stringUtils.js once this is es6
+/**
+ * Formats a scientific name. The Genus name is always capitalized,
+ * Species name and any infraspecific epithets are written in lowercase.
+ * Cultivar should be capitalized and in single quotes.
+ * All should be typically italicized.
+ * @see {@link https://en.wikipedia.org/wiki/Binomial_nomenclature}
+ *
+ * @param {string} scientificName - The scientific name of the tree
+ * @returns {string} - The formatted scientific name
+ *
+ * @example
+ * // returns 'Acer rubrum'
+ * formatScientificName('Acer rubrum')
+ *
+ * @example
+ * // returns 'Quercus alba'
+ * formatScientificName('Quercus alba')
+ *
+ * @example
+ * // returns 'Picea abies \'Nidiformis\''
+ * formatScientificName('Picea abies "Nidiformis"')
+ */
 function formatScientificName(scientificName) {
   if (!scientificName) return '';
 
