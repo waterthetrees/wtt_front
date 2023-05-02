@@ -26,7 +26,7 @@ const defaultProps = {
   setSelectedDataSourceIndex: jest.fn(),
   selectedDataSourceIndex: 0,
   data: [],
-  view: 'list',
+  view: 'column',
   setView: jest.fn(),
   search: '',
   setSearch: jest.fn(),
@@ -47,7 +47,7 @@ describe('<TreeListHeader/> spec', () => {
         setSelectedDataSourceIndex={mockSetSelectedDataSourceIndex}
         setFilteredData={setFilteredData}
         data={data}
-        view={'card'}
+        view={'quilt'}
         setView={mockSetView}
         showMore={true}
         setShowMore={mockSetShowMore}
@@ -79,7 +79,7 @@ describe('<TreeListHeader/> spec', () => {
 
   test('should toggle view when clicked', () => {
     render(<TreeListHeader {...defaultProps} />);
-    const toggleButton = screen.getByTestId('list-toggle-button');
+    const toggleButton = screen.getByTestId('column-toggle-button');
     fireEvent.click(toggleButton);
     expect(defaultProps.setView).toHaveBeenCalled();
   });
@@ -147,7 +147,7 @@ describe('<TreeListHeader/> spec', () => {
 
   test('should render Toggle component when showMore is true', () => {
     render(<TreeListHeader {...defaultProps} />);
-    const toggleComponent = screen.getByTestId('list-toggle-button');
+    const toggleComponent = screen.getByTestId('column-toggle-button');
     expect(toggleComponent).toBeInTheDocument();
   });
 });

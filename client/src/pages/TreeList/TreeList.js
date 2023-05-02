@@ -15,7 +15,7 @@ import './TreeList.scss';
 export default function TreeList() {
   const isMobile = useIsMobile();
   const [showMore, setShowMore] = useState(!isMobile);
-  const [view, setView] = useState(localStorage.getItem('view') || 'card');
+  const [view, setView] = useState(localStorage.getItem('view') || 'quilt');
   const [search, setSearch] = useState('');
 
   const [selectedDataSourceIndex, setSelectedDataSourceIndex] = useState(
@@ -54,13 +54,13 @@ export default function TreeList() {
         </SubHeader>
       </div>
       <div className={treeListContentStyle}>
-        {view === 'card' && (
+        {view === 'quilt' && (
           <TreeListCards
             data={filteredData}
             selectedDataSourceIndex={selectedDataSourceIndex}
           />
         )}
-        {view === 'list' && (
+        {view === 'column' && (
           <ListGrid data={filteredData} columns={columns} listType="data" />
         )}
       </div>

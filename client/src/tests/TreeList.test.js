@@ -33,13 +33,15 @@ describe('<TreeList/> spec', () => {
     expect(screen.getByText(/license/i)).toBeInTheDocument();
   });
 
-  test('switches between card and list views', () => {
-    const viewSwitcher = screen.getByLabelText('card');
+  test('switches between column and quilt views', () => {
+    const defaultView = 'quilt';
+    const newView = 'column';
+    const viewSwitcher = screen.getByLabelText(defaultView);
     fireEvent.click(viewSwitcher);
-    expect(screen.getByLabelText('list')).toBeInTheDocument();
+    expect(screen.getByLabelText(newView)).toBeInTheDocument();
 
     fireEvent.click(viewSwitcher);
-    expect(screen.getByLabelText('card')).toBeInTheDocument();
+    expect(screen.getByLabelText(defaultView)).toBeInTheDocument();
   });
 
   test('filters data based on search input', () => {
