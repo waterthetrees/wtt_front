@@ -1,4 +1,5 @@
 .tag {
+  $self: &;
   margin: 0.5rem;
   color: white;
   font-size: small;
@@ -7,14 +8,26 @@
   color: white;
   width: fit-content;
 
-  &__brown {
-    background-color: #795548;
+  &__pill {
     border-radius: 15px;
     padding: 5px 10px;
   }
+  &__brown {
+    background-color: #795548;
+  }
   &__green {
     background-color: green;
-    border-radius: 15px;
-    padding: 5px 10px;
+  }
+  &__blue {
+    background-color: #003972;
+  }
+  &__red {
+    background-color: #3b0000;
+  }
+  &__darkbrown {
+    background-color: brown;
+  }
+  &__black {
+    background-color: black;
   }
 }

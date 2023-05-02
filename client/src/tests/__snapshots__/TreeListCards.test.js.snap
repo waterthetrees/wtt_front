@@ -81,9 +81,9 @@ first three years to establish their roots.
                   class="tag"
                 >
                   <div
-                    class="tag__green"
+                    class="tag__pill tag__green"
                   >
-                    Evergreen
+                    evergreen
                   </div>
                 </div>
               </div>
@@ -128,7 +128,7 @@ first three years to establish their roots.
                   class="tag"
                 >
                   <div
-                    class="tag__green"
+                    class="tag__pill tag__green"
                   >
                     evergreen
                   </div>
@@ -217,9 +217,9 @@ first three years to establish their roots.
                 class="tag"
               >
                 <div
-                  class="tag__green"
+                  class="tag__pill tag__green"
                 >
-                  Evergreen
+                  evergreen
                 </div>
               </div>
             </div>
@@ -264,7 +264,7 @@ first three years to establish their roots.
                 class="tag"
               >
                 <div
-                  class="tag__green"
+                  class="tag__pill tag__green"
                 >
                   evergreen
                 </div>

@@ -17,6 +17,22 @@ provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
 first three years to establish their roots.`;
 
+export function getDormancyTagColor(dormancy) {
+  switch (dormancy) {
+    case 'evergreen':
+      return 'green';
+    case 'deciduous':
+      return 'brown';
+    case 'winter-deciduous':
+      return 'blue';
+    case 'summer-deciduous':
+    case 'summer-semi-deciduous':
+      return 'brown';
+    default:
+      return 'black';
+  }
+}
+
 export default function TreeListCards({ data, selectedDataSourceIndex }) {
   return (
     <div className="treelistcards">
@@ -44,8 +60,8 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
           const urlRoute = `/${routeName}/${nameFormatted}`;
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
-          const tagVariant =
-            deciduousEvergreen === 'deciduous' ? 'brown' : 'green';
+          const dormancy = deciduousEvergreen?.toLowerCase().replace(/ /g, '-');
+          const tagVariant = getDormancyTagColor(dormancy);
           const formatCommon = toTitleCase(common);
           const formatScientific = formatScientificName(scientific);
 
@@ -72,7 +88,7 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                   <h4 className="scientific">{formatScientific}</h4>
                   <div className="treelistcards__item">{height}</div>
                   {deciduousEvergreen && (
-                    <Tag variant={tagVariant}>{deciduousEvergreen}</Tag>
+                    <Tag variant={tagVariant}>{dormancy}</Tag>
                   )}
                 </div>
               </Card>
