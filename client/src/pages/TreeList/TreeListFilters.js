@@ -11,7 +11,7 @@ const checkboxCategories = {
     category: 'height',
     options: ['small', 'medium', 'large'],
   },
-  Type: {
+  Dormancy: {
     category: 'deciduousEvergreen',
     options: ['evergreen', 'deciduous'],
   },

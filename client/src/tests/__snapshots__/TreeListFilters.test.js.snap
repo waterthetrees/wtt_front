@@ -64,7 +64,7 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
           <h3
             class="treelistfilters__filter-title"
           >
-            Type
+            Dormancy
           </h3>
           <div
             class="treelistfilters__filter-item"
@@ -159,7 +159,7 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
         <h3
           class="treelistfilters__filter-title"
         >
-          Type
+          Dormancy
         </h3>
         <div
           class="treelistfilters__filter-item"

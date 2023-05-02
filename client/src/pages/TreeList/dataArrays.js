@@ -1,6 +1,6 @@
 import { topTreesCaliforniaNative } from '@/data/dist/topTreesCaliforniaNative';
-import { topTreesUSFood } from '@/data/dist/topTreesUSFood';
 import { topTreesSanFrancisco } from '@/data/dist/topTreesSanFrancisco';
+import { topTreesUSFood } from '@/data/dist/topTreesUSFood';
 
 const dataColumns = [
   {
@@ -21,7 +21,7 @@ const dataColumns = [
   },
   {
     columnHeader: 'deciduousEvergreen',
-    label: 'Deciduous or Evergreen',
+    label: 'Dormancy',
   },
   {
     columnHeader: 'notes',

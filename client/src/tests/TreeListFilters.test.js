@@ -99,7 +99,7 @@ describe('<TreeListFilters /> spec', () => {
     expect(getByText('small')).toBeInTheDocument();
     expect(getByText('medium')).toBeInTheDocument();
     expect(getByText('large')).toBeInTheDocument();
-    expect(getByText('Type')).toBeInTheDocument();
+    expect(getByText('Dormancy')).toBeInTheDocument();
     expect(getByText('evergreen')).toBeInTheDocument();
     expect(getByText('deciduous')).toBeInTheDocument();
   });

@@ -677,7 +677,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
                   <h3
                     class="treelistfilters__filter-title"
                   >
-                    Type
+                    Dormancy
                   </h3>
                   <div
                     class="treelistfilters__filter-item"
@@ -5605,7 +5605,7 @@ first three years to establish their roots.
                   <h3
                     class="treelistfilters__filter-title"
                   >
-                    Type
+                    Dormancy
                   </h3>
                   <div
                     class="treelistfilters__filter-item"
@@ -10984,7 +10984,7 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
                 <h3
                   class="treelistfilters__filter-title"
                 >
-                  Type
+                  Dormancy
                 </h3>
                 <div
                   class="treelistfilters__filter-item"
