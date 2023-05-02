@@ -12,13 +12,25 @@ import { dataSources } from './dataArrays';
 
 import './TreeList.scss';
 
-export const formatWord = (word) => {
-  if (!word) return '';
-  if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
-  let wordFormatted = word.toLowerCase();
-  wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
-  return wordFormatted.replace(/-/g, ' ');
-};
+// TODO this needs to be in the build phase, not here
+// export const formatWord = (key, word) => {
+//   if (!word) return '';
+//   if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
+//   let wordFormatted = word.toLowerCase();
+//   if (key === 'common')
+//     wordFormatted = word
+//       .split(' ')
+//       .map((word) => capitalizeFirstLetter(word))
+//       .join(' ');
+//   if (key === 'scientific')
+//     wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
+//   wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
+//   return wordFormatted.replace(/-/g, ' ');
+// };
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export const getTagVariant = (value) =>
   value === 'deciduous' ? 'brown' : 'green';
@@ -27,14 +39,12 @@ export default function TreePage() {
   const { state } = useLocation();
   const { tree, selectedDataSourceIndex } = state;
   const { scientific } = tree;
-  const formattedScientific = formatWord(scientific);
+  // const formattedScientific = formatWord(scientific);
   const dataSelected = dataSources[selectedDataSourceIndex];
   const { data, name } = dataSelected;
   const csvFileName = `${name.replaceAll(' ', '-')}.csv`;
   const wikipediaExtract =
-    treeImages[formattedScientific]?.content ||
-    treeImages[formattedScientific]?.extract ||
-    '';
+    treeImages[scientific]?.content || treeImages[scientific]?.extract || '';
   return (
     <div className="treepage">
       <div className="treepage__content">
@@ -53,33 +63,33 @@ export default function TreePage() {
         <div className="treepage__content-info">
           {tree &&
             Object.entries(tree).map(([key, value]) => {
-              const cappedKey = formatWord(key);
-              const cappedValue = formatWord(value);
+              const cappedKey = capitalizeFirstLetter(key);
+              // const cappedValue = formatWord(key, value);
               const tagVariant = getTagVariant(value);
 
               switch (key) {
                 case 'common':
                   return (
                     <div className="treepage__content-info-header" key={key}>
-                      <h1>{cappedValue}</h1>
+                      <h1>{value}</h1>
                     </div>
                   );
                 case 'scientific':
                   return (
                     <div className="treepage__content-info-header" key={key}>
-                      <h3>{cappedValue}</h3>
+                      <h3>{value}</h3>
                     </div>
                   );
                 case 'genus':
                   return (
                     <div className="treepage__content-info-header" key={key}>
-                      <h4>{cappedValue}</h4>
+                      <h4>{value}</h4>
                     </div>
                   );
                 case 'deciduousEvergreen':
                   return (
                     <Tag variant={tagVariant} key={key}>
-                      {cappedValue}
+                      {value}
                     </Tag>
                   );
                 case 'url':

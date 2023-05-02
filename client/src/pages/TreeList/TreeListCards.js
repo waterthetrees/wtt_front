@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Tag } from '@/components/Tag/Tag';
 import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
+import { formatScientificName, toTitleCase } from '@/util/stringUtils';
 
 import { Card } from '../../components/Card/Card';
 import { dataSources } from './dataArrays';
@@ -43,6 +44,8 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
           const treeImagePath = setFormatImagePath(scientific);
           const tagVariant =
             deciduousEvergreen === 'deciduous' ? 'brown' : 'green';
+          const formatCommon = toTitleCase(common);
+          const formatScientific = formatScientificName(scientific);
 
           return (
             <NavLink
@@ -62,8 +65,8 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                     />
                   </div>
                 )}
-                <h2>{common}</h2>
-                <h4>{scientific}</h4>
+                <h2>{formatCommon}</h2>
+                <h4 className="scientific">{formatScientific}</h4>
                 <div className="treelistcards__item">{height}</div>
                 {deciduousEvergreen && (
                   <Tag variant={tagVariant}>{deciduousEvergreen}</Tag>

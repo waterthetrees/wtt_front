@@ -87,7 +87,7 @@ describe('<TreePage /> spec', () => {
 
   beforeEach(() => {
     useLocation.mockReturnValue({ state: mockLocationState });
-    render(
+    const treePage = render(
       <Router>
         <TreePage />
       </Router>,
@@ -100,12 +100,11 @@ describe('<TreePage /> spec', () => {
         ),
       },
     );
+    console.log('treePage', treePage);
   });
 
   test('renders common name', () => {
-    const commonExists = screen.getByText(mockTree.common);
-    console.log('commonExists', commonExists);
-    expect(commonExists).toBeInTheDocument();
+    expect(screen.getByText(mockTree.common)).toBeInTheDocument();
   });
 
   test('renders scientific name', () => {
@@ -150,16 +149,16 @@ describe('getTagVariant', () => {
   });
 });
 
-describe('formatWord', () => {
-  test('returns empty string for undefined input', () => {
-    expect(formatWord(undefined)).toBe('');
-  });
+// describe('formatWord', () => {
+//   test('returns empty string for undefined input', () => {
+//     expect(formatWord(undefined)).toBe('');
+//   });
 
-  test('returns input string with capped first letter if no spaces', () => {
-    expect(formatWord('example')).toBe('Example');
-  });
+//   test('returns input string with capped first letter if no spaces', () => {
+//     expect(formatWord('example')).toBe('Example');
+//   });
 
-  test('capitalizes first letter and replaces spaces with hypens', () => {
-    expect(formatWord('example word')).toBe('Example word');
-  });
-});
+//   test('capitalizes first letter and replaces spaces with hypens', () => {
+//     expect(formatWord('example word')).toBe('Example word');
+//   });
+// });

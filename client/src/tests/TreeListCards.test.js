@@ -1,8 +1,9 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import TreeListCards from '@/pages/TreeList/TreeListCards';
 import { dataSources } from '@/pages/TreeList/dataArrays';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 /**
  * These snapshots are designed to catch _any_ change to UI components, so they

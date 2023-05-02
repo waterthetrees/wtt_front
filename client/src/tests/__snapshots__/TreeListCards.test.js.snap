@@ -53,13 +53,16 @@ first three years to establish their roots.
                   alt=""
                   loading="lazy"
                   placeholder="placeholder.jpg"
+                  src="placeholder.jpg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
               <h2>
                 Adpressa Redwood
               </h2>
-              <h4>
+              <h4
+                class="scientific"
+              >
                 Sequoia sempervirens 'Adpressa'
               </h4>
               <div
@@ -93,13 +96,16 @@ first three years to establish their roots.
                   alt=""
                   loading="lazy"
                   placeholder="placeholder.jpg"
+                  src="placeholder.jpg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
               <h2>
                 Alaska Cedar
               </h2>
-              <h4>
+              <h4
+                class="scientific"
+              >
                 Callitropsis nootkatensis
               </h4>
               <div
@@ -171,13 +177,16 @@ first three years to establish their roots.
                 alt=""
                 loading="lazy"
                 placeholder="placeholder.jpg"
+                src="placeholder.jpg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>
             <h2>
               Adpressa Redwood
             </h2>
-            <h4>
+            <h4
+              class="scientific"
+            >
               Sequoia sempervirens 'Adpressa'
             </h4>
             <div
@@ -211,13 +220,16 @@ first three years to establish their roots.
                 alt=""
                 loading="lazy"
                 placeholder="placeholder.jpg"
+                src="placeholder.jpg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>
             <h2>
               Alaska Cedar
             </h2>
-            <h4>
+            <h4
+              class="scientific"
+            >
               Callitropsis nootkatensis
             </h4>
             <div

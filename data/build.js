@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
-
+const featureFlags = {
+  downloadImages: true,
+};
 const jsonPattern = /(.+)\.json$/;
 const dataPath = path.resolve(__dirname, 'json');
 const outputPath = path.resolve(__dirname, '../client/src/data/dist');
@@ -61,11 +63,63 @@ function toSource(obj) {
   );
 }
 
-function toTitleCase(string) {
-  return string.replace(
-    /([^\W_]+[^\s-]*) */g,
-    (word) => word.charAt(0).toUpperCase() + word.slice(1),
-  );
+// TODO use functions from utils/stringUtils.js
+// Common Names should be title case. All major words are capitalized, while minor words are lowercased
+function toTitleCase(str) {
+  if (!str) return '';
+  const wordsToSkip = ['of', 'and', 'the', 'in', 'on'];
+
+  return str
+    .toLowerCase()
+    .split(/\s+/) // Split on one or more spaces
+    .filter((word) => word) // Filter out empty strings
+    .map(function (word, index) {
+      if (wordsToSkip.includes(word) && index !== 0) {
+        return word;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+}
+
+// TODO use functions from utils/stringUtils.js
+// Cultivar should be title case and in single quotes.
+function formatCultivar(cultivar) {
+  if (!cultivar) return '';
+  const cultivarWithoutQuotes = cultivar.replace(/["']/g, '');
+  const titleCasedCultivar = toTitleCase(cultivarWithoutQuotes);
+  return ` '${titleCasedCultivar}'`;
+}
+
+// TODO use functions from utils/stringUtils.js
+// Scientific naming:
+// Genus name is always capitalized,
+// Species name and any infraspecific epithets are written in lowercase.
+// Cultivar should be capitalized and in single quotes.
+// All should be typically italicized.
+function formatScientificName(scientificName) {
+  if (!scientificName) return '';
+
+  const [firstPart, cultivar] = scientificName
+    .trim()
+    .replace(/["]/g, "'") // replace double quotes with single quotes
+    .replace(/[']/, "----cultivarsplit'") // Add in ----cultivarsplit' to use for splitting quoted cultivar out of name
+    .split('----cultivarsplit');
+
+  const formattedCultivar = cultivar ? formatCultivar(cultivar) : '';
+  const [genus, species, ...epithet] = firstPart.trim().split(' ');
+
+  const formattedGenus = genus
+    ? genus.charAt(0).toUpperCase() + genus.slice(1).toLowerCase()
+    : '';
+
+  const formattedSpecies = species ? ` ${species.toLowerCase()}` : '';
+
+  const formattedEpithet = epithet?.length
+    ? ` ${epithet.join(' ').toLowerCase()}`
+    : '';
+
+  return `${formattedGenus}${formattedSpecies}${formattedEpithet}${formattedCultivar}`;
 }
 
 function createTreeSorter(name) {
@@ -138,9 +192,15 @@ async function buildScientificNameToImageMap(names) {
     // download Images and save to assets
     Object.values(allPages).forEach(async (page) => {
       const { title, fullurl, extract, thumbnail: { source } = {} } = page;
-      images[title] = { imageURL: source, fullurl, extract, title };
+
+      images[title] = {
+        imageURL: source,
+        fullurl,
+        extract,
+        title: formatScientificName(title),
+      };
       let count = 0;
-      if (source && title) {
+      if (source && title && featureFlags?.downloadImages) {
         const imageDownload = await downloadImage(source, title);
         if (await imageDownload) {
           images[title].imageFileName = imageDownload;
@@ -192,8 +252,9 @@ jsonFiles.forEach((filename) => {
   // Combine the trees into one deduped list, normalizing the names.
   data.forEach(({ common, scientific, genus }) => {
     const commonTitleCase = toTitleCase(common);
-    const lcNames = [common, scientific, genus].map(normalizeNames);
-    const key = lcNames.join('');
+    const scientificCase = formatScientificName(scientific);
+    const lowerCaseNames = [common, scientific, genus].map(normalizeNames);
+    const key = lowerCaseNames.join('');
 
     // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
     if (
@@ -203,12 +264,12 @@ jsonFiles.forEach((filename) => {
     ) {
       trees.push({
         common: replaceIrregularNames(commonTitleCase),
-        scientific: replaceIrregularNames(scientific),
+        scientific: replaceIrregularNames(scientificCase),
         genus: replaceIrregularNames(genus),
         // Store the lowercased names on each tree, so that we can sort by those strings.  They
         // don't include non-letter characters, so names like `"Ohi" A Lehua` won't get sorted to
         // the front of the list.
-        sort: lcNames,
+        sort: lowerCaseNames,
       });
       processedTrees[key] = true;
     }
@@ -232,12 +293,10 @@ function replaceIrregularNames(name) {
   return name === '\b' ? '' : name;
 }
 
-export const formatWord = (word) => {
-  if (!word) return '';
-  if (!word.includes(' ')) return word.at(0).toUpperCase() + word.slice(1);
-  let wordFormatted = word.toLowerCase();
-  wordFormatted = wordFormatted.at(0).toUpperCase() + wordFormatted.slice(1);
-  return wordFormatted.replace(/-/g, ' ');
+// change to lower case, replace hyphens with spaces, if str has multiple spaces, replace with one hyphen
+const formatWord = (str) => {
+  if (!str) return '';
+  return str.toLowerCase().replace(/\s+/g, '-');
 };
 
 async function downloadImage(imageURL, title) {

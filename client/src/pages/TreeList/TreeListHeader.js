@@ -22,7 +22,7 @@ const checkboxCategories = {
   },
 };
 
-function getActiveFilters(checkboxes) {
+export function getActiveFilters(checkboxes) {
   return Object.entries(checkboxCategories).reduce(
     (filters, [_, filterInfo]) => {
       filters[filterInfo.category] = filterOptions(
@@ -35,7 +35,7 @@ function getActiveFilters(checkboxes) {
   );
 }
 
-function createLookup(activeFilters) {
+export function createLookup(activeFilters) {
   const lookup = {};
   for (const [category, options] of Object.entries(activeFilters)) {
     lookup[category] = options.reduce((acc, option) => {
@@ -47,11 +47,13 @@ function createLookup(activeFilters) {
 }
 
 export function filterData(array, checkboxes) {
+  console.log(array, 'array');
+  console.log(checkboxes, 'checkboxes');
   if (Object.keys(checkboxes).length === 0) return array;
   if (array.length === 0) return array;
   const activeFilters = getActiveFilters(checkboxes);
   const lookup = createLookup(activeFilters);
-  return array.filter((item) => {
+  const filteredData = array.filter((item) => {
     return Object.entries(lookup).every(([category, options]) => {
       if (Object.keys(options).length === 0) return true;
 
@@ -63,9 +65,11 @@ export function filterData(array, checkboxes) {
       return false;
     });
   });
+  console.log(filteredData, 'filteredData');
+  return filteredData;
 }
 
-function filterOptions(checkboxes, options) {
+export function filterOptions(checkboxes, options) {
   return options.filter((option) => checkboxes[option]);
 }
 
