@@ -95,11 +95,11 @@ describe('<TreeListFilters /> spec', () => {
   test('renders filter groups and options', () => {
     const { getByText } = render(<TreeListFilters {...defaultProps} />);
 
-    expect(getByText('Height:')).toBeInTheDocument();
+    expect(getByText('Height')).toBeInTheDocument();
     expect(getByText('small')).toBeInTheDocument();
     expect(getByText('medium')).toBeInTheDocument();
     expect(getByText('large')).toBeInTheDocument();
-    expect(getByText('Type:')).toBeInTheDocument();
+    expect(getByText('Type')).toBeInTheDocument();
     expect(getByText('evergreen')).toBeInTheDocument();
     expect(getByText('deciduous')).toBeInTheDocument();
   });

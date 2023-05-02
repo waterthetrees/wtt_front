@@ -41,7 +41,7 @@ export default function TreeListFilters({
     <div className="treelistfilters">
       {Object.entries(checkboxCategories).map(([groupName, groupInfo]) => (
         <div key={groupName} className="treelistfilters__filter">
-          <h3 className="treelistfilters__filter-title">{groupName}:</h3>
+          <h3 className="treelistfilters__filter-title">{groupName}</h3>
           <div className="treelistfilters__filter-item">
             {groupInfo.options.map((option) => (
               <label

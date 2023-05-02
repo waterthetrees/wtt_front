@@ -183,6 +183,11 @@ $borderRadius: 4px;
     flex-direction: column;
     padding: 8px;
   }
+  &__filter-title {
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: 600;
+  }
   &__filter-item {
     display: flex;
     flex-direction: column;
@@ -234,8 +239,9 @@ $borderRadius: 4px;
   }
 
   &__filter-item-label {
+    font-size: small;
+    line-height: 2;
     font-weight: 400;
-    font-size: medium;
   }
 
   @media screen and (max-width: 600px) {
@@ -243,28 +249,29 @@ $borderRadius: 4px;
       padding: 0 2px;
     }
     &__filter-item-checkbox {
-      // margin: 0 2px 0 0;
       margin: 0 3px 0 5px;
       display: inline-block;
     }
     &__filter-item-label {
-      font-weight: 400;
-      font-size: small;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      // text-transform: uppercase;
     }
   }
 
   @media screen and (max-width: 480px) {
     flex-direction: column;
     font-size: medium;
-
     &__header {
       width: 100%;
     }
-
     &__filter {
       display: inline-flex;
       flex-direction: row;
       padding: 0;
+    }
+    &__filter-title {
+      font-weight: 500;
     }
     &__filter-item {
       flex-direction: row;

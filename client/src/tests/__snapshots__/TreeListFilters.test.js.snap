@@ -15,7 +15,6 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
             class="treelistfilters__filter-title"
           >
             Height
-            :
           </h3>
           <div
             class="treelistfilters__filter-item"
@@ -66,7 +65,6 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
             class="treelistfilters__filter-title"
           >
             Type
-            :
           </h3>
           <div
             class="treelistfilters__filter-item"
@@ -112,7 +110,6 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
           class="treelistfilters__filter-title"
         >
           Height
-          :
         </h3>
         <div
           class="treelistfilters__filter-item"
@@ -163,7 +160,6 @@ exports[`<TreeListFilters /> spec renders TreeListFilters correctly 1`] = `
           class="treelistfilters__filter-title"
         >
           Type
-          :
         </h3>
         <div
           class="treelistfilters__filter-item"

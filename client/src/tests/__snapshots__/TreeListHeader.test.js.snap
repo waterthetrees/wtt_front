@@ -619,7 +619,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
               class="treelistfilters__filter-title"
             >
               Height
-              :
             </h3>
             <div
               class="treelistfilters__filter-item"
@@ -669,7 +668,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
               class="treelistfilters__filter-title"
             >
               Type
-              :
             </h3>
             <div
               class="treelistfilters__filter-item"
@@ -1319,7 +1317,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
             class="treelistfilters__filter-title"
           >
             Height
-            :
           </h3>
           <div
             class="treelistfilters__filter-item"
@@ -1369,7 +1366,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
             class="treelistfilters__filter-title"
           >
             Type
-            :
           </h3>
           <div
             class="treelistfilters__filter-item"
