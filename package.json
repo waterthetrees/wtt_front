@@ -122,6 +122,6 @@
     "@storybook/react": "^7.0.4",
     "@storybook/react-webpack5": "^7.0.4",
     "eslint-plugin-storybook": "^0.6.11",
-    "storybook": "^7.0.4"
+    "storybook": "^7.0.7"
   }
 }
