@@ -117,7 +117,7 @@
   "optionalDependencies": {
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-interactions": "^7.0.4",
-    "@storybook/addon-links": "^7.0.4",
+    "@storybook/addon-links": "^7.0.7",
     "@storybook/blocks": "^7.0.4",
     "@storybook/react": "^7.0.4",
     "@storybook/react-webpack5": "^7.0.4",
