@@ -21,7 +21,8 @@ export default function TreeList() {
   const [selectedDataSourceIndex, setSelectedDataSourceIndex] = useState(
     localStorage.getItem('setSelectedDataSourceIndex') || 2,
   );
-  const { url, thanks, data, columns } = dataSources[selectedDataSourceIndex];
+  const { url, thanks, data, columns, name } =
+    dataSources[selectedDataSourceIndex];
 
   const [filteredData, setFilteredData] = useState(data);
 
@@ -61,7 +62,7 @@ export default function TreeList() {
           />
         )}
         {view === 'column' && (
-          <ListGrid data={filteredData} columns={columns} listType="data" />
+          <ListGrid data={filteredData} columns={columns} listType={name} />
         )}
       </div>
 

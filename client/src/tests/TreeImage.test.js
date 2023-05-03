@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
@@ -43,14 +37,6 @@ describe('ImageLoad', () => {
     global.Image.mockRestore();
   });
 
-  // test('image element has the correct placeholder initially', () => {
-  //   const { getByRole } = render(
-  //     <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
-  //   );
-  //   const img = getByRole('img');
-  //   expect(img).toHaveAttribute('src', placeholder);
-  // });
-
   test('image element has the correct alt attribute value', () => {
     const { getByRole } = render(
       <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
@@ -74,44 +60,6 @@ describe('ImageLoad', () => {
     const img = getByRole('img');
     expect(img).toHaveStyle('transition: opacity .30s linear');
   });
-
-  // test('updates currentSrc when src prop changes', async () => {
-  //   // const img = new Image();
-  //   // const loadEvent = new Event('load');
-
-  //   const newSrc = 'https://example.com/new-image.jpg';
-  //   const { getByRole, rerender } = render(
-  //     <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
-  //   );
-
-  //   // Change the src prop and rerender the component
-  //   rerender(<ImageLoad src={newSrc} placeholder={placeholder} alt={alt} />);
-
-  //   const img = getByRole('img');
-
-  //   // Wait for the component to update currentSrc
-  //   await waitFor(() => expect(img).toHaveAttribute('src', newSrc));
-
-  //   // Simulate image load
-  //   fireEvent.load(newSrc);
-
-  //   // Wait for the component to update opacity
-  //   await waitFor(() => expect(newSrc).toHaveStyle('opacity: 1'));
-  // });
-
-  // test("image's opacity changes after it has loaded", async () => {
-  //   const { getByRole } = render(
-  //     <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
-  //   );
-  //   const img = getByRole('img');
-  //   expect(img).toHaveStyle('opacity: 0.1');
-
-  //   // Simulate image load
-  //   fireEvent.load(img);
-
-  //   await waitFor(() => expect(img).toHaveStyle('opacity: 1'));
-  //   expect(img).toHaveAttribute('src', src);
-  // });
 });
 
 describe('setFormatImagePath', () => {

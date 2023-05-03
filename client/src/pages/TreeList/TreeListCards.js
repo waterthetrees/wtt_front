@@ -10,8 +10,6 @@ import { dataSources } from './dataArrays';
 
 import './TreeList.scss';
 
-const routeName = 'tree';
-
 const HEADING_TEXT = `We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
@@ -32,6 +30,11 @@ export function getDormancyTagColor(dormancy) {
       return 'black';
   }
 }
+
+export const createTreePageRoute = (tree, routeName = 'tree') => {
+  const nameFormatted = tree?.scientific?.toLowerCase().replace(/ /g, '-');
+  return `/${routeName}/${nameFormatted}`;
+};
 
 export default function TreeListCards({ data, selectedDataSourceIndex }) {
   return (
@@ -56,8 +59,6 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
         </div>
 
         {data.map((tree, index) => {
-          const nameFormatted = tree?.common?.toLowerCase().replace(/ /g, '-');
-          const urlRoute = `/${routeName}/${nameFormatted}`;
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
           const dormancy = deciduousEvergreen?.toLowerCase().replace(/ /g, '-');
@@ -69,7 +70,7 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
             <NavLink
               className="treelistcards__link"
               to={{
-                pathname: urlRoute,
+                pathname: createTreePageRoute(tree),
               }}
               state={{ tree, selectedDataSourceIndex }}
               key={`${tree?.scientific}-${index}`}

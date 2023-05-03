@@ -292,7 +292,6 @@ $borderRadius: 4px;
     column-count: 5;
     column-gap: 1.25rem;
     width: 100%;
-    max-width: 1200px;
   }
 
   &__header {
@@ -304,6 +303,7 @@ $borderRadius: 4px;
 
   &__link {
     break-inside: avoid;
+    color: $black;
   }
 
   &__link:focus,
@@ -313,6 +313,7 @@ $borderRadius: 4px;
   &__link:active {
     text-decoration: none;
     opacity: 0.8;
+    color: $black;
   }
 
   &__image {
@@ -360,9 +361,9 @@ $borderRadius: 4px;
   }
   @media screen and (max-width: 480px) {
     &__container {
-      column-count: 1;
-      column-gap: 0.05rem;
-      padding: 0.05rem;
+      column-count: 2;
+      column-gap: 0.5rem;
+      padding: 0.5rem;
     }
   }
 }

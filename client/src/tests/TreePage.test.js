@@ -1,16 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import React, { createContext, useContext } from 'react';
-import {
-  NavLink,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
 import TreePage, {
   WikipediaExtract,
-  formatWord,
   getTagVariant,
 } from '@/pages/TreeList/TreePage';
 import { dataSources } from '@/pages/TreeList/dataArrays';
@@ -51,6 +44,7 @@ const mockTree = {
   QRCode: '//calscape.org/qrcodes/Populus-fremontii(192)',
   availabilityInNurseries: 'Commonly Available',
   common: 'Fremont Cottonwood',
+  scientific: 'Fremont Cottonwood',
   commonUses: 'Bird Gardens,Butterfly Gardens',
   deciduousEvergreen: 'DECIDUOUS',
   drainage: 'Fast,Medium,Slow',
@@ -74,6 +68,7 @@ const mockTree = {
 const mockLocationState = {
   tree: mockTree,
   selectedDataSourceIndex: 0,
+  dataSetName: 'Native California Trees',
 };
 
 const mockDataSources = dataSources[mockLocationState.selectedDataSourceIndex];
@@ -143,17 +138,3 @@ describe('getTagVariant', () => {
     expect(getTagVariant('evergreen')).toBe('green');
   });
 });
-
-// describe('formatWord', () => {
-//   test('returns empty string for undefined input', () => {
-//     expect(formatWord(undefined)).toBe('');
-//   });
-
-//   test('returns input string with capped first letter if no spaces', () => {
-//     expect(formatWord('example')).toBe('Example');
-//   });
-
-//   test('capitalizes first letter and replaces spaces with hypens', () => {
-//     expect(formatWord('example word')).toBe('Example word');
-//   });
-// });

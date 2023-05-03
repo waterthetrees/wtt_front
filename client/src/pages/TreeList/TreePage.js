@@ -20,12 +20,25 @@ function capitalizeFirstLetter(string) {
 export const getTagVariant = (value) =>
   value === 'deciduous' ? 'brown' : 'green';
 
+/**
+ * Returns the index of the object with the given name in the dataSources array
+ * @param {Array} dataSources - The data sources array
+ * @param {string} name - The name of the data source to find
+ * @returns {number} - The index of the object with the given name, or -1 if not found
+ */
+export function getDataSourceIndex(dataSources, dataSetName) {
+  return dataSources.findIndex((dataSource) => dataSource.name === dataSetName);
+}
+
 export default function TreePage() {
   const { state } = useLocation();
-  const { tree, selectedDataSourceIndex } = state;
+  const { tree, selectedDataSourceIndex, dataSetName } = state;
   const { scientific } = tree;
   // const formattedScientific = formatWord(scientific);
-  const dataSelected = dataSources[selectedDataSourceIndex];
+  const dataSelected =
+    dataSources[
+      selectedDataSourceIndex || getDataSourceIndex(dataSources, dataSetName)
+    ];
   const { data, name } = dataSelected;
   const csvFileName = `${name.replaceAll(' ', '-')}.csv`;
   const wikipediaExtract =
