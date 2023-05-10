@@ -81,7 +81,6 @@ function App() {
                   <Route path="/treelist" element={<TreeList />} />
                   <Route path="/tree/:common" element={<TreePage />} />
                   <Route path="/tree/:scientific" element={<TreePage />} />
-                  <Route path="/treecare" element={<TreeCare />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
