@@ -34,10 +34,7 @@ describe('TreeCare component', () => {
       'src',
       'https://player.vimeo.com/video/416031708?h=948fa392f3&byline=0&portrait=0',
     );
-    expect(iframe).toHaveAttribute(
-      'allow',
-      'autoplay; fullscreen; picture-in-picture',
-    );
+    expect(iframe).toHaveAttribute('allow', 'fullscreen; picture-in-picture');
     expect(iframe).toHaveAttribute('allowFullScreen', '');
   });
 });
