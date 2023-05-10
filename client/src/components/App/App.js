@@ -28,14 +28,14 @@ const Source = React.lazy(() =>
 const MapLayout = React.lazy(() =>
   import(/* webpackChunkName: "MapLayout" */ '@/pages/Map/MapLayout'),
 );
-const TreeCare = React.lazy(() =>
-  import(/* webpackChunkName: "TreeCare" */ '@/pages/TreeCare/TreeCare'),
-);
 const TreeList = React.lazy(() =>
   import(/* webpackChunkName: "TreeList" */ '@/pages/TreeList/TreeList'),
 );
 const TreePage = React.lazy(() =>
   import(/* webpackChunkName: "TreePage" */ '@/pages/TreeList/TreePage'),
+);
+const TreeCare = React.lazy(() =>
+  import(/* webpackChunkName: "TreeCare" */ '@/pages/TreeCare/TreeCare'),
 );
 
 // Create a client for react-query calls.  Don't automatically refetch the data when the window is
@@ -81,6 +81,7 @@ function App() {
                   <Route path="/treelist" element={<TreeList />} />
                   <Route path="/tree/:common" element={<TreePage />} />
                   <Route path="/tree/:scientific" element={<TreePage />} />
+                  <Route path="/treeCare" element={<TreeCare />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
