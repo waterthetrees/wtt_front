@@ -1,6 +1,6 @@
+import { ViewColumn, ViewQuilt } from '@mui/icons-material';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import React from 'react';
-import { ViewList, ViewModule } from '@mui/icons-material';
-import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 export default function Toggle({ view, setView }) {
   const handleToggleView = (event, newView) => {
@@ -16,21 +16,23 @@ export default function Toggle({ view, setView }) {
       exclusive={true}
       onChange={handleToggleView}
       color="success"
+      aria-label="view"
+      role="group"
       sx={{ backgroundColor: 'white' }}
     >
       <ToggleButton
-        value="list"
-        aria-label="list"
-        data-testid="list-toggle-button"
+        value="column"
+        aria-label="column"
+        data-testid="column-toggle-button"
       >
-        <ViewList />
+        <ViewColumn /> column
       </ToggleButton>
       <ToggleButton
-        value="card"
-        aria-label="card"
-        data-testid="card-toggle-button"
+        value="quilt"
+        aria-label="quilt"
+        data-testid="quilt-toggle-button"
       >
-        <ViewModule />
+        <ViewQuilt /> quilt
       </ToggleButton>
     </ToggleButtonGroup>
   );
