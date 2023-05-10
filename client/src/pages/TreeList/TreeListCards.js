@@ -1,3 +1,5 @@
+import useMediaQuery from '@mui/material/useMediaQuery';
+import clsx from 'clsx';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -36,33 +38,63 @@ export const createTreePageRoute = (tree, routeName = 'tree') => {
   return `/${routeName}/${nameFormatted}`;
 };
 
+const getColumnRows = (data, big, medium, small) => {
+  let columnNumber = 4;
+  if (big) {
+    columnNumber = 4;
+  }
+  if (medium) {
+    columnNumber = 3;
+  }
+  if (small) {
+    columnNumber = 2;
+  }
+  const rowCounts = Math.ceil(data.length / columnNumber);
+  const countRowColumns = clsx('treelistcards__container', {
+    treelistcards__rowcolumns: {
+      'column-count': columnNumber,
+      height: rowCounts * 500,
+    },
+  });
+  return countRowColumns;
+};
+
 export default function TreeListCards({ data, selectedDataSourceIndex }) {
+  const big = useMediaQuery('(min-width: 769px)');
+  const medium = useMediaQuery('(min-width: 601px)');
+  const small = useMediaQuery('(min-width:481px)');
+  const countRowColumns = getColumnRows(data, big, medium, small);
+
   return (
     <div className="treelistcards">
-      <div className="treelistcards__container">
-        <div className="treelistcards__header">
-          <Card>
-            <div className="treelistcards__info">
-              <h3>{HEADING_TEXT}</h3>
-              <div className="treecare">
-                <a
-                  href={dataSources[selectedDataSourceIndex].treecare}
-                  target="_blank"
-                  className="treelistcards__link"
-                  rel="noreferrer"
-                >
-                  Tree Care Program
-                </a>
-              </div>
+      <div className="treelistcards__header">
+        <Card>
+          <div className="treelistcards__info">
+            <h3>{HEADING_TEXT}</h3>
+            <div className="treecare">
+              <a
+                href={dataSources[selectedDataSourceIndex].treecare}
+                target="_blank"
+                className="treelistcards__link"
+                rel="noreferrer"
+              >
+                Tree Care Program
+              </a>
             </div>
-          </Card>
-        </div>
-
+          </div>
+        </Card>
+      </div>
+      <div className={countRowColumns}>
         {data.map((tree, index) => {
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
-          const dormancy = deciduousEvergreen?.toLowerCase().replace(/ /g, '-');
-          const tagVariant = getDormancyTagColor(dormancy);
+          const dormancyLower = deciduousEvergreen
+            ?.toLowerCase()
+            .replace(/ /g, '-');
+          const dormancyArray = dormancyLower.includes(',')
+            ? dormancyLower?.split(',')
+            : [dormancyLower];
+
           const formatCommon = toTitleCase(common);
           const formatScientific = formatScientificName(scientific);
 
@@ -88,9 +120,15 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                   <h2>{formatCommon}</h2>
                   <h4 className="scientific">{formatScientific}</h4>
                   <div className="treelistcards__item">{height}</div>
-                  {deciduousEvergreen && (
-                    <Tag variant={tagVariant}>{dormancy}</Tag>
-                  )}
+                  {deciduousEvergreen &&
+                    dormancyArray.map((dormancy) => {
+                      const tagVariant = getDormancyTagColor(dormancy);
+                      return (
+                        <Tag key={tagVariant} variant={tagVariant}>
+                          {dormancy}
+                        </Tag>
+                      );
+                    })}
                 </div>
               </Card>
             </NavLink>
