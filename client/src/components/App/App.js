@@ -1,21 +1,23 @@
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import {
+  Auth0ProviderWithRedirect,
+  Loading,
+  RedirectWithHash,
+  RequireAuth,
+} from '@/components/Auth';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Header from '@/components/Header/Header';
-import {
-  Loading,
-  Auth0ProviderWithRedirect,
-  RequireAuth,
-  RedirectWithHash,
-} from '@/components/Auth';
 import About from '@/pages/About/About';
-import Privacy from '@/pages/Privacy/Privacy';
-import License from '@/pages/License/License';
-import UserProfile from '@/pages/Userprofile/UserProfile';
 import Contact from '@/pages/Contact/Contact';
+import License from '@/pages/License/License';
 import NotFound from '@/pages/NotFound/NotFound';
+import Privacy from '@/pages/Privacy/Privacy';
+import UserProfile from '@/pages/Userprofile/UserProfile';
+
 import './App.css';
 
 // Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also
@@ -28,6 +30,9 @@ const Source = React.lazy(() =>
 );
 const MapLayout = React.lazy(() =>
   import(/* webpackChunkName: "MapLayout" */ '@/pages/Map/MapLayout'),
+);
+const TreeCare = React.lazy(() =>
+  import(/* webpackChunkName: "TreeCare" */ '@/pages/TreeCare/TreeCare'),
 );
 
 // Create a client for react-query calls.  Don't automatically refetch the data when the window is
@@ -70,6 +75,7 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/data" element={<Data />} />
                   <Route path="/Source" element={<Source />} />
+                  <Route path="/treeCare" element={<TreeCare />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
