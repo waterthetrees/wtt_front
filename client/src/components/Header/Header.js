@@ -1,10 +1,12 @@
+import { useAuth0 } from '@auth0/auth0-react';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { Divider, IconButton, Menu, MenuItem } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, MenuItem, IconButton, Divider } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useAuth0 } from '@auth0/auth0-react';
+
 import { AuthButton } from '@/components/Auth';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+
 import './Header.scss';
 
 const Header = () => {
@@ -107,6 +109,12 @@ const Header = () => {
           <MenuItem onClick={handleClose}>
             <Link to="/contact" className="header__link">
               Contact
+            </Link>
+          </MenuItem>
+
+          <MenuItem onClick={handleClose}>
+            <Link to="/treecare" className="header__link">
+              TreeCare
             </Link>
           </MenuItem>
 
