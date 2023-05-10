@@ -125,8 +125,8 @@ const Header = () => {
           </MenuItem>
 
           <MenuItem onClick={handleClose}>
-            <Link to="/data" className="header__link">
-              Data
+            <Link to="/treelist" className="header__link">
+              TreeLists
             </Link>
           </MenuItem>
 

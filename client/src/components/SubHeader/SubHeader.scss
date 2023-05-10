@@ -1,0 +1,14 @@
+.subheader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  // padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+  opacity: .9;
+  
+&__content {
+    padding: 16px;
+  }
+}

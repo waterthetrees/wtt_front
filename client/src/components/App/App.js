@@ -20,11 +20,8 @@ import UserProfile from '@/pages/Userprofile/UserProfile';
 
 import './App.css';
 
-// Lazy-load the data page, so that we only load the large JSON files it uses if needed.  Also
+// Lazy-load the treelist data page, so that we only load the large JSON files it uses if needed.  Also
 // lazy-load the /map route, so that it doesn't impact the default route.
-const Data = React.lazy(() =>
-  import(/* webpackChunkName: "Data" */ '@/pages/Data/Data'),
-);
 const Source = React.lazy(() =>
   import(/* webpackChunkName: "Source" */ '@/pages/Source/Source'),
 );
@@ -33,6 +30,12 @@ const MapLayout = React.lazy(() =>
 );
 const TreeCare = React.lazy(() =>
   import(/* webpackChunkName: "TreeCare" */ '@/pages/TreeCare/TreeCare'),
+);
+const TreeList = React.lazy(() =>
+  import(/* webpackChunkName: "TreeList" */ '@/pages/TreeList/TreeList'),
+);
+const TreePage = React.lazy(() =>
+  import(/* webpackChunkName: "TreePage" */ '@/pages/TreeList/TreePage'),
 );
 
 // Create a client for react-query calls.  Don't automatically refetch the data when the window is
@@ -73,9 +76,11 @@ function App() {
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/license" element={<License />} />
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/data" element={<Data />} />
-                  <Route path="/Source" element={<Source />} />
-                  <Route path="/treeCare" element={<TreeCare />} />
+                  <Route path="/treecare" element={<TreeCare />} />
+                  <Route path="/source" element={<Source />} />
+                  <Route path="/treelist" element={<TreeList />} />
+                  <Route path="/tree/:common" element={<TreePage />} />
+                  <Route path="/tree/:scientific" element={<TreePage />} />
                   <Route path="/go" element={<RedirectWithHash param="to" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

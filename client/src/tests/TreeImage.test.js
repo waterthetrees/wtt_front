@@ -4,9 +4,9 @@ import React from 'react';
 import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
 
 describe('ImageLoad', () => {
-  const src = 'http://example.com/image.jpg';
-  const placeholder = 'http://example.com/placeholder.jpg';
-  const alt = 'Sample image';
+  const src = 'https://example.com/image.jpg';
+  const placeholder = 'https://example.com/placeholder.jpg';
+  const alt = 'Example image';
 
   it('Renders the ImageLoad component correctly', () => {
     const { container } = render(
@@ -35,6 +35,30 @@ describe('ImageLoad', () => {
 
     // Cleanup
     global.Image.mockRestore();
+  });
+
+  test('image element has the correct alt attribute value', () => {
+    const { getByRole } = render(
+      <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
+    );
+    const img = getByRole('img');
+    expect(img).toHaveAttribute('alt', alt);
+  });
+
+  test('image element has the loading attribute set to "lazy"', () => {
+    const { getByRole } = render(
+      <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
+    );
+    const img = getByRole('img');
+    expect(img).toHaveAttribute('loading', 'lazy');
+  });
+
+  test('image element has the correct transition style', () => {
+    const { getByRole } = render(
+      <ImageLoad src={src} placeholder={placeholder} alt={alt} />,
+    );
+    const img = getByRole('img');
+    expect(img).toHaveStyle('transition: opacity .30s linear');
   });
 });
 

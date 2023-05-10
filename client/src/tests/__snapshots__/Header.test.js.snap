@@ -528,9 +528,9 @@ exports[`<Header /> spec renders Header correctly 1`] = `
           >
             <a
               class="header__link"
-              href="/data"
+              href="/treelist"
             >
-              Data
+              TreeLists
             </a>
             <span
               class="MuiTouchRipple-root emotion-2"

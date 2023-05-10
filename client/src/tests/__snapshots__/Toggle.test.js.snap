@@ -151,53 +151,56 @@ exports[`<Toggle /> spec Renders the Toggle component correctly 1`] = `
 
 <div>
   <div
+    aria-label="view"
     class="MuiToggleButtonGroup-root emotion-0"
     role="group"
   >
     <button
-      aria-label="list"
+      aria-label="column"
       aria-pressed="true"
       class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-success MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal emotion-1"
-      data-testid="list-toggle-button"
+      data-testid="column-toggle-button"
       tabindex="0"
       type="button"
-      value="list"
+      value="column"
     >
       <svg
         aria-hidden="true"
         class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-2"
-        data-testid="ViewListIcon"
+        data-testid="ViewColumnIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
         <path
-          d="M3 14h4v-4H3v4zm0 5h4v-4H3v4zM3 9h4V5H3v4zm5 5h13v-4H8v4zm0 5h13v-4H8v4zM8 5v4h13V5H8z"
+          d="M14.67 5v14H9.33V5h5.34zm1 14H21V5h-5.33v14zm-7.34 0V5H3v14h5.33z"
         />
       </svg>
+       column
       <span
         class="MuiTouchRipple-root emotion-3"
       />
     </button>
     <button
-      aria-label="card"
+      aria-label="quilt"
       aria-pressed="false"
       class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-success MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal emotion-1"
-      data-testid="card-toggle-button"
+      data-testid="quilt-toggle-button"
       tabindex="0"
       type="button"
-      value="card"
+      value="quilt"
     >
       <svg
         aria-hidden="true"
         class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-2"
-        data-testid="ViewModuleIcon"
+        data-testid="ViewQuiltIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
         <path
-          d="M14.67 5v6.5H9.33V5h5.34zm1 6.5H21V5h-5.33v6.5zm-1 7.5v-6.5H9.33V19h5.34zm1-6.5V19H21v-6.5h-5.33zm-7.34 0H3V19h5.33v-6.5zm0-1V5H3v6.5h5.33z"
+          d="M21 5v6.5H9.33V5H21zm-6.33 14v-6.5H9.33V19h5.34zm1-6.5V19H21v-6.5h-5.33zM8.33 19V5H3v14h5.33z"
         />
       </svg>
+       quilt
       <span
         class="MuiTouchRipple-root emotion-3"
       />
