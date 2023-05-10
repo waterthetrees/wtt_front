@@ -18,14 +18,20 @@ export default function TreeCare() {
           <Card key={item.title} data-testid="card">
             <h3>{item.title}</h3>
             <div className="treecare__container-item">{item.text}</div>
+            <div className="treecare__container-item">
+              {item.url && (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt={item.title}
+                >
+                  Learn More
+                </a>
+              )}
+            </div>
           </Card>
         ))}
-      </div>
-      <div className="treecare__notice">
-        Please log your maintenance on the tree info sidebar so we all can track
-        the tree&apos;s health. Thank you!
-      </div>
-      <div className="treecare__footer">
         <div style={{ padding: '50% 0 0 0', position: 'relative' }}>
           <iframe
             title="Street Tree Care"
@@ -38,11 +44,18 @@ export default function TreeCare() {
               height: '100%',
             }}
             frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
+            allow="fullscreen; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
         <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+
+      <div className="treecare__footer">
+        <div className="treecare__notice">
+          Please log your maintenance on the tree info sidebar so we all can
+          track the tree&apos;s health. Thank you!
+        </div>
       </div>
     </div>
   );
