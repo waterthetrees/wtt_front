@@ -367,7 +367,7 @@ exports[`<Header /> spec renders Header correctly 1`] = `
   }
 }
 
-.emotion-17 {
+.emotion-19 {
   margin: 0;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -498,6 +498,21 @@ exports[`<Header /> spec renders Header correctly 1`] = `
           >
             <a
               class="header__link"
+              href="/treecare"
+            >
+              TreeCare
+            </a>
+            <span
+              class="MuiTouchRipple-root emotion-2"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <a
+              class="header__link"
               href="/source"
             >
               Source
@@ -522,7 +537,7 @@ exports[`<Header /> spec renders Header correctly 1`] = `
             />
           </li>
           <hr
-            class="MuiDivider-root MuiDivider-fullWidth emotion-17"
+            class="MuiDivider-root MuiDivider-fullWidth emotion-19"
           />
           <li
             class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
