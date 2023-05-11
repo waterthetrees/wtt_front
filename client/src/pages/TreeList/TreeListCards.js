@@ -61,10 +61,9 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
         {data.map((tree, index) => {
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
-          const dormancy = deciduousEvergreen?.toLowerCase().replace(/ /g, '-');
-          const tagVariant = getDormancyTagColor(dormancy);
-          const formatCommon = toTitleCase(common);
-          const formatScientific = formatScientificName(scientific);
+
+          // const formatCommon = toTitleCase(common);
+          // const formatScientific = formatScientificName(scientific);
 
           return (
             <NavLink
@@ -85,8 +84,10 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                   </div>
                 )}
                 <div className="treelistcards__info">
-                  <h2>{formatCommon}</h2>
-                  <h4 className="scientific">{formatScientific}</h4>
+                  <h2>{toTitleCase(common)}</h2>
+                  <h4 className="scientific">
+                    {formatScientificName(scientific)}
+                  </h4>
                   <div className="treelistcards__item">{height}</div>
                   <Dormancy deciduousEvergreen={deciduousEvergreen} />
                 </div>
