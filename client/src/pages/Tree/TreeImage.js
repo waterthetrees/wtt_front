@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import treeImages from '@/data/dist/treeImages.json';
 
+const placeholderPath = './../assets/images/treelist/placeholder.jpg';
+
 export const ImageLoad = React.memo(
-  ({
-    src,
-    placeholder = './../assets/images/treelist/placeholder.jpg',
-    alt = '',
-  }) => {
+  ({ src, placeholder = placeholderPath, alt = '' }) => {
     const [loading, setLoading] = useState(true);
     const [currentSrc, updateSrc] = useState(placeholder);
 
@@ -34,10 +32,7 @@ export const ImageLoad = React.memo(
         placeholder={placeholder}
         alt={alt}
         loading="lazy"
-        onError={(e) => {
-          e.target.src = '../../assets/images/treelist/placeholder.jpg'; // some replacement image
-          e.target.style = 'display: "none"';
-        }}
+        onError={(e) => (e.target.style = 'display: "none"')}
       />
     );
   },
@@ -51,11 +46,8 @@ export const setFormatImagePath = (scientific) => {
   if (!scientific || !treeImages[scientific]) return null;
 
   // replace spaces with hyphens for image path using regex
-  const scientificNospaces = scientific.replace(/\s/g, '-');
+  const scientificNospaces = scientific.toLowerCase().replace(/\s/g, '-');
 
-  const imagePath =
-    `../../assets/images/data/${scientificNospaces}.jpg` ||
-    treeImages[scientific]?.imageURL ||
-    null;
+  const imagePath = `../../assets/images/data/${scientificNospaces}.jpg`;
   return imagePath;
 };

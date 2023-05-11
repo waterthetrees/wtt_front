@@ -62,9 +62,6 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
 
-          // const formatCommon = toTitleCase(common);
-          // const formatScientific = formatScientificName(scientific);
-
           return (
             <NavLink
               className="treelistcards__link"
@@ -72,15 +69,12 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                 pathname: createTreePageRoute(tree),
               }}
               state={{ tree, selectedDataSourceIndex }}
-              key={`${tree?.scientific}-${index}`}
+              key={`${scientific}-${index}`}
             >
               <Card>
                 {treeImagePath && (
                   <div className="treelistcards__image">
-                    <ImageLoad
-                      src={treeImagePath}
-                      placeholder="placeholder.jpg"
-                    />
+                    <ImageLoad src={treeImagePath} alt={scientific} />
                   </div>
                 )}
                 <div className="treelistcards__info">
@@ -100,15 +94,16 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
   );
 }
 
-const Dormancy = ({ deciduousEvergreen }) => {
-  console.log('deciduousEvergreen', deciduousEvergreen);
-  if (!deciduousEvergreen || deciduousEvergreen === null) {
+export function Dormancy({ deciduousEvergreen }) {
+  if (
+    !deciduousEvergreen ||
+    deciduousEvergreen === null ||
+    typeof deciduousEvergreen !== 'string'
+  ) {
     return null;
   }
-  if (typeof deciduousEvergreen !== 'string') {
-    console.log('deciduousEvergreen', deciduousEvergreen);
-  }
   const dormancyLower = deciduousEvergreen?.replace(/ /g, '-').toLowerCase();
+  // If more than one dormancy, split into array, otherwise create array with one item
   const dormancyArray = dormancyLower?.includes(',')
     ? dormancyLower?.split(',')
     : [dormancyLower];
@@ -121,4 +116,4 @@ const Dormancy = ({ deciduousEvergreen }) => {
       </Tag>
     );
   });
-};
+}
