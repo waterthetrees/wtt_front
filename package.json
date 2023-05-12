@@ -48,6 +48,8 @@
     "@emotion/jest": "^11.10.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@testing-library/jest-dom": "^5.16.5",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/testing-react": "^2.0.0",
     "@testing-library/react": "^14.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "babel-jest": "^29.4.1",
@@ -108,6 +110,18 @@
     "start:dev": "webpack serve --env development",
     "test": "jest",
     "test:coverage": "jest --coverage && open-cli coverage/lcov-report/index.html",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "optionalDependencies": {
+    "@storybook/addon-essentials": "^7.0.4",
+    "@storybook/addon-interactions": "^7.0.4",
+    "@storybook/addon-links": "^7.0.4",
+    "@storybook/blocks": "^7.0.4",
+    "@storybook/react": "^7.0.4",
+    "@storybook/react-webpack5": "^7.0.4",
+    "eslint-plugin-storybook": "^0.6.11",
+    "storybook": "^7.0.4"
   }
 }

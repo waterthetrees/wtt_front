@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import { LocationSearching, MyLocation } from '@mui/icons-material';
 import { IconButton, styled } from '@mui/material';
-import { MyLocation, LocationSearching } from '@mui/icons-material';
+import React, { useContext, useEffect } from 'react';
+
+import { MapboxManagerContext } from '@/pages/Map/MapboxManagerProvider';
 import { useNewTree } from '@/pages/NewTree/useNewTree';
-import { useUserLocation } from './useUserLocation';
+
+import { REGION_TYPES } from '../../util/constants';
 import GeoMarker from './GeoMarker';
+import { useUserLocation } from './useUserLocation';
 
 const iconStyle = `
   width: 100%;
@@ -26,7 +30,7 @@ function GeolocateIcon({ isTracking, isFollowingUser }) {
   );
 }
 
-export default function GeolocateControl({ map }) {
+export default function GeolocateControl() {
   const {
     state: { coords, isTracking },
     beginTracking,
@@ -37,12 +41,13 @@ export default function GeolocateControl({ map }) {
     beginFollowingUser,
     endFollowingUser,
   } = useNewTree();
+  const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
-    if (isTracking && coords && map) {
-      map.flyTo({ center: coords });
+    if (isTracking && coords) {
+      mapboxManager.setCenter({ coords, regionType: REGION_TYPES.LATLONG });
     }
-  }, [isTracking, map]);
+  }, [isTracking, coords, mapboxManager]);
 
   const handleClick = () => {
     if (isTracking) {
@@ -60,14 +65,17 @@ export default function GeolocateControl({ map }) {
 
   return (
     <>
-      <IconButton title="Find Your Location" onClick={handleClick} style={{ color: '#333' }}>
+      <IconButton
+        title="Find Your Location"
+        onClick={handleClick}
+        style={{ color: '#333' }}
+      >
         <GeolocateIcon
           isTracking={isTracking}
           isFollowingUser={isFollowingUser}
         />
       </IconButton>
       <GeoMarker
-        map={map}
         visible={isTracking && (!isPlanting || !isFollowingUser)}
         coordinates={coords}
       />
