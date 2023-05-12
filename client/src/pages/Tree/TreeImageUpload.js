@@ -1,17 +1,23 @@
-import React, { useRef } from 'react';
-import { AddAPhoto } from "@mui/icons-material";
-import { Button, IconButton, LinearProgress, styled, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
-import "./TreeImageUpload.scss";
+import { AddAPhoto } from '@mui/icons-material';
+import {
+  Button,
+  IconButton,
+  LinearProgress,
+  TextField,
+  styled,
+} from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+
+import './TreeImageUpload.scss';
 
 function ImageUploadArea({ uploadURL, handleError }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   };
@@ -32,12 +38,12 @@ function ImageUploadArea({ uploadURL, handleError }) {
     const fileName = e.dataTransfer.files[0].name;
     // Only allow jpg files.
     if (!fileName.match(/\.jpg/)) {
-      handleError("Only jpg files are allowed.");
+      handleError('Only jpg files are allowed.');
       return;
     }
     uploadURL(fileName);
     setDragActive(false);
-  }
+  };
 
   return (
     <>
@@ -47,70 +53,61 @@ function ImageUploadArea({ uploadURL, handleError }) {
         onDragOver={handleDrag}
         onDrop={addImage}
         onClick={handleClick}
-        className={`drop-area ${dragActive ? "dragging" : "not-dragging"}`}
+        className={`drop-area ${dragActive ? 'dragging' : 'not-dragging'}`}
       >
-          <AddAPhoto className='photo-icon' />
-          <h2 className='action-text'>
-            Select Image to Upload
-          </h2>
-          <p className='text'>or drag and drop here</p>
+        <AddAPhoto className="photo-icon" />
+        <h2 className="action-text">Select Image to Upload</h2>
+        <p className="text">or drag and drop here</p>
       </IconButton>
       <input
-        sx={{ display: "none" }}
+        sx={{ display: 'none' }}
         data-testid="file-input"
         type="file"
         ref={inputRef}
         onChange={fileSelected}
-        accept='image/jpeg'
+        accept="image/jpeg"
       />
     </>
   );
 }
 
 function ImageUploadDialog({ uploadURL, handleError }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const submit = () => {
     // Only allow jpg files.
     if (!value.match(/\.jpg/)) {
-      handleError("Only jpg files are allowed.");
-      setValue("");
+      handleError('Only jpg files are allowed.');
+      setValue('');
       return;
     }
 
     uploadURL(value);
-    setValue("");
-  }
+    setValue('');
+  };
 
   const handleEnter = (e) => {
-    if (e.key && e.key === "Enter") {
+    if (e.key && e.key === 'Enter') {
       submit();
     }
-  }
+  };
 
   const handleChange = (e) => {
     setValue(e.target.value);
-  }
+  };
 
   return (
     <>
-      <section
-        className='input-border'
-        onKeyDown={handleEnter}
-      >
+      <section className="input-border" onKeyDown={handleEnter}>
         <TextField
           hiddenLabel
           InputProps={{ disableUnderline: true }}
-          placeholder='Add a file URL'
-          variant='standard'
+          placeholder="Add a file URL"
+          variant="standard"
           value={value}
           onChange={handleChange}
         />
-        <Button
-          variant='contained'
-          onClick={submit}
-          className='dialog-button'
-        >
+        <Button variant="contained" onClick={submit} className="dialog-button">
           Upload
         </Button>
       </section>
@@ -121,22 +118,18 @@ function ImageUploadDialog({ uploadURL, handleError }) {
 function ImageUploadBar({ pollUpload, uploadDone, cancelUpload }) {
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => { 
+  useEffect(() => {
     pollUpload((newProgess) => setProgress(newProgess), uploadDone);
   }, []);
 
   return (
-    <div className='upload-bar'>
-      <p sx={{ margin: "auto" }}>{progress}%</p>
-      <LinearProgress
-        variant="determinate"
-        color="success"
-        value={progress}
-      />
+    <div className="upload-bar">
+      <p sx={{ margin: 'auto' }}>{progress}%</p>
+      <LinearProgress variant="determinate" color="success" value={progress} />
       <Button
         variant="contained"
         onClick={cancelUpload}
-        className='dialog-button'
+        className="dialog-button"
       >
         Cancel
       </Button>
@@ -150,11 +143,11 @@ export default function ImageUpload({
   apiPollUpload,
   apiCancelUpload,
   apiFileDialog,
-  isMobile
+  isMobile,
 }) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState('');
 
   function handleErr(msg) {
     setError(true);
@@ -163,7 +156,7 @@ export default function ImageUpload({
 
   function uploadURL(url) {
     setError(false);
-    apiUploadURL(url)
+    apiUploadURL(url);
     setIsUploading(true);
   }
 
@@ -178,35 +171,31 @@ export default function ImageUpload({
   }
 
   return (
-    <section sx={{ margin: "1em 0" }}>
+    <section sx={{ margin: '1em 0' }}>
       <h3>Uploading Images</h3>
-      <p sx={{ fontSize: "12px" }}>
-        Took a selfie with your tree and want
-        to track the life of your tree from
-        the day you started.
+      <p sx={{ fontSize: '12px' }}>
+        Took a selfie with your tree and want to track the life of your tree
+        from the day you started.
       </p>
       <ImageUploadArea
         uploadURL={uploadURL}
         fileDialog={apiFileDialog}
         handleError={handleErr}
       />
-      {!isMobile &&
+      {!isMobile && (
         <>
           <p>Or upload from a URL</p>
-          <ImageUploadDialog
-            uploadURL={uploadURL}
-            handleError={handleErr}
-          />
+          <ImageUploadDialog uploadURL={uploadURL} handleError={handleErr} />
         </>
-      }
-      {isUploading &&
+      )}
+      {isUploading && (
         <ImageUploadBar
           uploadDone={uploadDone}
           cancelUpload={cancelUpload}
           pollUpload={apiPollUpload}
         />
-      }
-      {error && <p className='error-text'>{errMsg}</p>}
+      )}
+      {error && <p className="error-text">{errMsg}</p>}
     </section>
-  )
+  );
 }

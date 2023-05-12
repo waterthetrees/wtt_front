@@ -1,5 +1,5 @@
 $color: black;
-$font: Montserrat;
+$font: montserrat;
 
 // Per Google Bard:
 // If you want to use a custom class name
@@ -61,9 +61,9 @@ $font: Montserrat;
 .dialog-button.dialog-button {
   border-radius: 8px;
   font-size: 12px;
-  background-color: #ffffff;
+  background-color: #fff;
   color: $color;
-  padding: .1em 1em;
+  padding: 0.1em 1em;
   text-transform: none;
 }
 
@@ -91,5 +91,5 @@ $font: Montserrat;
 }
 
 .dragging.dragging {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgb(0 0 0 / 4%);
 }
