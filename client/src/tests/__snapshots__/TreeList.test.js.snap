@@ -719,39 +719,28 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
             class="treelistcards"
           >
             <div
-              class="treelistcards__container"
+              class="treelistcards__header"
             >
-              <div
-                class="treelistcards__header"
+              <h5
+                class="treelistcards__info"
               >
-                <div
-                  class="card"
-                  data-testid="card"
-                >
-                  <div
-                    class="treelistcards__info"
-                  >
-                    <h3>
-                      We encourage you to plant medium and larger-sized trees, as they
+                We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.
-                    </h3>
-                    <div
-                      class="treecare"
-                    >
-                      <a
-                        class="treelistcards__link"
-                        href="https://www.friendsoftheurbanforest.org/tree-care"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        Tree Care Program
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+first three years to establish their roots. 
+                <a
+                  class="treelistcards__link"
+                  href="https://www.friendsoftheurbanforest.org/tree-care"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Learn more about tree care.
+                </a>
+              </h5>
+            </div>
+            <div
+              class="treelistcards__container"
+            >
               <a
                 class="treelistcards__link"
                 href="/tree/acer-buergerianum"
@@ -766,7 +755,7 @@ first three years to establish their roots.
                     <img
                       alt="Acer buergerianum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -812,7 +801,7 @@ first three years to establish their roots.
                     <img
                       alt="Acer circinatum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -894,7 +883,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus californica"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -940,7 +929,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus hippocastanum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -986,7 +975,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus x carnea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1032,7 +1021,7 @@ first three years to establish their roots.
                     <img
                       alt="Agonis flexuosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1114,7 +1103,7 @@ first three years to establish their roots.
                     <img
                       alt="Angophora costata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1196,7 +1185,7 @@ first three years to establish their roots.
                     <img
                       alt="Archontophoenix cunninghamiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1242,7 +1231,7 @@ first three years to establish their roots.
                     <img
                       alt="Banksia integrifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1288,7 +1277,7 @@ first three years to establish their roots.
                     <img
                       alt="Brachychiton acerifolius"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1334,7 +1323,7 @@ first three years to establish their roots.
                     <img
                       alt="Brachychiton populneus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1380,7 +1369,7 @@ first three years to establish their roots.
                     <img
                       alt="Brahea clara"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1426,7 +1415,7 @@ first three years to establish their roots.
                     <img
                       alt="Brahea edulis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1472,7 +1461,7 @@ first three years to establish their roots.
                     <img
                       alt="Butia odorata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1518,7 +1507,7 @@ first three years to establish their roots.
                     <img
                       alt="Callistemon citrinus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1564,7 +1553,7 @@ first three years to establish their roots.
                     <img
                       alt="Callistemon viminalis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1610,7 +1599,7 @@ first three years to establish their roots.
                     <img
                       alt="Cassia leptophylla"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1728,7 +1717,7 @@ first three years to establish their roots.
                     <img
                       alt="Ceanothus thyrsiflorus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1774,7 +1763,7 @@ first three years to establish their roots.
                     <img
                       alt="Cedrela fissilis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1820,7 +1809,7 @@ first three years to establish their roots.
                     <img
                       alt="Ceiba speciosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1866,7 +1855,7 @@ first three years to establish their roots.
                     <img
                       alt="Celtis sinensis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1912,7 +1901,7 @@ first three years to establish their roots.
                     <img
                       alt="Cordyline australis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -1958,7 +1947,7 @@ first three years to establish their roots.
                     <img
                       alt="Corylus colurna"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2004,7 +1993,7 @@ first three years to establish their roots.
                     <img
                       alt="Corymbia citriodora"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2050,7 +2039,7 @@ first three years to establish their roots.
                     <img
                       alt="Corymbia ficifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2132,7 +2121,7 @@ first three years to establish their roots.
                     <img
                       alt="Crataegus phaenopyrum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2178,7 +2167,7 @@ first three years to establish their roots.
                     <img
                       alt="Crataegus x lavallei"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2224,7 +2213,7 @@ first three years to establish their roots.
                     <img
                       alt="Elaeocarpus decipiens"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2270,7 +2259,7 @@ first three years to establish their roots.
                     <img
                       alt="Eriobotrya deflexa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2352,7 +2341,7 @@ first three years to establish their roots.
                     <img
                       alt="Eucalyptus nicholii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2398,7 +2387,7 @@ first three years to establish their roots.
                     <img
                       alt="Eucalyptus polyanthemos"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2444,7 +2433,7 @@ first three years to establish their roots.
                     <img
                       alt="Garrya elliptica"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2490,7 +2479,7 @@ first three years to establish their roots.
                     <img
                       alt="Geijera parviflora"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2572,7 +2561,7 @@ first three years to establish their roots.
                     <img
                       alt="Heteromeles arbutifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2618,7 +2607,7 @@ first three years to establish their roots.
                     <img
                       alt="Howea forsteriana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2664,7 +2653,7 @@ first three years to establish their roots.
                     <img
                       alt="Hymenosporum flavum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2710,7 +2699,7 @@ first three years to establish their roots.
                     <img
                       alt="Jacaranda mimosifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2756,7 +2745,7 @@ first three years to establish their roots.
                     <img
                       alt="Koelreuteria bipinnata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2802,7 +2791,7 @@ first three years to establish their roots.
                     <img
                       alt="Koelreuteria elegans ssp. formosana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2848,7 +2837,7 @@ first three years to establish their roots.
                     <img
                       alt="Lagunaria patersonii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2930,7 +2919,7 @@ first three years to establish their roots.
                     <img
                       alt="Liriodendron tulipifera"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -2976,7 +2965,7 @@ first three years to establish their roots.
                     <img
                       alt="Lophostemon confertus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3022,7 +3011,7 @@ first three years to establish their roots.
                     <img
                       alt="Lyonothamnus floribundus asplenifolius"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3104,7 +3093,7 @@ first three years to establish their roots.
                     <img
                       alt="Magnolia doltsopa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3258,7 +3247,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca ericifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3304,7 +3293,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca linariifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3350,7 +3339,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca quinquenervia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3396,7 +3385,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca squamophloia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3442,7 +3431,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca styphelioides"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3524,7 +3513,7 @@ first three years to establish their roots.
                     <img
                       alt="Metrosideros excelsa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3606,7 +3595,7 @@ first three years to establish their roots.
                     <img
                       alt="Olea europaea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3652,7 +3641,7 @@ first three years to establish their roots.
                     <img
                       alt="Parajubaea sunkha"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3698,7 +3687,7 @@ first three years to establish their roots.
                     <img
                       alt="Parajubaea torallyi"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -3852,7 +3841,7 @@ first three years to establish their roots.
                     <img
                       alt="Pittosporum undulatum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4006,7 +3995,7 @@ first three years to establish their roots.
                     <img
                       alt="Prunus ilicifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4052,7 +4041,7 @@ first three years to establish their roots.
                     <img
                       alt="Prunus lyonii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4134,7 +4123,7 @@ first three years to establish their roots.
                     <img
                       alt="Pyrus kawakamii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4180,7 +4169,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus agrifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4226,7 +4215,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus chyrsolepis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4272,7 +4261,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus coccinea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4318,7 +4307,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus engelmannii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4400,7 +4389,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus hypoleucoides"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4446,7 +4435,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus ilex"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4492,7 +4481,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus phellos"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4538,7 +4527,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus rugosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4584,7 +4573,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus suber"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4630,7 +4619,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus tomentella"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4676,7 +4665,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus virginiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4722,7 +4711,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus wislizeni"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4768,7 +4757,7 @@ first three years to establish their roots.
                     <img
                       alt="Quillaja saponaria"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4850,7 +4839,7 @@ first three years to establish their roots.
                     <img
                       alt="Sambucus cerulea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4896,7 +4885,7 @@ first three years to establish their roots.
                     <img
                       alt="Syagrus romanzoffiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -4942,7 +4931,7 @@ first three years to establish their roots.
                     <img
                       alt="Tilia tomentosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5024,7 +5013,7 @@ first three years to establish their roots.
                     <img
                       alt="Tristaniopsis laurina"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5250,7 +5239,7 @@ first three years to establish their roots.
                     <img
                       alt="Washingtonia robusta"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5572,39 +5561,28 @@ first three years to establish their roots.
             class="treelistcards"
           >
             <div
-              class="treelistcards__container"
+              class="treelistcards__header"
             >
-              <div
-                class="treelistcards__header"
+              <h5
+                class="treelistcards__info"
               >
-                <div
-                  class="card"
-                  data-testid="card"
-                >
-                  <div
-                    class="treelistcards__info"
-                  >
-                    <h3>
-                      We encourage you to plant medium and larger-sized trees, as they
+                We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.
-                    </h3>
-                    <div
-                      class="treecare"
-                    >
-                      <a
-                        class="treelistcards__link"
-                        href="https://www.friendsoftheurbanforest.org/tree-care"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        Tree Care Program
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+first three years to establish their roots. 
+                <a
+                  class="treelistcards__link"
+                  href="https://www.friendsoftheurbanforest.org/tree-care"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Learn more about tree care.
+                </a>
+              </h5>
+            </div>
+            <div
+              class="treelistcards__container"
+            >
               <a
                 class="treelistcards__link"
                 href="/tree/acer-buergerianum"
@@ -5619,7 +5597,7 @@ first three years to establish their roots.
                     <img
                       alt="Acer buergerianum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5665,7 +5643,7 @@ first three years to establish their roots.
                     <img
                       alt="Acer circinatum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5747,7 +5725,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus californica"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5793,7 +5771,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus hippocastanum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5839,7 +5817,7 @@ first three years to establish their roots.
                     <img
                       alt="Aesculus x carnea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5885,7 +5863,7 @@ first three years to establish their roots.
                     <img
                       alt="Agonis flexuosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -5967,7 +5945,7 @@ first three years to establish their roots.
                     <img
                       alt="Angophora costata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6049,7 +6027,7 @@ first three years to establish their roots.
                     <img
                       alt="Archontophoenix cunninghamiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6095,7 +6073,7 @@ first three years to establish their roots.
                     <img
                       alt="Banksia integrifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6141,7 +6119,7 @@ first three years to establish their roots.
                     <img
                       alt="Brachychiton acerifolius"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6187,7 +6165,7 @@ first three years to establish their roots.
                     <img
                       alt="Brachychiton populneus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6233,7 +6211,7 @@ first three years to establish their roots.
                     <img
                       alt="Brahea clara"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6279,7 +6257,7 @@ first three years to establish their roots.
                     <img
                       alt="Brahea edulis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6325,7 +6303,7 @@ first three years to establish their roots.
                     <img
                       alt="Butia odorata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6371,7 +6349,7 @@ first three years to establish their roots.
                     <img
                       alt="Callistemon citrinus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6417,7 +6395,7 @@ first three years to establish their roots.
                     <img
                       alt="Callistemon viminalis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6463,7 +6441,7 @@ first three years to establish their roots.
                     <img
                       alt="Cassia leptophylla"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6581,7 +6559,7 @@ first three years to establish their roots.
                     <img
                       alt="Ceanothus thyrsiflorus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6627,7 +6605,7 @@ first three years to establish their roots.
                     <img
                       alt="Cedrela fissilis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6673,7 +6651,7 @@ first three years to establish their roots.
                     <img
                       alt="Ceiba speciosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6719,7 +6697,7 @@ first three years to establish their roots.
                     <img
                       alt="Celtis sinensis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6765,7 +6743,7 @@ first three years to establish their roots.
                     <img
                       alt="Cordyline australis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6811,7 +6789,7 @@ first three years to establish their roots.
                     <img
                       alt="Corylus colurna"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6857,7 +6835,7 @@ first three years to establish their roots.
                     <img
                       alt="Corymbia citriodora"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6903,7 +6881,7 @@ first three years to establish their roots.
                     <img
                       alt="Corymbia ficifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -6985,7 +6963,7 @@ first three years to establish their roots.
                     <img
                       alt="Crataegus phaenopyrum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7031,7 +7009,7 @@ first three years to establish their roots.
                     <img
                       alt="Crataegus x lavallei"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7077,7 +7055,7 @@ first three years to establish their roots.
                     <img
                       alt="Elaeocarpus decipiens"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7123,7 +7101,7 @@ first three years to establish their roots.
                     <img
                       alt="Eriobotrya deflexa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7205,7 +7183,7 @@ first three years to establish their roots.
                     <img
                       alt="Eucalyptus nicholii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7251,7 +7229,7 @@ first three years to establish their roots.
                     <img
                       alt="Eucalyptus polyanthemos"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7297,7 +7275,7 @@ first three years to establish their roots.
                     <img
                       alt="Garrya elliptica"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7343,7 +7321,7 @@ first three years to establish their roots.
                     <img
                       alt="Geijera parviflora"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7425,7 +7403,7 @@ first three years to establish their roots.
                     <img
                       alt="Heteromeles arbutifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7471,7 +7449,7 @@ first three years to establish their roots.
                     <img
                       alt="Howea forsteriana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7517,7 +7495,7 @@ first three years to establish their roots.
                     <img
                       alt="Hymenosporum flavum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7563,7 +7541,7 @@ first three years to establish their roots.
                     <img
                       alt="Jacaranda mimosifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7609,7 +7587,7 @@ first three years to establish their roots.
                     <img
                       alt="Koelreuteria bipinnata"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7655,7 +7633,7 @@ first three years to establish their roots.
                     <img
                       alt="Koelreuteria elegans ssp. formosana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7701,7 +7679,7 @@ first three years to establish their roots.
                     <img
                       alt="Lagunaria patersonii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7783,7 +7761,7 @@ first three years to establish their roots.
                     <img
                       alt="Liriodendron tulipifera"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7829,7 +7807,7 @@ first three years to establish their roots.
                     <img
                       alt="Lophostemon confertus"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7875,7 +7853,7 @@ first three years to establish their roots.
                     <img
                       alt="Lyonothamnus floribundus asplenifolius"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -7957,7 +7935,7 @@ first three years to establish their roots.
                     <img
                       alt="Magnolia doltsopa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8111,7 +8089,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca ericifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8157,7 +8135,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca linariifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8203,7 +8181,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca quinquenervia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8249,7 +8227,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca squamophloia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8295,7 +8273,7 @@ first three years to establish their roots.
                     <img
                       alt="Melaleuca styphelioides"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8377,7 +8355,7 @@ first three years to establish their roots.
                     <img
                       alt="Metrosideros excelsa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8459,7 +8437,7 @@ first three years to establish their roots.
                     <img
                       alt="Olea europaea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8505,7 +8483,7 @@ first three years to establish their roots.
                     <img
                       alt="Parajubaea sunkha"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8551,7 +8529,7 @@ first three years to establish their roots.
                     <img
                       alt="Parajubaea torallyi"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8705,7 +8683,7 @@ first three years to establish their roots.
                     <img
                       alt="Pittosporum undulatum"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8859,7 +8837,7 @@ first three years to establish their roots.
                     <img
                       alt="Prunus ilicifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8905,7 +8883,7 @@ first three years to establish their roots.
                     <img
                       alt="Prunus lyonii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -8987,7 +8965,7 @@ first three years to establish their roots.
                     <img
                       alt="Pyrus kawakamii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9033,7 +9011,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus agrifolia"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9079,7 +9057,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus chyrsolepis"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9125,7 +9103,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus coccinea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9171,7 +9149,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus engelmannii"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9253,7 +9231,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus hypoleucoides"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9299,7 +9277,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus ilex"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9345,7 +9323,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus phellos"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9391,7 +9369,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus rugosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9437,7 +9415,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus suber"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9483,7 +9461,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus tomentella"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9529,7 +9507,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus virginiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9575,7 +9553,7 @@ first three years to establish their roots.
                     <img
                       alt="Quercus wislizeni"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9621,7 +9599,7 @@ first three years to establish their roots.
                     <img
                       alt="Quillaja saponaria"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9703,7 +9681,7 @@ first three years to establish their roots.
                     <img
                       alt="Sambucus cerulea"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9749,7 +9727,7 @@ first three years to establish their roots.
                     <img
                       alt="Syagrus romanzoffiana"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9795,7 +9773,7 @@ first three years to establish their roots.
                     <img
                       alt="Tilia tomentosa"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -9877,7 +9855,7 @@ first three years to establish their roots.
                     <img
                       alt="Tristaniopsis laurina"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -10103,7 +10081,7 @@ first three years to establish their roots.
                     <img
                       alt="Washingtonia robusta"
                       loading="lazy"
-                      placeholder="./../assets/images/treelist/placeholder.jpg"
+                      placeholder="./../assets/images/treelist/placeholder.svg"
                       style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                     />
                   </div>
@@ -10876,39 +10854,28 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-p
           class="treelistcards"
         >
           <div
-            class="treelistcards__container"
+            class="treelistcards__header"
           >
-            <div
-              class="treelistcards__header"
+            <h5
+              class="treelistcards__info"
             >
-              <div
-                class="card"
-                data-testid="card"
-              >
-                <div
-                  class="treelistcards__info"
-                >
-                  <h3>
-                    We encourage you to plant medium and larger-sized trees, as they
+              We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.
-                  </h3>
-                  <div
-                    class="treecare"
-                  >
-                    <a
-                      class="treelistcards__link"
-                      href="https://www.friendsoftheurbanforest.org/tree-care"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Tree Care Program
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+first three years to establish their roots. 
+              <a
+                class="treelistcards__link"
+                href="https://www.friendsoftheurbanforest.org/tree-care"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Learn more about tree care.
+              </a>
+            </h5>
+          </div>
+          <div
+            class="treelistcards__container"
+          >
             <a
               class="treelistcards__link"
               href="/tree/acer-buergerianum"
@@ -10923,7 +10890,7 @@ first three years to establish their roots.
                   <img
                     alt="Acer buergerianum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -10969,7 +10936,7 @@ first three years to establish their roots.
                   <img
                     alt="Acer circinatum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11051,7 +11018,7 @@ first three years to establish their roots.
                   <img
                     alt="Aesculus californica"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11097,7 +11064,7 @@ first three years to establish their roots.
                   <img
                     alt="Aesculus hippocastanum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11143,7 +11110,7 @@ first three years to establish their roots.
                   <img
                     alt="Aesculus x carnea"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11189,7 +11156,7 @@ first three years to establish their roots.
                   <img
                     alt="Agonis flexuosa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11271,7 +11238,7 @@ first three years to establish their roots.
                   <img
                     alt="Angophora costata"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11353,7 +11320,7 @@ first three years to establish their roots.
                   <img
                     alt="Archontophoenix cunninghamiana"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11399,7 +11366,7 @@ first three years to establish their roots.
                   <img
                     alt="Banksia integrifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11445,7 +11412,7 @@ first three years to establish their roots.
                   <img
                     alt="Brachychiton acerifolius"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11491,7 +11458,7 @@ first three years to establish their roots.
                   <img
                     alt="Brachychiton populneus"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11537,7 +11504,7 @@ first three years to establish their roots.
                   <img
                     alt="Brahea clara"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11583,7 +11550,7 @@ first three years to establish their roots.
                   <img
                     alt="Brahea edulis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11629,7 +11596,7 @@ first three years to establish their roots.
                   <img
                     alt="Butia odorata"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11675,7 +11642,7 @@ first three years to establish their roots.
                   <img
                     alt="Callistemon citrinus"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11721,7 +11688,7 @@ first three years to establish their roots.
                   <img
                     alt="Callistemon viminalis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11767,7 +11734,7 @@ first three years to establish their roots.
                   <img
                     alt="Cassia leptophylla"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11885,7 +11852,7 @@ first three years to establish their roots.
                   <img
                     alt="Ceanothus thyrsiflorus"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11931,7 +11898,7 @@ first three years to establish their roots.
                   <img
                     alt="Cedrela fissilis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -11977,7 +11944,7 @@ first three years to establish their roots.
                   <img
                     alt="Ceiba speciosa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12023,7 +11990,7 @@ first three years to establish their roots.
                   <img
                     alt="Celtis sinensis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12069,7 +12036,7 @@ first three years to establish their roots.
                   <img
                     alt="Cordyline australis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12115,7 +12082,7 @@ first three years to establish their roots.
                   <img
                     alt="Corylus colurna"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12161,7 +12128,7 @@ first three years to establish their roots.
                   <img
                     alt="Corymbia citriodora"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12207,7 +12174,7 @@ first three years to establish their roots.
                   <img
                     alt="Corymbia ficifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12289,7 +12256,7 @@ first three years to establish their roots.
                   <img
                     alt="Crataegus phaenopyrum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12335,7 +12302,7 @@ first three years to establish their roots.
                   <img
                     alt="Crataegus x lavallei"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12381,7 +12348,7 @@ first three years to establish their roots.
                   <img
                     alt="Elaeocarpus decipiens"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12427,7 +12394,7 @@ first three years to establish their roots.
                   <img
                     alt="Eriobotrya deflexa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12509,7 +12476,7 @@ first three years to establish their roots.
                   <img
                     alt="Eucalyptus nicholii"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12555,7 +12522,7 @@ first three years to establish their roots.
                   <img
                     alt="Eucalyptus polyanthemos"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12601,7 +12568,7 @@ first three years to establish their roots.
                   <img
                     alt="Garrya elliptica"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12647,7 +12614,7 @@ first three years to establish their roots.
                   <img
                     alt="Geijera parviflora"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12729,7 +12696,7 @@ first three years to establish their roots.
                   <img
                     alt="Heteromeles arbutifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12775,7 +12742,7 @@ first three years to establish their roots.
                   <img
                     alt="Howea forsteriana"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12821,7 +12788,7 @@ first three years to establish their roots.
                   <img
                     alt="Hymenosporum flavum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12867,7 +12834,7 @@ first three years to establish their roots.
                   <img
                     alt="Jacaranda mimosifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12913,7 +12880,7 @@ first three years to establish their roots.
                   <img
                     alt="Koelreuteria bipinnata"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -12959,7 +12926,7 @@ first three years to establish their roots.
                   <img
                     alt="Koelreuteria elegans ssp. formosana"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13005,7 +12972,7 @@ first three years to establish their roots.
                   <img
                     alt="Lagunaria patersonii"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13087,7 +13054,7 @@ first three years to establish their roots.
                   <img
                     alt="Liriodendron tulipifera"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13133,7 +13100,7 @@ first three years to establish their roots.
                   <img
                     alt="Lophostemon confertus"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13179,7 +13146,7 @@ first three years to establish their roots.
                   <img
                     alt="Lyonothamnus floribundus asplenifolius"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13261,7 +13228,7 @@ first three years to establish their roots.
                   <img
                     alt="Magnolia doltsopa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13415,7 +13382,7 @@ first three years to establish their roots.
                   <img
                     alt="Melaleuca ericifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13461,7 +13428,7 @@ first three years to establish their roots.
                   <img
                     alt="Melaleuca linariifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13507,7 +13474,7 @@ first three years to establish their roots.
                   <img
                     alt="Melaleuca quinquenervia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13553,7 +13520,7 @@ first three years to establish their roots.
                   <img
                     alt="Melaleuca squamophloia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13599,7 +13566,7 @@ first three years to establish their roots.
                   <img
                     alt="Melaleuca styphelioides"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13681,7 +13648,7 @@ first three years to establish their roots.
                   <img
                     alt="Metrosideros excelsa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13763,7 +13730,7 @@ first three years to establish their roots.
                   <img
                     alt="Olea europaea"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13809,7 +13776,7 @@ first three years to establish their roots.
                   <img
                     alt="Parajubaea sunkha"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -13855,7 +13822,7 @@ first three years to establish their roots.
                   <img
                     alt="Parajubaea torallyi"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14009,7 +13976,7 @@ first three years to establish their roots.
                   <img
                     alt="Pittosporum undulatum"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14163,7 +14130,7 @@ first three years to establish their roots.
                   <img
                     alt="Prunus ilicifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14209,7 +14176,7 @@ first three years to establish their roots.
                   <img
                     alt="Prunus lyonii"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14291,7 +14258,7 @@ first three years to establish their roots.
                   <img
                     alt="Pyrus kawakamii"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14337,7 +14304,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus agrifolia"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14383,7 +14350,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus chyrsolepis"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14429,7 +14396,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus coccinea"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14475,7 +14442,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus engelmannii"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14557,7 +14524,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus hypoleucoides"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14603,7 +14570,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus ilex"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14649,7 +14616,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus phellos"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14695,7 +14662,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus rugosa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14741,7 +14708,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus suber"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14787,7 +14754,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus tomentella"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14833,7 +14800,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus virginiana"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14879,7 +14846,7 @@ first three years to establish their roots.
                   <img
                     alt="Quercus wislizeni"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -14925,7 +14892,7 @@ first three years to establish their roots.
                   <img
                     alt="Quillaja saponaria"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -15007,7 +14974,7 @@ first three years to establish their roots.
                   <img
                     alt="Sambucus cerulea"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -15053,7 +15020,7 @@ first three years to establish their roots.
                   <img
                     alt="Syagrus romanzoffiana"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -15099,7 +15066,7 @@ first three years to establish their roots.
                   <img
                     alt="Tilia tomentosa"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -15181,7 +15148,7 @@ first three years to establish their roots.
                   <img
                     alt="Tristaniopsis laurina"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>
@@ -15407,7 +15374,7 @@ first three years to establish their roots.
                   <img
                     alt="Washingtonia robusta"
                     loading="lazy"
-                    placeholder="./../assets/images/treelist/placeholder.jpg"
+                    placeholder="./../assets/images/treelist/placeholder.svg"
                     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                   />
                 </div>

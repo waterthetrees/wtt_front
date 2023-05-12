@@ -9,39 +9,28 @@ exports[`TreeListCards component renders TreeListCards correctly 1`] = `
         class="treelistcards"
       >
         <div
-          class="treelistcards__container"
+          class="treelistcards__header"
         >
-          <div
-            class="treelistcards__header"
+          <h5
+            class="treelistcards__info"
           >
-            <div
-              class="card"
-              data-testid="card"
-            >
-              <div
-                class="treelistcards__info"
-              >
-                <h3>
-                  We encourage you to plant medium and larger-sized trees, as they
+            We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.
-                </h3>
-                <div
-                  class="treecare"
-                >
-                  <a
-                    class="treelistcards__link"
-                    href="https://vimeo.com/416031708#t=5m35s"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Tree Care Program
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+first three years to establish their roots. 
+            <a
+              class="treelistcards__link"
+              href="/treecare"
+              rel="noopener noreferrer"
+              target="_self"
+            >
+              Learn more about tree care.
+            </a>
+          </h5>
+        </div>
+        <div
+          class="treelistcards__container"
+        >
           <a
             class="treelistcards__link"
             href="/tree/sequoia-sempervirens-'adpressa'"
@@ -56,7 +45,7 @@ first three years to establish their roots.
                 <img
                   alt="Sequoia sempervirens 'Adpressa'"
                   loading="lazy"
-                  placeholder="./../assets/images/treelist/placeholder.jpg"
+                  placeholder="./../assets/images/treelist/placeholder.svg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
@@ -102,7 +91,7 @@ first three years to establish their roots.
                 <img
                   alt="Callitropsis nootkatensis"
                   loading="lazy"
-                  placeholder="./../assets/images/treelist/placeholder.jpg"
+                  placeholder="./../assets/images/treelist/placeholder.svg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
@@ -143,39 +132,28 @@ first three years to establish their roots.
       class="treelistcards"
     >
       <div
-        class="treelistcards__container"
+        class="treelistcards__header"
       >
-        <div
-          class="treelistcards__header"
+        <h5
+          class="treelistcards__info"
         >
-          <div
-            class="card"
-            data-testid="card"
-          >
-            <div
-              class="treelistcards__info"
-            >
-              <h3>
-                We encourage you to plant medium and larger-sized trees, as they
+          We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.
-              </h3>
-              <div
-                class="treecare"
-              >
-                <a
-                  class="treelistcards__link"
-                  href="https://vimeo.com/416031708#t=5m35s"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Tree Care Program
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+first three years to establish their roots. 
+          <a
+            class="treelistcards__link"
+            href="/treecare"
+            rel="noopener noreferrer"
+            target="_self"
+          >
+            Learn more about tree care.
+          </a>
+        </h5>
+      </div>
+      <div
+        class="treelistcards__container"
+      >
         <a
           class="treelistcards__link"
           href="/tree/sequoia-sempervirens-'adpressa'"
@@ -190,7 +168,7 @@ first three years to establish their roots.
               <img
                 alt="Sequoia sempervirens 'Adpressa'"
                 loading="lazy"
-                placeholder="./../assets/images/treelist/placeholder.jpg"
+                placeholder="./../assets/images/treelist/placeholder.svg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>
@@ -236,7 +214,7 @@ first three years to establish their roots.
               <img
                 alt="Callitropsis nootkatensis"
                 loading="lazy"
-                placeholder="./../assets/images/treelist/placeholder.jpg"
+                placeholder="./../assets/images/treelist/placeholder.svg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>

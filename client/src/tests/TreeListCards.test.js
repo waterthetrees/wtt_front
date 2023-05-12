@@ -31,7 +31,7 @@ const mockData = [
 
 const mockDataSources = [
   {
-    treecare: 'https://vimeo.com/416031708#t=5m35s',
+    treecare: '/treecare',
   },
 ];
 
@@ -61,10 +61,7 @@ describe('TreeListCards component', () => {
 
     // Check header card
     expect(screen.getByText(/we encourage you to plant/i)).toBeInTheDocument();
-    expect(screen.getByText(/tree care program/i)).toHaveAttribute(
-      'href',
-      'https://vimeo.com/416031708#t=5m35s',
-    );
+    expect(screen.getByText(/tree care/i)).toHaveAttribute('href', '/treecare');
 
     // Check tree cards
     const links = screen.getAllByRole('link');
@@ -98,13 +95,10 @@ describe('TreeListCards component', () => {
     );
 
     expect(screen.getByText(/we encourage you to plant/i)).toBeInTheDocument();
-    expect(screen.getByText(/tree care program/i)).toHaveAttribute(
-      'href',
-      'https://vimeo.com/416031708#t=5m35s',
-    );
+    expect(screen.getByText(/tree care/i)).toHaveAttribute('href', '/treecare');
 
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(2); // 1 tree card + 1 Tree Care Program link
+    expect(links).toHaveLength(2); // 1 tree info header + 1 Tree Care link
     expect(links[1]).toHaveAttribute('href', '/tree/quercus-robur');
   });
 });

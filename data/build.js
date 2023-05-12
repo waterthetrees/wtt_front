@@ -193,6 +193,7 @@ async function buildScientificNameToImageMap(names) {
     const MAX_TITLES_PER_QUERY = 50;
     const partitions = partition(data, MAX_TITLES_PER_QUERY);
     const queryTitles = partitions.map((titles) => titles.join('|'));
+    console.log(queryTitles, queryTitles, queryTitles.length);
     const queries = queryTitles.map((titles) => buildRequestURL(titles));
     return queries.map((query) => query.href);
   }

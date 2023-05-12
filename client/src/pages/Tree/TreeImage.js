@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import treeImages from '@/data/dist/treeImages.json';
 
-const placeholderPath = './../assets/images/treelist/placeholder.jpg';
+const placeholderPath = './../assets/images/treelist/placeholder.svg';
 
 export const ImageLoad = React.memo(
   ({ src, placeholder = placeholderPath, alt = '' }) => {
