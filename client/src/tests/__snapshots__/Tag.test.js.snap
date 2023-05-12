@@ -6,7 +6,7 @@ exports[`<Tag /> spec Renders the Tag component correctly 1`] = `
     class="tag"
   >
     <div
-      class="tag__green"
+      class="tag__pill tag__green"
     >
       Test Tag
     </div>
