@@ -193,6 +193,7 @@ async function buildScientificNameToImageMap(names) {
     const MAX_TITLES_PER_QUERY = 50;
     const partitions = partition(data, MAX_TITLES_PER_QUERY);
     const queryTitles = partitions.map((titles) => titles.join('|'));
+    console.log(queryTitles, queryTitles, queryTitles.length);
     const queries = queryTitles.map((titles) => buildRequestURL(titles));
     return queries.map((query) => query.href);
   }
@@ -331,13 +332,19 @@ async function downloadImage(imageURL, title) {
     const dataDir = './client/src/assets/images/data';
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
+      console.info(`Created directory: ${dataDir}`);
     }
 
     const imageName = `${formatWord(title)}.jpg`;
-    const buffer = await response.arrayBuffer();
-    fs.writeFileSync(`${dataDir}/${imageName}`, Buffer.from(buffer));
+    const imagePath = `${dataDir}/${imageName}`;
+    if (!fs.existsSync(imagePath)) {
+      const buffer = await response.arrayBuffer();
+      fs.writeFileSync(imagePath, Buffer.from(buffer));
+      console.info(`Downloaded and saved new image: ${imageName}`);
+    } else {
+      console.info(`Image already exists: ${imageName}`);
+    }
 
-    console.info(`Downloaded and saved image: ${imageName}`);
     return imageName;
   } catch (error) {
     console.error(`Error downloading ${imageURL} - ${error.message}`);

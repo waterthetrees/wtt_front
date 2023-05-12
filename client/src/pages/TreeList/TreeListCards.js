@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { Tag } from '@/components/Tag/Tag';
 import { ImageLoad, setFormatImagePath } from '@/pages/Tree/TreeImage';
@@ -13,7 +13,7 @@ import './TreeList.scss';
 const HEADING_TEXT = `We encourage you to plant medium and larger-sized trees, as they
 provide greater benefits to the city than smaller trees. Young trees
 require 1.5 inches of rain or 25 gallons of water per week for the
-first three years to establish their roots.`;
+first three years to establish their roots. `;
 
 export function getDormancyTagColor(dormancy) {
   switch (dormancy) {
@@ -37,34 +37,26 @@ export const createTreePageRoute = (tree, routeName = 'tree') => {
 };
 
 export default function TreeListCards({ data, selectedDataSourceIndex }) {
+  const { treecare, target } = dataSources[selectedDataSourceIndex];
   return (
     <div className="treelistcards">
+      <div className="treelistcards__header">
+        <h5 className="treelistcards__info">
+          {HEADING_TEXT}
+          <Link
+            to={treecare}
+            target={target}
+            rel={'noopener noreferrer'}
+            className="treelistcards__link"
+          >
+            Learn more about tree care.
+          </Link>
+        </h5>
+      </div>
       <div className="treelistcards__container">
-        <div className="treelistcards__header">
-          <Card>
-            <div className="treelistcards__info">
-              <h3>{HEADING_TEXT}</h3>
-              <div className="treecare">
-                <a
-                  href={dataSources[selectedDataSourceIndex].treecare}
-                  target="_blank"
-                  className="treelistcards__link"
-                  rel="noreferrer"
-                >
-                  Tree Care Program
-                </a>
-              </div>
-            </div>
-          </Card>
-        </div>
-
         {data.map((tree, index) => {
           const { scientific, common, height, deciduousEvergreen } = tree;
           const treeImagePath = setFormatImagePath(scientific);
-          const dormancy = deciduousEvergreen?.toLowerCase().replace(/ /g, '-');
-          const tagVariant = getDormancyTagColor(dormancy);
-          const formatCommon = toTitleCase(common);
-          const formatScientific = formatScientificName(scientific);
 
           return (
             <NavLink
@@ -73,24 +65,21 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
                 pathname: createTreePageRoute(tree),
               }}
               state={{ tree, selectedDataSourceIndex }}
-              key={`${tree?.scientific}-${index}`}
+              key={`${scientific}-${index}`}
             >
               <Card>
                 {treeImagePath && (
                   <div className="treelistcards__image">
-                    <ImageLoad
-                      src={treeImagePath}
-                      placeholder="placeholder.jpg"
-                    />
+                    <ImageLoad src={treeImagePath} alt={scientific} />
                   </div>
                 )}
                 <div className="treelistcards__info">
-                  <h2>{formatCommon}</h2>
-                  <h4 className="scientific">{formatScientific}</h4>
+                  <h2>{toTitleCase(common)}</h2>
+                  <h4 className="scientific">
+                    {formatScientificName(scientific)}
+                  </h4>
                   <div className="treelistcards__item">{height}</div>
-                  {deciduousEvergreen && (
-                    <Tag variant={tagVariant}>{dormancy}</Tag>
-                  )}
+                  <Dormancy deciduousEvergreen={deciduousEvergreen} />
                 </div>
               </Card>
             </NavLink>
@@ -99,4 +88,28 @@ export default function TreeListCards({ data, selectedDataSourceIndex }) {
       </div>
     </div>
   );
+}
+
+export function Dormancy({ deciduousEvergreen }) {
+  if (
+    !deciduousEvergreen ||
+    deciduousEvergreen === null ||
+    typeof deciduousEvergreen !== 'string'
+  ) {
+    return null;
+  }
+  const dormancyLower = deciduousEvergreen?.replace(/ /g, '-').toLowerCase();
+  // If more than one dormancy, split into array, otherwise create array with one item
+  const dormancyArray = dormancyLower?.includes(',')
+    ? dormancyLower?.split(',')
+    : [dormancyLower];
+
+  return dormancyArray.map((dormancy) => {
+    const tagVariant = getDormancyTagColor(dormancy);
+    return (
+      <Tag key={tagVariant} variant={tagVariant}>
+        {dormancy}
+      </Tag>
+    );
+  });
 }

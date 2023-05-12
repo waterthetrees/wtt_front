@@ -2,39 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import treeImages from '@/data/dist/treeImages.json';
 
+const placeholderPath = './../assets/images/treelist/placeholder.svg';
+
 export const ImageLoad = React.memo(
-  ({ src, placeholder = 'placeholder.jpg', alt = '' }) => {
+  ({ src, placeholder = placeholderPath, alt = '' }) => {
     const [loading, setLoading] = useState(true);
     const [currentSrc, updateSrc] = useState(placeholder);
 
-    // useEffect(() => {
-    //   if (src !== currentSrc) updateSrc();
-    //   // start loading original image
-    //   const imageToLoad = new Image();
-    //   imageToLoad.src = src;
-    //   imageToLoad.onload = () => {
-    //     // When image is loaded replace the src and set loading to false
-    //     setLoading(false);
-    //     updateSrc(src);
-    //   };
-    // }, [src]);
-
-    // useEffect(() => {
-    //   if (src !== currentSrc) {
-    //     updateSrc(placeholder); // Add this line
-    //   }
-    //   // start loading original image
-    //   const imageToLoad = new Image();
-    //   imageToLoad.src = src;
-    //   imageToLoad.onload = () => {
-    //     // When image is loaded replace the src and set loading to false
-    //     setLoading(false);
-    //     updateSrc(src);
-    //   };
-    // }, [src]);
-
     useEffect(() => {
-      // if (src !== currentSrc) updateSrc();
+      if (src !== currentSrc) updateSrc();
       // start loading original image
       const imageToLoad = new Image();
       imageToLoad.src = src;
@@ -42,11 +18,6 @@ export const ImageLoad = React.memo(
         // When image is loaded replace the src and set loading to false
         setLoading(false);
         updateSrc(src);
-      };
-
-      // Cleanup function to reset currentSrc to placeholder when src changes
-      return () => {
-        updateSrc(placeholder);
       };
     }, [src]);
 
@@ -61,6 +32,7 @@ export const ImageLoad = React.memo(
         placeholder={placeholder}
         alt={alt}
         loading="lazy"
+        onError={(e) => (e.target.style = 'display: "none"')}
       />
     );
   },
@@ -74,12 +46,8 @@ export const setFormatImagePath = (scientific) => {
   if (!scientific || !treeImages[scientific]) return null;
 
   // replace spaces with hyphens for image path using regex
-  const scientificNospaces = scientific
-    .replace(/\s/g, '-')
-    .replace(/'/g, '')
-    .replace(/"/g, '');
+  const scientificNospaces = scientific.toLowerCase().replace(/\s/g, '-');
 
   const imagePath = `../../assets/images/data/${scientificNospaces}.jpg`;
-  // || treeImages[scientific]?.imageURL;
   return imagePath;
 };

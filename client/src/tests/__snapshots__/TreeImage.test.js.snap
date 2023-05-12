@@ -6,7 +6,6 @@ exports[`ImageLoad Renders the ImageLoad component correctly 1`] = `
     alt="Example image"
     loading="lazy"
     placeholder="https://example.com/placeholder.jpg"
-    src="https://example.com/placeholder.jpg"
     style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
   />
 </div>

@@ -25,6 +25,7 @@ const dataColumns = [
   },
 ];
 
+// TODO rename this to treelists so it doesn't get confused with sources
 export const dataSources = [
   {
     name: 'Native California Trees',
@@ -32,7 +33,8 @@ export const dataSources = [
     columns: dataColumns.slice(0, 4),
     url: 'https://calscape.org/loc-California/cat-Trees/ord-popular?srchcr=sc60ef7918b1949',
     thanks: '©calscape.org',
-    treecare: 'https://vimeo.com/416031708#t=5m35s',
+    treecare: '/treecare',
+    target: '_self',
   },
   {
     name: 'Food Trees',
@@ -40,7 +42,8 @@ export const dataSources = [
     columns: dataColumns.slice(0, 2),
     url: 'https://fallingfruit.org',
     thanks: '©FallingFruit.org',
-    treecare: 'https://vimeo.com/416031708#t=5m35s',
+    treecare: '/treecare',
+    target: '_self',
   },
   {
     name: 'San Francisco Street Trees',
@@ -49,5 +52,6 @@ export const dataSources = [
     url: 'https://www.fuf.net/',
     thanks: '©fuf.net',
     treecare: 'https://www.friendsoftheurbanforest.org/tree-care',
+    target: '_blank',
   },
 ];

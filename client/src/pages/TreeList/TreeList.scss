@@ -8,15 +8,6 @@ $white: white;
 $backgroundColor: white;
 
 $borderRadius: 4px;
-.treecare {
-  font-family: arial, sans-serif;
-  font-size: medium;
-  color: $black;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 5px;
-  cursor: pointer;
-}
 
 .treelist {
   $self: &;
@@ -54,7 +45,7 @@ $borderRadius: 4px;
 
   @media screen and (max-width: 480px) {
     &__content {
-      padding: 315px 5px;
+      padding: 273px 5px;
     }
   }
 }
