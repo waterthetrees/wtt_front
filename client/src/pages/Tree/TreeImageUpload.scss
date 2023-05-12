@@ -65,10 +65,10 @@ $font: montserrat;
   color: $color;
   padding: 0.1em 1em;
   text-transform: none;
-}
 
-.dialog-button.dialog-button:hover {
-  background-color: #ececec;
+  &:hover {
+    background-color: #ececec;
+  }
 }
 
 .error-text.error-text {

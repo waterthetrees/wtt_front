@@ -1,11 +1,5 @@
 import { AddAPhoto } from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  LinearProgress,
-  TextField,
-  styled,
-} from '@mui/material';
+import { Button, IconButton, LinearProgress, TextField } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 
 import './TreeImageUpload.scss';
@@ -46,7 +40,7 @@ function ImageUploadArea({ uploadURL, handleError }) {
   };
 
   return (
-    <>
+    <React.Fragment>
       <IconButton
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -67,7 +61,7 @@ function ImageUploadArea({ uploadURL, handleError }) {
         onChange={fileSelected}
         accept="image/jpeg"
       />
-    </>
+    </React.Fragment>
   );
 }
 
@@ -97,7 +91,7 @@ function ImageUploadDialog({ uploadURL, handleError }) {
   };
 
   return (
-    <>
+    <React.Fragment>
       <section className="input-border" onKeyDown={handleEnter}>
         <TextField
           hiddenLabel
@@ -111,7 +105,7 @@ function ImageUploadDialog({ uploadURL, handleError }) {
           Upload
         </Button>
       </section>
-    </>
+    </React.Fragment>
   );
 }
 
