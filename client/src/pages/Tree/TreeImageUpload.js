@@ -2,54 +2,7 @@ import React, { useRef } from 'react';
 import { AddAPhoto } from "@mui/icons-material";
 import { Button, IconButton, LinearProgress, styled, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import "./TreeImageUpload.css";
-
-const color = "black";
-const font = "Montserrat";
-
-const ImageUploadSection = styled('section')`
-  margin: 1em 0;
-`;
-
-const DropArea = styled(IconButton)`
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 1em;
-  width: 100%;
-  border-radius: 8px;
-  border: 2px dashed ${color};
-  text-align: center;
-  font-family: Montserrat;
-`;
-
-const ActionText = styled('h2')`
-  color: ${color};
-  font-family: ${font};
-  font-size: 16px;
-  font-style: medium;
-  margin: 5px;
-`;
-
-const Icon = styled(AddAPhoto)`
-  color: #7d7d7d;
-  width: 32px;
-  height: 32px;
-  margin: 5px 0 1px;
-`;
-
-const Text = styled('p')`
-  color: ${color};
-  font-size: 12px;
-  font-family: ${font};
-  margin: 1px;
-`;
-
-const HiddenInput = styled('input')`
-  display: none;
-`;
+import "./TreeImageUpload.scss";
 
 function ImageUploadArea({ uploadURL, handleError }) {
   const [dragActive, setDragActive] = useState(false);
@@ -88,21 +41,22 @@ function ImageUploadArea({ uploadURL, handleError }) {
 
   return (
     <>
-      <DropArea
+      <IconButton
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={addImage}
         onClick={handleClick}
-        className={dragActive ? "dragging" : "not-dragging"}
+        className={`drop-area ${dragActive ? "dragging" : "not-dragging"}`}
       >
-          <Icon />
-          <ActionText>
+          <AddAPhoto className='photo-icon' />
+          <h2 className='action-text'>
             Select Image to Upload
-          </ActionText>
-          <Text>or drag and drop here</Text>
-      </DropArea>
-      <HiddenInput
+          </h2>
+          <p className='text'>or drag and drop here</p>
+      </IconButton>
+      <input
+        sx={{ display: "none" }}
         data-testid="file-input"
         type="file"
         ref={inputRef}
@@ -112,36 +66,6 @@ function ImageUploadArea({ uploadURL, handleError }) {
     </>
   );
 }
-
-const InputBorder = styled('section')`
-  display: flex;
-  font-family: Montserrat;
-  align-items: center;
-  background-color: #ededed;
-  border-radius: 8px;
-  justify-content: center;
-  padding: 4px 2px;
-`;
-
-const DialogButton = styled(Button)`
-  border-radius: 8px;
-  font-size: 12px;
-  background-color: #ffffff;
-  color: ${color};
-  padding: .1em 1em;
-  text-transform: none;
-
-  &:hover {
-    background-color: #ececec;
-  }
-`;
-
-const ErrorText = styled('p')`
-  color: red;
-  font-size: 12px;
-  font-family: ${font};
-  margin: 1px;
-`;
 
 function ImageUploadDialog({ uploadURL, handleError }) {
   const [value, setValue] = useState("");
@@ -170,7 +94,8 @@ function ImageUploadDialog({ uploadURL, handleError }) {
 
   return (
     <>
-      <InputBorder
+      <section
+        className='input-border'
         onKeyDown={handleEnter}
       >
         <TextField
@@ -181,28 +106,17 @@ function ImageUploadDialog({ uploadURL, handleError }) {
           value={value}
           onChange={handleChange}
         />
-        <DialogButton
+        <Button
           variant='contained'
           onClick={submit}
+          className='dialog-button'
         >
           Upload
-        </DialogButton>
-      </InputBorder>
+        </Button>
+      </section>
     </>
   );
 }
-
-const UploadBar = styled("div")`
-  margin: 1em 0;
-  display: grid;
-  grid-template-columns: 1fr 5fr 2fr;
-  align-items: center;
-  grid-gap: 1em;
-`;
-
-const Percent = styled("p")`
-  margin: auto;
-`;
 
 function ImageUploadBar({ pollUpload, uploadDone, cancelUpload }) {
   const [progress, setProgress] = useState(0);
@@ -212,20 +126,21 @@ function ImageUploadBar({ pollUpload, uploadDone, cancelUpload }) {
   }, []);
 
   return (
-    <UploadBar>
-      <Percent>{progress}%</Percent>
+    <div className='upload-bar'>
+      <p sx={{ margin: "auto" }}>{progress}%</p>
       <LinearProgress
         variant="determinate"
         color="success"
         value={progress}
       />
-      <DialogButton
+      <Button
         variant="contained"
         onClick={cancelUpload}
+        className='dialog-button'
       >
         Cancel
-      </DialogButton>
-    </UploadBar>
+      </Button>
+    </div>
   );
 }
 
@@ -263,7 +178,7 @@ export default function ImageUpload({
   }
 
   return (
-    <ImageUploadSection>
+    <section sx={{ margin: "1em 0" }}>
       <h3>Uploading Images</h3>
       <p sx={{ fontSize: "12px" }}>
         Took a selfie with your tree and want
@@ -291,7 +206,7 @@ export default function ImageUpload({
           pollUpload={apiPollUpload}
         />
       }
-      {error && <ErrorText>{errMsg}</ErrorText>}
-    </ImageUploadSection>
+      {error && <p className='error-text'>{errMsg}</p>}
+    </section>
   )
 }

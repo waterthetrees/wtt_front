@@ -1,7 +1,0 @@
-.not-dragging.not-dragging {
-  background-color: none;
-}
-
-.dragging.dragging {
-  background-color: rgba(0, 0, 0, 0.04);
-}

@@ -1,0 +1,95 @@
+$color: black;
+$font: Montserrat;
+
+// Per Google Bard:
+// If you want to use a custom class name
+// that is not already defined by Material UI,
+// you will need to double the class name.
+//
+// This is because Material UI uses a prefix for its class names.
+// The prefix is usually Mui followed by the name of the component.
+// For example, the class name for the Button component is MuiButton.
+// When you double the class name, you are telling Material UI that
+// you want to use a custom class, not a class that is defined by Material UI.
+
+.text.text {
+  color: $color;
+  font-size: 12px;
+  font-family: $font;
+  margin: 1px;
+}
+
+.drop-area.drop-area {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 1em;
+  width: 100%;
+  border-radius: 8px;
+  border: 2px dashed $color;
+  text-align: center;
+  font-family: $font;
+}
+
+.action-text.action-text {
+  color: $color;
+  font-family: $font;
+  font-size: 16px;
+  font-style: medium;
+  margin: 5px;
+}
+
+.photo-icon.photo-icon {
+  color: #7d7d7d;
+  width: 32px;
+  height: 32px;
+  margin: 5px 0 1px;
+}
+
+.input-border.input-border {
+  display: flex;
+  font-family: Montserrat;
+  align-items: center;
+  background-color: #ededed;
+  border-radius: 8px;
+  justify-content: center;
+  padding: 4px 2px;
+}
+
+.dialog-button.dialog-button {
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #ffffff;
+  color: $color;
+  padding: .1em 1em;
+  text-transform: none;
+}
+
+.dialog-button.dialog-button:hover {
+  background-color: #ececec;
+}
+
+.error-text.error-text {
+  color: red;
+  font-size: 12px;
+  font-family: $font;
+  margin: 1px;
+}
+
+.upload-bar.upload-bar {
+  margin: 1em 0;
+  display: grid;
+  grid-template-columns: 1fr 5fr 2fr;
+  align-items: center;
+  grid-gap: 1em;
+}
+
+.not-dragging.not-dragging {
+  background-color: none;
+}
+
+.dragging.dragging {
+  background-color: rgba(0, 0, 0, 0.04);
+}
