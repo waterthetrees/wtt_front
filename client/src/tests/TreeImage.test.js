@@ -65,7 +65,7 @@ describe('ImageLoad', () => {
 describe('setFormatImagePath', () => {
   it('returns the correct image path when the scientific name is provided and exists in treeImages', () => {
     const scientificName = 'Quercus alba';
-    const expectedImagePath = '../../assets/images/data/Quercus-alba.jpg';
+    const expectedImagePath = '../../assets/images/data/quercus-alba.jpg';
     const result = setFormatImagePath(scientificName);
 
     expect(result).toBe(expectedImagePath);

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TreeListCards /> spec renders TreeListCards correctly 1`] = `
+exports[`TreeListCards component renders TreeListCards correctly 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -54,10 +54,9 @@ first three years to establish their roots.
                 class="treelistcards__image"
               >
                 <img
-                  alt=""
+                  alt="Sequoia sempervirens 'Adpressa'"
                   loading="lazy"
-                  placeholder="placeholder.jpg"
-                  src="placeholder.jpg"
+                  placeholder="./../assets/images/treelist/placeholder.jpg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
@@ -101,10 +100,9 @@ first three years to establish their roots.
                 class="treelistcards__image"
               >
                 <img
-                  alt=""
+                  alt="Callitropsis nootkatensis"
                   loading="lazy"
-                  placeholder="placeholder.jpg"
-                  src="placeholder.jpg"
+                  placeholder="./../assets/images/treelist/placeholder.jpg"
                   style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
                 />
               </div>
@@ -190,10 +188,9 @@ first three years to establish their roots.
               class="treelistcards__image"
             >
               <img
-                alt=""
+                alt="Sequoia sempervirens 'Adpressa'"
                 loading="lazy"
-                placeholder="placeholder.jpg"
-                src="placeholder.jpg"
+                placeholder="./../assets/images/treelist/placeholder.jpg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>
@@ -237,10 +234,9 @@ first three years to establish their roots.
               class="treelistcards__image"
             >
               <img
-                alt=""
+                alt="Callitropsis nootkatensis"
                 loading="lazy"
-                placeholder="placeholder.jpg"
-                src="placeholder.jpg"
+                placeholder="./../assets/images/treelist/placeholder.jpg"
                 style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
               />
             </div>

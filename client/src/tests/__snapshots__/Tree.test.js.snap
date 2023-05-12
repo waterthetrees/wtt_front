@@ -882,7 +882,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
               alt=""
               loading="lazy"
               placeholder="placeholder.jpg"
-              src="placeholder.jpg"
               style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
             />
             <div
@@ -2452,7 +2451,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-15:focus::-ms-input-
             alt=""
             loading="lazy"
             placeholder="placeholder.jpg"
-            src="placeholder.jpg"
             style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
           />
           <div
@@ -4160,7 +4158,6 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-17:focus::-ms-input-
               alt=""
               loading="lazy"
               placeholder="placeholder.jpg"
-              src="placeholder.jpg"
               style="opacity: 0.1; transition: opacity .30s linear; width: 100%;"
             />
             <div
