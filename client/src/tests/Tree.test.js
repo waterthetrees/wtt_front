@@ -1,8 +1,9 @@
-import React from 'react';
+import { composeStories } from '@storybook/react';
 import { render } from '@testing-library/react';
-import { composeStories } from '@storybook/testing-react';
+import React from 'react';
 
 import * as stories from '../pages/Tree/Tree.stories';
+
 const { TreeWithPanelDrawer, TreeWithScrollableDialog } =
   composeStories(stories);
 
