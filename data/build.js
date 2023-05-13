@@ -3,6 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 
+// const { toTitleCase } = Promise.all([import('@/util/stringUtils')]).then(
+//   ([{ default: toTitleCase }]) => ({ toTitleCase }),
+// );
+
+const featureFlags = {
+  downloadImages: true,
+};
 const jsonPattern = /(.+)\.json$/;
 const dataPath = path.resolve(__dirname, 'json');
 const outputPath = path.resolve(__dirname, '../client/src/data/dist');
@@ -61,11 +68,80 @@ function toSource(obj) {
   );
 }
 
-function toTitleCase(string) {
-  return string.replace(
-    /([^\W_]+[^\s-]*) */g,
-    (word) => word.charAt(0).toUpperCase() + word.slice(1),
-  );
+// // TODO use functions from utils/stringUtils.js once this is es6
+// // Common Names should be title case. All major words are capitalized, while minor words are lowercased
+function toTitleCase(str) {
+  if (!str) return '';
+  const wordsToSkip = ['of', 'and', 'the', 'in', 'on'];
+
+  return str
+    .toLowerCase()
+    .split(/\s+/) // Split on one or more spaces
+    .filter((word) => word) // Filter out empty strings
+    .map(function (word, index) {
+      if (wordsToSkip.includes(word) && index !== 0) {
+        return word;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+}
+
+// TODO use functions from utils/stringUtils.js once this is es6
+// Cultivar should be title case and in single quotes.
+function formatCultivar(cultivar) {
+  if (!cultivar) return '';
+  const cultivarWithoutQuotes = cultivar.replace(/["']/g, '');
+  const titleCasedCultivar = toTitleCase(cultivarWithoutQuotes);
+  return ` '${titleCasedCultivar}'`;
+}
+
+// TODO use functions from utils/stringUtils.js once this is es6
+/**
+ * Formats a scientific name. The Genus name is always capitalized,
+ * Species name and any infraspecific epithets are written in lowercase.
+ * Cultivar should be capitalized and in single quotes.
+ * All should be typically italicized.
+ * @see {@link https://en.wikipedia.org/wiki/Binomial_nomenclature}
+ *
+ * @param {string} scientificName - The scientific name of the tree
+ * @returns {string} - The formatted scientific name
+ *
+ * @example
+ * // returns 'Acer rubrum'
+ * formatScientificName('Acer rubrum')
+ *
+ * @example
+ * // returns 'Quercus alba'
+ * formatScientificName('Quercus alba')
+ *
+ * @example
+ * // returns 'Picea abies \'Nidiformis\''
+ * formatScientificName('Picea abies "Nidiformis"')
+ */
+function formatScientificName(scientificName) {
+  if (!scientificName) return '';
+
+  const [firstPart, cultivar] = scientificName
+    .trim()
+    .replace(/["]/g, "'") // replace double quotes with single quotes
+    .replace(/[']/, "----cultivarsplit'") // Add in ----cultivarsplit' to use for splitting quoted cultivar out of name
+    .split('----cultivarsplit');
+
+  const formattedCultivar = cultivar ? formatCultivar(cultivar) : '';
+  const [genus, species, ...epithet] = firstPart.trim().split(' ');
+
+  const formattedGenus = genus
+    ? genus.charAt(0).toUpperCase() + genus.slice(1).toLowerCase()
+    : '';
+
+  const formattedSpecies = species ? ` ${species.toLowerCase()}` : '';
+
+  const formattedEpithet = epithet?.length
+    ? ` ${epithet.join(' ').toLowerCase()}`
+    : '';
+
+  return `${formattedGenus}${formattedSpecies}${formattedEpithet}${formattedCultivar}`;
 }
 
 function createTreeSorter(name) {
@@ -117,6 +193,7 @@ async function buildScientificNameToImageMap(names) {
     const MAX_TITLES_PER_QUERY = 50;
     const partitions = partition(data, MAX_TITLES_PER_QUERY);
     const queryTitles = partitions.map((titles) => titles.join('|'));
+    console.log(queryTitles, queryTitles, queryTitles.length);
     const queries = queryTitles.map((titles) => buildRequestURL(titles));
     return queries.map((query) => query.href);
   }
@@ -138,9 +215,15 @@ async function buildScientificNameToImageMap(names) {
     // download Images and save to assets
     Object.values(allPages).forEach(async (page) => {
       const { title, fullurl, extract, thumbnail: { source } = {} } = page;
-      images[title] = { imageURL: source, fullurl, extract, title };
+
+      images[title] = {
+        imageURL: source,
+        fullurl,
+        extract,
+        title: formatScientificName(title),
+      };
       let count = 0;
-      if (source && title) {
+      if (source && title && featureFlags?.downloadImages) {
         const imageDownload = await downloadImage(source, title);
         if (await imageDownload) {
           images[title].imageFileName = imageDownload;
@@ -192,8 +275,9 @@ jsonFiles.forEach((filename) => {
   // Combine the trees into one deduped list, normalizing the names.
   data.forEach(({ common, scientific, genus }) => {
     const commonTitleCase = toTitleCase(common);
-    const lcNames = [common, scientific, genus].map(normalizeNames);
-    const key = lcNames.join('');
+    const scientificCase = formatScientificName(scientific);
+    const lowerCaseNames = [common, scientific, genus].map(normalizeNames);
+    const key = lowerCaseNames.join('');
 
     // Ignore dupes in the data, as well as things that aren't trees, like fungus and rainbow trout.
     if (
@@ -203,12 +287,12 @@ jsonFiles.forEach((filename) => {
     ) {
       trees.push({
         common: replaceIrregularNames(commonTitleCase),
-        scientific: replaceIrregularNames(scientific),
+        scientific: replaceIrregularNames(scientificCase),
         genus: replaceIrregularNames(genus),
         // Store the lowercased names on each tree, so that we can sort by those strings.  They
         // don't include non-letter characters, so names like `"Ohi" A Lehua` won't get sorted to
         // the front of the list.
-        sort: lcNames,
+        sort: lowerCaseNames,
       });
       processedTrees[key] = true;
     }
@@ -232,6 +316,12 @@ function replaceIrregularNames(name) {
   return name === '\b' ? '' : name;
 }
 
+// change to lower case, replace hyphens with spaces, if str has multiple spaces, replace with one hyphen
+const formatWord = (str) => {
+  if (!str) return '';
+  return str.toLowerCase().replace(/\s+/g, '-');
+};
+
 async function downloadImage(imageURL, title) {
   try {
     const response = await fetch(imageURL);
@@ -242,13 +332,19 @@ async function downloadImage(imageURL, title) {
     const dataDir = './client/src/assets/images/data';
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
+      console.info(`Created directory: ${dataDir}`);
     }
 
-    const imageName = `${title.split(' ').join('-')}.jpg`;
-    const buffer = await response.arrayBuffer();
-    fs.writeFileSync(`${dataDir}/${imageName}`, Buffer.from(buffer));
+    const imageName = `${formatWord(title)}.jpg`;
+    const imagePath = `${dataDir}/${imageName}`;
+    if (!fs.existsSync(imagePath)) {
+      const buffer = await response.arrayBuffer();
+      fs.writeFileSync(imagePath, Buffer.from(buffer));
+      console.info(`Downloaded and saved new image: ${imageName}`);
+    } else {
+      console.info(`Image already exists: ${imageName}`);
+    }
 
-    console.info(`Downloaded and saved image: ${imageName}`);
     return imageName;
   } catch (error) {
     console.error(`Error downloading ${imageURL} - ${error.message}`);

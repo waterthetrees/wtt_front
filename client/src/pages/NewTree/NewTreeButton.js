@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { styled, ToggleButton } from '@mui/material';
-import useAuthUtils from '@/components/Auth/useAuthUtils';
+import React, { useEffect } from 'react';
+
 import { useCreateTreeDataMutation, useUserMutation } from '@/api/queries';
 import PlusIconPath from '@/assets/images/addtree/plus2.svg';
+import useAuthUtils from '@/components/Auth/useAuthUtils';
 import { useUserLocation } from '@/pages/UserLocation/useUserLocation';
+
 import { NewTreePlantingMarker } from './NewTreePlantingMarker';
 import { useNewTree } from './useNewTree';
 import { useIsMobile } from './utilities';
@@ -36,7 +38,7 @@ const NewTreePlantButton = styled(ToggleButton)`
   }
 `;
 
-export default function NewTreeButton({ map }) {
+export default function NewTreeButton() {
   const { user, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
   const mutateUser = useUserMutation();
@@ -86,7 +88,7 @@ export default function NewTreeButton({ map }) {
         onChange={handlePlantClick}
         title="Plant New Tree"
       />
-      {map && <NewTreePlantingMarker map={map} onPlantClick={openPanel} />}
+      <NewTreePlantingMarker onPlantClick={openPanel} />
     </>
   );
 }

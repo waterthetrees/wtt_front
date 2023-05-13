@@ -1,8 +1,12 @@
-import React, { useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
 import { debounce } from '@mui/material/utils';
+import React, { useContext, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
+
 import SearchBar from '@/components/Search/SearchBar';
 import { mapboxAccessToken } from '@/util/config';
+
+import { REGION_TYPES } from '../../util/constants';
+import { MapboxManagerContext } from '../Map/MapboxManagerProvider';
 
 import './Search.scss';
 
@@ -13,7 +17,7 @@ const SEARCH_QUERY_CACHE_TIME = 1000 * 30; // 30 seconds
 const AUTOCOMPLETE_DEBOUNCE_TIME = 500; // 500 milliseconds
 const VALID_LAT_LNG_DELIMITERS = [',', '/', '\\'];
 
-const Search = ({ map }) => {
+const Search = () => {
   const [query, setQuery] = useState('');
   const [generatedSearchResults, setGeneratedSearchResults] = useState([]);
   const {
@@ -25,6 +29,7 @@ const Search = ({ map }) => {
     queryFn: () => getMapboxSearchResults(query),
     cacheTime: SEARCH_QUERY_CACHE_TIME,
   });
+  const mapboxManager = useContext(MapboxManagerContext);
 
   // Debounce search requests to mitigate churning through our API requests budget
   const debouncedSetQuery = useMemo(
@@ -49,7 +54,10 @@ const Search = ({ map }) => {
   // FIXME: This doesn't get triggered when the current selection is selected again from the autocomplete.
   const handleOptionSelect = (e, option) => {
     if (option) {
-      map.panTo(option.coords);
+      mapboxManager.setCenter({
+        coords: option.coords,
+        regionType: option.placeType,
+      });
     }
   };
 
@@ -109,6 +117,7 @@ const getMapboxSearchResults = async (query) => {
     id: result.id,
     coords: result.center,
     type: 'Results',
+    placeType: result.place_type, // Currently, this maps 1-1 with the region types in constants.js
   }));
 };
 
@@ -170,6 +179,7 @@ const createLatLongSearchResult = (query) => {
     type: 'Results',
     id: `latlng-${lat}-${lng}`,
     coords: { lat, lng },
+    placeType: REGION_TYPES.LATLONG,
   };
 };
 
