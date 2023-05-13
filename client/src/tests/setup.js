@@ -4,6 +4,7 @@
  * Ex: jest.unmock('@/api/queries');
  */
 import '@testing-library/jest-dom';
+
 // FIXME: Add in mock data for other types of queries
 jest.mock('@/api/queries', () => {
   const allAutoMocked = jest.createMockFromModule('@/api/queries');

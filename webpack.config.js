@@ -151,7 +151,6 @@ module.exports = (env) => {
   return ifAnalyze(
     new SpeedMeasurePlugin().wrap({
       plugins: config.plugins,
-      resolve: config.resolve,
     }),
     config,
   );

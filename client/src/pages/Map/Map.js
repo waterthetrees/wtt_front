@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
 import { Alert, Box, Typography } from '@mui/material';
+import mapboxgl from 'mapbox-gl';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+
 import { useTreeQuery } from '@/api/queries';
-import { mapboxAccessToken } from '@/util/config';
 import Adopt from '@/pages/Adopt/Adopt';
-import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
-import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
+import { MapboxManagerContext } from '@/pages/Map/MapboxManagerProvider';
 import NewTreeButton from '@/pages/NewTree/NewTreeButton';
+import GeolocateControl from '@/pages/UserLocation/GeolocateControl';
+import { mapboxAccessToken } from '@/util/config';
+import { REGION_TYPES } from '@/util/constants';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
-import MapboxControlPortal from './MapboxControlPortal';
+
+import DonateBtn from '../../components/Button/DonateBtn/DonateBtn';
 import MapLayers from './MapLayers';
+import MapboxControlPortal from './MapboxControlPortal';
 import TreeLayerLegend from './TreeLayerLegend';
+
 import './Map.css';
 
 mapboxgl.accessToken = mapboxAccessToken;
@@ -79,9 +84,9 @@ export default function Map({
   currentTreeDb,
   setCurrentTreeId,
   selectionEnabled,
-  onLoad,
 }) {
   const [map, setMap] = useState(null);
+  const mapboxManager = useContext(MapboxManagerContext);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
@@ -152,9 +157,6 @@ export default function Map({
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
         });
-
-        onLoad(mapboxMap);
-        setIsMapLoaded(true);
 
         // Wait until the map is loaded to add mouse event handlers so that we don't try to query
         // layers when the mouse moves before they've been added and loaded.
@@ -240,9 +242,13 @@ export default function Map({
           popup.remove();
           currentFeature.current = null;
         });
+
+        setIsMapLoaded(true);
       });
 
+      // Eventually, we only want to set the mapboxManager's map and not save the mapbox map itself in state
       setMap(mapboxMap);
+      mapboxManager.setMap(mapboxMap);
     }
   }, [map, containerRef]);
 
@@ -252,7 +258,11 @@ export default function Map({
     }
     if (initialLoadTreeData) {
       const { lng, lat, id } = initialLoadTreeData;
-      flyTo({ map, lng, lat, hasInitialFlyToFired });
+      mapboxManager.setCenter({
+        coords: { lng, lat },
+        regionType: REGION_TYPES.LATLONG,
+      });
+      hasInitialFlyToFired.current = true;
       setCurrentTreeId(id);
     }
   }, [isMapLoaded, map, initialLoadTreeData, setCurrentTreeId]);
@@ -270,7 +280,7 @@ export default function Map({
           currentTreeData={currentTreeData}
         />
         <MapboxControlPortal map={map} position="bottom-right">
-          <NewTreeButton map={map} />
+          <NewTreeButton />
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="bottom-right">
           <TreeLayerLegend
@@ -281,7 +291,7 @@ export default function Map({
           />
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="top-right">
-          <GeolocateControl map={map} />
+          <GeolocateControl />
         </MapboxControlPortal>
         <MapboxControlPortal map={map} position="bottom-right">
           <Adopt />
@@ -292,12 +302,4 @@ export default function Map({
       </>
     )
   );
-}
-
-function flyTo({ map, lng, lat, hasInitialFlyToFired }) {
-  map.flyTo({
-    center: [lng, lat],
-    zoom: 15,
-  });
-  hasInitialFlyToFired.current = true;
 }

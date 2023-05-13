@@ -1,5 +1,6 @@
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+
 import { Toggle } from '@/components/Form';
 
 describe('<Toggle /> spec', () => {
@@ -9,28 +10,32 @@ describe('<Toggle /> spec', () => {
 
   it('Renders the Toggle component correctly', () => {
     const mockSetView = jest.fn();
-    const { container } = render(<Toggle view="list" setView={mockSetView} />);
+    const view = 'column';
+    const { container } = render(<Toggle view={view} setView={mockSetView} />);
     expect(container).toMatchSnapshot();
   });
 
   it('Changes the view on button click and updates local storage', () => {
     const mockSetView = jest.fn();
+    const defaultView = 'column';
+    const newView = 'quilt';
     const { getByLabelText } = render(
-      <Toggle view="list" setView={mockSetView} />,
+      <Toggle view={defaultView} setView={mockSetView} />,
     );
-    const cardToggleButton = getByLabelText('card');
+    const cardToggleButton = getByLabelText(newView);
 
     fireEvent.click(cardToggleButton);
-    expect(mockSetView).toHaveBeenCalledWith('card');
-    expect(localStorage.getItem('view')).toEqual('card');
+    expect(mockSetView).toHaveBeenCalledWith(newView);
+    expect(localStorage.getItem('view')).toEqual(newView);
   });
 
   it('Defaults to the view from props if local storage is not present', () => {
     const mockSetView = jest.fn();
+    const defaultView = 'column';
     const { getByTestId } = render(
-      <Toggle view="list" setView={mockSetView} />,
+      <Toggle view={defaultView} setView={mockSetView} />,
     );
-    const listToggleButton = getByTestId('list-toggle-button');
-    expect(listToggleButton.getAttribute('aria-pressed')).toEqual('true');
+    const column = getByTestId('column-toggle-button');
+    expect(column.getAttribute('aria-pressed')).toEqual('true');
   });
 });

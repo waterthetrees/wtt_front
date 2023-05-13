@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
+import { useContext, useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+
+import { MapboxManagerContext } from '@/pages/Map/MapboxManagerProvider';
 
 const events = [
   ['dragstart', 'onDragStart'],
@@ -11,7 +13,6 @@ const events = [
 // MapboxMarkerPortal bridges Mapbox and React.  It manages adding/removing a marker to/from the
 // map, and creates a container div into which React will render the child components.
 export default function MapboxMarkerPortal({
-  map,
   visible,
   coordinates,
   options = {},
@@ -22,6 +23,7 @@ export default function MapboxMarkerPortal({
   const [container, setContainer] = useState(null);
   const [addedToMap, setAddedToMap] = useState(false);
   const markerRef = useRef(null);
+  const mapboxManager = useContext(MapboxManagerContext);
 
   useEffect(() => {
     const div = document.createElement('div');
@@ -54,7 +56,7 @@ export default function MapboxMarkerPortal({
 
     // Return a cleanup function that will remove the marker from the map when we're unmounted.
     return () => {
-      if (map && markerRef.current) {
+      if (markerRef.current) {
         markerRef.current.remove();
         markerRef.current = null;
         setContainer(null);
@@ -71,14 +73,14 @@ export default function MapboxMarkerPortal({
       // Adding a marker to the map with null coordinates will throw an exception in Mapbox, so we
       // have to wait until visible is true *and* there are coordinates before adding it.
       if (!addedToMap && coordinates) {
-        markerRef.current.addTo(map);
+        mapboxManager.addMarkerRefToMap(markerRef);
         setAddedToMap(true);
       }
     } else if (addedToMap) {
       markerRef.current.remove();
       setAddedToMap(false);
     }
-  }, [visible, coordinates]);
+  }, [visible, coordinates, mapboxManager, addedToMap]);
 
   return container
     ? // Render this component's children into a portal rooted on the container element.  The map

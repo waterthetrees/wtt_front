@@ -1,15 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { Box, styled } from '@mui/material';
+import React, { useState, useRef, useEffect } from 'react';
+
 import { useTreeQuery } from '@/api/queries';
-import { useIsMobile } from '@/pages/NewTree/utilities';
-import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
-import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
-import NewTree from '@/pages/NewTree/NewTree';
-import Search from '@/pages/Search/Search';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
-import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import MapboxManagerProvider from '@/pages/Map/MapboxManagerProvider';
+import NewTree from '@/pages/NewTree/NewTree';
+import { useNewTree, NewTreeProvider } from '@/pages/NewTree/useNewTree';
+import { useIsMobile } from '@/pages/NewTree/utilities';
+import Search from '@/pages/Search/Search';
 import Tree from '@/pages/Tree/Tree';
+import { UserLocationProvider } from '@/pages/UserLocation/useUserLocation';
+
 import Map from './Map';
 
 const drawerWidth = 350;
@@ -27,7 +30,6 @@ const MapContainer = styled('main')({
 function MapLayout() {
   const [currentTreeId, setCurrentTreeId] = useState();
   const [currentTreeDataVector, setCurrentTreeDataVector] = useState();
-  const [map, setMap] = useState(null);
   const [mapSelectionEnabled, setMapSelectionEnabled] = useState(true);
   const { newTreeState } = useNewTree();
   const mapContainerRef = useRef(null);
@@ -72,11 +74,10 @@ function MapLayout() {
           setCurrentTreeDataVector={setCurrentTreeDataVector}
           setCurrentTreeId={setCurrentTreeId}
           selectionEnabled={mapSelectionEnabled}
-          onLoad={setMap}
         />
       </MapContainer>
 
-      <Search map={map} />
+      <Search />
 
       {newTreeState.isPanelOpen ? (
         <NewTree
@@ -87,7 +88,6 @@ function MapLayout() {
         <Tree
           TreeDetailsContainer={treeDetailsContainer}
           drawerWidth={drawerWidth}
-          map={map}
           currentTreeData={currentTreeData}
           currentTreeId={currentTreeId}
           setCurrentTreeId={setCurrentTreeId}
@@ -105,7 +105,9 @@ export default function WrappedMapLayout() {
     <ErrorBoundary>
       <NewTreeProvider>
         <UserLocationProvider>
-          <MapLayout />
+          <MapboxManagerProvider>
+            <MapLayout />
+          </MapboxManagerProvider>
         </UserLocationProvider>
       </NewTreeProvider>
     </ErrorBoundary>
