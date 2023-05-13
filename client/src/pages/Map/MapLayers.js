@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
+
 import { useCitiesQuery, useTreemapQuery } from '@/api/queries';
+import { REGION_TYPES } from '@/util/constants';
 import { treeHealthUtil } from '@/util/treeHealthUtil';
+
 import TreeCountLayer from './TreeCountLayer';
 import TreeLayer from './TreeLayer';
 
@@ -51,7 +54,7 @@ export default function MapLayers({ map, layers, handlers, currentTreeData }) {
         map={map}
         minzoom={2}
         maxzoom={11}
-        flyToZoom={12}
+        regionType={REGION_TYPES.PLACE}
       />
 
       {!map.getLayer('WTTV') &&

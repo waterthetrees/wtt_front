@@ -1,6 +1,10 @@
+import { Edit, GppBad, Verified } from '@mui/icons-material';
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { createTreePageRoute } from '@/pages/TreeList/TreeListCards';
+
 import './ListGrid.scss';
-import { Edit, Verified, GppBad } from '@mui/icons-material';
 
 function sortList(data, sortColumn, sortOrderAsc = true) {
   return [...data].sort((a, b) => {
@@ -34,13 +38,27 @@ function createDynamicGridTemplateColumns(columnsNumber, listType) {
   // the default case is used for the Data Page (or any other page that uses ListGrid) to create equal column widths
   switch (listType) {
     case 'source':
-      return '2em 2.3em 8em 3.5em 3em 1fr 1fr 8.5em 1fr';
+      return {
+        gridTemplateColumns: '2em 2.3em 8em 3.5em 3em 1fr 1fr 8.5em 1fr',
+      };
+    case 'San Francisco Street Trees':
+      return {
+        gridTemplateColumns: '20% 20% .6fr .8fr 1fr',
+      };
+    case 'Food Trees':
+      return {
+        gridTemplateColumns: '1fr 1fr',
+      };
+    case 'Native California Trees':
+      return {
+        gridTemplateColumns: '25% 25% .6fr .5fr',
+      };
     default: {
       let templateColumns = '';
       for (let i = 0; i < columnsNumber; i++) {
         templateColumns += '1fr ';
       }
-      return templateColumns;
+      return { gridTemplateColumns: templateColumns };
     }
   }
 }
@@ -80,12 +98,15 @@ export function ListGrid({
     setLastSortColumn(newColumn);
   };
 
+  const gridStyle = createDynamicGridTemplateColumns(columns.length, listType);
+
   return (
     <div className="listgrid__list" key={listType}>
       <ListGridColumnHeaders
         handleSort={handleSort}
         columns={columns}
         listType={listType}
+        gridStyle={gridStyle}
       />
       {sortedList.map((item) => (
         <ListGridItem
@@ -96,23 +117,16 @@ export function ListGrid({
           setOpenEdit={setOpenEdit}
           setSource={setSource}
           listType={listType}
+          gridStyle={gridStyle}
         />
       ))}
     </div>
   );
 }
 
-function ListGridColumnHeaders({ handleSort, columns, listType }) {
+function ListGridColumnHeaders({ handleSort, columns, gridStyle }) {
   return (
-    <div
-      className="listgrid__columnheader"
-      style={{
-        gridTemplateColumns: createDynamicGridTemplateColumns(
-          columns.length,
-          listType,
-        ),
-      }}
-    >
+    <div className="listgrid__columnheader" style={gridStyle}>
       {columns.map(({ columnHeader, label }) => (
         <div className="listgrid__columnheader-item" key={columnHeader}>
           <button
@@ -135,17 +149,19 @@ function createKey(item, columnHeader, index) {
     : `${columnHeader}-${index}`;
 }
 
-function ListGridItem({ item, columns, setOpenEdit, setSource, listType }) {
+function ListGridItem({
+  item,
+  columns,
+  setOpenEdit,
+  setSource,
+  listType,
+  gridStyle,
+}) {
   return (
     <div
       key={item?.idSourceName}
       className="listgrid__list-item"
-      style={{
-        gridTemplateColumns: createDynamicGridTemplateColumns(
-          columns.length,
-          listType,
-        ),
-      }}
+      style={gridStyle}
     >
       {columns.map(({ columnHeader }, index) => (
         <div
@@ -157,6 +173,7 @@ function ListGridItem({ item, columns, setOpenEdit, setSource, listType }) {
             columnHeader={columnHeader}
             setOpenEdit={setOpenEdit}
             setSource={setSource}
+            listType={listType}
           />
         </div>
       ))}
@@ -164,7 +181,26 @@ function ListGridItem({ item, columns, setOpenEdit, setSource, listType }) {
   );
 }
 
-function ListGridItemSwitch({ item, columnHeader, setOpenEdit, setSource }) {
+function ListGridItemSwitch({
+  item,
+  columnHeader,
+  setOpenEdit,
+  setSource,
+  listType,
+}) {
+  if (listType !== 'source') {
+    return (
+      <NavLink
+        className="treelistcards__link"
+        to={{
+          pathname: createTreePageRoute(item),
+        }}
+        state={{ tree: { ...item }, dataSetName: listType }}
+      >
+        {item[columnHeader]}
+      </NavLink>
+    );
+  }
   switch (columnHeader) {
     case 'idSourceName':
       return (
