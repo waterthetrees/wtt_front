@@ -25,14 +25,15 @@ export const ImageLoad = React.memo(
       <img
         src={currentSrc}
         style={{
-          opacity: loading ? 0.1 : 1,
+          opacity: loading ? 0 : 1,
           transition: 'opacity .30s linear',
           width: '100%',
         }}
         placeholder={placeholder}
         alt={alt}
+        title={alt}
         loading="lazy"
-        onError={(e) => (e.target.style = 'display: "none"')}
+        onError="this.onerror=null;"
       />
     );
   },
@@ -43,11 +44,18 @@ ImageLoad.displayName = 'ImageLoad';
 // If the image has been downloaded, it will use the local file
 // If not, it will use the image URL from the treeImages.json file
 export const setFormatImagePath = (scientific) => {
-  if (!scientific || !treeImages[scientific]) return null;
-
+  if (
+    !scientific ??
+    !treeImages[scientific] ??
+    !treeImages[scientific].ImageURL
+  )
+    return null;
   // replace spaces with hyphens for image path using regex
   const scientificNospaces = scientific.toLowerCase().replace(/\s/g, '-');
 
-  const imagePath = `../../assets/images/data/${scientificNospaces}.jpg`;
+  const imagePath =
+    `../../assets/images/data/${scientificNospaces}.jpg` ??
+    treeImages[scientific].ImageURL ??
+    null;
   return imagePath;
 };
