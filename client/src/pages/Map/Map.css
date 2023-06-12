@@ -10,6 +10,16 @@
   top: 6.7rem;
 }
 
+/* hide zoom control from mobile*/
+@media(max-width: 900px) {
+
+  .mapboxgl-ctrl-top-left,
+  .mapboxgl-ctrl-top-right {
+    display: none;
+  }
+}
+
+
 /* an empty button gets inserted in the attribution element for some reason, so hide it */
 .mapboxgl-ctrl-attrib-button {
   display: none;
