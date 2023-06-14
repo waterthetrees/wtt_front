@@ -121,7 +121,7 @@ module.exports = (env) => {
       ifNotProduction(new ReactRefreshWebpackPlugin()),
       new HtmlWebPackPlugin({
         favicon:
-          './client/src/assets/images/favicons/wtt-christmas-favicon.png',
+          './client/src/assets/images/favicons/wtt-helmet-favicon.png',
         template: './client/src/index.html',
         filename: './index.html',
         minify: ifProduction(),
