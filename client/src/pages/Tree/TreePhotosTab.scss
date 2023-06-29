@@ -2,21 +2,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
   margin: 2em 0;
+  gap: 2em;
 }
 
 .tree-photo-card.tree-photo-card {
   margin: 0 .1em;
+  width: 90%;
+  border-radius: 1em;
   &:hover {
     cursor: pointer;
     filter: drop-shadow(0 0 .5em grey);
-    background-color: rgb(92, 177, 92);
-    color: white;
   }
 }
 
+.photo.photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 1em;
+  object-fit: cover;
+}
+
 .photo-name.photo-name {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  height: 0;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, .5);
+  width: fit-content;
+  height: fit-content;
+  padding: .2em .5em;
+  /* The name element still takes
+  up space even though it's relatively
+  positioned, so the fix is to apply a
+  negative margin. */
+  margin-top: -3em;
+  border-radius: .5em;
+  color: white;
 }

@@ -8,21 +8,17 @@ export default function TreePhotosTab({ photoLibraries = [] }) {
   return (
     <div className="tree-photos-tab">
       {photoLibraries.map((library) => (
-        <Card
-          className='tree-photo-card'
-          sx={{ margin: 'auto', width: '90%' }}
-        >
+        <div className='tree-photo-card' >
+          <h4 className='photo-name'>{library.name}</h4>
           <CardMedia
+            className='photo'
             component='img'
             image={library.imgs ? library.imgs[0] : PlaceholderImage}
             sx={{
               display: 'inline-block',
             }}
           />
-          <CardContent>
-            <h4 className='photo-name'>{library.name}</h4>
-          </CardContent>
-        </Card>
+        </div>
       ))}
     </div>
   )
