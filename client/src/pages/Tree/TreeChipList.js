@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { Info, InfoOutlined, PhotoCamera, PhotoCameraOutlined, PhotoLibrary, PhotoLibraryOutlined } from '@mui/icons-material';
 import "./TreeChipList.scss";
 
-export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObserver, notifyObservers }) {
+export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObserver, notifyObservers, tabSwitch }) {
   const [selected, setSelected] = React.useState(false);
   const clickHandler = () => {
     notifyObservers();
+    tabSwitch();
     setSelected(true);
   };
 
@@ -39,26 +39,8 @@ export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObs
   );
 }
 
-export default function TreeChipList() {
+export default function TreeChipList({ chips }) {
   const selectionObserver = [];
-
-  const chips = [
-    {
-      renderIcon: <PhotoLibrary />,
-      renderIconOutlined: <PhotoLibraryOutlined />,
-      text: 'All',
-    },
-    {
-      renderIcon: <PhotoCamera />,
-      renderIconOutlined: <PhotoCameraOutlined />,
-      text: 'Photos'
-    },
-    {
-      renderIcon: <Info />,
-      renderIconOutlined: <InfoOutlined />,
-      text: 'Information'
-    },
-  ];
 
   const addSelectionObserver = (observer) => {
     selectionObserver.push(observer);
@@ -79,6 +61,7 @@ export default function TreeChipList() {
           text={chip.text}
           addSelectionObserver={addSelectionObserver}
           notifyObservers={notifyObservers}
+          tabSwitch={chip.switchTab}
         />
       ))}
     </div>

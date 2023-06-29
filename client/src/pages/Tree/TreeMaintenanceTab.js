@@ -8,6 +8,7 @@ import TreeLinks from './TreeLinks';
 import TreeMaintenance from './TreeMaintenance';
 import TreeNotes from './TreeNotes';
 import TreeRemoval from './TreeRemoval';
+import './TreeMaintenanceTab.scss';
 
 export default function TreeMaintenancePage(
   currentTreeData,
@@ -20,7 +21,7 @@ export default function TreeMaintenancePage(
   const imagePath = setFormatImagePath(scientific);
 
   return (
-    <React.Fragment>
+    <div className='tree-maintenance-tab'>
       <ImageLoad src={imagePath} placeholder="placeholder.jpg" />
 
       {!hasUnfitData && (
@@ -58,6 +59,6 @@ export default function TreeMaintenancePage(
           isTreeQueryError={isTreeQueryError}
         />
       )}
-    </React.Fragment>
+    </div>
   );
 }

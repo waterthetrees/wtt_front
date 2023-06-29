@@ -3,7 +3,10 @@ import React from 'react';
 
 import TreeHeader from './TreeHeader';
 import TreeChipList from './TreeChipList';
-import TreeMaintenancePage from './TreeMaintenancePage';
+import TreeMaintenanceTab from './TreeMaintenanceTab';
+import { Info, InfoOutlined, PhotoCamera, PhotoCameraOutlined } from '@mui/icons-material';
+import TreePhotosTab from './TreePhotosTab';
+import './Tree.scss';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -34,6 +37,7 @@ export default function Tree({
   setCurrentTreeId,
   isTreeQueryError,
 }) {
+  const [currentTab, setCurrentTab] = React.useState(0);
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
   const noDataChild =
@@ -47,6 +51,27 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
+
+  const chips = [
+    {
+      renderIcon: <Info />,
+      renderIconOutlined: <InfoOutlined />,
+      text: 'Maintenance',
+      switchTab: () => {
+        console.log('switching to tab 0');
+        setCurrentTab(0);
+      }
+    },
+    {
+      renderIcon: <PhotoCamera />,
+      renderIconOutlined: <PhotoCameraOutlined />,
+      text: 'Photos',
+      switchTab: () => {
+        setCurrentTab(1);
+      }
+    },
+  ];
+
   return (
     <TreeDetailsContainer
       title="Tree Details"
@@ -55,22 +80,28 @@ export default function Tree({
       onClose={handleClose}
     >
       {currentTreeData ? (
-        <>
-          <TreeHeader
-            currentTreeData={currentTreeData}
-            hasUnfitData={hasUnfitData}
-            isTreeQueryError={isTreeQueryError}
-          />
+        <div className='tree-container'>
+          <div className='tree-details'>
+            <TreeHeader
+              currentTreeData={currentTreeData}
+              hasUnfitData={hasUnfitData}
+              isTreeQueryError={isTreeQueryError}
+            />
 
-          <TreeChipList />
+            <TreeChipList chips={chips} />
+          </div>
 
-          <TreeMaintenancePage
-            currentTreeData={currentTreeData}
-            currentTreeId={currentTreeId}
-            hasUnfitData={hasUnfitData}
-            isTreeQueryError={isTreeQueryError}
-          />
-        </>
+          {currentTab === 0 && (
+            <TreeMaintenanceTab
+              currentTreeData={currentTreeData}
+              currentTreeId={currentTreeId}
+              hasUnfitData={hasUnfitData}
+              isTreeQueryError={isTreeQueryError}
+            />
+          ) || currentTab === 1 && (
+            <TreePhotosTab />
+          )}
+        </div>
       ) : (
         noDataChild
       )}
