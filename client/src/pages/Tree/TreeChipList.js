@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@mui/material';
 import "./TreeChipList.scss";
 
-export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObserver, notifyObservers, tabSwitch }) {
+export function TreeChip({ idx, renderIcon, renderIconOutlined, text, addSelectionObserver, notifyObservers, tabSwitch }) {
   const [selected, setSelected] = React.useState(false);
   const clickHandler = () => {
     notifyObservers();
@@ -15,6 +15,7 @@ export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObs
       setSelected(false);
     }
   };
+
   // I use an observer pattern here
   // because I only want two elements
   // to change when a tab is selected:
@@ -25,8 +26,8 @@ export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObs
   // observer to be added twice,
   // but that's an acceptable side effect.
   React.useEffect(() => {
-    addSelectionObserver(observer);
-  }, []);
+    addSelectionObserver(observer, idx);
+  }, [selected]);
 
   return (
     <Button
@@ -42,8 +43,8 @@ export function TreeChip({ renderIcon, renderIconOutlined, text, addSelectionObs
 export default function TreeChipList({ chips }) {
   const selectionObserver = [];
 
-  const addSelectionObserver = (observer) => {
-    selectionObserver.push(observer);
+  const addSelectionObserver = (observer, idx) => {
+    selectionObserver[idx] = observer;
   };
 
   const notifyObservers = () => {
@@ -54,8 +55,9 @@ export default function TreeChipList({ chips }) {
 
   return (
     <div className="tree-chip-list">
-      {chips.map((chip) => (
+      {chips.map((chip, idx) => (
         <TreeChip
+          idx={idx}
           renderIcon={chip.renderIcon}
           renderIconOutlined={chip.renderIconOutlined}
           text={chip.text}
