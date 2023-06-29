@@ -27,7 +27,7 @@ export function TreeChip({ idx, renderIcon, renderIconOutlined, text, addSelecti
   // but that's an acceptable side effect.
   React.useEffect(() => {
     addSelectionObserver(observer, idx);
-  }, [selected]);
+  });
 
   return (
     <Button

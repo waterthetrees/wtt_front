@@ -65,6 +65,17 @@ export const TreeWithPanelDrawer = {
     currentTreeId: mockTreeId,
     setCurrentTreeId: mockSetCurrentTreeId,
     isTreeQueryError: false,
+    photoLibraries: [
+      {
+        name: 'All Photos',
+      },
+      {
+        name: 'Selfies',
+      },
+      {
+        name: 'Videos',
+      }
+    ],
   },
 };
 

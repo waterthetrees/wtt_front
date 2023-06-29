@@ -36,6 +36,7 @@ export default function Tree({
   currentTreeId,
   setCurrentTreeId,
   isTreeQueryError,
+  photoLibraries,
 }) {
   const [currentTab, setCurrentTab] = React.useState(0);
   // If a tree is selected but there was an error in fetching the data, show an error message.
@@ -99,7 +100,9 @@ export default function Tree({
               isTreeQueryError={isTreeQueryError}
             />
           ) || currentTab === 1 && (
-            <TreePhotosTab />
+            <TreePhotosTab 
+              photoLibraries={photoLibraries}
+            />
           )}
         </div>
       ) : (

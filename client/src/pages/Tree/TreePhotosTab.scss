@@ -1,0 +1,22 @@
+.tree-photos-tab.tree-photos-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  margin: 2em 0;
+}
+
+.tree-photo-card.tree-photo-card {
+  margin: 0 .1em;
+  &:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 .5em grey);
+    background-color: rgb(92, 177, 92);
+    color: white;
+  }
+}
+
+.photo-name.photo-name {
+  display: flex;
+  justify-content: center;
+}
