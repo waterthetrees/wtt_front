@@ -1,4 +1,6 @@
+import React from 'react';
 import Tree from './Tree';
+import TreeChipList from './TreeChipList';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
 
@@ -76,3 +78,8 @@ export const TreeWithScrollableDialog = {
     isTreeQueryError: false,
   },
 };
+
+export const Chip = {
+  name: 'Chip',
+  render: () => <TreeChipList />,
+}

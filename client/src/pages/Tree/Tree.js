@@ -1,16 +1,9 @@
 import { Alert } from '@mui/material';
 import React from 'react';
 
-import { CarbonCalculator } from './CarbonCalculator';
 import TreeHeader from './TreeHeader';
-import TreeHealth from './TreeHealth';
-import TreeHistory from './TreeHistory';
-import { ImageLoad, setFormatImagePath } from './TreeImage';
-import TreeInfo from './TreeInfo';
-import TreeLinks from './TreeLinks';
-import TreeMaintenance from './TreeMaintenance';
-import TreeNotes from './TreeNotes';
-import TreeRemoval from './TreeRemoval';
+import TreeChipList from './TreeChipList';
+import TreeMaintenancePage from './TreeMaintenancePage';
 
 const undefRequiredField = (requiredField) =>
   typeof requiredField === 'undefined';
@@ -41,7 +34,6 @@ export default function Tree({
   setCurrentTreeId,
   isTreeQueryError,
 }) {
-  const { scientific } = currentTreeData || {};
   // If a tree is selected but there was an error in fetching the data, show an error message.
   // Otherwise, show a blank panel while waiting for the data.
   const noDataChild =
@@ -55,7 +47,6 @@ export default function Tree({
   const hasUnfitData = checkForUnfitData(currentTreeData);
 
   const handleClose = () => setCurrentTreeId(null);
-  const imagePath = setFormatImagePath(scientific);
   return (
     <TreeDetailsContainer
       title="Tree Details"
@@ -71,43 +62,14 @@ export default function Tree({
             isTreeQueryError={isTreeQueryError}
           />
 
-          <ImageLoad src={imagePath} placeholder="placeholder.jpg" />
+          <TreeChipList />
 
-          {!hasUnfitData && (
-            <TreeHealth
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
-
-          {!hasUnfitData && (
-            <TreeNotes
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
-
-          {!hasUnfitData && (
-            <TreeMaintenance
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
-
-          {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
-
-          <TreeInfo currentTreeData={currentTreeData} />
-
-          <TreeLinks currentTreeData={currentTreeData} />
-
-          <CarbonCalculator currentTreeData={currentTreeData} />
-
-          {!hasUnfitData && (
-            <TreeRemoval
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
+          <TreeMaintenancePage
+            currentTreeData={currentTreeData}
+            currentTreeId={currentTreeId}
+            hasUnfitData={hasUnfitData}
+            isTreeQueryError={isTreeQueryError}
+          />
         </>
       ) : (
         noDataChild

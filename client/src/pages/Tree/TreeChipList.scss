@@ -1,0 +1,33 @@
+@mixin tree-chip-common {
+  box-shadow: .5em .5em .5em gray;
+  border-radius: 1em;
+  display: flex;
+  gap: .5em;
+  font-family: 'Roboto', sans-serif;
+  font-size: .8em;
+  text-transform: none;
+}
+
+.tree-chip.tree-chip {
+  @include tree-chip-common;
+  color: green;
+  background-color: white;
+}
+
+.tree-chip-selected.tree-chip-selected {
+  @include tree-chip-common;
+  color: white;
+  background-color: green;
+
+  &:hover {
+    background-color: green;
+  }
+}
+
+.tree-chip-list.tree-chip-list {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
