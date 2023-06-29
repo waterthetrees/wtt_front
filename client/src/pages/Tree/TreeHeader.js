@@ -5,6 +5,7 @@ import useAuthUtils from '@/components/Auth/useAuthUtils';
 import AdoptLikeCheckboxes from '@/pages/Tree/AdoptLikeCheckboxes';
 import TreeEdit from './TreeEdit';
 import { format } from 'date-fns';
+import './TreeHeader.scss';
 
 export default function TreeHeader({
   currentTreeData,
@@ -49,7 +50,7 @@ export default function TreeHeader({
 
         <div>
           {scientific && (
-            <h2>
+            <h3>
               <a
                 href={wikipediaLink}
                 name={wikipediaLink}
@@ -58,11 +59,11 @@ export default function TreeHeader({
               >
                 {scientific}
               </a>
-            </h2>
+            </h3>
           )}
           {scientific !== genus && <h2>{genus}</h2>}
           {height && <h5>Height: {height}</h5>}
-          {dbh && <h5 title="Diameter at breast height">DBH: {dbh}</h5>}
+          {dbh && <h5 className='dbh' title="Diameter at breast height">DBH: {dbh}</h5>}
           {(datePlanted || planted) && <h5>Planted: {formatPlantedDate}</h5>}
           {count > 1 && <h5 title="Count">Count: 1/{count}</h5>}
         </div>
