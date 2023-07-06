@@ -40,7 +40,7 @@ export function TreeChip({ idx, renderIcon, renderIconOutlined, text, addSelecti
   );
 }
 
-export default function TreeChipList({ chips }) {
+export default function TreeChipList({ chips = [] }) {
   const selectionObserver = [];
 
   const addSelectionObserver = (observer, idx) => {

@@ -3,6 +3,7 @@ import Tree from './Tree';
 import TreeChipList from './TreeChipList';
 import PanelDrawer from '@/components/PanelDrawer/PanelDrawer';
 import ScrollableDialog from '@/components/ScrollableDialog/ScrollableDialog';
+import { Info, InfoOutlined, PhotoCamera, PhotoCameraOutlined } from '@mui/icons-material';
 
 const drawerWidth = 350;
 const mockTreeData = {
@@ -92,5 +93,27 @@ export const TreeWithScrollableDialog = {
 
 export const Chip = {
   name: 'Chip',
-  render: () => <TreeChipList />,
+  render: () =>
+  <TreeChipList
+    chips={
+      [
+        {
+          renderIcon: <Info />,
+          renderIconOutlined: <InfoOutlined />,
+          text: 'Maintenance',
+          switchTab: () => {
+            console.log('switch tab to Maintenance');
+          }
+        },
+        {
+          renderIcon: <PhotoCamera />,
+          renderIconOutlined: <PhotoCameraOutlined />,
+          text: 'Photos',
+          switchTab: () => {
+            console.log('switch tab to Photos');
+          }
+        },
+      ]
+    }
+  />,
 }
