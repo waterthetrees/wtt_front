@@ -59,7 +59,6 @@ export default function Tree({
       renderIconOutlined: <InfoOutlined />,
       text: 'Maintenance',
       switchTab: () => {
-        console.log('switching to tab 0');
         setCurrentTab(0);
       }
     },

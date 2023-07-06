@@ -1,8 +1,7 @@
-import { Card, CardContent, CardMedia, Skeleton } from '@mui/material';
-import React, { Suspense } from 'react';
+import { CardMedia } from '@mui/material';
+import React from 'react';
 import './TreePhotosTab.scss';
-
-const PlaceholderImage = 'https://via.placeholder.com/150x150';
+import PlaceholderImage from '@/assets/images/trees/placeholder.png';
 
 export default function TreePhotosTab({ photoLibraries = [] }) {
   return (
