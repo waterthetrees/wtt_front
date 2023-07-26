@@ -165,10 +165,10 @@ export default function ImageUpload({
   }
 
   return (
-    <section sx={{ margin: '1em 0' }}>
+    <section className='treeimageupload'>
       <h3>Uploading Images</h3>
-      <p sx={{ fontSize: '12px' }}>
-        Took a selfie with your tree and want to track the life of your tree
+      <p className='text'>
+        Take a selfie with your tree and track the life of your tree
         from the day you started.
       </p>
       <ImageUploadArea

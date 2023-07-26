@@ -10,12 +10,12 @@ import TreeNotes from './TreeNotes';
 import TreeRemoval from './TreeRemoval';
 import './TreeMaintenanceTab.scss';
 
-export default function TreeMaintenancePage(
+export default function TreeMaintenancePage({
   currentTreeData,
   currentTreeId,
   hasUnfitData,
   isTreeQueryError,
-) {
+}) {
   const { scientific } = currentTreeData || {};
 
   const imagePath = setFormatImagePath(scientific);

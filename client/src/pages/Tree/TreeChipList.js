@@ -57,6 +57,7 @@ export default function TreeChipList({ chips = [] }) {
     <div className="tree-chip-list">
       {chips.map((chip, idx) => (
         <TreeChip
+          key={idx}
           idx={idx}
           renderIcon={chip.renderIcon}
           renderIconOutlined={chip.renderIconOutlined}

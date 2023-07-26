@@ -12,6 +12,10 @@ $font: montserrat;
 // When you double the class name, you are telling Material UI that
 // you want to use a custom class, not a class that is defined by Material UI.
 
+.treeimageupload.treeimageupload {
+  margin: 1em 0;
+}
+
 .text.text {
   color: $color;
   font-size: 12px;
