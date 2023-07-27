@@ -9,15 +9,15 @@ export default function TreePhotosTab({ photoLibraries = [] }) {
       {photoLibraries.map((library) => (
         <div className='tree-photo-card' >
           <h4 className='photo-name'>{library.name}</h4>
-            <CardMedia
-              className='photo'
-              component='img'
-              loading='lazy'
-              image={library.imgs ? library.imgs[0] : PlaceholderImage}
-              sx={{
-                display: 'inline-block',
-              }}
-            />
+          <CardMedia
+            className='photo'
+            component='img'
+            loading='lazy'
+            image={library.imgs ? library.imgs[0] : PlaceholderImage}
+            sx={{
+              display: 'inline-block',
+            }}
+          />
         </div>
       ))}
     </div>

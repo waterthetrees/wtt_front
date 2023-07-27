@@ -1,0 +1,9 @@
+.photo-gallery.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  width: 100%;
+}
+
+.photo-card.photo-card {
+  padding: 5%;
+}
