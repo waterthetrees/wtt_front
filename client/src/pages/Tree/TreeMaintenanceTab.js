@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CarbonCalculator } from './CarbonCalculator';
 import TreeHealth from './TreeHealth';
 import TreeHistory from './TreeHistory';
@@ -9,6 +9,8 @@ import TreeMaintenance from './TreeMaintenance';
 import TreeNotes from './TreeNotes';
 import TreeRemoval from './TreeRemoval';
 import './TreeMaintenanceTab.scss';
+import PhotoGallery from './PhotoGallery';
+import TreeImageUpload from './TreeImageUpload';
 
 export default function TreeMaintenancePage({
   currentTreeData,
@@ -19,6 +21,8 @@ export default function TreeMaintenancePage({
   const { scientific } = currentTreeData || {};
 
   const imagePath = setFormatImagePath(scientific);
+
+  const [imgs, setImgs] = useState([]);
 
   return (
     <div className='tree-maintenance-tab'>
@@ -44,6 +48,26 @@ export default function TreeMaintenancePage({
           isTreeQueryError={isTreeQueryError}
         />
       )}
+
+      <PhotoGallery imgs={imgs} columns={2} />
+
+      <TreeImageUpload
+        apiUploadURL={(url) => {
+          let fileURL = "";
+          if (typeof url === "string") {
+            // do stuff
+          }
+          else {
+            fileURL = window.URL.createObjectURL(url);
+            setImgs([...imgs, fileURL]);
+          }
+        }}
+        apiUploadDone={() => {}}
+        apiPollUpload={() => {}}
+        apiCancelUpload={() => {}}
+        apiFileDialog={() => {}}
+        isMobile={true}
+      />
 
       {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
 

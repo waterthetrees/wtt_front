@@ -23,19 +23,25 @@ function ImageUploadArea({ uploadURL, handleError }) {
   };
 
   const fileSelected = () => {
-    uploadURL(inputRef.current.files[0].name);
+    const file = inputRef.current.files[0];
+    // Only allow jpg files.
+    if (!file.name.match(/\.jp(e?)g/)) {
+      handleError('Only jpg files are allowed.');
+      return;
+    }
+    uploadURL(file);
   };
 
   const addImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const fileName = e.dataTransfer.files[0].name;
+    const file = e.dataTransfer.files[0];
     // Only allow jpg files.
-    if (!fileName.match(/\.jpg/)) {
+    if (!file.name.match(/\.jp(e?)g/)) {
       handleError('Only jpg files are allowed.');
       return;
     }
-    uploadURL(fileName);
+    uploadURL(file);
     setDragActive(false);
   };
 
