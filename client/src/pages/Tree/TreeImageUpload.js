@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import './TreeImageUpload.scss';
 
-function ImageUploadArea({ uploadURL, handleError }) {
+export function ImageUploadArea({ uploadURL, handleError }) {
   const [dragActive, setDragActive] = useState(false);
   const handleDrag = (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ function ImageUploadArea({ uploadURL, handleError }) {
   };
 
   return (
-    <React.Fragment>
+    <div className='image-upload-area'>
       <IconButton
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -56,18 +56,21 @@ function ImageUploadArea({ uploadURL, handleError }) {
         className={`drop-area ${dragActive ? 'dragging' : 'not-dragging'}`}
       >
         <AddAPhoto className="photo-icon" />
-        <h2 className="action-text">Select Image to Upload</h2>
+        <p className="action-text">Select Image to Upload</p>
         <p className="text">or drag and drop here</p>
       </IconButton>
       <input
-        sx={{ display: 'none' }}
+        style={{
+          display: 'none',
+          visibility: 'hidden'
+        }}
         data-testid="file-input"
         type="file"
         ref={inputRef}
         onChange={fileSelected}
         accept="image/jpeg"
       />
-    </React.Fragment>
+    </div>
   );
 }
 

@@ -2,8 +2,31 @@
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   width: 100%;
+  gap: .5em;
 }
 
 .photo-card.photo-card {
   padding: 5%;
+  overflow: hidden;
+}
+
+.photo-delete-icon.photo-delete-icon {
+  position: relative;
+  height: 0;
+  top: 60px;
+  left: 75%;
+  background-color: black;
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  /* The name element still takes
+  up space even though it's relatively
+  positioned, so the fix is to apply a
+  negative margin. */
+  margin-top: -4em;
+  border-radius: .5em;
+
+  svg {
+    color: white;
+  }
 }

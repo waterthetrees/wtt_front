@@ -1,5 +1,5 @@
 $color: black;
-$font: montserrat;
+$font: "Montserrat";
 
 // Per Google Bard:
 // If you want to use a custom class name
@@ -23,13 +23,17 @@ $font: montserrat;
   margin: 1px;
 }
 
+.image-upload-area.image-upload-area {
+  margin: .5em;
+  display: flex;
+  justify-content: center;
+}
+
 .drop-area.drop-area {
   display: flex;
   flex-direction: column;
   place-items: center;
   justify-content: center;
-  margin: auto;
-  padding: 1em;
   width: 100%;
   border-radius: 8px;
   border: 2px dashed $color;

@@ -10,7 +10,6 @@ import TreeNotes from './TreeNotes';
 import TreeRemoval from './TreeRemoval';
 import './TreeMaintenanceTab.scss';
 import PhotoGallery from './PhotoGallery';
-import TreeImageUpload from './TreeImageUpload';
 
 export default function TreeMaintenancePage({
   currentTreeData,
@@ -23,6 +22,20 @@ export default function TreeMaintenancePage({
   const imagePath = setFormatImagePath(scientific);
 
   const [imgs, setImgs] = useState([]);
+
+  const uploadURL =
+    (url) => {
+      console.log(url, imgs);
+      let fileURL = "";
+      fileURL = window.URL.createObjectURL(url);
+      setImgs([...imgs, fileURL]);
+    };
+
+  const removeImg = (idx) => {
+    const newImgs = [...imgs];
+    newImgs.splice(idx, 1);
+    setImgs(newImgs);
+  };
 
   return (
     <div className='tree-maintenance-tab'>
@@ -49,24 +62,11 @@ export default function TreeMaintenancePage({
         />
       )}
 
-      <PhotoGallery imgs={imgs} columns={2} />
-
-      <TreeImageUpload
-        apiUploadURL={(url) => {
-          let fileURL = "";
-          if (typeof url === "string") {
-            // do stuff
-          }
-          else {
-            fileURL = window.URL.createObjectURL(url);
-            setImgs([...imgs, fileURL]);
-          }
-        }}
-        apiUploadDone={() => {}}
-        apiPollUpload={() => {}}
-        apiCancelUpload={() => {}}
-        apiFileDialog={() => {}}
-        isMobile={true}
+      <PhotoGallery
+        imgs={imgs}
+        columns={2}
+        handleUpload={uploadURL}
+        handleRemove={removeImg}
       />
 
       {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
