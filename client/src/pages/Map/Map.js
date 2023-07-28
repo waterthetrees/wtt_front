@@ -157,10 +157,10 @@ export default function Map({
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
         });
-
+       
         // Wait until the map is loaded to add mouse event handlers so that we don't try to query
         // layers when the mouse moves before they've been added and loaded.
-        mapboxMap.on('click', ({ point: { x, y } }) => {
+        mapboxMap.on('click',({ point: { x, y } }) => {
           if (!selectionEnabledRef.current) {
             return;
           }
@@ -171,12 +171,16 @@ export default function Map({
           });
 
           if (feature) {
+            console.log(feature)
             const {
               properties,
               properties: { id },
               geometry,
             } = feature;
-
+            const featureState = mapboxMap.getFeatureState(feature)
+            featureState.click=true;
+              mapboxMap.setFeatureState(feature,featureState) ;
+              console.log(featureState);
             const currentTree = {
               ...currentTreeDb,
               ...properties,
@@ -229,7 +233,6 @@ export default function Map({
               while (Math.abs(lng - coordinates[0]) > 180) {
                 coordinates[0] += lng > coordinates[0] ? 360 : -360;
               }
-
               currentFeature.current = feature;
               mapboxMap.getCanvas().style.cursor = 'pointer';
               popup.setLngLat(coordinates).setHTML(html).addTo(mapboxMap);
