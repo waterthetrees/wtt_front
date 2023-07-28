@@ -91,7 +91,7 @@ export default function Map({
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
   const hasInitialFlyToFired = useRef(false);
-
+  const prevFeatureRef= useRef(null);
   const initialLoadTreeId = useRef(
     new URLSearchParams(window.location.hash.slice(1)).get('id'),
   );
@@ -169,18 +169,17 @@ export default function Map({
           const [feature] = mapboxMap.queryRenderedFeatures([x, y], {
             layers: layerIDs,
           });
-
           if (feature) {
-            console.log(feature)
             const {
               properties,
               properties: { id },
               geometry,
             } = feature;
+            prevFeatureRef.current=feature;
             const featureState = mapboxMap.getFeatureState(feature)
             featureState.click=true;
-              mapboxMap.setFeatureState(feature,featureState) ;
-              console.log(featureState);
+            mapboxMap.setFeatureState(feature,featureState) ;
+            console.log(featureState);
             const currentTree = {
               ...currentTreeDb,
               ...properties,
@@ -195,9 +194,12 @@ export default function Map({
           } else {
             // This click was on a blank part of the map, so clear the selection.
             setCurrentTreeId(null);
+            const prevFeature = prevFeatureRef.current;
+            const featureState = mapboxMap.getFeatureState(prevFeature)
+            featureState.click=false;
+            mapboxMap.setFeatureState(prevFeature,featureState) ;
             hashParams.delete('id');
           }
-
           const newUrl = `${window.location.origin}#${decodeURIComponent(
             hashParams.toString(),
           )}`;
