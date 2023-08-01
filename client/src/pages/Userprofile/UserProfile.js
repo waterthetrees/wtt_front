@@ -1,76 +1,20 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Star } from '@mui/icons-material';
 import {
   useUserAdoptedQuery,
   useUserLikedQuery,
   useUserPlantedQuery,
   useUserTreeHistoryQuery,
 } from '@/api/queries';
-import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
-import TreeIcon from '@/assets/images/addtree/tree12.svg';
 import UserInfoContainer from '@/components/UserInfoContainer/UserInfoContainer';
 import UserTreeHistoryTable from '@/components/UserTreeHistoryTable/UserTreeHistoryTable';
 import { Footer } from '@/components/Footer/Footer';
-import { TooltipBottom } from '@/components/Tooltip';
 
 const ProfileContainer = styled(Box)`
   margin-top: 6em;
 `;
-
-const UserAvatar = styled(Avatar)`
-  width: 8em;
-  height: 8em;
-  margin: 0 3em 0 2em;
-`;
-
-const UserActionIcon = ({ title, icon, count }) => (
-  <TooltipBottom title={title}>
-    <div
-      style={{
-        marginRight: '1em',
-        display: 'inline-block',
-        fontSize: '1.25em',
-      }}
-    >
-      {icon}
-      <span style={{ marginLeft: '0.35rem' }}>{count}</span>
-    </div>
-  </TooltipBottom>
-);
-
-const iconStyle = {
-  height: '2em',
-  width: '2em',
-};
-
-const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
-  <Box sx={{ mb: 2 }}>
-    <UserActionIcon
-      title="Adopted"
-      count={adoptedCount}
-      icon={<AdoptionIcon style={iconStyle} />}
-    />
-    <UserActionIcon
-      title="Liked"
-      count={likedCount}
-      icon={<Star style={iconStyle} />}
-    />
-    <UserActionIcon
-      title="Planted"
-      count={plantedCount}
-      icon={
-        <img
-          alt=""
-          src={TreeIcon}
-          style={{ ...iconStyle, marginRight: '0.2em' }}
-        />
-      }
-    />
-  </Box>
-);
 
 export default function UserProfile() {
   const { user = {} } = useAuth0();
@@ -94,7 +38,13 @@ export default function UserProfile() {
   return (
     <>
       <ProfileContainer>
-        <UserInfoContainer>
+        <UserInfoContainer
+          user={user}
+          adoptedTrees={adoptedTrees}
+          likedTrees={likedTrees}
+          plantedTrees={plantedTrees}
+        />
+        {/* <UserInfoContainer>
           <UserAvatar alt="Avatar" src={picture} />
           <div>
             <UserIcons
@@ -106,7 +56,7 @@ export default function UserProfile() {
             <Typography variant="body1">{nickname}</Typography>
             <Typography variant="body1">{email}</Typography>
           </div>
-        </UserInfoContainer>
+        </UserInfoContainer> */}
         <UserTreeHistoryTable rows={treeHistory} />
       </ProfileContainer>
       <Footer />
