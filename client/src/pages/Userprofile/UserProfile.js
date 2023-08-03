@@ -18,7 +18,7 @@ const ProfileContainer = styled(Box)`
 
 export default function UserProfile() {
   const { user = {} } = useAuth0();
-  const { name, nickname, email, picture } = user;
+  const { nickname, email } = user;
   const emailQuery = { email };
   const emailEnabled = { enabled: !!email };
   const { data: adoptedTrees = [] } = useUserAdoptedQuery(
@@ -44,19 +44,6 @@ export default function UserProfile() {
           likedTrees={likedTrees}
           plantedTrees={plantedTrees}
         />
-        {/* <UserInfoContainer>
-          <UserAvatar alt="Avatar" src={picture} />
-          <div>
-            <UserIcons
-              adoptedCount={adoptedTrees.length}
-              likedCount={likedTrees.length}
-              plantedCount={plantedTrees.length}
-            />
-            <Typography variant="body1">{name}</Typography>
-            <Typography variant="body1">{nickname}</Typography>
-            <Typography variant="body1">{email}</Typography>
-          </div>
-        </UserInfoContainer> */}
         <UserTreeHistoryTable rows={treeHistory} />
       </ProfileContainer>
       <Footer />
