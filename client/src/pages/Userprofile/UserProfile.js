@@ -8,7 +8,7 @@ import {
   useUserPlantedQuery,
   useUserTreeHistoryQuery,
 } from '@/api/queries';
-import UserInfoContainer from '@/components/UserInfoContainer/UserInfoContainer';
+import UserInfoContainer from './UserInfoContainer';
 import UserTreeHistoryTable from '@/components/UserTreeHistoryTable/UserTreeHistoryTable';
 import { Footer } from '@/components/Footer/Footer';
 
