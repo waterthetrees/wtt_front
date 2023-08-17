@@ -7,7 +7,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 export default function PhotoGallery({
   imgs = [],
   columns = 1,
-  handleUpload,
+  handleAdd,
   handleRemove
 }) {
   return (
@@ -40,7 +40,7 @@ export default function PhotoGallery({
           </div>
         )}
         <ImageUploadArea
-          uploadURL={handleUpload}
+          uploadURL={handleAdd}
           handleError={() => {}} // No-op.
         />
       </>
