@@ -40,6 +40,7 @@ const apiEndpoints = {
   treeadoptions: `${url}${port}/api/treeadoptions`,
   treelikes: `${url}${port}/api/treelikes`,
   treecount: `${url}${port}/api/treecount`,
+  treeimages: `${url}${port}/api/treeimages`,
   cities: `${url}${port}/api/cities`,
   city: `${url}${port}/api/cities`,
   countries: `${url}${port}/api/countries`,
