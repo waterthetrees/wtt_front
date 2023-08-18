@@ -446,114 +446,106 @@ exports[`<Header /> spec renders Header correctly 1`] = `
           role="menu"
           tabindex="-1"
         >
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
+          <a
+            class="header__link"
+            href="/"
             tabindex="0"
           >
-            <a
-              class="header__link"
-              href="/"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               Map
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
+          <a
+            class="header__link"
+            href="/about"
           >
-            <a
-              class="header__link"
-              href="/about"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               About
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
+          <a
+            class="header__link"
+            href="/contact"
           >
-            <a
-              class="header__link"
-              href="/contact"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               Contact
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
+          <a
+            class="header__link"
+            href="/treecare"
           >
-            <a
-              class="header__link"
-              href="/treecare"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               TreeCare
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
+          <a
+            class="header__link"
+            href="/source"
           >
-            <a
-              class="header__link"
-              href="/source"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               Source
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
+          <a
+            class="header__link"
+            href="/treelist"
           >
-            <a
-              class="header__link"
-              href="/treelist"
+            <li
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
+              role="menuitem"
+              tabindex="-1"
             >
               TreeLists
-            </a>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
+              <span
+                class="MuiTouchRipple-root emotion-2"
+              />
+            </li>
+          </a>
           <hr
             class="MuiDivider-root MuiDivider-fullWidth emotion-19"
           />
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters emotion-7"
-            role="menuitem"
-            tabindex="-1"
+          <button
+            class="authbutton btn btn-light btn-block"
+            type="button"
           >
-            <button
-              class="authbutton btn btn-light btn-block"
-              type="button"
-            >
-              Log In
-            </button>
-            <span
-              class="MuiTouchRipple-root emotion-2"
-            />
-          </li>
+            Log In
+          </button>
         </ul>
       </div>
       <div
