@@ -87,54 +87,53 @@ const Header = () => {
           }}
         >
           {isAuthenticated && (
-            <MenuItem onClick={handleClose}>
-              <Link to="/userprofile" className="header__link">
+            <Link to="/userprofile" className="header__link">
+              <MenuItem onClick={handleClose}>
                 User Profile
-              </Link>
-            </MenuItem>
+              </MenuItem>
+            </Link>
           )}
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/" className="header__link">
+          <Link to="/" className="header__link">
+            <MenuItem onClick={handleClose}>
               Map
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/about" className="header__link">
+          <Link to="/about" className="header__link">
+            <MenuItem onClick={handleClose}>
               About
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/contact" className="header__link">
+          <Link to="/contact" className="header__link">
+            <MenuItem onClick={handleClose}>
               Contact
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/treecare" className="header__link">
+          <Link to="/treecare" className="header__link">
+            <MenuItem onClick={handleClose}>
               TreeCare
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/source" className="header__link">
+          <Link to="/source" className="header__link">
+            <MenuItem onClick={handleClose}>
               Source
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
-          <MenuItem onClick={handleClose}>
-            <Link to="/treelist" className="header__link">
+          <Link to="/treelist" className="header__link">
+            <MenuItem onClick={handleClose}>
               TreeLists
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
 
           <Divider />
-
-          <MenuItem onClick={handleClose}>
-            <AuthButton />
-          </MenuItem>
+          <AuthButton >
+            <MenuItem onClick={handleClose} />
+          </AuthButton >
         </Menu>
 
         {showHeaderLink && (
