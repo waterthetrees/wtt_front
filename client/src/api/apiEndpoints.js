@@ -2,7 +2,7 @@ export const env =
   {
     'waterthetrees.com': 'prod',
     'dev.waterthetrees.com': 'dev',
-    localhost: 'dev',
+    localhost: 'localhost'
     // localhost: 'blue',
   }[window.location.hostname] || 'localhost';
 

@@ -25,10 +25,19 @@ export default function TreeMaintenancePage({
 
   const [imgs, setImgs] = useState([]);
 
-  const addImg = (url) => {
-    let fileURL = "";
-    fileURL = window.URL.createObjectURL(url);
-    setImgs([...imgs, fileURL]);
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+  });
+
+  const addImg = (file) => {
+    let objectURL = "";
+    objectURL = window.URL.createObjectURL(file);
+    setImgs([...imgs, { url: objectURL, file: file }]);
   };
 
   const removeImg = (idx) => {
@@ -42,18 +51,28 @@ export default function TreeMaintenancePage({
     // failure to POST, but currently
     // we just catch and ignore.
     try {
-      const resp = await fetch(apiEndpoints.treeimages, {
-        method: "POST",
-        body: JSON.stringify({
-          idImage: currentTreeId,
-          // TODO: This should actually be
-          // offset by the # of imgs
-          // currently associated with
-          // the image.
-          imageNumbers: [...imgs.keys()]
-        })
+      imgs.map(async (img, idx) => {
+        const data = await toBase64(img.file);
+        console.log(data);
+        const resp = await fetch(apiEndpoints.treeimages, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+            id: currentTreeId,
+            // TODO: This should actually be
+            // offset by the # of imgs
+            // currently associated with
+            // the image.
+            photographer: "Me",
+            email: "fake_email.com",
+            imageType: "jpg",
+            imageFilename: "img",
+            imageNumber: idx,
+            imageUrl: data
+          })
+        });
+        console.log(resp);
       });
-      console.log(resp);
     } catch (err) {
       console.log(err);
     }
@@ -86,7 +105,7 @@ export default function TreeMaintenancePage({
       )}
 
       <PhotoGallery
-        imgs={imgs}
+        imgs={imgs.map((img) => img.url)}
         columns={2}
         handleAdd={addImg}
         handleRemove={removeImg}
