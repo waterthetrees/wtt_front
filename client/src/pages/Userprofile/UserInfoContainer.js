@@ -1,6 +1,5 @@
 import React from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { Star } from '@mui/icons-material';
 import TreeIcon from '@/assets/images/addtree/tree12.svg';
 import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
