@@ -7,12 +7,6 @@ import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
 import { TooltipBottom } from '@/components/Tooltip';
 import './UserInfoContainer.scss';
 
-const UserAvatar = styled(Avatar)`
-  width: 8em;
-  height: 8em;
-  margin: 0 3em 0 2em;
-`;
-
 const iconStyle = {
   height: '2em',
   width: '2em',
@@ -63,7 +57,7 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
   const { name, nickname, email, picture } = user;
   return (
     <div className="user-info-container">
-      <UserAvatar alt="Avatar" src={picture} />
+      <Avatar className="user-avatar" alt="Avatar" src={picture} />
       <div>
         <UserIcons
           adoptedCount={adoptedTrees.length}

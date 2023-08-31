@@ -2,4 +2,10 @@
   display: inline-flex;
   align-items: center;
   margin-bottom: 2em;
+
+  .user-avatar {
+    width: 8em;
+    height: 8em;
+    margin: 0 3em 0 2em;
+  }
 }
