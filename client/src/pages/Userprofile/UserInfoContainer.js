@@ -5,12 +5,7 @@ import { Star } from '@mui/icons-material';
 import TreeIcon from '@/assets/images/addtree/tree12.svg';
 import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
 import { TooltipBottom } from '@/components/Tooltip';
-
-const UserInfoContainerBox = styled(Box)`
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 2em;
-`;
+import './UserInfoContainer.scss';
 
 const UserAvatar = styled(Avatar)`
   width: 8em;
@@ -67,7 +62,7 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
 const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => {
   const { name, nickname, email, picture } = user;
   return (
-    <UserInfoContainerBox>
+    <div className="user-info-container">
       <UserAvatar alt="Avatar" src={picture} />
       <div>
         <UserIcons
@@ -79,7 +74,7 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
         <Typography variant="body1">{nickname}</Typography>
         <Typography variant="body1">{email}</Typography>
       </div>
-    </UserInfoContainerBox>
+    </div>
   )
 }
 export default UserInfoContainer
