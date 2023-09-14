@@ -55,19 +55,33 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
 const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => {
   const { name, nickname, email, picture } = user;
   return (
-    <div className="user-info-container">
-      <Avatar className="user-avatar" alt="Avatar" src={picture} />
-      <div>
-        <UserIcons
-          adoptedCount={adoptedTrees.length}
-          likedCount={likedTrees.length}
-          plantedCount={plantedTrees.length}
-        />
-        <Typography variant="body1">{name}</Typography>
-        <Typography variant="body1">{nickname}</Typography>
-        <Typography variant="body1">{email}</Typography>
+    <>
+      <div className="user-info-container">
+        <Avatar className="user-avatar" alt="Avatar" src={picture} />
+        <div>
+          <UserIcons
+            adoptedCount={adoptedTrees.length}
+            likedCount={likedTrees.length}
+            plantedCount={plantedTrees.length}
+          />
+          <Typography variant="body1">{name}</Typography>
+          <Typography variant="body1">{nickname}</Typography>
+          <Typography variant="body1">{email}</Typography>
+        </div>
       </div>
-    </div>
+
+      <Box className="new-user-info-container">
+        <div className="user-info-hero">
+          <Avatar className="user-avatar" alt="Avatar" src={picture} />
+          <Box className="user-info-data">
+            asdfasdasdf
+          </Box>
+        </div>
+        <div style={{ bgColor: '#FFF' }}>
+          asdf asf asdf asdfa sdasd f
+        </div>
+      </Box >
+    </>
   )
 }
 export default UserInfoContainer

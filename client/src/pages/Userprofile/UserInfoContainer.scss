@@ -9,3 +9,25 @@
     margin: 0 3em 0 2em;
   }
 }
+
+.new-user-info-container {
+  display: block;
+
+  .user-info-hero {
+    background-color: #300;
+    height: 200px;
+    position: relative;
+
+    .user-avatar {
+      width: 8em;
+      height: 8em;
+      margin: 0 3em 0 2em;
+      position: absolute;
+      bottom: -20px;
+    }
+  }
+
+  .user-info-data {
+    color: #FFF;
+  }
+}
