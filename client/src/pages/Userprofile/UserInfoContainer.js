@@ -1,22 +1,10 @@
 import React from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { Star } from '@mui/icons-material';
 import TreeIcon from '@/assets/images/addtree/tree12.svg';
 import AdoptionIcon from '@/components/Icons/AdoptionIcon/AdoptionIcon';
 import { TooltipBottom } from '@/components/Tooltip';
-
-const UserInfoContainerBox = styled(Box)`
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 2em;
-`;
-
-const UserAvatar = styled(Avatar)`
-  width: 8em;
-  height: 8em;
-  margin: 0 3em 0 2em;
-`;
+import './UserInfoContainer.scss';
 
 const iconStyle = {
   height: '2em',
@@ -67,8 +55,8 @@ const UserIcons = ({ adoptedCount, likedCount, plantedCount }) => (
 const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => {
   const { name, nickname, email, picture } = user;
   return (
-    <UserInfoContainerBox>
-      <UserAvatar alt="Avatar" src={picture} />
+    <div className="user-info-container">
+      <Avatar className="user-avatar" alt="Avatar" src={picture} />
       <div>
         <UserIcons
           adoptedCount={adoptedTrees.length}
@@ -79,7 +67,7 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
         <Typography variant="body1">{nickname}</Typography>
         <Typography variant="body1">{email}</Typography>
       </div>
-    </UserInfoContainerBox>
+    </div>
   )
 }
 export default UserInfoContainer
