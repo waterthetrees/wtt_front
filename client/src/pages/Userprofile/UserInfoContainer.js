@@ -56,7 +56,7 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
   const { name, nickname, email, picture } = user;
   return (
     <>
-      <div className="user-info-container">
+      {/* <div className="user-info-container">
         <Avatar className="user-avatar" alt="Avatar" src={picture} />
         <div>
           <UserIcons
@@ -68,15 +68,15 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
           <Typography variant="body1">{nickname}</Typography>
           <Typography variant="body1">{email}</Typography>
         </div>
-      </div>
+      </div> */}
 
       <Box className="new-user-info-container">
-        <div className="user-info-hero">
+        <Box className="user-info-hero">
           <Avatar className="user-avatar" alt="Avatar" src={picture} />
           <Box className="user-info-data">
             asdfasdasdf
           </Box>
-        </div>
+        </Box>
         <div style={{ bgColor: '#FFF' }}>
           asdf asf asdf asdfa sdasd f
         </div>
