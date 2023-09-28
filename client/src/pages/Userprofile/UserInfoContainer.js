@@ -70,15 +70,18 @@ const UserInfoContainer = ({ adoptedTrees, likedTrees, plantedTrees, user }) => 
         </div>
       </div> */}
 
-      <Box className="new-user-info-container">
-        <Box className="user-info-hero">
-          <Avatar className="user-avatar" alt="Avatar" src={picture} />
-          <Box className="user-info-data">
-            asdfasdasdf
+      <Box className="user-info-container">
+        <Box className="hero">
+          <Box className="avatar-box">
+            <Avatar className="avatar-image" alt="Avatar" src={picture} />
+            <Box className="avatar-info">
+              asdfasdasdf
+            </Box>
           </Box>
         </Box>
-        <div style={{ bgColor: '#FFF' }}>
-          asdf asf asdf asdfa sdasd f
+        <div style={{ bgColor: '#FFF', padding: '40px 20px' }}>
+          <h1>About</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in dignissim semper a sed nec in arcu amet. In quis non amet non blandit elit. Aliquet rhoncus hac ornare diam egestas. Dictumst molestie at orci arcu, sed nunc pretium. Ultrices id vitae pellentesque tellus eu adipiscing. Cursus morbi ultricies ipsum sagittis. Tristique interdum et, enim, pharetra duis. Sapien, posuere sapien etiam in vel in nec. Enim, vivamus egestas at non neque.</p>
         </div>
       </Box >
     </>
