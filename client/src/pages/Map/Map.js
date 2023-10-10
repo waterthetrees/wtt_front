@@ -91,10 +91,23 @@ export default function Map({
   const selectionEnabledRef = useRef(selectionEnabled);
   const currentFeature = useRef(null);
   const hasInitialFlyToFired = useRef(false);
-
+  const prevFeatureRef= useRef(null);
   const initialLoadTreeId = useRef(
     new URLSearchParams(window.location.hash.slice(1)).get('id'),
   );
+  //toggle WTTV feature state with 'click' true and false. Change size of tree dot.
+  const featureStateClickTrue = (feature,mapboxMap) => {
+        prevFeatureRef.current=feature;
+        const featureState = mapboxMap.getFeatureState(feature)
+        featureState.click=true;
+        mapboxMap.setFeatureState(feature,featureState) ;
+  }
+  const featureStateClickFalse = (mapboxMap) => {
+        const prevFeature = prevFeatureRef.current;
+        const featureState = mapboxMap.getFeatureState(prevFeature)
+        featureState.click=false;
+        mapboxMap.setFeatureState(prevFeature,featureState) ;
+  }
   // This tree query is intentionally separate from the one in `MapLayout`,
   // since it kicks off only once on load!
   const { data: initialLoadTreeData } = useTreeQuery(
@@ -157,10 +170,10 @@ export default function Map({
           type: 'vector',
           url: 'mapbox://waterthetrees.open-trees',
         });
-
+       
         // Wait until the map is loaded to add mouse event handlers so that we don't try to query
         // layers when the mouse moves before they've been added and loaded.
-        mapboxMap.on('click', ({ point: { x, y } }) => {
+        mapboxMap.on('click',({ point: { x, y } }) => {
           if (!selectionEnabledRef.current) {
             return;
           }
@@ -169,21 +182,21 @@ export default function Map({
           const [feature] = mapboxMap.queryRenderedFeatures([x, y], {
             layers: layerIDs,
           });
-
           if (feature) {
             const {
               properties,
               properties: { id },
               geometry,
             } = feature;
-
+          
             const currentTree = {
               ...currentTreeDb,
               ...properties,
               lng: geometry.coordinates[0],
               lat: geometry.coordinates[1],
             };
-
+            //set click to true, tree dot gets bigger
+            featureStateClickTrue(feature,mapboxMap);
             setCurrentTreeDataVector(currentTree);
             setCurrentTreeId(id);
             hashParams.set('id', id);
@@ -191,9 +204,10 @@ export default function Map({
           } else {
             // This click was on a blank part of the map, so clear the selection.
             setCurrentTreeId(null);
+            //set feature state to false, tree dot shrinks to normal size
+            featureStateClickFalse(mapboxMap)
             hashParams.delete('id');
           }
-
           const newUrl = `${window.location.origin}#${decodeURIComponent(
             hashParams.toString(),
           )}`;
@@ -229,7 +243,6 @@ export default function Map({
               while (Math.abs(lng - coordinates[0]) > 180) {
                 coordinates[0] += lng > coordinates[0] ? 360 : -360;
               }
-
               currentFeature.current = feature;
               mapboxMap.getCanvas().style.cursor = 'pointer';
               popup.setLngLat(coordinates).setHTML(html).addTo(mapboxMap);
