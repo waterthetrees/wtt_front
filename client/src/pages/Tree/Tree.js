@@ -1,6 +1,5 @@
 import { Alert } from '@mui/material';
-import React from 'react';
-
+import React, { useState } from 'react';
 import { CarbonCalculator } from './CarbonCalculator';
 import TreeHeader from './TreeHeader';
 import TreeHealth from './TreeHealth';
@@ -56,62 +55,89 @@ export default function Tree({
 
   const handleClose = () => setCurrentTreeId(null);
   const imagePath = setFormatImagePath(scientific);
+  const [isMaintenanceAlertVisible, setMaintenanceAlertVisible] = useState(false)
+  const [maintenanceAlert, setMaintenanceAlert] = useState(null)
+
+  const handleMaintenanceAlert = (data) => {
+    setMaintenanceAlertVisible(true)
+    setMaintenanceAlert(data)
+
+    setTimeout(() => {
+      setMaintenanceAlert(null);
+      setMaintenanceAlertVisible(false);
+    }, 10000);
+  }
+
+  const closeMaintenanceAlert = () => {
+    setMaintenanceAlertVisible(false);
+    setMaintenanceAlert(null);
+  };
+
   return (
-    <TreeDetailsContainer
-      title="Tree Details"
-      width={drawerWidth}
-      open={!!currentTreeId}
-      onClose={handleClose}
-    >
-      {currentTreeData ? (
-        <>
-          <TreeHeader
-            currentTreeData={currentTreeData}
-            hasUnfitData={hasUnfitData}
-            isTreeQueryError={isTreeQueryError}
-          />
-
-          <ImageLoad src={imagePath} placeholder="placeholder.jpg" />
-
-          {!hasUnfitData && (
-            <TreeHealth
+    <div>
+      {isMaintenanceAlertVisible &&
+        maintenanceAlert
+      }
+      <TreeDetailsContainer
+        title="Tree Details"
+        width={drawerWidth}
+        open={!!currentTreeId}
+        onClose={handleClose}
+      >
+        {currentTreeData ? (
+          <>
+            <TreeHeader
               currentTreeData={currentTreeData}
+              hasUnfitData={hasUnfitData}
               isTreeQueryError={isTreeQueryError}
             />
-          )}
 
-          {!hasUnfitData && (
-            <TreeNotes
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
+            <ImageLoad src={imagePath} placeholder="placeholder.jpg" />
 
-          {!hasUnfitData && (
-            <TreeMaintenance
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
+            {!hasUnfitData && (
+              <TreeHealth
+                currentTreeData={currentTreeData}
+                isTreeQueryError={isTreeQueryError}
+              />
+            )}
 
-          {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
+            {!hasUnfitData && (
+              <TreeNotes
+                currentTreeData={currentTreeData}
+                isTreeQueryError={isTreeQueryError}
+              />
+            )}
 
-          <TreeInfo currentTreeData={currentTreeData} />
+            {!hasUnfitData && (
+              <TreeMaintenance
+                currentTreeData={currentTreeData}
+                isTreeQueryError={isTreeQueryError}
+                closeTreeDetails={handleClose}
+                maintenanceAlert={handleMaintenanceAlert}
+                closeMaintenanceAlert={closeMaintenanceAlert}
+              />
+            )}
 
-          <TreeLinks currentTreeData={currentTreeData} />
+            {currentTreeId && <TreeHistory currentTreeId={currentTreeId} />}
 
-          <CarbonCalculator currentTreeData={currentTreeData} />
+            <TreeInfo currentTreeData={currentTreeData} />
 
-          {!hasUnfitData && (
-            <TreeRemoval
-              currentTreeData={currentTreeData}
-              isTreeQueryError={isTreeQueryError}
-            />
-          )}
-        </>
-      ) : (
-        noDataChild
-      )}
-    </TreeDetailsContainer>
+            <TreeLinks currentTreeData={currentTreeData} />
+
+            <CarbonCalculator currentTreeData={currentTreeData} />
+
+            {!hasUnfitData && (
+              <TreeRemoval
+                currentTreeData={currentTreeData}
+                isTreeQueryError={isTreeQueryError}
+              />
+            )}
+
+          </>
+        ) : (
+          noDataChild
+        )}
+      </TreeDetailsContainer>
+    </div>
   );
 }

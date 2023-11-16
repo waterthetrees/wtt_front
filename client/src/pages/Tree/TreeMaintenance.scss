@@ -1,0 +1,21 @@
+.tree-maintenance-button {
+  font-size: 1.5rem;
+}
+
+.maintenance-alert {
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  top: 10%;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 0px;
+}
+
+.alert-success {
+  width: fit-content;
+  margin: 10px 50px;
+  font-size: 14px;
+  font-weight: 400;
+}

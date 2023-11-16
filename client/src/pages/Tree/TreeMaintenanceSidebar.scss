@@ -1,0 +1,135 @@
+.maintenance-button-group {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px auto 5px;
+
+  .maintenance-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 25%;
+    padding: 10px 10px 5px;
+    margin: 5px !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+
+    img {
+      width: 75%
+    }
+
+    & {
+      background-color: #999;
+    }
+
+    &:hover {
+      background-color: #777;
+    }
+
+    &.Mui-selected,
+    &.Mui-selected:hover {
+      background-color: #545b62;
+    }
+  }
+}
+
+.maintenance-sidebar-container {
+  top: 0;
+  z-index: 3000 !important;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+
+  .panel-drawer {
+    padding-bottom: 100px;
+  }
+
+  .dialog-title {
+    font-size: 25px !important;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .dialog-subtext {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .panel-icon-button {
+    position: absolute;
+    left: 0;
+  }
+
+  .panel-arrow-back {
+    position: absolute;
+    left: 20px;
+    top: 4px;
+  }
+
+  .maintenance-tree-icon {
+    color: green;
+    margin-bottom: 2px;
+    margin-left: 2px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  .dialog-content {
+    padding-bottom: 70px
+  }
+
+  .maintenance-section {
+    display: grid;
+    padding-bottom: 28px;
+  }
+
+  .maintenance-notes {
+    width: 100%;
+    margin-top: 30px;
+
+    textarea {
+      resize: vertical;
+    }
+  }
+}
+
+
+.maintenanace-confirm-btns {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  bottom: 0;
+  background-color: #F5F5F5;
+  left: 0;
+  width: 100%;
+  right: 0;
+  z-index: 10;
+  border-top: 1px solid #D9D9D9;
+  padding-left: 100px;
+  font-size: 1.5em;
+
+  .maintenance-cancel {
+    border: 1px solid #808080;
+    color: #808080;
+    background-color: #FFFFFF;
+  }
+
+  .maintenance-cancel,
+  .maintenance-submit {
+    margin: 15px 15px 15px 0;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    padding: 2px 0px !important;
+    text-transform: capitalize;
+  }
+
+}
