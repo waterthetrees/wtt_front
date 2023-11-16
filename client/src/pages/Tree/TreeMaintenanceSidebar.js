@@ -77,6 +77,7 @@ export default function MaintainTreeActions({
         onClose={onCancel}
         children=""
       >
+        {/* For new sections wrap it around a 'maintenance-section' div */}
         <div className="maintenance-section">
           <h4>Tree Maintenance
             <Park className="maintenance-tree-icon" fontSize="medium" />
@@ -89,19 +90,13 @@ export default function MaintainTreeActions({
             actions={actions}
             setActions={setActions}
           />
-        </div>
-        <div className="maintenance-section">
-          <h4>Adding notes about your Tree</h4>
-          <p>Currently out in the field looking to care for your adopted tree?
-            Your tree needs water or you founf pest infesting your tree? Click on
-            the appropriate icon for the action served.
-          </p>
           <TextField
             className="maintenance-notes"
             inputRef={commentRef}
             id="outlined-textarea"
             label="Maintenance Notes"
             multiline
+            minRows={6}
             variant="outlined"
           />
         </div>
