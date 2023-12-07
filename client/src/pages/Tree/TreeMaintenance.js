@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button, styled } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import { Park } from '@mui/icons-material';
 import format from 'date-fns/format';
 import {
@@ -8,34 +8,55 @@ import {
   useCreateTreeDataMutation,
 } from '@/api/queries';
 import useAuthUtils from '@/components/Auth/useAuthUtils';
-import TreeMaintenanceDialog from './TreeMaintenanceDialog';
+import TreeMaintenanceSidebar from './TreeMaintenanceSidebar';
+import './TreeMaintenance.scss';
 
-const TreeMaintenanceButton = styled(Button)`
-  font-size: 1.5rem;
-`;
-
-export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
+export default function TreeMaintenance({ currentTreeData, isTreeQueryError, closeTreeDetails, maintenanceAlert, closeMaintenanceAlert }) {
   const { id } = currentTreeData;
   const { user = {}, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isMaintenanceSidebarOpen, setMaintenanceSidebarOpen] = useState(false)
   const mutateHistory = useTreeHistoryMutation();
   const mutateCreateTreeData = useCreateTreeDataMutation();
   const volunteerName = isAuthenticated ? user.nickname : 'Volunteer';
 
-  const openDialog = () => setIsDialogOpen(true);
-  const closeDialog = () => setIsDialogOpen(false);
+  const openMaintenanceSidebar = () => {
+    setMaintenanceSidebarOpen(true)
+  }
+  const closeMaintenanceSidebar = () => {
+    setMaintenanceSidebarOpen(false)
+  }
 
   const handleClick = () => {
     if (isAuthenticated) {
-      openDialog();
+      openMaintenanceSidebar();
     } else {
       loginToCurrentPage();
     }
   };
 
+  useEffect(() => {
+    setMaintenanceSidebarOpen(false)
+  }, [currentTreeData])
+
+  const MaintenanceSubmitNotification = (type, body) => {
+    const alertMessage =
+      <div className="maintenance-alert">
+        <Alert
+          className={`alert alert-${type}`}
+          severity={type}
+          onClose={closeMaintenanceAlert}
+        >
+          {body}
+        </Alert>
+      </div>
+    maintenanceAlert(alertMessage)
+  }
+
   const handleConfirm = ({ actions, volunteer, comment }) => {
-    closeDialog();
+    closeMaintenanceSidebar();
+    closeTreeDetails()
+    MaintenanceSubmitNotification("success", "Thank you for submitting a maintenance request!")
 
     if (comment || Object.keys(actions).length) {
       const sendTreeHistory = {
@@ -61,7 +82,8 @@ export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
 
   return (
     <div>
-      <TreeMaintenanceButton
+      <Button
+        className="tree-maintenance-button"
         color="success"
         size="large"
         variant="contained"
@@ -71,15 +93,16 @@ export default function TreeMaintenance({ currentTreeData, isTreeQueryError }) {
         disableElevation
       >
         Maintenance
-      </TreeMaintenanceButton>
-      {isDialogOpen && (
-        <TreeMaintenanceDialog
-          open={isDialogOpen}
+      </Button>
+      {isMaintenanceSidebarOpen &&
+        <TreeMaintenanceSidebar
+          open={isMaintenanceSidebarOpen}
           volunteer={volunteerName}
           onConfirm={handleConfirm}
-          onCancel={closeDialog}
+          onCancel={closeMaintenanceSidebar}
+          currentTreeData={currentTreeData}
         />
-      )}
+      }
     </div>
   );
 }
