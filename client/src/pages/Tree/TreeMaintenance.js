@@ -11,7 +11,7 @@ import useAuthUtils from '@/components/Auth/useAuthUtils';
 import TreeMaintenanceSidebar from './TreeMaintenanceSidebar';
 import './TreeMaintenance.scss';
 
-export default function TreeMaintenance({ currentTreeData, isTreeQueryError, closeTreeDetails, maintenanceAlert, closeMaintenanceAlert }) {
+export default function TreeMaintenance({ currentTreeData, isTreeQueryError, maintenanceAlert, closeMaintenanceAlert }) {
   const { id } = currentTreeData;
   const { user = {}, isAuthenticated } = useAuth0();
   const { loginToCurrentPage } = useAuthUtils();
@@ -55,7 +55,6 @@ export default function TreeMaintenance({ currentTreeData, isTreeQueryError, clo
 
   const handleConfirm = ({ actions, volunteer, comment }) => {
     closeMaintenanceSidebar();
-    closeTreeDetails()
     MaintenanceSubmitNotification("success", "Thank you for submitting a maintenance request!")
 
     if (comment || Object.keys(actions).length) {
