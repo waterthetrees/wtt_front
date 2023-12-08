@@ -65,7 +65,7 @@ export default function Tree({
     setTimeout(() => {
       setMaintenanceAlert(null);
       setMaintenanceAlertVisible(false);
-    }, 10000);
+    }, 6000);
   }
 
   const closeMaintenanceAlert = () => {
@@ -112,7 +112,6 @@ export default function Tree({
               <TreeMaintenance
                 currentTreeData={currentTreeData}
                 isTreeQueryError={isTreeQueryError}
-                closeTreeDetails={handleClose}
                 maintenanceAlert={handleMaintenanceAlert}
                 closeMaintenanceAlert={closeMaintenanceAlert}
               />
