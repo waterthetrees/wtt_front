@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { render } from '@testing-library/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import {
   useUserAdoptedQuery,
@@ -32,7 +33,11 @@ describe('UserProfile', () => {
     useUserTreeHistoryQuery.mockReturnValue({
       data: [{ id: 4, name: 'Tree 4' }],
     });
-    const userProfile = render(<Userprofile />);
+    const userProfile = render(
+      <MemoryRouter>
+        <Userprofile />
+      </MemoryRouter>,
+    );
     expect(userProfile).toMatchSnapshot();
   });
 });
