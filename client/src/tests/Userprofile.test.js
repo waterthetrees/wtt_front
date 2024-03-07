@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ describe('UserProfile', () => {
     useUserPlantedQuery.mockClear();
     useUserTreeHistoryQuery.mockClear();
   });
-  it('renders UserProfile correctly', () => {
+  it('renders UserProfile correctly', async () => {
     useAuth0.mockReturnValue({
       user: { nickname: 'testUser', email: 'test@example.com' },
     });
@@ -38,6 +38,8 @@ describe('UserProfile', () => {
         <Userprofile />
       </MemoryRouter>,
     );
-    expect(userProfile).toMatchSnapshot();
+    await waitFor(() => {
+      expect(userProfile).toMatchSnapshot();
+    })
   });
 });
