@@ -1,11 +1,32 @@
 .user-info-container {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 2em;
+  display: block;
 
-  .user-avatar {
-    width: 8em;
-    height: 8em;
-    margin: 0 3em 0 2em;
+  .hero {
+    background-color: #300;
+    background: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6) ), url(../../assets/images/headers/treehero.png);
+    height: 200px;
+    display: flex;
+    align-items: end;
+    position: relative;
+
+    .avatar-box {
+      display: flex;
+      align-items: end;
+      position: relative;
+    }
+
+    .avatar-image {
+      width: 8em;
+      height: 8em;
+      margin: 0 1em 0 2em;
+      bottom: -20px;
+      border: solid 2px #FFF;
+    }
+
+    .avatar-info {
+      padding-bottom: 1em;
+      color: #FFF;
+    }
   }
+
 }
