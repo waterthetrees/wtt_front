@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import treeImages from '@/data/dist/treeImages.json';
 
 const placeholderPath = './../assets/images/treelist/placeholder.svg';
+const noImageAvailablePath = '../assets/images/treelist/no-image-available.jpg';
 
 export const ImageLoad = React.memo(
   ({ src, placeholder = placeholderPath, alt = '' }) => {
@@ -18,6 +19,12 @@ export const ImageLoad = React.memo(
         // When image is loaded replace the src and set loading to false
         setLoading(false);
         updateSrc(src);
+      };
+
+      imageToLoad.onerror = () => {
+        // When image fails to load the image src is set to a default path
+        setLoading(false);
+        updateSrc(noImageAvailablePath);
       };
     }, [src]);
 
