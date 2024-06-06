@@ -74,7 +74,12 @@ export default function MapLayers({ map, layers, handlers, currentTreeData }) {
                   : ['match', ['get', 'health'], id, true, false],
               paint: {
                 'circle-color': treeHealthUtil.getColorByName(id, 'fill'),
-                'circle-radius': linearZoom,
+                'circle-radius': [
+                  'case',
+                  ['boolean',['feature-state','click'],false],
+                  50,
+                  10,
+                ]
               },
             }}
           />
