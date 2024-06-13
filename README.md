@@ -1,6 +1,6 @@
 # waterthetrees
 
-Water The Trees is a platform that crowd sources tree planting and maintenance. We believe in the power of trees to restore natural habitat for animals, insects, and fauna. We are interesting in continuous massive tree planting events to help sequester carbon and stabilize climate change extremes.
+Water The Trees is a platform that crowd sources tree planting and maintenance. We believe in the power of trees to restore natural habitat for animals, insects, and fauna. We are interested in organizing continuous massive tree planting events aimed at helping to sequester carbon and stabilize the extreme effects of climate change.
 
 ## Join Us!
 
