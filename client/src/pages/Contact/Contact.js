@@ -1,69 +1,110 @@
 import React from 'react';
 import { Footer } from '@/components/Footer/Footer';
-import CodeLogo from '@/assets/images/logos/c4sf-logo.jpg';
-import SierrClubLogo from '@/assets/images/logos/san-francisco-bay.png';
-import Contacts from './Contacts';
+import { C4SF } from '@/components/Contacts';
+import { SlackLogo, GithubLogo, FigmaLogo } from '@/components/Icons';
+import tree from '../../assets/images/addtree/tree.png';
+import { GreenButton } from '@/components/Button/Green';
+
 import './Contact.scss';
 
 export default function Contact() {
   return (
     <div className="contact">
-      <div className="contact__header">
-        <h2>Ways to get in touch:</h2>
-      </div>
-
       <div className="contact__main">
-        <div className="contact__p">
-          <span>
-            Join us on slack to get involved in coding for the trees and climate
-            change!
-          </span>
-          <Contacts />
-          <span>
-            Or, email us at{' '}
-            <a
-              href="mailto:info@waterthetrees.com"
-              rel="noreferrer"
-              target="_blank"
-            >
-              info@waterthetrees.com
-            </a>
-          </span>
+        <div className="contact__main__image">
+          <img className="contact__main__image__img" src={tree} alt="tree" />
+          <div className="contact__main__image__absolute">
+            <div className="contact__main__image__relative">
+              <h1>Get in Touch with us!</h1>
+              <h2>We meet every week on wednesday at 6:30 PM PST.</h2>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://sfbrigade.slack.com/archives/C010EGACUTU"
+              >
+                <GreenButton
+                  styles={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  Join our Slack
+                </GreenButton>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <div className="contact__p">
-          <span>
-            Additionally, our parent organizations are always looking for
-            volunteers!
-          </span>
-          <span>For developers:</span>
-          <a
-            href="https://www.codeforsanfrancisco.org/"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <img
-              alt="Code for America Logo"
-              src={CodeLogo}
-              className="contact__logo"
-            />
-            Code for America San Francisco
-          </a>
-          <span>For tree afficionados and climate enthusiasts:</span>
-          <a
-            href="https://www.sierraclub.org/san-francisco-bay/tree-planting"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <img
-              alt="Sierra Club Logo"
-              src={SierrClubLogo}
-              className="contact__logo"
-            />
-            Sierra Club Tree Team
-          </a>
+        <div className="contact__main__section">
+          <div className="contact__main__section__sub">
+            <h1>
+              <span className="contact__main__green">Contact Information</span>
+            </h1>
+          </div>
+          <div className="contact__main__section__sub">
+            <h2>For Inquiries</h2>
+            <p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://sfbrigade.slack.com/archives/C010EGACUTU"
+              >
+                info@waterthetrees.com
+              </a>
+            </p>
+            <h2>Socials</h2>
+            <p>Follow us on our various social media accounts!</p>
+            <p></p>
+            <div className="contact__main__section__sub__social">
+              <a
+                href="https://join.slack.com/share/zt-ouzg0084-34S7_J9UZlcJSe9~qV7jbQ"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <SlackLogo />
+              </a>
+              <a
+                href="https://github.com/waterthetrees/waterthetrees/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <GithubLogo />
+              </a>
+              <a
+                href="https://www.figma.com/file/5C3v1LUNwMPQy9JOgnKEtr/Water-the-Trees"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <FigmaLogo />
+              </a>
+            </div>
+          </div>
         </div>
-        <Footer />
+        <div className="contact__main__section">
+          <div className="contact__main__section__sub">
+            <h1>
+              Join our{' '}
+              <span className="contact__main__green">Parent Organization</span>
+            </h1>
+          </div>
+          <div className="contact__main__section__sub">
+            <h2>Join us!</h2>
+            <p>
+              Additionally, our parent organizations are always looking for
+              volunteers! For more information,{' '}
+              <a
+                href="https://www.codeforsanfrancisco.org/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Code for San Francisco
+              </a>
+            </p>
+            <p></p>
+            <div className="contact__main__section__sub__social">
+              <C4SF />
+            </div>
+          </div>
+        </div>
+        <div className="contact__footer">
+          <Footer />
+        </div>
       </div>
     </div>
   );

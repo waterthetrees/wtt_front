@@ -6,3 +6,4 @@ export * from './Upload';
 export * from './Search';
 export * from './Sort';
 export * from './Tree';
+export * from './Social';

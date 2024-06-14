@@ -1,58 +1,158 @@
 .contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin: 10rem 8rem;
-  font-size: 1.5rem;
-  box-sizing: border-box;
+  margin-top: 5rem;
+  font-family: "Montserrat", sans-serif;
 
-  &__header {
-    margin-bottom: 1rem;
-  }
-
-  &__logo {
-    max-width: 20vw;
-    max-height: 20vh;
-    margin: 1rem;
-  }
-
-  &__p {
+  &__main {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+      font-size: 4.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 3.75rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 2.25rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    p {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+      }
+    }
+
+    &> :last-child {
+      border-top: none;
+      padding-top: 0px;
+      margin-Bottom: 0px;
+    }
+
+    &__green {
+      color: #3fab45;
+    }
+
+    &__image {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 500px;
+      margin-bottom: 4rem;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+        justify-content: flex-end;
+      }
+
+      &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &__absolute {
+        position: absolute;
+        width: 70%;
+        z-index: 10;
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+
+      &__relative {
+        position: relative;
+        width: 27%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        color: white;
+
+        @media only screen and (max-width: 768px) {
+          padding: 1.5rem;
+          width: 70%;
+        }
+      }
+    }
+
+    &__section {
+      margin-bottom: 4rem;
+      padding-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      border-top: 2px solid #80808070;
+
+      a {
+        color: #3fab45;
+        text-decoration: underline;
+        font-weight: bold;
+
+        &:hover {
+          color: green;
+        }
+      }
+
+      &__sub {
+        display: flex;
+        flex-direction: column;
+        width: 47.5%;
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+
+          // &>a {
+          //   justify-content: center;
+          // }
+        }
+
+        &__social {
+          display: flex;
+          justify-content: space-between;
+          width: 60%;
+
+          @media only screen and (max-width: 768px) {
+            width: 100%;
+          }
+        }
+      }
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
   }
 
-  &__p span {
-    margin: 1.5rem;
-    box-sizing: border-box;
-  }
+  &__footer {
+    width: 70%;
 
-  &__p a {
-    cursor: pointer;
-
-    a:link {
-      color: #ccc;
+    @media only screen and (max-width: 768px) {
+      width: 90%;
     }
-
-    /* visited link */
-    a:visited {
-      color: #095484;
-    }
-
-    /* mouse over link */
-    a:hover {
-      color: #8ebf42;
-    }
-
-    /* selected link */
-    a:active {
-      color: #800000;
-    }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .contact {
-    margin: 5rem 2rem;
   }
 }
